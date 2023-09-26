@@ -1,0 +1,5 @@
+INDEX VERSION 1.131
+C:\hobbyphoto\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3022320504.index
+\hobbyphoto\src\main\java
+C:\hobbyphoto\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2074020238.index
+\hobbyphoto\src\main\java
