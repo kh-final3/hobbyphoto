@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+C:\hobbyphoto\.metadata\.plugins\org.eclipse.jdt.core
-3422853608.index
-680927736.index
