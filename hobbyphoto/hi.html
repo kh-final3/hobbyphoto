@@ -203,9 +203,9 @@
                     <div class="pf_schedule">
                         <div class="pf_sche_tab">
                             <ul class="tab_ul">
-                                <li class="on"><a href="https://www.mfac.or.kr/performance/whole_list.jsp">예시1</a></li>
-                                <li><a href="https://www.mfac.or.kr/performance/whole_list2.jsp">예시2</a></li>
-                                <li><a href="https://www.mfac.or.kr/performance/whole_list3.jsp">예시3</a></li>
+                                <li class="on"><a href="javascript:void(0)">예시1</a></li>
+                                <li><a href="javascript:void(0)">예시2</a></li>
+                                <li><a href="javascript:void(0)">예시3</a></li>
                             </ul>
                         </div>
                     </div>
@@ -282,6 +282,14 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function () {
+                  $(".tab_ul li").click(function () {
+                    $(".tab_ul li").removeClass("on");
+                    $(this).addClass('on');
+                  })
+                });
+    </script>
 </body>
 
 </html>
