@@ -7,7 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-인덱스
+<jsp:include page="WEB-INF/views/common/header.jsp"/>
+
+<div style="height:600px"></div>
+
+<jsp:include page="WEB-INF/views/common/footer.jsp"/>
 
 </body>
 </html>
