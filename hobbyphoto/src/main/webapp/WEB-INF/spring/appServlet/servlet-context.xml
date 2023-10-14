@@ -23,6 +23,6 @@
 	
 	<context:component-scan base-package="com.kh.hobbyphoto" />
 	
-	
+	<!-- 나중에 interceptors만들기 -->
 	
 </beans:beans>
