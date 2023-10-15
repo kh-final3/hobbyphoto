@@ -1,4 +1,4 @@
-package com.kh.hobbyphoto.board.model.vo;
+package com.kh.hobbyphoto.notice.model.vo;
 
 import java.sql.Date;
 
@@ -13,15 +13,14 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Board {
-
-	private String boardNo;
-	private String boardTitle;
-	private String boardContent;
-	private String boardWriter;
+public class Notice {
+	
+	private String noticeNo;
+	private String noticeWriter;
+	private String noticeTitle;
+	private String noticeContent;
 	private int count;
-	private int boardType;
-	private String status;
 	private Date createDate;
-	private String hashTag;
+	private String status;
+	
 }
