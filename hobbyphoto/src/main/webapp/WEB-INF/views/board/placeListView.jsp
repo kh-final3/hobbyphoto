@@ -112,9 +112,19 @@
             margin-top: 0;
             margin-bottom: 2px;
         }
+        
+        #pagingArea {
+            width: fit-content;
+            margin: auto;
+        }
+        
+        .pno{
+        	display: none;
+        }
     </style>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp"/>
     <div class="warp">
 
         <div class="list-area">
@@ -133,25 +143,26 @@
                 <ul class="ul-area">
 					<c:if test="${ not empty list }">
 						<c:forEach var="p" items="${ list }">
-							<hr width="98.5%">
+							<hr width="1000px">
 
 		                    <li class="li-area">
 		                        <div class="photo">
-		                            <img src="resources/images/풍경1.JPG" alt="" width="250" height="150">
+		                            <img src="resources/images/풍경1.jpg" alt="" width="250" height="150">
 		                        </div>
 		
 		                        <div class="text">
+		                        	<p class="pno">${ p.pno }</p>
 		                            <h2 class="title">${ p.ptitle }</h2>
 		                            <p class="location">${ p.plocation }</p>
 		                            <p class="content">${ p.pcontent }</p>
-		                            <p class="content-ect">조회수 : 5  &nbsp;&nbsp;&nbsp; 좋아요 : 1 &nbsp;&nbsp;&nbsp;&nbsp; 작성일 : 2023-10-10</p>
+		                            <p class="content-ect">조회수 : ${ p.count }  &nbsp;&nbsp;&nbsp; 좋아요 : 1 &nbsp;&nbsp;&nbsp;&nbsp; 작성일 : ${ p.createDate }</p>
 		                        </div>
 		                    </li>
 						</c:forEach>
 					</c:if>
 					
 
-                    <hr width="98.5%">
+                    <hr width="1000px">
 
                 </ul>
             </div>
@@ -165,6 +176,45 @@
             <button>5</button>
             <button>&gt;</button>
         </div>
+        <div id="pagingArea">
+                <ul class="pagination">
+                		<c:choose>
+                			<c:when test="${ pi.currentPage eq 1 }">
+	                    		<li class="page-item disabled"><a class="page-link" href="list.pl?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+                			</c:when>
+							<c:otherwise>
+	                    		<li class="page-item"><a class="page-link" href="list.pl?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+							</c:otherwise>
+                		</c:choose>
+                		
+	                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    		<li class="page-item"><a class="page-link" href="list.pl?cpage=${p}">${ p }</a></li>
+	                    </c:forEach>
+	                    
+                    	<c:choose>
+                			<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    		<li class="page-item disabled"><a class="page-link" href="list.pl?cpage=${ pi.currentPage + 1 }">Previous</a></li>
+                			</c:when>
+							<c:otherwise>
+	                    		<li class="page-item"><a class="page-link" href="list.pl?cpage=${ pi.currentPage + 1 }">Previous</a></li>
+							</c:otherwise>
+                		</c:choose>
+                </ul>
+            </div>
     </div>
+     <script>
+
+        $(function(){
+        		$(".ul-area>.li-area>.text").click(function(){
+            		location.href = 'detail.pl?pno='+ $(this).children(".pno").text();
+            		console.log($(this).children(".pno").text());
+        		})
+        		
+        			$(".btn-area").click(function(){
+            		location.href = 'enrollForm.pl';
+        		})
+        	})
+    </script>
+    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

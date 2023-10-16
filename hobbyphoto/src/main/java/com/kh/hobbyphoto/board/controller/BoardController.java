@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.BoardServiceImpl;
+import com.kh.hobbyphoto.board.model.vo.Attachment;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Place;
 import com.kh.hobbyphoto.board.model.vo.Reply;
@@ -223,19 +224,34 @@ public class BoardController {
 	
 	
 	@RequestMapping("insert.pl")
-	public String insertPlace(Board b, MultipartFile upfile, HttpSession session, Model model) {
+	public String insertPlace(Place p, Attachment at,MultipartFile upfile, HttpSession session, Model model) {
 		
 		if(!upfile.getOriginalFilename().equals("")) {
 			
 			String changeName = saveFile(upfile, session);
 			System.out.println(changeName);
 			
-			b.setOriginName(upfile.getOriginalFilename());
-			b.setChangeName("resources/uploadFiles/" + changeName);
+			at.setOriginName(upfile.getOriginalFilename());
+			at.setChangeName("resources/uploadFiles/" + changeName);
+			ArrayList<Attachment> list = new ArrayList<Attachment>();
+				for(int i=1; i<=3; i++) {
+				
+				String key = "file" + i;
+				
+				if(multiRequest.getOriginalFilename(key) != null) {
+					at.setOriginName(multiRequest.getOriginalFileName(key));
+					at.setChangeName(multiRequest.getFilesystemName(key));
+					at.setFilePath("resources/board_upfiles");
+					
+					list.add(at);
+					
+				}
+			}
+			p.setPimg1(upfile.getOriginalFilename());
+		
+		System.out.println(p);
 		}
-		
-		
-		int result = bService.insertBoard(b);
+		int result = bService.insertPlace(p, list);
 		
 		if(result > 0) { // 성공 => 게시글 리스트페이지(list.bo url 재요청)
 			session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
@@ -273,15 +289,15 @@ public class BoardController {
 		}
 	
 	@RequestMapping("detail.pl")
-	public String selectPlace(int bno, Model model) {
-		int result = bService.increaseCount(bno);
+	public String selectPlace(int pno, Model model) {
+		int result = bService.increaseCount(pno);
 		
 		// 해당 게시글 조회수 증가 서비스 호출 결과 받기
 		if (result > 0) {
-			Board b = bService.selectBoard(bno);
-			model.addAttribute("b", b);
-			System.out.println(b);
-			return "board/boardDetailView";
+			Place p = bService.selectPlace(pno);
+			model.addAttribute("p", p);
+			System.out.println(p);
+			return "board/placeDetailView";
 			
 		} else {
 			// >> 조회수 증가 실패

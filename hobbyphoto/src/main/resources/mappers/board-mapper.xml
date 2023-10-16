@@ -19,6 +19,9 @@
 		<result column="p_content" property="pcontent"/>
 		<result column="p_address" property="paddress"/>
 		<result column="p_location" property="plocation"/>
+		<result column="p_writer" property="pwriter"/>
+		<result column="count" property="count"/>
+		<result column="create_date" property="createDate"/>
 		<result column="p_img1" property="pimg1"/>
 		<result column="p_img2" property="pimg2"/>
 		<result column="p_img3" property="pimg3"/>
@@ -172,14 +175,51 @@
 		     , p_content
 		     , p_location
 		     , p_address
+		     , count
+		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
 		     , p_img1
 		  from place
 		 order 
 		    by p_no desc
 	</select>
 	
+	<select id="selectPlace" resultMap="placeResult">
+		select p_no
+		     , p_title
+		     , p_content
+		     , p_location
+		     , p_address
+		     , count
+		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+		     , p_img1
+		     , p_img2
+		     , p_img3
+		  from place
+		 where p_no = #{ pno }
+	</select>
 	
-	
-	
+	<insert id="insertPlace" parameterType="Place">
+		  insert 
+			into place
+			  (
+			    p_no
+			  , p_title
+			  , P_CONTENT
+			  , P_location
+			  , P_ADDRESS
+			  , p_writer
+			  , p_img1
+			  ) 
+			  values
+			  (
+			   	SEQ_PLACENO.nextval
+			  , #{ptitle}
+			  , #{pcontent}
+			  , #{plocation}
+			  , #{paddress}
+			  , #{pwriter}
+			  , #{pimg1}
+			  )
+	</insert>
 	
 </mapper>

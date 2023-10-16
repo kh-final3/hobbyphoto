@@ -77,4 +77,12 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.selectPlaceList(sqlSession, pi);
 	}
 
+	public Place selectPlace(int pno) {
+		return bDao.selectPlace(sqlSession, pno);
+	}
+
+	public int insertPlace(Place p) {
+		return  bDao.insertPlace(sqlSession, p);
+	}
+
 }

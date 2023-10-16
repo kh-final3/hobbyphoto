@@ -63,34 +63,91 @@
     </style>
 </head>
 <body>
+    
+	<jsp:include page="../common/header.jsp"/>
     <div class="warp">
         <div class="innerOut">
             <div class="board-title">
                 <h2 style="text-align: center;">출사 명소</h2> 
             </div>
-            <div class="text">
+            <form id="enrollForm" method="post" action="insert.pl" enctype="multipart/form-data">
+                
+                <div class="text">
                 <div class="text-area">
-                제목 : <input type="text" name="" id="" placeholder="제목을 입력해주세요." required> <br>
-                작성자 : <input type="text" name="" id="" value="user01" style="border: none;"> <br>
-                주소 : <input type="text" name="" id="" placeholder="주소를 입력해주세요." required> <br>
+                제목 : <input type="text" name="ptitle" id="ptitle" placeholder="제목을 입력해주세요." required> <br>
+                작성자 : <input type="text" name="pwriter" id="pwriter" value="user01" style="border: none;"> <br>
+                상세주소 : <input type="text" name="paddress" id="paddress" placeholder="주소를 입력해주세요. ex) 서울 강남구 테헤란로14길 6" required> <br><br>
+                위치 : <input type="text" name="plocation" id="plocation" placeholder="위치를 입력해주세요. ex) 서울시 강북구" required> <br><br>
                 <br>
-                <textarea name="" id="" cols="30" rows="10" placeholder="내용을 입력해주세요."></textarea>
+                <textarea name="pcontent" id="pcontent" cols="30" rows="10" placeholder="내용을 입력해주세요." required></textarea>
+            </div>
+        </div>
+        
+        <div class="photo">
+            <div class="photo-area">
+                <img src="" alt="사진1"  id="titleImg"  width="150" height="120"onclick="chooseFile(1);" >
+                <img src="" alt="사진2" id="contentImg1" width="150" height="120" onclick="chooseFile(2);">
+                <img src="" alt="사진3" id="contentImg2" width="150" height="120" onclick="chooseFile(3);">
+                <img src="" alt="사진4" id="contentImg3"  width="150" height="120" onclick="chooseFile(4);">
                 </div>
             </div>
-
-            <div class="photo">
-                <div class="photo-area">
-                    <img src="" alt="사진1">
-                    <img src="" alt="사진2">
-                    <img src="" alt="사진3">
-                </div>
+            <div id="file-area" style="display:none">
+                <input type="file" name="upfile" id="file1" onchange="loadImg(this, 1);" required>
+                <input type="file" name="upfile" id="file2" onchange="loadImg(this, 2);">
+                <input type="file" name="upfile" id="file3" onchange="loadImg(this, 3);">
+                <input type="file" name="upfile" id="file4" onchange="loadImg(this, 4);">
             </div>
             <br>
             <div class="brn-area" align="center">
-                <button>작성하기</button>
-                <button>목록으로 </button>
+                <button type="submit">작성하기</button>
+                <button type="reset">취소하기</button>
+                <button type="button" class="list">목록으로 </button>
             </div>
+        </form>
         </div>
     </div>
+    <script>
+        function chooseFile(num){
+            $("#file"+num).click();
+        }	
+        
+        function loadImg(inputFile, num){
+
+                                
+            if(inputFile.files.length == 1){ 
+                
+               
+                const reader = new FileReader();
+            
+              
+                reader.readAsDataURL(inputFile.files[0]);
+              
+                reader.onload = function(e){
+                    switch(num){
+                        case 1: $("#titleImg").attr("src", e.target.result); break;
+                        case 2: $("#contentImg1").attr("src", e.target.result); break;
+                        case 3: $("#contentImg2").attr("src", e.target.result); break;
+                        case 4: $("#contentImg3").attr("src", e.target.result); break;
+                    }
+                }
+                
+            }else{
+                switch(num){
+                case 1: $("#titleImg").attr("src", null); break;
+                case 2: $("#contentImg1").attr("src", null); break;
+                case 3: $("#contentImg2").attr("src", null); break;
+                case 4: $("#contentImg3").attr("src", null); break;
+            }
+                
+            }
+            
+        }
+    $(function (){
+        $(".list").click(function(){
+            location.href='list.pl';
+        })
+    })
+    </script>
+    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

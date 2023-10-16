@@ -64,4 +64,12 @@ public class BoardDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.selectPlaceList", null, rowBounds);
 	}
+
+	public Place selectPlace(SqlSessionTemplate sqlSession, int pno) {
+		return (Place)sqlSession.selectOne("boardMapper.selectPlace", pno);
+	}
+
+	public int insertPlace(SqlSessionTemplate sqlSession, Place p) {
+		return sqlSession.insert("boardMapper.insertPlace", p);
+	}
 }

@@ -1,5 +1,7 @@
 package com.kh.hobbyphoto.board.model.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +19,9 @@ public class Place {
 	private String pcontent;
 	private String plocation;
 	private String paddress;
+	private String pwriter;
+	private Date createDate;
+	private int	count;
 	private String pimg1;
 	private String pimg2;
 	private String pimg3;

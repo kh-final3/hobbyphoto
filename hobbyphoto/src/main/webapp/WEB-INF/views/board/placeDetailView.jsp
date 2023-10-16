@@ -210,32 +210,37 @@
     </style>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp"/>
     <div class="warp">
         <div class="outline">
+        
             <div class="content-area">
                 <div class="detail-area">
                     <div class="text-area">
                         <ul class="ul-area">
                             <li class="li-area">
-                                <div class="board-title">&nbsp;&nbsp;제목 : 동대문 야경</div>
+                                <div class="board-title">&nbsp;&nbsp;제목 : ${ p.ptitle }</div>
                                 
-                                <div class="board-create">2023-09-18</div>
+                                <div class="board-create">${ p.createDate }</div>
 
                                 <div class="boare-ect">
-                                    <a href=""><img src="resources/like.png" alt="좋아요" width="35"></a> &nbsp;&nbsp;
-                                    <a href=""><img src="resources/report.png" alt="신고" width="35"></a>
+                                <!-- 좋아요눌럿을때 -->
+                                    <a href="">❤️</a> &nbsp;&nbsp;
+                                <!-- 좋아요안눌럿을때 -->
+                                    <a href="">🤍</a> &nbsp;&nbsp;
+                                    <a href="">❗</a>
                                 </div>
                             </li>
                             <hr>
                             <li class="li-area1">
                                 <div class="board-writer">&nbsp;&nbsp;작성자 : user01</div>
-                                <div class="board-ect">조회수 : 10  &nbsp;&nbsp;&nbsp; 추천수 : 3 &nbsp;&nbsp;&nbsp; 댓글 : 2</div>
+                                <div class="board-ect">조회수 : ${ p.count } &nbsp;&nbsp;&nbsp; 추천수 : 3 &nbsp;&nbsp;&nbsp; 댓글 : 2</div>
                             </li>
                         </ul>
                     </div>
                     <hr>
                     <div class="list-content">
-                        [주소] 서울 특별시 OO구 <br>
+                        [주소] ${ p.paddress } <br>
                         [촬영 시기] 5월 중순 ~ 8월 중순 <br>
                         [추천 카메라] 24-70mm,... <br>
                         [특징] 동작대교에서 여의도 쌍둥이 빌딩 사이 일몰 촬영 및 야경 촬영을 할 수 있는 포인트 입니다.일몰은 시기에 따라 남단에서 북단응로 조금씩 위치 변화가 있으니 주의 바랍니다. 
@@ -247,9 +252,9 @@
                     <h2 style="text-align: center;">상세 사진</h2>
                 </div>
                 <div class="photo-area">
-                    <img src="resources/pro.png" alt="사진 1">
-                    <img src="resources/like.png" alt="사진 2">
-                    <img src="resources/풍경1.JPG" alt="사진 3">
+                    <img src="resources/images/풍경2.jpg" alt="사진 1">
+                    <img src="resources/images/풍경3.jpg" alt="사진 2">
+                    <img src="resources/images/풍경1.jpg" alt="사진 3">
                 </div>
 
                 <hr>
@@ -258,7 +263,10 @@
                     지도 api
                 </div>
             </div>
-            <hr>
+           
+           <a class="btn btn-secondary" style="float:right" href="list.pl">목록으로</a>
+           <hr>
+            
             <div class="review-area">
                 <h3 class="review-lo">댓글(2)</h3>
                 <div class="writer-review">
@@ -279,8 +287,12 @@
                 <div class="all-review">
 
                 </div>
+                
             </div>
+            
         </div>
+        
     </div>
+    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

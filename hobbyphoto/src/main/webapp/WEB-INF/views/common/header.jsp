@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  	
   <style>
     div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'NanumBarunGothic';}
         .mb_outer{
@@ -125,7 +128,7 @@
         }
         
         hr{
-          width: 1200px;
+          width: 1000px;
         }
   </style>
 </head>
