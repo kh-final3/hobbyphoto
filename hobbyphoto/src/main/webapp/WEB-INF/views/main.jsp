@@ -195,7 +195,7 @@
           <div class="carousel-caption d-none d-md-block">
               <h5>TEST</h5>
               <p>테스트입니다.</p>
-        </div>
+          </div>
       </div>
       <div class="carousel-item">
         <img class="d-block w-100"
@@ -239,7 +239,7 @@
   <!--중간-->
   <div class="midd">
     <div class="midd-content">
-      <h2 style="text-align: center; cursor: pointer;" >HobbyPhoto's Pick</h2>
+      <h2 style="text-align: center; cursor: pointer;">HobbyPhoto's Pick</h2>
       <p style="text-align: center;">hobby photo의 사진작가</p>
     </div>
 
@@ -266,7 +266,7 @@
   <!--하단-->
   <div class="under">
     <div class="under-content">
-      <h2 style="text-align: center; cursor: pointer;" >여기저기 콕콕!!</h2> 
+      <h2 style="text-align: center; cursor: pointer;">여기저기 콕콕!!</h2> 
       <p style="text-align: center;">hobby photo가 추천하는 명소</p>
     </div>
 

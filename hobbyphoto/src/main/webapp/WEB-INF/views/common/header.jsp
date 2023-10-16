@@ -133,15 +133,15 @@
 	    <div class="mb_outer">
 	        <div class="mb_menu-area">
 	            <div id="mb_logo">
-	                <img src="images/logo.png" alt="로고">
+	                <img src="resources/images/logo.png" alt="로고">
 	            </div> 
 	            <div id="mb_nav">
 	                <ul id="mb_navi">
-	                    <li><a href="#">홈</a></li>
 	                    <li><a href="#">사진게시판</a></li>
 	                    <li><a href="#">장비추천</a></li>
 	                    <li><a href="#">축제 · 전시</a></li>
 	                    <li><a href="#">출사명소</a></li>
+	                   	<li><a href="#">배경화면</a></li>
 	                    <li><a href="#">모임</a></li>
 	                    <li><a href="#">공지사항</a></li>
 	                </ul>
@@ -151,7 +151,7 @@
 	            <div id="mb_search">
 	                <form action="#" id="search_form">
 	                    <div id="search_text">
-	                        <input type="text" name="keyword" id="sh_text" placeholder="     검색어를 입력해주세요">
+	                        <input type="text" name="keyword" id="sh_text" placeholder="검색어를 입력해주세요">
 	                        <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
 	                    </div>
 	                    
@@ -162,7 +162,7 @@
 	                <div id="mb_user_1">
 	                    <table class="login-area" align="center">
 	                        <tr height="75">
-	                            <td width="70"><img width="60" src="images/shopping-cart.png" alt=""></td>
+	                            <td width="70"><img width="60" src="resources/images/shopping-cart.png" alt=""></td>
 	                            <td width="70"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png" alt=""></td>
 	                        </tr>
 	                    </table>

@@ -71,7 +71,7 @@
 <body>
     <div id="ft_footer">
         <div id="ft_logo">
-            <img src="images/logo.png" alt="">
+            <img src="resources/images/logo.png" alt="">
         </div>
           <div class="footer_info">
             <div id="ft_footer1">
