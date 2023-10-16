@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hobbyphoto.board.model.dao.BoardDao;
 import com.kh.hobbyphoto.board.model.vo.Board;
+import com.kh.hobbyphoto.board.model.vo.Place;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 
@@ -70,6 +71,10 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public ArrayList<Board> selectTopBoardList() {
 		return bDao.selectTopBoardList(sqlSession);
+	}
+
+	public ArrayList<Place> selectPlaceList(PageInfo pi) {
+		return bDao.selectPlaceList(sqlSession, pi);
 	}
 
 }

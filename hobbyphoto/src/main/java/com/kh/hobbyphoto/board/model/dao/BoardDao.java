@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hobbyphoto.board.model.vo.Board;
+import com.kh.hobbyphoto.board.model.vo.Place;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 
@@ -54,5 +55,13 @@ public class BoardDao {
 	
 	public ArrayList<Board> selectTopBoardList(SqlSessionTemplate sqlSession){
 		return (ArrayList) sqlSession.selectList("boardMapper.selectTopBoardList");
+	}
+
+	public ArrayList<Place> selectPlaceList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectPlaceList", null, rowBounds);
 	}
 }

@@ -9,10 +9,15 @@
 	
 	<typeAliases>
 		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Attachment" alias="Attachment"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Place" alias="Place"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Reply" alias="Reply"/>
 	</typeAliases>
 
 
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/board-mapper.xml"/>
 	</mappers>
 </configuration>
