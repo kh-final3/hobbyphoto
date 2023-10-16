@@ -127,6 +127,60 @@
         hr{
           width: 1200px;
         }
+        
+        .false{
+        	display: none;
+        }
+
+        .member--visible{
+            display: "";
+        }
+
+        .header .member--visible:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            border: 8px solid transparent;
+            border-bottom-color: #fff;
+            transform: translate(-50%,calc(-100% + 1px))
+        }
+        
+    
+        .member_inner{
+        	width: 120px;
+        	height: 130px;
+            background-color: white;
+        	position: absolute;
+        	top: 100px;
+            right: 120px;
+        	border: 1px solid black;
+        	z-index: 120;
+            text-align: center;
+            padding: 10px 15px;
+        }
+
+        .btn_login{
+            color: #5865f5;
+            font-weight: bolder;
+        }
+
+        .btn_login:hover{
+            color: #5865f5;
+        }
+        
+        .member_menu_mypage{
+        	list-style-type: none;
+            border-top: 1px solid #f1f1f1;
+            padding-top: 14px;
+        }
+        
+        .member_menu_mypage a{
+			color: black;
+            font-weight: bolder;
+        }
+        
+       	
   </style>
 </head>
 	<body>
@@ -159,15 +213,48 @@
 	            </div>
 	        </div>
 	        <div class="mb_login-area">
-	                <div id="mb_user_1">
-	                    <table class="login-area" align="center">
-	                        <tr height="75">
-	                            <td width="70"><img width="60" src="resources/images/shopping-cart.png" alt=""></td>
-	                            <td width="70"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png" alt=""></td>
-	                        </tr>
-	                    </table>
-	                </div>
+                <div id="mb_user_1">
+                    <table class="login-area" align="center">
+                        <tr height="75">
+                            <td width="70"><img width="60" src="resources/images/shopping-cart.png" alt=""></td>
+                            <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="heder_inner">
+                	<div class="member false">
+                		<div class="member_inner">
+                			<button type="button" class="btn btn_login" onclick="login()">로그인</button>
+                			<div class="member_menu">
+                				<ul style="padding: 0px;">
+                					<li class="member_menu_mypage" align="center">
+                						<a href="#">회원가입</a>
+                					</li>
+                				</ul>
+                			</div>
+                		</div>
+                	</div>
+                </div>
 	        </div>
 	    </div>
 	</body>
+
+    <script>
+        $(()=>{
+        	$("#member_menu").click(()=>{
+                $(".member").before();
+        		if($(".member").hasClass("false")){
+	        		$(".member").removeClass("false")
+	        		$(".member").addClass("member--visible")
+        		}else{
+        			$(".member").removeClass("member--visible")
+	        		$(".member").addClass("false")
+        		}
+        	})
+        })
+        
+        function login() {
+			location.href="loginEnroll.me"
+		}
+    </script>
 </html>
