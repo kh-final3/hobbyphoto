@@ -192,7 +192,7 @@
           alt="First slide">
           <div class="carousel-caption d-none d-md-block">
               <h5>TEST</h5>
-              <p>testtesttest</p>
+              <p>테스트입니다.</p>
         </div>
       </div>
       <div class="carousel-item">
@@ -247,7 +247,7 @@
         <p style="text-align: center;">닉네임</p>
       </div>
       <div class="pick2">
-        <img src="WEB-INF/resources/images/shopping-cart.png" alt="사진게시판 인기2" width="270" height="200">
+        <img src="resources/images/풍경2.jpg" alt="사진게시판 인기2" width="270" height="200">
         <p style="text-align: center;">닉네임</p>
       </div>
       <div class="pick3">
@@ -275,7 +275,7 @@
         <div class="section">
 
           <div class="cont on">					
-            <span class="bg"><img src="resources/images/풍경1.jpg" width="500" height="500" /></span>	
+            <span class="bg"><img src="resources/images/풍경4.jpg" width="500" height="500" /></span>	
             <span class="title_off"><img src="resources/images/cont_title01_out.png" /></span>
             <span class="title_on">서울 특별시 동대문</span>
             <!-- <span class="layer"></span> -->
@@ -303,7 +303,7 @@
           </div>
 
           <div class="cont">					
-            <span class="bg"><img src="../resources/images/풍경1.jpg" width="500" height="500"/></span>	
+            <span class="bg"><img src="resources/images/풍경1.jpg" width="500" height="500"/></span>	
             <!-- <span class="title_off"><img src="img/cont_title05_out.png" /></span>-->			
             <span class="title_on">서울 특별시 동대문</span> 
             <!-- <span class="layer"></span> -->
