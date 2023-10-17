@@ -224,44 +224,51 @@ public class BoardController {
 	
 	
 	@RequestMapping("insert.pl")
-	public String insertPlace(Place p, Attachment at,MultipartFile upfile, HttpSession session, Model model) {
-		
-		if(!upfile.getOriginalFilename().equals("")) {
-			
-			String changeName = saveFile(upfile, session);
-			System.out.println(changeName);
-			
-			at.setOriginName(upfile.getOriginalFilename());
-			at.setChangeName("resources/uploadFiles/" + changeName);
-			ArrayList<Attachment> list = new ArrayList<Attachment>();
-				for(int i=1; i<=3; i++) {
-				
-				String key = "file" + i;
-				
-				if(multiRequest.getOriginalFilename(key) != null) {
-					at.setOriginName(multiRequest.getOriginalFileName(key));
-					at.setChangeName(multiRequest.getFilesystemName(key));
-					at.setFilePath("resources/board_upfiles");
-					
-					list.add(at);
-					
-				}
-			}
-			p.setPimg1(upfile.getOriginalFilename());
-		
-		System.out.println(p);
-		}
-		int result = bService.insertPlace(p, list);
-		
-		if(result > 0) { // 성공 => 게시글 리스트페이지(list.bo url 재요청)
-			session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
-			return "redirect:list.pl";
-		} else { // 실패 => 에러페이지 포워딩
-			model.addAttribute("errorMsg", "게시글 등록 실패");
-			return "common/errorPage";
-		}
+	public String insertPlace(Place p, @RequestParam("upfile") MultipartFile[] upfiles, HttpSession session, Model model) {
+	    ArrayList<Attachment> list = new ArrayList<>();
+
+	    for (MultipartFile upfile : upfiles) {
+	        if (upfile != null && !upfile.isEmpty()) {
+	            String changeName = saveFile(upfile, session);
+
+	            Attachment at = new Attachment();
+	            at.setOriginName(upfile.getOriginalFilename());
+	            at.setChangeName("resources/uploadFiles/" + changeName);
+	            at.setFilePath("resources/board_upfiles");
+	            list.add(at);
+	        }
+	    }
+
+	    for (int i = 0; i < Math.min(list.size(), 4); i++) {
+	        switch (i) {
+	            case 0:
+	                p.setPimg1(list.get(i).getChangeName());
+	                break;
+	            case 1:
+	                p.setPimg2(list.get(i).getChangeName());
+	                break;
+	            case 2:
+	                p.setPimg3(list.get(i).getChangeName());
+	                break;
+	            case 3:
+	                p.setPimg4(list.get(i).getChangeName());
+	                break;
+	            default:
+	                break;
+	        }
+	    }
+
+
+	    int result = bService.insertPlace(p, list);
+
+	    if (result > 0) {
+	        session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
+	        return "redirect:list.pl";
+	    } else {
+	        model.addAttribute("errorMsg", "게시글 등록 실패");
+	        return "common/errorPage";
+	    }
 	}
-	
 	public String savePlFile(MultipartFile upfile, HttpSession session) {
 		
 		  // 파일명 수정 작업 후 서버에 업로드 시키기("flower.png" => "2023100412345.png") 
@@ -291,17 +298,12 @@ public class BoardController {
 	@RequestMapping("detail.pl")
 	public String selectPlace(int pno, Model model) {
 		int result = bService.increaseCount(pno);
-		
-		// 해당 게시글 조회수 증가 서비스 호출 결과 받기
 		if (result > 0) {
 			Place p = bService.selectPlace(pno);
 			model.addAttribute("p", p);
-			System.out.println(p);
 			return "board/placeDetailView";
 			
 		} else {
-			// >> 조회수 증가 실패
-			// 		>> 에러문구 담아서 에러페이지 포워딩
 			model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
 			return "common/errorPage";
 			

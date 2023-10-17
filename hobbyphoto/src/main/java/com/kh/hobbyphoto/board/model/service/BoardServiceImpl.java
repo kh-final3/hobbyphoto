@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.hobbyphoto.board.model.dao.BoardDao;
+import com.kh.hobbyphoto.board.model.vo.Attachment;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Place;
 import com.kh.hobbyphoto.board.model.vo.Reply;
@@ -39,8 +40,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int increaseCount(int boardNo) {
-		return bDao.increaseCount(sqlSession, boardNo);
+	public int increaseCount(int pno) {
+		return bDao.increaseCount(sqlSession, pno);
 	}
 
 	@Override
@@ -81,8 +82,15 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.selectPlace(sqlSession, pno);
 	}
 
-	public int insertPlace(Place p) {
-		return  bDao.insertPlace(sqlSession, p);
+	public int insertPlace(Place p, ArrayList<Attachment> list) {
+		int result1 = bDao.insertPlace(sqlSession, p);
+		
+		int result2 = 1;
+		
+		if(!list.isEmpty()) {
+			result2 = bDao.insertAttachment(sqlSession, list);
+		}
+		return  result1 * result2;
 	}
 
 }

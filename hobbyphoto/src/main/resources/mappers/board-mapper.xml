@@ -78,9 +78,9 @@
 	</insert>
 	
 	<update id="increaseCount">
-		update board
+		update place
 		   set count = count+1
-		   where board_no = #{ boardNo }
+		   where p_no = #{ pno }
 	</update>
 	
 	
@@ -194,6 +194,7 @@
 		     , p_img1
 		     , p_img2
 		     , p_img3
+		     , p_img4
 		  from place
 		 where p_no = #{ pno }
 	</select>
@@ -209,6 +210,9 @@
 			  , P_ADDRESS
 			  , p_writer
 			  , p_img1
+			  , p_img2
+			  , p_img3
+			  , p_img4
 			  ) 
 			  values
 			  (
@@ -219,7 +223,21 @@
 			  , #{paddress}
 			  , #{pwriter}
 			  , #{pimg1}
+			  , #{pimg2}
+			  , #{pimg3}
+			  , #{pimg4}
 			  )
 	</insert>
+	
+	<insert id="insertAttachment" parameterType="java.util.List">
+    INSERT INTO ATTACHMENT (FILE_NO, REF_BNO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
+    SELECT SEQ_FILE_NO.NEXTVAL, 'P'||SEQ_PLACENO.CURRVAL, A.ORIGIN_NAME, A.CHANGE_NAME, A.FILE_PATH
+    FROM (
+        <foreach item="attachment" collection="list" separator="UNION ALL">
+            SELECT #{attachment.originName} AS ORIGIN_NAME, #{attachment.changeName} AS CHANGE_NAME, #{attachment.filePath} AS FILE_PATH FROM DUAL
+        </foreach>
+    ) A
+</insert>
+
 	
 </mapper>

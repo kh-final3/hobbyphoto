@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hobbyphoto.board.model.vo.Attachment;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Place;
 import com.kh.hobbyphoto.board.model.vo.Reply;
@@ -29,8 +30,8 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 
-	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.update("boardMapper.increaseCount", boardNo);
+	public int increaseCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("boardMapper.increaseCount", pno);
 	}
 
 	public Board selectBoard(SqlSessionTemplate sqlSession, int boardNo) {
@@ -71,5 +72,10 @@ public class BoardDao {
 
 	public int insertPlace(SqlSessionTemplate sqlSession, Place p) {
 		return sqlSession.insert("boardMapper.insertPlace", p);
+	}
+
+	public int insertAttachment(SqlSessionTemplate sqlSession, ArrayList<Attachment> list) {
+		System.out.println(list);
+		return sqlSession.insert("boardMapper.insertAttachment", list);
 	}
 }

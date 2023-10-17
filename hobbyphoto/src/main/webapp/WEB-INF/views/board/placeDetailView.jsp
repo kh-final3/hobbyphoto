@@ -252,13 +252,12 @@
                     <h2 style="text-align: center;">상세 사진</h2>
                 </div>
                 <div class="photo-area">
-                    <img src="resources/images/풍경2.jpg" alt="사진 1">
-                    <img src="resources/images/풍경3.jpg" alt="사진 2">
-                    <img src="resources/images/풍경1.jpg" alt="사진 3">
+                    <img src="${ p.pimg1 }" alt="사진 1">
+                    <img src="${ p.pimg2 }" alt="사진 2">
+                    <img src="${ p.pimg3 }" alt="사진 3">
+                    <img src="${ p.pimg4 }" alt="사진 4">
                 </div>
-
                 <hr>
-
                 <div class="map-area">
                     지도 api
                 </div>
@@ -271,7 +270,7 @@
                 <h3 class="review-lo">댓글(2)</h3>
                 <div class="writer-review">
                     <div class="propho">
-                        <img src="resources/풍경1.JPG" alt="프로필사진" width="70" height="59">
+                        <img src="resources/images/풍경1.jpg" alt="프로필사진" width="70" height="59">
                     </div>
                     <div class="review">
                         <textarea name="" id="" placeholder="댓글을 입력해주세요"></textarea>

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,4 +27,5 @@ public class Place {
 	private String pimg2;
 	private String pimg3;
 	private String pimg4;
+	private MultipartFile[] upfiles;
 }
