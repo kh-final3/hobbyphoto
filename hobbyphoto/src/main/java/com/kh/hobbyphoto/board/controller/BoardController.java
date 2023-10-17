@@ -37,9 +37,33 @@ public class BoardController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<Board> list = bService.selectList(pi);
 		
-		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectpBoardList");
+		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectPhBoardList");
 		
 		return mv;
+	}
+	
+	@RequestMapping("phDetail.bo")
+	public String selectPhBoard(int phno, Model model) {
+		int result = bService.increaseCount(phno);
+		
+		// 해당 게시글 조회수 증가 서비스 호출 결과 받기
+		if (result > 0) {
+			// >> 성공적으로 조회수 증가
+			// 		>> boardDetailView.jsp 상에 필요한 데이터 조회 (게시글 상세정보 조회 서비스 호출)
+			// 		>> 조회된 데이터 담아서
+			// 		>> board/boardDetailView.jsp로 포워딩
+			Board b = bService.selectBoard(phno);
+			model.addAttribute("b", b);
+			System.out.println(b);
+			return "board/phBoardDetailView";
+			
+		} else {
+			// >> 조회수 증가 실패
+			// 		>> 에러문구 담아서 에러페이지 포워딩
+			model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
+			return "common/errorPage";
+			
+		}
 	}
 	
 

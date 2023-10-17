@@ -82,7 +82,7 @@
 	        
 	        <div class="list-area_th">
 			   	<c:forEach var="b" items="${ list }">
-		            <div class="thumbnail" align="center">
+		            <div class="thumbnail" align="center" id="phno">
 		                <img src= "${ b.thumbnail }" width="295" height="220"> 
 		                <p id="thumbText">
 		                    <img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" style="border-radius: 100%; margin-bottom: 3px;" width="20px" height="20px"> ${ b.boardWriter } <br><h class="h_a">${ b.boardTitle }</h>
@@ -91,6 +91,16 @@
 		            </div>
 			   	</c:forEach>
 	        </div>
+	        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            <script>
+	            $(function(){
+	                $(".thumbnail").click(function(){
+	                    var phno = $(this).attr('id');
+	                    location.href = 'detail.bo?phno=' + phno;
+	                });
+	            });
+            </script>	        
+	        
         
             <div class="paging-area" align="center">
             	<c:choose>
@@ -98,22 +108,22 @@
                 		<button disabled> &lt; </button>
                 	</c:when>
                 	<c:otherwise>
-                		<button style="border: 1px solid lightgray; font-weight: bolder;" onclick="location.href='pBoardList.bo?cpage=${ pi.currentPage - 1 }'">Previous</button>
+                		<button style="border: 1px solid lightgray; font-weight: bolder;" onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage - 1 }'">Previous</button>
                 	</c:otherwise>
                 </c:choose>
                 
                 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <button onclick="location.href='pBoardList.bo?cpage=${ p }'">${ p }</button>
+                    <button onclick="location.href='phBoardList.bo?cpage=${ p }'">${ p }</button>
                 </c:forEach>
                 
-                <button onclick="location.href='pBoardList.bo?cpage=${ p }'">${ p }</button>
+                <button onclick="location.href='phBoardList.bo?cpage=${ p }'">${ p }</button>
                 
                	<c:choose>
                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
                     		<button onclick="location.href=''" disabled>Next</button>
                    	</c:when>
                      <c:otherwise>
-                     	<button onclick="location.href='list.bo?cpage=${ pi.currentPage + 1 }'">Next</button>
+                     	<button onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage + 1 }'">Next</button>
                    	</c:otherwise>
                 </c:choose>
                 

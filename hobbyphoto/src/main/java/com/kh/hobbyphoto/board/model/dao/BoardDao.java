@@ -28,8 +28,8 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 
-	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.update("boardMapper.increaseCount", boardNo);
+	public int increaseCount(SqlSessionTemplate sqlSession, int phno) {
+		return sqlSession.update("boardMapper.increaseCount", phno);
 	}
 
 	public Board selectpBoard(SqlSessionTemplate sqlSession, int boardNo) {
