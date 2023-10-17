@@ -8,11 +8,13 @@
 	
 	
 	<typeAliases>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Board" alias="board"/>
 		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Member" alias="Member"/>
 	</typeAliases>
 
 
 	<mappers>
+		<mapper resource="/mappers/board-mapper.xml"/>
 		<mapper resource="/mappers/member-mapper.xml"/>
 	</mappers>
 </configuration>

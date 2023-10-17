@@ -29,21 +29,18 @@ public class BoardController {
 	@Autowired
 	private BoardServiceImpl bService;
 	
-	@RequestMapping("pBoardList.bo")
-	public ModelAndView selectPBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+	@RequestMapping("phBoardList.bo")
+	public ModelAndView selectPhBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = bService.selectListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<Board> list = bService.selectList(pi);
 		
-		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectPBoardList");
+		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectpBoardList");
 		
 		return mv;
 	}
 	
-//	@RequestMapping("pBoardList.bo")
-//	public String selectPBoardList() {
-//		return "board/selectPBoardList";
-//	}
+
 }

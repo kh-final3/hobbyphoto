@@ -24,4 +24,5 @@ public class Board {
 	private String status;
 	private Date createDate;
 	private String hashTag;
+	private String thumbnail;
 }

@@ -43,90 +43,9 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public Board selectBoard(int boardNo) {
-		return bDao.selectBoard(sqlSession, boardNo);
+		return bDao.selectpBoard(sqlSession, boardNo);
 	}
 
-	@Override
-	public int deleteBoard(int boardNo) {
-		return bDao.deleteBoard(sqlSession, boardNo);
-	}
 
-	@Override
-	public int updateBoard(Board b) {
-		return bDao.updateBoard(sqlSession, b);
-	}
-
-	@Override
-	public ArrayList<Reply> selectReplyList(int boardNo) {
-		return bDao.selectReplyList(sqlSession, boardNo);
-	}
-
-	@Override
-	public int insertReply(Reply r) {
-		return bDao.insertReply(sqlSession, r);
-	}
-
-	@Override
-	public ArrayList<Board> selectTopBoardList() {
-		return bDao.selectTopBoardList(sqlSession);
-	}
-
-	@Autowired
-	private BoardDao bDao;
-	@Autowired
-	private SqlSessionTemplate sqlSession;
-
-	@Override
-	public int selectListCount() {
-		int result = bDao.selectListCount(sqlSession);
-		return result;
-	}
-
-	@Override
-	public ArrayList<Board> selectList(PageInfo pi) {
-		ArrayList<Board> list = bDao.selectList(sqlSession, pi);
-		return list;
-	}
-
-	@Override
-	public int insertBoard(Board b) {
-		int result = bDao.insertBoard(sqlSession, b);
-		return result;
-	}
-
-	@Override
-	public int increaseCount(int boardNo) {
-		return bDao.increaseCount(sqlSession, boardNo);
-	}
-
-	@Override
-	public Board selectBoard(int boardNo) {
-		return bDao.selectBoard(sqlSession, boardNo);
-	}
-
-	@Override
-	public int deleteBoard(int boardNo) {
-		return bDao.deleteBoard(sqlSession, boardNo);
-	}
-
-	@Override
-	public int updateBoard(Board b) {
-		return bDao.updateBoard(sqlSession, b);
-	}
-
-	@Override
-	public ArrayList<Reply> selectReplyList(int boardNo) {
-		return bDao.selectReplyList(sqlSession, boardNo);
-	}
-
-	@Override
-	public int insertReply(Reply r) {
-		return bDao.insertReply(sqlSession, r);
-	}
-
-	@Override
-	public ArrayList<Board> selectTopBoardList() {
-		return bDao.selectTopBoardList(sqlSession);
-	}
 
 }
