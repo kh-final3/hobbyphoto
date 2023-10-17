@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,31 +149,41 @@
         
     
         .member_inner{
-        	width: 120px;
-        	height: 130px;
+        	width: 130px;
+        	height: 150px;
             background-color: white;
         	position: absolute;
         	top: 100px;
-            right: 120px;
+            right: 117px;
         	border: 1px solid black;
         	z-index: 120;
             text-align: center;
             padding: 10px 15px;
         }
+        
 
         .btn_login{
             color: #5865f5;
             font-weight: bolder;
+            box-sizing: border-box;
         }
 
         .btn_login:hover{
             color: #5865f5;
         }
         
+        .btn:active, .btn:focus { 
+        	border: 1px solid white; box-shadow: none; 
+        }
+        
+		        
         .member_menu_mypage{
         	list-style-type: none;
-            border-top: 1px solid #f1f1f1;
             padding-top: 14px;
+        }
+        
+        .first_menu{
+        	border-top: 1px solid #f1f1f1;
         }
         
         .member_menu_mypage a{
@@ -222,18 +233,46 @@
                     </table>
                 </div>
                 <div class="heder_inner">
-                	<div class="member false">
-                		<div class="member_inner">
-                			<button type="button" class="btn btn_login" onclick="login()">로그인</button>
-                			<div class="member_menu">
-                				<ul style="padding: 0px;">
-                					<li class="member_menu_mypage" align="center">
-                						<a href="#">회원가입</a>
-                					</li>
-                				</ul>
-                			</div>
-                		</div>
-                	</div>
+                	<c:choose>
+                		<c:when test="${ empty loginMember }">
+		                	<div class="member false">
+		                		<div class="member_inner">
+		                			<button type="button" class="btn btn_login" onclick="login()">로그인</button>
+		                			<div class="member_menu">
+		                				<ul style="padding: 0px;">
+		                					<li class="member_menu_mypage" align="center">
+		                						<a href="memberEnrollForm.me">회원가입</a>
+		                					</li>
+		                				</ul>
+		                			</div>
+		                		</div>
+		                	</div>
+                		</c:when>
+                		<c:otherwise>
+                			<div class="member false">
+		                		<div class="member_inner">
+		                			<button type="button" class="btn btn_login" onclick="logout()">로그아웃</button>
+		                			<div class="member_menu">
+		                				<ul style="padding: 0px;">
+		                					<li class="member_menu_mypage first_menu" align="center">
+		                						<a href="myPage.me">마이페이지</a>
+		                					</li>
+		                					<li class="member_menu_mypage" align="center">
+			                					<c:choose>
+				                					<c:when test="${ loginMember.userNo == 1 }">
+					                					<a href="#">관리자페이지</a>
+				                					</c:when>
+				                					<c:otherwise>
+				                						<a href="#">알림(0)</a>
+				                					</c:otherwise>
+			                					</c:choose>
+		                					</li>
+		                				</ul>
+		                			</div>
+		                		</div>
+		                	</div>
+                		</c:otherwise>
+                	</c:choose>
                 </div>
 	        </div>
 	    </div>
@@ -254,7 +293,11 @@
         })
         
         function login() {
-			location.href="loginEnroll.me"
+			location.href="loginForm.me"
+		}
+        
+        function logout() {
+			location.href="logout.me"
 		}
     </script>
 </html>

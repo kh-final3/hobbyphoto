@@ -117,17 +117,17 @@
             <h2>Hobby Photo <br>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;LogoIn</span>
             </h2>
-            <form action="" method="">
+            <form action="login.me" method="post">
                 <div class="login-form">
 
                     <div class="login_id">
                         <h4>아이디</h4>
-                        <input type="email" name="" id="" placeholder="아이디를 입력해주세요.">
+                        <input type="text" name="userId" placeholder="아이디를 입력해주세요.">
                     </div>
 
                     <div class="login_pw">
                         <h4>비밀번호</h4>
-                        <input type="password" name="" id="" placeholder="비밀번호를 입력해주세요.">
+                        <input type="password" name="userPwd" placeholder="비밀번호를 입력해주세요.">
                     </div>
 
                     <div class="login_etc">
