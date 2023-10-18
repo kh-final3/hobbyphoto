@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .exhibitionDetail {
+            width: 96%;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5
+        }
+
+        #exh_detail_banner,
+        #exh_detail_banner img {
+            width: 100%;
+            max-width: 1152px
+        }
+
+        #exh_detail_banner.banner330 {
+            margin-top: 40px
+        }
+
+        #exh_detail_banner a.banner_link {
+            display: block;
+            position: relative
+        }
+
+        #exh_detail_banner a.banner_link:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0
+        }
+
+        #exh_detail_banner a.banner_link>img {
+            display: block
+        }
+
+        #exh_detail_banner a.banner_link>img:nth-child(2),
+        #exh_detail_banner a.banner_link>img:nth-child(3) {
+            display: none
+        }
+
+        .exhibitionDetail-head {
+            padding-bottom: 60px;
+            border-bottom: 1px solid #dfdfdf;
+            margin-top: 40px
+        }
+
+        .exhibitionDetail-head-title {
+            margin-bottom: 8px;
+            font-size: 28px;
+            font-weight: bold
+        }
+
+        .exhibitionDetail-head-location {
+            font-size: 14px;
+            color: #989898
+        }
+
+        .exhibitionDetail-carousel {
+            margin-top: 12px
+        }
+
+        .exhibitionDetail-carousel-item {
+            position: relative;
+            width: 100%;
+            padding-bottom: 75%
+        }
+
+        .exhibitionDetail-carousel-item:nth-child(n+2) {
+            display: none
+        }
+
+        .exhibitionDetail-carousel-imageWrap {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border: 1px solid #eee;
+            background-color: #fafafa;
+            overflow: hidden
+        }
+
+        .exhibitionDetail-carousel-image {
+            position: absolute;
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%)
+        }
+
+        .exhibitionDetail-carousel>.owl-dots {
+            margin-top: 24px
+        }
+
+        .exhibitionDetail-carousel .owl-dots {
+            line-height: 8px;
+            text-align: center
+        }
+
+        .exhibitionDetail-carousel .owl-dot {
+            display: inline-block;
+            background-color: #dfdfdf;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin: 0 6px;
+            vertical-align: top
+        }
+
+        .exhibitionDetail-carousel .owl-dot.active {
+            background-color: #989898
+        }
+
+        .exhibitionDetail-section {
+            margin-top: 72px
+        }
+
+        .exhibitionDetail-section-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center
+        }
+
+        .exhibitionDetail-section-bar {
+            width: 42px;
+            height: 3px;
+            margin: 8px auto 24px;
+            background-color: #222
+        }
+
+        .exhibitionDetail-section-description {
+            position: relative;
+            padding: 24px 24px 24px 94px;
+            margin: 8px 0 30px;
+            background-color: #eff3fa;
+            border-radius: 4px
+        }
+
+        .exhibitionDetail-section-description>img {
+            position: absolute;
+            top: 50%;
+            left: 40px;
+            transform: translateY(-50%);
+            width: 22px
+        }
+
+        .exhibitionDetail-section-description>p {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #222;
+            line-height: 1.5
+        }
+
+        .exhibitionDetail-section-description>a {
+            float: right;
+            font-size: 12px;
+            font-weight: bold;
+            color: #007aff;
+            line-height: 1.75;
+            text-decoration: underline
+        }
+
+        .exhibitionDetail-sm {
+            font-size: 12px;
+            color: #989898
+        }
+
+        .exhibitionDetail-explain {
+            max-width: 680px;
+            margin: 0 auto;
+            font-size: 14px;
+            text-align: justify;
+            color: #4a4a4a
+        }
+
+        .exhibitionDetail-infoTable {
+            border: 1px solid #dfdfdf;
+            background-color: #fafafa
+        }
+
+        .exhibitionDetail-infoTable-head {
+            border-bottom: 1px solid #dfdfdf;
+            background-color: #fff
+        }
+
+        .exhibitionDetail-collectionBox {
+            float: right;
+            width: 48px;
+            height: 48px;
+            border-left: 1px solid #eee;
+            background: #fff url(/static/pages/img/service/detailview/lined_heart_sprite.png) 3px 3px no-repeat;
+            background-size: 84px 42px;
+            cursor: pointer
+        }
+
+        .exhibitionDetail-collectionBox.collected {
+            background-position-x: -39px
+        }
+
+        .exhibitionDetail-shareButton {
+            float: right;
+            width: 48px;
+            height: 48px;
+            border-left: 1px solid #eee;
+            background: #fff url(/static/pages/img/service/detailview/share_icon.png) 3px 3px no-repeat;
+            background-size: 42px 42px;
+            cursor: pointer
+        }
+
+        .exhibitionDetail-infoTable-table {
+            table-layout: fixed;
+            width: 100%;
+            font-size: 14px
+        }
+
+        .exhibitionDetail-infoTable-table th {
+            width: 80px;
+            padding: 16px 0 0 20px;
+            text-align: left;
+            vertical-align: top
+        }
+
+        .exhibitionDetail-infoTable-table td {
+            padding: 16px 20px 0 20px;
+            vertical-align: top
+        }
+
+        .exhibitionDetail-infoTable-table a {
+            color: #4085df;
+            text-decoration: underline
+        }
+
+        .exhibitionDetail-infoTable-admissionDetail {
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+            margin-top: 6px
+        }
+
+        .exhibitionDetail-infoTable-footer {
+            padding: 14px 20px;
+            border-top: 1px solid #eee;
+            margin-top: 16px
+        }
+
+        .exhibitionDetail-location {
+            border: 1px solid #dfdfdf
+        }
+
+        .exhibitionDetail-location-map {
+            height: 248px;
+            background-color: #eee
+        }
+
+        .exhibitionDetail-location-caption {
+            padding: 15px 20px;
+            border-top: 1px solid #dfdfdf;
+            background-color: #fff
+        }
+
+        .exhibitionDetail-location-name {
+            font-size: 15px;
+            font-weight: bold
+        }
+
+        .exhibitionDetail-footerBanner {
+            display: block;
+            padding: 45px 0;
+            background: url(/static/pages/img/service/exhibition/bottom_banner.png) center center;
+            background-size: cover;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            text-align: center
+        }
+
+        .customoverlay {
+            position: relative;
+            bottom: 45px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            border-bottom: 2px solid #ddd;
+            float: left
+        }
+
+        .customoverlay:nth-of-type(n) {
+            border: 0;
+            box-shadow: 0 1px 2px #888
+        }
+
+        .customoverlay a {
+            display: block;
+            text-decoration: none;
+            color: #000;
+            text-align: center;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            overflow: hidden
+        }
+
+        .customoverlay .title {
+            display: inline-block;
+            text-align: center;
+            background: #fff;
+            padding: 5px;
+            font-size: 14px;
+            font-weight: bold
+        }
+
+        .customoverlay .arrow {
+            display: inline-block;
+            text-align: center;
+            background: #1c1c1c;
+            padding: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff
+        }
+
+        .exhibitionDetail-ogArtists {}
+
+        .exhibitionDetail-ogArtists>h4 {
+            position: relative;
+            font-size: 18px
+        }
+
+        .exhibitionDetail-ogArtists>h4>a {
+            position: absolute;
+            display: block;
+            top: 0;
+            right: 0;
+            line-height: 27px;
+            font-size: 16px;
+            font-weight: normal;
+            color: #989898
+        }
+
+        .exhibitionDetail-ogArtists>h4>a.lte_8 {
+            display: none
+        }
+
+        .exhibitionDetail-ogArtists-artworks {
+            margin: 12px 0 40px
+        }
+
+        .exhibitionDetail-artworkGrid {
+            display: block;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            float: left;
+            width: 24.25%;
+            padding: 0;
+            border: 1px solid #dfdfdf;
+            border-radius: 3px;
+            margin: 0 1% 1% 0;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden
+        }
+
+        .exhibitionDetail-artworkGrid:nth-child(4n) {
+            margin-right: 0
+        }
+
+        .exhibitionDetail-artworkGrid-maskHolder {
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            display: inline-block;
+            -webkit-transition: .1s ease-in-out;
+            transition: .1s ease-in-out;
+            background: rgba(255, 255, 255, 0);
+            text-align: center
+        }
+
+        .exhibitionDetail-artworkGrid:hover .exhibitionDetail-artworkGrid-maskHolder {
+            background: rgba(255, 255, 255, 0.4);
+            bottom: 0;
+            overflow: hidden
+        }
+
+        .exhibitionDetail-artworkGrid-imgHolder {
+            position: relative;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding-bottom: 100%
+        }
+
+        .exhibitionDetail-artworkGrid-imgWrap {
+            border-bottom: 1px solid #dfdfdf;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            text-align: center;
+            background-color: #f9f9f9;
+            display: none
+        }
+
+        .exhibitionDetail-artworkGrid-imgWrap:before {
+            content: "";
+            display: inline-block;
+            width: 0;
+            height: 100%;
+            vertical-align: middle
+        }
+
+        .exhibitionDetail-artworkGrid-img {
+            vertical-align: middle;
+            max-width: 100%;
+            max-height: 100%
+        }
+
+        .exhibitionDetail-artworkGrid-txtHolder {
+            margin: 10px 15px 15px;
+            position: relative
+        }
+
+        .exhibitionDetail-artworkGrid-tagHolder {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 12px;
+            height: 18px
+        }
+
+        .exhibitionDetail-artworkGrid-tagHolder>div {
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            margin: 3px 0
+        }
+
+        .exhibitionDetail-artworkGrid-tag-red {
+            background-color: rgb(223, 59, 50)
+        }
+
+        .exhibitionDetail-artworkGrid-tag-blue {
+            background-color: rgb(64, 133, 223)
+        }
+
+        .exhibitionDetail-artworkGrid-tag-gray {
+            background-color: rgb(152, 152, 152)
+        }
+
+        .exhibitionDetail-artworkGrid-title {
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden
+        }
+
+        .exhibitionDetail-artworkGrid-tagHolder+.exhibitionDetail-artworkGrid-title {
+            margin-right: 15px
+        }
+
+        .exhibitionDetail-artworkGrid-info {
+            color: #989898;
+            font-size: 13px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden
+        }
+
+        .exhibitionDetail-themes-item {
+            position: relative;
+            display: block;
+            float: left;
+            width: 32.666667%;
+            height: 156px;
+            margin: 0 1% 1% 0;
+            border-radius: 3px;
+            background: no-repeat center;
+            overflow: hidden
+        }
+
+        .exhibitionDetail-themes-item:nth-child(3n) {
+            margin-right: 0
+        }
+
+        .exhibitionDetail-themes-item-inner {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 44px 12px 0;
+            color: #fff;
+            background-color: rgba(0, 0, 0, .25)
+        }
+
+        .exhibitionDetail-themes-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 0 9px;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+            font-size: 12px;
+            font-weight: bold;
+            color: #222;
+            line-height: 20px;
+            background-color: #fff;
+            text-align: center
+        }
+
+        .exhibitionDetail-themes-title {
+            display: inline-block;
+            font-size: 12px;
+            border-bottom: 1px solid #fff;
+            margin-bottom: 4px
+        }
+
+        .exhibitionDetail-themes-sub {
+            display: -webkit-box;
+            height: 3em;
+            font-size: 16px;
+            font-weight: bold;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            word-break: keep-all;
+            word-wrap: break-word;
+            overflow: hidden
+        }
+
+        .exhibitionDetail-themes-hash {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            font-size: 12px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden
+        }
+
+        .exhibitionDetail-themes-showAll {
+            display: block;
+            width: 180px;
+            height: 50px;
+            border-radius: 3px;
+            margin: 44px auto 100px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+            background-color: #222
+        }
+
+        @media screen and (max-width: 991px) {
+            .exhibitionDetail-head {
+                margin-top: 24px
+            }
+
+            .exhibitionDetail-head-location {
+                font-size: 12px
+            }
+
+            .exhibitionDetail-location-name {
+                font-size: 14px
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .exhibitionDetail-head {
+                padding-bottom: 30px
+            }
+
+            .exhibitionDetail-head-title {
+                font-size: 24px
+            }
+
+            #exh_detail_banner a.banner_link>img:nth-child(2) {
+                display: block
+            }
+
+            #exh_detail_banner a.banner_link>img:nth-child(1),
+            #exh_detail_banner a.banner_link>img:nth-child(3) {
+                display: none
+            }
+
+            #exh_detail_banner.banner330 {
+                margin-top: 20px
+            }
+
+            .exhibitionDetail-carousel {
+                margin-top: 10px
+            }
+
+            .exhibitionDetail-carousel>.owl-nav {
+                margin-top: 16px
+            }
+
+            .exhibitionDetail-section {
+                margin-top: 48px
+            }
+
+            .exhibitionDetail-section-title {
+                font-size: 18px
+            }
+
+            .exhibitionDetail-section-description {
+                padding: 20px 20px 20px 70px;
+                margin: 0 0 24px
+            }
+
+            .exhibitionDetail-section-description>img {
+                position: absolute;
+                left: 24px
+            }
+
+            .exhibitionDetail-infoTable-table th {
+                width: 60px;
+                padding-top: 12px
+            }
+
+            .exhibitionDetail-infoTable-table td {
+                padding-top: 12px
+            }
+
+            .exhibitionDetail-infoTable-admissionDetail {
+                padding-bottom: 12px
+            }
+
+            .exhibitionDetail-infoTable-footer {
+                padding: 12px 20px
+            }
+
+            .exhibitionDetail-location-map {
+                height: 148px
+            }
+
+            .exhibitionDetail-location-caption {
+                padding: 14px
+            }
+
+            .exhibitionDetail-footerBanner {
+                padding: 30px 0;
+                font-size: 14px
+            }
+
+            .exhibitionDetail-ogArtists>h4>a {
+                font-size: 14px
+            }
+
+            .exhibitionDetail-ogArtists>h4>a.lte_8 {
+                display: block
+            }
+
+            .exhibitionDetail-ogArtists>h4>a.lte_6 {
+                display: none
+            }
+
+            .exhibitionDetail-ogArtists-artworks {
+                margin: 10px 0 22px
+            }
+
+            .exhibitionDetail-artworkGrid {
+                width: 32.295720%;
+                margin: 0 1.556420% 1.556420% 0
+            }
+
+            .exhibitionDetail-artworkGrid:nth-child(n+7) {
+                display: none
+            }
+
+            .exhibitionDetail-artworkGrid:nth-child(4n) {
+                margin: 0 1.556420% 1.556420% 0
+            }
+
+            .exhibitionDetail-artworkGrid:nth-child(3n) {
+                margin-right: 0
+            }
+
+            .exhibitionDetail-artworkGrid-txtHolder {
+                margin: 10px 12px 12px
+            }
+
+            .exhibitionDetail-themes-item {
+                width: 49.221790%;
+                margin: 0 1.556420% 1.556420% 0
+            }
+
+            .exhibitionDetail-themes-item:nth-child(n+5) {
+                display: none
+            }
+
+            .exhibitionDetail-themes-item:nth-child(3n) {
+                margin-right: 1.556420%
+            }
+
+            .exhibitionDetail-themes-item:nth-child(2n) {
+                margin-right: 0
+            }
+
+            .exhibitionDetail-themes-showAll {
+                width: 160px;
+                height: 46px;
+                margin: 40px auto 72px;
+                line-height: 46px;
+                font-size: 16px
+            }
+        }
+
+        @media screen and (max-width: 543px) {
+            .exhibitionDetail-head {
+                margin-top: 28px
+            }
+
+            .exhibitionDetail-head-title {
+                font-size: 20px
+            }
+
+            #exh_detail_banner a.banner_link>img:nth-child(1),
+            #exh_detail_banner a.banner_link>img:nth-child(2) {
+                display: none
+            }
+
+            #exh_detail_banner a.banner_link>img:nth-child(3) {
+                display: block
+            }
+
+            #exh_detail_banner.banner330 {
+                margin-top: 12px
+            }
+
+            .exhibitionDetail-carousel {
+                margin-top: 8px
+            }
+
+            .exhibitionDetail-section-bar {
+                margin-bottom: 20px
+            }
+
+            .exhibitionDetail-infoTable-table th {
+                width: 46px;
+                padding: 8px 0 0 12px
+            }
+
+            .exhibitionDetail-infoTable-table td {
+                padding: 8px 12px 0 12px
+            }
+
+            .exhibitionDetail-infoTable-footer {
+                padding: 12px;
+                margin-top: 12px
+            }
+
+            .exhibitionDetail-location-caption {
+                padding: 12px
+            }
+
+            .exhibitionDetail-ogArtists>h4 {
+                font-size: 15px
+            }
+
+            .exhibitionDetail-ogArtists>h4>a {
+                line-height: 22px;
+                font-size: 13px
+            }
+
+            .exhibitionDetail-ogArtists-artworks {
+                margin: 8px 0 18px
+            }
+
+            .exhibitionDetail-artworkGrid-txtHolder {
+                margin: 8px
+            }
+
+            .exhibitionDetail-artworkGrid-title {
+                margin-bottom: 4px;
+                font-size: 12px
+            }
+
+            .exhibitionDetail-artworkGrid-info {
+                font-size: 12px
+            }
+
+            .exhibitionDetail-themes-item {
+                width: 100%;
+                height: 180px;
+                margin: 0 0 8px 0
+            }
+
+            .exhibitionDetail-themes-item:nth-child(n+4) {
+                display: none
+            }
+
+            .exhibitionDetail-themes-item:nth-child(3n) {
+                margin-right: 0
+            }
+
+            .exhibitionDetail-themes-item-inner {
+                padding: 58px 12px 0
+            }
+
+            .exhibitionDetail-themes-sub {
+                max-width: 240px;
+                font-size: 18px
+            }
+
+            .exhibitionDetail-themes-hash {
+                bottom: 16px
+            }
+
+            .exhibitionDetail-themes-showAll {
+                width: 140px;
+                margin-top: 28px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap" class="header_banner_padding">
+
+        <div id="contents">
+            <div class="exhibitionDetail">
+                <section class="exhibitionDetail-head">
+                    <h2 class="exhibitionDetail-head-title">LOVE IN PARADISE : BANKSY &amp; KEITH HARING</h2>
+                    <div class="exhibitionDetail-head-location">
+
+                        파라다이스 아트스페이스 &nbsp; I &nbsp; 인천
+
+                    </div>
+                </section>
+                <section class="exhibitionDetail-carousel owl-carousel owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage"
+                            style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1600px;">
+                            <div class="owl-item active" style="width: 800px;">
+                                <div class="exhibitionDetail-carousel-item">
+                                    <div class="exhibitionDetail-carousel-imageWrap">
+                                        <img class="exhibitionDetail-carousel-image"
+                                            src="https://og-data.s3.amazonaws.com/media/exhibitions/image/13611/ei_13611.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="exhibitionDetail-section">
+                    <div class="exhibitionDetail-explain">파라다이스는 세계 최대 미술작품 경매 회사인 소더비(Sotheby’s)와 협력하여 뱅크시(Banksy)와 키스
+                        해링(Keith Haring)의 작품 32점을 선보입니다.<br>이번 전시에서는 &lt;사랑은 쓰레기통에 Love is in the Bin&gt; 작품이 국내 최초 공개되어
+                        더욱 주목받고 있습니다.<br>사랑이라는 주제로 그림 안에 세상과 사람을 담는 두 예술가, 뱅크시와 키스 해링의 작품을 감상해 보세요.</div>
+                </section>
+
+                <section class="exhibitionDetail-section">
+                    <h3 class="exhibitionDetail-section-title">전시 정보</h3>
+                    <div class="exhibitionDetail-section-bar"></div>
+                    <div class="exhibitionDetail-infoTable">
+                        <div class="exhibitionDetail-infoTable-head cf">
+                            <div class="exhibitionDetail-collectionBox"></div>
+                            <div class="exhibitionDetail-shareButton" data-pathname="/exhibition/4189/"
+                                data-txt="LOVE IN PARADISE : BANKSY &amp; KEITH HARING #오픈갤러리 #전시정보"></div>
+                        </div>
+                        <table class="exhibitionDetail-infoTable-table">
+                            <tbody>
+                                <tr>
+                                    <th>작가</th>
+                                    <td class="exhibitionDetail-infoTable-artists">
+                                        키스 해링,
+                                        뱅크시
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>장소</th>
+                                    <td>
+
+                                        파라다이스 아트스페이스
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>기간</th>
+                                    <td>
+                                        2023-09-05 ~ 2023-11-05
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>시간</th>
+                                    <td>
+                                        10:00 ~ 20:00
+
+                                        <br>
+                                        · 휴관일 없음
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>관람료</th>
+                                    <td>
+
+                                        무료
+
+
+                                        <div class="exhibitionDetail-infoTable-admissionDetail exhibitionDetail-sm">
+                                            · 네이버 사전 예약 무료 관람
+                                        </div>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>주최</th>
+                                    <td>Sotheby’s, 파라다이스</td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>주관</th>
+                                    <td>Sotheby’s, 파라다이스</td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <th>출처</th>
+                                    <td class="exhibitionDetail-infoTable-url">
+                                        <a href="https://www.p-city.com/front/event/eventView?SBU_CD=&amp;P_SEQ=9988&amp;PAGE_SIZE=9&amp;PAGE_NO=1&amp;SC_END=&amp;ORDER_COLUMN=&amp;ty=MAIN&amp;P_CTNT_TY=imageTy&amp;SRC_CD=&amp;BANNER_YN=Y&amp;SC_DATE="
+                                            target="_blank">사이트 바로가기</a>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>문의</th>
+                                    <td class="exhibitionDetail-infoTable-contact">
+                                        02-3789-2205
+                                        <div class="exhibitionDetail-infoTable-contactSub exhibitionDetail-sm">
+                                            (전시 정보 문의는 해당 연락처로 전화해주세요.)
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="exhibitionDetail-infoTable-footer exhibitionDetail-sm">
+                            * 주최 측의 사정에 따라 변경될 수 있습니다.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="exhibitionDetail-section">
+                    <h3 class="exhibitionDetail-section-title">위치 정보</h3>
+                    <div class="exhibitionDetail-section-bar"></div>
+                    <div class="exhibitionDetail-location">
+                        <div class="exhibitionDetail-location-map"
+                            style="position: relative; overflow: hidden; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/bg_tile.png&quot;);">
+                            <div
+                                style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; touch-action: none; cursor: url(&quot;https://t1.daumcdn.net/mapjsapi/images/cursor/openhand.cur.ico&quot;) 7 5, url(&quot;https://t1.daumcdn.net/mapjsapi/images/cursor/openhand.cur.ico&quot;), default;">
+                                <div style="position: absolute;">
+                                    <div style="position: absolute; z-index: 0;"></div>
+                                    <div style="position: absolute; z-index: 1; left: 0px; top: 0px;"><img
+                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/971/353.png"
+                                            alt="" role="presentation" draggable="false"
+                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -141px; top: 140px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/971/354.png"
+                                            alt="" role="presentation" draggable="false"
+                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 115px; top: 140px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/971/355.png"
+                                            alt="" role="presentation" draggable="false"
+                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 371px; top: 140px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/971/356.png"
+                                            alt="" role="presentation" draggable="false"
+                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 627px; top: 140px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/971/357.png"
+                                            alt="" role="presentation" draggable="false"
+                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 883px; top: 140px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/972/353.png"
+                                            alt="" role="presentation" draggable="false"
+                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -141px; top: -116px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/972/354.png"
+                                            alt="" role="presentation" draggable="false"
+                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 115px; top: -116px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/972/355.png"
+                                            alt="" role="presentation" draggable="false"
+                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 371px; top: -116px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/972/356.png"
+                                            alt="" role="presentation" draggable="false"
+                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 627px; top: -116px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
+                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/972/357.png"
+                                            alt="" role="presentation" draggable="false"
+                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 883px; top: -116px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;">
+                                    </div>
+                                    <div style="position: absolute; z-index: 1;"></div>
+                                    <div style="width: 798px; height: 248px; position: absolute; z-index: 1;"></div>
+                                    <div style="position: absolute; z-index: 1;"><svg version="1.1"
+                                            style="stroke: none; stroke-dashoffset: 0.5; stroke-linejoin: round; fill: none; transform: translateZ(0px); position: absolute; width: 3990px; height: 1240px; left: -1596px; top: -496px;"
+                                            viewBox="0 0 3990 1240">
+                                            <defs></defs>
+                                        </svg></div>
+                                    <div
+                                        style="position: absolute; z-index: 1; width: 100%; height: 0px; transform: translateZ(0px);">
+                                        <div
+                                            style="position: absolute; margin: -39px 0px 0px -14px; z-index: 0; left: 399px; top: 124px;">
+                                            <img draggable="false"
+                                                src="https://t1.daumcdn.net/mapjsapi/images/marker.png" alt=""
+                                                role="presentation" title=""
+                                                style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 29px, 42px, 0px); top: 0px; left: 0px; width: 29px; height: 42px;"><img
+                                                src="https://t1.daumcdn.net/mapjsapi/images/transparent.gif" alt=""
+                                                role="presentation" draggable="false" usemap="#daum.maps.Marker.Area:1"
+                                                style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; width: 29px; height: 42px;"><map
+                                                id="daum.maps.Marker.Area:1" name="daum.maps.Marker.Area:1"><area
+                                                    href="javascript:void(0)" alt="" role="presentation" shape="poly"
+                                                    coords="14,39,9,27,4,21,1,16,1,10,4,4,11,0,18,0,25,4,28,10,28,16,25,21,20,27"
+                                                    title="파라다이스 아트스페이스"
+                                                    style="-webkit-tap-highlight-color: transparent;"></map>
+                                        </div>
+                                        <div
+                                            style="position: absolute; z-index: 0; white-space: nowrap; margin: -31px 0px 0px -91px; left: 399px; top: 124px;">
+                                            <div class="customoverlay"><a
+                                                    href="https://map.daum.net/link/map/파라다이스 아트스페이스,37.437412,126.455555"
+                                                    target="_blank"><span class="title">파라다이스 아트스페이스</span><span
+                                                        class="arrow">&gt;</span></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                style="position: absolute; cursor: default; z-index: 1; margin: 0px 6px; height: 19px; line-height: 14px; left: 0px; bottom: 0px; color: rgb(0, 0, 0);">
+                                <div style="color: rgb(0, 0, 0); text-align: center; font-size: 10px; float: left;">
+                                    <div
+                                        style="float: left; margin: 2px 3px 0px 4px; height: 6px; transition: width 0.1s ease 0s; border-top: none rgb(0, 0, 0); border-right: 2px solid rgb(0, 0, 0); border-bottom: 2px solid rgb(0, 0, 0); border-left: 2px solid rgb(0, 0, 0); border-image: initial; width: 46px;">
+                                    </div>
+                                    <div
+                                        style="float: left; margin: 0px 4px 0px 0px; font-family: AppleSDGothicNeo-Regular, 돋움, dotum, sans-serif; font-weight: bold; color: rgb(0, 0, 0);">
+                                        100m</div>
+                                </div>
+                                <div style="margin: 0px 4px; float: left;"><a target="_blank"
+                                        href="http://map.kakao.com/" title="Kakao 지도로 보시려면 클릭하세요."
+                                        style="float: left; width: 32px; height: 10px;"><img
+                                            src="https://t1.daumcdn.net/mapjsapi/images/m_bi_b.png" alt="Kakao 지도로 이동"
+                                            style="float: left; width: 32px; height: 10px; border: none;"></a>
+                                    <div style="font: 11px / 11px Arial, Tahoma, Dotum, sans-serif; float: left;"></div>
+                                </div>
+                            </div>
+                            <div style="cursor: auto; position: absolute; z-index: 2; left: 0px; top: 0px;">
+                                <div
+                                    style="width: 32px; border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 2px 0px; position: absolute; left: 763px; top: 3px;">
+                                    <button draggable="false" title="확대" type="button"
+                                        style="float: left; cursor: pointer; width: 32px; height: 32px; user-select: none; -webkit-user-drag: none; border-top: none; border-right: none; border-bottom: 1px solid rgb(226, 226, 226); border-left: none; border-image: initial; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) -40px 0px / 116px 264px no-repeat rgb(255, 255, 255); border-radius: 3px 3px 0px 0px;"></button>
+                                    <div
+                                        style="float: left; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/bg_zoom_control.png&quot;) repeat; padding: 7px 0px; transition: height 0s ease 0s, margin 0.1s ease 0s;">
+                                        <div
+                                            style="cursor: pointer; position: relative; background-size: 116px 264px; transition: height 0.1s ease 0s; margin: 2px 0px; display: block; width: 32px; height: 104px;">
+                                            <div
+                                                style="position: absolute; width: 4px; height: 100%; background-color: rgb(51, 150, 255); left: 50%; margin: 0px 0px 0px -2px;">
+                                                <div
+                                                    style="width: 4px; height: 2px; margin-bottom: -2px; bottom: 0px; position: absolute; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) -50px -127px / 116px 264px;">
+                                                </div>
+                                                <div
+                                                    style="width: 4px; height: 2px; margin-top: -2px; top: 0px; position: absolute; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) -40px -100px / 116px 264px;">
+                                                </div>
+                                            </div>
+                                            <div
+                                                style="position: absolute; background-color: rgb(204, 204, 204); transition: height 0.1s ease 0s; left: 50%; margin: 0px 0px 0px -2px; width: 4px; height: 24px;">
+                                            </div>
+                                            <div
+                                                style="cursor: row-resize; position: absolute; width: 20px; height: 10px; margin: -4px 0px 0px -10px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) -40px -80px / 116px 264px; left: 50%; transition: top 0.1s ease 0s; top: 24px;">
+                                            </div>
+                                        </div>
+                                    </div><button draggable="false" title="축소" type="button"
+                                        style="float: left; cursor: pointer; width: 32px; height: 32px; user-select: none; -webkit-user-drag: none; border-top: 1px solid rgb(226, 226, 226); border-right: none; border-bottom: none; border-left: none; border-image: initial; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) -40px -32px / 116px 264px no-repeat rgb(255, 255, 255); border-radius: 0px 0px 3px 3px; margin: 0px;"></button>
+                                    <div
+                                        style="display: none; position: absolute; margin: 41px 0px 0px -30px; background-size: 116px 264px; width: 30px; height: 104px;">
+                                        <div
+                                            style="position: absolute; width: 29px; height: 15px; margin: -6px 0px 0px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) 0px -80px / 116px 264px; left: 0px; top: 8px;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; width: 29px; height: 15px; margin: -6px 0px 0px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) 0px -100px / 116px 264px; left: 0px; top: 32px;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; width: 29px; height: 15px; margin: -6px 0px 0px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) 0px -120px / 116px 264px; left: 0px; top: 64px;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; width: 29px; height: 15px; margin: -6px 0px 0px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) 0px -140px / 116px 264px; left: 0px; top: 80px;">
+                                        </div>
+                                        <div
+                                            style="position: absolute; width: 29px; height: 15px; margin: -6px 0px 0px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) 0px -160px / 116px 264px; left: 0px; top: 96px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exhibitionDetail-location-caption">
+                            <div class="exhibitionDetail-location-name">파라다이스 아트스페이스</div>
+                            <div class="exhibitionDetail-sm">인천광역시 중구 영종해안남로321번길 186 (운서동) </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -137,7 +137,7 @@
                 </div>
               
                 <div class="ect">
-                    <a href="">최신순</a> | <a href="">인기순</a>
+                    <a href="sortPlace.pl?keyword=date">최신순</a> | <a href="sortPlace.pl?keyword=best">인기순</a>
                 </div>
 
                 <ul class="ul-area">
@@ -147,7 +147,7 @@
 
 		                    <li class="li-area">
 		                        <div class="photo">
-		                            <img src="resources/images/풍경1.jpg" alt="" width="250" height="150">
+		                            <img src="${p.pimg1}" alt="" width="250" height="150">
 		                        </div>
 		
 		                        <div class="text">
@@ -167,43 +167,28 @@
                 </ul>
             </div>
         </div>
-        <div class="page-btn" align="center">
-            <button>&lt;</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>&gt;</button>
-        </div>
+
         <div id="pagingArea">
-                <ul class="pagination">
-                		<c:choose>
-                			<c:when test="${ pi.currentPage eq 1 }">
-	                    		<li class="page-item disabled"><a class="page-link" href="list.pl?cpage=${ pi.currentPage - 1 }">Previous</a></li>
-                			</c:when>
-							<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="list.pl?cpage=${ pi.currentPage - 1 }">Previous</a></li>
-							</c:otherwise>
-                		</c:choose>
-                		
-	                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    		<li class="page-item"><a class="page-link" href="list.pl?cpage=${p}">${ p }</a></li>
-	                    </c:forEach>
-	                    
-                    	<c:choose>
-                			<c:when test="${ pi.currentPage eq pi.maxPage }">
-	                    		<li class="page-item disabled"><a class="page-link" href="list.pl?cpage=${ pi.currentPage + 1 }">Previous</a></li>
-                			</c:when>
-							<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="list.pl?cpage=${ pi.currentPage + 1 }">Previous</a></li>
-							</c:otherwise>
-                		</c:choose>
-                </ul>
+            <div class="page-btn" align="center">   
+                <c:choose>
+                    <c:when test="${ pi.currentPage ne 1 }">
+                        <button onclick="location.href='list.pl?cpage=${ pi.currentPage - 1 }';"> &lt; </button>
+                    </c:when>
+                </c:choose>
+                
+                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    <button onclick="location.href='list.pl?cpage=${p}';">${p}</button>
+                </c:forEach>
+                
+                <c:choose>
+                    <c:when test="${ pi.currentPage ne pi.maxPage }">
+                        <button onclick="location.href='list.pl?cpage=${ pi.currentPage + 1 }';"> &gt; </button>
+                    </c:when>
+                </c:choose>
             </div>
+        </div>
     </div>
      <script>
-
         $(function(){
         		$(".ul-area>.li-area>.text").click(function(){
             		location.href = 'detail.pl?pno='+ $(this).children(".pno").text();

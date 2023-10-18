@@ -1,6 +1,7 @@
 package com.kh.hobbyphoto.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,15 +74,24 @@ public class BoardServiceImpl implements BoardService{
 	public ArrayList<Board> selectTopBoardList() {
 		return bDao.selectTopBoardList(sqlSession);
 	}
-
+	
+	@Override
+	public int selectPlaceListCount() {
+		int result = bDao.selectPlaceListCount(sqlSession);
+		return result;
+	}
+	
+	@Override
 	public ArrayList<Place> selectPlaceList(PageInfo pi) {
 		return bDao.selectPlaceList(sqlSession, pi);
 	}
-
+	
+	@Override
 	public Place selectPlace(int pno) {
 		return bDao.selectPlace(sqlSession, pno);
 	}
-
+	
+	@Override
 	public int insertPlace(Place p, ArrayList<Attachment> list) {
 		int result1 = bDao.insertPlace(sqlSession, p);
 		
@@ -91,6 +101,24 @@ public class BoardServiceImpl implements BoardService{
 			result2 = bDao.insertAttachment(sqlSession, list);
 		}
 		return  result1 * result2;
+	}
+
+	@Override
+	public ArrayList<Reply> placeReplyList(int pno) {
+		return bDao.placeReplyList(sqlSession, pno);
+	}
+
+	@Override
+	public int placeInsertReply(Reply r) {
+		return bDao.placeInsertReply(sqlSession, r);
+	}
+
+	public int updatePlace(Place p) {
+		return 0;
+	}
+
+	public ArrayList<Place> sortPlaceList(PageInfo pi, HashMap<String, String> map) {
+		return bDao.sortPlaceList(sqlSession, map, pi);
 	}
 
 }

@@ -33,6 +33,7 @@
 		<result column="reply_no" property="replyNo"/>
 		<result column="reply_content" property="replyContent"/>
 		<result column="reply_writer" property="replyWriter"/>
+		<result column="nickname" property="replyWriter"/>
 		<result column="create_date" property="createDate"/>
 		<result column="status" property="status"/>
 	</resultMap>
@@ -167,7 +168,10 @@
 	
 	
 	
-	
+	<select id="selectPlaceListCount" resultType="_int">
+		select count(*)
+		  from place
+	</select>
 	
 	<select id="selectPlaceList" resultMap="placeResult">
 		select p_no
@@ -189,6 +193,7 @@
 		     , p_content
 		     , p_location
 		     , p_address
+		     , p_writer
 		     , count
 		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
 		     , p_img1
@@ -238,6 +243,57 @@
         </foreach>
     ) A
 </insert>
-
+	
+	<select id="placeReplyList" resultMap="replyResult">
+		select
+		       reply_no
+		     , nickname as "reply_writer"
+		     , reply_content
+		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+		  from reply r
+		  join member on (user_no = reply_writer)
+		 where r.STATUS = 'Y'
+		   and member.status = 'Y'
+		   and ref_bno = 'P'||#{pno}
+		 order
+		       by reply_no desc
+	</select>
+	
+	<insert id="placeInsertReply">
+		insert
+		  into reply
+		  (
+		  	reply_no
+		  , reply_content
+		  , ref_bno
+		  , reply_writer	
+		  )
+		  values
+		  (
+		  	SEQ_REP_NO.nextval
+		  , #{replyContent}
+		  , #{refBno}
+		  , (select user_no
+			from member
+			where user_id = #{replyWriter})
+		  )		  
+	</insert>
+	<select id="sortPlaceList" resultMap="placeResult">
+		select p_no
+		     , p_title
+		     , p_content
+		     , p_location
+		     , p_address
+		     , count
+		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+		     , p_img1
+		  from place
+		  <if test="keyword == 'date'">
+		  	 order by create_date desc
+		    </if>
+		    <if test="keyword == 'best'">
+		   	order by count desc
+		    </if>
+	</select>
 	
 </mapper>

@@ -101,7 +101,7 @@
             <div class="brn-area" align="center">
                 <button type="submit">작성하기</button>
                 <button type="reset">취소하기</button>
-                <button type="button" class="list">목록으로 </button>
+                <button type="button" class="golist">목록으로 </button>
             </div>
         </form>
         </div>
@@ -143,7 +143,7 @@
             
         }
     $(function (){
-        $(".list").click(function(){
+        $(".golist").click(function(){
             location.href='list.pl';
         })
     })

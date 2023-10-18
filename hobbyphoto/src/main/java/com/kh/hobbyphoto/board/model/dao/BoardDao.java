@@ -1,6 +1,7 @@
 package com.kh.hobbyphoto.board.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -58,6 +59,11 @@ public class BoardDao {
 		return (ArrayList) sqlSession.selectList("boardMapper.selectTopBoardList");
 	}
 
+	
+	public int selectPlaceListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("boardMapper.selectPlaceListCount");
+	}
+	
 	public ArrayList<Place> selectPlaceList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
@@ -77,5 +83,21 @@ public class BoardDao {
 	public int insertAttachment(SqlSessionTemplate sqlSession, ArrayList<Attachment> list) {
 		System.out.println(list);
 		return sqlSession.insert("boardMapper.insertAttachment", list);
+	}
+
+	public ArrayList<Reply> placeReplyList(SqlSessionTemplate sqlSession, int pno) {
+		return  (ArrayList)sqlSession.selectList("boardMapper.placeReplyList", pno);
+	}
+
+	public int placeInsertReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("boardMapper.placeInsertReply", r);
+	}
+
+	public ArrayList sortPlaceList(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.sortPlaceList", map, rowBounds);
 	}
 }

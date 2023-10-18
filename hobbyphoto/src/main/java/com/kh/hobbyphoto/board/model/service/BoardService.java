@@ -2,7 +2,9 @@ package com.kh.hobbyphoto.board.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.hobbyphoto.board.model.vo.Attachment;
 import com.kh.hobbyphoto.board.model.vo.Board;
+import com.kh.hobbyphoto.board.model.vo.Place;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 
@@ -34,5 +36,14 @@ public interface BoardService {
 	
 	// 8. 조회수 top5 리스트 조회용 서비스
 	ArrayList<Board> selectTopBoardList();
+	
+	
+	
+	ArrayList<Place> selectPlaceList(PageInfo pi);
+	int insertPlace(Place p, ArrayList<Attachment> list);
+	Place selectPlace(int pno);
+	int placeInsertReply(Reply r);
+	ArrayList<Reply> placeReplyList(int pno);
+	int selectPlaceListCount();
 	
 }

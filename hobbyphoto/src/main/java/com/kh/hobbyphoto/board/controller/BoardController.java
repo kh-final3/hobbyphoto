@@ -1,28 +1,22 @@
 package com.kh.hobbyphoto.board.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.*;
+import java.net.*;
+import java.text.*;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.BoardServiceImpl;
-import com.kh.hobbyphoto.board.model.vo.Attachment;
-import com.kh.hobbyphoto.board.model.vo.Board;
-import com.kh.hobbyphoto.board.model.vo.Place;
-import com.kh.hobbyphoto.board.model.vo.Reply;
+import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
 
@@ -203,15 +197,32 @@ public class BoardController {
 		return new Gson().toJson(list);
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// *************출사명소시작************ //
 	@RequestMapping("list.pl")
 	public ModelAndView selectPlaceList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
-		int listCount = bService.selectListCount();
+		int listCount = bService.selectPlaceListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<Place> list = bService.selectPlaceList(pi);
-		System.out.println(list);
+		System.out.println(pi);
 		mv.addObject("pi", pi).addObject("list", list).setViewName("board/placeListView");
 		
 		return mv;
@@ -334,35 +345,31 @@ public class BoardController {
 	}
 	
 	@RequestMapping("updateForm.pl")
-	public String plUpdateForm(int bno, Model model) {
-		model.addAttribute("b", bService.selectBoard(bno));
+	public String plUpdateForm(int pno, Model model) {
+		model.addAttribute("p", bService.selectPlace(pno));
 		return "board/placeUpdateForm";
 	}
 	
-	@RequestMapping("update.bo")
-	public String updateBoard(Board b, MultipartFile reupfile, HttpSession session, Model model) {
+	@RequestMapping("update.pl")
+	public String updatePlace(Place p,Attachment at, MultipartFile reupfile, HttpSession session, Model model) {
 		
-		// 새로 넘어온 첨부파일이 있을 경우
 		if(!reupfile.getOriginalFilename().equals("")) {
 			
-			// 기존에 첨부파일이 있었을 경우 => 기존의 첨부파일 지우기
-			if(b.getOriginName() != null) {
-				new File(session.getServletContext().getRealPath(b.getChangeName())).delete();
+			if(at.getOriginName() != null) {
+				new File(session.getServletContext().getRealPath(at.getChangeName())).delete();
 			}
-			// 새로 넘어온 첨부파일 서버 업로드 시키기
 			String changeName = saveFile(reupfile, session);
 			
-			// b에 새로 넘어온 첨부파일에 대한 원본명, 저장경로 담기
-			b.setOriginName(reupfile.getOriginalFilename());
-			b.setChangeName("resources/uploadFiles/" + changeName);
+			at.setOriginName(reupfile.getOriginalFilename());
+			at.setChangeName("resources/uploadFiles/" + changeName);
 			}
 			
-			int result = bService.updateBoard(b);
+			int result = bService.updatePlace(p);
 			
 			if(result > 0) {
 				// 수정 성공 => 상세페이지 detail.bo   url 재요청
 				model.addAttribute("alertMsg", "게시글 수정에 성공했습니다.");
-				return "redirect:detail.bo?bno=" + b.getBoardNo();
+				return "redirect:detail.pl?bno=" + p.getPno();
 			} else {
 				// 수정 실패 => 에러페이지
 				model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
@@ -370,5 +377,106 @@ public class BoardController {
 			}
 			
 		}
+	
+	@ResponseBody
+	@RequestMapping(value="rlist.pl", produces="application/json; charset=UTF-8")
+	public String placeReplyList(int pno) { 
+		ArrayList<Reply> list = bService.placeReplyList(pno);
+		return new Gson().toJson(list);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="rinsert.pl")
+	public String placeInsertReply(Reply r) {
+		int result = bService.placeInsertReply(r);
+		return result > 0 ? "success" : "fail";
+		
+	}
+	
+	
+	@RequestMapping("sortPlace.pl")
+	public ModelAndView sortPlace(String keyword,@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		int listCount = bService.selectPlaceListCount();
+		HashMap<String, String> map = new HashMap<>(); 
+		map.put("keyword",keyword);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Place> list = bService.sortPlaceList(pi, map);
+		mv.addObject("pi", pi).addObject("list", list).setViewName("board/placeListView");
+		
+		return mv;
+	}
+	
+	@RequestMapping("festvalListView.fs")
+	public String festivalView() {
+		return "culture/festival";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="festvalList.fs", produces = "text/xml; charset=utf-8")
+	public String festivalList() throws IOException {
+		String url = "http://openapi.seoul.go.kr:8088";
+		url += "/6b74516d52666267343266754f7574";
+		url += "/xml";
+		url += "/culturalEventInfo";
+		url += "/1";
+		url += "/50";
+		url += "/축제";	
+		
+		URL requestUrl = new URL(url);
+		
+		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
+		
+		urlConnection.setRequestMethod("GET");
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));				
+		
+		String responseText = "";
+		String line;
+		while((line= br.readLine()) != null) {
+			responseText += line;
+		}
+		
+		
+		br.close();
+		urlConnection.disconnect();
+		return responseText;	
+	}
+	
+	@RequestMapping("exhibitListView.fs")
+	public String exhibitView() {
+		return "culture/exhibit";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="exhibitList.fs", produces = "text/xml; charset=utf-8")
+	public String exhibitList() throws IOException {
+		String url = "http://openapi.seoul.go.kr:8088";
+		url += "/6b74516d52666267343266754f7574";
+		url += "/xml";
+		url += "/culturalEventInfo";
+		url += "/1";
+		url += "/10";
+		url += "/전시";	
+		
+		URL requestUrl = new URL(url);
+		
+		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
+		
+		urlConnection.setRequestMethod("GET");
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));				
+		
+		String responseText = "";
+		String line;
+		while((line= br.readLine()) != null) {
+			responseText += line;
+		}
+		
+		
+		br.close();
+		urlConnection.disconnect();
+		return responseText;	
+	}
 	
 }
