@@ -23,6 +23,7 @@ import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
+import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Controller
 public class BoardController {
@@ -38,7 +39,6 @@ public class BoardController {
 		ArrayList<Board> list = bService.selectList(pi);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectPhBoardList");
-		
 		return mv;
 	}
 	
@@ -46,25 +46,54 @@ public class BoardController {
 	public String selectPhBoard(int phno, Model model) {
 		int result = bService.increaseCount(phno);
 		
-		// 해당 게시글 조회수 증가 서비스 호출 결과 받기
 		if (result > 0) {
-			// >> 성공적으로 조회수 증가
-			// 		>> boardDetailView.jsp 상에 필요한 데이터 조회 (게시글 상세정보 조회 서비스 호출)
-			// 		>> 조회된 데이터 담아서
-			// 		>> board/boardDetailView.jsp로 포워딩
-			Board b = bService.selectBoard(phno);
+			Board b = bService.selectpBoard(phno);
 			model.addAttribute("b", b);
-			System.out.println(b);
 			return "board/phBoardDetailView";
 			
 		} else {
-			// >> 조회수 증가 실패
-			// 		>> 에러문구 담아서 에러페이지 포워딩
 			model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
 			return "common/errorPage";
 			
 		}
 	}
+	
+	@RequestMapping("phEnrollForm.bo")
+	public String phEnrollForm() {
+		return "board/phBoardEnrollForm";
+	}
+	
+//	@RequestMapping("insert.bo")
+//	public String insertBoard(Board b, MultipartFile upfile, HttpSession session, Model model) {
+//	    System.out.println(b);
+//
+//	    if (!upfile.getOriginalFilename().equals("")) {
+//
+//	        String changeName = saveFile(upfile, session);
+//	        System.out.println(changeName);
+//
+//	        // 원본명, 서버업로드된 경로를 Attachment 객체에 담기
+//	        Attachment attachment = new Attachment();
+//	        attachment.setOrignName((upfile.getOriginalFilename()));
+//	        attachment.setChangeName(attachment.get + changeName);
+//
+//	        // Attachment 객체를 Board 객체에 설정
+//	        b.setAttachment(attachment);
+//	    }
+//
+//	    int result = bService.insertBoard(b);
+//
+//	    if (result > 0) { // 성공 => 게시글 리스트페이지(list.bo url 재요청)
+//	        session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
+//	        return "redirect:phBoardList.bo";
+//	    } else { // 실패 => 에러페이지 포워딩
+//	        model.addAttribute("errorMsg", "게시글 등록 실패");
+//	        return "common/errorPage";
+//	    }
+//	}
+
+
+
 	
 
 }

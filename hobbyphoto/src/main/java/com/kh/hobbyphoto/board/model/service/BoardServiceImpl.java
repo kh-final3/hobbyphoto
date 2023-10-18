@@ -37,12 +37,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int increaseCount(int phno) {
-		return bDao.increaseCount(sqlSession, phno);
+	public int increaseCount(int boardNo) {
+		return bDao.increaseCount(sqlSession, boardNo);
 	}
 
 	@Override
-	public Board selectBoard(int boardNo) {
+	public Board selectpBoard(int boardNo) {
 		return bDao.selectpBoard(sqlSession, boardNo);
 	}
 

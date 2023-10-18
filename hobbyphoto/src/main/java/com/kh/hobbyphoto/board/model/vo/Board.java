@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class Board {
 
-	private String boardNo;
+	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
 	private String boardWriter;
@@ -25,4 +25,6 @@ public class Board {
 	private Date createDate;
 	private String hashTag;
 	private String thumbnail;
+	private String changeName;
+	private String filePath;
 }

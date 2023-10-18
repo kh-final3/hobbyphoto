@@ -12,8 +12,8 @@
             width: 1200px;
             height: 1000px;
             margin: auto;
-            background-color: rgba(0, 0,0,0.1);
-            border-radius: 15px;
+            background-color: rgba(44, 44, 44, 0.026);
+            border-radius: 8px;
         }
 
         .inner{
@@ -21,14 +21,13 @@
             width: 90%;
             height: 98%;
             margin: auto;
-            margin-top: 10px;
             background-color: white;
             border-radius: 15px;
         }
 
         /* 사진 */
         .img-area{
-            border-right: 1px solid black;
+            /* border-right: 1px solid black; */
             width: 64%;
             height: 100%;
             float: left;
@@ -38,7 +37,7 @@
         .text-area{
             border: 1px solid blue;
             width: 35%;
-            height: 100%;
+            height: 85%;
             margin-left: 65%;
             border: none;
         }
@@ -52,7 +51,7 @@
         }
         /* 작성자 */
         .writer_name{
-            border: 1px solid black;
+            /* border: 1px solid black; */
             width: 100%;
             height: 30%;
             border: none;
@@ -64,15 +63,18 @@
             width: 100%;
             height: 70%;
             border: none;
+            margin-left: 20px;
+            margin-top: 30px;
         }
         /* 댓글 리스트 박스 */
         .content-area{
-            border: 1px solid purple;
+            /* border: 1px solid purple; */
             width: 100%;
             height: 50%;
         }
         /* 댓글 작성 박스 */
         .under-area{
+            margin-top: 20px;
             border: 1px solid blueviolet;
             width: 100%;
             height: 10%;
@@ -119,11 +121,15 @@
         button{
             width: 30px; height: 30px;
             color: white;
-            background: #646464;
+            background: #808080;
+            border-radius: 3px;
+        }
+        .writer textarea {
+            border: 1px solid rgba(171, 164, 159, 0.389);
         }
 
         button:active{/**버튼을 클릭하는 동안 색을 바꾼다.**/
-            background:#3e3e3e;
+            background: #808080;
         }
 
         button:disabled{/**버튼 속성이 disabled되면 색을 바꾼다.**/
@@ -170,6 +176,12 @@
             margin-left: 3px;
             margin-top: 10px;
         }
+        #detail-hr {
+            border: 1px solid rgba(220, 220, 220, 0.340);
+            margin-right: 10px;
+            margin: auto;
+            width: 360px
+        }
     </style>
 </head>
 <body>
@@ -181,10 +193,10 @@
                 <div class="box">
                     <!--div를 두개 감싼이유는 img들을 좌우배치하고 배치된 사진중 한장만 보이게 하기 위해서이다.-->
                     <div class="slide"> <!--배치된 img들을 하나의 img만 보이게 가리기 위한 태그-->
-                        <div class="images"> <!--img들을 좌우배치할 태그-->
-                            <img src="resources/images/blackboard.png">
-                            <img src="resources/images/block-user.png">
-                            <img src="resources/images/bookmark-white.png">
+						<div class="images"> <!--img들을 좌우배치할 태그-->                        
+                      		<%-- <c:forEach var="b" items="${ b }"> --%>
+						    <img src="${ b.filePath }/${ b.changeName }">
+							<!-- </c:forEach> -->
                         </div>
                     </div>
                     <button class="back">❮</button>
@@ -237,12 +249,12 @@
             <div class="text-area">
                 <div class="head-area">
                     <div class="writer_name">
-                        <img src="resources/pro.png" alt="" width="95">
-                        <p>user01</p>
+                        <img src="resources/images/pro.png" alt="" width="95">
+                        <p>${ b.boardWriter }</p>
                         <!--팔로운 안한 사람만 보이게-->
                         <p style="color: blue; cursor: pointer;">팔로우</p>
                     </div>
-                    <hr>
+                    <hr id="detail-hr">
                     <div class="content">
                         <div>
                             장소 : 서울특별시 역삼역 3번 출구 <br>
@@ -250,23 +262,23 @@
                         </div>
                         <br>
                         <div>
-                            간략한 사진 설명 또는 장소 설명
+                            ${ b.boardContent }
                         </div>
                         <br>
                         <div>
-                            작성일 : 2023-09-18 | 
-                            조회수 : 12
+                            작성일 : ${ b.createDate } | 
+                            조회수 : ${ b.count }
                         </div>
                         
                     </div>
                 </div>
-                <hr>
+                <hr id="detail-hr">
                 <div class="content-area">
                     <div class="review-area">
                         
                     </div>
                 </div>
-                <hr>
+                <hr id="detail-hr">
                 <div class="under-area">
                     <p>댓글(2)</p>
                     <div class="writer">

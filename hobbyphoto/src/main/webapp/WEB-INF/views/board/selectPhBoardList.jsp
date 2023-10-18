@@ -71,18 +71,19 @@
 	</style>
 </head>
 	<body>
+	  <jsp:include page="../common/header.jsp"/>
 		<div class="outer_th" id="header_th">
-            <br>
+           <br>
             <h2 align="center">사진게시판</h2>
             <br>
 
 	        <div style="width: 850px;" align="right">
-	            <a href="#" class="btn btn-light" id="btn_th">글작성</a>
+	            <a href="phEnrollForm.bo" class="btn btn-light" id="btn_th">글작성</a>
 	        </div>
 	        
 	        <div class="list-area_th">
 			   	<c:forEach var="b" items="${ list }">
-		            <div class="thumbnail" align="center" id="phno">
+		           	<div class="thumbnail" align="center" data-phno="${ b.boardNo }">
 		                <img src= "${ b.thumbnail }" width="295" height="220"> 
 		                <p id="thumbText">
 		                    <img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" style="border-radius: 100%; margin-bottom: 3px;" width="20px" height="20px"> ${ b.boardWriter } <br><h class="h_a">${ b.boardTitle }</h>
@@ -95,47 +96,46 @@
             <script>
 	            $(function(){
 	                $(".thumbnail").click(function(){
-	                    var phno = $(this).attr('id');
-	                    location.href = 'detail.bo?phno=' + phno;
+	                    var phno = $(this).data("phno");
+	                    window.location.href = 'phDetail.bo?phno=' + phno;
 	                });
 	            });
             </script>	        
-	        
-        
-            <div class="paging-area" align="center">
-            	<c:choose>
-            		<c:when test="${ pi.currentPage eq 1 }">
-                		<button disabled> &lt; </button>
-                	</c:when>
-                	<c:otherwise>
-                		<button style="border: 1px solid lightgray; font-weight: bolder;" onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage - 1 }'">Previous</button>
-                	</c:otherwise>
-                </c:choose>
-                
-                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <button onclick="location.href='phBoardList.bo?cpage=${ p }'">${ p }</button>
-                </c:forEach>
-                
-                <button onclick="location.href='phBoardList.bo?cpage=${ p }'">${ p }</button>
-                
-               	<c:choose>
-                   	<c:when test="${ pi.currentPage eq pi.maxPage }">
-                    		<button onclick="location.href=''" disabled>Next</button>
-                   	</c:when>
-                     <c:otherwise>
-                     	<button onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage + 1 }'">Next</button>
-                   	</c:otherwise>
-                </c:choose>
-                
-                <button> &gt; </button>
-            </div>
+		            <div class="paging-area" align="center">
+		            	<c:choose>
+		            		<c:when test="${ pi.currentPage eq 1 }">
+		                		<button disabled> &lt; </button>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<button style="border: 1px solid lightgray; font-weight: bolder;" onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage - 1 }'">Previous</button>
+		                	</c:otherwise>
+		                </c:choose>
+		                
+		                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		                    <button onclick="location.href='phBoardList.bo?cpage=${ p }'">${ p }</button>
+		                </c:forEach>
+		                
+		                <button onclick="location.href='phBoardList.bo?cpage=${ p }'">${ p }</button>
+		                
+		               	<c:choose>
+		                   	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		                    		<button onclick="location.href=''" disabled>Next</button>
+		                   	</c:when>
+		                     <c:otherwise>
+		                     	<button onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage + 1 }'">Next</button>
+		                   	</c:otherwise>
+		                </c:choose>
+		                
+		                <button> &gt; </button>
+            		</div>
 
-            <div id="topbtn">
-                <a style="display:scroll; position:fixed; bottom:10px; right:20px;" title="top">
-                    <img src="https://cdn-icons-png.flaticon.com/128/6469/6469473.png" id="top">
-                </a> 
-            </div>   
-        </div>
-    </div>
+            		<div id="topbtn">
+                	<a style="display:scroll; position:fixed; bottom:10px; right:20px;" title="top">
+                    	<img src="https://cdn-icons-png.flaticon.com/128/6469/6469473.png" id="top">
+                	</a> 
+            		</div>   
+        		</div>
+    		</div>
+  		<jsp:include page="../common/footer.jsp"/>
 	</body>
 </html>
