@@ -227,7 +227,7 @@
                 <div id="mb_user_1">
                     <table class="login-area" align="center">
                         <tr height="75">
-                            <td width="70"><img width="60" src="resources/images/shopping-cart.png" alt=""></td>
+                            <td width="70"><a href="pro.list"><img width="60" src="resources/images/shopping-cart.png" alt=""></a></td>
                             <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png"></td>
                         </tr>
                     </table>
@@ -260,7 +260,7 @@
 		                					<li class="member_menu_mypage" align="center">
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
-					                					<a href="#">관리자페이지</a>
+					                					<a href="admin.pg">관리자페이지</a>
 				                					</c:when>
 				                					<c:otherwise>
 				                						<a href="#">알림(0)</a>

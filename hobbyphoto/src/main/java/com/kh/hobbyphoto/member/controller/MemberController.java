@@ -58,6 +58,7 @@ public class MemberController {
 			model.addAttribute("errorMsg", "회원등록에 실패하였습니다.");
 			return "common/errorPage";
 		}
+	
 	}
 	
 	@RequestMapping("myPage.me")
