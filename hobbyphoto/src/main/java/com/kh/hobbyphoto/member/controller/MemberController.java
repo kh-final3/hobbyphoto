@@ -70,4 +70,15 @@ public class MemberController {
 		session.removeAttribute("loginMember");
 		return "redirect:/";
 	}
+	
+	@RequestMapping("findId.me")
+	public String findId() {
+		return "member/findMember";
+	}
+	
+	@RequestMapping("idSearch")
+	public String idSearch(String userName) {
+		Member searchMember = ms.searchId(userName);
+		return "";
+	}
 }

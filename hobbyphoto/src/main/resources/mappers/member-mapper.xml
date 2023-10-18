@@ -59,4 +59,23 @@
 		 where user_id = #{userId}
 		   and status = 'Y'
 	</select>
+	
+	<select id="searchId" resultMap="resultMember">
+		select 
+		       user_no
+		     , user_id
+		     , user_pwd
+		     , user_name
+		     , nickname
+		     , email
+		     , gender
+		     , phone
+		     , description
+		     , profile_img
+		     , status
+		     , social
+		  from member
+		 where user_id = #{userName}
+		   and status = 'Y'
+	</select>
 </mapper>

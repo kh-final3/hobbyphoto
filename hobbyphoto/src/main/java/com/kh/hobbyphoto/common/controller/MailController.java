@@ -1,26 +1,23 @@
 package com.kh.hobbyphoto.common.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.hobbyphoto.common.model.service.MailService;
 
-import lombok.RequiredArgsConstructor;
-
 @Controller
-@RequiredArgsConstructor
 public class MailController {
 	
+	@Autowired
 	private MailService mailService;
 	
-	@GetMapping("/")
-	public String MailPage() {
-		return "Mail";
-	}
 	
-	@PostMapping("/mail")
-	public void MailSend(String mail) {
-		mailService.createMail(mail);
+	@ResponseBody
+	@RequestMapping("mail")
+	public int MailSend(String mail) {
+		int number = mailService.sendMail(mail);
+		return number;
 	}
 }

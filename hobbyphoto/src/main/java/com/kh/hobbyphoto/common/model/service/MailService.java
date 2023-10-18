@@ -3,24 +3,22 @@ package com.kh.hobbyphoto.common.model.service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class MailService {
+	
+	@Autowired
 	private JavaMailSender javaMailSender;
-    private static final String senderEmail= "gohwangbong@gmail.com";
-    private static int number;
+	
+    private static final String senderEmail= "final3.kh@gmail.com";
+    
+    private static final int number = (int)(Math.random() * (90000)) + 100000;
 
-    public static void createNumber(){
-       number = (int)(Math.random() * (90000)) + 100000;// (int) Math.random() * (최댓값-최소값+1) + 최소값
-    }
 
     public MimeMessage createMail(String mail){
-        createNumber();
         MimeMessage message = javaMailSender.createMimeMessage();
 
         try {

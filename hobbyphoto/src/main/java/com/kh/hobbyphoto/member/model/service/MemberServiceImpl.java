@@ -26,4 +26,9 @@ public class MemberServiceImpl implements MemberService {
 		return md.insertMember(sqlSession, m);
 	}
 
+	@Override
+	public Member searchId(String userName) {
+		return md.searchId(sqlSession, userName);
+	}
+
 }
