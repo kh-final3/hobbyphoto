@@ -2,6 +2,7 @@ package com.kh.hobbyphoto.board.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Autowired
 	private BoardDao bDao;
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -112,13 +114,34 @@ public class BoardServiceImpl implements BoardService{
 	public int placeInsertReply(Reply r) {
 		return bDao.placeInsertReply(sqlSession, r);
 	}
-
-	public int updatePlace(Place p) {
-		return 0;
+	
+	@Override
+	public int updatePlace(Place p, ArrayList<Attachment> list) {
+		int result1 = bDao.updatePlace(sqlSession, p);
+		
+		int result2 = 1;
+		
+		if(!list.isEmpty()) {
+			result2 = bDao.updatePlaceAttachment(sqlSession, list);
+		}
+		System.out.println(result1);
+		System.out.println(result2);
+		return  result1 * result2;
 	}
-
+	
+	@Override
 	public ArrayList<Place> sortPlaceList(PageInfo pi, HashMap<String, String> map) {
 		return bDao.sortPlaceList(sqlSession, map, pi);
+	}
+
+	public int getImageCount(int pno) {
+		
+		return bDao.getImageCount(sqlSession, pno);
+	}
+
+	public int insertAttachmentPlace(ArrayList<Attachment> list) {
+		
+		return bDao.insertAttachment(sqlSession, list);
 	}
 
 }

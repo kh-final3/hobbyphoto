@@ -2,6 +2,7 @@ package com.kh.hobbyphoto.board.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -100,4 +101,20 @@ public class BoardDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.sortPlaceList", map, rowBounds);
 	}
+
+	public int updatePlace(SqlSessionTemplate sqlSession, Place p) {
+		
+		return sqlSession.update("boardMapper.updatePlace", p);
+	}
+
+	public int getImageCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("boardMapper.getImageCount", pno);
+	}
+
+	public int updatePlaceAttachment(SqlSessionTemplate sqlSession, ArrayList<Attachment> list) {
+		System.out.println(list);
+		return sqlSession.update("boardMapper.updatePlaceAttachment", list);
+	}
+
+
 }

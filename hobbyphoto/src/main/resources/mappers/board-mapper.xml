@@ -236,7 +236,7 @@
 	
 	<insert id="insertAttachment" parameterType="java.util.List">
     INSERT INTO ATTACHMENT (FILE_NO, REF_BNO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
-    SELECT SEQ_FILE_NO.NEXTVAL, 'P'||SEQ_PLACENO.CURRVAL, A.ORIGIN_NAME, A.CHANGE_NAME, A.FILE_PATH
+    SELECT SEQ_FILE_NO.NEXTVAL, SEQ_PLACENO.CURRVAL, A.ORIGIN_NAME, A.CHANGE_NAME, A.FILE_PATH
     FROM (
         <foreach item="attachment" collection="list" separator="UNION ALL">
             SELECT #{attachment.originName} AS ORIGIN_NAME, #{attachment.changeName} AS CHANGE_NAME, #{attachment.filePath} AS FILE_PATH FROM DUAL
@@ -254,7 +254,7 @@
 		  join member on (user_no = reply_writer)
 		 where r.STATUS = 'Y'
 		   and member.status = 'Y'
-		   and ref_bno = 'P'||#{pno}
+		   and ref_bno = #{pno}
 		 order
 		       by reply_no desc
 	</select>
@@ -278,6 +278,7 @@
 			where user_id = #{replyWriter})
 		  )		  
 	</insert>
+	
 	<select id="sortPlaceList" resultMap="placeResult">
 		select p_no
 		     , p_title
@@ -296,4 +297,41 @@
 		    </if>
 	</select>
 	
+	<update id="updatePlace">
+		update
+			   place
+		   set p_title = #{ptitle}
+		     , p_content = #{pcontent}
+		     , p_location = #{plocation}
+		     , p_address= #{paddress}
+		     , p_img1 = #{pimg1}
+		     , p_img2 = #{pimg2}
+		     , p_img3 = #{pimg3}
+		     , p_img4 = #{pimg4}
+		 where p_no = #{pno}
+	</update>
+
+
+	<select id="getImageCount" resultType="_int">
+	    SELECT COUNT(FILE_NO) "COUNT"
+	      FROM ATTACHMENT
+	      WHERE REF_BNO = #{pno}
+	</select>
+	
+	<update id="updatePlaceAttachment" parameterType="java.util.ArrayList">
+	    <foreach collection="list" item="attachment" open="DECLARE BEGIN" separator=";" close="; END;">
+	        UPDATE ATTACHMENT
+	        SET ORIGIN_NAME = #{attachment.originName},
+	            CHANGE_NAME = #{attachment.changeName},
+	            FILE_PATH = #{attachment.filePath}
+	        WHERE FILE_NO = (
+	            SELECT FILE_NO
+	            FROM ATTACHMENT
+	            WHERE REF_BNO = #{attachment.refBno}
+	            AND STATUS = 'Y'
+	        )
+	    </foreach>
+	</update>
+
+
 </mapper>

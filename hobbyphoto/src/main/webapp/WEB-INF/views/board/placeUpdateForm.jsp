@@ -191,7 +191,7 @@
 <jsp:include page="../common/header.jsp"/>
     <div class="warp">
         <form method="post" action="update.pl" enctype="multipart/form-data">
-       
+       	<input type="hidden" value="${ p.pno }" name="pno">
         <div class="outline">
             <div class="content-area">
                 <div class="detail-area">
@@ -199,7 +199,7 @@
                         <ul class="ul-area">
                             <li class="li-area">
                                 <div class="board-title">
-                                    &nbsp; 제목 : <input type="text" name="" id="" value="${ p.ptitle }" required>
+                                    &nbsp; 제목 : <input type="text" name="ptitle" id="" value="${ p.ptitle }" required>
                                 </div>
                                 
                                 <div class="board-create">${ p.createDate }</div>
@@ -219,7 +219,9 @@
                     <hr>
                     <div class="list-content">
                         <div class="list">
-                        [주소] <input type="text" name="" id="" value="${ p.plocation }" required> <br>
+                        [장소] <input type="text" name="plocation" id="" value="${ p.plocation }" required> <br>
+                        [상세주소] <input type="text" name="paddress" id="" value="${ p.paddress }" required> <br>
+                        [내용] <input type="text" name="pcontent" id="" value="${ p.pcontent }" required> <br>
                         [촬영 시기] <input type="text" name="" id="" value="5월 중순 ~ 8월 중순"> <br>
                         [추천 카메라] <input type="text" name="" id="" value="24-70mm,..."> <br>
                         [특징] <br><textarea name="" id="" style="width: 1000px; height: 100px; resize: none;"></textarea>
@@ -233,21 +235,23 @@
                 </div>
                 <div class="photo-area">
                     <img src="${ p.pimg1 }" alt="사진 1" id="titleImg" onclick="chooseFile(1);">
+                    <input type="hidden" name="originFileNo1" value="${list.size() > 0 ? list[0].fileNo : ''}">
                     <img src="${ p.pimg2 }" alt="사진 2" id="contentImg1" onclick="chooseFile(2);">
+                    <input type="hidden" name="originFileNo2" value="${list.size() > 1 ? list[1].fileNo : ''}">
                     <img src="${ p.pimg3 }" alt="사진 3" id="contentImg2" onclick="chooseFile(3);">
+                    <input type="hidden" name="originFileNo3" value="${list.size() > 2 ? list[2].fileNo : ''}">
                     <img src="${ p.pimg4 }" alt="사진 4" id="contentImg3" onclick="chooseFile(4);">
+                    <input type="hidden" name="originFileNo4" value="${list.size() > 3 ? list[3].fileNo : ''}">
                 </div>
 		 		<div id="file-area" style="display:none">
-		            <input type="file" name="upfile" id="file1" onchange="loadImg(this, 1);" required>
+		            <input type="file" name="upfile" id="file1" onchange="loadImg(this, 1);">
 		            <input type="file" name="upfile" id="file2" onchange="loadImg(this, 2);">
 		            <input type="file" name="upfile" id="file3" onchange="loadImg(this, 3);">
 		            <input type="file" name="upfile" id="file4" onchange="loadImg(this, 4);">
 		        </div>
                 <hr>
 
-                <div class="map-area">
-                    지도 api
-                </div> 
+                
             </div>
             
         </div>

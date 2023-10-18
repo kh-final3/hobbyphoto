@@ -1,6 +1,7 @@
 package com.kh.hobbyphoto.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.hobbyphoto.board.model.vo.Attachment;
 import com.kh.hobbyphoto.board.model.vo.Board;
@@ -45,5 +46,7 @@ public interface BoardService {
 	int placeInsertReply(Reply r);
 	ArrayList<Reply> placeReplyList(int pno);
 	int selectPlaceListCount();
+	ArrayList<Place> sortPlaceList(PageInfo pi, HashMap<String, String> map);
+	int updatePlace(Place p, ArrayList<Attachment> list);
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -245,7 +246,7 @@ public class BoardController {
 	            Attachment at = new Attachment();
 	            at.setOriginName(upfile.getOriginalFilename());
 	            at.setChangeName("resources/uploadFiles/" + changeName);
-	            at.setFilePath("resources/board_upfiles");
+	            at.setFilePath("resources/uploadFiles");
 	            list.add(at);
 	        }
 	    }
@@ -351,32 +352,47 @@ public class BoardController {
 	}
 	
 	@RequestMapping("update.pl")
-	public String updatePlace(Place p,Attachment at, MultipartFile reupfile, HttpSession session, Model model) {
-		
-		if(!reupfile.getOriginalFilename().equals("")) {
-			
-			if(at.getOriginName() != null) {
-				new File(session.getServletContext().getRealPath(at.getChangeName())).delete();
-			}
-			String changeName = saveFile(reupfile, session);
-			
-			at.setOriginName(reupfile.getOriginalFilename());
-			at.setChangeName("resources/uploadFiles/" + changeName);
-			}
-			
-			int result = bService.updatePlace(p);
-			
-			if(result > 0) {
-				// 수정 성공 => 상세페이지 detail.bo   url 재요청
-				model.addAttribute("alertMsg", "게시글 수정에 성공했습니다.");
-				return "redirect:detail.pl?bno=" + p.getPno();
-			} else {
-				// 수정 실패 => 에러페이지
-				model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
-				return "common/errorPage";
-			}
-			
-		}
+	public String updatePlace(Place p, @RequestParam("upfile") MultipartFile[] upfiles,HttpSession session, Model model) {
+		ArrayList<Attachment> list = new ArrayList<>();
+	    Place existingPlace = bService.selectPlace(p.getPno());
+	    p.setPimg1(existingPlace.getPimg1());
+	    p.setPimg2(existingPlace.getPimg2());
+	    p.setPimg3(existingPlace.getPimg3());
+	    p.setPimg4(existingPlace.getPimg4());
+
+	    for (int i = 1; i <= 4; i++) {
+	        String key = "upfile" + i;
+
+	        if (upfiles[i - 1] != null && !upfiles[i - 1].isEmpty()) {
+	            MultipartFile file = upfiles[i - 1];
+	            String changeName = saveFile(file, session);
+	            Attachment at = new Attachment();
+	            at.setOriginName(file.getOriginalFilename());
+	            at.setChangeName("resources/uploadFiles/" + changeName);
+	            at.setFilePath("resources/uploadFiles");
+	            at.setRefBno(String.valueOf(p.getPno()));
+	            list.add(at);
+	        }
+	    }
+	    
+	    int result = bService.updatePlace(p,list);
+	    System.out.println(list);
+	   
+
+	    if (result > 0) {
+	        session.setAttribute("alertMsg", "게시글 수정에 성공했습니다.");
+	        return "redirect:detail.pl?pno=" + p.getPno();
+	    } else {
+	        model.addAttribute("errorMsg", "게시글 수정 실패");
+	        return "common/errorPage";
+	    }
+	}
+
+
+
+
+
+
 	
 	@ResponseBody
 	@RequestMapping(value="rlist.pl", produces="application/json; charset=UTF-8")
