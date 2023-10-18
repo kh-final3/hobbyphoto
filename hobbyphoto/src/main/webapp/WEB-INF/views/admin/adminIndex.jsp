@@ -1,8 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="X-UA-Compatible" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <meta name="description" content="" />
         <meta name="author" content="" />
@@ -10,16 +13,20 @@
             button {
                 border: 1px solid gray
             }
+            
         </style>
         <title>Admin Page</title>
+         
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="resources/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="adminIndex.jsp">하비포토 관리페이지</a>
+            <a class="navbar-brand ps-3" href="alist.da">하비포토 관리페이지</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -48,7 +55,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">메인</div>
-                            <a class="nav-link" href="adminIndex.jsp">
+                            <a class="nav-link" href="alist.da">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -60,8 +67,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.jsp">Login</a>
-                                            <a class="nav-link" href="register.jsp">Register</a>
+                                            <a class="nav-link" href="login.me">Login</a>
+                                            <a class="nav-link" href="memberEnrollForm.me">Register</a>
                                             <a class="nav-link" href="password.jsp">Forgot Password</a>
                                         </nav>
                                     </div>
@@ -79,24 +86,24 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">주요 관리 기능</div>
-                            <a class="nav-link" href="memberManage.jsp">
+                            <a class="nav-link" href="mlist.me">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 회원관리
                             </a>
-                            <a class="nav-link" href="productManage.jsp">
+                            <a class="nav-link" href="plist.pr">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 상품관리
                             </a>
-                            <a class="nav-link" href="postsManage.jsp">
+                            <a class="nav-link" href="blist.bo">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 게시글관리
                             </a>
-                            <a class="nav-link" href="reportManage.jsp">
+                            <a class="nav-link" href="rlist.me">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 신고회원관리
                             </a>
                             <div class="sb-sidenav-menu-heading">주요 현황</div>
-                            <a class="nav-link" href="adminCharts.jsp">
+                            <a class="nav-link" href="achart.pr">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 상품 매출 현황
                             </a>
@@ -108,7 +115,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        hobbyphoto 관리자
+                        ${ loginMember.nickName}
                     </div>
                 </nav>
             </div>
@@ -124,7 +131,7 @@
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">회원관리</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="memberManage.jsp">View Details</a>
+                                        <a class="small text-white stretched-link" href="mlist.me">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -133,16 +140,16 @@
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">상품관리</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="productManage.jsp">View Details</a>
+                                        <a class="small text-white stretched-link" href="plist.pr">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">게시글 관리</div>
+                                    <div class="card-body">게시글관리</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="postsManage.jsp">View Details</a>
+                                        <a class="small text-white stretched-link" href="blist.bo">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -151,7 +158,7 @@
                                 <div class="card bg-danger text-white mb-4">
                                     <div class="card-body">신고</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="issueMemberManage.jsp">View Details</a>
+                                        <a class="small text-white stretched-link" href="rlist.me">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -712,12 +719,14 @@
                 </footer>
             </div>
         </div>
+        <!--  -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="resources/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="resources/assets/demo/chart-area-demo.js"></script>
+        <script src="resources/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script src="resources/js/datatables-simple-demo.js"></script>
+   
     </body>
 </html>

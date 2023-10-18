@@ -260,7 +260,7 @@
 		                					<li class="member_menu_mypage" align="center">
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
-					                					<a href="#">관리자페이지</a>
+					                					<a href="alist.da">관리자페이지</a>
 				                					</c:when>
 				                					<c:otherwise>
 				                						<a href="#">알림(0)</a>

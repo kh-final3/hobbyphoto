@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="resources/scc/styles.css">
     <title>관리자 대시보드</title>
 
     <style>
@@ -111,7 +111,7 @@
                   <td>분류A</td>
                   <td>게시물 1</td>
                   <td class="button-container">
-	                      <button onclick="postFormSubmit(#);">관리</button>
+                  		  <button onclick="postFormSubmit(3);">페이지로 이동</button>
 	                      <button onclick="postFormSubmit(2);">삭제</button>
 	                      <button onclick="postFormSubmit(1);">수정</button>
                   </td>

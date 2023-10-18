@@ -29,6 +29,7 @@ public class MemberController {
 	public ModelAndView loginMember(Member m,Model model,HttpSession session,ModelAndView mv) {
 		Member loginMember = ms.loginMember(m);
 		System.out.println(bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd()));
+		
 		if(loginMember != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			mv.setViewName("redirect:/");
@@ -36,6 +37,7 @@ public class MemberController {
 			mv.addObject("errorMsg", "로그인실패");
 			mv.setViewName("common/errorPage");
 		}
+		
 		return mv;
 	}
 	

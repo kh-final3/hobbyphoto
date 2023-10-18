@@ -11,11 +11,8 @@ public interface AdminService {
 	// 1. 게시판 리스트 페이지 서비스 (페이징)
 	int selectListCount();
 	ArrayList<Board> selectList(PageInfo pi);
-	
-	// 2. 게시글 작성하기 서비스
-	int insertBoard(Board b);
-	
-	// 3. 게시글 상세조회용 서비스
+
+	// 2. 게시글 상세조회용 서비스
 	int increaseCount(int boardNo);
 	Board selectBoard(int boardNo);
 	

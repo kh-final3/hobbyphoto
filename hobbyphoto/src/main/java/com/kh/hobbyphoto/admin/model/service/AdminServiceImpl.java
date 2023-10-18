@@ -30,11 +30,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int insertBoard(Board b) {
-		return aDao.insertBoard(sqlSession, b);
-	}
-
-	@Override
 	public int increaseCount(int boardNo) {
 		return aDao.increaseCount(sqlSession, boardNo);
 	}

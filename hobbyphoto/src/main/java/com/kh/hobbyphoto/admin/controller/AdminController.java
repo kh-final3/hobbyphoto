@@ -28,6 +28,49 @@ public class AdminController {
 	@Autowired
 	private AdminServiceImpl aService;
 	
+	// 관리자페이지 index
+	@RequestMapping("alist.da")
+	public String adminIndex() {
+		
+		return "admin/adminIndex";
+	}
+	
+	// 회원관리 페이지로 연결
+	@RequestMapping("mlist.me")
+	public String memberManage() {
+		
+		return "admin/memberManage";
+	}
+	
+	
+	// 상품관리 페이지로 연결
+	@RequestMapping("plist.pr")
+	public String productManage() {
+		
+		return "admin/productManage";
+	}
+	
+	// 게시글 관리 페이지로 연결
+	@RequestMapping("blist.bo")
+	public String postsManage() {
+		
+		return "admin/postsManage";
+	}
+	
+	// 신고회원 관리 페이지로 연결
+	@RequestMapping("rlist.me")
+	public String reportManage() {
+		
+		return "admin/reportManage";
+	}
+	
+	// 상품 매출 현황으로 연결
+	@RequestMapping("achart.pr")
+	public String adminCharts() {
+		
+		return "admin/adminCharts";
+	}
+	
 	@RequestMapping("alist.bo")
 	public ModelAndView selectList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, ModelAndView mv) {
 		
@@ -47,20 +90,6 @@ public class AdminController {
 
 		return "board/boardEnrollForm";
 	}
-		
-	@RequestMapping("ainsert.bo")
-	public String insertBoard(Board b, MultipartFile upfile, HttpSession session, Model model) {
-  
-	      int result = aService.insertBoard(b);
-	      
-	      if(result>0) { //성공 => 게시글 리스트페이지(list.bo url재요청)
-	         session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
-	         return "redirect:list.bo";
-	      }else { //실패 => 에러페이지 포워딩
-	         model.addAttribute("errorMsg", "게시글 등록 실패");
-	         return "common/errorPage";
-	      }
-	   }
 	
 	@RequestMapping("adetail.bo")
 	public ModelAndView selectBoard(int bno, ModelAndView mv) {
