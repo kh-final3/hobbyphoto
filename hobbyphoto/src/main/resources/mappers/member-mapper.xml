@@ -15,6 +15,26 @@
 		<result column="status" property="status" />
 		<result column="social" property="social" />
 	</resultMap>
+	
+	<!-- 관리자페이지 회원 조회 -->
+	<select id="selectMember" resultMap="resultMember">
+	select 
+		  USER_NO 
+		, USER_ID
+		, USER_PWD
+		, USER_NAME
+		, NICKNAME
+		, EMAIL
+		, GENDER
+		, PHONE
+		, STATUS
+		, SOCIAL
+	from member
+   where status = 'Y'
+	order 
+	   by user_no
+	</select>
+	
 	<insert id="insertMember" parameterType="Member">
 		insert
 		  into member

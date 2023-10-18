@@ -9,9 +9,15 @@ import org.springframework.stereotype.Repository;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.member.model.vo.Member;
 
 @Repository
 public class AdminDao {
+	
+	// 회원 관리 리스트 조회
+	public ArrayList<Member> selectMember(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMember");
+	}
 	
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.selectListCount");

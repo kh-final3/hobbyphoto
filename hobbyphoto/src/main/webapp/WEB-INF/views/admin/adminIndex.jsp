@@ -15,7 +15,7 @@
             }
             
         </style>
-        <title>Admin Page</title>
+        <title>관리자 페이지</title>
          
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
@@ -41,10 +41,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">설정</a></li>
-                        <li><a class="dropdown-item" href="#!">활동로그</a></li>
+                        <li><a class="dropdown-item" href="main.ho">홈으로</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                        <li><a class="dropdown-item" href="logout.me">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
@@ -115,7 +114,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        ${ loginMember.nickName}
+                        ${ loginMember.nickName }
                     </div>
                 </nav>
             </div>
@@ -156,7 +155,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">신고</div>
+                                    <div class="card-body">신고회원관리</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="rlist.me">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -218,7 +217,7 @@
                                             <td>김철수</td>
                                             <td>1</td>
                                             <td>2023/10/10</td>
-                                            <td><button>신고게시물로 바로가기</button></td>
+                                            <td><button>신고된 게시물로 이동</button></td>
                                         </tr>
                                         <tr>
                                             <td>홍길동</td>

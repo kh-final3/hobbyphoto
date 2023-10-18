@@ -10,6 +10,7 @@ import com.kh.hobbyphoto.admin.model.dao.AdminDao;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.member.model.vo.Member;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -47,6 +48,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int updateBoard(Board b) {
 		return aDao.updateBoard(sqlSession, b);
+	}
+
+	@Override
+	public ArrayList<Member> selectMember() {
+		return aDao.selectMember(sqlSession);
 	}
 	
 }

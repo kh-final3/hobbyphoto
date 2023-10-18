@@ -14,13 +14,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.hobbyphoto.admin.model.service.AdminServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
+import com.kh.hobbyphoto.member.model.vo.Member;
 
 @Controller
 public class AdminController {
@@ -36,12 +39,13 @@ public class AdminController {
 	}
 	
 	// 회원관리 페이지로 연결
-	@RequestMapping("mlist.me")
+	@ResponseBody
+	@RequestMapping(value="mlist.me", produces="application/json; charset=utf-8")
 	public String memberManage() {
-		
-		return "admin/memberManage";
+		ArrayList<Member> list = aService.selectMember();
+//		System.out.println(new Gson().toJson(list));
+		return new Gson().toJson(list);
 	}
-	
 	
 	// 상품관리 페이지로 연결
 	@RequestMapping("plist.pr")
@@ -69,6 +73,12 @@ public class AdminController {
 	public String adminCharts() {
 		
 		return "admin/adminCharts";
+	}
+	
+	@RequestMapping("main.ho")
+	public String main() {
+		
+		return "main";
 	}
 	
 	@RequestMapping("alist.bo")
