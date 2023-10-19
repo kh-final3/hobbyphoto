@@ -20,6 +20,9 @@
         .tit{font-size: 16px; font-weight: bold;}
         .smoll-tit{font-size: 14px; color: gray;}
         #pd-selectbox{width: 570px; height: 50px; padding-left: 10px;}
+        #count-box{width: 122px; height: 40px; border: 1px solid #ddd; display: block; float: right;}
+        #count-box *{width: 40px; height: 100%; font-weight: 700; box-sizing: border-box; display: block; float: left; border: 0; background-color: white; text-align: center;}
+        #count-box button{outline: 0;}
         .product-tprice{width: 570px; height: 50px; margin-top: 24px; padding-top: 21px; border-top: 2px solid black;}
         .result-price{float: right; padding-right: 10px;}
         .product-btn{width: 570px; height: 64px;}
@@ -29,7 +32,7 @@
         .product-nav{border-top: 2px solid black; border-bottom: 1px solid lightgray;}
         ul>li{list-style-type: none;}
         .product-nav>ul{margin-bottom: 0px;}
-        .product-nav>ul>li{ width: 300px; height: 70px; padding-top: 20px; display: inline-block; font-size: 20px; font-weight: bolder;} 
+        .product-nav>ul>li{ width: 300px; height: 70px; padding-top: 20px; display: inline-block; font-size: 20px; font-weight: bolder;}
     </style>
 </head>
 <body>
@@ -51,7 +54,7 @@
          
             
             <div class="product-img">
-                <img src="resources/images/eosR8.jpg" style="width: 500px; height: 290px; margin-top: 100px;">
+                <img src="${ p.thumbnail }" style="width: 500px; height: 290px; margin-top: 100px;">
             </div>
             <div class="product-info">
                 <div class="product-name">
@@ -60,19 +63,21 @@
                     </strong>
                 </div>
                 <div class="product-price">
-                    <strong>
-                        ${ p.price } 원
-                    </strong>
+                    <strong class="st-price">${ p.price }</strong>
+                    <strong>원</strong>
                 </div>
                 <div class="product-select">
                     <p class="tit">
                         제품선택
                     </p>
                     <div>
-                        <select name="selected" id="pd-selectbox">
-                            <option value="" style="display: none;" disabled selected>제품을 선택하세요</option>
-                            <option value="black">EOS R8/블랙</option>
-                        </select>
+                        <div id="pd-selectbox">
+                            <div id="count-box" align="center">
+                                <button type="button" class="minus">-</button>
+                                <input class="count" type="text" name="amount" value="1" align="center">
+                                <button type="button" class="plus">+</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="product-tprice">
                         <p class="tit">
@@ -93,15 +98,15 @@
                     <br><br>
                     <div class="product-btn">
                     
-                        <button class="pd-btn" id="wishbtn">
+                        <button type="button" class="pd-btn" id="wishbtn">
                             <img src="resources/images/wish.png" style="width: 40px; height: 40px;">
                         </button>
                         
-                        <button class="pd-btn" id="cartbtn">
+                        <button type="submit" class="pd-btn" id="cartbtn">
                             <img src="resources/images/cart.png" style="width: 40px; height: 40px;">
                         </button>
                         
-                        <button class="final">
+                        <button class="final" type="submit">
                             구매하기
                         </button>
                         
@@ -114,6 +119,42 @@
     </form>
     
     <script>
+    
+	    $(()=>{
+	        $(".count").text($(".count").val())
+	        $(".num").text($(".st-price").text())
+	        $(".minus").click(()=>{
+	            let count = Number($(".count").val());
+	            let price =  Number($(".st-price").text().replace(/,/g,''));
+	            let totalPrice = Number($(".num").text().replace(/,/g,'')); 
+	
+	            console.log(totalPrice)
+	            
+	            if($(".count").val() != 1){
+	                $(".count").val(count-1)
+	                $(".count").text($(".count").val())
+	                totalPrice = totalPrice - price;
+	                $(".num").text(totalPrice.toLocaleString('ko-KR'));
+	            }
+	        })
+	
+	        $(".plus").click(()=>{
+	            let count = Number($(".count").val());
+	            let price =  Number($(".st-price").text().replace(/,/g,''));
+	            let totalPrice = price;
+	
+	            if($(".count").val() != ${ p.amount}){
+	                $(".count").val(count+1)
+	                $(".count").text($(".count").val())
+	                totalPrice = price * $(".count").val();
+	                $(".num").text(totalPrice.toLocaleString('ko-KR'));
+	            }
+	        })
+	    })
+    
+    
+    
+    
     	$(document).ready(function(){
     		
     		//찜하기
@@ -157,12 +198,12 @@
 
         <!-- -->
         <div style="width: 960px; margin: auto;" id="overview" class="jyImg" >
-            <img src="resources/images/풍경4.jpg">
+            <img src="${ p.PDimg }">
         </div>
 		
         
         <div style="width: 960px; margin: auto; display: none;" id="detail" class="jyImg" >
-            <img src="resources/images/풍경3.jpg">
+            <img src="${ p.PSimg }">
         </div>
         
        <div style="display: none" id="refund" class="refund" >

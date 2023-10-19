@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,14 +82,22 @@
 </head>
 <body>
 
+<c:if test="${ not empty alertMsg }">
+		<script>
+			alert("${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
+
 	<div class="container">
         <h2>상품 등록</h2>
-        <form action="#" method="post">
+        <form action="regist.pro" method="post" enctype="multipart/form-data">
             <label for="productName">상품명:</label>
-            <input type="text" id="productName" name="productName" required>
+            <input type="text" id="productName" name="pName" required>
 
             <label for="productName">브랜드 명:</label>
-            <select class="select-area">
+            <select class="select-area" name="brandNo" required>
+                <option value="" disabled selected>브랜드를 선택하세요</option>
                 <option value="1">CANON</option>
                 <option value="2">NIKON</option>
                 <option value="3">OLYMPUS</option>
@@ -99,7 +108,8 @@
             <br>
 
             <label for="category">종류:</label>
-            <select class="select-area">
+            <select class="select-area" name="categoryNo" required>
+                <option value="" disabled selected>종류를 선택하세요</option>
                 <option value="1">DSLR</option>
                 <option value="2">SLR</option>
                 <option value="3">미러리스트</option>
@@ -109,19 +119,19 @@
             <br>
 
             <label for="productPrice">가격:</label>
-            <input type="number" id="productPrice" name="productPrice" required>
+            <input type="number" id="productPrice" name="price" required>
 
             <label for="productamount">수량:</label>
-            <input type="number" id="productamount" name="productamount" required>
+            <input type="number" id="productamount" name="amount" required>
 
             <label for="productImage">상품 이미지 URL:</label>
-            <input type="file" id="productImage" name="productImage" required>
+            <input type="file" id="thumbnail" name="upfile" required>
 
             <label for="productDescription">상품 개요 :</label>
-            <input type="file" name="productDescription" id="productDescription" required>
+            <input type="file" name="upfile" id="pdimg" required>
 
             <label for="productDescription">제품 상세 :</label>
-            <input type="file" name="productDescription" id="productDescription" required>
+            <input type="file" name="upfile" id="psimg" required>
             
             <button type="submit">상품 등록</button>
         </form>

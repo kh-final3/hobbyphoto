@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+  <insert id="insertProduct">
+  	insert
+  		into Product
+  		(
+  			p_no
+  		,	p_name
+  		,	category_no
+  		,	brand_no
+  		,	price
+  		,	amount
+  		,	thumbnail
+  		,	p_dimg
+  		,	p_simg
+  		)
+  		values
+  		(
+  			SEQ_PRODUCT.nextval
+  		,	#{pName}
+  		,	#{categoryNo}
+  		,	#{brandNo}
+  		,	#{price}
+  		,	#{amount}
+  		,	#{thumbnail}
+  		,	#{pDimg}
+  		,	#{pSimg}
+  		)
+  </insert>
+</mapper>

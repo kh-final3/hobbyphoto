@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!--제이쿼리-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <style>
     div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'NanumBarunGothic';}
@@ -130,6 +136,67 @@
           width: 1200px;
         }
 
+		.false{
+        	display: none;
+        }
+
+        .member--visible{
+            display: "";
+        }
+
+        .header .member--visible:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            border: 8px solid transparent;
+            border-bottom-color: #fff;
+            transform: translate(-50%,calc(-100% + 1px))
+        }
+        
+    
+        .member_inner{
+        	width: 130px;
+        	height: 150px;
+            background-color: white;
+        	position: absolute;
+        	top: 100px;
+            right: 117px;
+        	border: 1px solid black;
+        	z-index: 120;
+            text-align: center;
+            padding: 10px 15px;
+        }
+        
+
+        .btn_login{
+            color: #5865f5;
+            font-weight: bolder;
+            box-sizing: border-box;
+        }
+
+        .btn_login:hover{
+            color: #5865f5;
+        }
+        
+        .btn:active, .btn:focus { 
+        	border: 1px solid white; box-shadow: none; 
+        }
+        
+		        
+        .member_menu_mypage{
+        	list-style-type: none;
+            padding-top: 14px;
+        }
+        
+        .first_menu{
+        	border-top: 1px solid #f1f1f1;
+        }
+        
+        .member_menu_mypage a{
+			color: black;
+            font-weight: bolder;
+        }
   </style>
 
 </head>
@@ -173,13 +240,78 @@
                 <div id="mb_user_1">
                     <table class="login-area" align="center">
                         <tr height="75">
-                            <td width="70"><img width="60" src="resources/images/clipboard.png" alt=""></td>
-                            <td width="70"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png" alt=""></td>
+                            <td width="70"><a href=""><img width="60" src="resources/images/clipboard.png" alt=""></a></td>
+                            <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png" alt=""></td>
                         </tr>
                     </table>
+                </div>
+                <div class="heder_inner">
+                	<c:choose>
+                		<c:when test="${ empty loginMember }">
+		                	<div class="member false">
+		                		<div class="member_inner">
+		                			<button type="button" class="btn btn_login" onclick="login()">로그인</button>
+		                			<div class="member_menu">
+		                				<ul style="padding: 0px;">
+		                					<li class="member_menu_mypage" align="center">
+		                						<a href="memberEnrollForm.me">회원가입</a>
+		                					</li>
+		                				</ul>
+		                			</div>
+		                		</div>
+		                	</div>
+                		</c:when>
+                		<c:otherwise>
+                			<div class="member false">
+		                		<div class="member_inner">
+		                			<button type="button" class="btn btn_login" onclick="logout()">로그아웃</button>
+		                			<div class="member_menu">
+		                				<ul style="padding: 0px;">
+		                					<li class="member_menu_mypage first_menu" align="center">
+		                						<a href="">마이페이지</a>
+		                					</li>
+		                					<li class="member_menu_mypage" align="center">
+			                					<c:choose>
+				                					<c:when test="${ loginMember.userNo == 1 }">
+					                					<a href="admin.pg">관리자페이지</a>
+				                					</c:when>
+				                					<c:otherwise>
+				                						<a href="#">장바구니</a>
+				                					</c:otherwise>
+			                					</c:choose>
+		                					</li>
+		                				</ul>
+		                			</div>
+		                		</div>
+		                	</div>
+                		</c:otherwise>
+                	</c:choose>
                 </div>
         </div>
     </div>
 
 </body>
+	<script>
+	        $(()=>{
+	        	$("#member_menu").click(()=>{
+	                $(".member").before();
+	        		if($(".member").hasClass("false")){
+		        		$(".member").removeClass("false")
+		        		$(".member").addClass("member--visible")
+	        		}else{
+	        			$(".member").removeClass("member--visible")
+		        		$(".member").addClass("false")
+	        		}
+	        	})
+	        })
+	        
+	        function login() {
+				location.href="loginForm.me"
+			}
+	        
+	        function logout() {
+				location.href="logout.me"
+			}
+    </script>
+
 </html>
