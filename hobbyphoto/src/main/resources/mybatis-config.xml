@@ -10,6 +10,8 @@
 	<typeAliases>
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Board" alias="board"/>
 		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.hobbyphoto.upfile.model.vo.Attachment" alias="Attachment"/>
+		
 	</typeAliases>
 
 

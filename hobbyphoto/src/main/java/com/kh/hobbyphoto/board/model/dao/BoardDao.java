@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Repository
 public class BoardDao {
@@ -24,18 +25,22 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectList", null, rowBounds);
 	}
 
-	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
-		return sqlSession.insert("boardMapper.insertBoard", b);
-	}
-
 	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.increaseCount", boardNo);
 	}
-
+	
 	public Board selectpBoard(SqlSessionTemplate sqlSession, int boardNo) {
-		return (Board) sqlSession.selectOne("boardMapper.selectpBoard", boardNo);
+		return sqlSession.selectOne("boardMapper.selectpBoard", boardNo);
 	}
-
+	
+	public ArrayList<Attachment> selectAtBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList) sqlSession.selectList("boardMapper.selectAtBoard", boardNo);
+	}
+	
+	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoard", b);
+	}
+	
 	public int deleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deleteBoard", boardNo);
 	}
@@ -55,5 +60,10 @@ public class BoardDao {
 	public ArrayList<Board> selectTopBoardList(SqlSessionTemplate sqlSession){
 		return (ArrayList) sqlSession.selectList("boardMapper.selectTopBoardList");
 	}
+
+	public ArrayList insertAtBoard(SqlSessionTemplate sqlSession) {
+		return (ArrayList) sqlSession.insert("boardMapper.insertAtBoard", boardNo);
+	}
+
 	
 }

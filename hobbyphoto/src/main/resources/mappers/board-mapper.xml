@@ -18,6 +18,16 @@
 		<result column="change_name" property="changeName"/>
 	</resultMap>
 	
+	<resultMap id="AttachmentResult" type="Attachment">
+		<result column="file_no" property="fileNo"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+		<result column="file_path" property="filePath"/>
+		<result column="upload_date" property="uploadDate"/>
+		<result column="status" property="status"/>
+		<result column="ref_bno" property="refBno"/>
+	</resultMap>
+	
 
 	<select id="selectListCount" resultType="_int">
 		select
@@ -35,7 +45,7 @@
 	    , b.count
         , m.nickname
 	    , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
-	    , a.file_path || a.change_name as "thumbnail"
+	    , a.file_path as "thumbnail"
 	  from board b
 	  left join attachment a on b.board_no = a.ref_bno
       join member m on b.board_writer = m.user_no
@@ -80,24 +90,30 @@
 		    b.board_no,
 		    b.board_title,
 		    b.board_content,
-		    m.user_id AS board_writer,
+		    m.user_id as "board_writer",
 		    b.count,
-		    TO_CHAR(b.create_date, 'YYYY-MM-DD') AS create_date,
-		    b.hashtag,
-		    a.file_no,
-		    a.origin_name,
-		    a.change_name,
-		    a.file_path,
-		    a.status
+		    TO_CHAR(b.create_date, 'YYYY-MM-DD') as "create_date",
+		    b.hashtag
 		FROM
 		    board b
 		JOIN
 		    member m ON b.board_writer = m.user_no
-		LEFT JOIN
-		    attachment a ON b.board_no = a.ref_bno
 		WHERE
 		    b.board_no = #{boardNo}
 		    AND b.board_type = 1
+	</select>
+	
+	<select id="selectAtBoard" resultMap="AttachmentResult">
+		select 
+	        FILE_NO
+	       , ORIGIN_NAME
+	       , CHANGE_NAME
+	       , FILE_PATH
+	       , UPLOAD_DATE
+	       , STATUS
+	       , REF_BNO
+       from attachment
+       where ref_bno = #{boardNo}
 	</select>
 	
 

@@ -111,30 +111,30 @@
 <body>
     <div class="warp">
         <div class="innerOut">
-            <form action="" class="form-area">
+            <form action="phBoardEnrollForm" action="phInsert.bo" enctype="multiPart/form-data" class="form-area">
                 <div class="content-area">
                     <div class="photo-area">
 
                         <div class="mainpho">
                             <img src="" alt="" id="image1" width="450" height="400" onclick="chooseFile(1);">
-                            <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" style="display: none;" required>
+                            <input type="file" name="uploadfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;" required>
                         </div>
                         <div class="pho">
                             <div class="pho1">
                                 <img src="" alt="" id="image2" width="200" height="200" onclick="chooseFile(2);">
-                                <input type="file" name="file2" id="file2" onchange="loadImg(this, 2);" style="display: none;">
+                                <input type="file" name="uploadfiles" id="file2" onchange="loadImg(this, 2);" style="display: none;">
                             </div>
                             <div class="pho2">
                                 <img src="" alt="" id="image3" width="200" height="200" onclick="chooseFile(3);">
-                                <input type="file" name="file3" id="file3" onchange="loadImg(this, 3);" style="display: none;">
+                                <input type="file" name="uploadfiles" id="file3" onchange="loadImg(this, 3);" style="display: none;">
                             </div>
                             <div class="pho3">
                                 <img src="" alt="" id="image4" width="200" height="200" onclick="chooseFile(4);">
-                                <input type="file" name="file4" id="file4" onchange="loadImg(this, 4);" style="display: none;">
+                                <input type="file" name="uploadfiles" id="file4" onchange="loadImg(this, 4);" style="display: none;">
                             </div>
                             <div class="pho4">
                                 <img src="" alt="" id="image5" width="200" height="200" onclick="chooseFile(5);">
-                                <input type="file" name="file5" id="file5" onchange="loadImg(this, 5);" style="display: none;">
+                                <input type="file" name="uploadfiles" id="file5" onchange="loadImg(this, 5);" style="display: none;">
                             </div>
                         </div>
                     </div>
@@ -196,8 +196,8 @@
                         <input type="text" name="" id="" class="tag-input" placeholder="해시태그를 입력해주세요.">
                     </div>
                     <div class="btn-area">
-                        <button>등록하기</button>
-                        <button>목록으로</button>
+                        <button type="submit">등록하기</button>
+                        <button type="button" onclick="">목록으로</button>
                     </div>
                 </div>
             </form>

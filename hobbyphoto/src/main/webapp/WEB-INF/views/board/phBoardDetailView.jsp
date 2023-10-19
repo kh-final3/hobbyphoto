@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -193,10 +194,10 @@
                 <div class="box">
                     <!--div를 두개 감싼이유는 img들을 좌우배치하고 배치된 사진중 한장만 보이게 하기 위해서이다.-->
                     <div class="slide"> <!--배치된 img들을 하나의 img만 보이게 가리기 위한 태그-->
-						<div class="images"> <!--img들을 좌우배치할 태그-->                        
-                      		<%-- <c:forEach var="b" items="${ b }"> --%>
-						    <img src="${ b.filePath }/${ b.changeName }">
-							<!-- </c:forEach> -->
+						<div class="images"> <!--img들을 좌우배치할 태그-->  
+							 <c:forEach var="a" items="${ at }">    
+							    <img src="${a.filePath}">
+							 </c:forEach>
                         </div>
                     </div>
                     <button class="back">❮</button>
@@ -204,23 +205,23 @@
                 </div>
                 
                 <script>
-                    let pages = 0;//현재 인덱스 번호
+                    let pages = 1;//현재 인덱스 번호
                     let positionValue = 0;//images 위치값
                     const IMAGE_WIDTH = 580;//한번 이동 시 IMAGE_WIDTH만큼 이동한다.
                     //DOM
                     const backBtn = document.querySelector(".back")
                     const nextBtn = document.querySelector(".next")
                     const images = document.querySelector(".images")
-            
+            		
                     function next() {
                     if (pages< 2) {
                         backBtn.removeAttribute('disabled')//뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
                         positionValue -= IMAGE_WIDTH;//IMAGE_WIDTH의 증감을 positionValue에 저장한다.
-                        images.style.transform = `translateX(${positionValue}px)`;
+                        images.style.transform = "translateX("+positionValue+"px)";
                             //x축으로 positionValue만큼의 px을 이동한다.
                         pages += 1; //다음 페이지로 이동해서 pages를 1증가 시킨다.
                     }
-                    if (pages === 2) { //
+                    if (pages === ${at.size()}) { //
                         nextBtn.setAttribute('disabled', 'true')//마지막 장일 때 next버튼이 disabled된다.
                     }
                     }
@@ -229,10 +230,10 @@
                     if (pages > 0) {
                         nextBtn.removeAttribute('disabled')
                         positionValue += IMAGE_WIDTH;
-                        images.style.transform = `translateX(${positionValue}px)`;
+                        images.style.transform = "translateX("+positionValue+"px)";
                         pages -= 1; //이전 페이지로 이동해서 pages를 1감소 시킨다.
                     }
-                    if (pages === 0) {
+                    if (pages === 1) {
                         backBtn.setAttribute('disabled', 'true')//마지막 장일 때 back버튼이 disabled된다.
                     }
                     }

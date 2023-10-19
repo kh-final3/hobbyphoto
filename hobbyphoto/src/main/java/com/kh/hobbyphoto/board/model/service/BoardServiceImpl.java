@@ -10,6 +10,7 @@ import com.kh.hobbyphoto.board.model.dao.BoardDao;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -44,6 +45,15 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Board selectpBoard(int boardNo) {
 		return bDao.selectpBoard(sqlSession, boardNo);
+	}
+	
+	public ArrayList<Attachment> selectAtBoard(int boardNo){
+		return bDao.selectAtBoard(sqlSession, boardNo);
+	}
+
+	@Override
+	public int insertAtBoard(ArrayList<Attachment> at) {
+		return bDao.insertAtBoard(sqlSession);
 	}
 
 
