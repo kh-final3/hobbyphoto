@@ -422,77 +422,100 @@ public class BoardController {
 		return mv;
 	}
 	
-	@RequestMapping("festvalListView.fs")
-	public String festivalView() {
-		return "culture/festival";
-	}
 	
-	@ResponseBody
-	@RequestMapping(value="festvalList.fs", produces = "text/xml; charset=utf-8")
-	public String festivalList() throws IOException {
-		String url = "http://openapi.seoul.go.kr:8088";
-		url += "/6b74516d52666267343266754f7574";
-		url += "/xml";
-		url += "/culturalEventInfo";
-		url += "/1";
-		url += "/50";
-		url += "/축제";	
+	
+	@RequestMapping("festvalList.fs")
+	public ModelAndView festvalList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		String keyword = "축제";
+		int listCount = bService.cultureListCount(keyword);
+		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Festival> list = bService.cultureList(pi, keyword);
+		System.out.println(list);
+		mv.addObject("pi", pi).addObject("list", list).setViewName("culture/festival");
 		
-		URL requestUrl = new URL(url);
+		return mv;
+	}	
+	
+	
+	@RequestMapping("festivalDetail.fs")
+	public String selectFestival(int feNo, Model model) {
 		
-		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
-		
-		urlConnection.setRequestMethod("GET");
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));				
-		
-		String responseText = "";
-		String line;
-		while((line= br.readLine()) != null) {
-			responseText += line;
+		Festival fe = bService.selectCulture(feNo);
+		if (fe != null) {
+			model.addAttribute("fe", fe);
+			return "culture/festivalDetail";
+
+			
+		} else {
+			model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
+			return "common/errorPage";
+			
 		}
-		
-		
-		br.close();
-		urlConnection.disconnect();
-		return responseText;	
-	}
-	
-	@RequestMapping("exhibitListView.fs")
-	public String exhibitView() {
-		return "culture/exhibit";
 	}
 	
 	
-	@ResponseBody
-	@RequestMapping(value="exhibitList.fs", produces = "text/xml; charset=utf-8")
-	public String exhibitList() throws IOException {
-		String url = "http://openapi.seoul.go.kr:8088";
-		url += "/6b74516d52666267343266754f7574";
-		url += "/xml";
-		url += "/culturalEventInfo";
-		url += "/1";
-		url += "/10";
-		url += "/전시";	
+
+	@RequestMapping("exhibitList.fs")
+	public ModelAndView exhibitList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		String keyword = "전시";
+		int listCount = bService.cultureListCount(keyword);
 		
-		URL requestUrl = new URL(url);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Festival> list = bService.cultureList(pi,keyword);
+		System.out.println(list);
+		mv.addObject("pi", pi).addObject("list", list).setViewName("culture/exhibit");
 		
-		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
+		return mv;
+	}	
+	
+	@RequestMapping("exhibitDetail.fs")
+	public String selectExhibit(int feNo, Model model) {
 		
-		urlConnection.setRequestMethod("GET");
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));				
-		
-		String responseText = "";
-		String line;
-		while((line= br.readLine()) != null) {
-			responseText += line;
+		Festival fe = bService.selectCulture(feNo);
+		if (fe != null) {
+			model.addAttribute("fe", fe);
+			return "culture/exhibitDetail";
+
+			
+		} else {
+			model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
+			return "common/errorPage";
+			
 		}
-		
-		
-		br.close();
-		urlConnection.disconnect();
-		return responseText;	
 	}
 	
+	@RequestMapping("festivalEnrollForm.fs")
+	public String fsEnrollForm() {
+		return "culture/festivalEnrollForm";
+	}
+	
+	
+	
+	@RequestMapping("exhibitEnrollForm.fs")
+	public String exEnrollForm() {
+		return "culture/exhibitEnrollForm";
+	}
+	
+	@RequestMapping("insertExhibit.fs")
+	public String insertExhibit(Festival fe, MultipartFile upfile, HttpSession session, Model model) {
+
+	   
+			
+			String changeName = saveFile(upfile, session);
+			System.out.println(changeName);
+
+			fe.setTimg("resources/uploadFiles/" + changeName);
+
+
+	    int result = bService.insertExhibit(fe);
+
+	    if (result > 0) {
+	        session.setAttribute("alertMsg", "전시 등록에 성공했습니다.");
+	        return "redirect:exhibitList.fs";
+	    } else {
+	        model.addAttribute("errorMsg", "게시글 등록 실패");
+	        return "common/errorPage";
+	    }
+	}
 }

@@ -22,6 +22,9 @@ public class Festival {
 	private String longitude;
 	private String latitude;
 	private String url;
-	private String tImg;
-	private String sImg;
+	private String timg;
+	private String simg;
+	private String age;
+	private String host;
+	private String inq;
 }

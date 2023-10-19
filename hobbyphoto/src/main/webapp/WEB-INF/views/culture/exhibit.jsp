@@ -214,8 +214,8 @@
                     <div class="pf_schedule">
                         <div class="pf_sche_tab">
                             <ul class="tab_ul">
-                                <li><a href="festvalListView.fs">축제</a></li>
-                                <li class="on"><a href="exhibitListView.fs">전시</a></li>
+                                <li><a href="festvalList.fs">축제</a></li>
+                                <li class="on"><a href="exhibitList.fs">전시</a></li>
                             </ul>
                         </div>
                     </div>
@@ -225,39 +225,42 @@
     </div>
 
     <div class="exhibit">
-        
-        
+    <a href="exhibitEnrollForm.fs">글쓰기</a>
+     <c:if test="${ not empty list }">
+			<c:forEach var="fe" items="${ list }">
+	        <div class="card">
+		            <img class="card-img-top"
+		                src="${ fe.timg }" alt="Card image">
+		            <div class="card-body">
+		                <h4 class="card-title">${ fe.feTitle }</h4>
+		                <p class="card-text">기 간${ fe.feDate }</p>
+		                <a href="exhibitDetail.fs?feNo=${ fe.feNo }" class="btn btn-primary">자세히보기</a>
+		            </div>
+		        </div>
+        	</c:forEach>
+    	</c:if>
     </div>
-
+	<div id="pagingArea">
+            <div class="page-btn" align="center">   
+                <c:choose>
+                    <c:when test="${ pi.currentPage ne 1 }">
+                        <button onclick="location.href='exhibitList.fs?cpage=${ pi.currentPage - 1 }';"> &lt; </button>
+                    </c:when>
+                </c:choose>
+                
+                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    <button onclick="location.href='exhibitList.fs?cpage=${p}';">${p}</button>
+                </c:forEach>
+                
+                <c:choose>
+                    <c:when test="${ pi.currentPage ne pi.maxPage }">
+                        <button onclick="location.href='exhibitList.fs?cpage=${ pi.currentPage + 1 }';"> &gt; </button>
+                    </c:when>
+                </c:choose>
+            </div>
+        </div>
      <script>
-        $(function () {
-                  $.ajax({
-                        url: "exhibitList.fs",
-                        success: function (data) {
-                            console.log(data);
-
-
-                            let value = "";
-                            $(data).find("row").each(function (i, row) {
-                                value += "<div class='card'>"
-		                                + "<img class='card-img-top' src="+$(row).find("MAIN_IMG").text()+" alt='Card image'>"
-		                                + "<div class='card-body'>"
-		                                +  "<h4 class='card-title'>"+$(row).find("TITLE").text()+"</h4>"
-		                                +  "<p class='card-text'>기 간 "+ $(row).find("DATE").text()+"</p>"
-		                                +  "<a href='#' class='btn btn-primary'>자세히보기</a>"
-		                                + "</div>"
-		                            +"</div>"
-                            })
-
-                            $(".exhibit").html(value);
-                             
-                        }, error: function () {
-                            console.log("ajax 통신 실패")
-                        }
-                    })
-                });
-        
-        
+      
     </script>
 
 <jsp:include page="../common/footer.jsp"/>

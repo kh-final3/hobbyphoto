@@ -134,8 +134,8 @@
         }
 
         .imgbox img{
-            width: 100%;
-            height: 100%;
+            width: 200px;
+            height: 230px;
         }
 
         .txtbox {
@@ -204,8 +204,8 @@
                     <div class="pf_schedule">
                         <div class="pf_sche_tab">
                             <ul class="tab_ul">
-                                <li class="on"><a href="festvalListView.fs">축제</a></li>
-                                <li><a href="exhibitListView.fs">전시</a></li>
+                                <li class="on"><a href="festvalList.fs">축제</a></li>
+                                <li><a href="exhibitList.fs">전시</a></li>
                             </ul>
                         </div>
                     </div>
@@ -215,50 +215,58 @@
     </div>
 
     <div class="containers">
+    <c:if test="${ not empty list }">
+		<c:forEach var="fe" items="${ list }">
+	    	<div class="pf_list_box">
+	            <div class="imgbox">
+                    <img src="${ fe.timg }">
+	            </div>
+	            <div class="txtbox">
+	                <h3>${ fe.feTitle }</h3>
+	                <ul>
+	                    <li><b>기 간</b> ${ fe.feDate }</li>
+	                    <li><b>장 소</b> ${ fe.feLocation }</li>
+	                  
+	                    <c:choose>
+                       		<c:when test="${ not empty fe.cash }">
+                            	  <li><b>가 격</b> ${ fe.cash }</li>
+                       		</c:when>
+                       		<c:otherwise>
+                            	  <li><b>가 격</b> 프로그램별 상이</li>
+                       		</c:otherwise>
+                       	</c:choose>
+                       	<li><b>이용대상</b> ${ fe.age }</li>
+	                </ul>
+	                <div class="pf_btn">
+	                    <br>
+	                    <a href="festivalDetail.fs?feNo=${ fe.feNo}" seq="2221" class="view_btn">상세보기</a>
+	                </div>
+	            </div>
+	        </div>
+    	</c:forEach>
+    </c:if>
     </div>
+    <div id="pagingArea">
+            <div class="page-btn" align="center">   
+                <c:choose>
+                    <c:when test="${ pi.currentPage ne 1 }">
+                        <button onclick="location.href='festvalList.fs?cpage=${ pi.currentPage - 1 }';"> &lt; </button>
+                    </c:when>
+                </c:choose>
+                
+                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    <button onclick="location.href='festvalList.fs?cpage=${p}';">${p}</button>
+                </c:forEach>
+                
+                <c:choose>
+                    <c:when test="${ pi.currentPage ne pi.maxPage }">
+                        <button onclick="location.href='festvalList.fs?cpage=${ pi.currentPage + 1 }';"> &gt; </button>
+                    </c:when>
+                </c:choose>
+            </div>
+        </div>
     <script>
-        $(function () {
-                  $(".tab_ul li").click(function () {
-                    $(".tab_ul li").removeClass("on");
-                    $(this).addClass('on');
-                  })
-                  
-                  $.ajax({
-                        url: "festvalList.fs",
-                        success: function (data) {
-                            console.log(data);
-
-
-                            let value = "";
-                            $(data).find("row").each(function (i, row) {
-                                value += "<div class='pf_list_box'>"
-		                               + "<div class='imgbox'>"
-		                               + "<img src='"+$(row).find("MAIN_IMG").text() +"' ></div>"
-		                                + "<div class='txtbox'>"
-		                                + "<h3>" + $(row).find("TITLE").text() +"</h3>"
-		                                + "<ul>"
-		                                + "<li><b>기 간 </b>" + $(row).find("DATE").text()+"</li>"
-		                                + "<li><b>장 소 </b>" + $(row).find("PLACE").text()+ "</li>"
-		                                + "<li><b>가 격 </b>" + $(row).find("USE_FEE").text()+"</li>"
-		                                + "<li><b>대 상 </b>" + $(row).find("USE_TRGT").text()+"</li>"
-		                                + "</ul>"
-		                                + "<div class='pf_btn'>"
-		                                + "<br>"
-		                                + "<a href="+$(row).find("ORG_LINK").text() +" seq='2221' class='view_btn'>상세보기</a>"
-		                                + "</div>"
-		                                +  "</div>"
-		                                + "</div>"
-                            })
-
-                            $(".containers").html(value);
-                             
-                        }, error: function () {
-                            console.log("ajax 통신 실패")
-                        }
-                    })
-                });
-        
-        
+    
     </script>
     <jsp:include page="../common/footer.jsp"/>
 </body>

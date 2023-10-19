@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,39 +16,6 @@
             line-height: 1.5
         }
 
-        #exh_detail_banner,
-        #exh_detail_banner img {
-            width: 100%;
-            max-width: 1152px
-        }
-
-        #exh_detail_banner.banner330 {
-            margin-top: 40px
-        }
-
-        #exh_detail_banner a.banner_link {
-            display: block;
-            position: relative
-        }
-
-        #exh_detail_banner a.banner_link:after {
-            content: '';
-            display: block;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0
-        }
-
-        #exh_detail_banner a.banner_link>img {
-            display: block
-        }
-
-        #exh_detail_banner a.banner_link>img:nth-child(2),
-        #exh_detail_banner a.banner_link>img:nth-child(3) {
-            display: none
-        }
 
         .exhibitionDetail-head {
             padding-bottom: 60px;
@@ -273,17 +243,6 @@
         .exhibitionDetail-location-name {
             font-size: 15px;
             font-weight: bold
-        }
-
-        .exhibitionDetail-footerBanner {
-            display: block;
-            padding: 45px 0;
-            background: url(/static/pages/img/service/exhibition/bottom_banner.png) center center;
-            background-size: cover;
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
-            text-align: center
         }
 
         .customoverlay {
@@ -588,18 +547,6 @@
                 font-size: 24px
             }
 
-            #exh_detail_banner a.banner_link>img:nth-child(2) {
-                display: block
-            }
-
-            #exh_detail_banner a.banner_link>img:nth-child(1),
-            #exh_detail_banner a.banner_link>img:nth-child(3) {
-                display: none
-            }
-
-            #exh_detail_banner.banner330 {
-                margin-top: 20px
-            }
 
             .exhibitionDetail-carousel {
                 margin-top: 10px
@@ -652,10 +599,7 @@
                 padding: 14px
             }
 
-            .exhibitionDetail-footerBanner {
-                padding: 30px 0;
-                font-size: 14px
-            }
+        
 
             .exhibitionDetail-ogArtists>h4>a {
                 font-size: 14px
@@ -729,18 +673,7 @@
                 font-size: 20px
             }
 
-            #exh_detail_banner a.banner_link>img:nth-child(1),
-            #exh_detail_banner a.banner_link>img:nth-child(2) {
-                display: none
-            }
 
-            #exh_detail_banner a.banner_link>img:nth-child(3) {
-                display: block
-            }
-
-            #exh_detail_banner.banner330 {
-                margin-top: 12px
-            }
 
             .exhibitionDetail-carousel {
                 margin-top: 8px
@@ -826,19 +759,34 @@
                 margin-top: 28px
             }
         }
+        .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+        .wrap * {padding: 0;margin: 0;}
+        .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+        .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+        .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+        .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+        .info .close:hover {cursor: pointer;}
+        .info .body {position: relative;overflow: hidden;}
+        .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+        .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+        .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+        .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+        .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+        .info .link {color: #5085BB;}
     </style>
 </head>
 
 <body>
+	<jsp:include page="../common/header.jsp"/>
     <div id="wrap" class="header_banner_padding">
 
         <div id="contents">
             <div class="exhibitionDetail">
                 <section class="exhibitionDetail-head">
-                    <h2 class="exhibitionDetail-head-title">LOVE IN PARADISE : BANKSY &amp; KEITH HARING</h2>
+                    <h2 class="exhibitionDetail-head-title">${ fe.feTitle }</h2>
                     <div class="exhibitionDetail-head-location">
 
-                        파라다이스 아트스페이스 &nbsp; I &nbsp; 인천
+                        ${ fe.feLocation }
 
                     </div>
                 </section>
@@ -850,7 +798,7 @@
                                 <div class="exhibitionDetail-carousel-item">
                                     <div class="exhibitionDetail-carousel-imageWrap">
                                         <img class="exhibitionDetail-carousel-image"
-                                            src="https://og-data.s3.amazonaws.com/media/exhibitions/image/13611/ei_13611.jpg">
+                                            src="${ fe.timg }">
                                     </div>
                                 </div>
                             </div>
@@ -860,9 +808,7 @@
                 </section>
 
                 <section class="exhibitionDetail-section">
-                    <div class="exhibitionDetail-explain">파라다이스는 세계 최대 미술작품 경매 회사인 소더비(Sotheby’s)와 협력하여 뱅크시(Banksy)와 키스
-                        해링(Keith Haring)의 작품 32점을 선보입니다.<br>이번 전시에서는 &lt;사랑은 쓰레기통에 Love is in the Bin&gt; 작품이 국내 최초 공개되어
-                        더욱 주목받고 있습니다.<br>사랑이라는 주제로 그림 안에 세상과 사람을 담는 두 예술가, 뱅크시와 키스 해링의 작품을 감상해 보세요.</div>
+                    <div class="exhibitionDetail-explain">${fe.feContent }</div>
                 </section>
 
                 <section class="exhibitionDetail-section">
@@ -887,49 +833,35 @@
                                     <th>장소</th>
                                     <td>
 
-                                        파라다이스 아트스페이스
+                                        ${ fe.feLocation }	
 
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>기간</th>
                                     <td>
-                                        2023-09-05 ~ 2023-11-05
+                                        ${ fe.feDate }
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>시간</th>
-                                    <td>
-                                        10:00 ~ 20:00
-
-                                        <br>
-                                        · 휴관일 없음
-
-                                    </td>
-                                </tr>
+                                
                                 <tr>
                                     <th>관람료</th>
                                     <td>
-
-                                        무료
-
-
-                                        <div class="exhibitionDetail-infoTable-admissionDetail exhibitionDetail-sm">
-                                            · 네이버 사전 예약 무료 관람
-                                        </div>
+										<c:choose>
+                                		<c:when test="${ not empty fe.cash }">
+                                    		 ${ fe.cash }
+                                		</c:when>
+                                		<c:otherwise>
+		                                    전시별 상이
+                                		</c:otherwise>
+                                	</c:choose>
 
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <th>주최</th>
-                                    <td>Sotheby’s, 파라다이스</td>
-                                </tr>
-
-
-                                <tr>
-                                    <th>주관</th>
-                                    <td>Sotheby’s, 파라다이스</td>
+                                    <td>${ fe.host }</td>
                                 </tr>
 
 
@@ -937,7 +869,7 @@
                                 <tr>
                                     <th>출처</th>
                                     <td class="exhibitionDetail-infoTable-url">
-                                        <a href="https://www.p-city.com/front/event/eventView?SBU_CD=&amp;P_SEQ=9988&amp;PAGE_SIZE=9&amp;PAGE_NO=1&amp;SC_END=&amp;ORDER_COLUMN=&amp;ty=MAIN&amp;P_CTNT_TY=imageTy&amp;SRC_CD=&amp;BANNER_YN=Y&amp;SC_DATE="
+                                        <a href="${ fe.url }"
                                             target="_blank">사이트 바로가기</a>
                                     </td>
                                 </tr>
@@ -965,146 +897,10 @@
                     <h3 class="exhibitionDetail-section-title">위치 정보</h3>
                     <div class="exhibitionDetail-section-bar"></div>
                     <div class="exhibitionDetail-location">
-                        <div class="exhibitionDetail-location-map"
-                            style="position: relative; overflow: hidden; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/bg_tile.png&quot;);">
-                            <div
-                                style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; touch-action: none; cursor: url(&quot;https://t1.daumcdn.net/mapjsapi/images/cursor/openhand.cur.ico&quot;) 7 5, url(&quot;https://t1.daumcdn.net/mapjsapi/images/cursor/openhand.cur.ico&quot;), default;">
-                                <div style="position: absolute;">
-                                    <div style="position: absolute; z-index: 0;"></div>
-                                    <div style="position: absolute; z-index: 1; left: 0px; top: 0px;"><img
-                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/971/353.png"
-                                            alt="" role="presentation" draggable="false"
-                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -141px; top: 140px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
-                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/971/354.png"
-                                            alt="" role="presentation" draggable="false"
-                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 115px; top: 140px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
-                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/971/355.png"
-                                            alt="" role="presentation" draggable="false"
-                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 371px; top: 140px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
-                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/971/356.png"
-                                            alt="" role="presentation" draggable="false"
-                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 627px; top: 140px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
-                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/971/357.png"
-                                            alt="" role="presentation" draggable="false"
-                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 883px; top: 140px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
-                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/972/353.png"
-                                            alt="" role="presentation" draggable="false"
-                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: -141px; top: -116px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
-                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/972/354.png"
-                                            alt="" role="presentation" draggable="false"
-                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 115px; top: -116px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
-                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/972/355.png"
-                                            alt="" role="presentation" draggable="false"
-                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 371px; top: -116px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
-                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/972/356.png"
-                                            alt="" role="presentation" draggable="false"
-                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 627px; top: -116px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;"><img
-                                            src="https://map.daumcdn.net/map_k3f_prod/bakery/image_map_png/PNGSD01/v16_260kk/4/972/357.png"
-                                            alt="" role="presentation" draggable="false"
-                                            style="position: absolute; user-select: none; -webkit-user-drag: none; min-width: 0px; min-height: 0px; max-width: none; max-height: none; left: 883px; top: -116px; opacity: 1; transition-property: opacity; transition-duration: 0.2s; transition-timing-function: ease; width: 256px; height: 256px;">
-                                    </div>
-                                    <div style="position: absolute; z-index: 1;"></div>
-                                    <div style="width: 798px; height: 248px; position: absolute; z-index: 1;"></div>
-                                    <div style="position: absolute; z-index: 1;"><svg version="1.1"
-                                            style="stroke: none; stroke-dashoffset: 0.5; stroke-linejoin: round; fill: none; transform: translateZ(0px); position: absolute; width: 3990px; height: 1240px; left: -1596px; top: -496px;"
-                                            viewBox="0 0 3990 1240">
-                                            <defs></defs>
-                                        </svg></div>
-                                    <div
-                                        style="position: absolute; z-index: 1; width: 100%; height: 0px; transform: translateZ(0px);">
-                                        <div
-                                            style="position: absolute; margin: -39px 0px 0px -14px; z-index: 0; left: 399px; top: 124px;">
-                                            <img draggable="false"
-                                                src="https://t1.daumcdn.net/mapjsapi/images/marker.png" alt=""
-                                                role="presentation" title=""
-                                                style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; clip: rect(0px, 29px, 42px, 0px); top: 0px; left: 0px; width: 29px; height: 42px;"><img
-                                                src="https://t1.daumcdn.net/mapjsapi/images/transparent.gif" alt=""
-                                                role="presentation" draggable="false" usemap="#daum.maps.Marker.Area:1"
-                                                style="min-width: 0px; min-height: 0px; max-width: 99999px; max-height: none; border: 0px; display: block; position: absolute; user-select: none; -webkit-user-drag: none; width: 29px; height: 42px;"><map
-                                                id="daum.maps.Marker.Area:1" name="daum.maps.Marker.Area:1"><area
-                                                    href="javascript:void(0)" alt="" role="presentation" shape="poly"
-                                                    coords="14,39,9,27,4,21,1,16,1,10,4,4,11,0,18,0,25,4,28,10,28,16,25,21,20,27"
-                                                    title="파라다이스 아트스페이스"
-                                                    style="-webkit-tap-highlight-color: transparent;"></map>
-                                        </div>
-                                        <div
-                                            style="position: absolute; z-index: 0; white-space: nowrap; margin: -31px 0px 0px -91px; left: 399px; top: 124px;">
-                                            <div class="customoverlay"><a
-                                                    href="https://map.daum.net/link/map/파라다이스 아트스페이스,37.437412,126.455555"
-                                                    target="_blank"><span class="title">파라다이스 아트스페이스</span><span
-                                                        class="arrow">&gt;</span></a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                style="position: absolute; cursor: default; z-index: 1; margin: 0px 6px; height: 19px; line-height: 14px; left: 0px; bottom: 0px; color: rgb(0, 0, 0);">
-                                <div style="color: rgb(0, 0, 0); text-align: center; font-size: 10px; float: left;">
-                                    <div
-                                        style="float: left; margin: 2px 3px 0px 4px; height: 6px; transition: width 0.1s ease 0s; border-top: none rgb(0, 0, 0); border-right: 2px solid rgb(0, 0, 0); border-bottom: 2px solid rgb(0, 0, 0); border-left: 2px solid rgb(0, 0, 0); border-image: initial; width: 46px;">
-                                    </div>
-                                    <div
-                                        style="float: left; margin: 0px 4px 0px 0px; font-family: AppleSDGothicNeo-Regular, 돋움, dotum, sans-serif; font-weight: bold; color: rgb(0, 0, 0);">
-                                        100m</div>
-                                </div>
-                                <div style="margin: 0px 4px; float: left;"><a target="_blank"
-                                        href="http://map.kakao.com/" title="Kakao 지도로 보시려면 클릭하세요."
-                                        style="float: left; width: 32px; height: 10px;"><img
-                                            src="https://t1.daumcdn.net/mapjsapi/images/m_bi_b.png" alt="Kakao 지도로 이동"
-                                            style="float: left; width: 32px; height: 10px; border: none;"></a>
-                                    <div style="font: 11px / 11px Arial, Tahoma, Dotum, sans-serif; float: left;"></div>
-                                </div>
-                            </div>
-                            <div style="cursor: auto; position: absolute; z-index: 2; left: 0px; top: 0px;">
-                                <div
-                                    style="width: 32px; border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 2px 0px; position: absolute; left: 763px; top: 3px;">
-                                    <button draggable="false" title="확대" type="button"
-                                        style="float: left; cursor: pointer; width: 32px; height: 32px; user-select: none; -webkit-user-drag: none; border-top: none; border-right: none; border-bottom: 1px solid rgb(226, 226, 226); border-left: none; border-image: initial; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) -40px 0px / 116px 264px no-repeat rgb(255, 255, 255); border-radius: 3px 3px 0px 0px;"></button>
-                                    <div
-                                        style="float: left; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/bg_zoom_control.png&quot;) repeat; padding: 7px 0px; transition: height 0s ease 0s, margin 0.1s ease 0s;">
-                                        <div
-                                            style="cursor: pointer; position: relative; background-size: 116px 264px; transition: height 0.1s ease 0s; margin: 2px 0px; display: block; width: 32px; height: 104px;">
-                                            <div
-                                                style="position: absolute; width: 4px; height: 100%; background-color: rgb(51, 150, 255); left: 50%; margin: 0px 0px 0px -2px;">
-                                                <div
-                                                    style="width: 4px; height: 2px; margin-bottom: -2px; bottom: 0px; position: absolute; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) -50px -127px / 116px 264px;">
-                                                </div>
-                                                <div
-                                                    style="width: 4px; height: 2px; margin-top: -2px; top: 0px; position: absolute; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) -40px -100px / 116px 264px;">
-                                                </div>
-                                            </div>
-                                            <div
-                                                style="position: absolute; background-color: rgb(204, 204, 204); transition: height 0.1s ease 0s; left: 50%; margin: 0px 0px 0px -2px; width: 4px; height: 24px;">
-                                            </div>
-                                            <div
-                                                style="cursor: row-resize; position: absolute; width: 20px; height: 10px; margin: -4px 0px 0px -10px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) -40px -80px / 116px 264px; left: 50%; transition: top 0.1s ease 0s; top: 24px;">
-                                            </div>
-                                        </div>
-                                    </div><button draggable="false" title="축소" type="button"
-                                        style="float: left; cursor: pointer; width: 32px; height: 32px; user-select: none; -webkit-user-drag: none; border-top: 1px solid rgb(226, 226, 226); border-right: none; border-bottom: none; border-left: none; border-image: initial; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) -40px -32px / 116px 264px no-repeat rgb(255, 255, 255); border-radius: 0px 0px 3px 3px; margin: 0px;"></button>
-                                    <div
-                                        style="display: none; position: absolute; margin: 41px 0px 0px -30px; background-size: 116px 264px; width: 30px; height: 104px;">
-                                        <div
-                                            style="position: absolute; width: 29px; height: 15px; margin: -6px 0px 0px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) 0px -80px / 116px 264px; left: 0px; top: 8px;">
-                                        </div>
-                                        <div
-                                            style="position: absolute; width: 29px; height: 15px; margin: -6px 0px 0px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) 0px -100px / 116px 264px; left: 0px; top: 32px;">
-                                        </div>
-                                        <div
-                                            style="position: absolute; width: 29px; height: 15px; margin: -6px 0px 0px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) 0px -120px / 116px 264px; left: 0px; top: 64px;">
-                                        </div>
-                                        <div
-                                            style="position: absolute; width: 29px; height: 15px; margin: -6px 0px 0px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) 0px -140px / 116px 264px; left: 0px; top: 80px;">
-                                        </div>
-                                        <div
-                                            style="position: absolute; width: 29px; height: 15px; margin: -6px 0px 0px; background: url(&quot;https://t1.daumcdn.net/mapjsapi/images/control.png&quot;) 0px -160px / 116px 264px; left: 0px; top: 96px;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div id="map" style="width:100%;height:350px;"></div>
+                        
                         <div class="exhibitionDetail-location-caption">
-                            <div class="exhibitionDetail-location-name">파라다이스 아트스페이스</div>
+                            <div class="exhibitionDetail-location-name">${ fe.feLocation }</div>
                             <div class="exhibitionDetail-sm">인천광역시 중구 영종해안남로321번길 186 (운서동) </div>
                         </div>
                     </div>
@@ -1112,6 +908,61 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9a2f35856f46bd082d1ef297c29d5fc"></script>
+    <script>
+        var mapContainer = document.getElementById('map'), // 지도의 중심좌표
+        mapOption = { 
+            center: new kakao.maps.LatLng(${fe.latitude}, ${fe.longitude}), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        }; 
+
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        // 지도에 마커를 표시합니다 
+        var marker = new kakao.maps.Marker({
+            map: map, 
+            position: new kakao.maps.LatLng(${fe.latitude}, ${fe.longitude})
+        });
+
+        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+        // 별도의 이벤트 메소드를 제공하지 않습니다 
+        var content = '<div class="wrap">' + 
+                    '    <div class="info">' + 
+                    '        <div class="title">' + 
+                    "             ${ fe.feLocation }" + 
+                    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+                    '        </div>' + 
+                    '        <div class="body">' + 
+                    '            <div class="img">' +
+                    '                <img src="${ fe.timg }" width="73" height="70">' +
+                    '           </div>' + 
+                    '            <div class="desc">' + 
+                    '                <div><a href="${ fe.url }" target="_blank" class="link">전시 홈페이지</a></div>' + 
+                    '            </div>' + 
+                    '        </div>' + 
+                    '    </div>' +    
+                    '</div>';
+
+        // 마커 위에 커스텀오버레이를 표시합니다
+        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+        var overlay = new kakao.maps.CustomOverlay({
+            content: content,
+            map: map,
+            position: marker.getPosition()       
+        });
+
+        // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+        kakao.maps.event.addListener(marker, 'click', function() {
+            overlay.setMap(map);
+        });
+
+        // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+        function closeOverlay() {
+            overlay.setMap(null);     
+        }
+    </script>
+    <jsp:include page="../common/footer.jsp"/>
 </body>
 
 </html>

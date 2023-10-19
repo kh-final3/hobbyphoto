@@ -383,7 +383,7 @@
 					
 					        // 인포윈도우로 장소에 대한 설명을 표시합니다
 					        var infowindow = new kakao.maps.InfoWindow({
-					            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+					            content: '<div style="width:150px;text-align:center;padding:6px 0;">${ p.ptitle }</div>'
 					        });
 					        infowindow.open(map, marker);
 					
@@ -405,10 +405,10 @@
 					            var rvCustomOverlay = new kakao.maps.CustomOverlay({
 					                position: mapCenter,
 					                content: '<div class="overlay_info">' +
-					                    '    <a href="https://place.map.kakao.com/17600274" target="_blank"><strong>월정리 해수욕장</strong></a>' +
+					                    '    <a href="https://place.map.kakao.com/17600274" target="_blank">${ p.ptitle }</a>' +
 					                    '    <div class="desc">' +
-					                    '        <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/place_thumb.png" alt="">' +
-					                    '        <span class="address">제주특별자치도 제주시 구좌읍 월정리 33-3</span>' +
+					                    '        <img src="${p.pimg1}" width="56px" height="56px">' +
+					                    '        <span class="address">${ p.paddress }</span>' +
 					                    '    </div>' +
 					                    '</div>',
 					                xAnchor: 0.5,

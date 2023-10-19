@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hobbyphoto.board.model.dao.BoardDao;
 import com.kh.hobbyphoto.board.model.vo.Attachment;
 import com.kh.hobbyphoto.board.model.vo.Board;
+import com.kh.hobbyphoto.board.model.vo.Festival;
 import com.kh.hobbyphoto.board.model.vo.Place;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
@@ -142,6 +143,22 @@ public class BoardServiceImpl implements BoardService{
 	public int insertAttachmentPlace(ArrayList<Attachment> list) {
 		
 		return bDao.insertAttachment(sqlSession, list);
+	}
+
+	public int cultureListCount(String keyword) {
+		return bDao.cultureListCount(sqlSession, keyword);
+	}
+
+	public ArrayList<Festival> cultureList(PageInfo pi, String keyword) {
+		return bDao.cultureList(sqlSession,pi,keyword);
+	}
+
+	public Festival selectCulture(int feNo) {
+		return bDao.selectCulture(sqlSession, feNo);
+	}
+
+	public int insertExhibit(Festival fe) {
+		return bDao.insertExhibit(sqlSession,fe);
 	}
 
 }

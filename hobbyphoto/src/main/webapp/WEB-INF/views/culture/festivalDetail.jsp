@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,49 +16,50 @@
 </head>
 
 <body>
+<jsp:include page="../common/header.jsp"/>
     <div class="wrap">
         <div class="contents">
             <div class="view_wrap whole_wrap">
                 <div class="container">
                     <div class="view_top">
                         <div class="imgbox">
-                            <span><img src="https://www.mfac.or.kr/mapoArt/f/upload/show/show_0_20230711162154.jpg"
-                                    alt="＂제8회 M클래식 축제＂<br/>〈메인콘서트〉 지휘자 김건 × M 클래식 페스티벌 오케스트라 × 피아니스트 김도현"></span>
+                            <span>
+                                <img src="${ fe.timg }">
+                            </span>
                         </div><!-- //imgbox -->
                         <div class="txtbox">
 
-                            <h3>＂제8회 M클래식 축제＂<br>〈메인콘서트〉 지휘자 김건 × M 클래식 페스티벌 오케스트라 × 피아니스트 김도현</h3>
+                            <h3>${ fe.feTitle }</h3>
                             <ul>
                                 <li>
-                                    <p>장르</p><span>클래식</span>
+                                    <p>장르</p><span>${ fe.feType }</span>
                                 </li>
                                 <li>
-                                    <p>기간</p><span>2023.10.11 ~ 2023.10.11</span>
+                                    <p>기간</p><span>${ fe.feDate }</span>
                                 </li>
                                 <li>
-                                    <p>시간</p><span>(수) 20:00</span>
+                                    <p>장소</p><span>${ fe.feLocation }</span>
                                 </li>
                                 <li>
-                                    <p>소요시간</p><span>약 100분(인터미션 15분)</span>
+                                    <p>이용대상</p><span>${ fe.age }</span>
                                 </li>
                                 <li>
-                                    <p>장소</p><span>아트홀맥</span>
+                                	<c:choose>
+                                		<c:when test="${ not empty fe.cash }">
+                                    		<p>이용가격</p><span>${ fe.cash }</span>
+                                		</c:when>
+                                		<c:otherwise>
+		                                    <p>이용가격</p><span>프로그램별 상이</span>
+                                		</c:otherwise>
+                                	</c:choose>
                                 </li>
                                 <li>
-                                    <p>입장연령</p><span>8세이상 관람가능(미취학아동입장불가)</span>
-                                </li>
-                                <li>
-                                    <p>티켓가격</p><span>R석 50,000원<br> S석 30,000원 <br>A석 20,000원</span>
-                                </li>
-                                <li>
-                                    <p>주최,주관</p><span>주최,주관 : 마포구, 마포문화재단<br>후원: 서울시</span>
+                                    <p>주최,주관</p><span>${ fe.host }</span>
                                 </li>
 
 
 
-                                <li>
-                                    <p>구분</p><span>마포문화재단기획공연</span>
-                                </li>
+                               
                                 <li>
                                     <p>문의 전화</p><span>02-3274-8600[문의1]</span>
                                 </li>
@@ -111,13 +115,15 @@
                             </div>
 
                         </div><!-- //view_cont -->
-                        <a href="javascript:void(0);" id="btnList" class="list_btn"><img
+                        <a href="festvalList.fs" id="btnList" class="list_btn"><img
                                 src="https://www.mfac.or.kr/web/images/sub/list_ico.png" alt="목록 이미지">목록보기 </a>
                     </div><!-- //view_contbox -->
                 </div><!-- //container -->
             </div>
         </div>
     </div>
+    <jsp:include page="../common/footer.jsp"/>
+    
 </body>
 
 </html>

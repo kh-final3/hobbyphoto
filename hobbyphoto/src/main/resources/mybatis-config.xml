@@ -13,6 +13,7 @@
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Attachment" alias="Attachment"/>
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Place" alias="Place"/>
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Reply" alias="Reply"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Festival" alias="Festival"/>
 	</typeAliases>
 
 

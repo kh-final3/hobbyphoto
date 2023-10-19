@@ -143,7 +143,7 @@
 	                    <li><a href="#">홈</a></li>
 	                    <li><a href="#">사진게시판</a></li>
 	                    <li><a href="#">장비추천</a></li>
-	                    <li><a href="festvalListView.fs">축제 · 전시</a></li>
+	                    <li><a href="festvalList.fs">축제 · 전시</a></li>
 	                    <li><a href="list.pl">출사명소</a></li>
 	                    <li><a href="#">모임</a></li>
 	                    <li><a href="#">공지사항</a></li>

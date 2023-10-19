@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -86,8 +89,8 @@
 <body>
     <div id="write">
         <h1 align="center" id="ttl">축제/전시 작성</h1>
-        <form action="<%= contextPath %>/insert.tg" method="post">
-            <input type="hidden" name="userNo" value="<%= loginMember.getUserNo() %>">
+        <form action="insertExhibit.fs" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="userNo" value="">
             <div id="write1">
                 <p id="ff4">포스터 <em style="color: red;">*</em></p>
 
@@ -99,28 +102,27 @@
                 </div>
                 <br>
                 <div id="write2">
-                    <label id="ff4">제목</label><br><input type="text" name="title"
+                    <label id="ff4">제목</label><br><input type="text" name="feTitle"
                         style="width: 650px; margin: 5px 0 0 0;" maxlength="18" required>
                 </div>
                 <br>
                 <div id="write3">
-                    <label id="ff4">내용</label><br><textarea name="content" cols="71" rows="8" style="resize: none;"
+                    <label id="ff4">내용</label><br><textarea name="feContent" cols="71" rows="8" style="resize: none;"
                         required></textarea>
                     <br>
                 </div>
                 <br>
                 <div id="write4">
-                    <hr>
-                    <span id="ff4">상세주소</span>
-
-                    <br><input type="text" name="mountain" style="width: 650px; margin: 5px 0 0 0;"
-                        placeholder="ex) 서울 강서구 하늘길 112" required>
-
+                    <label id="ff4">전시/축제</label><br><input type="text" name="feType"
+                        style="width: 650px; margin: 5px 0 0 0;" maxlength="2" required>
+                    <br>
                 </div>
+                <br>
+                
                 <div id="write5">
                     <hr>
                     <span id="ff4">📍 장소</span>
-                    <br><input type="text" name="mountain" style="width: 650px; margin: 5px 0 0 0;"
+                    <br><input type="text" name="feLocation" style="width: 650px; margin: 5px 0 0 0;"
                         placeholder="ex) 김포공항" required>
                 </div>
                 <br>
@@ -128,39 +130,22 @@
                 <div id="write6">
                     <hr>
                     <span id="ff4">📅 기간</span><br>
-                    <input type="date" name="date" id="dateIn" required> 달력틀찾아서 수정예정
+                    <input type="date" name="feDate" id="dateIn" required>
                     <hr>
-                </div>
-                <br>
-                <div id="write7">
-                    <span id="ff4">🕒 시간</span><br><br>
-                    <input type="radio" name="ampm" id="time1" value="오전" required><label for="time1">오전</label><br>
-                    <input type="radio" name="ampm" id="time2" value="오후"><label for="time2">오후</label>
-                    <br><input type="number" name="time" min="1" max="12" required> 시<br><br>
-                    <hr>
-
                 </div>
                 <br>
                 <div id="write8">
                     <span id="ff4">문의전화</span>
                     <br>
-                    <input type="text" name="tell" style="width: 650px; margin: 5px 0 0 0;"
+                    <input type="text" name="inq" style="width: 650px; margin: 5px 0 0 0;"
                         placeholder="ex) 080-335-0020" required>
-                    <hr>
-                </div>
-                <br>
-                <div id="write9">
-                    <span id="ff4">작가</span>
-                    <br>
-                    <input type="text" name="artist" style="width: 650px; margin: 5px 0 0 0;" placeholder="ex) 앤디워홀"
-                        required>
                     <hr>
                 </div>
                 <br>
                 <div id="write10">
                     <span id="ff4">관람료</span>
                     <br>
-                    <input type="text" name="artist" style="width: 650px; margin: 5px 0 0 0;" placeholder="ex) 10,000원"
+                    <input type="text" name="cash" style="width: 650px; margin: 5px 0 0 0;" placeholder="ex) 10,000원, 무료등.."
                         required>
                     <hr>
                 </div>
@@ -168,20 +153,17 @@
                 <div id="write11">
                     <span id="ff4">주최</span>
                     <br>
-                    <input type="text" name="?" style="width: 650px; margin: 5px 0 0 0;" placeholder="ex) 마포구"
+                    <input type="text" name="host" style="width: 650px; margin: 5px 0 0 0;" placeholder="ex) 마포구"
                         required>
                     <hr>
                 </div>
                 <br>
-                <div id="write12">
-                    <span id="ff4">주관</span>
-                    <br>
-                    <input type="text" name="?" style="width: 650px; margin: 5px 0 0 0;" placeholder="ex) 마포문화재단"
-                        required>
-                    <hr>
-                </div>
-                <br>
-                <div align="right" id="write13">
+                <div id="map" style="width:100%;height:350px;"></div>
+                <input type="text" name="latitude" id="lat" readonly>
+                <input type="text" name="longitude" id="lon" readonly>
+                <div id="clickLatlng"></div>
+                
+                <div align="right" id="write12">
                     <button type="reset" class="btn btn-light" id="ff4">취소</button>
                     <button type="submit" class="btn btn-primary" id="ff4">등록</button>
                 </div>
@@ -194,7 +176,45 @@
 
         </form>
     </div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9a2f35856f46bd082d1ef297c29d5fc"></script>
+    <script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = { 
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
 
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 지도를 클릭한 위치에 표출할 마커입니다
+    var marker = new kakao.maps.Marker({ 
+        // 지도 중심좌표에 마커를 생성합니다 
+        position: map.getCenter() 
+    }); 
+    // 지도에 마커를 표시합니다
+    marker.setMap(map);
+
+    // 지도에 클릭 이벤트를 등록합니다
+    // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+        
+        // 클릭한 위도, 경도 정보를 가져옵니다 
+        var latlng = mouseEvent.latLng; 
+        
+        // 마커 위치를 클릭한 위치로 옮깁니다
+        marker.setPosition(latlng);
+        
+        var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+        message += '경도는 ' + latlng.getLng() + ' 입니다';
+        $("#lat").val(latlng.getLat());
+        $("#lon").val( latlng.getLng());
+
+        
+        var resultDiv = document.getElementById('clickLatlng'); 
+        resultDiv.innerHTML = message;
+        
+    });
+    </script>
     <script>
         function chooseFile(num) {
             $("#file" + num).click();

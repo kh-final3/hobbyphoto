@@ -37,6 +37,27 @@
 		<result column="create_date" property="createDate"/>
 		<result column="status" property="status"/>
 	</resultMap>
+	
+	<resultMap type="Festival" id="festivalResult">
+		<result column="FE_NO" property="feNo"/>
+		<result column="FE_TITLE" property="feTitle"/>
+		<result column="FE_CONTENT" property="feContent"/>
+		<result column="FE_DATE" property="feDate"/>
+		<result column="FE_LOCATION" property="feLocation"/>
+		<result column="CASH" property="cash"/>
+		<result column="FE_TYPE" property="feType"/>
+		<result column="LONGITUDE" property="longitude"/>
+		<result column="LATITUDE" property="latitude"/>
+		<result column="URL" property="url"/>
+		<result column="T_IMG" property="timg"/>
+		<result column="S_IMG" property="simg"/>
+		<result column="host" property="host"/>
+		<result column="age" property="age"/>
+		<result column="inq" property="inq"/>
+	</resultMap>
+	
+	
+	
 	<select id="selectListCount" resultType="_int">
 		select count(*)
 		  from board
@@ -333,5 +354,82 @@
 	    </foreach>
 	</update>
 
-
+	<select id="cultureListCount" resultType="_int">
+		SELECT COUNT(FE_NO) "COUNT"
+	      FROM festival
+	      WHERE fe_type like #{keyword}||'%'
+	</select>
+	
+	<select id="cultureList" resultMap="festivalResult">
+		select fe_no
+		     , fe_title
+		     , fe_date
+		     , fe_location
+		     , cash
+		     , fe_type
+		     , t_img
+		     , age
+		  from festival
+		  WHERE fe_type like #{keyword}||'%'
+	</select>
+	
+	<select id="selectCulture" resultMap="festivalResult">
+		select fe_no
+		     , fe_title
+		     , fe_content
+		     , fe_date
+		     , fe_location
+		     , cash
+		     , fe_type
+		     , LONGITUDE
+		     , latitude
+		     , url
+		     , t_img
+		     , s_img
+		     , age
+		     , host
+		     , inq
+		  from festival
+		 where fe_no = #{ feNo }
+	</select>
+	
+	<insert id="insertExhibit" parameterType="Festival">
+		insert 
+			into festival
+			  (
+			    FE_NO
+			  , FE_TITLE
+			  , FE_CONTENT
+			  , FE_DATE
+			  , FE_LOCATION
+			  , CASH
+			  , FE_TYPE
+			  ,	LONGITUDE
+			  ,	LATITUDE
+			  ,	URL
+			  ,	T_IMG
+			  ,	HOST
+			  ,	INQ
+			  ,	AGE
+			  ) 
+			  values
+			  (
+			   	SEQ_FE_NO.nextval
+			  , #{feTitle}
+			  , #{feContent}
+			  , #{feDate}
+			  , #{feLocation}
+			  , #{cash}
+			  , #{feType}
+			  , #{longitude}
+			  , #{latitude}
+			  , #{url}
+			  , #{timg}
+			  , #{host}
+			  , #{inq}
+			  , #{age}
+			  )
+	</insert>
+	
+	
 </mapper>
