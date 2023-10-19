@@ -52,9 +52,11 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int insertAtBoard(ArrayList<Attachment> at) {
+	public int insertAtBoard(Attachment at) {
 		return bDao.insertAtBoard(sqlSession);
 	}
+
+
 
 
 

@@ -62,8 +62,9 @@
 				, board_title
 				, board_writer
 				, board_content
-				, origin_name
-				, change_name
+				, board_type
+				, create_date
+				, hashtag
 				)
 				values
 				(
@@ -71,9 +72,33 @@
 				 , #{boardTitle}
 				 , #{boardWriter}
 				 , #{boardContent}
-				 , #{originName}
-				 , #{changeName}
+				 , 1
+				 , #{createDate}
+				 , #{hashtag}
 				)
+	</insert>
+	
+	<insert id="insertAtBoard">
+        insert
+			into attachment
+			(
+				file_no
+              , origin_name
+              , change_name
+              , file_path
+              , upload_date
+              , ref_bno
+			)
+            values
+            (
+              seq_file_no.nextval
+             , #{origin_name}
+             , #{change_name}
+             , #{filePath} || #{changeName}
+             , sysdate
+             , #{boardNo}
+            )
+			
 	</insert>
 	
 	<update id="increaseCount">

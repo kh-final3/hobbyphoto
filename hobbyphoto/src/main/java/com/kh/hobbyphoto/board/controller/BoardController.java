@@ -68,10 +68,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping("phInsert.bo")
-	public String insertBoard(ArrayList<Attachment> at, Board b, MultipartFile[] uploadfiles, Model model, HttpSession session) {
+	public String insertBoard( Attachment at, Board b, MultipartFile[] uploadfiles, Model model, HttpSession session) {
 	    System.out.println(at);
 
-	    if (uploadfiles.length>0) {
+	    if (uploadfiles.length > 0) {
 
 	    	for(int i=0; i<uploadfiles.length;i++) {
 	    		String changeName = saveFile(uploadfiles[i], session);
@@ -85,12 +85,12 @@ public class BoardController {
 	    	}
 	    }
 
-	    int result = bService.insertBoard(b);
-	    int result = bService.insertAtBoard(at);
+	    int result1 = bService.insertBoard(b);
+	    int result2 = bService.insertAtBoard(at);
 
-	    if (result > 0) { // 성공 => 게시글 리스트페이지(list.bo url 재요청)
+	    if (result1 * result2 > 0) { // 성공 => 게시글 리스트페이지(list.bo url 재요청)
 	        session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
-	        return "redirect:phBoardList.bo";
+	        return "redirect:phBoardEnrollForm";
 	    } else { // 실패 => 에러페이지 포워딩
 	        model.addAttribute("errorMsg", "게시글 등록 실패");
 	        return "common/errorPage";

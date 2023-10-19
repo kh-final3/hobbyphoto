@@ -20,7 +20,6 @@ public interface BoardService {
 	// 3. 게시글 상세조회용 서비스
 	int increaseCount(int boardNo);
 	Board selectpBoard(int boardNo);
-	ArrayList<Attachment> selectAtBoard(int boardNo);
 	
 	
 }
