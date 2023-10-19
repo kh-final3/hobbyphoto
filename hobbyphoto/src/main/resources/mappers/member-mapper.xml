@@ -75,7 +75,34 @@
 		     , status
 		     , social
 		  from member
-		 where user_id = #{userName}
+		 where user_name = #{userName}
 		   and status = 'Y'
 	</select>
+	
+	<select id="searchPwd" resultMap="resultMember">
+		select 
+		       user_no
+		     , user_id
+		     , user_pwd
+		     , user_name
+		     , nickname
+		     , email
+		     , gender
+		     , phone
+		     , description
+		     , profile_img
+		     , status
+		     , social
+		  from member
+		 where user_id = #{userId}
+		   and status = 'Y'
+	</select>
+	
+	<update id="updatePwd">
+		update
+		       member
+		   set user_pwd = #{ userPwd }
+		 where user_id = #{ userId }
+		   and status = 'Y'
+	</update>
 </mapper>

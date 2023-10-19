@@ -31,4 +31,14 @@ public class MemberServiceImpl implements MemberService {
 		return md.searchId(sqlSession, userName);
 	}
 
+	@Override
+	public Member searchPwd(String userId) {
+		return md.searchPwd(sqlSession, userId);
+	}
+
+	@Override
+	public int updatePwd(Member m) {
+		return md.updatePwd(sqlSession,m);
+	}
+
 }
