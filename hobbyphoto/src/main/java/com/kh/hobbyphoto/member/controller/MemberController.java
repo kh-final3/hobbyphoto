@@ -100,6 +100,7 @@ public class MemberController {
 		int result = ms.updatePwd(m);
 		
 		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 비밀번호를 변경했습니다.");
 			return "redirect:loginForm.me";
 		}else {
 			model.addAttribute("errorMsg", "회원등록에 실패하였습니다.");
@@ -107,4 +108,5 @@ public class MemberController {
 		}
 		
 	}
+	
 }

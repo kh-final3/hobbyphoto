@@ -270,9 +270,9 @@
     			$("#hiddenId").val(userId);
     			if(data != null ){
     				value = "<input type='password' id='newPwd' class='newPwd' name='userPwd' placeholder='새로운 비밀번호를 입력해주세요' min='6' max='18' required> <br>"
-    					  + "<input type='password' id='heckPwd' class='newPwd' placeholder='비밀번호를 다시 입력해주세요' min='6' max='18' required>";
+    					  + "<input type='password' id='checkPwd' class='newPwd' placeholder='비밀번호를 다시 입력해주세요' min='6' max='18' required>";
     				$("#resultBtn2").html("비밀번호 변경");
-    				$("#resultBtn2").attr("onclick","test()");
+    				$("#resultBtn2").attr("onclick","submitPwd()");
     			}else{
     				value = "입력한 정보와 일치하는 계정이 없습니다"
     				$("#resultBtn2").html("다시하기");
@@ -285,8 +285,14 @@
     	})
     }
     
-    function test() {
-		$("#submitPwd").submit();
+    function submitPwd() {
+    	if($("#newPwd").val() == $("#checkPwd").val()){
+    		if(confirm("비밀번호를 변경하시겠습니까?")){
+				$("#submitPwd").submit();
+			}
+		}else{
+			alert("비밀번호 확인이 같지 않습니다.")
+		}
 	}
     </script>
 
