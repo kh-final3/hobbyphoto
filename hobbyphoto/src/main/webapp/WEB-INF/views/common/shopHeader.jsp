@@ -6,8 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!--제이쿼리-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<style>
     div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'NanumBarunGothic';}
         .mb_outer{
             height: 120px;
@@ -79,7 +85,7 @@
         #mb_navi li {
             float: left;
             text-align: center;
-            width: 15%; 
+            width: 20%; 
             /* border: 1px solid red; */
             height: 100%;
         }
@@ -129,8 +135,8 @@
         hr{
           width: 1200px;
         }
-        
-        .false{
+
+		.false{
         	display: none;
         }
 
@@ -191,51 +197,53 @@
 			color: black;
             font-weight: bolder;
         }
-        
-       	
   </style>
+
 </head>
+<body>
+
+	
+
 	<c:if test="${ not empty alertMsg }">
-      <script>
-         alert("${alertMsg}");
-      </script>
-      <c:remove var="alertMsg" scope="session"/>
-    </c:if>
-	<body>
-	    <div class="mb_outer">
-	        <div class="mb_menu-area">
-	            <div id="mb_logo">
-	                <img src="resources/images/logo.png" alt="로고">
-	            </div> 
-	            <div id="mb_nav">
-	                <ul id="mb_navi">
-	                    <li><a href="#">사진게시판</a></li>
-	                    <li><a href="#">장비추천</a></li>
-	                    <li><a href="#">축제 · 전시</a></li>
-	                    <li><a href="#">출사명소</a></li>
-	                   	<li><a href="#">배경화면</a></li>
-	                    <li><a href="#">모임</a></li>
-	                    <li><a href="#">공지사항</a></li>
-	                </ul>
-	            </div>
-	        </div>
-	        <div class="mb_search-area">
-	            <div id="mb_search">
-	                <form action="#" id="search_form">
-	                    <div id="search_text">
-	                        <input type="text" name="keyword" id="sh_text" placeholder="검색어를 입력해주세요">
-	                        <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
-	                    </div>
-	                    
-	                </form>
-	            </div>
-	        </div>
-	        <div class="mb_login-area">
+		<script>
+			alert("${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
+
+	<div class="mb_outer">
+        <div class="mb_menu-area">
+            <div id="mb_logo">
+                <img src="resources/images/logo.png" alt="로고">
+            </div> 
+            <div id="mb_nav">
+                <ul id="mb_navi">
+                    <li><a href="pro.list">홈</a></li>
+                    <li><a href="#">카메라</a></li>
+                    <li><a href="#">포토북</a></li>
+                    <li><a href="#">핸드폰 케이스</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="mb_search-area">
+            <div id="mb_search">
+                <form action="#" id="search_form">
+                    <div id="search_text">
+                        <input type="text" name="keyword" id="sh_text" placeholder="검색어를 입력해주세요">
+                        <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        <div class="mb_login-area">
                 <div id="mb_user_1">
                     <table class="login-area" align="center">
                         <tr height="75">
-                            <td width="70"><a href="pro.list"><img width="60" src="resources/images/shopping-cart.png" alt=""></a></td>
-                            <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png"></td>
+                            <td width="70"><a href=""><img width="60" src="resources/images/clipboard.png" alt=""></a></td>
+                            <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png" alt=""></td>
                         </tr>
                     </table>
                 </div>
@@ -262,15 +270,16 @@
 		                			<div class="member_menu">
 		                				<ul style="padding: 0px;">
 		                					<li class="member_menu_mypage first_menu" align="center">
-		                						<a href="myPage.me">마이페이지</a>
+		                						<a href="">마이페이지</a>
 		                					</li>
 		                					<li class="member_menu_mypage" align="center">
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
 					                					<a href="admin.pg">관리자페이지</a>
+					                					<a href="shop.mp">장바구니</a>
 				                					</c:when>
 				                					<c:otherwise>
-				                						<a href="#">알림(0)</a>
+				                						<a href="shop.mp">장바구니</a>
 				                					</c:otherwise>
 			                					</c:choose>
 		                					</li>
@@ -281,30 +290,31 @@
                 		</c:otherwise>
                 	</c:choose>
                 </div>
-	        </div>
-	    </div>
-	</body>
+        </div>
+    </div>
 
-    <script>
-        $(()=>{
-        	$("#member_menu").click(()=>{
-                $(".member").before();
-        		if($(".member").hasClass("false")){
-	        		$(".member").removeClass("false")
-	        		$(".member").addClass("member--visible")
-        		}else{
-        			$(".member").removeClass("member--visible")
-	        		$(".member").addClass("false")
-        		}
-        	})
-        })
-        
-        function login() {
-			location.href="loginForm.me"
-		}
-        
-        function logout() {
-			location.href="logout.me"
-		}
+</body>
+	<script>
+	        $(()=>{
+	        	$("#member_menu").click(()=>{
+	                $(".member").before();
+	        		if($(".member").hasClass("false")){
+		        		$(".member").removeClass("false")
+		        		$(".member").addClass("member--visible")
+	        		}else{
+	        			$(".member").removeClass("member--visible")
+		        		$(".member").addClass("false")
+	        		}
+	        	})
+	        })
+	        
+	        function login() {
+				location.href="loginForm.me"
+			}
+	        
+	        function logout() {
+				location.href="logout.me"
+			}
     </script>
+
 </html>
