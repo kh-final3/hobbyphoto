@@ -9,6 +9,7 @@ import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Member;
+import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Repository
 public class AdminDao {
@@ -51,8 +52,9 @@ public class AdminDao {
 	
 	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
 		return sqlSession.update("boardMapper.updateBoard", b);
+	}
 
-	public int insertProduct(SqlSessionTemplate sqlSession,Product p) {
+	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
 		return sqlSession.insert("adminMapper.insertProduct", p);
 
 	}

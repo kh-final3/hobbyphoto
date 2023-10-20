@@ -23,6 +23,7 @@ import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.member.model.vo.Member;
+import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Controller
 public class AdminController {
@@ -189,7 +190,6 @@ public class AdminController {
 		}
 	}
 	
-}
 
 	
 	@RequestMapping("")
