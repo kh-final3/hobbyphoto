@@ -19,6 +19,11 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectMember");
 	}
 	
+	// 회원 삭제 처리
+	public int deleteMember(SqlSessionTemplate sqlSession, String userId) {
+		return sqlSession.update("memberMapper.deleteMember", userId);
+	}
+	
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.selectListCount");
 	}

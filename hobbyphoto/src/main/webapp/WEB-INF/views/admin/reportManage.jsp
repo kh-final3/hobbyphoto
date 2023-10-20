@@ -126,22 +126,26 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>아이디</th>
+                                            <th>이름</th>
+                                            <th>닉네임</th>
+                                            <th>이메일</th>
+                                            <th>성별</th>
+                                            <th>핸드폰</th>
+                                            <th>신고자</th>
+                                            <th>신고 일자</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>아이디</th>
+                                            <th>이름</th>
+                                            <th>닉네임</th>
+                                            <th>이메일</th>
+                                            <th>성별</th>
+                                            <th>핸드폰</th>
+                                            <th>신고자</th>
+                                            <th>신고 일자</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>

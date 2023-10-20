@@ -22,12 +22,13 @@ import com.kh.hobbyphoto.board.model.service.BoardServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.common.template.Pagination;
 
 @Controller
 public class BoardController {
-//	@Autowired
-//	private BoardServiceImpl bService;
-//	
+	@Autowired
+	private BoardServiceImpl bService;
+	
 //	@RequestMapping("list.bo")
 //	public ModelAndView selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
 //		
@@ -55,8 +56,8 @@ public class BoardController {
 //			String changeName = saveFile(upfile, session);
 //			System.out.println(changeName);
 //			
-//			b.setOriginName(upfile.getOriginalFilename());
-//			b.setChangeName("resources/uploadFiles/" + changeName);
+////			b.setOriginName(upfile.getOriginalFilename());
+////			b.setChangeName("resources/uploadFiles/" + changeName);
 //		}
 //		
 //		
@@ -149,10 +150,10 @@ public class BoardController {
 //	@RequestMapping("update.bo")
 //	public String updateBoard(Board b, MultipartFile reupfile, HttpSession session, Model model) {
 //		
-//		// 새로 넘어온 첨부파일이 있을 경우
+		// 새로 넘어온 첨부파일이 있을 경우
 //		if(!reupfile.getOriginalFilename().equals("")) {
-//			
-//			// 기존에 첨부파일이 있었을 경우 => 기존의 첨부파일 지우기
+			
+			// 기존에 첨부파일이 있었을 경우 => 기존의 첨부파일 지우기
 //			if(b.getOriginName() != null) {
 //				new File(session.getServletContext().getRealPath(b.getChangeName())).delete();
 //			}

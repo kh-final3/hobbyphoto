@@ -1,11 +1,7 @@
 package com.kh.hobbyphoto.admin.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.kh.hobbyphoto.admin.model.service.AdminServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
@@ -31,20 +25,38 @@ public class AdminController {
 	@Autowired
 	private AdminServiceImpl aService;
 	
-	// 관리자페이지 index
+	// 관리자페이지 메인화면
 	@RequestMapping("alist.da")
 	public String adminIndex() {
 		
 		return "admin/adminIndex";
 	}
 	
-	// 회원관리 페이지로 연결
-	@ResponseBody
-	@RequestMapping(value="mlist.me", produces="application/json; charset=utf-8")
-	public String memberManage() {
+	// 회원 목록 조회	
+	@RequestMapping("mlist.me")
+	public ModelAndView selectMember(ModelAndView mv) {
+		
 		ArrayList<Member> list = aService.selectMember();
-//		System.out.println(new Gson().toJson(list));
-		return new Gson().toJson(list);
+		
+		mv.addObject("list",list).setViewName("admin/memberManage");
+		
+		return mv;
+	}
+	
+	// 회원 삭제 서비스
+	@RequestMapping("mdelete.me")
+	public String deleteMember(String userId, HttpSession session, Model model) { 
+		
+		int result = aService.deleteMember(userId);
+		
+		if(result > 0) { // 삭제 성공	
+			session.setAttribute("alertMsg", "성공적으로 회원정보가 삭제되었습니다.");
+			return "redirect:mlist.me";
+		}else { // 삭제 실패
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
+		
 	}
 	
 	// 상품관리 페이지로 연결
@@ -75,9 +87,9 @@ public class AdminController {
 		return "admin/adminCharts";
 	}
 	
+	// 하비포토 메인 페이지로 이동
 	@RequestMapping("main.ho")
 	public String main() {
-		
 		return "main";
 	}
 	

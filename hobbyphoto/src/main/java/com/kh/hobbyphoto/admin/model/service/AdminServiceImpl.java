@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.hobbyphoto.admin.model.dao.AdminDao;
 import com.kh.hobbyphoto.board.model.vo.Board;
@@ -50,9 +51,16 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.updateBoard(sqlSession, b);
 	}
 
+	// 회원 리스트 조회
 	@Override
 	public ArrayList<Member> selectMember() {
 		return aDao.selectMember(sqlSession);
+	}
+	
+	// 회원 삭제 서비스
+	@Override
+	public int deleteMember(String userId) {
+		return aDao.deleteMember(sqlSession, userId);		
 	}
 	
 }

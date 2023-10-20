@@ -12,6 +12,9 @@ public interface AdminService {
 	// 1. 회원 관리 리스트 페이지
 	ArrayList<Member> selectMember();
 	
+	// 2. 회원 삭제 처리
+	int deleteMember(String userId);
+	
 	// 1. 게시판 리스트 페이지 서비스 (페이징)
 	int selectListCount();
 	ArrayList<Board> selectList(PageInfo pi);
