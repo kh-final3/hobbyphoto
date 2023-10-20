@@ -1,5 +1,4 @@
 package com.kh.hobbyphoto.admin.model.dao;
-
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
@@ -52,6 +51,10 @@ public class AdminDao {
 	
 	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
 		return sqlSession.update("boardMapper.updateBoard", b);
+
+	public int insertProduct(SqlSessionTemplate sqlSession,Product p) {
+		return sqlSession.insert("adminMapper.insertProduct", p);
+
 	}
 	
 }

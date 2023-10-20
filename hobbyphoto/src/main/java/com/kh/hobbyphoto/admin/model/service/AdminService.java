@@ -1,5 +1,6 @@
 package com.kh.hobbyphoto.admin.model.service;
 
+
 import java.util.ArrayList;
 
 import com.kh.hobbyphoto.board.model.vo.Board;
@@ -28,4 +29,9 @@ public interface AdminService {
 	
 	// 5. 게시글 수정용 서비스
 	int updateBoard(Board b);
+
+	//1. 상품 등록하기
+	int insertProduct(Product p);
+	
+	
 }

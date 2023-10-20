@@ -14,4 +14,20 @@ public class MemberDao {
 	public Member loginMember(SqlSessionTemplate sqlSession,Member m) {
 		return sqlSession.selectOne("memberMapper.loginMember",m);
 	}
+	
+	public Member searchId(SqlSessionTemplate sqlSession,String userName) {
+		return sqlSession.selectOne("memberMapper.searchId",userName);
+	}
+	
+	public Member searchPwd(SqlSessionTemplate sqlSession,String userId) {
+		return sqlSession.selectOne("memberMapper.searchPwd",userId);
+	}
+	
+	public int updatePwd(SqlSessionTemplate sqlSession,Member m) {
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
+	
+	public int deleteMember(SqlSessionTemplate sqlSession,Member m) {
+		return sqlSession.update("memberMapper.deleteMember",m);
+	}
 }

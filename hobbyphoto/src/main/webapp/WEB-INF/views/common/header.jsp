@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <style>
     div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'NanumBarunGothic';}
         .mb_outer{
@@ -194,6 +195,12 @@
        	
   </style>
 </head>
+	<c:if test="${ not empty alertMsg }">
+      <script>
+         alert("${alertMsg}");
+      </script>
+      <c:remove var="alertMsg" scope="session"/>
+    </c:if>
 	<body>
 	    <div class="mb_outer">
 	        <div class="mb_menu-area">
@@ -202,7 +209,7 @@
 	            </div> 
 	            <div id="mb_nav">
 	                <ul id="mb_navi">
-	                    <li><a href="#">사진게시판</a></li>
+	                    <li><a href="phBoardList.bo">사진게시판</a></li>
 	                    <li><a href="#">장비추천</a></li>
 	                    <li><a href="#">축제 · 전시</a></li>
 	                    <li><a href="#">출사명소</a></li>
@@ -227,7 +234,7 @@
                 <div id="mb_user_1">
                     <table class="login-area" align="center">
                         <tr height="75">
-                            <td width="70"><img width="60" src="resources/images/shopping-cart.png" alt=""></td>
+                            <td width="70"><a href="pro.list"><img width="60" src="resources/images/shopping-cart.png" alt=""></a></td>
                             <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png"></td>
                         </tr>
                     </table>
@@ -260,7 +267,9 @@
 		                					<li class="member_menu_mypage" align="center">
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
+
 					                					<a href="alist.da">관리자페이지</a>
+
 				                					</c:when>
 				                					<c:otherwise>
 				                						<a href="#">알림(0)</a>

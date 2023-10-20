@@ -26,4 +26,24 @@ public class MemberServiceImpl implements MemberService {
 		return md.insertMember(sqlSession, m);
 	}
 
+	@Override
+	public Member searchId(String userName) {
+		return md.searchId(sqlSession, userName);
+	}
+
+	@Override
+	public Member searchPwd(String userId) {
+		return md.searchPwd(sqlSession, userId);
+	}
+
+	@Override
+	public int updatePwd(Member m) {
+		return md.updatePwd(sqlSession,m);
+	}
+
+	@Override
+	public int deleteMember(Member m) {
+		return md.deleteMember(sqlSession,m);
+	}
+
 }

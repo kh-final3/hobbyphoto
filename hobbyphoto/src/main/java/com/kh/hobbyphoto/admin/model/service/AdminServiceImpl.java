@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.hobbyphoto.admin.model.dao.AdminDao;
@@ -12,12 +13,15 @@ import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Member;
+import com.kh.hobbyphoto.shop.model.vo.Product;
+import com.kh.hobbyphoto.upfile.model.vo.P_Attachment;
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	private AdminDao aDao;
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -62,5 +66,10 @@ public class AdminServiceImpl implements AdminService {
 	public int deleteMember(String userId) {
 		return aDao.deleteMember(sqlSession, userId);		
 	}
-	
+  
+ @Override
+	public int insertProduct(Product p) {
+		return aDao.insertProduct(sqlSession, p);
+	}
+
 }
