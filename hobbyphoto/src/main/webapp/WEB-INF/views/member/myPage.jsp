@@ -142,7 +142,7 @@
                 <h6 style="text-align: center;">***님</h6>
                 <div id="btnall_my">
                     <button type="submit" class="btn btn-sm btn-primary" id="btn_my1" onclick="location.href='logout.me'">로그아웃</button><br>                    
-                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my2" onclick ="location.href='회원탈퇴.html'">회원탈퇴</button>
+                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my2" onclick ="location.href='deleteForm.me'">회원탈퇴</button>
                 </div>
             </div>
             <div class="info_my2">
