@@ -104,7 +104,7 @@ public class BoardDao {
 	}
 
 	public int updatePlace(SqlSessionTemplate sqlSession, Place p) {
-		
+		System.out.println(p);
 		return sqlSession.update("boardMapper.updatePlace", p);
 	}
 
@@ -112,9 +112,8 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.getImageCount", pno);
 	}
 
-	public int updatePlaceAttachment(SqlSessionTemplate sqlSession, ArrayList<Attachment> list) {
-		System.out.println(list);
-		return sqlSession.update("boardMapper.updatePlaceAttachment", list);
+	public int updatePlaceAttachment(SqlSessionTemplate sqlSession, Attachment attachment) {
+		return sqlSession.update("boardMapper.updatePlaceAttachment", attachment);
 	}
 
 	public int cultureListCount(SqlSessionTemplate sqlSession, String keyword) {

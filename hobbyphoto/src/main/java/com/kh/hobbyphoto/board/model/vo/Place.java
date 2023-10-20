@@ -29,4 +29,8 @@ public class Place {
 	private String pimg4;
 	private MultipartFile[] upfiles;
 	private String keyword;
+	private int fileNo1;
+	private int fileNo2;
+	private int fileNo3;
+	private int fileNo4;
 }

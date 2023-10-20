@@ -235,19 +235,19 @@
                 </div>
                 <div class="photo-area">
                     <img src="${ p.pimg1 }" alt="사진 1" id="titleImg" onclick="chooseFile(1);">
-                    <input type="hidden" name="originFileNo1" value="${list.size() > 0 ? list[0].fileNo : ''}">
                     <img src="${ p.pimg2 }" alt="사진 2" id="contentImg1" onclick="chooseFile(2);">
-                    <input type="hidden" name="originFileNo2" value="${list.size() > 1 ? list[1].fileNo : ''}">
                     <img src="${ p.pimg3 }" alt="사진 3" id="contentImg2" onclick="chooseFile(3);">
-                    <input type="hidden" name="originFileNo3" value="${list.size() > 2 ? list[2].fileNo : ''}">
                     <img src="${ p.pimg4 }" alt="사진 4" id="contentImg3" onclick="chooseFile(4);">
-                    <input type="hidden" name="originFileNo4" value="${list.size() > 3 ? list[3].fileNo : ''}">
+                    <input type="hidden" name="originFileNo1" value="${p.fileNo1}">
+                    <input type="hidden" name="originFileNo2" value="${p.fileNo2}">
+                    <input type="hidden" name="originFileNo3" value="${p.fileNo3}">
+                    <input type="hidden" name="originFileNo4" value="${p.fileNo4}">
                 </div>
 		 		<div id="file-area" style="display:none">
-		            <input type="file" name="upfile" id="file1" onchange="loadImg(this, 1);">
-		            <input type="file" name="upfile" id="file2" onchange="loadImg(this, 2);">
-		            <input type="file" name="upfile" id="file3" onchange="loadImg(this, 3);">
-		            <input type="file" name="upfile" id="file4" onchange="loadImg(this, 4);">
+		            <input type="file" name="upfiles" id="file1" onchange="loadImg(this, 1);">
+		            <input type="file" name="upfiles" id="file2" onchange="loadImg(this, 2);">
+		            <input type="file" name="upfiles" id="file3" onchange="loadImg(this, 3);">
+		            <input type="file" name="upfiles" id="file4" onchange="loadImg(this, 4);">
 		        </div>
                 <hr>
 

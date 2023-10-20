@@ -47,6 +47,6 @@ public interface BoardService {
 	ArrayList<Reply> placeReplyList(int pno);
 	int selectPlaceListCount();
 	ArrayList<Place> sortPlaceList(PageInfo pi, HashMap<String, String> map);
-	int updatePlace(Place p, ArrayList<Attachment> list);
+	int updatePlace(Place p);
 	
 }

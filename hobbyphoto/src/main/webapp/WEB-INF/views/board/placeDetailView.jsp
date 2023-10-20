@@ -428,28 +428,6 @@
             </div>
            <hr>
             
-            <div class="review-area">
-                <h3 class="review-lo">댓글(<span id="rcount"></span>) </h3>
-                <div class="writer-review">
-                    <div class="propho">
-                        <img src="resources/images/풍경1.jpg" alt="프로필사진" width="70" height="59">
-                    </div>
-                    <div class="review">
-                        <textarea id="content" placeholder="댓글을 입력해주세요"></textarea>
-                    </div>
-                    <div class="allr">
-                        
-                    </div>
-
-                    <div class="subtn">
-                        <button onclick="addReply();">등록</button>
-                    </div>
-                </div>
-                <div class="all-review">
-
-                </div>
-                
-            </div>
             
         </div>
         
@@ -464,52 +442,7 @@
                 location.href = 'list.pl'
             })
         })
-        $(function(){
-        	selectReplyList();
-        })
-                
-        function addReply(){
-            if($("#content").val().trim().length != 0){            
-                $.ajax({
-                    url:"rinsert.pl",
-                    data:{
-                        refBno: 'P' + ${p.pno},
-                        replyContent:$("#content").val(),
-                        replyWriter: '${ p.pwriter }'
-                    }, success:function(status){
-                        if(status == "success"){ // 댓글작성성공 => 갱신된 댓글리스트 조회
-                            selectReplyList();
-                        }
-                    }, error:function(){
-                        console.log("댓글 작성용 ajax통신 실패");
-                    }
-                })
-            }else{
-                alertify.alert("댓글입력후 등록해주세요");
-            }
-        }
-            
-        function selectReplyList(){
-            $.ajax({
-                url:"rlist.pl",
-                data:{pno: ${p.pno}},
-                success:function(list){
-                    console.log(list);
-                    let value ="";
-                for(let i in list){
-                    value += "<table align=center border=1  ><tr>"
-                            + "<th>" + list[i].replyWriter + "</th>"
-                            + "<td>" + list[i].replyContent + "</td>"
-                            + "<td>" + list[i].createDate + "</td>"
-                            + "</tr></table>";
-                        }
-                $(".all-review").html(value); 
-                $("#rcount").html(list.length); 
-            },  error:function(){
-                    console.log("댓글 조회용 ajax 통신실패");
-                }
-            })          
-        }
+        
     </script>
     <jsp:include page="../common/footer.jsp"/>
 </body>

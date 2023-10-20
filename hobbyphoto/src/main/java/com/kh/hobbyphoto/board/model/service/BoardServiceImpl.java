@@ -117,17 +117,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public int updatePlace(Place p, ArrayList<Attachment> list) {
-		int result1 = bDao.updatePlace(sqlSession, p);
-		
-		int result2 = 1;
-		
-		if(!list.isEmpty()) {
-			result2 = bDao.updatePlaceAttachment(sqlSession, list);
-		}
-		System.out.println(result1);
-		System.out.println(result2);
-		return  result1 * result2;
+	public int updatePlace(Place p) {
+		return bDao.updatePlace(sqlSession, p);
+	}
+	
+	public int updatePlaceAttachment(Attachment attachment) {
+		return bDao.updatePlaceAttachment(sqlSession, attachment);
 	}
 	
 	@Override
@@ -160,5 +155,7 @@ public class BoardServiceImpl implements BoardService{
 	public int insertExhibit(Festival fe) {
 		return bDao.insertExhibit(sqlSession,fe);
 	}
+
+	
 
 }

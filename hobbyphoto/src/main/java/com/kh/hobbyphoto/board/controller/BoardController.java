@@ -313,6 +313,7 @@ public class BoardController {
 		if (result > 0) {
 			Place p = bService.selectPlace(pno);
 			model.addAttribute("p", p);
+			System.out.println(p);
 			return "board/placeDetailView";
 			
 		} else {
@@ -352,41 +353,74 @@ public class BoardController {
 	}
 	
 	@RequestMapping("update.pl")
-	public String updatePlace(Place p, @RequestParam("upfile") MultipartFile[] upfiles,HttpSession session, Model model) {
-		ArrayList<Attachment> list = new ArrayList<>();
+	public String updatePlace(Place p, @RequestParam("upfiles") MultipartFile[] upfiles, 
+									   @RequestParam("originFileNo1") int originFileNo1,
+								       @RequestParam("originFileNo2") int originFileNo2,
+								       @RequestParam("originFileNo3") int originFileNo3,
+								       @RequestParam("originFileNo4") int originFileNo4, HttpSession session, Model model) {
+		System.out.println(originFileNo1);
+	    ArrayList<Attachment> list = new ArrayList<>();
 	    Place existingPlace = bService.selectPlace(p.getPno());
 	    p.setPimg1(existingPlace.getPimg1());
 	    p.setPimg2(existingPlace.getPimg2());
 	    p.setPimg3(existingPlace.getPimg3());
 	    p.setPimg4(existingPlace.getPimg4());
+	    
 
-	    for (int i = 1; i <= 4; i++) {
-	        String key = "upfile" + i;
+	    for (int i = 0; i < upfiles.length; i++) {
+	        MultipartFile file = upfiles[i];
 
-	        if (upfiles[i - 1] != null && !upfiles[i - 1].isEmpty()) {
-	            MultipartFile file = upfiles[i - 1];
+	        if (file != null && !file.isEmpty()) {
 	            String changeName = saveFile(file, session);
 	            Attachment at = new Attachment();
 	            at.setOriginName(file.getOriginalFilename());
 	            at.setChangeName("resources/uploadFiles/" + changeName);
 	            at.setFilePath("resources/uploadFiles");
-	            at.setRefBno(String.valueOf(p.getPno()));
+	            at.setFileLevel(i+1);
+	            switch (i) {
+                case 0:
+                    at.setFileNo(originFileNo1);
+                    p.setPimg1("resources/uploadFiles/" + changeName);
+                    break;
+                case 1:
+                    at.setFileNo(originFileNo2);
+                    p.setPimg2("resources/uploadFiles/" + changeName);
+                    break;
+                case 2:
+                    at.setFileNo(originFileNo3);
+                    p.setPimg3("resources/uploadFiles/" + changeName);
+                    break;
+                case 3:
+                    at.setFileNo(originFileNo4);
+                    p.setPimg4("resources/uploadFiles/" + changeName);
+                    break;
+                default:
+                    break;
+	            }
 	            list.add(at);
 	        }
 	    }
-	    
-	    int result = bService.updatePlace(p,list);
-	    System.out.println(list);
-	   
 
-	    if (result > 0) {
-	        session.setAttribute("alertMsg", "게시글 수정에 성공했습니다.");
-	        return "redirect:detail.pl?pno=" + p.getPno();
-	    } else {
-	        model.addAttribute("errorMsg", "게시글 수정 실패");
-	        return "common/errorPage";
+	    int result = bService.updatePlace(p);
+	    if (result <= 0) {
+	    	model.addAttribute("errorMsg", "게시글 수정 실패");
+	    	return "common/errorPage";
 	    }
+
+	    for (Attachment attachment : list) {
+	        int attachmentResult = bService.updatePlaceAttachment(attachment);
+	        if (attachmentResult <= 0) {
+	            model.addAttribute("errorMsg", "첨부 파일 수정 실패");
+	            return "common/errorPage";
+	        }
+	    }
+
+	    session.setAttribute("alertMsg", "게시글 수정에 성공했습니다.");
+	    return "redirect:detail.pl?pno=" + p.getPno();
 	}
+
+
+
 
 
 
