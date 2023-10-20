@@ -143,7 +143,11 @@ public class MemberController {
 			session.setAttribute("alertMsg", "비밀번호가 다릅니다.");
 			return "redirect:deleteForm.me";
 		}
+	}
 	
+	@RequestMapping("myBoard.me")
+	public String myBoard() {
+		return "member/myBoard";
 	}
 	
 }
