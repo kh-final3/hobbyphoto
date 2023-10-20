@@ -80,7 +80,8 @@
 			)
 	 </insert>
 	 
-	 <select id="selectProductList">
+	 <!-- 
+	 <select id="selectProductList" >
 	 	select
 			    p_no
 			,   p_name
@@ -92,5 +93,5 @@
 			join brand b using (brand_no)
 			where user_no = #{userNo}
 	 </select>
-  
+   -->
 </mapper>

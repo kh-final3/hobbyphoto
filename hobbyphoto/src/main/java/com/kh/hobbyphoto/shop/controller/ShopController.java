@@ -90,13 +90,13 @@ public class ShopController {
 		return mv;
 	}
 	
-	@RequestMapping("shop.mp")
-	public String shopMyPage(int userNo) {
-		
-		ArrayList<Cart> list = sService.selectProCartList(userNo);
-		
-		
-		
-		return "shop/shopCart";
-	}
+//	@RequestMapping("shop.mp")
+//	public String shopMyPage(int userNo) {
+//		
+//		ArrayList<Cart> list = sService.selectProCartList(userNo);
+//		
+//		
+//		
+//		return "shop/shopCart";
+//	}
 }
