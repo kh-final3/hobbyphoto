@@ -31,8 +31,8 @@
             margin: auto;
             margin-left: 85px;
             padding-top: 50px;
-            width: 50%;
-            height: 35%;
+            width: 60%;
+            height: 50%;
         }
 
         #ft_footer1 {

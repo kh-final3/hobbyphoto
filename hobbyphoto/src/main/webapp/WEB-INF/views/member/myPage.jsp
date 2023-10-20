@@ -178,7 +178,7 @@
                             <span>북마크</span>
                         </li>
                         <li>
-                            <a href="마이페이지_게시글.html" class="icon2"><img src="../../resources/images/noticeboard.png" style="width: 50px; height: 50px;"></a>
+                            <a href="myBoard.me" class="icon2"><img src="../../resources/images/noticeboard.png" style="width: 50px; height: 50px;"></a>
                             <span>게시글</span>
                         </li>
                         <li>
