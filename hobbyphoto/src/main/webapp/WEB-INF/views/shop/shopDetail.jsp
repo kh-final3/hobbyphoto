@@ -98,10 +98,11 @@
                     <br><br>
                     <div class="product-btn">
                     
+                    <!--   -->
                         <button type="button" class="pd-btn" id="wishbtn">
                             <img src="resources/images/wish.png" style="width: 40px; height: 40px;">
                         </button>
-                        
+                       
                         <button type="submit" class="pd-btn" id="cartbtn">
                             <img src="resources/images/cart.png" style="width: 40px; height: 40px;">
                         </button>
@@ -158,19 +159,39 @@
     	$(document).ready(function(){
     		
     		//찜하기
-    		$("#wishbtn").click(function(event){
-    			event.preventDefault();
-    			$("form").attr("action", "add-to-wishlist").submit();
-    		});
+    		//$("#wishbtn").click(function(event){
+    		//	event.preventDefault();
+    		//	$("form").attr("action", "add-to-wishlist").submit();
+    		//});
+    		
+    		//로그인 체크
+    		function checkLogin() {
+		        if (${ empty loginMember}) { // 로그인하지 않은 경우
+		            alert('회원만 사용할 수 있습니다. 로그인해주세요.');
+		            return false;
+		        }
+		        return true;
+		    }
+    		
     		//장바구니
     		$("#cartbtn").click(function(event) {
     	        event.preventDefault();
+    	        
+    	     	// 로그인 여부 확인
+    	        if (!checkLogin()) return; // 로그인하지 않은 경우 함수에서 빠져나옴
+    	        
     	        $("form").attr("action", "cart.pro").submit();
+    	        
     	    });
 
+    		
     	    // 구매하기 버튼
     	    $(".final").click(function(event) {
     	        event.preventDefault();
+    	        
+    	     	// 로그인 여부 확인
+    	        if (!checkLogin()) return; // 로그인하지 않은 경우 함수에서 빠져나옴
+
     	        $("form").attr("action", "purchase").submit();
     	    });
     		
@@ -334,6 +355,8 @@
     </div>
 
  	 </div>
+
+      <jsp:include page="../common/footer.jsp"/>
         
 	<script>
 		$(document).ready(function(){

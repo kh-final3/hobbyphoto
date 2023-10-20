@@ -18,4 +18,7 @@ public interface ShopService {
 		
 		//4.장바구니 등록
 		int insertCartProduct(Cart cart);
+		
+		//5.장바구니 조회(아이콘 클릭 -> 내가 한 장바구니 목록 확인)
+		ArrayList<Cart> selectProCartList(int userNo);
 }

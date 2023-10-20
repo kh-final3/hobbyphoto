@@ -20,6 +20,12 @@ public class ShopController {
 	@Autowired
 	private ShopServiceImpl sService;
 	
+	
+	@RequestMapping("shop.main")
+	public String goShopMain() {
+		return "shop/shopMain";
+	}
+	
 	@RequestMapping("pro.list")
 	public String selectProdcutList(Model model) {
 		ArrayList<Product> list = sService.selectProductList();
@@ -82,5 +88,15 @@ public class ShopController {
 	    	mv.setViewName("redirect:detail.pro?pno="+cart.getPNo());
 	    }
 		return mv;
+	}
+	
+	@RequestMapping("shop.mp")
+	public String shopMyPage(int userNo) {
+		
+		ArrayList<Cart> list = sService.selectProCartList(userNo);
+		
+		
+		
+		return "shop/shopCart";
 	}
 }

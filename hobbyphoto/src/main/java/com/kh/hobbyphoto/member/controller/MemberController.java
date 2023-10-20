@@ -48,8 +48,10 @@ public class MemberController {
 	public String enroll(Member m,Model model,HttpSession session) {
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		m.setUserPwd(encPwd);
+		//System.out.println(encPwd);
 		
 		int result = ms.insertMember(m);
+		
 		
 		if(result>0) {
 			session.setAttribute("alertMsg", "성공적으로 회원등록 되었습니다");

@@ -8,17 +8,25 @@
 <meta charset="UTF-8">
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
 <title>Insert title here</title>
 
 	<Style>
-	    #banner{
-        height: 450px;
-        border: 1px solid black;
-        margin: auto;
-        background-image: url(bg_cat_camera.jpg);
-        background-size: 1400px;
-        color: white;
+
+     div * {
+        box-sizing: border-box;
+     }
+
+   
+
+    #banner{
+    height: 450px;
+    border: 1px solid black;
+    margin: auto;
+    background-image: url(bg_cat_camera.jpg);
+    background-size: 1400px;
+    color: white;
     }
 
     #category{
@@ -34,6 +42,7 @@
         width: 1300px;
         margin: auto;
         margin-top: 20px;
+        margin-left: 200px;
     }
 
     .product{
@@ -110,76 +119,103 @@
     .select-ul{width: 100%; padding: 0;}
     .select-ul>li{width: 100%; height: 50px; box-sizing: border-box; font-size: 16px; font-weight: 600; color: black; list-style-type: none; padding: 13px 30px;}
     
+
+    .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+    margin: auto;
+    }
+    .home-btn{text-align: center; line-height: 50px; font-size: 30px;}
+    .home-btn a{color: white;}
+    .home-btn a:link{color: white; text-decoration: none}
+    .home-btn a:hover{color: white;}
+
+	
+
 	</Style>
 
 </head>
 <body>
 
 	<jsp:include page="../common/shopHeader.jsp"/>
+            <div class="all">
+                <div id="banner" align="center">
+                        여기는 배너입니다.
+                </div>
 
-		<div id="banner" align="center">
-		        여기는 배너입니다.
-		    </div>
-		    <div id="category" align="center">
-        <div class="inner-category">
-            <ul class="category-ul" align="left">
-                <li class="home-btn" align="center">
-                    <a href="">
-                        <img style="margin-top: 10px;" src="home.svg">
-                    </a>
-                </li>
-                <li class="select-li">
-                    <div class="select-wrap">
-                        <span class="label">브랜드</span>
-                        <b class="select-btn" onclick="brandBtn()"><img src="nav_arrow.svg"></b>
-                    </div>
-                    <div class="select-item brand">
-                        <ul class="select-ul">
-                            <li>CANON</li>
-                            <li>NIKON</li>
-                            <li>OLYMPUS</li>
-                            <li>SONY</li>
-                            <li>FUJIFILM</li>
+                <div id="category" align="center">
+
+                    <div class="inner-category">
+                        <ul class="category-ul" align="left">
+                            <li class="home-btn" align="center">
+                                <a href="">
+                                   <i class="ri-home-line"></i>
+                                </a>
+                            </li>
+                            <li class="select-li">
+                                <div class="select-wrap">
+                                    <span class="label">브랜드</span>
+                                    <b class="select-btn" onclick="brandBtn()"><i class="ri-arrow-down-s-fill"></i></b>
+                                </div>
+                                <div class="select-item brand">
+                                    <ul class="select-ul">
+                                        <li>CANON</li>
+                                        <li>NIKON</li>
+                                        <li>OLYMPUS</li>
+                                        <li>SONY</li>
+                                        <li>FUJIFILM</li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="select-li">
+                                <div class="select-wrap">
+                                    <span class="label">DSLR</span>
+                                    <b class="select-btn" onclick="categoryBtn()"><i class="ri-arrow-down-s-fill"></i></b>
+                                </div>
+                                <div class="select-item category">
+                                    <ul class="select-ul">
+                                        <li>CANON</li>
+                                        <li>NIKON</li>
+                                        <li>OLYMPUS</li>
+                                        <li>SONY</li>
+                                        <li>FUJIFILM</li>
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
                     </div>
-                </li>
-                <li class="select-li">
-                    <div class="select-wrap">
-                        <span class="label">DSLR</span>
-                        <b class="select-btn" onclick="categoryBtn()"><img src="nav_arrow.svg"></b>
-                    </div>
-                    <div class="select-item category">
-                        <ul class="select-ul">
-                            <li>CANON</li>
-                            <li>NIKON</li>
-                            <li>OLYMPUS</li>
-                            <li>SONY</li>
-                            <li>FUJIFILM</li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-		
-		    <div class="list">
-		    
-		    	<c:forEach var="p" items="${ list }">
-		        <div class="product" id="clickpro">
-		            <input type="hidden" name="pNo" class="pNo" value="${ p.PNo }">
-		            <div class="img">
-		                <img src="${ p.thumbnail }">
-		            </div>
-		            <div class="text">
-		                ${ p.PName }
-		            </div>
-		        </div>
+                </div>
+                
+                
+                <div class="list clearfix" style="width: 90%;">
+                
+                    <c:forEach var="p" items="${ list }">
+                        <div class="product" id="clickpro">
+                            <input type="hidden" name="pNo" class="pNo" value="${ p.PNo }">
+                            <div class="img">
+                                <img src="${ p.thumbnail }">
+                            </div>
+                            <div class="text">
+                                ${ p.PName }
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+                
 		        
-		        </c:forEach>
-		        
-		        
-		    </div>
-		    
+            </div>
+
+            <br>
+            <div>
+                <jsp:include page="../common/footer.jsp"/>
+            </div>
+            
+
+
+
+
+
 		    <script>
 		    	$(function(){
 		    		$(".product").click(function(){
@@ -205,6 +241,7 @@
 		            }   
 		        }
 		    </script>
+
 
 </body>
 </html>

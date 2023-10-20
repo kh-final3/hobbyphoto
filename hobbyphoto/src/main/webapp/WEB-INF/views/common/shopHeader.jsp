@@ -202,6 +202,8 @@
 </head>
 <body>
 
+	
+
 	<c:if test="${ not empty alertMsg }">
 		<script>
 			alert("${alertMsg}");
@@ -216,7 +218,7 @@
             </div> 
             <div id="mb_nav">
                 <ul id="mb_navi">
-                    <li><a href="#">홈</a></li>
+                    <li><a href="pro.list">홈</a></li>
                     <li><a href="#">카메라</a></li>
                     <li><a href="#">포토북</a></li>
                     <li><a href="#">핸드폰 케이스</a></li>
@@ -229,7 +231,7 @@
             <div id="mb_search">
                 <form action="#" id="search_form">
                     <div id="search_text">
-                        <input type="text" name="keyword" id="sh_text" placeholder="     검색어를 입력해주세요">
+                        <input type="text" name="keyword" id="sh_text" placeholder="검색어를 입력해주세요">
                         <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
                     </div>
                     
@@ -274,9 +276,10 @@
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
 					                					<a href="admin.pg">관리자페이지</a>
+					                					<a href="shop.mp">장바구니</a>
 				                					</c:when>
 				                					<c:otherwise>
-				                						<a href="#">장바구니</a>
+				                						<a href="shop.mp">장바구니</a>
 				                					</c:otherwise>
 			                					</c:choose>
 		                					</li>

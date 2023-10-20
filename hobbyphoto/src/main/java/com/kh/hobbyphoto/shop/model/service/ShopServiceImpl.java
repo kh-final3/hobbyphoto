@@ -39,6 +39,11 @@ public class ShopServiceImpl implements ShopService{
 		return sDao.insertCartProduct(sqlSession, cart);
 	}
 
+	@Override
+	public ArrayList<Cart> selectProCartList(int userNo) {
+		return sDao.selectProductList(sqlSession, userNo);
+	}
+
 
 	
 
