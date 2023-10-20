@@ -1,5 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
-  
+	<resultMap type="Member" id="resultMember">
+		<result column="user_no" property="userNo" />
+		<result column="user_id" property="userId" />
+		<result column="user_pwd" property="userPwd" />
+		<result column="user_name" property="userName" />
+		<result column="nickname" property="nickName" />
+		<result column="email" property="email" />
+		<result column="gender" property="gender" />
+		<result column="phone" property="phone" />
+		<result column="description" property="description" />
+		<result column="profile_img" property="profileImg" />
+		<result column="status" property="status" />
+		<result column="social" property="social" />
+	</resultMap>
+	<insert id="insertMember" parameterType="Member">
+		insert
+		  into member
+		  	 (
+		  	   user_no 
+		  	 , user_id
+		  	 , user_pwd
+		  	 , user_name
+		  	 , nickname
+		  	 , email
+		  	 , phone
+		  	 , gender
+		  	 )
+		values 
+		     (
+		       SEQ_MNO.nextval
+		     , #{ userId }
+		     , #{ userPwd }
+		     , #{ userName }
+		     , #{ nickName }
+		     , #{ email }
+		     , #{ phone }
+		     , #{ gender }
+		     )
+	</insert>
+	
+	<select id="loginMember" resultMap="resultMember">
+		select 
+		       user_no
+		     , user_id
+		     , user_pwd
+		     , user_name
+		     , nickname
+		     , email
+		     , gender
+		     , phone
+		     , description
+		     , profile_img
+		     , status
+		     , social
+		  from member
+		 where user_id = #{userId}
+		   and status = 'Y'
+	</select>
+	
+	<select id="searchId" resultMap="resultMember">
+		select 
+		       user_no
+		     , user_id
+		     , user_pwd
+		     , user_name
+		     , nickname
+		     , email
+		     , gender
+		     , phone
+		     , description
+		     , profile_img
+		     , status
+		     , social
+		  from member
+		 where user_name = #{userName}
+		   and status = 'Y'
+	</select>
+	
+	<select id="searchPwd" resultMap="resultMember">
+		select 
+		       user_no
+		     , user_id
+		     , user_pwd
+		     , user_name
+		     , nickname
+		     , email
+		     , gender
+		     , phone
+		     , description
+		     , profile_img
+		     , status
+		     , social
+		  from member
+		 where user_id = #{userId}
+		   and status = 'Y'
+	</select>
+	
+	<update id="updatePwd">
+		update
+		       member
+		   set user_pwd = #{ userPwd }
+		 where user_id = #{ userId }
+		   and status = 'Y'
+	</update>
+	<update id="deleteMember">
+		update
+		       member
+		   set status = 'N'
+		 where user_id = #{ userId }
+		   and user_pwd = #{ userPwd }
+		   and status = 'Y'
+	</update>
 </mapper>
