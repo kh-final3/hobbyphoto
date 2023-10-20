@@ -3,6 +3,7 @@ package com.kh.hobbyphoto.common.template;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 
 
+
 public class Pagination {
 
 	public static PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit) {
@@ -15,5 +16,7 @@ public class Pagination {
 		}
 		
 		return new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
 	}
+	
 }

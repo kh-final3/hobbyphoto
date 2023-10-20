@@ -25,11 +25,13 @@ import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
+
 @Controller
 public class BoardController {
 	@Autowired
 	private BoardServiceImpl bService;
 	
+
 	@RequestMapping("phBoardList.bo")
 	public ModelAndView selectPhBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
@@ -122,9 +124,5 @@ public class BoardController {
 		}
 		return changeName;
 	}
-
-
-
-	
 
 }

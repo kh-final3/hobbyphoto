@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -79,6 +80,7 @@
             height: 40px;
         }
     </style>
+
 </head>
 <body>
 
@@ -103,9 +105,11 @@
                 <option value="3">OLYMPUS</option>
                 <option value="4">SONY</option>
                 <option value="5">FUJIFILM</option>
+
             </select>
 
             <br>
+
 
             <label for="category">종류:</label>
             <select class="select-area" name="categoryNo" required>
@@ -139,3 +143,4 @@
 	
 </body>
 </html>
+
