@@ -13,4 +13,6 @@ public interface MemberService {
 	Member searchPwd(String userId);
 
 	int updatePwd(Member m);
+	
+	int deleteMember(Member m);
 }

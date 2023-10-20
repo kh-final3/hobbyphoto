@@ -50,7 +50,7 @@
 				</div>
 				<div style="margin-bottom: 10px;"
 					class="custom-control custom-radio custom-control-inline">
-					<input type="radio" class="custom-control-input" id="search_1" name="search_total" onclick="search_check(1)" checked="checked">
+					<input type="radio" class="custom-control-input" id="search_1" name="search_total" onclick="search_check(1)" checked>
 					<label class="custom-control-label font-weight-bold"	for="search_1">아이디 찾기</label>
 				</div>
 				<div class="custom-control custom-radio custom-control-inline">
@@ -105,7 +105,7 @@
 					</div>
 					<br>
 					<div class="form-group">
-						<button id="searchBtn2" type="button" onclick="pwdSearch_click()" class="btn btn-primary btn-block" data-toggle="modal" data-target="#pwdModal">확인</button>
+						<button id="searchBtn2" type="button" onclick="pwdSearch_click()" class="btn btn-primary btn-block" data-toggle="modal" data-target="#pwdModal" disabled>확인</button>
 					<a class="btn btn-danger btn-block"	href="${pageContext.request.contextPath}">취소</a>
 					<br>
 						<input type="text" class="confirmPwd" style="display: none" value="">
@@ -294,6 +294,15 @@
 			alert("비밀번호 확인이 같지 않습니다.")
 		}
 	}
+    
+    $(()=>{
+    	var find = '${ find }'
+    	if(find == 'Pwd'){
+    		$("#search_2").attr("checked",true)
+    		$("#searchP").css("display","")
+    		$("#searchI").css("display","none")
+    	}
+    })
     </script>
 
 </body>

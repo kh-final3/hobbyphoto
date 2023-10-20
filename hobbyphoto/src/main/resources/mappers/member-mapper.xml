@@ -105,4 +105,12 @@
 		 where user_id = #{ userId }
 		   and status = 'Y'
 	</update>
+	<update id="deleteMember">
+		update
+		       member
+		   set status = 'N'
+		 where user_id = #{ userId }
+		   and user_pwd = #{ userPwd }
+		   and status = 'Y'
+	</update>
 </mapper>

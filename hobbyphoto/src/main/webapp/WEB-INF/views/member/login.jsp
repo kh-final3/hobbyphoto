@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,10 +35,10 @@
             width: 100%;
         }
 
-        .login_id input {
-            width: 100%;
+        .login-input{
+            width: 351px;
             height: 50px;
-            border-radius: 30px;
+            border-radius: 10px;
             margin-top: 10px;
             padding: 0px 20px;
             border: 1px solid lightgray;
@@ -49,34 +50,44 @@
             width: 100%;
         }
 
-        .login_pw input {
-            width: 100%;
-            height: 50px;
-            border-radius: 30px;
-            margin-top: 10px;
-            padding: 0px 20px;
-            border: 1px solid lightgray;
-            outline: none;
-        }
-
         .login_etc {
             padding: 10px;
-            width: 108%;
+            width: 96%;
             font-size: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
         }
-
-        .btn button{
-            width: 200px;
+        
+        .login-form{
+        	width: 390px;
+        	margin: 0 auto 0;
+        }
+        
+        .login_btn{
+            width: 400px;
             height: 40px;
             background-color: black;
             color: white;
             border-radius: 10px;
-            border: none;
+            border: 1px solid black;
             cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .enroll_btn{
+        	width: 400px;
+            height: 40px;
+            background-color: white;
+            border-radius: 10px;
+            border: 1px solid black;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 10px;
         }
 
         .btn button:hover{
@@ -113,21 +124,27 @@
 </head>
 <body>
 <div class="all">
+	<c:if test="${ not empty alertMsg }">
+      <script>
+         alert("${alertMsg}");
+      </script>
+      <c:remove var="alertMsg" scope="session"/>
+    </c:if>
 	<div class="innerOuter">
-            <h2>Hobby Photo <br>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;LogoIn</span>
-            </h2>
-            <form action="login.me" method="post">
+            <h1>Hobby Photo <br>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;Login</span>
+            </h1>
                 <div class="login-form">
+		            <form action="login.me" method="post">
 
                     <div class="login_id">
                         <h4>아이디</h4>
-                        <input type="text" name="userId" placeholder="아이디를 입력해주세요.">
+                        <input class="login-input" type="text" name="userId" required placeholder="아이디를 입력해주세요.">
                     </div>
 
                     <div class="login_pw">
                         <h4>비밀번호</h4>
-                        <input type="password" name="userPwd" placeholder="비밀번호를 입력해주세요.">
+                        <input class="login-input" type="password" name="userPwd" required" placeholder="비밀번호를 입력해주세요.">
                     </div>
 
                     <div class="login_etc">
@@ -138,7 +155,7 @@
 
                         <div class="forgot_pw">
                             <a href="findId.me">아이디 찾기</a> |
-                            <a href="">비밀번호 찾기</a>
+                            <a href="findPwd.me">비밀번호 찾기</a>
                         </div>
 
                     </div>
@@ -146,10 +163,13 @@
                     <br>
 
                     <div class="btn" align="center">
-                        <button type="submit">로그인</button>
+                        <button class="login_btn" type="submit">로그인</button>
                     </div>
+                    <div class="btn" align="center">
+                        <button class="enroll_btn" type="button">회원가입</button>
+                    </div>
+		            </form>
                 </div>
-            </form>
 
             <br>
            
@@ -159,12 +179,7 @@
                 <!-- <li><a href=""><img src="" alt="카카오"></a></li> -->
                 
             </div>
-
             <br>
-
-            <div>
-                
-            </div>
         </div> 
     </div>
 </body>

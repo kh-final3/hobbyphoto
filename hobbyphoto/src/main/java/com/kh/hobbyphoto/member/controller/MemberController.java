@@ -35,8 +35,8 @@ public class MemberController {
 			session.setAttribute("loginMember", loginMember);
 			mv.setViewName("redirect:/");
 		} else {
-			mv.addObject("errorMsg", "로그인실패");
-			mv.setViewName("common/errorPage");
+			session.setAttribute("alertMsg", "아이디 또는 비밀번호가 다르거나, 존재하지 않는 회원입니다.");
+			mv.setViewName("redirect:loginForm.me");
 		}
 		return mv;
 	}
@@ -74,7 +74,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping("findId.me")
-	public String findId() {
+	public String findId(HttpSession session) {
+		session.setAttribute("find", "Id");
+		return "member/findMember";
+	}
+	
+	@RequestMapping("findPwd.me")
+	public String findPwd(HttpSession session) {
+		session.setAttribute("find", "Pwd");
 		return "member/findMember";
 	}
 	
@@ -92,10 +99,10 @@ public class MemberController {
 		return new Gson().toJson(searchMember);
 	}
 	
-	@RequestMapping(value="updatePwd.me")
+	@RequestMapping("updatePwd.me")
 	public String updatePwd(Member m,HttpSession session,Model model) {
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
-		m.setUserPwd(encPwd);;
+		m.setUserPwd(encPwd);
 		
 		int result = ms.updatePwd(m);
 		
@@ -107,6 +114,31 @@ public class MemberController {
 			return "common/errorPage";
 		}
 		
+	}
+	
+	@RequestMapping("deleteForm.me")
+	public String deleteForm() {
+		return "member/deleteMember";
+	}
+	
+	@RequestMapping("delete.me")
+	public String deleteMember(Member m,Model model,HttpSession session) {
+		Member loginMember = ms.loginMember(m);
+		if(loginMember != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())) {
+			int result = ms.deleteMember(loginMember);
+			if(result>0) {
+				session.setAttribute("alertMsg", "정상처리 되었습니다, 감사합니다.");
+				session.removeAttribute("loginMember");
+				return "redirect:/";
+			}else {
+				model.addAttribute("errorMsg", "회원탈퇴에 실패하였습니다.");
+				return "common/errorPage";
+			}
+		} else {
+			session.setAttribute("alertMsg", "비밀번호가 다릅니다.");
+			return "redirect:deleteForm.me";
+		}
+	
 	}
 	
 }

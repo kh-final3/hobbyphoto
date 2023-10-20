@@ -195,6 +195,12 @@
        	
   </style>
 </head>
+	<c:if test="${ not empty alertMsg }">
+      <script>
+         alert("${alertMsg}");
+      </script>
+      <c:remove var="alertMsg" scope="session"/>
+    </c:if>
 	<body>
 	    <div class="mb_outer">
 	        <div class="mb_menu-area">

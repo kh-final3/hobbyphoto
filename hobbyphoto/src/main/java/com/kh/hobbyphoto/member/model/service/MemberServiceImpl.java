@@ -41,4 +41,9 @@ public class MemberServiceImpl implements MemberService {
 		return md.updatePwd(sqlSession,m);
 	}
 
+	@Override
+	public int deleteMember(Member m) {
+		return md.deleteMember(sqlSession,m);
+	}
+
 }
