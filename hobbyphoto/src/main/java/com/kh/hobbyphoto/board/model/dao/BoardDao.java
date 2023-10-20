@@ -41,6 +41,14 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 	
+	public int insertAttachment(SqlSessionTemplate sqlSession, Attachment at) {
+		return sqlSession.insert("boardMapper.insertAttachment", at);
+	}
+	
+	public int insertAtBoard(SqlSessionTemplate sqlSession, Attachment at) {
+		return sqlSession.insert("boardMapper.insertAtBoard", at);
+	}
+	
 	public int deleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deleteBoard", boardNo);
 	}
@@ -61,9 +69,7 @@ public class BoardDao {
 		return (ArrayList) sqlSession.selectList("boardMapper.selectTopBoardList");
 	}
 
-	public int insertAtBoard(SqlSessionTemplate sqlSession) {
-		return sqlSession.insert("boardMapper.insertAtBoard");
-	}
+
 
 	
 }

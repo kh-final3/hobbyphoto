@@ -15,11 +15,11 @@
 		<result column="thumbnail" property="thumbnail"/>
 		<result column="board_writer" property="boardWriter"/>
 		<result column="file_path" property="filePath"/>
-		<result column="change_name" property="changeName"/>
 	</resultMap>
 	
 	<resultMap id="AttachmentResult" type="Attachment">
 		<result column="file_no" property="fileNo"/>
+		<result column="file_level" property="fileLevel"/>
 		<result column="origin_name" property="originName"/>
 		<result column="change_name" property="changeName"/>
 		<result column="file_path" property="filePath"/>
@@ -51,6 +51,7 @@
       join member m on b.board_writer = m.user_no
 	  where b.status = 'Y'
 	  and b.board_type = 1
+      and a.file_level = 1
 	  order by b.board_no desc
 	</select>
 	
@@ -68,21 +69,22 @@
 				)
 				values
 				(
-				   seq_bno.nextval
+				   seq_board_no.nextval
 				 , #{boardTitle}
-				 , #{boardWriter}
+				 , 1
 				 , #{boardContent}
 				 , 1
-				 , #{createDate}
-				 , #{hashtag}
+				 , sysdate
+				 , #{hashTag}
 				)
 	</insert>
 	
-	<insert id="insertAtBoard">
+	<insert id="insertAttachment">
         insert
 			into attachment
 			(
 				file_no
+              , file_level
               , origin_name
               , change_name
               , file_path
@@ -92,11 +94,12 @@
             values
             (
               seq_file_no.nextval
-             , #{origin_name}
-             , #{change_name}
-             , #{filePath} || #{changeName}
+             , #{fileLevel}
+             , #{originName}
+             , #{changeName}
+             , #{filePath}
              , sysdate
-             , #{boardNo}
+             , seq_board_no.currval
             )
 			
 	</insert>

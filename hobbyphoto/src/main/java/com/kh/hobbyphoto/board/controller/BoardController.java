@@ -68,44 +68,47 @@ public class BoardController {
 	}
 	
 	@RequestMapping("phInsert.bo")
-	public String insertBoard( Attachment at, Board b, MultipartFile[] uploadfiles, Model model, HttpSession session) {
-	    System.out.println(at);
+	public String insertBoard( Board b, MultipartFile[] upfiles, Model model, HttpSession session) {
+		
+        ArrayList<Attachment> list = new ArrayList<>();
 
-	    if (uploadfiles.length > 0) {
+        for (int i = 0; i < upfiles.length; i++) {
+            if (upfiles[i] != null && !upfiles[i].isEmpty()) {
+                String changeName = saveFile(upfiles[i], session);
 
-	    	for(int i=0; i<uploadfiles.length;i++) {
-	    		String changeName = saveFile(uploadfiles[i], session);
-	    		
-	    		System.out.println(changeName);
-	    		
-	    		// 원본명, 서버업로드된 경로를 Attachment 객체에 담기
-	    		Attachment attachment = new Attachment();
-	    		attachment.setOriginName((uploadfiles[i].getOriginalFilename()));
-	    		attachment.setChangeName("resources/uploadFiles/" + changeName);
-	    	}
-	    }
+                Attachment at = new Attachment();
+                at.setFileNo(i + 1);
+                at.setOriginName(upfiles[i].getOriginalFilename());
+                at.setChangeName(changeName);
+                at.setFilePath("resources/upfiles/" + changeName);
+                at.setFileLevel(i + 1);
+                list.add(at);
+            }
+        }
 
-	    int result1 = bService.insertBoard(b);
-	    int result2 = bService.insertAtBoard(at);
+        int result = bService.insertBoard(b, list);
 
-	    if (result1 * result2 > 0) { // 성공 => 게시글 리스트페이지(list.bo url 재요청)
-	        session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
-	        return "redirect:phBoardEnrollForm";
-	    } else { // 실패 => 에러페이지 포워딩
-	        model.addAttribute("errorMsg", "게시글 등록 실패");
-	        return "common/errorPage";
-	    }
+        if (result > 0) {
+            session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
+            return "redirect:phBoardList.bo";
+        } else {
+            model.addAttribute("errorMsg", "게시글 등록 실패");
+            return "common/errorPage";
+        }
 	}
+	
+	
 
 	
 	// 현재 넘어온 첨부파일 그 자체를 서버의 폴더에 저장시키는 역할
-	public String saveFile(MultipartFile uploadfiles, HttpSession session) {
+	public String saveFile(MultipartFile upfiles, HttpSession session) {
 		
-	  // 파일명 수정 작업 후 서버에 업로드 시키기("flower.png" => "2023100412345.png") 
-	 String originName = uploadfiles.getOriginalFilename(); // "flower.png"
+	 String originName = upfiles.getOriginalFilename(); 
 	  
-	 String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // "202031004143508"
-	  int ranNum = (int)(Math.random()* 90000 + 10000); // 21381 (5자리 랜덤값) 
+	 String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	 
+	  int ranNum = (int)(Math.random()* 90000 + 10000); // 5자리 랜덤값)
+	  
 	  String ext = originName.substring(originName.lastIndexOf("."));
 	  
 	  String changeName = currentTime + ranNum + ext; //"202320055470821318.png"
@@ -113,13 +116,11 @@ public class BoardController {
 	  String savePath = session.getServletContext().getRealPath("/resources/upfiles/");
 	  
 		try {
-			uploadfiles.transferTo(new File(savePath + changeName));
+			upfiles.transferTo(new File(savePath + changeName));
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-		
 		return changeName;
-	 
 	}
 
 

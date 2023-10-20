@@ -111,30 +111,30 @@
 <body>
     <div class="warp">
         <div class="innerOut">
-            <form action="phBoardEnrollForm" action="phInsert.bo" enctype="multiPart/form-data" class="form-area">
+            <form action="phInsert.bo" enctype="multiPart/form-data" class="form-area" method="post">
                 <div class="content-area">
                     <div class="photo-area">
 
                         <div class="mainpho">
                             <img src="" alt="" id="image1" width="450" height="400" onclick="chooseFile(1);">
-                            <input type="file" name="uploadfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;" required>
+                            <input type="file" name="upfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;" required>
                         </div>
                         <div class="pho">
                             <div class="pho1">
                                 <img src="" alt="" id="image2" width="200" height="200" onclick="chooseFile(2);">
-                                <input type="file" name="uploadfiles" id="file2" onchange="loadImg(this, 2);" style="display: none;">
+                                <input type="file" name="upfiles" id="file2" onchange="loadImg(this, 2);" style="display: none;">
                             </div>
                             <div class="pho2">
                                 <img src="" alt="" id="image3" width="200" height="200" onclick="chooseFile(3);">
-                                <input type="file" name="uploadfiles" id="file3" onchange="loadImg(this, 3);" style="display: none;">
+                                <input type="file" name="upfiles" id="file3" onchange="loadImg(this, 3);" style="display: none;">
                             </div>
                             <div class="pho3">
                                 <img src="" alt="" id="image4" width="200" height="200" onclick="chooseFile(4);">
-                                <input type="file" name="uploadfiles" id="file4" onchange="loadImg(this, 4);" style="display: none;">
+                                <input type="file" name="upfiles" id="file4" onchange="loadImg(this, 4);" style="display: none;">
                             </div>
                             <div class="pho4">
                                 <img src="" alt="" id="image5" width="200" height="200" onclick="chooseFile(5);">
-                                <input type="file" name="uploadfiles" id="file5" onchange="loadImg(this, 5);" style="display: none;">
+                                <input type="file" name="upfiles" id="file5" onchange="loadImg(this, 5);" style="display: none;">
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                             // 선택된 파일이 있다면 inputFile.files[0]에 선택된 파일이 담겨 있음
                                         //=> inputFile.files.length 또한 1이 될것임
                             if(inputFile.files.length == 1) { // 1 반환했다는 것은 파일이 선택된 경우라는 것 => 파일 읽어들여서 '미리보기'
-                                
+                              
                                 // => 있다면, 1)해당파일에 고유한url 부여해주고, 2)해당num일때 src를 고유한url넣어서 선택한파일 띄움 
                                 
                                 // 1)파일을 읽어들일 FileReader 객체 생성
@@ -191,9 +191,9 @@
                     </script>
 
                     <div class="writer-area">
-                        <input type="text" name="" id="" class="title-input" placeholder="제목을 입력해주세요."> <br>
-                        <textarea name="" id="" class="text-area" placeholder="내용을 입력해주세요."></textarea> <br>
-                        <input type="text" name="" id="" class="tag-input" placeholder="해시태그를 입력해주세요.">
+                        <input type="text" name="boardTitle" id="boardTitle" class="title-input" placeholder="제목을 입력해주세요."> <br>
+                        <textarea name="boardContent" id="boardContent" class="text-area" placeholder="내용을 입력해주세요."></textarea> <br>
+                        <input type="text" name="hashTag" id="hashTag" class="tag-input" placeholder="해시태그를 입력해주세요.">
                     </div>
                     <div class="btn-area">
                         <button type="submit">등록하기</button>

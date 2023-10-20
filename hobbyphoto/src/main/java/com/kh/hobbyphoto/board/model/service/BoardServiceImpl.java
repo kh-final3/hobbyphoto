@@ -2,6 +2,8 @@ package com.kh.hobbyphoto.board.model.service;
 
 import java.util.ArrayList;
 
+import javax.annotation.processing.SupportedSourceVersion;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +34,21 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int insertBoard(Board b) {
+	public int insertBoard(Board b, ArrayList<Attachment> list) {
 		int result = bDao.insertBoard(sqlSession, b);
-		return result;
-	}
+	
+		int result2 = 0;
+		if(result > 0) {//성공
+			//사진을 입력
+			for(Attachment at : list) {
+				result2 = bDao.insertAttachment(sqlSession, at);
+			}
+		}
+		
+		return result * result2;
+		}
 
+	
 	@Override
 	public int increaseCount(int boardNo) {
 		return bDao.increaseCount(sqlSession, boardNo);
@@ -50,13 +62,6 @@ public class BoardServiceImpl implements BoardService{
 	public ArrayList<Attachment> selectAtBoard(int boardNo){
 		return bDao.selectAtBoard(sqlSession, boardNo);
 	}
-
-	@Override
-	public int insertAtBoard(Attachment at) {
-		return bDao.insertAtBoard(sqlSession);
-	}
-
-
 
 
 

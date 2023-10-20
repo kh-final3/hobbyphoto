@@ -214,7 +214,7 @@
                     const images = document.querySelector(".images")
             		
                     function next() {
-                    if (pages< 2) {
+                    if (pages< 5) {
                         backBtn.removeAttribute('disabled')//뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
                         positionValue -= IMAGE_WIDTH;//IMAGE_WIDTH의 증감을 positionValue에 저장한다.
                         images.style.transform = "translateX("+positionValue+"px)";
