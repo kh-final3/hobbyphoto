@@ -24,5 +24,5 @@ public class Cart {
 	private String thumbnail;
 	private String price;
 	
-	private String proamount;
+	
 }

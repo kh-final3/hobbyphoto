@@ -268,9 +268,7 @@
            	$(".plus").click(function(){
         	   var $input = $(this).siblings(".count");
         	   var count = parseInt($input.val());
-        	   
-        	   
-        	   
+ 
         	   $input.val(count + 1); //수량 1증가
       
         	   //총 주문 정보 다시 계산
@@ -330,9 +328,7 @@
                     }
                 })
             }
-           
-            
-            
+               
         </script>
 
     <br><br>
