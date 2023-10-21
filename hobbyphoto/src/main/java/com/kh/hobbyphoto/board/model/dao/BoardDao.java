@@ -13,11 +13,11 @@ import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Repository
 public class BoardDao {
-	public int selectListCount(SqlSessionTemplate sqlSession) {
+	public int selectPhListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.selectListCount");
 	}
 
-	public ArrayList<Board> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Board> selectPhList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
@@ -45,10 +45,6 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertAttachment", at);
 	}
 	
-	public int insertAtBoard(SqlSessionTemplate sqlSession, Attachment at) {
-		return sqlSession.insert("boardMapper.insertAtBoard", at);
-	}
-	
 	public int deleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deleteBoard", boardNo);
 	}
@@ -57,6 +53,9 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.updateBoard", b);
 	}
 
+	
+	
+	
 	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int boardNo) {
 		return (ArrayList) sqlSession.selectList("boardMapper.selectReplyList", boardNo);
 	}

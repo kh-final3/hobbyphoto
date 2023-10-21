@@ -30,7 +30,7 @@
 	</resultMap>
 	
 
-	<select id="selectListCount" resultType="_int">
+	<select id="selectPhListCount" resultType="_int">
 		select
 			count(*)
 			from board
@@ -38,22 +38,22 @@
             and board_type = 1 
 	</select>
 	
-	<select id="selectList" resultMap="boardResult">
-	  select
-	    b.board_no
-	    , b.board_title
-	    , b.board_content
-	    , b.count
-        , m.nickname
-	    , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
-	    , a.file_path as "thumbnail"
-	  from board b
-	  left join attachment a on b.board_no = a.ref_bno
-      join member m on b.board_writer = m.user_no
-	  where b.status = 'Y'
-	  and b.board_type = 1
-      and a.file_level = 1
-	  order by b.board_no desc
+	<select id="selectPhList" resultMap="boardResult">
+		select
+		    b.board_no
+		    , b.board_title
+		    , b.board_content
+		    , b.count
+	        , m.nickname
+		    , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
+		    , a.file_path as "thumbnail"
+		  from board b
+		  left join attachment a on b.board_no = a.ref_bno
+	      join member m on b.board_writer = m.user_no
+		  where b.status = 'Y'
+		  and b.board_type = 1
+	      and a.file_level = 1
+		  order by to_number(b.board_no) desc
 	</select>
 	
 	<insert id="insertBoard">
@@ -102,7 +102,6 @@
              , sysdate
              , seq_board_no.currval
             )
-			
 	</insert>
 	
 	<update id="increaseCount">
@@ -144,6 +143,28 @@
        from attachment
        where ref_bno = #{boardNo}
 	</select>
+	
+	<update id="updatePhBoard">
+	 update
+		board
+	 set board_title = #{boardTitle}
+	   , board_content = #{boardContent}
+	 where board_no = #{boardNo}
+	</update>
+	
+	<update id="updatePhAtBoard">
+	 update
+		attachment
+	 set origin_name = #{originName}
+	   , change_name = #{changeName}
+	 where ref_bno = #{refBno}
+	</update>
+	
+	<delete id="deleteBoard">
+	    DELETE FROM board
+	    WHERE board_no = #{boardNo}
+	</delete>
+
 	
 
 </mapper>

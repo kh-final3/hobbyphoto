@@ -210,7 +210,7 @@
 	            <div id="mb_nav">
 	                <ul id="mb_navi">
 	                    <li><a href="phBoardList.bo">사진게시판</a></li>
-	                    <li><a href="#">장비추천</a></li>
+	                    <li><a href="rcBoardList.bo">장비추천</a></li>
 	                    <li><a href="#">축제 · 전시</a></li>
 	                    <li><a href="#">출사명소</a></li>
 	                   	<li><a href="#">배경화면</a></li>

@@ -22,14 +22,14 @@ public class BoardServiceImpl implements BoardService{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public int selectListCount() {
-		int result = bDao.selectListCount(sqlSession);
+	public int selectPhListCount() {
+		int result = bDao.selectPhListCount(sqlSession);
 		return result;
 	}
 
 	@Override
 	public ArrayList<Board> selectList(PageInfo pi) {
-		ArrayList<Board> list = bDao.selectList(sqlSession, pi);
+		ArrayList<Board> list = bDao.selectPhList(sqlSession, pi);
 		return list;
 	}
 
@@ -62,6 +62,20 @@ public class BoardServiceImpl implements BoardService{
 	public ArrayList<Attachment> selectAtBoard(int boardNo){
 		return bDao.selectAtBoard(sqlSession, boardNo);
 	}
+
+	@Override
+	public int deleteBoard(int boardNo) {
+		return bDao.deleteBoard(sqlSession, boardNo);
+	}
+
+	@Override
+	public int updateBoard(Board b) {
+		return bDao.updateBoard(sqlSession, b);
+	}
+
+
+	
+	
 
 
 

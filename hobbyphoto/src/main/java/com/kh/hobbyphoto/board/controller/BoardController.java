@@ -35,10 +35,10 @@ public class BoardController {
 	@RequestMapping("phBoardList.bo")
 	public ModelAndView selectPhBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
-		int listCount = bService.selectListCount();
+		int listCount = bService.selectPhListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
-		ArrayList<Board> list = bService.selectList(pi);
+		ArrayList<Board> list = bService.selectPhList(pi);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectPhBoardList");
 		return mv;
@@ -70,7 +70,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("phInsert.bo")
-	public String insertBoard( Board b, MultipartFile[] upfiles, Model model, HttpSession session) {
+	public String insertBoard(Board b, MultipartFile[] upfiles, Model model, HttpSession session) {
 		
         ArrayList<Attachment> list = new ArrayList<>();
 
@@ -99,9 +99,6 @@ public class BoardController {
         }
 	}
 	
-	
-
-	
 	// 현재 넘어온 첨부파일 그 자체를 서버의 폴더에 저장시키는 역할
 	public String saveFile(MultipartFile upfiles, HttpSession session) {
 		
@@ -124,5 +121,25 @@ public class BoardController {
 		}
 		return changeName;
 	}
+	
+	@RequestMapping("phUpdate.bo")
+	public String phUpdate(int phno, Model model) {
+		model.addAttribute("b", bService.selectpBoard(phno));
+		return "board/phUpdateForm";
+	}
+	
+	@RequestMapping("rcBoardList.bo")
+	public ModelAndView selectRcBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		int listCount = bService.selectPhListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
+		ArrayList<Board> list = bService.selectPhList(pi);
+		
+		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectRcBoardList");
+		return mv;
+	}
+
+
+	
 
 }

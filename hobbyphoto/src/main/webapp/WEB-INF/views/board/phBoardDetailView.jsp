@@ -52,11 +52,17 @@
         }
         /* 작성자 */
         .writer_name{
-            /* border: 1px solid black; */
-            width: 100%;
+            border: 1px solid black;
+            width: 85%;
             height: 30%;
-            border: none;
+            /* border: none; */
             margin-top: 2px;
+        }
+        .writer_name2{
+            margin-top: 25px;
+            margin-left: 20px;
+            width: 10%;
+            height: 20%;
         }
         /* 글내용 */
         .content{
@@ -183,6 +189,14 @@
             margin: auto;
             width: 360px
         }
+        .profile{
+            display: flex;
+        }
+        
+        a > img {
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
 <body>
@@ -245,22 +259,27 @@
                     }
                     init();
                 </script>
-
+                
+            <form id="postForm" action="" method="post">
+            	<input type="hidden" name="phno" value="${ b.boardNo }">
+            </form>
+            
             </div>
             <div class="text-area">
                 <div class="head-area">
-                    <div class="writer_name">
-                        <img src="resources/images/pro.png" alt="" width="95">
-                        <p>${ b.boardWriter }</p>
-                        <!--팔로운 안한 사람만 보이게-->
-                        <p style="color: blue; cursor: pointer;">팔로우</p>
+                    <div class="profile">
+                        <div class="writer_name">
+                            <img src="resources/pro.png" alt="" width="95">
+                            <p>${ nickname }</p>
+                            <!--팔로운 안한 사람만 보이게-->
+                            <p style="color: blue; cursor: pointer;">팔로우</p>
+                        </div>
+                        <div class="writer_name2">
+                            <a href="phUpdate.bo" name="phno" value="${ b.boardNo }"><img src="resources/images/option.png"></a>
+                        </div>
                     </div>
                     <hr id="detail-hr">
                     <div class="content">
-                        <div>
-                            장소 : 서울특별시 역삼역 3번 출구 <br>
-                            카메라 종류 : 미놀타 x-300
-                        </div>
                         <br>
                         <div>
                             ${ b.boardContent }
