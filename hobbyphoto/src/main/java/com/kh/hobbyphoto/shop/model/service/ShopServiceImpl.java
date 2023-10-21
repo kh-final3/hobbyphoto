@@ -40,9 +40,16 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 	@Override
-	public ArrayList<Cart> selectProCartList(int userNo) {
-		return sDao.selectProductList(sqlSession, userNo);
+	public ArrayList<Cart> selectCartProList(int userNo) {
+		return sDao.selectCartProList(sqlSession,userNo);
 	}
+
+	@Override
+	public int updateCartAmount(Cart cart) {
+		return sDao.updateCartAmount(sqlSession,cart);
+	}
+
+	
 
 
 	

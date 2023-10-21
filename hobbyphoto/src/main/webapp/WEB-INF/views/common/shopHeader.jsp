@@ -268,6 +268,11 @@
 		                		<div class="member_inner">
 		                			<button type="button" class="btn btn_login" onclick="logout()">로그아웃</button>
 		                			<div class="member_menu">
+		                			
+		                			<form action="">
+		                			
+		                			<input type="hidden" name="userNo" id="userNo" value="${ loginMember.userNo }">
+		                			
 		                				<ul style="padding: 0px;">
 		                					<li class="member_menu_mypage first_menu" align="center">
 		                						<a href="">마이페이지</a>
@@ -276,14 +281,17 @@
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
 					                					<a href="admin.pg">관리자페이지</a>
-					                					<a href="shop.mp">장바구니</a>
+					                					<a href="" id="cartbtn">장바구니</a>
 				                					</c:when>
 				                					<c:otherwise>
-				                						<a href="shop.mp">장바구니</a>
+				                						<a href="" id="cartbtn">장바구니</a>
 				                					</c:otherwise>
 			                					</c:choose>
 		                					</li>
 		                				</ul>
+		                				
+		                		</form>		
+		                				
 		                			</div>
 		                		</div>
 		                	</div>
@@ -315,6 +323,14 @@
 	        function logout() {
 				location.href="logout.me"
 			}
+	        
+	        
+	        $("#cartbtn").click(function(event) {
+    	        event.preventDefault();
+    	        $("form").attr("action", "shop.mp").submit();
+    	        
+    	    });
+	        
     </script>
 
 </html>

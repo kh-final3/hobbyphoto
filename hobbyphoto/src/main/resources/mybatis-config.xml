@@ -11,7 +11,6 @@
 		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Product" alias="Product"/>
 		<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Cart" alias="Cart"/>
-		
 	</typeAliases>
 
 

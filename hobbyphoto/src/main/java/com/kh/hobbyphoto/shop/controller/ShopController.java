@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.service.ShopServiceImpl;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.Product;
@@ -90,13 +93,29 @@ public class ShopController {
 		return mv;
 	}
 	
-//	@RequestMapping("shop.mp")
-//	public String shopMyPage(int userNo) {
-//		
-//		ArrayList<Cart> list = sService.selectProCartList(userNo);
-//		
-//		
-//		
-//		return "shop/shopCart";
-//	}
+
+	@RequestMapping("shop.mp")
+	public String shopMyPage(int userNo , HttpSession session ,Model model) {
+		
+		
+		System.out.println(userNo);
+		
+		ArrayList<Cart> list = sService.selectCartProList(userNo);
+	
+		System.out.println(list);
+		
+		model.addAttribute("list", list);
+		
+		return "shop/shopCart";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="cupdate.amount")
+	public String upDateCartAmount(Cart cart) {
+		System.out.println(cart);
+		int result = sService.updateCartAmount(cart);
+		System.out.println(result);
+		
+		return result>0?"success":"fail";
+	}
 }

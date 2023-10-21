@@ -26,8 +26,11 @@ public class ShopDao {
 	public int insertCartProduct(SqlSessionTemplate sqlSession,Cart cart) {
 		return sqlSession.insert("shopMapper.insertCartProduct", cart);
 	}
-	public ArrayList<Cart> selectProductList(SqlSessionTemplate sqlSession,int userNo){
-		return (ArrayList)sqlSession.selectList("shopMapper.selectProductList", userNo);
+	public ArrayList<Cart> selectCartProList(SqlSessionTemplate sqlSession,int userNo){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectCartProList",userNo);
+	}
+	public int updateCartAmount(SqlSessionTemplate sqlSession,Cart cart) {
+		return sqlSession.update("shopMapper.updateCartAmount", cart);
 	}
 	
 	

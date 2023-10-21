@@ -20,5 +20,8 @@ public interface ShopService {
 		int insertCartProduct(Cart cart);
 		
 		//5.장바구니 조회(아이콘 클릭 -> 내가 한 장바구니 목록 확인)
-		ArrayList<Cart> selectProCartList(int userNo);
+		ArrayList<Cart> selectCartProList(int userNo);
+		
+		//6.장바구니에서 수량 변경(업데이트)
+		int updateCartAmount(Cart cart);
 }
