@@ -104,9 +104,9 @@
 	</insert>
 	
 	<update id="increaseCount">
-		update place
+		update board
 		   set count = count+1
-		   where p_no = #{ pno }
+		   where board_No = #{ boardNo }
 	</update>
 	
 	
@@ -212,6 +212,12 @@
 		    by p_no desc
 	</select>
 	
+	<update id="increaseCountPlace">
+		update place
+		   set count = count+1
+		   where p_no = #{ pno }
+	</update>
+	
 	<select id="selectPlace" resultMap="placeResult">
 	    SELECT p_no,
 	           p_title,
@@ -306,7 +312,29 @@
 	    <if test="pimg4 != null">, p_img4 = #{pimg4}</if>
 	    where p_no = #{pno}
 	</update>
-
+	
+	<insert id="insertAttachment2" parameterType="Attachment">
+        INSERT 
+          INTO attachment 
+          (
+          file_no, 
+          file_level, 
+          origin_name, 
+          change_name, 
+          file_path,
+          REF_BNO
+          )
+        VALUES 
+        (
+        SEQ_FILE_NO.NEXTVAL,
+        #{fileLevel}, 
+        #{originName},
+        #{changeName}, 
+        #{filePath},
+        #{refBno}
+        )
+    </insert>
+	
 	<update id="updatePlaceAttachment" parameterType="Attachment">
 	    UPDATE ATTACHMENT
 	    SET

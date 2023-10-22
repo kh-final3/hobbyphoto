@@ -156,6 +156,11 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.insertExhibit(sqlSession,fe);
 	}
 
+	public int insertAttachmentPlace2(Attachment attachment) {
+		
+		return bDao.insertAttachment2(sqlSession, attachment);
+	}
+
 	
 
 }

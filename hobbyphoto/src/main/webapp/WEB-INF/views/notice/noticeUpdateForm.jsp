@@ -116,8 +116,7 @@ button.active {
 	height: 50px
 }
 
-.write_box input,
-.write_box textarea {
+.write_box input, .write_box textarea {
 	width: 100%;
 	box-sizing: border-box;
 }

@@ -1,6 +1,6 @@
 package com.kh.hobbyphoto.board.model.vo;
 
-import java.sql.Date;
+import java.sql.*;
 
 import lombok.*;
 

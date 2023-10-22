@@ -33,8 +33,8 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 
-	public int increaseCount(SqlSessionTemplate sqlSession, int pno) {
-		return sqlSession.update("boardMapper.increaseCount", pno);
+	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("boardMapper.increaseCount", boardNo);
 	}
 
 	public Board selectBoard(SqlSessionTemplate sqlSession, int boardNo) {
@@ -72,6 +72,10 @@ public class BoardDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.selectPlaceList", null, rowBounds);
+	}
+	
+	public int increaseCountPlace(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("boardMapper.increaseCountPlace", pno);
 	}
 
 	public Place selectPlace(SqlSessionTemplate sqlSession, int pno) {
@@ -134,6 +138,11 @@ public class BoardDao {
 
 	public int insertExhibit(SqlSessionTemplate sqlSession, Festival fe) {
 		return sqlSession.insert("boardMapper.insertExhibit", fe);
+	}
+
+	public int insertAttachment2(SqlSessionTemplate sqlSession, Attachment attachment) {
+		
+		return sqlSession.insert("boardMapper.insertAttachment2", attachment);
 	}
 
 
