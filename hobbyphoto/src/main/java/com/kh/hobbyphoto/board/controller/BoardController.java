@@ -529,6 +529,6 @@ public class BoardController {
 	@RequestMapping("updateForm.fs")
 	public String updateExhibit(int feNo, Model model) {
 		model.addAttribute("fe", bService.selectCulture(feNo));
-		return "board/exhibitUpdateForm";
+		return "culture/exhibitUpdateForm";
 	}
 }
