@@ -191,6 +191,11 @@
 
         <script>
         	$(document).ready(function(){
+        		
+        		//체크박스가 모두 체크된채 함수 시작
+        		$(".product_check").prop("checked", true);
+    			$(".allproduct_check").prop("checked", true);
+    			
         		setTotalInfo();
         	});
         	
@@ -307,7 +312,8 @@
                         userNo:'${loginMember.userNo}'
                     },success:function(result){
                     	console.log(result);
-                    
+                    	
+                    	
                     	if (result === "success") {
                             // 해당 상품의 수량이 이미 업데이트되었습니다. 
 
@@ -320,7 +326,7 @@
                             // 전체 주문 정보 다시 계산
                             //setTotalInfo();
                         } else {
-                            console.log("Server reported an error while updating amount");
+                            console.log("장바구니 ajax통신 실패");
                         }
                     	
                     },error:function(){
@@ -328,6 +334,60 @@
                     }
                 })
             }
+           
+            //체크박스 선택된 상품 찾기
+            function checkedProductbox(){
+                //체크된 상품 넣을 배열
+                var checkedPno = [];
+
+                //체크된 박스 찾기
+                $(".product_check:checked").each(function() {
+                var $productBody = $(this).closest('.product_body');
+                var pNo = $productBody.data('product-id');
+                checkedPno.push(pNo);
+            });
+
+                return checkedPno;
+            }
+
+            $(".cart_btn").first().on("click",function(){
+                var checkedPno = checkedProductbox();
+
+                //체크박스 선택x
+                if(checkedPno.length ===0){
+                    alert("선택된 상품이 없습니다.");
+                    return;
+                }
+
+                //선택된 상품이 있어서 사용자에게 확인창 뜨우기
+                var checkComfirm = confirm("선택된 상품을 삭제하시겠습니까?");
+
+                //사용자가 확인 클릭
+                if(checkComfirm){
+                    deleteCartProduct(checkedPno);
+                }
+            })
+
+
+
+           //체크박스 선택 삭제
+           function deleteCartProduct(checkedPno){
+                $.ajax({
+                    url:"delete.cartp",
+                    traditional : true,
+                    data:{
+                        pNo:checkedPno, //배열로 넘기기
+                        userNo:'${loginMember.userNo}'
+                    },success:function(result){
+						console.log(result);
+						location.reload();
+                    	
+                    },error:function(){
+                        console.log("장바구니 상품 선택 삭제 ajax통신 실패");
+                    }
+                })
+           }
+           
                
         </script>
 

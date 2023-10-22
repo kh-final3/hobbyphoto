@@ -49,6 +49,19 @@ public class ShopServiceImpl implements ShopService{
 		return sDao.updateCartAmount(sqlSession,cart);
 	}
 
+	@Override
+	public int deleteCartProduct(ArrayList<Cart> clist) {
+		
+		int result = 0;
+		
+		for(Cart c : clist) {
+			result += sDao.deleteCartProduct(sqlSession,c);
+		}
+		System.out.println(result + "service에서의 값");
+		
+		return result;
+	}
+
 	
 
 

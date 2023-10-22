@@ -32,6 +32,8 @@ public class ShopDao {
 	public int updateCartAmount(SqlSessionTemplate sqlSession,Cart cart) {
 		return sqlSession.update("shopMapper.updateCartAmount", cart);
 	}
-	
+	public int deleteCartProduct(SqlSessionTemplate sqlSession,Cart c) {
+		return sqlSession.delete("shopMapper.deleteCartProduct", c);
+	}
 	
 }

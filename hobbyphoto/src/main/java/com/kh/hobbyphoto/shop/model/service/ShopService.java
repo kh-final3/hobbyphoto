@@ -24,4 +24,7 @@ public interface ShopService {
 		
 		//6.장바구니에서 수량 변경(업데이트)
 		int updateCartAmount(Cart cart);
+		
+		//7. 장바구니 상품 선택 삭제(delete)
+		int deleteCartProduct(ArrayList<Cart> clist);
 }

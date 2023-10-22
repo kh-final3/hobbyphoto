@@ -108,4 +108,11 @@
 	       and user_no = #{userNo}
 	 </update>
 
+	<delete id="deleteCartProduct">
+		delete
+		    from cart
+		    where p_no = #{pNo}
+		    and user_no = #{userNo}
+	</delete>
+
 </mapper>

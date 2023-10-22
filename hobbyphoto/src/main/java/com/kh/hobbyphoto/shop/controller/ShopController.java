@@ -1,6 +1,7 @@
 package com.kh.hobbyphoto.shop.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.service.ShopServiceImpl;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
@@ -50,7 +52,9 @@ public class ShopController {
 	}
 	
 	@RequestMapping("cart.pro")
-	public ModelAndView insertCartProduct(int userNo,String prono ,Cart cart, HttpSession session, ModelAndView mv) {
+	public ModelAndView insertCartProduct(int userNo,String prono,Cart cart, HttpSession session, ModelAndView mv) {
+		System.out.println("컨트롤러 : " + prono);
+		
 		cart.setPNo(Integer.parseInt(prono));
 		ArrayList<Cart> list = sService.selectCartList(userNo);
 		
@@ -118,4 +122,30 @@ public class ShopController {
 		
 		return result>0?"success":"fail";
 	}
+	
+	@ResponseBody
+	@RequestMapping("delete.cartp")
+	public String deleteCartProduct(String[] pNo,int userNo) {
+		
+		ArrayList<Cart> clist = new ArrayList<Cart>();
+		
+		for(int i=0;i<pNo.length;i++) {
+			//System.out.println(pNo[i]);
+			if(pNo[i] != null && !pNo[i].isEmpty()) {
+				Cart c = new Cart();
+				c.setPNo(Integer.parseInt(pNo[i]));
+				c.setUserNo(userNo);
+				
+				clist.add(c);
+			}
+		}
+		System.out.println(clist + "controller에서 clist값");
+		
+		int result = sService.deleteCartProduct(clist);
+		System.out.println(result + "controller에서 result 값");
+		return result>0 ? "success":"fail";
+		
+	}
+		
+	
 }
