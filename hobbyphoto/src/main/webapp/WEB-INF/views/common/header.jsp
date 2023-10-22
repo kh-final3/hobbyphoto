@@ -146,7 +146,7 @@
 	                    <li><a href="festvalList.fs">축제 · 전시</a></li>
 	                    <li><a href="list.pl">출사명소</a></li>
 	                    <li><a href="#">모임</a></li>
-	                    <li><a href="#">공지사항</a></li>
+	                    <li><a href="list.no">공지사항</a></li>
 	                </ul>
 	            </div>
 	        </div>

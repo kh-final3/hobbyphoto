@@ -14,11 +14,13 @@
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Place" alias="Place"/>
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Festival" alias="Festival"/>
+		<typeAlias type="com.kh.hobbyphoto.notice.model.vo.Notice" alias="Notice"/>
 	</typeAliases>
 
 
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/notice-mapper.xml"/>
 		<mapper resource="/mappers/board-mapper.xml"/>
 	</mappers>
 </configuration>

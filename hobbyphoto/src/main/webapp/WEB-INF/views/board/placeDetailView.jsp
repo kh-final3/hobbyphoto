@@ -268,37 +268,7 @@
             width: 22px;
             height: 12px;
             background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png) no-repeat 0 bottom;
-        }
-        
-        /* 댓글 목록 테이블 스타일 */
-		.reply-table {
-		    width: 100%;
-		    border-collapse: collapse;
-		    margin-top: 10px;
-		}
-		
-		.reply-table th, .reply-table td {
-		    border: 1px solid #ccc;
-		    padding: 8px;
-		    text-align: left;
-		}
-		
-		.reply-table th {
-		    background-color: #f0f0f0;
-		    font-weight: bold;
-		}
-		
-		.reply-table td {
-		    background-color: #fff;
-		}
-		
-		.reply-table tbody tr:nth-child(odd) {
-		    background-color: #f8f8f8;
-		}
-		
-		.reply-table tbody tr:nth-child(even) {
-		    background-color: #e8e8e8;
-		}
+        }	
         
     </style>
 </head>
