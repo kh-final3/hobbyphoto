@@ -55,7 +55,7 @@
             border: 1px solid black;
             width: 85%;
             height: 30%;
-            /* border: none; */
+            border: none;
             margin-top: 2px;
         }
         .writer_name2{
@@ -193,7 +193,7 @@
             display: flex;
         }
         
-        a > img {
+       	.writer_name2 img {
             width: 20px;
             height: 20px;
         }
@@ -260,9 +260,25 @@
                     init();
                 </script>
                 
+	            <div align="center">
+		                <a class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
+		                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
+	            </div><br><br>
+            
             <form id="postForm" action="" method="post">
             	<input type="hidden" name="phno" value="${ b.boardNo }">
+            	<input type="hidden" name="filePath" value="${ a.filePath }">
             </form>
+            
+			<script>
+				function postFormSubmit(num) {
+					if(num == 1){ // 수정하기 클릭시
+						$("#postForm").attr("action", "phUpdateForm.bo").submit();
+					} else{ // 삭제하기 클릭시
+						$("#postForm").attr("action", "phDelete.bo").submit();
+					}
+				}
+			</script> 
             
             </div>
             <div class="text-area">
@@ -270,12 +286,11 @@
                     <div class="profile">
                         <div class="writer_name">
                             <img src="resources/pro.png" alt="" width="95">
-                            <p>${ nickname }</p>
-                            <!--팔로운 안한 사람만 보이게-->
+                            <p>${ b.boardWriter }</p>
                             <p style="color: blue; cursor: pointer;">팔로우</p>
                         </div>
                         <div class="writer_name2">
-                            <a href="phUpdate.bo" name="phno" value="${ b.boardNo }"><img src="resources/images/option.png"></a>
+                           <img src="resources/images/option.png">
                         </div>
                     </div>
                     <hr id="detail-hr">
