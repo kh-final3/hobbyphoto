@@ -198,7 +198,9 @@
             height: 510px;
             box-sizing: border-box;
         }
-
+    .enrollForm{
+        float: right;
+    }
 
        
     </style>
@@ -219,13 +221,13 @@
                             </ul>
                         </div>
                     </div>
+                    <a class="enrollForm btn btn-secondary" href="exhibitEnrollForm.fs">글쓰기</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="exhibit">
-    <a href="exhibitEnrollForm.fs">글쓰기</a>
      <c:if test="${ not empty list }">
 			<c:forEach var="fe" items="${ list }">
 	        <div class="card">

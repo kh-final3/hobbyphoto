@@ -914,7 +914,7 @@
 								<tr>
 									<th>문의</th>
 									<td class="exhibitionDetail-infoTable-contact">
-										02-3789-2205
+										${ fe.inq }
 										<div
 											class="exhibitionDetail-infoTable-contactSub exhibitionDetail-sm">
 											(전시 정보 문의는 해당 연락처로 전화해주세요.)</div>
@@ -947,7 +947,7 @@
 			<a href="exhibitList.fs" class="btn btn-sm btn-secondary" style="width: 90px; height: 35px; font-size: medium;">목록가기</a>
 					<!-- 현재 로그인한 사용자가 해당 글을 쓴 본인일 경우 -->
 	
-			<a href="updateForm.fs?feNo=${ fe.feNo }" class="btn btn-sm btn-warning" style="width: 90px; height: 35px; font-size: medium;">수정하기</a>
+			<a href="updateForm.ex?feNo=${ fe.feNo }" class="btn btn-sm btn-warning" style="width: 90px; height: 35px; font-size: medium;">수정하기</a>
 			<a href="delete.fs?feNo=${ fe.feNo }" class="btn btn-sm btn-danger" style="width: 90px; height: 35px; font-size: medium;">삭제하기</a>
 		
 		</div>

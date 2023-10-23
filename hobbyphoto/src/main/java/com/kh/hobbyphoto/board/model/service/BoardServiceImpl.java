@@ -161,6 +161,14 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.insertAttachment2(sqlSession, attachment);
 	}
 
+	public int updateExhibit(Festival fe) {
+		return bDao.updateExhibit(sqlSession, fe);
+	}
+
+	public int deletePlace(int pno) {
+		return bDao.deletePlace(sqlSession,pno);
+	}
+
 	
 
 }

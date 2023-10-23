@@ -115,8 +115,14 @@
                             </div>
 
                         </div><!-- //view_cont -->
-                        <a href="festvalList.fs" id="btnList" class="list_btn"><img
-                                src="https://www.mfac.or.kr/web/images/sub/list_ico.png" alt="목록 이미지">목록보기 </a>
+                        <a href="festvalList.fs" id="btnList" class="list_btn">
+                            <img src="https://www.mfac.or.kr/web/images/sub/list_ico.png" alt="목록 이미지">
+                            목록보기 
+                        </a>
+                        
+                        <a href="updateForm.fe?feNo=${fe.feNo}" id="btnList" class="list_btn">
+                            수정하기 
+                        </a>
                     </div><!-- //view_contbox -->
                 </div><!-- //container -->
             </div>

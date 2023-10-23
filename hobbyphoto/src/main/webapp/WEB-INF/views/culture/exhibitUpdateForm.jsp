@@ -1,185 +1,193 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <style>
-        #ff1 {
-            font-family: 'NanumBarunGothicExtraLight';
-        }
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<style>
+#ff1 {
+	font-family: 'NanumBarunGothicExtraLight';
+}
 
-        #ff2 {
-            font-family: 'NanumBarunGothicLight';
-        }
+#ff2 {
+	font-family: 'NanumBarunGothicLight';
+}
 
-        #ff3 {
-            font-family: 'NanumBarunGothic';
-        }
+#ff3 {
+	font-family: 'NanumBarunGothic';
+}
 
-        #ff4 {
-            font-family: 'NanumBarunGothicBold';
-        }
+#ff4 {
+	font-family: 'NanumBarunGothicBold';
+}
 
-        #write {
-            width: 1200px;
-            margin: auto;
-            margin-bottom: 100px;
-            margin-top: 100px;
-        }
+#write {
+	width: 1200px;
+	margin: auto;
+	margin-bottom: 100px;
+	margin-top: 100px;
+}
 
-        #write1,
-        #write2,
-        #write3,
-        #write4,
-        #write5,
-        #write6,
-        #write7,
-        #write8,
-        #write9,
-        #write10,
-        #write11,
-        #write12,
-        #write13 {
-            width: 670px;
-            margin: 0 auto;
-        }
+#write1, #write2, #write3, #write4, #write5, #write6, #write7, #write8,
+	#write9, #write10, #write11, #write12, #write13 {
+	width: 670px;
+	margin: 0 auto;
+}
 
-        #searchimg {
-            position: absolute;
-            right: 460px;
-            /* float: right; */
-            margin: 12px 0 0 0;
-            width: 15px;
-            height: 15px;
-            cursor: pointer;
-        }
+#searchimg {
+	position: absolute;
+	right: 460px;
+	/* float: right; */
+	margin: 12px 0 0 0;
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+}
 
-        #mtinput {
-            float: right;
-        }
+#mtinput {
+	float: right;
+}
 
-        #top {
-            width: 50px;
-            height: 50px;
-        }
+#top {
+	width: 50px;
+	height: 50px;
+}
 
-        #dateIn {
-            width: 650px;
-        }
+#dateIn {
+	width: 250px;
+}
 
-        input[type="number"] {
-            width: 50px;
-        }
+input[type="number"] {
+	width: 50px;
+}
 
-        #ttl {
-            font-weight: bolder;
-            letter-spacing: 5px;
-            margin-top: 100px;
-            margin-bottom: 60px;
-        }
-    </style>
+#ttl {
+	font-weight: bolder;
+	letter-spacing: 5px;
+	margin-top: 100px;
+	margin-bottom: 60px;
+}
+</style>
 </head>
 
 <body>
-<jsp:include page="../common/header.jsp"/>
-    <div id="write">
-        <h1 align="center" id="ttl">전시 수정</h1>
-        <form action="updateExhibit.fs" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="userNo" value="">
-            <div id="write1">
-                <p id="ff4">포스터 <em style="color: red;">*</em></p>
+	<jsp:include page="../common/header.jsp" />
+	<div id="write">
+		<h1 align="center" id="ttl">전시 수정</h1>
+		<form action="updateExhibit.fs" method="post"
+			enctype="multipart/form-data">
+			<input type="hidden" name="userNo" value="">
+			<div id="write1">
+				<p id="ff4">
+					포스터 <em style="color: red;">*</em>
+				</p>
 
-                <div class="uploadimg">
-                    <img id="titleImg" width="250" height="170" onclick="chooseFile(1);" src="${ fe.timg }">
-                    <div id="file-area" style="display:none">
-                        <input type="file" name="upfile" id="file1" onchange="loadImg(this, 1);" required>
-                    </div>
-                </div>
+				<div class="uploadimg">
+					<img id="titleImg" width="250" height="170"
+						onclick="chooseFile(1);" src="${ fe.timg }">
+					<div id="file-area" style="display: none">
+						<input type="file" name="upfile" id="file1"
+							onchange="loadImg(this, 1);" >
+					</div>
+				</div>
 			</div>
-                <br>
-                <div id="write2">
-                    <label id="ff4">제목</label><br><input type="text" name="feTitle" value="${ fe.feTitle }"
-                        style="width: 650px; margin: 5px 0 0 0;" maxlength="18" required>
-                </div>
-                <br>
-                <div id="write3">
-                    <label id="ff4">내용</label><br><textarea name="feContent" cols="71" rows="8" style="resize: none;"
-                        required>${fe.feContent }</textarea>
-                    <br>
-                </div>
-                <br>
-                <div id="write4">
-                    <label id="ff4">전시/축제</label><br><input type="text" name="feType" value="${fe.feType }"
-                        style="width: 650px; margin: 5px 0 0 0;" maxlength="2" required>
-                    <br>
-                </div>
-                <br>
-                
-                <div id="write5">
-                    <hr>
-                    <span id="ff4">📍 장소</span>
-                    <br><input type="text" name="feLocation" style="width: 650px; margin: 5px 0 0 0;"
-                        placeholder="ex) 김포공항" value="${ fe.feLocation }" required>
-                </div>
-                <br>
+			<br>
+			<div id="write2">
+				<label id="ff4">제목</label><br>
+				<input type="text" name="feTitle" value="${ fe.feTitle }"
+					style="width: 650px; margin: 5px 0 0 0;" maxlength="18" >
+			</div>
+			<br>
+			<div id="write3">
+				<label id="ff4">내용</label><br>
+				<textarea name="feContent" cols="71" rows="8" style="resize: none;"
+					required>${fe.feContent }</textarea>
+				<br>
+			</div>
+			<br>
+			<div id="write4">
+				<label id="ff4">전시/축제</label><br>
+				<input type="text" name="feType" value="${fe.feType }"
+					style="width: 650px; margin: 5px 0 0 0;" maxlength="2" >
+				<br>
+			</div>
+			<br>
 
-                <div id="write6">
-                    <hr>
-                    <span id="ff4">📅 기간</span><br>
-                    <input type="date" name="feDate" id="dateIn" value="${ fe.feDate }" required>
-                    <hr>
-                </div>
-                <br>
-                <div id="write8">
-                    <span id="ff4">문의전화</span>
-                    <br>
-                    <input type="text" name="inq" style="width: 650px; margin: 5px 0 0 0;"
-                        placeholder="ex) 080-335-0020" value="${ fe.inq }" required>
-                    <hr>
-                </div>
-                <br>
-                <div id="write10">
-                    <span id="ff4">관람료</span>
-                    <br>
-                    <input type="text" name="cash" style="width: 650px; margin: 5px 0 0 0;" placeholder="ex) 10,000원, 무료등.."
-                        value="${ fe.cash }" required>
-                    <hr>
-                </div>
-                <br>
-                <div id="write11">
-                    <span id="ff4">주최</span>
-                    <br>
-                    <input type="text" name="host" style="width: 650px; margin: 5px 0 0 0;" placeholder="ex) 마포구"
-                        value="${ fe.host }" required>
-                    <hr>
-                </div>
-                <br>
-                <div id="map" style="width:100%;height:350px;"></div>
-                <input type="text" name="latitude" id="lat" value="${fe.latitude}" readonly>
-                <input type="text" name="longitude" id="lon" value="${fe.longitude}" readonly>
-                <div id="clickLatlng"></div>
-                
-                <div align="right" id="write12">
-                    <button type="reset" class="btn btn-light" id="ff4">취소</button>
-                    <button type="submit" class="btn btn-primary" id="ff4">등록</button>
-                </div>
+			<div id="write5">
+				<hr>
+				<span id="ff4">📍 장소</span> <br>
+				<input type="text" name="feLocation"
+					style="width: 650px; margin: 5px 0 0 0;" placeholder="ex) 김포공항"
+					value="${ fe.feLocation }" >
+			</div>
+			<br>
 
-                <div id="topbtn">
-                    <a style="display:scroll;position:fixed;bottom:10px;right:5px;" href="#" title="top">
-                        <img src="https://cdn-icons-png.flaticon.com/128/6469/6469473.png" id="top" alt="">
-                    </a>
-                </div>
+			<div id="write6">
+				<hr>
+				<span id="ff4">📅 기간</span><br> 
+				<input type="date" name="feDate1" id="dateIn" value="${ fe.feDate1 }"> 부터
+				<input type="date" name="feDate2" id="dateIn" value="${ fe.feDate2 }"> 까지
+				<hr>
+			</div>
+			<br>
+			<div id="write8">
+				<span id="ff4">문의전화</span> <br> <input type="text" name="inq"
+					style="width: 650px; margin: 5px 0 0 0;"
+					placeholder="ex) 080-335-0020" value="${ fe.inq }" >
+				<hr>
+			</div>
+			<br>
+			<div id="write9">
+				<span id="ff4">이용대상</span> <br> <input type="text" name="age"
+					style="width: 650px; margin: 5px 0 0 0;"
+					placeholder="ex) 누구나 이용가능 / 8세이상등.." required>
+				<hr>
+			</div>
+			<br>
+			<div id="write10">
+				<span id="ff4">관람료</span> <br> <input type="text" name="cash"
+					style="width: 650px; margin: 5px 0 0 0;"
+					placeholder="ex) 10,000원, 무료등.." value="${ fe.cash }" >
+				<hr>
+			</div>
+			<br>
+			<div id="write11">
+				<span id="ff4">주최</span> <br> <input type="text" name="host"
+					style="width: 650px; margin: 5px 0 0 0;" placeholder="ex) 마포구"
+					value="${ fe.host }" >
+				<hr>
+			</div>
+			<br>
+			<div id="map" style="width: 100%; height: 350px;"></div>
+			<input type="text" name="latitude" id="lat" value="${fe.latitude}"
+				readonly> <input type="text" name="longitude" id="lon"
+				value="${fe.longitude}" readonly>
+			<div id="clickLatlng"></div>
 
-        </form>
-    </div>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9a2f35856f46bd082d1ef297c29d5fc"></script>
-    <script>
+			<div align="right" id="write12">
+				<button type="reset" class="btn btn-light" id="ff4">취소</button>
+				<button type="submit" class="btn btn-primary" id="ff4">등록</button>
+			</div>
+
+		</form>
+        <div id="topbtn">
+            <a
+                style="display: scroll; position: fixed; bottom: 10px; right: 5px;"
+                href="#" title="top"> <img
+                src="https://cdn-icons-png.flaticon.com/128/6469/6469473.png"
+                id="top" alt="">
+            </a>
+        </div>
+	</div>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9a2f35856f46bd082d1ef297c29d5fc"></script>
+	<script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = { 
             center: new kakao.maps.LatLng(${fe.latitude}, ${fe.longitude}), // 지도의 중심좌표
@@ -217,7 +225,7 @@
         
     });
     </script>
-    <script>
+	<script>
         function chooseFile(num) {
             $("#file" + num).click();
         }
@@ -237,7 +245,7 @@
             }
         }
     </script>
-    <jsp:include page="../common/footer.jsp"/>
+	<jsp:include page="../common/footer.jsp" />
 </body>
 
 </html>

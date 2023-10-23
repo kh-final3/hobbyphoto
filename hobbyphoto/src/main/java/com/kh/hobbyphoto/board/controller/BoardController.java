@@ -308,17 +308,11 @@ public class BoardController {
 	}
 
 	@RequestMapping("delete.pl")
-	public String deletePlace(int bno, String filePath, HttpSession session, Model model) {
-		int result = bService.deleteBoard(bno);
+	public String deletePlace(int pno, String filePath, HttpSession session, Model model) {
+		int result = bService.deletePlace(pno);
 
 		if (result > 0) {
-			// 삭제 성공
-
-			// 첨부파일이 있었을 경우 => 파일 삭제
-			if (!filePath.equals("")) { // filePath = "resources/uploadFiles/xxxx.jpg" | ""
-				new File(session.getServletContext().getRealPath(filePath)).delete();
-			}
-			// 게시판 리스트 페이지 list.bo url 재요청
+		
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
 			return "redirect:list.pl";
 
@@ -512,7 +506,8 @@ public class BoardController {
 
 		String changeName = saveFile(upfile, session);
 		System.out.println(changeName);
-
+		fe.setFeDate(fe.getFeDate1() +"~"+ fe.getFeDate2());
+		System.out.println(fe.getFeDate());
 		fe.setTimg("resources/uploadFiles/" + changeName);
 
 		int result = bService.insertExhibit(fe);
@@ -526,9 +521,99 @@ public class BoardController {
 		}
 	}
 
-	@RequestMapping("updateForm.fs")
-	public String updateExhibit(int feNo, Model model) {
+	@RequestMapping("updateForm.ex")
+	public String updateExhibitView(int feNo, Model model) {
 		model.addAttribute("fe", bService.selectCulture(feNo));
 		return "culture/exhibitUpdateForm";
+	}
+	
+	@RequestMapping("updateExhibit.fs")
+	public String updateExhibit(Festival fe, MultipartFile reupfile, HttpSession session, Model model) {
+
+		// 새로 넘어온 첨부파일이 있을 경우
+		if (!reupfile.getOriginalFilename().equals("")) {
+
+			
+			// 새로 넘어온 첨부파일 서버 업로드 시키기
+			String changeName = saveFile(reupfile, session);
+
+			fe.setTimg("resources/uploadFiles/" + changeName);
+		}
+
+		int result = bService.updateExhibit(fe);
+
+		if (result > 0) {
+			// 수정 성공 => 상세페이지 detail.bo url 재요청
+			model.addAttribute("alertMsg", "게시글 수정에 성공했습니다.");
+			return "redirect:exhibitDetail.fs?feNo=" + fe.getFeNo();
+		} else {
+			// 수정 실패 => 에러페이지
+			model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
+			return "common/errorPage";
+		}
+
+	}
+	
+	@RequestMapping("insertFestival.fs")
+	public String insertFestival(Festival fe, MultipartFile upfile, HttpSession session, Model model) {
+		
+		String changeName = saveFile(upfile, session);
+		System.out.println(changeName);
+		fe.setFeDate(fe.getFeDate1() +"~"+ fe.getFeDate2());
+		System.out.println(fe.getFeDate());
+		fe.setTimg("resources/uploadFiles/" + changeName);
+		
+		int result = bService.insertExhibit(fe);
+		
+		if (result > 0) {
+			session.setAttribute("alertMsg", "전시 등록에 성공했습니다.");
+			return "redirect:festivalList.fs";
+		} else {
+			model.addAttribute("errorMsg", "게시글 등록 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("updateForm.fe")
+	public String updateFestivalView(int feNo, Model model) {
+		model.addAttribute("fe", bService.selectCulture(feNo));
+		return "culture/festivalUpdateForm";
+	}
+	
+	@RequestMapping("updateFestival.fs")
+	public String updateFestival(Festival fe, MultipartFile reupfile, HttpSession session, Model model) {
+		
+		// 새로 넘어온 첨부파일이 있을 경우
+		if (!reupfile.getOriginalFilename().equals("")) {
+			
+			
+			// 새로 넘어온 첨부파일 서버 업로드 시키기
+			String changeName = saveFile(reupfile, session);
+			
+			fe.setTimg("resources/uploadFiles/" + changeName);
+		}
+		
+		int result = bService.updateExhibit(fe);
+		
+		if (result > 0) {
+			// 수정 성공 => 상세페이지 detail.bo url 재요청
+			model.addAttribute("alertMsg", "게시글 수정에 성공했습니다.");
+			return "redirect:exhibitDetail.fs?feNo=" + fe.getFeNo();
+		} else {
+			// 수정 실패 => 에러페이지
+			model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
+			return "common/errorPage";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/")
+	public String home() {		
+		return "common/main";
+	}
+	
+	@RequestMapping("test.t")
+	public String test() {
+		return "test/NewFile";
 	}
 }

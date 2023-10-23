@@ -145,5 +145,13 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertAttachment2", attachment);
 	}
 
+	public int updateExhibit(SqlSessionTemplate sqlSession, Festival fe) {
+		return sqlSession.update("boardMapper.updateExhibit", fe);
+	}
+
+	public int deletePlace(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.delete("boardMapper.deletePlace", pno);
+	}
+
 
 }

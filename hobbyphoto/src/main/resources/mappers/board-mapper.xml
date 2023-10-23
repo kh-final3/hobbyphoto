@@ -47,6 +47,8 @@
 		<result column="FE_TITLE" property="feTitle"/>
 		<result column="FE_CONTENT" property="feContent"/>
 		<result column="FE_DATE" property="feDate"/>
+		<result column="FE_DATE1" property="feDate1"/>
+		<result column="FE_DATE2" property="feDate2"/>
 		<result column="FE_LOCATION" property="feLocation"/>
 		<result column="CASH" property="cash"/>
 		<result column="FE_TYPE" property="feType"/>
@@ -130,6 +132,7 @@
 		   where board_no = #{boardNo}
 	</update>
 	
+
 	<update id="updateBoard">
 		update
 			   board
@@ -344,7 +347,10 @@
 	    WHERE FILE_NO = #{fileNo}
 	</update>
 
-
+	<delete id="deletePlace">
+		DELETE FROM place WHERE p_no = #{pno}
+	</delete>
+	
 	<select id="getImageCount" resultType="_int">
 	    SELECT COUNT(FILE_NO) "COUNT"
 	      FROM ATTACHMENT
@@ -376,6 +382,8 @@
 		     , fe_title
 		     , fe_content
 		     , fe_date
+             , substr(fe_date,1,10) as "fe_date1"
+             , substr(fe_date,12,20) as "fe_date2"
 		     , fe_location
 		     , cash
 		     , fe_type
@@ -429,5 +437,22 @@
 			  )
 	</insert>
 	
+	<update id="updateExhibit">
+		update
+			   festival
+		   set fe_title = #{feTitle}
+		     , fe_content = #{feContent}
+		     , t_img = #{timg}
+		     , fe_location = #{feLocation}
+		     , cash = #{cash}
+		     , fe_date = #{feDate}
+		     , longitude = #{longitude}
+		     , latitude = #{latitude}
+		     , age = #{age}
+		     , host = #{host}
+		     , inq = #{inq}
+		     , age = #{age}
+		 where fe_no = #{feNo}
+	</update>
 	
 </mapper>

@@ -16,6 +16,8 @@ public class Festival {
 	private String feTitle;
 	private String feContent;
 	private String feDate;
+	private String feDate1;
+	private String feDate2;
 	private String feLocation;
 	private String cash;
 	private String feType;

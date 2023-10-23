@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,6 +134,12 @@
   </style>
 </head>
 	<body>
+	<c:if test="${ not empty alertMsg }">
+		<script>
+			alert("${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
 	    <div class="mb_outer">
 	        <div class="mb_menu-area">
 	            <div id="mb_logo">
@@ -145,8 +152,9 @@
 	                    <li><a href="#">장비추천</a></li>
 	                    <li><a href="festvalList.fs">축제 · 전시</a></li>
 	                    <li><a href="list.pl">출사명소</a></li>
-	                    <li><a href="#">모임</a></li>
+	                    <li><a href="list.to">모임</a></li>
 	                    <li><a href="list.no">공지사항</a></li>
+	                    <li><a href="test.t">테스트</a></li>
 	                </ul>
 	            </div>
 	        </div>

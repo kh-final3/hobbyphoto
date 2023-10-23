@@ -60,7 +60,7 @@
 }
 
 #dateIn {
-	width: 650px;
+	width: 250px;
 }
 
 input[type="number"] {
@@ -127,8 +127,9 @@ input[type="number"] {
 
 			<div id="write6">
 				<hr>
-				<span id="ff4">📅 기간</span><br> <input type="date"
-					name="feDate" id="dateIn" required>
+				<span id="ff4">📅 기간</span><br> 
+				<input type="date" name="feDate1" id="dateIn" required> 부터
+				<input type="date" name="feDate2" id="dateIn" required> 까지
 				<hr>
 			</div>
 			<br>
@@ -136,6 +137,13 @@ input[type="number"] {
 				<span id="ff4">문의전화</span> <br> <input type="text" name="inq"
 					style="width: 650px; margin: 5px 0 0 0;"
 					placeholder="ex) 080-335-0020" required>
+				<hr>
+			</div>
+			<br>
+			<div id="write9">
+				<span id="ff4">이용대상</span> <br> <input type="text" name="age"
+					style="width: 650px; margin: 5px 0 0 0;"
+					placeholder="ex) 누구나 이용가능 / 8세이상등.." required>
 				<hr>
 			</div>
 			<br>
@@ -154,8 +162,8 @@ input[type="number"] {
 			</div>
 			<br>
 			<div id="map" style="width: 100%; height: 350px;"></div>
-			<input type="text" name="latitude" id="lat" readonly> <input
-				type="text" name="longitude" id="lon" readonly>
+			<input type="text" name="latitude" id="lat" readonly> 
+			<input type="text" name="longitude" id="lon" readonly>
 			<div id="clickLatlng"></div>
 
 			<div align="right" id="write12">
