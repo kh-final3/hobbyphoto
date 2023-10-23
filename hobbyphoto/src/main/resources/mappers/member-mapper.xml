@@ -34,14 +34,6 @@
 	order 
 	   by user_no
 	</select>
-	
-	<!-- 관리자페이지 회원 삭제 -->
-	  <update id="deleteMember">
-	  	update 
-	  		   member
-	       set status = 'N'
-	     where user_id = #{userId}
-	  </update>
 	  
 	<!-- 신고 게시물 관리 -->  
 	<select id="">
@@ -57,7 +49,6 @@
 	 WHERE B.BOARD_TYPE = #{boardtype};
 	</select>
 	  
-	
 	<insert id="insertMember" parameterType="Member">
 		insert
 		  into member
