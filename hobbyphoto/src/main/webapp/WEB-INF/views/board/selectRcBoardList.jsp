@@ -97,13 +97,13 @@
 				                <td>${b.boardWriter}</td>
 				                <td>${b.count}</td>
 				                <td>${b.createDate}</td>
-				                <input type="hidden" class="phno">
+				                <!-- Use reverseIndex here -->
+				                <input type="hidden" class="phno" value="${reverseIndex}">
 				            </tr>
 				        </c:forEach>
 				    </tbody>
 				</table>
 				<br><br>
-				
 				<script>
 				    $(document).ready(function() {
 				        $('#boardList tbody').on('click', 'tr', function() {
