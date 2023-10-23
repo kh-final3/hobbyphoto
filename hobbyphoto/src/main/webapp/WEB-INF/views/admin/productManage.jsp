@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,81 +94,64 @@
 <div class="dashboard">
         <h2>상품 관리</h2>
 
+        <a href="proenro.from">등록</a>  /
+
+        <a href="admin.pg">관리자 페이지</a>
+
         <table>
             <thead>
                 <tr>
                     <th><input type="checkbox" name="" id=""></th>
-                    <th>게시판 유형</th>
-                    <th>분류</th>
-                    <th>게시판 목록</th>
-                    <th>게시물 관리</th>
+                    <th>상품번호</th>
+                    <th>상품명</th>
+                    <th>재고수량</th>
+                    <th>상품 관리</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><input type="checkbox" name="" id=""></td>
-                    <td>커뮤니티</td>
-                    <td>분류A</td>
-                    <td>게시물 1</td>
-                    <td class="button-container">
-                        <button>관리</button>
-                        <button>삭제</button>
-                        <button>수정</button>
-                    </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="" id=""></td>
-                  <td>커뮤니티</td>
-                  <td>분류A</td>
-                  <td>게시물 1</td>
-                  <td class="button-container">
-                      <button>관리</button>
-                      <button>삭제</button>
-                      <button>수정</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="" id=""></td>
-                  <td>커뮤니티</td>
-                  <td>분류A</td>
-                  <td>게시물 1</td>
-                  <td class="button-container">
-                      <button>관리</button>
-                      <button>삭제</button>
-                      <button>수정</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="" id=""></td>
-                  <td>커뮤니티</td>
-                  <td>분류A</td>
-                  <td>게시물 1</td>
-                  <td class="button-container">
-                      <button>관리</button>
-                      <button>삭제</button>
-                      <button>수정</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="" id=""></td>
-                  <td>커뮤니티</td>
-                  <td>분류A</td>
-                  <td>게시물 1</td>
-                  <td class="button-container">
-                      <button>관리</button>
-                      <button>삭제</button>
-                      <button>수정</button>
-                  </td>
-                </tr>
+            	<c:forEach var="p" items="${ plist }">
+            	
+	                <tr>
+	                    <td><input type="checkbox" name="" id=""></td>
+	                    <td>${ p.PNo }</td>
+	                    <td>${ p.PName }</td>
+	                    <td>${ p.amount }</td>
+	                    <td class="button-container">
+	                        <button>상세</button>
+	                        <button>수정</button>
+	                        <button>삭제</button>
+	                    </td>
+	                </tr>
+                </c:forEach>
+                
             </tbody>
         </table>
 
         <div align="center" class="btn-area">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
+        
+        	<c:choose>
+        		<c:when test="${ pi.currentPage eq 1 }">
+            		<a style="display: none;">이전</a>
+            	</c:when>
+            	<c:otherwise>
+            		<a href="plist.pr?cpage=${pi.currentPage-1}">이전</a>
+            	</c:otherwise>
+            </c:choose>
+
+            <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+            	<a href="plist.pr?cpage=${p}">${p}</a>
+            </c:forEach>
+            
+            <c:choose>
+        		<c:when test="${ pi.currentPage eq pi.maxPage }">
+            		<a style="display: none;">다음</a>
+            	</c:when>
+            	<c:otherwise>
+            		<a href="plist.pr?cpage=${pi.currentPage+1}">다음</a>
+            	</c:otherwise>
+            </c:choose>
+            
+            
         </div>
 
     </div>

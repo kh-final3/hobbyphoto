@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="adminMapper">
+
+	<resultMap type="Product" id="shopResult">
+		<result column="p_no" property="pNo"/>
+		<result column="p_name" property="pName"/>
+		<result column="category_no" property="categoryNo"/>
+		<result column="brand_no" property="brandNo"/>
+		<result column="price" property="price"/>
+		<result column="amount" property="amount"/>
+		<result column="thumbnail" property="thumbnail"/>
+		<result column="p_dimg" property="pDimg"/>
+		<result column="p_simg" property="pSimg"/>
+	</resultMap>
+	
   <insert id="insertProduct">
   	insert
   		into Product
@@ -28,4 +41,25 @@
   		,	#{pSimg}
   		)
   </insert>
+  
+  <select id="selectAdminProListCount" resultType="_int">
+	select
+			count(*)
+	  from product
+	 where status = 'Y' 	
+  </select>
+  
+  <select id="selecAdminProtList" resultMap="shopResult">
+  		select
+  				p_no
+  			,	p_name
+  			,	price
+  			,	amount
+  			,	thumbnail
+  		from product
+  	   where status='Y'
+  	   order
+  	   		by p_no desc
+  </select>
+  
 </mapper>

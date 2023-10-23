@@ -70,6 +70,18 @@ public class AdminServiceImpl implements AdminService{
 		return aDao.insertProduct(sqlSession, p);
 	}
 
+	//리스트에 뿌릴 상품 정보 조회
+	@Override
+	public ArrayList<Product> selecAdminProtList(PageInfo pi) {
+		return aDao.selecAdminProtList(sqlSession,pi);
+	}
+
+	//페이징위한 상품 개수 조회
+	@Override
+	public int selectAdminProListCount() {
+		return aDao.selectAdminProListCount(sqlSession);
+	}
+
 	
 
 	

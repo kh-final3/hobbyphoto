@@ -27,4 +27,7 @@ public interface ShopService {
 		
 		//7. 장바구니 상품 선택 삭제(delete)
 		int deleteCartProduct(ArrayList<Cart> clist);
+		
+		//8.장바구니에서 상품 선택해서 구매페이지 넘기기
+		ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist);
 }

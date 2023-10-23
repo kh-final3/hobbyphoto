@@ -57,10 +57,23 @@ public class ShopServiceImpl implements ShopService{
 		for(Cart c : clist) {
 			result += sDao.deleteCartProduct(sqlSession,c);
 		}
+		
 		System.out.println(result + "service에서의 값");
 		
 		return result;
 	}
+
+	@Override
+	public ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist) {
+		
+		for(Cart b : blist) {
+			ArrayList<Cart> ordlist = sDao.selectCartBuy(sqlSession,b);
+		}
+		
+		return null;
+	}
+
+
 
 	
 

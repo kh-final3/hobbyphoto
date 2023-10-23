@@ -17,6 +17,7 @@ import com.kh.hobbyphoto.shop.model.vo.Product;
 import com.kh.hobbyphoto.admin.model.service.AdminServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
@@ -47,9 +48,19 @@ public class AdminController {
 	
 	// 상품관리 페이지로 연결
 	@RequestMapping("plist.pr")
-	public String productManage() {
+	public ModelAndView productManage(@RequestParam(value="cpage",defaultValue = "1")int currentPage, ModelAndView mv) {
 		
-		return "admin/productManage";
+		int ProlistCount = aService.selectAdminProListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(ProlistCount, currentPage, 5, 5);
+		
+		ArrayList<Product> plist = aService.selecAdminProtList(pi);
+		
+		mv.addObject("pi",pi).addObject("plist", plist).setViewName("admin/productManage");
+		
+		System.out.println(mv);
+		
+		return mv;
 	}
 	
 	// 게시글 관리 페이지로 연결
@@ -158,7 +169,7 @@ public class AdminController {
 	}
 	
 	//상품 등록(지영)
-	@RequestMapping("")
+	@RequestMapping("proenro.from")
 	public String insertProFrom() {
 		return "admin/productRegist";
 	}
@@ -200,7 +211,7 @@ public class AdminController {
 		System.out.println(result);
 		if(result>0) {//등록 성공
 			session.setAttribute("alertMsg", "성공적으로 상품이 등록되었습니다.");
-			return "admin/adminIndex";
+			return "redirect:plist.pr";
 		}else {//등록 실패
 			model.addAttribute("errorMsg", "상품 등록 실패");
 			return "common/errorPage";

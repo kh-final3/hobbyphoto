@@ -99,7 +99,7 @@ public class ShopController {
 	
 
 	@RequestMapping("shop.mp")
-	public String shopMyPage(int userNo , HttpSession session ,Model model) {
+	public String selectCartProList(int userNo , HttpSession session ,Model model) {
 		
 		
 		System.out.println(userNo);
@@ -131,19 +131,38 @@ public class ShopController {
 		
 		for(int i=0;i<pNo.length;i++) {
 			//System.out.println(pNo[i]);
-			if(pNo[i] != null && !pNo[i].isEmpty()) {
+
 				Cart c = new Cart();
 				c.setPNo(Integer.parseInt(pNo[i]));
 				c.setUserNo(userNo);
 				
 				clist.add(c);
-			}
+			
 		}
 		System.out.println(clist + "controller에서 clist값");
 		
 		int result = sService.deleteCartProduct(clist);
 		System.out.println(result + "controller에서 result 값");
 		return result>0 ? "success":"fail";
+		
+	}
+	
+	@RequestMapping("pro.buy")
+	public void selectCartBuy(String[] pNo, int userNo) {
+		
+		ArrayList<Cart> blist = new ArrayList<Cart>();
+		//체크된 상품 리스트 만들기
+		for(int i = 0; i<pNo.length;i++) {
+			
+			Cart bc = new Cart();
+			bc.setPNo(Integer.parseInt(pNo[i]));
+			bc.setUserNo(userNo);
+			
+			blist.add(bc);
+		}
+		System.out.println(blist + "컨트롤러에서 blist의 값");
+		
+		ArrayList<Cart> orlist = sService.selectCartBuy(blist);
 		
 	}
 		

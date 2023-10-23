@@ -33,5 +33,7 @@ public interface AdminService {
 	//1. 상품 등록하기(지영)
 	int insertProduct(Product p);
 	
-	
+	//2. 상품 리스트 페이지 관리(지영)
+	int selectAdminProListCount();
+	ArrayList<Product> selecAdminProtList(PageInfo pi);
 }

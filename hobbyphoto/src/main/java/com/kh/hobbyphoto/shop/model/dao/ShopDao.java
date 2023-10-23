@@ -35,5 +35,8 @@ public class ShopDao {
 	public int deleteCartProduct(SqlSessionTemplate sqlSession,Cart c) {
 		return sqlSession.delete("shopMapper.deleteCartProduct", c);
 	}
+	public ArrayList<Cart> selectCartBuy(SqlSessionTemplate sqlSession,Cart b){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectCartBuy", b);
+	}
 	
 }

@@ -59,5 +59,18 @@ public class AdminDao {
 	public int insertProduct(SqlSessionTemplate sqlSession,Product p) {
 		return sqlSession.insert("adminMapper.insertProduct", p);
 	}
+	//상품 개수
+	public int selectAdminProListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.selectAdminProListCount");
+	}
+	//페이징 되어있는 상품 리스트
+	public ArrayList<Product> selecAdminProtList(SqlSessionTemplate sqlSession,PageInfo pi){
+		int poffset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int plimit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(poffset,plimit);
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selecAdminProtList", null, rowBounds);
+	}
 	
 }

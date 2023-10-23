@@ -66,7 +66,7 @@
         .total_amount{margin-top: 10px; font-size: 0.875rem; font-weight: 500;}
         .price_btn{width: 900px; height: 70px; margin: auto;}
         .continue_btn{width: 400px; height: 100%; border: 1px solid black; background-color: white; font-size: 26px; font-weight: 600; margin-left: 10px;}
-        .buy_btn{width: 400px; height: 100%; border: 1px solid black; background-color: black; color: white; font-size: 26px; font-weight: 600;}
+        .cbuy_btn{width: 400px; height: 100%; border: 1px solid black; background-color: black; color: white; font-size: 26px; font-weight: 600;}
         .cart_plus{width: 40px; height: 40px; text-align: center; line-height: 34px; border-radius: 100px; background-color: black; color: white; font-size: 30px; position: absolute; left: 33%; top: 55%;}
         .cart_minus{width: 40px; height: 40px; text-align: center; line-height: 34px; border-radius: 100px; background-color: black; color: white; font-size: 30px; position: absolute; right: 33%; top: 55%;}
     </style>
@@ -137,7 +137,7 @@
                     </div>
                
                     <div class="pb_charge">
-                       <span>${(c.price*c.amount) >=50000 ? "무료" : "3000원" }</span>
+                       <span>${c.price * c.amount >= 50000 ? "무료" : "3000원"}</span>
                     </div>
                 </div>
                 
@@ -184,8 +184,8 @@
             <div class="cart_minus">=</div>
         </div>
         <div class="price_btn">
-            <button class="continue_btn">CONTINUE SHOPPING</button>
-            <button class="buy_btn">BUY NOW</button>
+            <button class="continue_btn" onclick="continueshopping()">CONTINUE SHOPPING</button>
+            <button class="cbuy_btn">BUY NOW</button>
         </div>
     </div>
 
@@ -388,7 +388,44 @@
                 })
            }
            
-               
+           $(".cbuy_btn").click(function(){
+        	   var checkedPno = checkedProductbox();
+        	   if(checkedPno.length ===0){
+        		   alert("구매할 상품을 선택해주세요");
+        		   return
+        	   }
+        	   selectBuyProduct(checkedPno);
+           }) 
+            
+            
+           //체크박시 선택 상품 구매 페이지로 이동
+           function selectBuyProduct(checkedPno){
+        	   $.ajax({
+        		   url:"pro.buy",
+        		   traditional : true,
+        		   data:{
+        			   pNo:checkedPno,
+        			   userNo:'${loginMember.userNo}'
+        		   },success:function(){
+        			   console.log("확인!!")
+        		   },error:function(){
+        			   console.log("장바구니에서 선택 상품 구매페이지 넘기기 ajax 통신 실패");
+        		   }
+        	   })
+           }
+            
+            
+           function continueshopping(){
+        	   location.href="pro.list"
+           }    
+           
+           /*
+           function productbuy(){
+        	   location.href="pro.buy"
+           }
+           */
+            
+            
         </script>
 
     <br><br>
