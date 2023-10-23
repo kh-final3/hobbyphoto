@@ -92,13 +92,12 @@
 				        <c:forEach var="b" items="${list}" varStatus="status">
 				            <c:set var="reverseIndex" value="${listSize - status.count + 1}" />
 				            <tr class="clickable-row">
-				                <td>${reverseIndex}</td>
-				                <td>${b.boardTitle}</td>
-				                <td>${b.boardWriter}</td>
-				                <td>${b.count}</td>
-				                <td>${b.createDate}</td>
-				                <!-- Use reverseIndex here -->
-				                <input type="hidden" class="phno" value="${reverseIndex}">
+				                <td>${ reverseIndex }</td>
+				                <td>${ b.boardTitle }</td>
+				                <td>${ b.boardWriter }</td>
+				                <td>${ b.count }</td>
+				                <td>${ b.createDate }</td>
+				                <input type="hidden" class="phno" value="${ reverseIndex }">
 				            </tr>
 				        </c:forEach>
 				    </tbody>

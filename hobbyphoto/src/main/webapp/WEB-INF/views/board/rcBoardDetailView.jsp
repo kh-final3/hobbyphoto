@@ -52,17 +52,17 @@
 	            <table id="contentArea" align="center" class="table">
 	                <tr>
 	                    <th width="100">제목</th>
-	                    <td>${ b.boardTitle }</td>
+	                    <td>${ boardTitle }</td>
 	                </tr>
 	                <tr>
 	                    <th>작성자</th>
-	                    <td>${ b.boardWriter }</td>
+	                    <td>${ boardWriter }</td>
 	                </tr>
 	                <tr>
-	                    <td colspan="2" id="etc"><span>작성일</span> <span class="text">2023-03-31</span> <span>조회수</span> <span class="text">2</span></td>
+	                    <td colspan="2" id="etc"><span>작성일</span> <span class="text">${ createDate }</span> <span>조회수</span> <span class="text">${ b.count }</span></td>
 	                </tr>
 	                <tr>
-	                    <td colspan="2"><p style="height:150px">피자가 먹고싶네오</p></td>
+	                    <td colspan="2"><p style="height:150px">${ boardContent }</p></td>
 	                </tr>
 	            </table>
 	        </div>
