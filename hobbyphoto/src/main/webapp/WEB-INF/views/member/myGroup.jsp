@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title>	
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<style>
-        .outer_myBoardList{
-        width: 1200px;
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .outer_myMeet{
+        width: 900px;
         height: 600px;
         margin: auto;
         margin-top: 50px;
@@ -19,40 +19,40 @@
         grid-template-columns: 1fr 1fr;
         }
 
-        .container_myBoardList1{
-          width: 900px;
+        .container_myMeet1{
+            width: 600px;
 
             
         }
-        .container_myBoardList2{
+        .container_myMeet2{
             background-color: whitesmoke;
             width: 250px;
             height: 250px;
-            margin: 110px 10px 10px 15px;
+            margin: 110px 10px 10px 30px;
             padding-left: 20px;
             display: block;
         }
 
-        .myBoardList2_list li{
+        .myMeet2_list li{
             padding: 0 0 0 20px;
             list-style-type: none;
             margin: 20px 0 0 -60px;
 
         }
 
-        .myBoardList2_list li a{
+        .myMeet2_list li a{
           color: black;
           text-decoration: none;
         }
 
-        .myBoardList2_list li:hover{
+        .myMeet2_list li:hover{
             cursor: pointer;
             background: url(https://korean.visitkorea.or.kr/resources/images/sub/ico_mypagemenu.png) 0 0 no-repeat;
             background-size: 4px 100%;
             font-weight: 600;
             padding: 0 0 0 20px;
         }
-</style>
+    </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>

@@ -52,7 +52,7 @@
             font-weight: 600;
             padding: 0 0 0 20px;
         }
-</style>
+</style>	
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
