@@ -80,17 +80,4 @@
 			)
 	 </insert>
 	 
-	 <select id="selectProductList">
-	 	select
-			    p_no
-			,   p_name
-			,   user_no
-			,   c.amount
-			,   brand_name
-			from cart c
-			join product p using (p_no)
-			join brand b using (brand_no)
-			where user_no = #{userNo}
-	 </select>
-  
 </mapper>

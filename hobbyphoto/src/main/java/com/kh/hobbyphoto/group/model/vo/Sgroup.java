@@ -16,7 +16,7 @@ import lombok.ToString;
 public class Sgroup {
 	private int groupNo;
 	private String img;
-	private int userNo;
+	private String userNo; // join 을 위해 String으로 변경함
 	private String title;
 	private String conent;
 	private int pTotal;

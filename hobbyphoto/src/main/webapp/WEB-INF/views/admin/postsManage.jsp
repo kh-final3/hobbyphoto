@@ -4,13 +4,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="styles.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+ <meta name="description" content="" />
+ <meta name="author" content="" />
+ <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+ <link href="resources/css/styles.css" rel="stylesheet" />
+ <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>게시글 관리</title>
 
 <style>
@@ -18,23 +20,25 @@
         font-family: 'Arial', sans-serif;
         background-color: #f4f4f4;
         margin: 0;
+        /* margin-top: 0; */
         padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        height: 115%;
     }
 
     .dashboard {
         width: 80%;
+        /* border: 1px solid red; */
         background-color: #fff;
         padding: 30px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-height: 115%;
     }
 
     h2 {
-        text-align: center;
         color: #333;
         margin-bottom: 25px;
         margin-top: 0px;
@@ -134,6 +138,16 @@
 <body>
 <div class="dashboard">
     <h2>게시물 관리</h2>
+   <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item"><a href="alist.da">Dashboard</a></li>
+      <li class="breadcrumb-item active">게시물 관리</li>
+  </ol>
+  <div class="card mb-4">
+      <div class="card-body">
+	사이트 내의 모든 게시물을 조회할 수 있는 화면입니다. <br>
+		관리할 게시판을 해당 게시판 버튼을 통해 이동하세요.
+      </div>
+  </div>
             <div id="ad_nav">
                 <ul id="ad_navi">
                     <li><a onclick="goFormSubmit(1);">사진게시판</a></li>
@@ -143,7 +157,7 @@
                 </ul>
             </div>
                 
-    <table id="">
+    <table id="datatablesSimple">
         <thead>
             <tr>
                 <th><input type="checkbox" name="" id=""></th>
@@ -155,54 +169,70 @@
             </tr>
         </thead>
         <tbody>
+        
+        <c:forEach var="b" items="${ list }">
             <tr>
-                <td><input type="checkbox" name="" id="pmPhoto"></td>
+                <td ><input type="checkbox" name="" id="pmPhoto"></td>
                 <td>사진게시판</td>
-                <td>게시물 1</td>
-                <td>게시물 1</td>
-                <td>게시물 1</td>
+                <td class="bno">${b.boardTitle}</td>
+                 <td>${b.boardWriter}</td>
+                <td>${b.createDate}</td>
                 <td class="button-container">
                     <button onclick="">관리</button>
-                    <button onclick="">삭제</button>
+     				<form action="pdelete.bo" method="post">
+	                	<input type="hidden" name="boardTitle" value="${ b.boardTitle }">
+	                    <button type="submit">삭제</button>
+                    </form>
                     <button onclick="">수정</button>
                 </td>
             </tr>
+            </c:forEach>
+            
+            <c:forEach var="b" items="${ list2 }">
             <tr>
               <td><input type="checkbox" name="" id="pmEquip"></td>
               <td>장비추천 게시판</td>
-              <td>게시물 2</td>
-              <td>게시물 2</td>
-              <td>게시물 2</td>
+              <td class="bno">${b.boardTitle}</td>
+                 <td>${b.boardWriter}</td>
+                <td>${b.createDate}</td>
               <td class="button-container">
                   <button onclick="">관리</button>
                   <button onclick="">삭제</button>
                   <button onclick="">수정</button>
               </td>
             </tr>
+            </c:forEach>
+            
+            <c:forEach var="g" items="${ list3 }">
             <tr>
               <td><input type="checkbox" name="" id="pmGetter"></td>
               <td>모임 게시판</td>
-              <td>게시물 3</td>
-              <td>게시물 3</td>
-              <td>게시물 3</td>
+              <td class="gno">${g.title}</td>
+              <td>${g.userNo}</td>
+              <td>${g.createDate}</td>
               <td class="button-container">
                   <button onclick="">관리</button>
                   <button onclick="">삭제</button>
                   <button onclick="">수정</button>
               </td>
             </tr>
+            </c:forEach>
+            
+            <c:forEach var="k" items="${ list4 }">
             <tr>
-              <td><input type="checkbox" name="" id="pmback"></td>
+              <td><input type="checkbox" name="" id="pmBack"></td>
               <td>배경 화면 게시판</td>
-              <td>게시물 4</td>
-              <td>게시물 4</td>
-              <td>게시물 4</td>
+              <td class="kno">배경화면</td>
+              <td>${k.userNo}</td>
+              <td>${k.createDate}</td>
               <td class="button-container">
                   <button onclick="">관리</button>
                   <button onclick="">삭제</button>
                   <button onclick="">수정</button>
               </td>
             </tr>
+            </c:forEach>
+            
         </tbody>
     </table>
 
@@ -223,33 +253,49 @@
    </form>
    
    <form id="postForm3" action="" method="post">
-   		<input type="hidden" name="bno" value="${ b.boardNo }">
+   		<input type="hidden" name="gno" value="${ g.groupNo }">
    </form>
    
    <form id="postForm4" action="" method="post">
-   	    <input type="hidden" name="bno" value="${ b.boardNo }">
+   	    <input type="hidden" name="kno" value="${ k.backNo }">
    </form>
 
 	<script type="text/javascript">
 	$(function(){
-		$(document).on("click", "#pmPhoto>tbody>tr", function(){
-			location.href="myPage.me?mno=" + $(this).children().eq(0).text();
+		$(document).on("click", "#datatablesSimple>tbody>tr", function(){
+			location.href="plist.bo?bno=" + $(this).children().eq(0).text();
+		})
+	})
+	
+		$(function(){
+		$(document).on("click", "#datatablesSimple>tbody>tr", function(){
+			location.href="elist.bo?bno=" + $(this).children().eq(0).text();
+		})
+	})
+	
+		$(function(){
+		$(document).on("click", "#datatablesSimple>tbody>tr", function(){
+			location.href="glist.bo?gno=" + $(this).children().eq(0).text();
+		})
+	})
+	
+		$(function(){
+		$(document).on("click", "#datatablesSimple>tbody>tr", function(){
+			location.href="backlist.bo?kno=" + $(this).children().eq(0).text();
 		})
 	})
 	
 	function goFormSubmit(num){
-            		
   		if(num == 1){
-  			$("#postForm1").attr("action", "#pmPhoto").submit();
+  			$("#postForm1").attr("action", "plist.bo").submit();
   		} else if(num == 2){
-  			$("#postForm2").attr("action", "#pmEquip").submit();
+  			$("#postForm2").attr("action", "elist.bo").submit();
   		} else if(num == 3){
-  			$("#postForm3").attr("action", "#pmGetter").submit();
+  			$("#postForm3").attr("action", "glist.bo").submit();
   		} else{ 
-  			$("#postForm4").attr("action", "#pmback").submit();
+  			$("#postForm4").attr("action", "backlist.bo").submit();
   		}
   	}
-	
 	
 	</script>
 
