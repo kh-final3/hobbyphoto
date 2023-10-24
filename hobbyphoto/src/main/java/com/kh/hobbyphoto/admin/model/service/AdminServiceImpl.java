@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.hobbyphoto.admin.model.dao.AdminDao;
+import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.common.model.vo.Report;
+import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 import com.kh.hobbyphoto.upfile.model.vo.P_Attachment;
@@ -25,47 +28,53 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	@Override
-	public int selectListCount() {
-		return aDao.selectListCount(sqlSession);
-	}
+	 // 회원 리스트 조회
+   @Override
+   public ArrayList<Member> selectMember() {
+      return aDao.selectMember(sqlSession);
+   }
+   
+   // 회원 삭제 서비스
+   @Override
+   public int deleMember(String userId) {
+      return aDao.deleMember(sqlSession, userId);      
+   }
 
-	@Override
-	public ArrayList<Board> selectList(PageInfo pi) {
-		return aDao.selectList(sqlSession, pi);
-	}
+// 게시물 관리서비스-사진게시판
+   @Override
+   public ArrayList<Board> selectBoard() {
+      return aDao.selectBoard(sqlSession);
+}
+   // 게시물 삭제서비스-사진게시판
+   @Override
+   public int deleBoard(String boardTitle) {
+      return aDao.deleBoard(sqlSession, boardTitle);      
+   }
+   
+   // 게시물 관리서비스-장비게시판
+   @Override
+   public ArrayList<Board> selectBoard2() {
+      return aDao.selectBoard2(sqlSession);
+   }
+   
+   // 게시물 관리서비스-모임게시판
+   @Override
+   public ArrayList<Sgroup> selectBoard3() {
+      return aDao.selectBoard3(sqlSession);
+   }
+   
+   // 게시물 관리서비스-배경화면게시판
+   @Override
+   public ArrayList<BackGround> selectBoard4() {
+      return aDao.selectBoard4(sqlSession);
+   }
+   
+   // 신고 게시물 조회
+   @Override
+   public ArrayList<Report> selectReport() {
+      return aDao.selectReport(sqlSession);
+   }
 
-	@Override
-	public int increaseCount(int boardNo) {
-		return aDao.increaseCount(sqlSession, boardNo);
-	}
-
-	@Override
-	public Board selectBoard(int boardNo) {
-		return aDao.selectBoard(sqlSession, boardNo);
-	}
-
-	@Override
-	public int deleteBoard(int boardNo) {
-		return aDao.deleteBoard(sqlSession, boardNo);
-	}
-
-	@Override
-	public int updateBoard(Board b) {
-		return aDao.updateBoard(sqlSession, b);
-	}
-
-	// 회원 리스트 조회
-	@Override
-	public ArrayList<Member> selectMember() {
-		return aDao.selectMember(sqlSession);
-	}
-	
-	// 회원 삭제 서비스
-	@Override
-	public int deleteMember(String userId) {
-		return aDao.deleteMember(sqlSession, userId);		
-	}
   
 	//상품 등록(지영)
 	@Override
