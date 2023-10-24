@@ -118,9 +118,11 @@
                     </div>
                     <br>
                     <div id="write4">
-                        <label id="ff4">전시/축제</label><br>
-                        <input type="text" name="feType" value="${fe.feType }" style="width: 650px; margin: 5px 0 0 0;"
-                            maxlength="2">
+                        <label id="ff4">전시/축제</label><br> 
+                            <input type="radio" name="feType" id="E" value="전시">
+                            <label for="E">전시</label>
+                            <input type="radio" name="feType" id="F" value="축제"> 
+                            <label for="F">축제</label>
                         <br>
                     </div>
                     <br>
