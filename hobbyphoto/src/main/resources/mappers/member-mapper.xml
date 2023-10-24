@@ -74,6 +74,29 @@
 		     , #{ gender }
 		     )
 	</insert>
+	<insert id="insertMemberKakao" parameterType="Member">
+		insert
+		  into member
+		  	 (
+		  	   user_no 
+		  	 , user_id
+		  	 , user_pwd
+		  	 , user_name
+		  	 , nickname
+		  	 , email
+		  	 , social
+		  	 )
+		values 
+		     (
+		       SEQ_MNO.nextval
+		     , #{ userId }
+		     , #{ userPwd }
+		     , #{ userName }
+		     , #{ nickName }
+		     , #{ email }
+		     , 'kakao'
+		     )
+	</insert>
 	
 	<select id="loginMember" resultMap="resultMember">
 		select 

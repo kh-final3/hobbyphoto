@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<style>
         .all{
             width: 1400px;
@@ -175,13 +176,15 @@
             <br>
            
             <div class="sns-login">
-                
-                <li><a href=""><img src="resources/kakao_login_medium_narrow.png" alt="카카오" width="250" height="50"></a></li>
-                <!-- <li><a href=""><img src="" alt="카카오"></a></li> -->
-                
+	            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=5f1f7536e194f12469c7a86ac6bdb30f&redirect_uri=http://localhost:8006/hobbyphoto/login">
+				 	<img src="resources/images/kakao_login.png">
+				</a>
+				<br>
+				<a href="http://localhost:8006/api/v1/oauth2/google">
+					구글 아이디로 로그인
+				</a>
             </div>
             <br>
         </div> 
     </div>
-</body>
-</html>
+    

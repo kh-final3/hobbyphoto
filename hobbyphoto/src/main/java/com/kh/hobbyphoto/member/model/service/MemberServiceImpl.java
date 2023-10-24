@@ -25,6 +25,11 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMember(Member m) {
 		return md.insertMember(sqlSession, m);
 	}
+	
+	@Override
+	public int insertMemberKakao(Member m) {
+		return md.insertMemberKakao(sqlSession, m);
+	}
 
 	@Override
 	public Member searchId(String userName) {
@@ -45,5 +50,6 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMember(Member m) {
 		return md.deleteMember(sqlSession,m);
 	}
+
 
 }

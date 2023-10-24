@@ -6,11 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>	
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
     <style>
         .outer_myMeet{
+        /* border: 1px solid red; */
         width: 900px;
         height: 600px;
         margin: auto;
@@ -25,6 +29,7 @@
             
         }
         .container_myMeet2{
+            /* border: 1px solid red; */
             background-color: whitesmoke;
             width: 250px;
             height: 250px;
@@ -67,7 +72,6 @@
             </ul>  
         </div>
         <div class="container_myMeet1">
-
             <h6 style="margin: 10px 0 0 10px; font-weight: 500;"><img src="https://korean.visitkorea.or.kr/resources/images/sub/ico_tit_list5.png"> 마이페이지</h6>
             <h1 style="font-weight: 700;">모임</h1>
             <hr>
