@@ -48,6 +48,7 @@
         <input type="hidden" name="userNo" class="userNo" value="${ loginMember.userNo }">
         <input type="hidden" name="prono" value=${ p.PNo }>
         
+        
         <div class="innerOuter">
             <br>
             

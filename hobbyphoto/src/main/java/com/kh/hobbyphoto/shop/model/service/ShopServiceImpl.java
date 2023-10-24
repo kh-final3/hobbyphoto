@@ -63,14 +63,31 @@ public class ShopServiceImpl implements ShopService{
 		return result;
 	}
 
+//	@Override
+//	public ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist) {
+//		
+//		ArrayList<Cart> resultList = new ArrayList<>();
+//		
+//		for(Cart b : blist) {
+//	        ArrayList<Cart> resultCarts = sDao.selectCartBuy(sqlSession, b);
+//	        if(resultCarts != null && !resultCarts.isEmpty()) {
+//	            resultList.addAll(resultCarts);
+//	        }
+//	    }
+//		for(int i = 0 ; i<resultList.size();i++) {
+//		System.out.println("서비스에서 확인중 + " + resultList.get(i));
+//		}
+//		return resultList;
+//	}
+
 	@Override
-	public ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist) {
-		
-		for(Cart b : blist) {
-			ArrayList<Cart> ordlist = sDao.selectCartBuy(sqlSession,b);
-		}
-		
-		return null;
+	public int selectProductamount(int pno) {
+		return sDao.selectProductamount(sqlSession,pno);
+	}
+
+	@Override
+	public Product selectBuyProduct(int pno) {
+		return sDao.selectBuyProduct(sqlSession,pno);
 	}
 
 

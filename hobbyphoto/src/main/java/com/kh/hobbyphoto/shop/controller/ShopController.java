@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.service.ShopServiceImpl;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Controller
@@ -147,24 +148,61 @@ public class ShopController {
 		
 	}
 	
-	@RequestMapping("pro.buy")
-	public void selectCartBuy(String[] pNo, int userNo) {
+//	@ResponseBody
+//	@RequestMapping("pro.buy")
+//	public String selectCartBuy(String[] pNo, int userNo) {
+//		
+//		
+//		ArrayList<Cart> blist = new ArrayList<Cart>();
+//		//체크된 상품 리스트 만들기
+//		for(int i = 0; i<pNo.length;i++) {
+//			System.out.println(pNo[i]);
+//			Cart bc = new Cart();
+//			bc.setPNo(Integer.parseInt(pNo[i]));
+//			bc.setUserNo(userNo);
+//			
+//			blist.add(bc);
+//		}
+//		//System.out.println(blist + "컨트롤러에서 blist의 값");
+//		//System.out.println(blist.get(1).getPNo()+"상품 번호 확인중");
+//			
+//		//ArrayList<Orders> list = sService.selectCartBuy(blist.get(1).getPNo());
+//		
+//		ArrayList<Cart> buylist = sService.selectCartBuy(blist);
+//		
+//		for(int i = 0; i<buylist.size();i++) {
+//		System.out.println("리턴값 확이중 + " + buylist.get(i));
+//		}
+//		return "shop/shopCartBuy";
+//	}
+	
+	@RequestMapping("purchase")
+	public ModelAndView insertBuyOrder(String prono,Product p ,int userNo,int amount,Orders orders,HttpSession session,ModelAndView mv) {
 		
-		ArrayList<Cart> blist = new ArrayList<Cart>();
-		//체크된 상품 리스트 만들기
-		for(int i = 0; i<pNo.length;i++) {
+		int pno = Integer.parseInt(prono);
+		p.setPNo(Integer.parseInt(prono));
+		
+		//System.out.println(pno + "상품 번호");
+		//System.out.println(userNo + "회원번호");
+		//System.out.println(amount+"구매수량");
+		
+		int pamount = sService.selectProductamount(pno);
+		
+		if(amount > pamount) {//재고가 더 적을 경우
 			
-			Cart bc = new Cart();
-			bc.setPNo(Integer.parseInt(pNo[i]));
-			bc.setUserNo(userNo);
+			session.setAttribute("alertMsg", "재고량이 주문 수량 보다 많습니다.");
+			mv.setViewName("redirect:detail.pro?pno="+p.getPNo());
 			
-			blist.add(bc);
+		}else {//재고량이 더 많을 경우
+			
+			mv.addObject("amount", amount);
+			Product list = sService.selectBuyProduct(pno);
+			
+			mv.addObject("list", list).setViewName("shop/shopCartBuy");
 		}
-		System.out.println(blist + "컨트롤러에서 blist의 값");
-		
-		ArrayList<Cart> orlist = sService.selectCartBuy(blist);
+		return mv;
 		
 	}
-		
+	
 	
 }

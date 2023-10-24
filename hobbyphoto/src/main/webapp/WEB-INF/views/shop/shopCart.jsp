@@ -137,7 +137,7 @@
                     </div>
                
                     <div class="pb_charge">
-                       <span>${c.price * c.amount >= 50000 ? "무료" : "3000원"}</span>
+                       <span>${c.price * c.amount >= 50000 ? "0원" : "3000원"}</span>
                     </div>
                 </div>
                 
@@ -185,7 +185,7 @@
         </div>
         <div class="price_btn">
             <button class="continue_btn" onclick="continueshopping()">CONTINUE SHOPPING</button>
-            <button class="cbuy_btn">BUY NOW</button>
+            <button class="cbuy_btn" onclick="productbuy()">BUY NOW</button>
         </div>
     </div>
 
@@ -369,7 +369,6 @@
             })
 
 
-
            //체크박스 선택 삭제
            function deleteCartProduct(checkedPno){
                 $.ajax({
@@ -388,42 +387,14 @@
                 })
            }
            
-           $(".cbuy_btn").click(function(){
-        	   var checkedPno = checkedProductbox();
-        	   if(checkedPno.length ===0){
-        		   alert("구매할 상품을 선택해주세요");
-        		   return
-        	   }
-        	   selectBuyProduct(checkedPno);
-           }) 
-            
-            
-           //체크박시 선택 상품 구매 페이지로 이동
-           function selectBuyProduct(checkedPno){
-        	   $.ajax({
-        		   url:"pro.buy",
-        		   traditional : true,
-        		   data:{
-        			   pNo:checkedPno,
-        			   userNo:'${loginMember.userNo}'
-        		   },success:function(){
-        			   console.log("확인!!")
-        		   },error:function(){
-        			   console.log("장바구니에서 선택 상품 구매페이지 넘기기 ajax 통신 실패");
-        		   }
-        	   })
-           }
-            
-            
+       
+           //장바구니에있는 계속 쇼핑하기
            function continueshopping(){
         	   location.href="pro.list"
            }    
            
-           /*
-           function productbuy(){
-        	   location.href="pro.buy"
-           }
-           */
+          
+           
             
             
         </script>

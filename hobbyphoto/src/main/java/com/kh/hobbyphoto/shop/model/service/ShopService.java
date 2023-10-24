@@ -29,5 +29,11 @@ public interface ShopService {
 		int deleteCartProduct(ArrayList<Cart> clist);
 		
 		//8.장바구니에서 상품 선택해서 구매페이지 넘기기
-		ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist);
+		//ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist);
+		
+		//8.상품 상세에서 바로 구매하기 누렸을 경우 재고 확인
+		int selectProductamount(int pno);
+		
+		//9.구매상품 조회
+		Product selectBuyProduct(int pno);
 }

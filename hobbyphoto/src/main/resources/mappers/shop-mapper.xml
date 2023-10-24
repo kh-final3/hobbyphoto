@@ -116,7 +116,46 @@
 	</delete>
 	
 	<select id="selectCartBuy" resultMap="cartResult">
-		
+		select
+		        p_no
+		    ,   user_no
+		    ,   c.amount
+		    ,   p.price
+		    ,   p_name
+		    ,   b.brand_no
+		    ,   b.brand_name
+		    ,	thumbnail
+		from cart c
+		join product p using (p_no)
+		join member using (user_no)
+		join brand b on p.brand_no = b.brand_no
+		where user_no =#{userNo}
+		  and p_no = #{pNo}
 	</select>
-
+	
+	<select id="selectProductamount" resultType="_int">
+		select
+				p_no
+			,	amount
+		from product
+		where p_no = #{pNo}
+	</select>
+	
+	<select id="selectBuyProduct" resultMap="shopResult">
+		select
+	 				p_no
+	 			,	p_name
+	 			,	category_no
+	 			,	brand_no
+	 			,	price
+	 			,	amount
+	 			,	status
+	 			,	thumbnail
+	 		from product
+	 	   where status ='Y'
+	 	    and p_no = #{pNo}
+	 	   order
+ 	   		by p_no desc
+	</select>
+	
 </mapper>
