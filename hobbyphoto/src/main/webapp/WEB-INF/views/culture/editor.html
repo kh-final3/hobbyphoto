@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- TOAST UI Editor CDN URL(CSS)-->
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+
+</head>
+<body>
+
+    <h1>TOAST UI TEST</h1>
+
+    <!-- TOAST UI Editor가 들어갈 div태그 -->
+    <div id="editor"></div>
+    
+
+    <!-- TOAST UI Editor CDN URL(JS) -->
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
+    <!-- TOAST UI Editor 생성 JavaScript 코드 -->
+    <script>
+
+        const editor = new toastui.Editor({
+            el: document.querySelector('#editor'),
+            previewStyle: 'vertical',
+            height: '300px',
+            hooks: {
+                addImageBlobHook: (blob, callback) => uploadImages(blob, callback)
+            }
+        });
+
+        const uploadImages = (blob, callback) => {
+            let formData = new FormData();
+            formData.append("images", blob);
+
+            $.ajax({
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                url: '/common/fileUpload',
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                cache: false
+            }).fail(function() {
+                callback('image_load_fail');
+            }).done(function(data) {
+                callback(data);
+            });
+        }
+    </script>
+</body>
+</html>
