@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>장비추천 상세</title>
 <style>
 
     .content{
@@ -52,17 +52,18 @@
 	            <table id="contentArea" align="center" class="table">
 	                <tr>
 	                    <th width="100">제목</th>
-	                    <td>${ boardTitle }</td>
+	                    <td>${ b.boardTitle }</td>
 	                </tr>
 	                <tr>
 	                    <th>작성자</th>
-	                    <td>${ boardWriter }</td>
+	                    <td>${ b.boardWriter }</td>
 	                </tr>
 	                <tr>
-	                    <td colspan="2" id="etc"><span>작성일</span> <span class="text">${ createDate }</span> <span>조회수</span> <span class="text">${ b.count }</span></td>
+	                    <td colspan="2" id="etc"><span>작성일</span> <span class="text">${ b.createDate }</span> <span>조회수</span> <span class="text">${ b.count }</span></td>
 	                </tr>
 	                <tr>
-	                    <td colspan="2"><p style="height:150px">${ boardContent }</p></td>
+	                    <td colspan="2"><p style="height:150px">${ b.boardContent }</p></td>
+	                    <td colspan="2"><p style="height:150px">${ b.hashTag }</p></td>
 	                </tr>
 	            </table>
 	        </div>

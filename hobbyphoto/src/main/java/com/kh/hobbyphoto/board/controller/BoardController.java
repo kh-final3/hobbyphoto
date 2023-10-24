@@ -183,7 +183,6 @@ public class BoardController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 		ArrayList<Board> list = bService.selectRcList(pi);
 		
-		System.out.println(list);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectRcBoardList");
 		return mv;
@@ -196,7 +195,6 @@ public class BoardController {
 		if (result > 0) {
 			Board b = bService.selectRcBoard(phno); 
 			ArrayList<Attachment> at = bService.selectRcAtBoard(phno);
-			
 			model.addAttribute("b", b);
 			model.addAttribute("at", at);
 			

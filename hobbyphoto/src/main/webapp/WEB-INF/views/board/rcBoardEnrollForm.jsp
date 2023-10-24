@@ -26,8 +26,8 @@
     <div class="content">
         <br><br>
         <div align="center">
-            <h2>장비 추천</h2>
-            <h6 style="color: gray;">사용자가 전해주는 다양한 카메라 이야기!</h6>
+        	<h2>장비 추천</h2>
+            	<h6 style="color: gray;">사용자가 전해주는 다양한 카메라 이야기!</h6>
         </div>
         <br>
         <div class="recommend">
@@ -39,15 +39,16 @@
                     </tr>
                     <tr>
                         <td colspan="2"><textarea name="boardContent" cols="180" rows="15" style="resize: none;"></textarea></td>
+                        <input type="text" name="hashTag" style="width: 1200px;">
                     </tr>
                 </table>
                 <input type="file">
-            </form>
-        </div>
-        <br>
-        <div class="rc-btn" align="right" style="width: 1300px;" >
-            <button type="submit" class="btn btn-dark">작성</button>
-            <button class="btn btn-dark">취소</button>
+        		<br>
+			        <div class="rc-btn" align="right" style="width: 1300px;" >
+			            <button type="submit" class="btn btn-dark">작성</button>
+			            <button class="btn btn-dark">취소</button>
+			        </div>
+        	</form>
         </div>
     </div>
 </body>

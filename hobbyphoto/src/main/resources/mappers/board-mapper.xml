@@ -52,7 +52,7 @@
 		  where b.status = 'Y'
 		  and b.board_type = 1
 	      and a.file_level = 1
-		  order by to_number(b.board_no) desc
+		  order by b.board_no desc
 	</select>
 	
 	<insert id="insertPhBoard">
@@ -186,6 +186,15 @@
 		  and b.board_type = 2
 		  order by to_number(b.board_no) desc
 	</select>
+	
+	<update id="increaseRcCount">
+		update
+			board
+		  	set count = count + 1
+		  where board_no = #{boardNo}
+		    and status = 'Y'
+		    and board_type = 2
+	</update>
 	
 	<select id="selectRcBoard" resultMap="boardResult">
 		SELECT

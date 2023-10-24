@@ -97,7 +97,7 @@
 				                <td>${ b.boardWriter }</td>
 				                <td>${ b.count }</td>
 				                <td>${ b.createDate }</td>
-				                <input type="hidden" class="phno" value="${ reverseIndex }">
+				                <input type="hidden" class="phno" value="${ b.boardNo }">
 				            </tr>
 				        </c:forEach>
 				    </tbody>

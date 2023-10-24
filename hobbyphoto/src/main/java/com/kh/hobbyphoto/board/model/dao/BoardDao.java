@@ -26,7 +26,7 @@ public class BoardDao {
 	}
 
 	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.update("boardMapper.increaseCount", boardNo);
+		return sqlSession.update("boardMapper.increaseRcCount", boardNo);
 	}
 	
 	public Board selectPhBoard(SqlSessionTemplate sqlSession, int boardNo) {
@@ -86,7 +86,7 @@ public class BoardDao {
 	}
 	
 	public int increaseRcCount(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.update("boardMapper.increaseCount", boardNo);
+		return sqlSession.update("boardMapper.increaseRcCount", boardNo);
 	}
 
 	public Board selectRcBoard(SqlSessionTemplate sqlSession, int boardNo) {

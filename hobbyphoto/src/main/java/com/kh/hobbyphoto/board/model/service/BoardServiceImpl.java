@@ -90,7 +90,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int increaseRcCount(int boardNo) {
-		return bDao.increaseCount(sqlSession, boardNo);
+		return bDao.increaseRcCount(sqlSession, boardNo);
 	}
 
 	@Override
