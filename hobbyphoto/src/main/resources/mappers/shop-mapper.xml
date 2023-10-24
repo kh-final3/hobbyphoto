@@ -83,7 +83,7 @@
 			,	#{amount}
 			)
 	 </insert>
-	 
+  
 	 <select id="selectCartProList" resultMap="cartResult">
 		select
 		        p_no

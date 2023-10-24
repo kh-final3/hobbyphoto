@@ -6,7 +6,7 @@ import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Member;
-import com.kh.hobbyphoto.shop.model.vo.Product;
+
 
 public interface AdminService {
 	

@@ -15,7 +15,6 @@
 		<result column="status" property="status" />
 		<result column="social" property="social" />
 	</resultMap>
-
 	
 	<!-- 관리자페이지 회원 조회 -->
 	<select id="selectMember" resultMap="resultMember">
@@ -35,6 +34,7 @@
 	order 
 	   by user_no
 	</select>
+
 	  
 	<!-- 신고 게시물 관리 -->  
 	<select id="">

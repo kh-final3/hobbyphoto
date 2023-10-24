@@ -211,7 +211,7 @@
 	            </div> 
 	            <div id="mb_nav">
 	                <ul id="mb_navi">
-	                    <li><a href="#">사진게시판</a></li>
+	                    <li><a href="phBoardList.bo">사진게시판</a></li>
 	                    <li><a href="#">장비추천</a></li>
 	                    <li><a href="#">축제 · 전시</a></li>
 	                    <li><a href="#">출사명소</a></li>
@@ -269,7 +269,9 @@
 		                					<li class="member_menu_mypage" align="center">
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
-					                					<a href="admin.pg">관리자페이지</a>
+
+					                					<a href="alist.da">관리자페이지</a>
+
 				                					</c:when>
 				                					<c:otherwise>
 				                						<a href="#">알림(0)</a>

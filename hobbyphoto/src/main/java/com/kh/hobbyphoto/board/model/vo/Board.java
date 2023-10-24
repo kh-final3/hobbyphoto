@@ -2,6 +2,8 @@ package com.kh.hobbyphoto.board.model.vo;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,7 @@ import lombok.ToString;
 @ToString
 public class Board {
 
-	private String boardNo;
+	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
 	private String boardWriter;
@@ -24,4 +26,7 @@ public class Board {
 	private String status;
 	private Date createDate;
 	private String hashTag;
+	private String thumbnail;
+	//private MultipartFile[] upfiles;
+
 }

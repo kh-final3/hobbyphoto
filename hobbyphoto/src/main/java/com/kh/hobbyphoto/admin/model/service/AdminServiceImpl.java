@@ -6,8 +6,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.web.bind.annotation.GetMapping;
+
 import com.kh.hobbyphoto.admin.model.dao.AdminDao;
 import com.kh.hobbyphoto.board.model.vo.Board;
+import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.vo.Product;
@@ -18,7 +21,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	private AdminDao aDao;
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -80,10 +83,5 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int selectAdminProListCount() {
 		return aDao.selectAdminProListCount(sqlSession);
-	}
-
-	
-
-	
-
+  }
 }

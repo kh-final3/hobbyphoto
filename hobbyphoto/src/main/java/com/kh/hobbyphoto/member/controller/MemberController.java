@@ -31,6 +31,7 @@ public class MemberController {
 	@RequestMapping("login.me")
 	public ModelAndView loginMember(Member m,Model model,HttpSession session,ModelAndView mv) {
 		Member loginMember = ms.loginMember(m);
+
 		if(loginMember != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			mv.setViewName("redirect:/");
@@ -38,6 +39,7 @@ public class MemberController {
 			session.setAttribute("alertMsg", "아이디 또는 비밀번호가 다르거나, 존재하지 않는 회원입니다.");
 			mv.setViewName("redirect:loginForm.me");
 		}
+		
 		return mv;
 	}
 	
@@ -141,7 +143,11 @@ public class MemberController {
 			session.setAttribute("alertMsg", "비밀번호가 다릅니다.");
 			return "redirect:deleteForm.me";
 		}
+	}
 	
+	@RequestMapping("myBoard.me")
+	public String myBoard() {
+		return "member/myBoard";
 	}
 	
 }

@@ -15,7 +15,7 @@
             justify-content: center;
             background-color: rgba(0, 0,0,0.1);
             border-radius: 15px;
-            margin-left: 130px;
+            margin: auto;
         }
 
         .innerOuter{
@@ -28,6 +28,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column; 
+            margin: auto;
         }
 
         .login_id {
@@ -166,7 +167,7 @@
                         <button class="login_btn" type="submit">로그인</button>
                     </div>
                     <div class="btn" align="center">
-                        <button class="enroll_btn" type="button">회원가입</button>
+                        <button class="enroll_btn" type="button" onclick="location.href='memberEnrollForm.me'">회원가입</button>
                     </div>
 		            </form>
                 </div>

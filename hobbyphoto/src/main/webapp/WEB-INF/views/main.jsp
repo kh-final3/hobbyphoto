@@ -9,16 +9,9 @@
   <title>메인화면</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
   <!--제이쿼리-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
-  <!-- Swiper's CSS -->
-  <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"> -->
-
-  <!-- Swiper's JS -->
-  <!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
 
   <style>
     .carousel-inner > .carousel-item > img{
@@ -209,7 +202,7 @@
       </div>
       <div class="carousel-item">
         <img class="d-block w-100"
-          src="resources/풍경2.JPG"
+          src="https://mblogthumb-phinf.pstatic.net/MjAxOTAzMDZfMTMy/MDAxNTUxODE0NTI0MDE2.aHZ-ft3YNSC3XGhzrGEKFdU4o_lJ8qBRC-F4aftjplAg.gS9c4UEnLDY_kXveY6xVoM1GqUUqZSQM8BRFKCHl7LYg.JPEG.mong728/%EC%B4%88%EA%B3%A0%ED%99%94%EC%A7%88_%EC%BB%B4%ED%93%A8%ED%84%B0_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_(3).jpg?type=w800"
           alt="Third slide">
       </div>
     
