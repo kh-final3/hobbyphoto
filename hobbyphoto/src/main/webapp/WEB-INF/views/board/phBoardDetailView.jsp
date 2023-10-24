@@ -204,7 +204,6 @@
     <div class="warp">
         <div class="inner">
             <div class="img-area">
-
                 <div class="box">
                     <!--div를 두개 감싼이유는 img들을 좌우배치하고 배치된 사진중 한장만 보이게 하기 위해서이다.-->
                     <div class="slide"> <!--배치된 img들을 하나의 img만 보이게 가리기 위한 태그-->

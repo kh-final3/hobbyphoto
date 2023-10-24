@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>장비추천 상세</title>
 <style>
-
     .content{
         width: 1300px;
         margin: auto;
@@ -40,6 +39,7 @@
     .ir-btn{margin-left: 10px; width: 100px; height: 75px; position: relative; bottom: 33px;}
 </style>
 </head>
+	<jsp:include page="../common/header.jsp"/>
 	<body>
 	    <div class="content">
 	        <br><br>
@@ -65,17 +65,41 @@
 	                    <td colspan="2"><p style="height:150px">${ b.boardContent }</p></td>
 	                    <td colspan="2"><p style="height:150px">${ b.hashTag }</p></td>
 	                </tr>
+		                <tr>
+		                    <th>첨부파일</th>
+		                    <td>
+		                     <c:forEach var="a" items="${ at }">    
+				                <img src="${ a.filePath }">
+				             </c:forEach>
+		                    </td>
+	                	</tr>
 	            </table>
 	        </div>
 	        <br>
 	        <div>
 	            <button class="btn btn-dark btn-sm">목록으로</button>
-	            <!--
-	            <button class="btn btn-dark btn-sm">수정하기</button>
-	            <button class="btn btn-dark btn-sm">삭제하기</button>
-	            -->
+	            <button class="btn btn-dark btn-sm" onclick="postFormSubmit(1);">수정하기</button>
+	            <button class="btn btn-dark btn-sm" onclick="postFormSubmit(2);">삭제하기</button>
 	        </div>
 	        <br><br>
+	        
+            <form id="postForm" action="" method="post">
+            	<input type="hidden" name="phno" value="${ b.boardNo }">
+            	<c:forEach var="a" items="${ at }">    
+            		<input type="hidden" name="filePath" value="${ a.filePath }">
+				</c:forEach>
+            </form>
+            
+			<script>
+				function postFormSubmit(num) {
+					if(num == 1){ // 수정하기 클릭시
+						$("#postForm").attr("action", "rcUpdateForm.bo").submit();
+					} else{ // 삭제하기 클릭시
+						console.log($("#postForm"));
+						$("#postForm").attr("action", "rcDelete.bo").submit();
+					}
+				}
+			</script> 
 	            <ul class="replyArea">
 	                <ul class="reply">
 	                    <div class="reply-title">
@@ -116,4 +140,5 @@
 	        <br><br>
 	    </div>
 	</body>
+	<jsp:include page="../common/footer.jsp"/>
 </html>

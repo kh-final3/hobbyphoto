@@ -31,7 +31,7 @@
         </div>
         <br>
         <div class="recommend">
-            <form action="rcInsert.bo" class="form-area" method="post">
+            <form action="rcInsert.bo"  enctype="multiPart/form-data"class="form-area" method="post">
                 <table id="contentArea" align="center" class="table">
                     <tr>
                         <th width="100">제목</th>
@@ -42,7 +42,7 @@
                         <input type="text" name="hashTag" style="width: 1200px;">
                     </tr>
                 </table>
-                <input type="file">
+                <input type="file" name="upfile">
         		<br>
 			        <div class="rc-btn" align="right" style="width: 1300px;" >
 			            <button type="submit" class="btn btn-dark">작성</button>

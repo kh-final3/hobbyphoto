@@ -26,7 +26,7 @@ public class BoardDao {
 	}
 
 	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.update("boardMapper.increaseRcCount", boardNo);
+		return sqlSession.update("boardMapper.increaseCount", boardNo);
 	}
 	
 	public Board selectPhBoard(SqlSessionTemplate sqlSession, int boardNo) {
@@ -71,6 +71,7 @@ public class BoardDao {
 		return (ArrayList) sqlSession.selectList("boardMapper.selectTopBoardList");
 	}
 	
+	
 	//-----------------------------------------------------------
 
 	public int selectRcListCount(SqlSessionTemplate sqlSession) {
@@ -104,6 +105,11 @@ public class BoardDao {
 	public int insertRcAtBoard(SqlSessionTemplate sqlSession, Attachment at) {
 		return sqlSession.insert("boardMapper.insertRcAtBoard", at);
 	}
+
+	public int deleteRcBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.delete("boardMapper.deleteRcBoard", boardNo);
+	}
+
 
 
 

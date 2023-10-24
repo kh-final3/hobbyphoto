@@ -114,6 +114,10 @@ public class BoardServiceImpl implements BoardService{
 		return result * result2;
 	}
 
+	public int deleteRcBoard(int boardNo) {
+		return bDao.deleteRcBoard(sqlSession, boardNo);
+	}
+
 
 
 

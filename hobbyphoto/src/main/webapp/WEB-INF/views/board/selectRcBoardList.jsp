@@ -52,82 +52,84 @@
         }
     </style>
 </head>
-<body>
-    <div class="content">
-        <br><br>
-        <div class="innerOuter">
-            <div align="center">
-                <h2>장비 추천</h2>
-                <h6 style="color: gray;">사용자가 전해주는 다양한 카메라 이야기!</h6>
-            </div>
-            <br>
-            <div align="right">
-                <form id="searchForm" action="" method="get">
-                    <div class="select">
-                        <select class="custom-select" name="condition">
-                            <option value="writer">작성자</option>
-                            <option value="title">제목</option>
-                            <option value="content">내용</option>
-                        </select>
-                    </div>
-                    <div class="text">
-                        <input type="text" class="form-control" name="keyword">
-                    </div>
-                    <button type="submit" class="searchBtn btn btn-secondary">검색</button>
-                </form>
-            </div>  
-            <br></br>
-				<table id="boardList" class="table table-hover" align="center">
-				    <thead>
-				        <tr>
-				            <th>글번호</th>
-				            <th>제목</th>
-				            <th>작성자</th>
-				            <th>조회수</th>
-				            <th>작성일</th>
-				        </tr>
-				    </thead>
-				    <tbody>
-				        <c:set var="listSize" value="${fn:length(list)}" />
-				        <c:forEach var="b" items="${list}" varStatus="status">
-				            <c:set var="reverseIndex" value="${listSize - status.count + 1}" />
-				            <tr class="clickable-row">
-				                <td>${ reverseIndex }</td>
-				                <td>${ b.boardTitle }</td>
-				                <td>${ b.boardWriter }</td>
-				                <td>${ b.count }</td>
-				                <td>${ b.createDate }</td>
-				                <input type="hidden" class="phno" value="${ b.boardNo }">
-				            </tr>
-				        </c:forEach>
-				    </tbody>
-				</table>
-				<br><br>
-				<script>
-				    $(document).ready(function() {
-				        $('#boardList tbody').on('click', 'tr', function() {
-				            var phno = $(this).find('.phno').val();
-				            window.location.href = 'rcDetail.bo?phno=' + phno;
-				        });
-				    });
-				</script>
-
-            	<a class="btn btn-secondary btn-sm" style="float:right" href="rcEnrollForm.bo">글쓰기</a>
-			           <div id="pagingArea">
-			               <ul class="pagination">
-			                    <li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-			                   	<li class="page-item"><a class="page-link" href="">1</a></li>
-			                   	<li class="page-item"><a class="page-link" href="">2</a></li>
-			                   	<li class="page-item"><a class="page-link" href="">3</a></li>
-			                   	<li class="page-item"><a class="page-link" href="">4</a></li>
-			                   	<li class="page-item"><a class="page-link" href="">5</a></li>
-			                    <li class="page-item"><a class="page-link" href="">Next</a></li>
-			               </ul>
-			           </div>
-            		<br clear="both"><br>
-            	<br><br>
-        	</div>
-        <br><br>
-    </div>
-</body>
+<jsp:include page="../common/header.jsp"/>
+	<body>
+	    <div class="content">
+	        <br><br>
+	        <div class="innerOuter">
+	            <div align="center">
+	                <h2>장비 추천</h2>
+	                <h6 style="color: gray;">사용자가 전해주는 다양한 카메라 이야기!</h6>
+	            </div>
+	            <br>
+	            <div align="right">
+	                <form id="searchForm" action="" method="get">
+	                    <div class="select">
+	                        <select class="custom-select" name="condition">
+	                            <option value="writer">작성자</option>
+	                            <option value="title">제목</option>
+	                            <option value="content">내용</option>
+	                        </select>
+	                    </div>
+	                    <div class="text">
+	                        <input type="text" class="form-control" name="keyword">
+	                    </div>
+	                    <button type="submit" class="searchBtn btn btn-secondary">검색</button>
+	                </form>
+	            </div>  
+	            <br></br>
+					<table id="boardList" class="table table-hover" align="center">
+					    <thead>
+					        <tr>
+					            <th>글번호</th>
+					            <th>제목</th>
+					            <th>작성자</th>
+					            <th>조회수</th>
+					            <th>작성일</th>
+					        </tr>
+					    </thead>
+					    <tbody>
+					        <c:set var="listSize" value="${fn:length(list)}" />
+					        <c:forEach var="b" items="${list}" varStatus="status">
+					            <c:set var="reverseIndex" value="${listSize - status.count + 1}" />
+					            <tr class="clickable-row">
+					                <td>${ reverseIndex }</td>
+					                <td>${ b.boardTitle }</td>
+					                <td>${ b.boardWriter }</td>
+					                <td>${ b.count }</td>
+					                <td>${ b.createDate }</td>
+					                <input type="hidden" class="phno" value="${ b.boardNo }">
+					            </tr>
+					        </c:forEach>
+					    </tbody>
+					</table>
+					<br><br>
+					<script>
+					    $(document).ready(function() {
+					        $('#boardList tbody').on('click', 'tr', function() {
+					            var phno = $(this).find('.phno').val();
+					            window.location.href = 'rcDetail.bo?phno=' + phno;
+					        });
+					    });
+					</script>
+	
+	            	<a class="btn btn-secondary btn-sm" style="float:right" href="rcEnrollForm.bo">글쓰기</a>
+				           <div id="pagingArea">
+				               <ul class="pagination">
+				                    <li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+				                   	<li class="page-item"><a class="page-link" href="">1</a></li>
+				                   	<li class="page-item"><a class="page-link" href="">2</a></li>
+				                   	<li class="page-item"><a class="page-link" href="">3</a></li>
+				                   	<li class="page-item"><a class="page-link" href="">4</a></li>
+				                   	<li class="page-item"><a class="page-link" href="">5</a></li>
+				                    <li class="page-item"><a class="page-link" href="">Next</a></li>
+				               </ul>
+				           </div>
+	            		<br clear="both"><br>
+	            	<br><br>
+	        	</div>
+	        <br><br>
+	    </div>
+	</body>
+	<jsp:include page="../common/footer.jsp"/>
 </html>

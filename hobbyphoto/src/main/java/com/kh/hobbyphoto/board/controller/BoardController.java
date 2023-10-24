@@ -213,17 +213,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping("rcInsert.bo")
-	public String insertRcBoard(Board b, MultipartFile[] upfiles, Model model, HttpSession session) {
+	public String insertRcBoard(Board b, MultipartFile[] upfile, Model model, HttpSession session) {
 		
         ArrayList<Attachment> list = new ArrayList<>();
 
-        for (int i = 0; i < upfiles.length; i++) {
-            if (upfiles[i] != null && !upfiles[i].isEmpty()) {
-                String changeName = saveFile(upfiles[i], session);
+        for (int i = 0; i < upfile.length; i++) {
+            if (upfile[i] != null && !upfile[i].isEmpty()) {
+                String changeName = saveFile(upfile[i], session);
 
                 Attachment at = new Attachment();
                 at.setFileNo(i + 1);
-                at.setOriginName(upfiles[i].getOriginalFilename());
+                at.setOriginName(upfile[i].getOriginalFilename());
                 at.setChangeName(changeName);
                 at.setFilePath("resources/upfiles/" + changeName);
                 at.setFileLevel(i + 1);
@@ -235,13 +235,32 @@ public class BoardController {
 
         if (result > 0) {
             session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
-            return "redirect:phBoardList.bo";
+            return "redirect:rcBoardList.bo";
         } else {
             model.addAttribute("errorMsg", "게시글 등록 실패");
             return "common/errorPage";
         }
 	}
-
+	
+	@RequestMapping("rcDelete.bo")
+	public String deleteRcBoard(int phno, String filePath, HttpSession session, Model model) { 
+		int result = bService.deleteRcBoard(phno);
+		
+		if(result > 0) {
+			// 첨부파일이 있었을 경우 => 파일 삭제
+			if(!filePath.equals("")) { // filePath = "resources/uploadFiles/xxxx.jpg" | ""
+				new File(session.getServletContext().getRealPath(filePath)).delete();
+			}
+			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+			return "redirect:rcBoardList.bo";
+			
+		} else {
+			// 삭제 실패
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
+		
+	}
 	
 
 }
