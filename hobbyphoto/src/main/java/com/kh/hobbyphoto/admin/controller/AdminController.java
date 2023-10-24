@@ -22,6 +22,7 @@ import com.kh.hobbyphoto.admin.model.service.AdminServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.common.model.vo.Report;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
@@ -144,16 +145,13 @@ public class AdminController {
 	
 	// 신고회원 관리 페이지로 연결
 	@RequestMapping("rlist.me")
-	public String reportManage() {
+	public ModelAndView selectReport(ModelAndView mv) {
 		
-		return "admin/reportManage";
-	}
-	
-	// 상품 매출 현황으로 연결
-	@RequestMapping("achart.pr")
-	public String adminCharts() {
+		ArrayList<Report> list = aService.selectReport();
 		
-		return "admin/adminCharts";
+		mv.addObject("list",list).setViewName("admin/reportManage");
+		
+		return mv;
 	}
 	
 	// 하비포토 메인 페이지로 이동
@@ -162,6 +160,7 @@ public class AdminController {
 		return "main";
 	}
 	
+	/*
 	@RequestMapping("regist.pro")
 	public String insertproduct(Product p, MultipartFile[] upfile, HttpSession session, Model model) {
 		
@@ -193,17 +192,17 @@ public class AdminController {
 			}
 			
 		}
-		int result = aService.insertProduct(p);
+//		int result = aService.insertProduct(p);
 		
-		System.out.println(p);
-		System.out.println(result);
-		if(result>0) {//등록 성공
-			session.setAttribute("alertMsg", "성공적으로 상품이 등록되었습니다.");
-			return "admin/adminIndex";
-		}else {//등록 실패
-			model.addAttribute("errorMsg", "상품 등록 실패");
-			return "common/errorPage";
-		}
+//		System.out.println(p);
+//		System.out.println(result);
+//		if(result>0) {//등록 성공
+//			session.setAttribute("alertMsg", "성공적으로 상품이 등록되었습니다.");
+//			return "admin/adminIndex";
+//		}else {//등록 실패
+//			model.addAttribute("errorMsg", "상품 등록 실패");
+//			return "common/errorPage";
+//		}
 		
 		
 	}
@@ -237,6 +236,22 @@ public class AdminController {
 			
 			return changeName;
 		}
+		*/
+	
+	// 관리자페이지 차트
+	@RequestMapping("chart.da")
+	public String adminCharts() {
+		
+		return "admin/adminCharts";
+	}
+	
+	// 관리자페이지 관리자 통계
+	@RequestMapping("table.da")
+	public String adminTables() {
+		
+		return "admin/adminTables";
+	}	
+		
 		
 	}
 

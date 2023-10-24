@@ -9,15 +9,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>신고회원관리</title>
+        <title>방문자 통계</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="resources/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
+        <c:if test="${ not empty alertMsg }">
+		<script>
+			alertify.alert("${ alertMsg }");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
+    
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="rlist.me">신고회원관리</a>
+            <a class="navbar-brand ps-3" href="table.da">방문자 통계 조회</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -44,7 +51,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">메인</div>
+                            <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="alist.da">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
@@ -112,10 +119,10 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">신고회원관리</h1>
+                        <h1 class="mt-4">Tables</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="alist.da">Dashboard</a></li>
-                            <li class="breadcrumb-item active">신고회원관리</li>
+                            <li class="breadcrumb-item active">Tables</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
@@ -127,41 +134,80 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                신고회원관리
+                                DataTable Example
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>참조번호</th>
-                                            <th>게시글번호</th>
-                                            <th>신고 내용</th>
-                                            <th>사진게시판</th>
-                                            <th>신고자</th>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
                                         </tr>
                                     </thead>
-                                    
                                     <tfoot>
                                         <tr>
-                                            <th>참조번호</th>
-                                            <th>게시글번호</th>
-                                            <th>신고 내용</th>
-                                            <th>사진게시판</th>
-                                            <th>신고자</th>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
                                         </tr>
                                     </tfoot>
-                                    
                                     <tbody>
-                                    <c:forEach var="r" items="${ list }">
-	                                        <tr>
-	                                            <td class="rno">${ r.rpNo }</td>
-	                                            <td>${ r.boardNo }</td>
-	                                            <td>${ r.rpContent }</td>
-	                                            <td>${ r.boardtype }</td>
-	                                            <td>${ r.userId }</td>
-	                                        </tr>
-                                    </c:forEach>
-	                                    </tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                            <td>$320,800</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Garrett Winters</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>63</td>
+                                            <td>2011/07/25</td>
+                                            <td>$170,750</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ashton Cox</td>
+                                            <td>Junior Technical Author</td>
+                                            <td>San Francisco</td>
+                                            <td>66</td>
+                                            <td>2009/01/12</td>
+                                            <td>$86,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cedric Kelly</td>
+                                            <td>Senior Javascript Developer</td>
+                                            <td>Edinburgh</td>
+                                            <td>22</td>
+                                            <td>2012/03/29</td>
+                                            <td>$433,060</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Airi Satou</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>33</td>
+                                            <td>2008/11/28</td>
+                                            <td>$162,700</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Brielle Williamson</td>
+                                            <td>Integration Specialist</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                            <td>2012/12/02</td>
+                                            <td>$372,000</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -187,4 +233,3 @@
         <script src="resources/js/datatables-simple-demo.js"></script>
     </body>
 </html>
-    

@@ -13,6 +13,7 @@ import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.common.model.vo.Report;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.vo.Product;
@@ -40,10 +41,10 @@ public class AdminServiceImpl implements AdminService{
 	}
   
 	// 상품 등록 서비스
-	@Override
-	public int insertProduct(Product p) {
-		return aDao.insertProduct(sqlSession, p);
-	}
+//	@Override
+//	public int insertProduct(Product p) {
+//		return aDao.insertProduct(sqlSession, p);
+//	}
 	
 	// 게시물 관리서비스-사진게시판
 	@Override
@@ -72,6 +73,12 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ArrayList<BackGround> selectBoard4() {
 		return aDao.selectBoard4(sqlSession);
+	}
+	
+	// 신고 게시물 조회
+	@Override
+	public ArrayList<Report> selectReport() {
+		return aDao.selectReport(sqlSession);
 	}
 
 }

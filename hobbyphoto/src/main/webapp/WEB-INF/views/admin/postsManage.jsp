@@ -157,10 +157,10 @@
                 </ul>
             </div>
                 
-    <table id="datatablesSimple">
+    <table id="boardList">
         <thead>
             <tr>
-                <th><input type="checkbox" name="" id=""></th>
+                <th>순번</th>
                 <th>게시판 유형</th>
                 <th>게시물 제목</th>
                 <th>작성자</th>                
@@ -172,32 +172,34 @@
         
         <c:forEach var="b" items="${ list }">
             <tr>
-                <td ><input type="checkbox" name="" id="pmPhoto"></td>
+                <td class="bno">${b.boardNo}</td>
                 <td>사진게시판</td>
-                <td class="bno">${b.boardTitle}</td>
+                <td>${b.boardTitle}</td>
                  <td>${b.boardWriter}</td>
                 <td>${b.createDate}</td>
                 <td class="button-container">
-                    <button onclick="">관리</button>
      				<form action="pdelete.bo" method="post">
 	                	<input type="hidden" name="boardTitle" value="${ b.boardTitle }">
 	                    <button type="submit">삭제</button>
                     </form>
-                    <button onclick="">수정</button>
+                    <form action="phDetail.bo?phno=" method="post">
+                    <input type="hidden" name="boardNo" value="${ b.boardNo }">
+                    <button type="submit">수정</button>
+                    
+                    </form>
                 </td>
             </tr>
             </c:forEach>
             
             <c:forEach var="b" items="${ list2 }">
             <tr>
-              <td><input type="checkbox" name="" id="pmEquip"></td>
+              <td>${b.boardNo}</td>
               <td>장비추천 게시판</td>
               <td class="bno">${b.boardTitle}</td>
                  <td>${b.boardWriter}</td>
                 <td>${b.createDate}</td>
               <td class="button-container">
-                  <button onclick="">관리</button>
-                  <button onclick="">삭제</button>
+                  <button onclick="submit">삭제</button>
                   <button onclick="">수정</button>
               </td>
             </tr>
@@ -205,14 +207,13 @@
             
             <c:forEach var="g" items="${ list3 }">
             <tr>
-              <td><input type="checkbox" name="" id="pmGetter"></td>
+              <td>${ g.groupNo }</td>
               <td>모임 게시판</td>
               <td class="gno">${g.title}</td>
               <td>${g.userNo}</td>
               <td>${g.createDate}</td>
               <td class="button-container">
-                  <button onclick="">관리</button>
-                  <button onclick="">삭제</button>
+                  <button onclick="submit">삭제</button>
                   <button onclick="">수정</button>
               </td>
             </tr>
@@ -220,14 +221,13 @@
             
             <c:forEach var="k" items="${ list4 }">
             <tr>
-              <td><input type="checkbox" name="" id="pmBack"></td>
+              <td>${k.backNo}</td>
               <td>배경 화면 게시판</td>
               <td class="kno">배경화면</td>
               <td>${k.userNo}</td>
               <td>${k.createDate}</td>
               <td class="button-container">
-                  <button onclick="">관리</button>
-                  <button onclick="">삭제</button>
+                  <button onclick="submit">삭제</button>
                   <button onclick="">수정</button>
               </td>
             </tr>
@@ -261,30 +261,6 @@
    </form>
 
 	<script type="text/javascript">
-	$(function(){
-		$(document).on("click", "#datatablesSimple>tbody>tr", function(){
-			location.href="plist.bo?bno=" + $(this).children().eq(0).text();
-		})
-	})
-	
-		$(function(){
-		$(document).on("click", "#datatablesSimple>tbody>tr", function(){
-			location.href="elist.bo?bno=" + $(this).children().eq(0).text();
-		})
-	})
-	
-		$(function(){
-		$(document).on("click", "#datatablesSimple>tbody>tr", function(){
-			location.href="glist.bo?gno=" + $(this).children().eq(0).text();
-		})
-	})
-	
-		$(function(){
-		$(document).on("click", "#datatablesSimple>tbody>tr", function(){
-			location.href="backlist.bo?kno=" + $(this).children().eq(0).text();
-		})
-	})
-	
 	function goFormSubmit(num){
   		if(num == 1){
   			$("#postForm1").attr("action", "plist.bo").submit();
@@ -296,8 +272,9 @@
   			$("#postForm4").attr("action", "backlist.bo").submit();
   		}
   	}
-	
 	</script>
+	
+	
 
 </div>
 

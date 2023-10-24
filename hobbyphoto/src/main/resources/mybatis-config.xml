@@ -13,7 +13,7 @@
 		<typeAlias type="com.kh.hobbyphoto.upfile.model.vo.Attachment" alias="Attachment"/>
 		<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Product" alias="Product"/>
 		<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Cart" alias="Cart"/>
-		<typeAlias type="com.kh.hobbyphoto.admin.model.vo.Report" alias="Report"/>
+		<typeAlias type="com.kh.hobbyphoto.common.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.hobbyphoto.group.model.vo.Sgroup" alias="S_group"/>
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.BackGround" alias="BackGround"/>
 		
