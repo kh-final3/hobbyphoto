@@ -67,8 +67,8 @@
 .exhibitionDetail-carousel-image {
 	position: absolute;
 	display: block;
-	max-width: 100%;
-	max-height: 100%;
+	width: 100%;
+	height: 100%;
 	top: 50%;
 	left: 50%;
 	-webkit-transform: translate(-50%, -50%);
@@ -154,7 +154,6 @@
 }
 
 .exhibitionDetail-explain {
-	max-width: 680px;
 	margin: 0 auto;
 	font-size: 14px;
 	text-align: justify;

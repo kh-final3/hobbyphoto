@@ -123,32 +123,6 @@ public class BoardController {
 		}
 	}
 
-	public String savePlFile(MultipartFile upfile, HttpSession session) {
-
-		// 파일명 수정 작업 후 서버에 업로드 시키기("flower.png" => "2023100412345.png")
-		String originName = upfile.getOriginalFilename(); // "flower.png"
-
-		// "2023100412345" ("년월일시분초")
-		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // "202031004143508"
-		int ranNum = (int) (Math.random() * 90000 + 10000); // 21381 (5자리 랜덤값)
-		String ext = originName.substring(originName.lastIndexOf("."));
-
-		String changeName = currentTime + ranNum + ext; // "202320055470821318.png"
-
-		// 업로드 시키고자 하는 폴더의 물리적인 경로를 알아내기
-
-		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-
-		try {
-			upfile.transferTo(new File(savePath + changeName));
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-		}
-
-		return changeName;
-
-	}
-
 	@RequestMapping("detail.pl")
 	public String selectPlace(int pno, Model model) {
 		int result = bService.increaseCount(pno);
@@ -485,4 +459,6 @@ public class BoardController {
 		System.out.println(imageUrl);
 		return ResponseEntity.ok(imageUrl);
 	}
+	
+	
 }

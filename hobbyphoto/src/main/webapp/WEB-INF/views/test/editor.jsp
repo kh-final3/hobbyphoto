@@ -47,7 +47,7 @@
                     formData.append('image', blob);
                     
                     // 2. FileApiController - uploadEditorImage 메서드 호출
-                    const response = await fetch('/tui-editor/image-upload', {
+                    const response = await fetch('tui-editor/image-upload', {
                         method : 'POST',
                         body : formData,
                     });
@@ -55,9 +55,10 @@
                     // 3. 컨트롤러에서 전달받은 디스크에 저장된 파일명
                     const filename = await response.text();
                     console.log('서버에 저장된 파일명 : ', filename);
-
+                    console.log(filename);
                     // 4. addImageBlobHook의 callback 함수를 통해, 디스크에 저장된 이미지를 에디터에 렌더링
-                    const imageUrl = `/tui-editor/image-print?filename=${filename}`;
+                    const imageUrl = `tui-editor/image-print?filename=`+filename;
+                    console.log(imageUrl);
                     callback(imageUrl, 'image alt attribute');
 
                 } catch (error) {

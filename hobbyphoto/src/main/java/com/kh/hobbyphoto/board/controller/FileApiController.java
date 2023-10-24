@@ -10,10 +10,10 @@ import java.nio.file.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/tui-editor")
+@RequestMapping("tui-editor")
 public class FileApiController {
     // 파일을 업로드할 디렉터리 경로
-    private final String uploadDir = Paths.get("C:", "tui-editor", "upload").toString();
+    private final String uploadDir = Paths.get("C:\\tui-editor\\upload").toString();
 
     /**
      * 에디터 이미지 업로드
@@ -22,7 +22,6 @@ public class FileApiController {
      */
     @PostMapping("/image-upload")
     public String uploadEditorImage(@RequestParam final MultipartFile image) {
-    	System.out.println(213123);
         if (image.isEmpty()) {
             return "";
         }
@@ -58,17 +57,21 @@ public class FileApiController {
      */
     @GetMapping(value = "/image-print", produces = { MediaType.IMAGE_GIF_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE })
     public byte[] printEditorImage(@RequestParam final String filename) {
+    	
+    	System.out.println(filename);
         // 업로드된 파일의 전체 경로
         String fileFullPath = Paths.get(uploadDir, filename).toString();
-
+        System.out.println(fileFullPath);
         // 파일이 없는 경우 예외 throw
         File uploadedFile = new File(fileFullPath);
+        System.out.println(uploadedFile);
         if (uploadedFile.exists() == false) {
             throw new RuntimeException();
         }
-
+        
         try {
             // 이미지 파일을 byte[]로 변환 후 반환
+        	System.out.println(Files.readAllBytes(uploadedFile.toPath()));
             byte[] imageBytes = Files.readAllBytes(uploadedFile.toPath());
             System.out.println(imageBytes);
             return imageBytes;
