@@ -20,5 +20,20 @@ public interface ShopService {
 		int insertCartProduct(Cart cart);
 		
 		//5.장바구니 조회(아이콘 클릭 -> 내가 한 장바구니 목록 확인)
-		ArrayList<Cart> selectProCartList(int userNo);
+		ArrayList<Cart> selectCartProList(int userNo);
+		
+		//6.장바구니에서 수량 변경(업데이트)
+		int updateCartAmount(Cart cart);
+		
+		//7. 장바구니 상품 선택 삭제(delete)
+		int deleteCartProduct(ArrayList<Cart> clist);
+		
+		//8.장바구니에서 상품 선택해서 구매페이지 넘기기
+		//ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist);
+		
+		//8.상품 상세에서 바로 구매하기 누렸을 경우 재고 확인
+		int selectProductamount(int pno);
+		
+		//9.구매상품 조회
+		Product selectBuyProduct(int pno);
 }

@@ -189,7 +189,6 @@
                 
                 
                 <div class="list clearfix" style="width: 90%;">
-                
                     <c:forEach var="p" items="${ list }">
                         <div class="product" id="clickpro">
                             <input type="hidden" name="pNo" class="pNo" value="${ p.PNo }">

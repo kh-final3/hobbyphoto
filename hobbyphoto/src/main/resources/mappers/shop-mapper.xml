@@ -18,6 +18,10 @@
 		<result column="p_no" property="pNo"/>
 		<result column="user_no" property="userNo"/>
 		<result column="amount" property="amount"/>
+		<result column="p_name" property="pName"/>
+		<result column="brand_no" property="brandNo"/>
+		<result column="brand_name" property="brandName"/>
+		<result column="thumbnail" property="thumbnail"/>
 	</resultMap>
 
 	 <select id="selectProductList" resultMap="shopResult">
@@ -79,5 +83,79 @@
 			,	#{amount}
 			)
 	 </insert>
+  
+	 <select id="selectCartProList" resultMap="cartResult">
+		select
+		        p_no
+		    ,   user_no
+		    ,   c.amount
+		    ,   p.price
+		    ,   p_name
+		    ,   b.brand_no
+		    ,   b.brand_name
+		    ,	thumbnail
+		from cart c
+		join product p using (p_no)
+		join member using (user_no)
+		join brand b on p.brand_no = b.brand_no
+		where user_no =#{userNo}	 
+	 </select>
 	 
+	 <update id="updateCartAmount">
+	 	update cart
+	 	   set amount = #{amount}
+	     where p_no = #{pNo}
+	       and user_no = #{userNo}
+	 </update>
+
+	<delete id="deleteCartProduct">
+		delete
+		    from cart
+		    where p_no = #{pNo}
+		    and user_no = #{userNo}
+	</delete>
+	
+	<select id="selectCartBuy" resultMap="cartResult">
+		select
+		        p_no
+		    ,   user_no
+		    ,   c.amount
+		    ,   p.price
+		    ,   p_name
+		    ,   b.brand_no
+		    ,   b.brand_name
+		    ,	thumbnail
+		from cart c
+		join product p using (p_no)
+		join member using (user_no)
+		join brand b on p.brand_no = b.brand_no
+		where user_no =#{userNo}
+		  and p_no = #{pNo}
+	</select>
+	
+	<select id="selectProductamount" resultType="_int">
+		select
+				p_no
+			,	amount
+		from product
+		where p_no = #{pNo}
+	</select>
+	
+	<select id="selectBuyProduct" resultMap="shopResult">
+		select
+	 				p_no
+	 			,	p_name
+	 			,	category_no
+	 			,	brand_no
+	 			,	price
+	 			,	amount
+	 			,	status
+	 			,	thumbnail
+	 		from product
+	 	   where status ='Y'
+	 	    and p_no = #{pNo}
+	 	   order
+ 	   		by p_no desc
+	</select>
+	
 </mapper>

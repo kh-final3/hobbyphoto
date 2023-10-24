@@ -52,7 +52,7 @@ public class MemberController {
 	public String enroll(Member m,Model model,HttpSession session) {
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		m.setUserPwd(encPwd);
-		//System.out.println(encPwd);
+		System.out.println(encPwd);
 		
 		int result = ms.insertMember(m);
 		

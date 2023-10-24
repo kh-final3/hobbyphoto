@@ -16,4 +16,13 @@ public class Cart {
 	private int userNo;
 	private int amount;
 	private String status;
+	
+	
+	private String pName;
+	private int brandNo;
+	private String brandName;
+	private String thumbnail;
+	private String price;
+	
+	
 }

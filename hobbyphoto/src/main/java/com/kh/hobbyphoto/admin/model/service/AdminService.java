@@ -1,12 +1,12 @@
 package com.kh.hobbyphoto.admin.model.service;
-
-
 import java.util.ArrayList;
-
+import com.kh.hobbyphoto.shop.model.vo.Product;
+import com.kh.hobbyphoto.upfile.model.vo.P_Attachment;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Member;
+
 
 public interface AdminService {
 	
@@ -30,8 +30,10 @@ public interface AdminService {
 	// 5. 게시글 수정용 서비스
 	int updateBoard(Board b);
 
-	//1. 상품 등록하기
+	//1. 상품 등록하기(지영)
 	int insertProduct(Product p);
 	
-	
+	//2. 상품 리스트 페이지 관리(지영)
+	int selectAdminProListCount();
+	ArrayList<Product> selecAdminProtList(PageInfo pi);
 }
