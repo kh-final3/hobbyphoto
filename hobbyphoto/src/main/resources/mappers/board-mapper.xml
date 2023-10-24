@@ -6,8 +6,6 @@
 		<result column="board_title" property="boardTitle"/>
 		<result column="board_content" property="boardContent"/>
 		<result column="board_writer" property="boardWriter"/>
-		<result column="origin_name" property="originName"/>
-		<result column="change_name" property="changeName"/>
 		<result column="count" property="count"/>
 		<result column="create_date" property="createDate"/>
 		<result column="status" property="status"/>
@@ -61,138 +59,6 @@
 		<result column="age" property="age"/>
 		<result column="inq" property="inq"/>
 	</resultMap>
-	
-	
-	
-	<select id="selectListCount" resultType="_int">
-		select count(*)
-		  from board
-		 where status='Y'
-	</select>
-	
-	<select id="selectList" resultMap="boardResult">
-		select board_no
-		     , board_title
-		     , board_writer
-		     , count
-		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
-		  from board
-		 where status = 'Y'
-		 order 
-		    by board_no desc
-		 
-	</select>
-	
-	<insert id="insertBoard" parameterType="Board">
-		  insert 
-			into board
-			  (
-			    board_no
-			  , board_title
-			  , board_writer
-			  , board_content
-			  , origin_name
-			  , change_name
-			  ) 
-			  values
-			  (
-			   	seq_bno.nextval
-			  , #{boardTitle}
-			  , #{boardWriter}
-			  , #{boardContent}
-			  , #{originName}
-			  , #{changeName}
-			  )
-	</insert>
-	
-	<update id="increaseCount">
-		update board
-		   set count = count+1
-		   where board_No = #{ boardNo }
-	</update>
-	
-	
-	<select id="selectBoard" resultMap="boardResult">
-		select
-			   board_no
-			 , board_title
-			 , board_writer
-			 , board_content
-			 , origin_name
-			 , change_name
-			 , count
-			 , to_char(create_date, 'YYYY-MM-DD') as "create_date"
-			  from board
-		 where board_no = #{ boardNo }
-	</select>
-	
-	<update id="deleteBoard">
-		update board
-		   set status = 'N'
-		   where board_no = #{boardNo}
-	</update>
-	
-
-	<update id="updateBoard">
-		update
-			   board
-		   set board_title = #{boardTitle}
-		     , board_content = #{boardContent}
-		     , origin_name = #{originName}
-		     , change_name = #{changeName}
-		 where board_no = #{boardNo}
-	</update>
-	
-	<select id="selectReplyList" resultMap="replyResult">
-		select
-			   reply_no
-			 , reply_writer
-			 , reply_content
-			 , to_char(create_date, 'YYYY-MM-DD') as "create_date"
-	      from reply
-		 where status='Y'
-		   and ref_bno = #{boardNo}
-		 order
-		       by reply_no desc
-	</select>
-	
-	<insert id="insertReply">
-		insert
-		  into reply
-		  (
-		  	reply_no
-		  , reply_content
-		  , ref_bno
-		  , reply_writer
-		  
-		  )
-		  values
-		  (
-		  	seq_rno.nextval
-		  , #{replyContent}
-		  , #{refBoardNo}
-		  , #{replyWriter}
-		  )		  
-	</insert>
-	
-	<select id="selectTopBoardList" resultMap="boardResult">
-		SELECT *
-		  FROM 
-		   (select board_no
-			     , board_title
-			     , board_writer
-			     , origin_name
-			     , count
-			     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
-			  from board
-			 where status = 'Y'
-			 order 
-			    by count desc
-			 )			
-		 where rownum between 1 and 5
-	</select>
-	
-	
 	
 	
 	
@@ -351,13 +217,8 @@
 		DELETE FROM place WHERE p_no = #{pno}
 	</delete>
 	
-	<select id="getImageCount" resultType="_int">
-	    SELECT COUNT(FILE_NO) "COUNT"
-	      FROM ATTACHMENT
-	      WHERE REF_BNO = #{pno}
-	</select>
 	
-
+	
 	<select id="cultureListCount" resultType="_int">
 		SELECT COUNT(FE_NO) "COUNT"
 	      FROM festival
@@ -399,7 +260,7 @@
 		 where fe_no = #{ feNo }
 	</select>
 	
-	<insert id="insertExhibit" parameterType="Festival">
+	<insert id="insertCulture" parameterType="Festival">
 		insert 
 			into festival
 			  (
@@ -437,7 +298,7 @@
 			  )
 	</insert>
 	
-	<update id="updateExhibit">
+	<update id="updateCulture">
 		update
 			   festival
 		   set fe_title = #{feTitle}

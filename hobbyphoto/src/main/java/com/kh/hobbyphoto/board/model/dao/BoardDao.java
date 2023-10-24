@@ -17,50 +17,7 @@ import com.kh.hobbyphoto.common.model.vo.PageInfo;
 
 @Repository
 public class BoardDao {
-	public int selectListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("boardMapper.selectListCount");
-	}
-
-	public ArrayList<Board> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return (ArrayList)sqlSession.selectList("boardMapper.selectList", null, rowBounds);
-	}
-
-	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
-		return sqlSession.insert("boardMapper.insertBoard", b);
-	}
-
-	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.update("boardMapper.increaseCount", boardNo);
-	}
-
-	public Board selectBoard(SqlSessionTemplate sqlSession, int boardNo) {
-		return (Board) sqlSession.selectOne("boardMapper.selectBoard", boardNo);
-	}
-
-	public int deleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.update("boardMapper.deleteBoard", boardNo);
-	}
-
-	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
-		return sqlSession.update("boardMapper.updateBoard", b);
-	}
-
-	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int boardNo) {
-		return (ArrayList) sqlSession.selectList("boardMapper.selectReplyList", boardNo);
-	}
-
-	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
-		return sqlSession.insert("boardMapper.insertReply", r);
-	}
 	
-	public ArrayList<Board> selectTopBoardList(SqlSessionTemplate sqlSession){
-		return (ArrayList) sqlSession.selectList("boardMapper.selectTopBoardList");
-	}
-
 	
 	public int selectPlaceListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.selectPlaceListCount");
@@ -112,14 +69,18 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.updatePlace", p);
 	}
 
-	public int getImageCount(SqlSessionTemplate sqlSession, int pno) {
-		return sqlSession.selectOne("boardMapper.getImageCount", pno);
-	}
-
+	
 	public int updatePlaceAttachment(SqlSessionTemplate sqlSession, Attachment attachment) {
 		return sqlSession.update("boardMapper.updatePlaceAttachment", attachment);
 	}
-
+	
+	public int deletePlace(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.delete("boardMapper.deletePlace", pno);
+	}
+	
+	
+	
+	
 	public int cultureListCount(SqlSessionTemplate sqlSession, String keyword) {
 		return sqlSession.selectOne("boardMapper.cultureListCount", keyword);
 	}
@@ -136,8 +97,8 @@ public class BoardDao {
 		return (Festival)sqlSession.selectOne("boardMapper.selectCulture", feNo);
 	}
 
-	public int insertExhibit(SqlSessionTemplate sqlSession, Festival fe) {
-		return sqlSession.insert("boardMapper.insertExhibit", fe);
+	public int insertCulture(SqlSessionTemplate sqlSession, Festival fe) {
+		return sqlSession.insert("boardMapper.insertCulture", fe);
 	}
 
 	public int insertAttachment2(SqlSessionTemplate sqlSession, Attachment attachment) {
@@ -145,13 +106,10 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertAttachment2", attachment);
 	}
 
-	public int updateExhibit(SqlSessionTemplate sqlSession, Festival fe) {
-		return sqlSession.update("boardMapper.updateExhibit", fe);
+	public int updateCulture(SqlSessionTemplate sqlSession, Festival fe) {
+		return sqlSession.update("boardMapper.updateCulture", fe);
 	}
 
-	public int deletePlace(SqlSessionTemplate sqlSession, int pno) {
-		return sqlSession.delete("boardMapper.deletePlace", pno);
-	}
 
 
 }

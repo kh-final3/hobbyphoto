@@ -179,7 +179,7 @@
       interval: 2000 //기본 5초
     })
   </script>
-  <jsp:include page="header.jsp"></jsp:include>
+  <jsp:include page="common/header.jsp"/>
 <!-- <div class="container"> </div> -->
   <div id="demo" class="carousel slide" data-ride="carousel">
 
@@ -324,6 +324,6 @@
 
     });
   </script>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="common/footer.jsp"/>
 </body>
 </html>

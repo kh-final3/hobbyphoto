@@ -191,7 +191,10 @@
         .card-img-top {
             height: 300px;
         }
-       
+        .enrollForm{
+        float: right;
+    }
+
     </style>
 </head>
 
@@ -209,6 +212,8 @@
                             </ul>
                         </div>
                     </div>
+                    <a class="enrollForm btn btn-secondary" href="cultureEnrollForm.fs">글쓰기</a>
+                    
                 </div>
             </div>
         </div>

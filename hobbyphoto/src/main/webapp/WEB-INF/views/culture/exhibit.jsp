@@ -221,7 +221,7 @@
                             </ul>
                         </div>
                     </div>
-                    <a class="enrollForm btn btn-secondary" href="exhibitEnrollForm.fs">글쓰기</a>
+                    <a class="enrollForm btn btn-secondary" href="cultureEnrollForm.fs">글쓰기</a>
                 </div>
             </div>
         </div>

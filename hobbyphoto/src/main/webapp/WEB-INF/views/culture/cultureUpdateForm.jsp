@@ -8,8 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+
 <style>
 #ff1 {
 	font-family: 'NanumBarunGothicExtraLight';
@@ -79,8 +80,8 @@ input[type="number"] {
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<div id="write">
-		<h1 align="center" id="ttl">전시 수정</h1>
-		<form action="updateExhibit.fs" method="post"
+		<h1 align="center" id="ttl">축제/전시 수정</h1>
+		<form action="updateCulture.fs" method="post"
 			enctype="multipart/form-data">
 			<input type="hidden" name="userNo" value="">
 			<div id="write1">
@@ -106,16 +107,16 @@ input[type="number"] {
 			<br>
 			<div id="write3">
 				<label id="ff4">내용</label><br>
-				<textarea name="feContent" cols="71" rows="8" style="resize: none;"
-					required>${fe.feContent }</textarea>
-				<br>
+					<div id="content">${fe.feContent}</div>
+					<input type="hidden" name="feContent" class="feContent">
+					<br>
 			</div>
 			<br>
 			<div id="write4">
 				<label id="ff4">전시/축제</label><br> 
-					<input type="radio" name="feType" id="E" value="전시">
+					<input type="radio" name="feType"  class="feType" id="E" value="전시">
 					<label for="E">전시</label>
-					<input type="radio" name="feType" id="F" value="축제"> 
+					<input type="radio" name="feType" class="feType" id="F" value="축제"> 
 					<label for="F">축제</label>
 				<br>
 			</div>
@@ -187,6 +188,13 @@ input[type="number"] {
             </a>
         </div>
 	</div>
+
+	<script>
+		$(function(){
+			$("input[name='feType'][value='${fe.feType}']").prop("checked",true)
+		})
+	</script>
+
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9a2f35856f46bd082d1ef297c29d5fc"></script>
 	<script>
@@ -246,7 +254,58 @@ input[type="number"] {
                 }
             }
         }
+
+		
     </script>
+	 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
+	<script>
+		$("#content").keyup(function(){
+			$(".feContent").val(editor.getHTML());	
+		})
+
+		const editor = new toastui.Editor({
+			el: document.querySelector('#content'),      // 에디터를 적용할 요소 (컨테이너)
+			height: '500px',                             // 에디터 영역의 높이 값 (OOOpx || auto)
+			initialEditType: 'markdown',                 // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
+			initialValue: '',                            // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+			previewStyle: 'vertical',                    // 마크다운 프리뷰 스타일 (tab || vertical)
+			placeholder: '${ fe.feContent }',
+			/* start of hooks */
+			hooks: {
+				async addImageBlobHook(blob, callback) { // 이미지 업로드 로직 커스텀
+					try {
+						/*
+						* 1. 에디터에 업로드한 이미지를 FormData 객체에 저장
+						*    (이때, 컨트롤러 uploadEditorImage 메서드의 파라미터인 'image'와 formData에 append 하는 key('image')값은 동일해야 함)
+						*/
+						const formData = new FormData();
+						formData.append('image', blob);
+						
+						// 2. FileApiController - uploadEditorImage 메서드 호출
+						const response = await fetch('tui-editor/image-upload', {
+							method : 'POST',
+							body : formData,
+						});
+	
+						// 3. 컨트롤러에서 전달받은 디스크에 저장된 파일명
+						const filename = await response.text();
+						console.log('서버에 저장된 파일명 : ', filename);
+						console.log(filename);
+						// 4. addImageBlobHook의 callback 함수를 통해, 디스크에 저장된 이미지를 에디터에 렌더링
+						const imageUrl = `tui-editor/image-print?filename=`+filename;
+						console.log(imageUrl);
+						callback(imageUrl, 'image alt attribute');
+	
+					} catch (error) {
+						console.error('업로드 실패 : ', error);
+					}
+				}
+			}
+			/* end of hooks */
+		});
+	</script>
+	
 	<jsp:include page="../common/footer.jsp" />
 </body>
 

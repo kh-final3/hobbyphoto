@@ -125,7 +125,7 @@ public class BoardController {
 
 	@RequestMapping("detail.pl")
 	public String selectPlace(int pno, Model model) {
-		int result = bService.increaseCount(pno);
+		int result = bService.increaseCountPlace(pno);
 		if (result > 0) {
 			Place p = bService.selectPlace(pno);
 			model.addAttribute("p", p);
@@ -235,22 +235,8 @@ public class BoardController {
 	    return "redirect:detail.pl?pno=" + p.getPno();
 	}
 
+
 	
-
-	@ResponseBody
-	@RequestMapping(value = "rlist.pl", produces = "application/json; charset=UTF-8")
-	public String placeReplyList(int pno) {
-		ArrayList<Reply> list = bService.placeReplyList(pno);
-		return new Gson().toJson(list);
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "rinsert.pl")
-	public String placeInsertReply(Reply r) {
-		int result = bService.placeInsertReply(r);
-		return result > 0 ? "success" : "fail";
-
-	}
 
 	@RequestMapping("sortPlace.pl")
 	public ModelAndView sortPlace(String keyword, @RequestParam(value = "cpage", defaultValue = "1") int currentPage,
@@ -265,6 +251,9 @@ public class BoardController {
 		return mv;
 	}
 
+	
+	//////////////// 축제,전시 ///////////////////////////
+	
 	@RequestMapping("festvalList.fs")
 	public ModelAndView festvalList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
 			ModelAndView mv) {
@@ -278,22 +267,7 @@ public class BoardController {
 
 		return mv;
 	}
-
-	@RequestMapping("festivalDetail.fs")
-	public String selectFestival(int feNo, Model model) {
-
-		Festival fe = bService.selectCulture(feNo);
-		if (fe != null) {
-			model.addAttribute("fe", fe);
-			return "culture/festivalDetail";
-
-		} else {
-			model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
-			return "common/errorPage";
-
-		}
-	}
-
+	
 	@RequestMapping("exhibitList.fs")
 	public ModelAndView exhibitList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
 			ModelAndView mv) {
@@ -307,34 +281,33 @@ public class BoardController {
 
 		return mv;
 	}
+	
 
-	@RequestMapping("exhibitDetail.fs")
-	public String selectExhibit(int feNo, Model model) {
-
-		Festival fe = bService.selectCulture(feNo);
-		if (fe != null) {
-			model.addAttribute("fe", fe);
-			return "culture/exhibitDetail";
-
-		} else {
-			model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
-			return "common/errorPage";
-
-		}
+	@RequestMapping("cultureDetail.fs")
+	public String selectCulture(int feNo, Model model) {
+	    Festival fe = bService.selectCulture(feNo);
+	    if (fe != null) {
+	        model.addAttribute("fe", fe);
+	        if ("축제".equals(fe.getFeType())) {
+	            // 축제인 경우
+	            return "culture/festivalDetail";
+	        } else if ("전시".equals(fe.getFeType())) {
+	            // 전시인 경우
+	            return "culture/exhibitDetail";
+	        }
+	    } 
+        model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
+        return "common/errorPage";
+	   
 	}
 
-	@RequestMapping("festivalEnrollForm.fs")
+	@RequestMapping("cultureEnrollForm.fs")
 	public String fsEnrollForm() {
-		return "culture/festivalEnrollForm";
+		return "culture/cultureEnrollForm";
 	}
 
-	@RequestMapping("exhibitEnrollForm.fs")
-	public String exEnrollForm() {
-		return "culture/exhibitEnrollForm";
-	}
-
-	@RequestMapping("insertExhibit.fs")
-	public String insertExhibit(Festival fe, MultipartFile upfile, HttpSession session, Model model) {
+	@RequestMapping("insertCulture.fs")
+	public String insertCulture(Festival fe, MultipartFile upfile, HttpSession session, Model model) {
 
 		String changeName = saveFile(upfile, session);
 		System.out.println(changeName);
@@ -342,25 +315,30 @@ public class BoardController {
 		System.out.println(fe.getFeDate());
 		fe.setTimg("resources/uploadFiles/" + changeName);
 
-		int result = bService.insertExhibit(fe);
+		int result = bService.insertCulture(fe);
 
 		if (result > 0) {
-			session.setAttribute("alertMsg", "전시 등록에 성공했습니다.");
-			return "redirect:exhibitList.fs";
-		} else {
+	        // 게시물 수정 성공
+	        if ("전시".equals(fe.getFeType())) {
+	            // 전시인 경우
+	            return "redirect:exhibitList.fs";
+	        } else if ("축제".equals(fe.getFeType())) {
+	            // 축제인 경우
+	            return "redirect:festivalList.fs";
+	        }
+	    }
 			model.addAttribute("errorMsg", "게시글 등록 실패");
 			return "common/errorPage";
-		}
 	}
 
-	@RequestMapping("updateForm.ex")
-	public String updateExhibitView(int feNo, Model model) {
+	@RequestMapping("updateForm.fs")
+	public String updateForm(int feNo, Model model) {
 		model.addAttribute("fe", bService.selectCulture(feNo));
-		return "culture/exhibitUpdateForm";
+		return "culture/cultureUpdateForm";
 	}
 	
-	@RequestMapping("updateExhibit.fs")
-	public String updateExhibit(Festival fe, MultipartFile reupfile, HttpSession session, Model model) {
+	@RequestMapping("updateCulture.fs")
+	public String updateCulture(Festival fe, MultipartFile reupfile, HttpSession session, Model model) {
 
 		// 새로 넘어온 첨부파일이 있을 경우
 		if (!reupfile.getOriginalFilename().equals("")) {
@@ -372,93 +350,33 @@ public class BoardController {
 			fe.setTimg("resources/uploadFiles/" + changeName);
 		}
 
-		int result = bService.updateExhibit(fe);
+		int result = bService.updateCulture(fe);
 
 		if (result > 0) {
-			// 수정 성공 => 상세페이지 detail.bo url 재요청
-			model.addAttribute("alertMsg", "게시글 수정에 성공했습니다.");
-			return "redirect:exhibitDetail.fs?feNo=" + fe.getFeNo();
-		} else {
+	        // 게시물 수정 성공
+	        if ("전시".equals(fe.getFeType())) {
+	            // 전시인 경우
+	            return "redirect:exhibitDetail.fs?feNo=" + fe.getFeNo();
+	        } else if ("축제".equals(fe.getFeType())) {
+	            // 축제인 경우
+	            return "redirect:festivalDetail.fs?feNo=" + fe.getFeNo();
+	        }
+	    } 
 			// 수정 실패 => 에러페이지
 			model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
 			return "common/errorPage";
-		}
-
+		
 	}
 	
-	@RequestMapping("insertFestival.fs")
-	public String insertFestival(Festival fe, MultipartFile upfile, HttpSession session, Model model) {
-		
-		String changeName = saveFile(upfile, session);
-		System.out.println(changeName);
-		fe.setFeDate(fe.getFeDate1() +"~"+ fe.getFeDate2());
-		System.out.println(fe.getFeDate());
-		fe.setTimg("resources/uploadFiles/" + changeName);
-		
-		int result = bService.insertExhibit(fe);
-		
-		if (result > 0) {
-			session.setAttribute("alertMsg", "전시 등록에 성공했습니다.");
-			return "redirect:festivalList.fs";
-		} else {
-			model.addAttribute("errorMsg", "게시글 등록 실패");
-			return "common/errorPage";
-		}
-	}
-	
-	@RequestMapping("updateForm.fe")
-	public String updateFestivalView(int feNo, Model model) {
-		model.addAttribute("fe", bService.selectCulture(feNo));
-		return "culture/festivalUpdateForm";
-	}
-	
-	@RequestMapping("updateFestival.fs")
-	public String updateFestival(Festival fe, MultipartFile reupfile, HttpSession session, Model model) {
-		
-		// 새로 넘어온 첨부파일이 있을 경우
-		if (!reupfile.getOriginalFilename().equals("")) {
-			
-			
-			// 새로 넘어온 첨부파일 서버 업로드 시키기
-			String changeName = saveFile(reupfile, session);
-			
-			fe.setTimg("resources/uploadFiles/" + changeName);
-		}
-		
-		int result = bService.updateExhibit(fe);
-		
-		if (result > 0) {
-			// 수정 성공 => 상세페이지 detail.bo url 재요청
-			model.addAttribute("alertMsg", "게시글 수정에 성공했습니다.");
-			return "redirect:exhibitDetail.fs?feNo=" + fe.getFeNo();
-		} else {
-			// 수정 실패 => 에러페이지
-			model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
-			return "common/errorPage";
-		}
-		
-	}
 	
 	@RequestMapping(value = "/")
 	public String home() {		
-		return "common/main";
+		return "main";
 	}
 	
 	@RequestMapping("test.t")
 	public String test() {
 		return "test/editor";
 	}
-	
-	
-	@ResponseBody
-	@PostMapping("fileUpload.t")
-	public ResponseEntity<String> fileUpload(MultipartFile images,HttpSession session) {
-		System.out.println(123);
-		String changeName = saveFile(images, session);
-		String imageUrl = "resources/uploadFiles/" + changeName;
-		System.out.println(imageUrl);
-		return ResponseEntity.ok(imageUrl);
-	}
-	
 	
 }

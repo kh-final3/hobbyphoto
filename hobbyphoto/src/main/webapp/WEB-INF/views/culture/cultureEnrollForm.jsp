@@ -90,7 +90,7 @@
 		<body>
 			<div id="write">
 				<h1 align="center" id="ttl">축제/전시 작성</h1>
-				<form action="insertExhibit.fs" method="post" enctype="multipart/form-data">
+				<form action="insertCulture.fs" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="userNo" value="">
 					<div id="write1">
 						<p id="ff4">
