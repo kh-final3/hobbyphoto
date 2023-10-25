@@ -15,49 +15,7 @@
 		<result column="status" property="status" />
 		<result column="social" property="social" />
 	</resultMap>
-	
-	<!-- 관리자페이지 회원 조회 -->
-	<select id="selectMember" resultMap="resultMember">
-	select 
-		  USER_NO 
-		, USER_ID
-		, USER_PWD
-		, USER_NAME
-		, NICKNAME
-		, EMAIL
-		, GENDER
-		, PHONE
-		, STATUS
-		, SOCIAL
-	from member
-   where status = 'Y'
-	order 
-	   by user_no
-	</select>
-	
-	<!-- 관리자페이지 회원 삭제 -->
-	  <update id="deleteMember">
-	  	update 
-	  		   member
-	       set status = 'N'
-	     where user_id = #{userId}
-	  </update>
-	  
-	<!-- 신고 게시물 관리 -->  
-	<select id="">
-	SELECT
-   		   R.RP_NO
-		 , B.BOARD_NO
-		 , R.RP_CONTENT
-		 , B.BOARD_TYPE
-		 , M.USER_ID
-	  FROM BOARD B
-	  JOIN REPORT R ON(BOARD_NO = REF_BNO)
-	  JOIN MEMBER M ON(USER_NO = BOARD_WRITER)
-	 WHERE B.BOARD_TYPE = #{boardtype};
-	</select>
-	  
-	
+
 	<insert id="insertMember" parameterType="Member">
 		insert
 		  into member

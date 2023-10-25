@@ -1,6 +1,7 @@
 package com.kh.hobbyphoto.shop.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,10 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.service.ShopServiceImpl;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Controller
@@ -47,7 +53,9 @@ public class ShopController {
 	}
 	
 	@RequestMapping("cart.pro")
-	public ModelAndView insertCartProduct(int userNo,String prono ,Cart cart, HttpSession session, ModelAndView mv) {
+	public ModelAndView insertCartProduct(int userNo,String prono,Cart cart, HttpSession session, ModelAndView mv) {
+		System.out.println("컨트롤러 : " + prono);
+		
 		cart.setPNo(Integer.parseInt(prono));
 		ArrayList<Cart> list = sService.selectCartList(userNo);
 		
@@ -90,13 +98,111 @@ public class ShopController {
 		return mv;
 	}
 	
+
 	@RequestMapping("shop.mp")
-	public String shopMyPage(int userNo) {
-		
-		ArrayList<Cart> list = sService.selectProCartList(userNo);
+	public String selectCartProList(int userNo , HttpSession session ,Model model) {
 		
 		
+		System.out.println(userNo);
+		
+		ArrayList<Cart> list = sService.selectCartProList(userNo);
+	
+		System.out.println(list);
+		
+		model.addAttribute("list", list);
 		
 		return "shop/shopCart";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="cupdate.amount")
+	public String upDateCartAmount(Cart cart) {
+		System.out.println(cart);
+		int result = sService.updateCartAmount(cart);
+		System.out.println(result);
+		
+		return result>0?"success":"fail";
+	}
+	
+	@ResponseBody
+	@RequestMapping("delete.cartp")
+	public String deleteCartProduct(String[] pNo,int userNo) {
+		
+		ArrayList<Cart> clist = new ArrayList<Cart>();
+		
+		for(int i=0;i<pNo.length;i++) {
+			//System.out.println(pNo[i]);
+
+				Cart c = new Cart();
+				c.setPNo(Integer.parseInt(pNo[i]));
+				c.setUserNo(userNo);
+				
+				clist.add(c);
+			
+		}
+		System.out.println(clist + "controller에서 clist값");
+		
+		int result = sService.deleteCartProduct(clist);
+		System.out.println(result + "controller에서 result 값");
+		return result>0 ? "success":"fail";
+		
+	}
+	
+//	@ResponseBody
+//	@RequestMapping("pro.buy")
+//	public String selectCartBuy(String[] pNo, int userNo) {
+//		
+//		
+//		ArrayList<Cart> blist = new ArrayList<Cart>();
+//		//체크된 상품 리스트 만들기
+//		for(int i = 0; i<pNo.length;i++) {
+//			System.out.println(pNo[i]);
+//			Cart bc = new Cart();
+//			bc.setPNo(Integer.parseInt(pNo[i]));
+//			bc.setUserNo(userNo);
+//			
+//			blist.add(bc);
+//		}
+//		//System.out.println(blist + "컨트롤러에서 blist의 값");
+//		//System.out.println(blist.get(1).getPNo()+"상품 번호 확인중");
+//			
+//		//ArrayList<Orders> list = sService.selectCartBuy(blist.get(1).getPNo());
+//		
+//		ArrayList<Cart> buylist = sService.selectCartBuy(blist);
+//		
+//		for(int i = 0; i<buylist.size();i++) {
+//		System.out.println("리턴값 확이중 + " + buylist.get(i));
+//		}
+//		return "shop/shopCartBuy";
+//	}
+	
+	@RequestMapping("purchase")
+	public ModelAndView insertBuyOrder(String prono,Product p ,int userNo,int amount,Orders orders,HttpSession session,ModelAndView mv) {
+		
+		int pno = Integer.parseInt(prono);
+		p.setPNo(Integer.parseInt(prono));
+		
+		//System.out.println(pno + "상품 번호");
+		//System.out.println(userNo + "회원번호");
+		//System.out.println(amount+"구매수량");
+		
+		int pamount = sService.selectProductamount(pno);
+		
+		if(amount > pamount) {//재고가 더 적을 경우
+			
+			session.setAttribute("alertMsg", "재고량이 주문 수량 보다 많습니다.");
+			mv.setViewName("redirect:detail.pro?pno="+p.getPNo());
+			
+		}else {//재고량이 더 많을 경우
+			
+			mv.addObject("amount", amount);
+			Product list = sService.selectBuyProduct(pno);
+			
+			mv.addObject("list", list).setViewName("shop/shopCartBuy");
+		}
+		return mv;
+		
+	}
+	
+	
 }
