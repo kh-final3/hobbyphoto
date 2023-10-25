@@ -52,11 +52,17 @@
         }
         /* 작성자 */
         .writer_name{
-            /* border: 1px solid black; */
-            width: 100%;
+            border: 1px solid black;
+            width: 85%;
             height: 30%;
             border: none;
             margin-top: 2px;
+        }
+        .writer_name2{
+            margin-top: 25px;
+            margin-left: 20px;
+            width: 10%;
+            height: 20%;
         }
         /* 글내용 */
         .content{
@@ -183,6 +189,14 @@
             margin: auto;
             width: 360px
         }
+        .profile{
+            display: flex;
+        }
+        
+       	.writer_name2 img {
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
 <body>
@@ -190,7 +204,6 @@
     <div class="warp">
         <div class="inner">
             <div class="img-area">
-
                 <div class="box">
                     <!--div를 두개 감싼이유는 img들을 좌우배치하고 배치된 사진중 한장만 보이게 하기 위해서이다.-->
                     <div class="slide"> <!--배치된 img들을 하나의 img만 보이게 가리기 위한 태그-->
@@ -245,22 +258,42 @@
                     }
                     init();
                 </script>
-
+                
+	            <div align="center">
+		                <a class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
+		                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
+	            </div><br><br>
+            
+            <form id="postForm" action="" method="post">
+            	<input type="hidden" name="phno" value="${ b.boardNo }">
+            	<input type="hidden" name="filePath" value="${ a.filePath }">
+            </form>
+            
+			<script>
+				function postFormSubmit(num) {
+					if(num == 1){ // 수정하기 클릭시
+						$("#postForm").attr("action", "phUpdateForm.bo").submit();
+					} else{ // 삭제하기 클릭시
+						$("#postForm").attr("action", "phDelete.bo").submit();
+					}
+				}
+			</script> 
+            
             </div>
             <div class="text-area">
                 <div class="head-area">
-                    <div class="writer_name">
-                        <img src="resources/images/pro.png" alt="" width="95">
-                        <p>${ b.boardWriter }</p>
-                        <!--팔로운 안한 사람만 보이게-->
-                        <p style="color: blue; cursor: pointer;">팔로우</p>
+                    <div class="profile">
+                        <div class="writer_name">
+                            <img src="resources/pro.png" alt="" width="95">
+                            <p>${ b.boardWriter }</p>
+                            <p style="color: blue; cursor: pointer;">팔로우</p>
+                        </div>
+                        <div class="writer_name2">
+                           <img src="resources/images/option.png">
+                        </div>
                     </div>
                     <hr id="detail-hr">
                     <div class="content">
-                        <div>
-                            장소 : 서울특별시 역삼역 3번 출구 <br>
-                            카메라 종류 : 미놀타 x-300
-                        </div>
                         <br>
                         <div>
                             ${ b.boardContent }

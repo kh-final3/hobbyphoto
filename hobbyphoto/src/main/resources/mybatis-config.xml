@@ -8,7 +8,8 @@
 	
 	
 	<typeAliases>
-		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Board" alias="board"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.hobbyphoto.group.model.vo.Sgroup" alias="Sgroup"/>
 		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.hobbyphoto.upfile.model.vo.Attachment" alias="Attachment"/>
 		<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Product" alias="Product"/>
@@ -21,6 +22,7 @@
 
 	<mappers>
 		<mapper resource="/mappers/board-mapper.xml"/>
+		<mapper resource="/mappers/sgroup-mapper.xml"/>
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/shop-mapper.xml"/>
 		<mapper resource="/mappers/admin-mapper.xml"/>

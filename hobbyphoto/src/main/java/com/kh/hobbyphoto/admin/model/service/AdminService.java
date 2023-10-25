@@ -9,6 +9,7 @@ import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.model.vo.Report;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
+import com.kh.hobbyphoto.shop.model.vo.Product;
 
 
 public interface AdminService {

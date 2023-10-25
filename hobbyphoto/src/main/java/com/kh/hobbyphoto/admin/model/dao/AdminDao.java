@@ -18,6 +18,7 @@ import com.kh.hobbyphoto.shop.model.vo.Product;
 @Repository
 public class AdminDao {
 	
+<<
 	 // 회원 관리 리스트 조회
 	   public ArrayList<Member> selectMember(SqlSessionTemplate sqlSession){
 	      return (ArrayList)sqlSession.selectList("adminMapper.selectMember");

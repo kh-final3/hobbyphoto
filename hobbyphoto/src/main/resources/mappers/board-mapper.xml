@@ -15,7 +15,6 @@
 		<result column="hashtag" property="hashTag"/>
 		<result column="thumbnail" property="thumbnail"/>
 		<result column="board_writer" property="boardWriter"/>
-		<result column="file_path" property="filePath"/>
 	</resultMap>
 	
 	<resultMap id="AttachmentResult" type="Attachment">
@@ -29,8 +28,7 @@
 		<result column="ref_bno" property="refBno"/>
 	</resultMap>
 	
-
-	<select id="selectListCount" resultType="_int">
+	<select id="selectPhListCount" resultType="_int">
 		select
 			count(*)
 			from board
@@ -38,25 +36,25 @@
             and board_type = 1 
 	</select>
 	
-	<select id="selectList" resultMap="boardResult">
-	  select
-	    b.board_no
-	    , b.board_title
-	    , b.board_content
-	    , b.count
-        , m.nickname
-	    , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
-	    , a.file_path as "thumbnail"
-	  from board b
-	  left join attachment a on b.board_no = a.ref_bno
-      join member m on b.board_writer = m.user_no
-	  where b.status = 'Y'
-	  and b.board_type = 1
-      and a.file_level = 1
-	  order by b.board_no desc
+	<select id="selectPhList" resultMap="boardResult">
+		select
+		    b.board_no
+		    , b.board_title
+		    , b.board_content
+		    , b.count
+	        , m.nickname
+		    , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
+		    , a.file_path as "thumbnail"
+		  from board b
+		  left join attachment a on b.board_no = a.ref_bno
+	      join member m on b.board_writer = m.user_no
+		  where b.status = 'Y'
+		  and b.board_type = 1
+	      and a.file_level = 1
+		  order by b.board_no desc
 	</select>
 	
-	<insert id="insertBoard">
+	<insert id="insertPhBoard">
 		insert	
 			into board
 				(
@@ -102,7 +100,6 @@
              , sysdate
              , seq_board_no.currval
             )
-			
 	</insert>
 	
 	<update id="increaseCount">
@@ -114,7 +111,7 @@
 		    and board_type = 1
 	</update>
 	
-	<select id="selectpBoard" resultMap="boardResult">
+	<select id="selectPhBoard" resultMap="boardResult">
 		SELECT
 		    b.board_no,
 		    b.board_title,
@@ -144,6 +141,147 @@
        from attachment
        where ref_bno = #{boardNo}
 	</select>
+	
+	<update id="updatePhBoard">
+	 update
+		board
+	 set board_title = #{boardTitle}
+	   , board_content = #{boardContent}
+	 where board_no = #{boardNo}
+	</update>
+	
+	<update id="updatePhAtBoard">
+	 update
+		attachment
+	 set origin_name = #{originName}
+	   , change_name = #{changeName}
+	 where ref_bno = #{refBno}
+	</update>
+	
+	<delete id="deletePhBoard">
+	    DELETE FROM board
+	    WHERE board_no = #{boardNo}
+	</delete>
+	
+	<select id="selectRcListCount" resultType="_int">
+		select
+			count(*)
+			from board
+		where status = 'Y'
+        and board_type = 2 
+	</select>
+	
+	<select id="selectRcList" resultMap="boardResult">
+		select
+		    b.board_no
+		    , b.board_title
+		    , b.board_content
+		    , b.count
+	        , m.user_id as board_writer
+		    , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
+		  from board b
+	      join member m on b.board_writer = m.user_no
+		  where b.status = 'Y'
+		  and b.board_type = 2
+		  order by b.board_no desc
+	</select>
+	
+	<update id="increaseRcCount">
+		update
+			board
+		  	set count = count + 1
+		  where board_no = #{boardNo}
+		    and status = 'Y'
+		    and board_type = 2
+	</update>
+	
+	<select id="selectRcBoard" resultMap="boardResult">
+		SELECT
+		    b.board_no,
+		    b.board_title,
+		    b.board_content,
+		    m.user_id as "board_writer",
+		    b.count,
+		    TO_CHAR(b.create_date, 'YYYY-MM-DD') as "create_date",
+		    b.hashtag
+		FROM
+		    board b
+		JOIN
+		    member m ON b.board_writer = m.user_no
+		WHERE
+		    b.board_no = #{boardNo}
+		    AND b.board_type = 2
+	</select>
+	
+	<select id="selectRcAtBoard" resultMap="AttachmentResult">
+		select 
+	        FILE_NO
+	       , ORIGIN_NAME
+	       , CHANGE_NAME
+	       , FILE_PATH
+	       , UPLOAD_DATE
+	       , STATUS
+	       , REF_BNO
+       from attachment
+       where ref_bno = #{boardNo}
+	</select>
+	
+	<insert id="insertRcBoard">
+		insert	
+			into board
+				(
+				  board_no
+				, board_title
+				, board_writer
+				, board_content
+				, board_type
+				, create_date
+				, hashtag
+				)
+				values
+				(
+				   seq_board_no.nextval
+				 , #{boardTitle}
+				 , 1
+				 , #{boardContent}
+				 , 2
+				 , sysdate
+				 , #{hashTag}
+				)
+	</insert>
+	
+	<insert id="insertRcAtBoard">
+		        insert
+			into attachment
+			(
+				file_no
+              , file_level
+              , origin_name
+              , change_name
+              , file_path
+              , upload_date
+              , ref_bno
+			)
+            values
+            (
+              seq_file_no.nextval
+             , #{fileLevel}
+             , #{originName}
+             , #{changeName}
+             , #{filePath}
+             , sysdate
+             , seq_board_no.currval
+            )
+	</insert>
+	
+	<delete id="deleteRcBoard">
+		DELETE FROM board
+	    WHERE board_no = #{boardNo}
+	</delete>
+	
+
+	
+
 	
 
 </mapper>

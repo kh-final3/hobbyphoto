@@ -99,6 +99,7 @@ public class AdminController {
 		return "main";
 	}
 	
+
 	@RequestMapping("proenro.from")
 	public String insertProFrom() {
 		return "admin/productRegist";
