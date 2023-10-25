@@ -11,7 +11,6 @@ import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
-
 public interface AdminService {
 	
 	 // 1_1. 회원 관리 리스트 페이지

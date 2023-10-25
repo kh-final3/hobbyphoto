@@ -8,6 +8,10 @@ public interface MemberService {
 	
 	int insertMember(Member m);
 	
+	int insertMemberKakao(Member m);
+	
+	int insertMemberGoogle(Member m);
+	
 	Member searchId(String userName);
 	
 	Member searchPwd(String userId);

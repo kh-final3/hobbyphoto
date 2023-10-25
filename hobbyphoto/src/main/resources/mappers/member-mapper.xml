@@ -15,7 +15,7 @@
 		<result column="status" property="status" />
 		<result column="social" property="social" />
 	</resultMap>
-
+  
 	<insert id="insertMember" parameterType="Member">
 		insert
 		  into member
@@ -39,6 +39,53 @@
 		     , #{ email }
 		     , #{ phone }
 		     , #{ gender }
+		     )
+	</insert>
+	<insert id="insertMemberKakao" parameterType="Member">
+		insert
+		  into member
+		  	 (
+		  	   user_no 
+		  	 , user_id
+		  	 , user_pwd
+		  	 , user_name
+		  	 , nickname
+		  	 , email
+		  	 , social
+		  	 )
+		values 
+		     (
+		       SEQ_MNO.nextval
+		     , #{ userId }
+		     , #{ userPwd }
+		     , #{ userName }
+		     , #{ nickName }
+		     , #{ email }
+		     , 'kakao'
+		     )
+	</insert>
+	
+	<insert id="insertMemberGoogle" parameterType="Member">
+		insert
+		  into member
+		  	 (
+		  	   user_no 
+		  	 , user_id
+		  	 , user_pwd
+		  	 , user_name
+		  	 , nickname
+		  	 , email
+		  	 , social
+		  	 )
+		values 
+		     (
+		       SEQ_MNO.nextval
+		     , #{ userId }
+		     , #{ userPwd }
+		     , #{ userName }
+		     , #{ nickName }
+		     , #{ email }
+		     , 'google'
 		     )
 	</insert>
 	

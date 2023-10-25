@@ -150,4 +150,21 @@ public class MemberController {
 		return "member/myBoard";
 	}
 	
+	@RequestMapping("myGroup.me")
+	public String myGroup() {
+		return "member/myGroup";
+	}
+	
+	@RequestMapping("myBookmarks.me")
+	public String myBookmarks() {
+		return "member/myBookmarks";
+	}
+	@RequestMapping("myLike.me")
+	public String myLike() {
+		return "member/myLike";
+	}
+	@RequestMapping("myBlock.me")
+	public String myBlock() {
+		return "member/myBlock";
+	}
 }

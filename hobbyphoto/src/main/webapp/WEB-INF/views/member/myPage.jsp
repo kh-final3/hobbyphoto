@@ -174,7 +174,7 @@
                 <div id="list_my">
                     <ul>
                         <li>
-                            <a href="마이페이지_북마크.html" class="icon1"><img src="../../resources/images/bookmark-white.png" style="width: 50px; height: 50px;"></a>
+                            <a href="myBookmarks.me" class="icon1"><img src="../../resources/images/bookmark-white.png" style="width: 50px; height: 50px;"></a>
                             <span>북마크</span>
                         </li>
                         <li>
@@ -182,15 +182,15 @@
                             <span>게시글</span>
                         </li>
                         <li>
-                            <a href="마이페이지_댓글.html" class="icon3"><img src="../../resources/images/coment.png" style="width: 50px; height: 50px;"></a>
-                            <span>댓글</span>
+                            <a href="myLike.me" class="icon3"><img src="../../resources/images/coment.png" style="width: 50px; height: 50px;"></a>
+                            <span>좋아요</span>
                         </li>
                     <li>
-                        <a href="마이페이지_모임.html" class="icon4"><img src="../../resources/images/interview.png" style="width: 50px; height: 50px;"></a>
+                        <a href="myGroup.me" class="icon4"><img src="../../resources/images/interview.png" style="width: 50px; height: 50px;"></a>
                         <span>모임</span>
                     </li>
                     <li>
-                        <a href="마이페이지_차단회원.html" class="icon5"><img src="../../resources/images/block-user.png" style="width: 50px; height: 50px;"></a>
+                        <a href="myBlock.me" class="icon5"><img src="../../resources/images/block-user.png" style="width: 50px; height: 50px;"></a>
                         <span>차단 회원</span>
                     </li>
                 </ul>

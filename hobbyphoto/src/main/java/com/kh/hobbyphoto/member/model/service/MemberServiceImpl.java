@@ -25,6 +25,16 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMember(Member m) {
 		return md.insertMember(sqlSession, m);
 	}
+	
+	@Override
+	public int insertMemberKakao(Member m) {
+		return md.insertMemberKakao(sqlSession, m);
+	}
+	
+	@Override
+	public int insertMemberGoogle(Member m) {
+		return md.insertMemberGoogle(sqlSession, m);
+	}
 
 	@Override
 	public Member searchId(String userName) {
