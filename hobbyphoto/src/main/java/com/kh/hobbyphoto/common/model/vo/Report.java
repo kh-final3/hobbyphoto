@@ -17,7 +17,7 @@ public class Report {
 	private String rpContent;
 	private String process;
 	private String refBno;
-	private int reportUno;
-	private int reportedUno;
+	private String reportUno;
+	private String reportedUno;
 	private String boardType;
 }

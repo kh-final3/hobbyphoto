@@ -39,12 +39,6 @@ public class AdminServiceImpl implements AdminService{
 	public int deleMember(String userId) {
 		return aDao.deleMember(sqlSession, userId);		
 	}
-  
-	// 상품 등록 서비스
-//	@Override
-//	public int insertProduct(Product p) {
-//		return aDao.insertProduct(sqlSession, p);
-//	}
 	
 	// 게시물 관리서비스-사진게시판
 	@Override
