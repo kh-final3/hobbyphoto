@@ -353,18 +353,15 @@ public class BoardController {
 		int result = bService.updateCulture(fe);
 
 		if (result > 0) {
-	        // 게시물 수정 성공
-	        if ("전시".equals(fe.getFeType())) {
-	            // 전시인 경우
-	            return "redirect:exhibitDetail.fs?feNo=" + fe.getFeNo();
-	        } else if ("축제".equals(fe.getFeType())) {
-	            // 축제인 경우
-	            return "redirect:festivalDetail.fs?feNo=" + fe.getFeNo();
-	        }
-	    } 
+	      
+	            return "redirect:cultureDetail.fs?feNo=" + fe.getFeNo();
+	       
+	    }else {
+	    	
 			// 수정 실패 => 에러페이지
 			model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
 			return "common/errorPage";
+	    }
 		
 	}
 	

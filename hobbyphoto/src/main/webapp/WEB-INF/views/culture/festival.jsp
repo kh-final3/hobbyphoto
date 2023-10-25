@@ -244,7 +244,7 @@
 	                </ul>
 	                <div class="pf_btn">
 	                    <br>
-	                    <a href="festivalDetail.fs?feNo=${ fe.feNo}" seq="2221" class="view_btn">상세보기</a>
+	                    <a href="cultureDetail.fs?feNo=${ fe.feNo}" seq="2221" class="view_btn">상세보기</a>
 	                </div>
 	            </div>
 	        </div>
