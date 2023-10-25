@@ -40,7 +40,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="main.ho">홈으로</a></li>
-                        <li><hr class="dropdown-divider" /></li>
+                        <li><hr class="dropdown-divider"/></li>
                         <li><a class="dropdown-item" href="logout.me">로그아웃</a></li>
                     </ul>
                 </li>
@@ -87,10 +87,11 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>참조번호</th>
+                                            <th>번호</th>
                                             <th>혐의</th>
                                             <th>신고 내용</th>
                                             <th>게시판 유형</th>
+                                            <th>게시글번호</th>
                                             <th>신고자</th>
                                             <th>혐의자</th>
                                             <th>처리여부</th>
@@ -100,10 +101,11 @@
                                     
                                     <tfoot>
                                         <tr>
-                                            <th>참조번호</th>
+                                            <th>번호</th>
                                             <th>혐의</th>
                                             <th>신고 내용</th>
                                             <th>게시판 유형</th>
+                                            <th>게시글번호</th>
                                             <th>신고자</th>
                                             <th>혐의자</th>
                                             <th>처리여부</th>
@@ -118,13 +120,15 @@
 		                                            <td>${ r.guilty }</td>
 		                                            <td>${ r.rpContent }</td>
 		                                            <td>${ r.boardType }</td>
+		                                            <td>${ r.refBno }</td>
 		                                            <td>${ r.reportUno }</td>
 		                                            <td>${ r.reportedUno }</td>
 		                                            <td>${ r.process }</td>
 		                                            <td>
-		                                            	<button>관리</button>
-		                                            	<button>삭제</button>
-		                                            	<button>수정</button>
+								                        <form action="processed.me" method="post">
+								                        	<input type="hidden" name="rpNo" value="${ r.rpNo }">
+								                        	<button type="submit">처리완료</button>
+														</form>
 		                                            </td>
 		                                        </tr>
 		                                   </c:forEach>
@@ -148,7 +152,23 @@
                 </footer>
             </div>
         </div>
-        
+		<script>
+		    $(function(){
+		        $(document).on("click", "#datatablesSimple>tbody>tr", function(){
+		            var boardType = $(this).data("boardtype");
+		            var boardNo = $(this).children().eq(0).text();
+		            if (boardType === 1) {
+		                location.href = "phDetail.bo?phno=" + boardNo;
+		            } else if (boardType === 2) {
+		                location.href = "phDetail.bo?phno=" + boardNo;
+		            } else if (boardType === 3) {
+		                location.href = "SgroupDetail.bo?sno=" + boardNo;
+		            } else {
+		            	location.href = "meetDetail.bo?meetno=" + boardNo;
+		            }
+		        });
+		    });
+		</script>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="resources/js/scripts.js"></script>

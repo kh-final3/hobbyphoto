@@ -75,4 +75,10 @@ public class AdminServiceImpl implements AdminService{
 		return aDao.selectReport(sqlSession);
 	}
 
+	// 신고 게시물 처리완료 버튼
+	@Override
+	public int processed(String rpNo) {
+		return aDao.processed(sqlSession, rpNo);		
+	}
+
 }

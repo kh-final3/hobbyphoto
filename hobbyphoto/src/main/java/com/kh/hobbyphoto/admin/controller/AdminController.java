@@ -1,35 +1,23 @@
 package com.kh.hobbyphoto.admin.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hobbyphoto.admin.model.service.AdminServiceImpl;
-import com.kh.hobbyphoto.admin.model.vo.Admin.AdminReqDto;
 import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
-import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.model.vo.Report;
-import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
-import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Controller
 public class AdminController {
@@ -97,20 +85,20 @@ public class AdminController {
 	}
 	
 	// 사진 게시물 삭제 서비스
-		@RequestMapping("pdelete.bo")
-		public String deleBoard(String boardTitle, HttpSession session, Model model) { 
-			
-			int result = aService.deleBoard(boardTitle);
-			
-			if(result > 0) { // 삭제 성공	
-				session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
-				return "redirect:plist.bo";
-			}else { // 삭제 실패
-				model.addAttribute("errorMsg", "사진 게시글 삭제 실패");
-				return "common/errorPage";
-			}
-			
+	@RequestMapping("pdelete.bo")
+	public String deleBoard(String boardTitle, HttpSession session, Model model) { 
+		
+		int result = aService.deleBoard(boardTitle);
+		
+		if(result > 0) { // 삭제 성공	
+			session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
+			return "redirect:plist.bo";
+		}else { // 삭제 실패
+			model.addAttribute("errorMsg", "사진 게시글 삭제 실패");
+			return "common/errorPage";
 		}
+		
+	}
 	
 	// 게시물관리-장비게시판 리스트로 이동
 	@RequestMapping("elist.bo")
@@ -146,7 +134,7 @@ public class AdminController {
 	}
 	
 	
-	// 신고회원 관리 페이지로 연결
+	// 신고 관리 페이지로 연결
 	@RequestMapping("rlist.me")
 	public ModelAndView selectReport(ModelAndView mv) {
 		
@@ -157,45 +145,26 @@ public class AdminController {
 		return mv;
 	}
 	
+	// 신고 처리완료 버튼
+	@RequestMapping("processed.me")
+	public String processed(String rpNo, HttpSession session, Model model) { 
+		
+		int result = aService.processed(rpNo);
+		
+		if(result > 0) { // 삭제 성공	
+			session.setAttribute("alertMsg", "성공적으로 처리되었습니다.");
+			return "redirect:rlist.me";
+		}else { 		 // 삭제 실패
+			model.addAttribute("errorMsg", "신고 처리 실패");
+			return "common/errorPage";
+		}
+	}
+	
 	// 하비포토 메인 페이지로 이동
 	@RequestMapping("main.ho")
 	public String main() {
 		return "main";
 	}
-	
-	// 관리자가 아닐 경우 관리자 로그인 창으로 돌아감
-//    @GetMapping("/admin")
-//    public String admin() {
-//        User principal = (User) session.getAttribute("principal");
-//        if (principal == null) {
-//            return "redirect:/admin/adminlogin";
-//        }
-//        if (!principal.getRole().equals("ADMIN")) {
-//            return "redirect:/admin/adminlogin";
-//        }
-//        return "admin/adminIndex";
-//    }
-    
-    //관리자 로그인
-//    @PostMapping("/admin/adminlogin")
-//    public String loginAdmin(AdminReqDto adminReqDto, Model model) {
-//        if (adminReqDto.getUsername() == null || adminReqDto.getUsername().isEmpty()) {
-//            throw new CustomException("아이디를 입력해주세요");
-//        }
-//        if (adminReqDto.getPassword() == null || adminReqDto.getPassword().isEmpty()) {
-//            throw new CustomException("패스워드를 입력해주세요");
-//        }
-//        User admin = userRepository.findByUsernameAndPassword(
-//        		adminReqDto.getUsername(), adminReqDto.getPassword());
-//        if (admin == null) {
-//            throw new CustomException("아이디 또는 비밀번호가 다릅니다.");
-//        }
-//        if (!admin.getRole().equals("ADMIN")) {
-//            throw new CustomException("관리자 계정이 아닙니다.");
-//        }
-//        session.setAttribute("principal", admin);
-//        return "redirect:/admin/user";
-//    }
     
 	
 	// 관리자페이지 차트

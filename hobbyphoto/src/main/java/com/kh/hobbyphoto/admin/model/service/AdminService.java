@@ -45,8 +45,11 @@ public interface AdminService {
 	
 //-----------------------------------------------------------------
 	
-	// 4. 신고 게시물 조회
+	// 4_1. 신고 게시물 조회
 	ArrayList<Report> selectReport();
+	
+	// 4_2. 신고 게시물 처리완료 버튼
+	int processed(String rpNo);
 	
 
 }

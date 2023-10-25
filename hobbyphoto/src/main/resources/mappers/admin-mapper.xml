@@ -48,9 +48,9 @@
 		<result column="guilty" property="guilty"></result>
 		<result column="rp_content" property="rpContent"></result>
 		<result column="process" property="process"></result>
-		<result column="ref_bno" property="refBno"></result>
-		<result column="user_id" property="reportUno"></result>
-		<result column="user_id" property="reportedUno"></result>
+		<result column="BOARD_NO" property="refBno"></result>
+		<result column="REPORTUSER" property="reportUno"></result>
+		<result column="REPORTEDUSER" property="reportedUno"></result>
 		<result column="BOARD_TYPE_DESCRIPTION" property="boardType"></result>
 	</resultMap>
 	
@@ -181,18 +181,35 @@
         WHEN R.BOARD_TYPE = '1' THEN '사진 게시판'
         WHEN R.BOARD_TYPE = '2' THEN '장비 게시판'
         WHEN R.BOARD_TYPE = '3' THEN '모임 게시판'
+        WHEN R.BOARD_TYPE = '4' THEN '배경화면 게시판'
         ELSE '기타'
     END AS BOARD_TYPE_DESCRIPTION
-      	 , M1.USER_ID
-	     , M2.USER_ID
+      	 , M1.USER_ID AS REPORTUSER
+	     , M2.USER_ID AS REPORTEDUSER
 	     , R.PROCESS
+         ,
+       (CASE
+        WHEN R.BOARD_TYPE = 1 THEN (SELECT BOARD_NO FROM BOARD B WHERE B.BOARD_NO = R.REF_BNO)
+        WHEN R.BOARD_TYPE = 2 THEN (SELECT BOARD_NO FROM BOARD B WHERE B.BOARD_NO = R.REF_BNO)
+        WHEN R.BOARD_TYPE = 3 THEN (SELECT GROUP_NO FROM S_GROUP G WHERE G.GROUP_NO = R.REF_BNO)
+        WHEN R.BOARD_TYPE = 4 THEN (SELECT BACK_NO FROM BACKGROUND D WHERE D.BACK_NO = R.REF_BNO)
+        ELSE NULL
+        END) AS BOARD_NO
 	  FROM BOARD B
 	  JOIN REPORT R ON(BOARD_NO = REF_BNO)
 	  JOIN MEMBER M1 ON R.REPORT_UNO = M1.USER_NO
 	  JOIN MEMBER M2 ON R.REPORTED_UNO = M2.USER_NO
-	 ORDER
-	    BY B.BOARD_NO DESC
+	 ORDER 
+	    BY R.RP_NO DESC
 	</select>
+	
+	<!-- 신고 게시물 처리완료로 표시 --> 
+	  <update id="processed">
+	  	update 
+	  		   report
+	       set process = 'Y'
+	     where rp_no = #{rpNo}
+	  </update>
 
   <insert id="insertProduct">
   	insert

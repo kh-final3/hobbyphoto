@@ -57,4 +57,9 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectReport");
 	}
 	
+	// 신고 게시글 완료처리
+	public int processed(SqlSessionTemplate sqlSession, String rpNo) {
+		return sqlSession.update("adminMapper.processed", rpNo);
+	}
+	
 }
