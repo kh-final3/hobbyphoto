@@ -238,7 +238,7 @@
 	
 	                        <!-- 모임홍보사진 -->
 	                        <img alt="socialing-detail_image"
-	                            src="resources/images/${ g.img }"
+	                            src="resources/images/${ sg.img }"
 	                            width="600" height="200" decoding="async" data-nimg="1" class="Main_template__image__l4wQN"
 	                            loading="lazy" style="color: transparent;">
 	                        <div class="Main_content__MC5q_">
@@ -254,15 +254,15 @@
 	                                            style="color: transparent;">
 	                                    </div>
 	                                </a>
-	                                <div class="Main_content__host-name__5ligk">${ g.userNo }</div>
+	                                <div class="Main_content__host-name__5ligk">${ sg.userNo }</div>
 	                            </div>
-	                            <div class="Main_content__title__2dJZx">${ g.title }
+	                            <div class="Main_content__title__2dJZx">${ sg.title }
 	                            </div>
 	                        </div>
 	                        <div class="IntroduceHtml_introduce__KLDMs">
 	                            <div class="IntroduceHtml_introduce__content__AGQj0">
 	                                <div>
-	                                    <p>${ g.content }</p>
+	                                    <p>${ sg.content }</p>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -277,21 +277,21 @@
 	                                    <img alt="map" src="https://images.munto.kr/munto-web/info_group.svg?s=48x48"
 	                                        width="24" height="24" decoding="async" data-nimg="1"
 	                                        class="Info_detail__image__Jg5Nb" loading="lazy" style="color: transparent;">
-	                                    <div class="Info_detail__info__hl0py">${ g.meTotal }명</div>
+	                                    <div class="Info_detail__info__hl0py">${ sg.meTotal }명</div>
 	                                </span>
 	
 	                                <span class="Info_detail__4My9u">
 	                                    <img alt="member" src="https://images.munto.kr/munto-web/info_place_24px.svg?"
 	                                        height="24" decoding="async" data-nimg="1" class="Info_detail__image__Jg5Nb"
 	                                        loading="lazy" style="color: transparent;">
-	                                    <div class="Info_detail__info__hl0py">${ g.location }</div>
+	                                    <div class="Info_detail__info__hl0py">${ sg.location }</div>
 	                                </span>
 	
 	                                <span class="Info_detail__4My9u">
 	                                    <img alt="map" src="https://cdn-icons-png.flaticon.com/512/1827/1827463.png"
 	                                        width="24" height="24" decoding="async" data-nimg="1"
 	                                        class="Info_detail__image__Jg5Nb" loading="lazy" style="color: transparent;">
-	                                    <div class="Info_detail__info__hl0py">${ g.grDate }</div>
+	                                    <div class="Info_detail__info__hl0py">${ sg.grDate }</div>
 	                                </span>
 	
 	

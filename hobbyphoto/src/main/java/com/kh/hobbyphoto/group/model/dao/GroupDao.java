@@ -29,8 +29,8 @@ public class GroupDao {
 		return sqlSession.update("sgroupMapper.increaseTgCount", boardNo);
 	}
 
-	public Sgroup selectTgBoard(SqlSessionTemplate sqlSession, int boardNo) {
-		return (Sgroup)sqlSession.selectOne("sgroupMapper.selectTgBoard", boardNo);
+	public ArrayList<Sgroup> selectTgBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList)sqlSession.selectList("sgroupMapper.selectTgBoard", boardNo);
 	}
 
 	public int insertSgBoard(SqlSessionTemplate sqlSession, Sgroup g) {

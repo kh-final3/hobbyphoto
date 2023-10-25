@@ -44,9 +44,9 @@ public class GroupController {
 	
 	@RequestMapping("togetherDetail.tg")
 	public String selcetTogether(int gno, Model model) {
-		Sgroup g = GService.selectTgBoard(gno); 
+		ArrayList<Sgroup> sg = GService.selectTgBoard(gno); 
 		
-		model.addAttribute("g", g);
+		model.addAttribute("sg", sg);
 		return "group/togetherDetailView";
 	}
 	

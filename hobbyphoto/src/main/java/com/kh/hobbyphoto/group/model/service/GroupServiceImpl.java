@@ -28,7 +28,7 @@ public class GroupServiceImpl implements GroupService{
 	}
 	
 	@Override
-	public Sgroup selectTgBoard(int boardNo) {
+	public ArrayList<Sgroup> selectTgBoard(int boardNo) {
 		return GDao.selectTgBoard(sqlSession, boardNo);
 	}
 

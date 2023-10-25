@@ -15,6 +15,6 @@ public interface GroupService {
 	int insertSgBoard(Sgroup g);
 	
 	// 3. 게시글 상세조회용 서비스
-	Sgroup selectTgBoard(int boardNo);
+	ArrayList<Sgroup> selectTgBoard(int boardNo);
 	
 }
