@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.group.model.dao.GroupDao;
+import com.kh.hobbyphoto.group.model.vo.Sgroup;
 
 @Service
 public class GroupServiceImpl implements GroupService{
@@ -17,13 +18,21 @@ public class GroupServiceImpl implements GroupService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	@Override
 	public int selectTgListCount() {
 		return GDao.selectTgListCount(sqlSession);
 	}
 
-	public ArrayList<Board> selectTgList(PageInfo pi) {
+	public ArrayList<Sgroup> selectTgList(PageInfo pi) {
 		return GDao.selectTgList(sqlSession, pi);
 	}
+	
+	@Override
+	public Sgroup selectTgBoard(int boardNo) {
+		return GDao.selectTgBoard(sqlSession, boardNo);
+	}
+
+
 	
 
 	

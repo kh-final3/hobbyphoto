@@ -229,7 +229,84 @@
 
     </style>
 </head>
-<body>
-
-</body>
+	<body>
+	    <div id="__next">
+	        <div class="__className_ff1e61">
+	            <div class="detail-socialing_template__NkCnA">
+	                <div class="detail-socialing_content__6jFUF">
+	                    <div class="Main_template__t9QX6">
+	
+	                        <!-- 모임홍보사진 -->
+	                        <img alt="socialing-detail_image"
+	                            src="https://upload.wikimedia.org/wikipedia/ko/8/87/Kakaofriends.png"
+	                            width="600" height="200" decoding="async" data-nimg="1" class="Main_template__image__l4wQN"
+	                            loading="lazy" style="color: transparent;">
+	                        <div class="Main_content__MC5q_">
+	                            <div class="Main_content__host-img__3fO0S"
+	                            ><a href="/user-profile?id=486807">
+	                                    <div class="SocialingHostImage_host__kz5xl">
+	
+	                                        <!-- 모임주최자프사 -->
+	                                        <img alt="socialinghost"
+	                                            src="https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/7r5X/image/9djEiPBPMLu_IvCYyvRPwmZkM1g.jpg"
+	                                            width="50" height="50" decoding="async" data-nimg="1"
+	                                            class="SocialingHostImage_host__image__NUYeg" loading="lazy"
+	                                            style="color: transparent;">
+	                                    </div>
+	                                </a>
+	                                <div class="Main_content__host-name__5ligk">모임주최자</div>
+	                            </div>
+	                            <div class="Main_content__title__2dJZx">${ g.title }
+	                            </div>
+	                        </div>
+	                        <div class="IntroduceHtml_introduce__KLDMs">
+	                            <div class="IntroduceHtml_introduce__content__AGQj0">
+	                                <div>
+	                                    <p>${ g.conent }</p>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="Info_template__qLVqv">
+	
+	                        <div class="Info_notification__7DgBr">
+	                            <div class="Info_notification__title">안내사항</div>
+	                            <div class="Info_notification__introduce">자세한 정보를 알려드릴게요</div>
+	                            <div class="Info_notification__detail__a5KSg">
+	                                <span class="Info_detail__4My9u">
+	                                    <img alt="map" src="https://images.munto.kr/munto-web/info_group.svg?s=48x48"
+	                                        width="24" height="24" decoding="async" data-nimg="1"
+	                                        class="Info_detail__image__Jg5Nb" loading="lazy" style="color: transparent;">
+	                                    <div class="Info_detail__info__hl0py">${ g.meTotal }</div>
+	                                </span>
+	
+	                                <span class="Info_detail__4My9u">
+	                                    <img alt="member" src="https://images.munto.kr/munto-web/info_place_24px.svg?"
+	                                        height="24" decoding="async" data-nimg="1" class="Info_detail__image__Jg5Nb"
+	                                        loading="lazy" style="color: transparent;">
+	                                    <div class="Info_detail__info__hl0py">${ g.location }</div>
+	                                </span>
+	
+	                                <span class="Info_detail__4My9u">
+	                                    <img alt="map" src="https://cdn-icons-png.flaticon.com/512/1827/1827463.png"
+	                                        width="24" height="24" decoding="async" data-nimg="1"
+	                                        class="Info_detail__image__Jg5Nb" loading="lazy" style="color: transparent;">
+	                                    <div class="Info_detail__info__hl0py">${ g.grDate }</div>
+	                                </span>
+	
+	
+	                            </div>
+	                        </div>
+	                        <button id="enroll-btn">신청하기</button>
+	                        <br><br><br>
+	                    </div>
+	                    <div>
+	
+	                    </div>
+	
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</body>
 </html>

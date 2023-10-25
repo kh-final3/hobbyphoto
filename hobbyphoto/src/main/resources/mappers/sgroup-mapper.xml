@@ -5,7 +5,7 @@
 	<resultMap id="SgroupResult" type="Sgroup">
 		<result column="group_no" property="groupNo"/>
 		<result column="img" property="img"/>
-		<result column="user_no" property="userNo"/>
+		<result column="nickname" property="userNo"/>
 		<result column="title" property="title"/>
 		<result column="content" property="content"/>
 		<result column="me_total" property="meTotal"/>
@@ -28,8 +28,10 @@
 		    sg.img,
 		    sg.title,
 		    sg.user_no,
-		    m.user_id,
-		    TO_CHAR(sg.create_date, 'YYYY-MM-DD') AS create_date
+		    m.nickname,
+            sg.location,
+            sg.me_total,
+		    TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
 		FROM
 		    s_group sg
 		JOIN
@@ -41,6 +43,7 @@
 		ORDER BY
 		    sg.group_no DESC
 	</select>
+	
 	
 </mapper>
 	

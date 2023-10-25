@@ -16,7 +16,7 @@ import lombok.ToString;
 public class Sgroup {
 	private int groupNo;
 	private String img;
-	private int userNo;
+	private String userNo;
 	private String title;
 	private String conent;
 	private int meTotal;

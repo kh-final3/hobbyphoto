@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>모임 게시판</title>
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+    <!-- <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <style>
         .outer{
@@ -16,7 +17,7 @@
             /* border: 1px solid black; */
         }
         .wrap{
-            width: 1000px; 
+            width: 950px; 
             /* border: 1px solid red; */
             margin: auto;
             font-family: 'NanumBarunGothic';
@@ -25,8 +26,7 @@
         }
        
         .list>div{
-            /* border: 1px solid black; */
-            width: 33.3%;
+            width: 32.8%;
             height: 250px;
             float: left;
             box-sizing: border-box;
@@ -38,10 +38,12 @@
             width: 90%;
             height: 85%;
             position: absolute;
-            top: 10;bottom: 0;left: 0;right: 0;
+            top: 10; bottom: 0; left: 5; right: 0;
             margin: auto;
-            background-color: rgb(231, 231, 231);
+            background-color: rgba(202, 240, 248, 0.404);
             border-radius: 10px;
+            margin-right: 5px;
+            margin-top: 20px
         }
 
         .together>table{
@@ -82,142 +84,44 @@
         }
     </style>
 </head>
-<body>
-    <div class="outer">
-        <div class="wrap">
-            <h1 align="center" id="title">소 모 임</h1>
-           
-            <div align="center"><button id="write-btn" class="btn btn-secondary">글 작성</button></div>
-         
-            <div class="list">
-              
-                <div>
-                    <div class="together">
-						<input type="hidden" class="todayNo" value="글번호">
-                        <table>
-                            <tbody>
-                                <tr height="30" style="font-size: 18px; font-weight: bolder;">
-                                    <td>제목</td>
-                                </tr>
-                                <tr>
-                                    <td>작성자</td>
-                                </tr>
-                                <tr>
-                                    <td>📍 장소</td>
-                                </tr>
-                                <tr>
-                                	<td>📅 날짜</td>
-                                </tr>
-                                <tr>
-                                    <td>🕒 시간</td>
-                                </tr>
-                                <tr>
-                                
-                                    <td>🙋 5/10명</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <div class="end">마감</div>
-                      
-                    </div>
-                    
-                </div>
-                <div>
-                    <div class="together">
-						<input type="hidden" class="todayNo" value="글번호">
-                        <table>
-                            <tbody>
-                                <tr height="30" style="font-size: 18px; font-weight: bolder;">
-                                    <td>제목</td>
-                                </tr>
-                                <tr>
-                                    <td>작성자</td>
-                                </tr>
-                                <tr>
-                                    <td>📍 장소</td>
-                                </tr>
-                                <tr>
-                                	<td>📅 날짜</td>
-                                </tr>
-                                <tr>
-                                    <td>🕒 시간</td>
-                                </tr>
-                                <tr>
-                                
-                                    <td>🙋 5/10명</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <div class="end">마감</div>
-                      
-                    </div>
-                    
-                </div>
-                <div>
-                    <div class="together">
-						<input type="hidden" class="todayNo" value="글번호">
-                        <table>
-                            <tbody>
-                                <tr height="30" style="font-size: 18px; font-weight: bolder;">
-                                    <td>제목</td>
-                                </tr>
-                                <tr>
-                                    <td>작성자</td>
-                                </tr>
-                                <tr>
-                                    <td>📍 장소</td>
-                                </tr>
-                                <tr>
-                                	<td>📅 날짜</td>
-                                </tr>
-                                <tr>
-                                    <td>🕒 시간</td>
-                                </tr>
-                                <tr>
-                                
-                                    <td>🙋 5/10명</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <div class="end">마감</div>
-                      
-                    </div>
-                    
-                </div>
-                <div>
-                    <div class="together">
-						<input type="hidden" class="todayNo" value="글번호">
-                        <table>
-                            <tbody>
-                                <tr height="30" style="font-size: 18px; font-weight: bolder;">
-                                    <td>제목</td>
-                                </tr>
-                                <tr>
-                                    <td>작성자</td>
-                                </tr>
-                                <tr>
-                                    <td>📍 장소</td>
-                                </tr>
-                                <tr>
-                                	<td>📅 날짜</td>
-                                </tr>
-                                <tr>
-                                    <td>🕒 시간</td>
-                                </tr>
-                                <tr>
-                                
-                                    <td>🙋 5/10명</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="end">마감</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
+<jsp:include page="../common/header.jsp"/>
+	<body>
+	    <div class="outer">
+	        <div class="wrap">
+	            <h1 align="center" id="title">모임</h1>
+	            <div align="center"><button id="write-btn" class="btn btn-secondary">글 작성</button></div>
+					<div class="list">
+					    <c:forEach var="g" items="${ list }">
+					        <div class="together">
+					            <input type="hidden" class="gno" value="${ g.groupNo }">
+					            <table>
+					                <tbody>
+					                    <tr height="30" style="font-size: 18px; font-weight: bolder;">
+					                        <td>${ g.title }</td>
+					                    </tr>
+					                    <tr>
+					                        <td>${ g.userNo }</td>
+					                    </tr>
+					                    <tr>
+					                        <td>📍 ${ g.location }</td>
+					                    </tr>
+					                    <tr>
+					                        <td>📅 ${ g.grDate }</td>
+					                    </tr>
+					                    <tr>
+					                        <td>🕒 시간</td>
+					                    </tr>
+					                    <tr>
+					                        <td>🙋 ?/${ g.meTotal }명</td>
+					                    </tr>
+					                </tbody>
+					            </table>
+					            <div class="end">마감</div>
+					        </div>
+					    </c:forEach>
+					</div>
+	        	</div>
+	    	</div>
+		</body>
+	<jsp:include page="../common/footer.jsp"/>
 </html>
