@@ -1,5 +1,7 @@
 package com.kh.hobbyphoto.member.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +31,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping("login.me")
-	public ModelAndView loginMember(Member m,Model model,HttpSession session,ModelAndView mv) {
+	public ModelAndView loginMember(Member m,Model model,HttpSession session,ModelAndView mv,HttpServletResponse response) {
 		Member loginMember = ms.loginMember(m);
-
+		
 		if(loginMember != null && bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			mv.setViewName("redirect:/");
@@ -39,8 +41,22 @@ public class MemberController {
 			session.setAttribute("alertMsg", "아이디 또는 비밀번호가 다르거나, 존재하지 않는 회원입니다.");
 			mv.setViewName("redirect:loginForm.me");
 		}
-		
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping("addCookie.me")
+	public String addCookie(String userId,String cookie,HttpServletResponse response){
+		System.out.println(userId);
+		System.out.println(cookie.equals(""));
+		Cookie cookieId = new Cookie("cookieId", userId);
+		if(cookie.equals("")) {
+			cookieId.setMaxAge(0);
+			response.addCookie(cookieId);
+		}else {
+			response.addCookie(cookieId);
+		}
+		return "쿠키 생성 성공";
 	}
 	
 	@RequestMapping("memberEnrollForm.me")
@@ -52,7 +68,6 @@ public class MemberController {
 	public String enroll(Member m,Model model,HttpSession session) {
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		m.setUserPwd(encPwd);
-		System.out.println(encPwd);
 		
 		int result = ms.insertMember(m);
 		

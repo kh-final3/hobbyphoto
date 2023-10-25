@@ -101,27 +101,32 @@
         }
 
         .sns-login {
-        padding: 20px;
+        	width: 390px;
+        	margin: auto;
+        	padding-right: 36px;
         }
 
         .sns-login li {
-        padding: 0px 15px;
+  	    	padding: 0px 15px;
         }
 
         .sns-logins a {
-        width: 50px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        border-radius: 50px;
-        background: white;
-        font-size: 20px;
-        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4), -3px -3px 5px rgba(0, 0, 0, 0.1);
+	        width: 50px;
+	        height: 50px;
+	        display: flex;
+	        align-items: center;
+	        justify-content: center;
+	        padding: 10px;
+	        border-radius: 50px;
+	        background: white;
+	        font-size: 20px;
+	        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4), -3px -3px 5px rgba(0, 0, 0, 0.1);
         }
        
-       
+        .sns-login img{
+        	width: 440px;
+        	height: 60px;
+        }
     </style>
 </head>
 <body>
@@ -141,7 +146,7 @@
 
                     <div class="login_id">
                         <h4>아이디</h4>
-                        <input class="login-input" type="text" name="userId" required placeholder="아이디를 입력해주세요.">
+                        <input class="login-input" type="text" name="userId" value="${ cookie }" required placeholder="아이디를 입력해주세요.">
                     </div>
 
                     <div class="login_pw">
@@ -152,7 +157,7 @@
                     <div class="login_etc">
 
                         <div class="checkbox">
-                            <input type="checkbox" name="" id=""> 아이디 저장
+                            <input type="checkbox" name="cookie" id="cookie"> 아이디 저장
                         </div>
 
                         <div class="forgot_pw">
@@ -173,18 +178,48 @@
 		            </form>
                 </div>
 
-            <br>
-           
             <div class="sns-login">
 	            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=5f1f7536e194f12469c7a86ac6bdb30f&redirect_uri=http://localhost:8006/hobbyphoto/login">
 				 	<img src="resources/images/kakao_login.png">
 				</a>
 				<br>
 				<a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=860686382085-sag7ri1m1cuu3t9csh56c9c0t8touqei.apps.googleusercontent.com&redirect_uri=http://localhost:8006/hobbyphoto/google&response_type=code&scope=email%20profile%20openid&access_type=offline">
-					<img src="resources/images/google_login.png" style="width: 300px; height: 45px;">
+					<img src="resources/images/google_login.png">
 				</a>
             </div>
             <br>
         </div> 
     </div>
-    
+    <script>
+    	$(()=>{
+    		$("#cookie").change(()=>{
+    			if(!$("#cookie").hasClass("cookie")){
+    				$("#cookie").addClass("cookie");
+    				$("#cookie").val("cookie")
+    				$.ajax({
+    					url:"addCookie.me",
+    					data:{userId:$("input[name=userId]").val(),cookie:$("#cookie").val()},
+    					success:()=>{
+    						
+    					},
+    					error:()=>{
+    						console.log("아이디 저장 ajax 실패")
+    					}
+    				})
+    			}else{
+    				$("#cookie").removeClass("cookie");
+    				$("#cookie").val("");
+    				$.ajax({
+    					url:"addCookie.me",
+    					data:{userId:$("input[name=userId]").val(),cookie:$("#cookie").val()},
+    					success:(data)=>{
+    						console.log(data)
+    					},
+    					error:()=>{
+    						console.log("아이디 저장 ajax 실패")
+    					}
+    				})
+    			}
+    		})
+    	})
+    </script>
