@@ -98,6 +98,30 @@
 		     )
 	</insert>
 	
+	<insert id="insertMemberGoogle" parameterType="Member">
+		insert
+		  into member
+		  	 (
+		  	   user_no 
+		  	 , user_id
+		  	 , user_pwd
+		  	 , user_name
+		  	 , nickname
+		  	 , email
+		  	 , social
+		  	 )
+		values 
+		     (
+		       SEQ_MNO.nextval
+		     , #{ userId }
+		     , #{ userPwd }
+		     , #{ userName }
+		     , #{ nickName }
+		     , #{ email }
+		     , 'google'
+		     )
+	</insert>
+	
 	<select id="loginMember" resultMap="resultMember">
 		select 
 		       user_no

@@ -180,8 +180,8 @@
 				 	<img src="resources/images/kakao_login.png">
 				</a>
 				<br>
-				<a href="http://localhost:8006/api/v1/oauth2/google">
-					구글 아이디로 로그인
+				<a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=860686382085-sag7ri1m1cuu3t9csh56c9c0t8touqei.apps.googleusercontent.com&redirect_uri=http://localhost:8006/hobbyphoto/google&response_type=code&scope=email%20profile%20openid&access_type=offline">
+					<img src="resources/images/google_login.png" style="width: 300px; height: 45px;">
 				</a>
             </div>
             <br>
