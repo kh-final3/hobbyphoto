@@ -236,7 +236,7 @@
 		            <div class="card-body">
 		                <h4 class="card-title">${ fe.feTitle }</h4>
 		                <p class="card-text">기 간${ fe.feDate }</p>
-		                <a href="exhibitDetail.fs?feNo=${ fe.feNo }" class="btn btn-primary">자세히보기</a>
+		                <a href="cultureDetail.fs?feNo=${ fe.feNo}" class="btn btn-primary">자세히보기</a>
 		            </div>
 		        </div>
         	</c:forEach>

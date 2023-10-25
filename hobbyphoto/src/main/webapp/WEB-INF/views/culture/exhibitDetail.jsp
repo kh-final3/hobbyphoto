@@ -176,7 +176,7 @@
 	height: 48px;
 	border-left: 1px solid #eee;
 	background: #fff
-		url(/static/pages/img/service/detailview/lined_heart_sprite.png) 3px
+		url(https://og-data.s3.amazonaws.com/static/pages/img/service/detailview/lined_heart_sprite.png) 3px
 		3px no-repeat;
 	background-size: 84px 42px;
 	cursor: pointer
@@ -192,7 +192,7 @@
 	height: 48px;
 	border-left: 1px solid #eee;
 	background: #fff
-		url(/static/pages/img/service/detailview/share_icon.png) 3px 3px
+		url(https://og-data.s3.amazonaws.com/static/pages/img/service/detailview/share_icon.png) 3px 3px
 		no-repeat;
 	background-size: 42px 42px;
 	cursor: pointer

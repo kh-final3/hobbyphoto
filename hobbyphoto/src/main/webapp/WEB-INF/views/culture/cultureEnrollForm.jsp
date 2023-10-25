@@ -88,6 +88,8 @@
 		</head>
 
 		<body>
+			<jsp:include page="../common/header.jsp"/>
+
 			<div id="write">
 				<h1 align="center" id="ttl">축제/전시 작성</h1>
 				<form action="insertCulture.fs" method="post" enctype="multipart/form-data">
@@ -297,5 +299,7 @@
 			/* end of hooks */
 		});
 		</script>
+		<jsp:include page="../common/footer.jsp"/>
+
 </body>
 </html>
