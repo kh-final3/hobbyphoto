@@ -158,4 +158,56 @@
  	   		by p_no desc
 	</select>
 	
+	<select id="selectshopkeyword" resultMap="shopResult">
+		select
+	 				p_no
+	 			,	p_name
+	 			,	category_no
+	 			,	brand_no
+	 			,	price
+	 			,	amount
+	 			,	status
+	 			,	thumbnail
+	 		from product
+	 	   where status ='Y'
+	 	      AND UPPER(p_name) LIKE UPPER('%' || #{keyword} || '%')
+	 	   order
+ 	   		by p_no desc
+	</select>
+	
+	<select id="selectbrandProduct" resultMap="shopResult">
+		select
+	 				p_no
+	 			,	p_name
+	 			,	category_no
+	 			,	brand_no
+	 			,	price
+	 			,	amount
+	 			,	status
+	 			,	thumbnail
+	 		from product
+	 	   where status ='Y'
+	 	     and brand_no = #{brandNo}
+	 	   order
+ 	   		by p_no desc
+	</select>
+	
+	<select id="selectAllSearchProduct" resultMap="shopResult">
+		select
+	 				p_no
+	 			,	p_name
+	 			,	category_no
+	 			,	brand_no
+	 			,	price
+	 			,	amount
+	 			,	status
+	 			,	thumbnail
+	 		from product
+	 	   where status ='Y'
+	 	     and brand_no = #{brandNo}
+	 	     and category_no = #{categoryNo}
+	 	   order
+ 	   		by p_no desc
+	</select>
+	
 </mapper>

@@ -35,9 +35,9 @@ public class ShopDao {
 	public int deleteCartProduct(SqlSessionTemplate sqlSession,Cart c) {
 		return sqlSession.delete("shopMapper.deleteCartProduct", c);
 	}
-//	public ArrayList<Cart> selectCartBuy(SqlSessionTemplate sqlSession,Cart b){
-//		return (ArrayList)sqlSession.selectList("shopMapper.selectCartBuy", b);
-//	}
+	public ArrayList<Cart> selectCartBuy(SqlSessionTemplate sqlSession,Cart b){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectCartBuy", b);
+	}
 	
 	public int selectProductamount(SqlSessionTemplate sqlSession,int pno) {
 		return sqlSession.selectOne("shopMapper.selectProductamount", pno);
@@ -46,5 +46,14 @@ public class ShopDao {
 	public Product selectBuyProduct(SqlSessionTemplate sqlSession,int pno) {
 		return sqlSession.selectOne("shopMapper.selectBuyProduct", pno);
 	}
+	public ArrayList<Product> selectshopkeyword(SqlSessionTemplate sqlSession,String keyword) {
+		return (ArrayList)sqlSession.selectList("shopMapper.selectshopkeyword", keyword);
+	}
 	
+	public ArrayList<Product> selectbrandProduct(SqlSessionTemplate sqlSession,int brandNo){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectbrandProduct", brandNo);
+	}
+	public ArrayList<Product> selectAllSearchProduct(SqlSessionTemplate sqlSession,Product p){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectAllSearchProduct", p);
+	}
 }

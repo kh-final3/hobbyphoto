@@ -214,11 +214,11 @@
 	<div class="mb_outer">
         <div class="mb_menu-area">
             <div id="mb_logo">
-                <img src="resources/images/logo.png" alt="로고">
+                <img src="resources/images/logo.png" alt="로고" onclick="shopHome()">
             </div> 
             <div id="mb_nav">
                 <ul id="mb_navi">
-                    <li><a href="pro.list">홈</a></li>
+                    <!--<li><a href="pro.list">홈</a></li> -->
                     <li><a href="#">카메라</a></li>
                     <li><a href="#">포토북</a></li>
                     <li><a href="#">핸드폰 케이스</a></li>
@@ -229,7 +229,7 @@
         </div>
         <div class="mb_search-area">
             <div id="mb_search">
-                <form action="#" id="search_form">
+                <form action="shop.search" id="search_form">
                     <div id="search_text">
                         <input type="text" name="keyword" id="sh_text" placeholder="검색어를 입력해주세요">
                         <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
@@ -317,6 +317,19 @@
 	        function logout() {
 				location.href="logout.me"
 			}
+	        
+	        function shopHome(){
+	        	location.href="pro.list"
+	        }
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
 	        
 	        
 	        //$("#cartbtn").click(function(event) {

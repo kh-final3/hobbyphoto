@@ -1,8 +1,11 @@
 package com.kh.hobbyphoto.shop.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,13 +105,8 @@ public class ShopController {
 	@RequestMapping("shop.mp")
 	public String selectCartProList(int userNo , HttpSession session ,Model model) {
 		
-		
-		System.out.println(userNo);
-		
 		ArrayList<Cart> list = sService.selectCartProList(userNo);
 	
-		System.out.println(list);
-		
 		model.addAttribute("list", list);
 		
 		return "shop/shopCart";
@@ -148,33 +146,37 @@ public class ShopController {
 		
 	}
 	
-//	@ResponseBody
-//	@RequestMapping("pro.buy")
-//	public String selectCartBuy(String[] pNo, int userNo) {
-//		
-//		
-//		ArrayList<Cart> blist = new ArrayList<Cart>();
-//		//체크된 상품 리스트 만들기
-//		for(int i = 0; i<pNo.length;i++) {
-//			System.out.println(pNo[i]);
-//			Cart bc = new Cart();
-//			bc.setPNo(Integer.parseInt(pNo[i]));
-//			bc.setUserNo(userNo);
-//			
-//			blist.add(bc);
-//		}
-//		//System.out.println(blist + "컨트롤러에서 blist의 값");
-//		//System.out.println(blist.get(1).getPNo()+"상품 번호 확인중");
-//			
-//		//ArrayList<Orders> list = sService.selectCartBuy(blist.get(1).getPNo());
-//		
-//		ArrayList<Cart> buylist = sService.selectCartBuy(blist);
-//		
-//		for(int i = 0; i<buylist.size();i++) {
-//		System.out.println("리턴값 확이중 + " + buylist.get(i));
-//		}
-//		return "shop/shopCartBuy";
-//	}
+	@RequestMapping("pro.buy")
+	public String selectCartBuy(String[] pNo,HttpSession session, Model model) {
+		Member m = (Member)session.getAttribute("loginMember");
+		
+		//for(int i = 0; i<pNo.length;i++) {
+		//	System.out.println("pNo확인중 + " + pNo[i]);
+		//}
+		
+		ArrayList<Cart> blist = new ArrayList<Cart>();
+		//체크된 상품 리스트 만들기
+		for(int i = 0; i<pNo.length;i++) {
+			Cart bc = new Cart();
+			bc.setPNo(Integer.parseInt(pNo[i]));
+			bc.setUserNo(m.getUserNo());
+			blist.add(bc);
+		}
+		
+		System.out.println(blist + "컨트롤러에서 blist의 값");
+		//System.out.println(blist.get(1).getPNo()+"상품 번호 확인중");
+			
+		//ArrayList<Orders> list = sService.selectCartBuy(blist.get(1).getPNo());
+		
+		ArrayList<Cart> buylist = sService.selectCartBuy(blist);
+		
+		//for(int i = 0; i<buylist.size();i++) {
+		//System.out.println("리턴값 확이중 + " + buylist.get(i));
+		//}
+		model.addAttribute("buylist", buylist);
+		
+		return "shop/shopCartBuy";
+	}
 	
 	@RequestMapping("purchase")
 	public ModelAndView insertBuyOrder(String prono,Product p ,int userNo,int amount,Orders orders,HttpSession session,ModelAndView mv) {
@@ -203,6 +205,53 @@ public class ShopController {
 		return mv;
 		
 	}
-	
-	
+	@RequestMapping("shop.search")
+	public String selectshopkeyword(String keyword, Model model) {
+		
+		ArrayList<Product> plist = sService.selectshopkeyword(keyword);
+		
+		model.addAttribute("list", plist);
+		
+		return "shop/shopMain";
+		
+	}
+	@ResponseBody
+	@RequestMapping("shopli.search")
+	public  Map<String, Object> selectShopUlsearch(Product p ,String brand, String category) {
+//		if (brand != null && !brand.isEmpty()) {
+//	        int brandNo = Integer.parseInt(brand);
+//	        System.out.println("브랜드 확인 :" + brandNo);
+//	    } else {
+//	        System.out.println("브랜드가 선택되지 않았습니다.");
+//	    }
+//
+//	    if (category != null && !category.isEmpty()) {
+//	        int categoryNo = Integer.parseInt(category);
+//	        System.out.println("카테고리 확인 :" + categoryNo);
+//	    } else {
+//	        System.out.println("카테고리가 선택되지 않았습니다.");
+//	    }
+		Map<String, Object> response = new HashMap<>();
+		
+		if (brand != null && !brand.isEmpty()) {
+	        int brandNo = Integer.parseInt(brand);
+
+	        if(category != null && !category.isEmpty()) {
+	        	int categoryNo = Integer.parseInt(category);
+	        	//브랜드 + 카테고리 선택
+	        	p.setBrandNo(brandNo);
+	        	p.setCategoryNo(categoryNo);
+	        	
+	        	ArrayList<Product> calist = sService.selectAllSearchProduct(p);
+	        	response.put("list", calist);
+	        }else {
+	        	//브랜드만 선택
+	        	ArrayList<Product> brlist = sService.selectbrandProduct(brandNo);
+	        	response.put("list", brlist); 
+	        }
+	    }
+		
+		return response;
+	      
+	}	
 }

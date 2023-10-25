@@ -63,22 +63,22 @@ public class ShopServiceImpl implements ShopService{
 		return result;
 	}
 
-//	@Override
-//	public ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist) {
-//		
-//		ArrayList<Cart> resultList = new ArrayList<>();
-//		
-//		for(Cart b : blist) {
-//	        ArrayList<Cart> resultCarts = sDao.selectCartBuy(sqlSession, b);
-//	        if(resultCarts != null && !resultCarts.isEmpty()) {
-//	            resultList.addAll(resultCarts);
-//	        }
-//	    }
-//		for(int i = 0 ; i<resultList.size();i++) {
-//		System.out.println("서비스에서 확인중 + " + resultList.get(i));
-//		}
-//		return resultList;
-//	}
+	@Override
+	public ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist) {
+		
+		ArrayList<Cart> resultList = new ArrayList<>();
+		
+		for(Cart b : blist) {
+	        ArrayList<Cart> resultCarts = sDao.selectCartBuy(sqlSession, b);
+	        if(resultCarts != null && !resultCarts.isEmpty()) {
+	            resultList.addAll(resultCarts);
+	        }
+	    }
+		for(int i = 0 ; i<resultList.size();i++) {
+		System.out.println("서비스에서 확인중 + " + resultList.get(i));
+		}
+		return resultList;
+	}
 
 	@Override
 	public int selectProductamount(int pno) {
@@ -88,6 +88,21 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public Product selectBuyProduct(int pno) {
 		return sDao.selectBuyProduct(sqlSession,pno);
+	}
+
+	@Override
+	public ArrayList<Product> selectshopkeyword(String keyword) {
+		return sDao.selectshopkeyword(sqlSession,keyword);
+	}
+
+	@Override
+	public ArrayList<Product> selectbrandProduct(int brandNo) {
+		return sDao.selectbrandProduct(sqlSession, brandNo);
+	}
+
+	@Override
+	public ArrayList<Product> selectAllSearchProduct(Product p) {
+		return sDao.selectAllSearchProduct(sqlSession,p);
 	}
 
 

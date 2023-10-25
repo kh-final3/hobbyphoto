@@ -185,7 +185,7 @@
         </div>
         <div class="price_btn">
             <button class="continue_btn" onclick="continueshopping()">CONTINUE SHOPPING</button>
-            <button class="cbuy_btn" onclick="productbuy()">BUY NOW</button>
+            <button class="cbuy_btn" type="button">BUY NOW</button>
         </div>
     </div>
 
@@ -380,7 +380,6 @@
                     },success:function(result){
 						console.log(result);
 						location.reload();
-                    	
                     },error:function(){
                         console.log("장바구니 상품 선택 삭제 ajax통신 실패");
                     }
@@ -393,7 +392,38 @@
         	   location.href="pro.list"
            }    
            
+          //1.체크박스 클릭된 상품 
+          function buyCheckBox(){
+        	  
+        	  var buyProduct = [];
+        	  
+        	//체크된 박스 찾기
+              $(".product_check:checked").each(function() {
+              var $productBody = $(this).closest('.product_body');
+              var pNo = $productBody.data('product-id');
+              buyProduct.push(pNo);
+          });
+        	return buyProduct;
+        	
+          }
           
+          $(".cbuy_btn").click(function(){
+        	  var buyProduct = buyCheckBox();
+        	  
+        	//체크박스 선택x
+              if(buyProduct.length ===0){
+                  alert("선택된 상품이 없습니다.");
+                  return;
+              }
+
+              //선택된 상품이 있어서 사용자에게 확인창 뜨우기
+              var Comfirmchecked = confirm("선택된 상품을 구매하시겠습니까?");
+
+              //사용자가 확인 클릭
+              if(Comfirmchecked){
+                  location.href="pro.buy?pNo="+buyProduct;
+              }
+          })
            
             
             

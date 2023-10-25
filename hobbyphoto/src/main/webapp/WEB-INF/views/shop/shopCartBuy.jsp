@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,6 +102,8 @@
 </head>
 <body>
 <jsp:include page="../common/shopHeader.jsp"/>
+
+<form action="">
 <div class="payment_outer" align="center">
         <div class="order_pay">
             <!-- <img src="img/pay.png" alt="카메라 사진"> -->
@@ -115,16 +118,43 @@
                     <th>합계</th>    
                 </tr>
             </thead>
-            <tbody> 
-                <tr>
-                    <td style="text-align: center;"><img src="${ list.thumbnail }" alt=""></td>
-                    <td style="text-align: center;">${ list.PName }</td>
-                    <td style="text-align: center;">${ list.price }</td>
-                    <td style="text-align: center;">${ amount }</td>
-                    <td style="text-align: center;">${ list.price * amount }</td>
-                </tr>
+            
+            <c:choose>
+            
+            	<c:when test="${ empty buylist }">
+		            <tbody> 
+		                <tr>
+		                    <td style="text-align: center;"><img src="${ list.thumbnail }" alt=""></td>
+		                    <td style="text-align: center;">${ list.PName }</td>
+		                    <td style="text-align: center;">${ list.price }</td>
+		                    <td style="text-align: center;">${ amount }</td>
+		                    <td style="text-align: center;">${ list.price * amount }</td>
+		                </tr>
+		            </tbody>   
+            	</c:when>
+            	
+            	<c:otherwise>
 
-            </tbody>    
+				<c:set var="totalPrice" value="0"/>            		
+         
+            		<c:forEach var="c" items="${ buylist }">
+         				<tbody> 
+			                <tr>
+			                    <td style="text-align: center;"><img src="${ c.thumbnail }" alt=""></td>
+			                    <td style="text-align: center;">${ c.PName }</td>
+			                    <td style="text-align: center;">${ c.price }</td>
+			                    <td style="text-align: center;">${ c.amount }</td>
+			                    <td style="text-align: center;">${ c.price * c.amount }</td>
+			                </tr>
+			            </tbody>   
+            		
+            			<c:set var="totalPrice" value="${totalPrice + (c.price * c.amount)}"/>
+            			
+            		</c:forEach>
+            	</c:otherwise>
+
+            </c:choose>
+
         </table>
 
         <br>
@@ -172,7 +202,8 @@
                     	<td><input type="text" id="sample6_detailAddress" placeholder="상세주소"></td>
                     	<td></td>                    	
                     </tr>
-             
+                    
+                
                 </table>
                 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                 <script>
@@ -226,36 +257,85 @@
 				</script>
                 
             </div>
-            <div class="amount_outer">
-                <div id="amount">
-                    <div id="sum">
-                        결제예정 금액
-                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;">${list.price * amount + (list.price * amount >= 50000 ? 0 : 3000)} 원</p>
-                    </div>
-                    <hr class="hr2">
-                    <table id="sum2" >
-                        <tr>
-                            <td>주문금액</td>
-                            <td>${ list.price * amount } 원</td>
-                        </tr>
-                        
-                        <tr>
-                            <td>배송비</td>
-                            <td>${ list.price * amount  >= 50000 ? "0원" : "3000원" }</td>
-                        </tr>
-                    </table>
-                    <br><br>
-                    <div>
-                        [필수] 주문할 제품의 거래조건을 <br>
-                        하였으며, 구매에 동의하시겠습니까? <br>
-                        (전자상거래법 제8조 2항)<br><br>
-                        <button class="orbtn">결제</button>
-                    </div>
-                </div>
-               <pre>결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</pre>
-            </div>
+            
+            <c:choose>
+            
+            	<c:when test="${ empty buylist }">
+            		<div class="amount_outer">
+		                <div id="amount">
+		                    <div id="sum">
+		                        결제예정 금액
+		                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;">${list.price * amount + (list.price * amount >= 50000 ? 0 : 3000)} 원</p>
+		                    </div>
+		                    <hr class="hr2">
+		                    <table id="sum2" >
+		                        <tr>
+		                            <td>주문금액</td>
+		                            <td>${ list.price * amount } 원</td>
+		                        </tr>
+		                        
+		                        <tr>
+		                            <td>배송비</td>
+		                            <td>${ list.price * amount  >= 50000 ? "0원" : "3000원" }</td>
+		                        </tr>
+		                    </table>
+		                    <br><br>
+		                    <div>
+		                        [필수] 주문할 제품의 거래조건을 <br>
+		                        하였으며, 구매에 동의하시겠습니까? <br>
+		                        (전자상거래법 제8조 2항)<br><br>
+		                        <button class="orbtn">결제</button>
+		                    </div>
+		                </div>
+		               <pre>결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</pre>
+		            </div>
+            	</c:when>
+            	
+            	<c:otherwise>
+            	
+            			<div class="amount_outer">
+			                <div id="amount">
+			                    <div id="sum">
+			                        결제예정 금액
+			                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;">${totalPrice + (totalPrice >= 50000 ? 0 : 3000)} 원</p>
+			                    </div>
+			                    <hr class="hr2">
+			                    <table id="sum2" >
+			                        <tr>
+			                            <td>주문금액</td>
+			                            <td>${ totalPrice } 원</td>
+			                        </tr>
+			                        
+			                        <tr>
+			                            <td>배송비</td>
+			                            <td>${ totalPrice  >= 50000 ? "0원" : "3000원" }</td>
+			                        </tr>
+			                    </table>
+			                    <br><br>
+			                    <div>
+			                        [필수] 주문할 제품의 거래조건을 <br>
+			                        하였으며, 구매에 동의하시겠습니까? <br>
+			                        (전자상거래법 제8조 2항)<br><br>
+			                        <button class="orbtn">결제</button>
+			                    </div>
+			                </div>
+			               <pre>결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</pre>
+			            </div>
+            		
+            	</c:otherwise>
+            	
+            </c:choose>
+            
+            
+            
+            
+            
+            
+            
+            
         </div>
     </div>   
+ </form>
 <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
