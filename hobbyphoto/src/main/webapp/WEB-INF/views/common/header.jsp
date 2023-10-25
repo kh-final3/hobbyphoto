@@ -6,7 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
   <style>
     div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'NanumBarunGothic';}
         .mb_outer{
@@ -126,9 +134,11 @@
             margin-left: 90px; /* 테이블 간격 늘리기 */
         }
         
+        /*
         hr{
           width: 1200px;
         }
+        */
         
         .false{
         	display: none;
@@ -210,11 +220,11 @@
 	            <div id="mb_nav">
 	                <ul id="mb_navi">
 	                    <li><a href="phBoardList.bo">사진게시판</a></li>
-	                    <li><a href="#">장비추천</a></li>
+	                    <li><a href="rcBoardList.bo">장비추천</a></li>
 	                    <li><a href="#">축제 · 전시</a></li>
 	                    <li><a href="#">출사명소</a></li>
 	                   	<li><a href="#">배경화면</a></li>
-	                    <li><a href="#">모임</a></li>
+	                    <li><a href="togetherList.bo">모임</a></li>
 	                    <li><a href="#">공지사항</a></li>
 	                </ul>
 	            </div>

@@ -16,12 +16,12 @@ import lombok.ToString;
 public class Sgroup {
 	private int groupNo;
 	private String img;
-	private int userNo;
+	private String userNo;
 	private String title;
 	private String conent;
-	private int pTotal;
+	private int meTotal;
 	private String location;
-	private Date gDate;
+	private Date grDate;
 	private Date createDate;
 	private String status;
 	private String boardType;

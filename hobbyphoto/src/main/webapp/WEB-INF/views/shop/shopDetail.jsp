@@ -42,17 +42,17 @@
         
       <jsp:include page="../common/shopHeader.jsp"/>
         
-    <form action="">
+    <form action="cart.pro"	>
         
         
         <input type="hidden" name="userNo" class="userNo" value="${ loginMember.userNo }">
-        <input type="hidden" name="prono" value="${ p.PNo }">
+        <input type="hidden" name="prono" value=${ p.PNo }>
+        
         
         <div class="innerOuter">
             <br>
             
-         
-            
+        
             <div class="product-img">
                 <img src="${ p.thumbnail }" style="width: 500px; height: 290px; margin-top: 100px;">
             </div>
@@ -103,7 +103,7 @@
                             <img src="resources/images/wish.png" style="width: 40px; height: 40px;">
                         </button>
                        
-                        <button type="submit" class="pd-btn" id="cartbtn">
+                        <button type="submit" class="pd-btn" id="cartbtn-cart">
                             <img src="resources/images/cart.png" style="width: 40px; height: 40px;">
                         </button>
                         
@@ -174,7 +174,7 @@
 		    }
     		
     		//장바구니
-    		$("#cartbtn").click(function(event) {
+    		$("#cartbtn-cart").click(function(event) {
     	        event.preventDefault();
     	        
     	     	// 로그인 여부 확인

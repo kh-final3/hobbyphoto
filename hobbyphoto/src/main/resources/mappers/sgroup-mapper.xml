@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="sgroupMapper">
+
+	<resultMap id="SgroupResult" type="Sgroup">
+		<result column="group_no" property="groupNo"/>
+		<result column="img" property="img"/>
+		<result column="nickname" property="userNo"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="me_total" property="meTotal"/>
+		<result column="location" property="location"/>
+		<result column="gr_date" property="grDate"/>
+		<result column="create_date" property="createDate"/>
+		<result column="status" property="status"/>
+	</resultMap>
+
+	<select id="selectTgListCount" resultType="_int">
+		select
+			count(*)
+			from s_group
+			where status = 'Y'
+	</select>
+	
+	<select id="selectTgList" resultMap="SgroupResult">
+		SELECT
+		    sg.group_no,
+		    sg.img,
+		    sg.title,
+		    sg.user_no,
+		    m.nickname,
+            sg.location,
+            sg.me_total,
+		    TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
+		FROM
+		    s_group sg
+		JOIN
+		    group_d g ON sg.user_no = g.user_no
+		JOIN
+		    member m on m.user_no = g.user_no
+		WHERE
+		    sg.status = 'Y'
+		ORDER BY
+		    sg.group_no DESC
+	</select>
+	
+	
+</mapper>
+	

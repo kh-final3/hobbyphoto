@@ -22,31 +22,29 @@ public class BoardServiceImpl implements BoardService{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public int selectListCount() {
-		int result = bDao.selectListCount(sqlSession);
+	public int selectPhListCount() {
+		int result = bDao.selectPhListCount(sqlSession);
 		return result;
 	}
 
 	@Override
-	public ArrayList<Board> selectList(PageInfo pi) {
-		ArrayList<Board> list = bDao.selectList(sqlSession, pi);
+	public ArrayList<Board> selectPhList(PageInfo pi) {
+		ArrayList<Board> list = bDao.selectPhList(sqlSession, pi);
 		return list;
 	}
 
 	@Override
-	public int insertBoard(Board b, ArrayList<Attachment> list) {
-		int result = bDao.insertBoard(sqlSession, b);
-	
+	public int insertPhBoard(Board b, ArrayList<Attachment> list) {
+		int result = bDao.insertPhBoard(sqlSession, b);
 		int result2 = 0;
-		if(result > 0) {//성공
-			//사진을 입력
+		
+		if(result > 0) {
 			for(Attachment at : list) {
 				result2 = bDao.insertAttachment(sqlSession, at);
 			}
 		}
-		
 		return result * result2;
-		}
+	}
 
 	
 	@Override
@@ -55,13 +53,76 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Board selectpBoard(int boardNo) {
-		return bDao.selectpBoard(sqlSession, boardNo);
+	public Board selectPhBoard(int boardNo) {
+		return bDao.selectPhBoard(sqlSession, boardNo);
 	}
 	
 	public ArrayList<Attachment> selectAtBoard(int boardNo){
 		return bDao.selectAtBoard(sqlSession, boardNo);
 	}
+
+	@Override
+	public int deletePhBoard(int boardNo) {
+		return bDao.deletePhBoard(sqlSession, boardNo);
+	}
+
+	@Override
+	public int updatePhBoard(Board b) {
+		return bDao.updatePhBoard(sqlSession, b);
+	}
+	
+	@Override
+	public int updatePhAtBoard(Attachment at) {
+		return bDao.updatePhAtBoard(sqlSession, at);
+	}
+	
+	// ------------------------------------------------------------
+
+	@Override
+	public int selectRcListCount() {
+		return bDao.selectRcListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Board> selectRcList(PageInfo pi) {
+		return bDao.selectRcList(sqlSession, pi);
+	}
+
+	@Override
+	public int increaseRcCount(int boardNo) {
+		return bDao.increaseRcCount(sqlSession, boardNo);
+	}
+
+	@Override
+	public Board selectRcBoard(int boardNo) {
+		return bDao.selectRcBoard(sqlSession, boardNo);
+	}
+
+	public ArrayList<Attachment> selectRcAtBoard(int boardNo) {
+		return bDao.selectRcAtBoard(sqlSession, boardNo);
+	}
+
+	public int insertRcBoard(Board b, ArrayList<Attachment> list) {
+		int result = bDao.insertRcBoard(sqlSession, b);
+		int result2 = 0;
+		
+		if(result > 0) {
+			for(Attachment at : list) {
+				result2 = bDao.insertAttachment(sqlSession, at);
+			}
+		}
+		return result * result2;
+	}
+
+	public int deleteRcBoard(int boardNo) {
+		return bDao.deleteRcBoard(sqlSession, boardNo);
+	}
+
+
+
+
+	
+	
 
 
 
