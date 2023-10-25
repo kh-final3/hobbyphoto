@@ -32,6 +32,13 @@ public class GroupServiceImpl implements GroupService{
 		return GDao.selectTgBoard(sqlSession, boardNo);
 	}
 
+	@Override
+	public int insertSgBoard(Sgroup g) {
+		return GDao.insertSgBoard(sqlSession, g);
+	}
+
+
+
 
 	
 

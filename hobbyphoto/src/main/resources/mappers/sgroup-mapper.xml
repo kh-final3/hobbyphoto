@@ -44,6 +44,56 @@
 		    sg.group_no DESC
 	</select>
 	
+	<select id="selectTgBoard" resultMap="SgroupResult">
+		SELECT
+		    sg.img,
+		    sg.title,
+		    sg.content,
+		    m.nickname,
+            sg.location,
+            sg.me_total,
+		    TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
+		FROM
+		    s_group sg
+		JOIN
+		    group_d g ON sg.user_no = g.user_no
+		JOIN
+		    member m on m.user_no = g.user_no
+		WHERE
+		    sg.group_no = #{boardNo}
+		ORDER BY
+		    sg.group_no DESC
+	</select>
+	
+	<insert id="insertSgBoard">
+    INSERT 
+    	INTO s_group 
+    	( 
+    	 group_no,
+    	 title,
+    	 img,
+    	 content,
+    	 me_total,
+    	 location,
+    	 gr_date,
+    	 user_no,
+    	 status
+    	 )
+    	VALUES 
+    	(
+    	seq_sgr.nextval,
+    	#{title},
+    	#{img}, 
+    	#{content}, 
+    	#{meTotal}, 
+    	#{location}, 
+    	#{grDate},
+    	1,
+    	'Y'
+    	)
+	</insert>
+
+	
 	
 </mapper>
 	

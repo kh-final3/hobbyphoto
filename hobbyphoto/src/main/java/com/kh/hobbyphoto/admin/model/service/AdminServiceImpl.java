@@ -40,11 +40,11 @@ public class AdminServiceImpl implements AdminService{
       return aDao.deleMember(sqlSession, userId);      
    }
 
-// 게시물 관리서비스-사진게시판
+   // 게시물 관리서비스-사진게시판
    @Override
    public ArrayList<Board> selectBoard() {
       return aDao.selectBoard(sqlSession);
-}
+   }
    // 게시물 삭제서비스-사진게시판
    @Override
    public int deleBoard(String boardTitle) {
