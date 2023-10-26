@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="noticeMapper">
+
+	<resultMap id="noticeResult" type="Notice">
+		<result column="notice_no" property="noticeNo"/>
+		<result column="notice_writer" property="noticeWriter"/>
+		<result column="notice_title" property="noticeTitle"/>
+		<result column="notice_content" property="noticeContent"/>
+		<result column="noatice_type" property="noticeType"/>
+		<result column="count" property="count"/>
+		<result column="create_date" property="createDate"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<select id="selectShopListCount" resultType="_int">
+		select
+			count(*)
+			from notice
+			where status = 'Y'
+            and notice_type = 2
+	</select>
+	
+	<select id="selectShopList" resultMap="noticeResult">
+	 	select
+		    notice_no,
+		    notice_writer,
+		    notice_title,
+		    notice_content,
+		    count,
+		    create_date
+		 from notice
+	 	where notice_type = 2
+	 	order by to_number(notice_no) desc
+	</select>
+</mapper>
