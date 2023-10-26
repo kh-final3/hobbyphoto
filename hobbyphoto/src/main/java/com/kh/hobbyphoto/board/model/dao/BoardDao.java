@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Repository
@@ -109,9 +110,24 @@ public class BoardDao {
 	public int deleteRcBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.delete("boardMapper.deleteRcBoard", boardNo);
 	}
-
-
-
-
 	
+	public int myListCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("boardMapper.myListCount",userNo);
+	}
+
+	public ArrayList<Board> myBoardList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.myBoardList", userNo, rowBounds);
+	}
+	
+	public ArrayList<Board> myBookmarksList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.myBookmarksList", userNo, rowBounds);
+	}
 }

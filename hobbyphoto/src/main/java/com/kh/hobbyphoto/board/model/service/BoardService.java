@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 public interface BoardService {
@@ -39,6 +40,8 @@ public interface BoardService {
 	int increaseRcCount(int boardNo);
 	Board selectRcBoard(int boardNo);
 	
-	
-	
+	// ------------------- 마이 페이지 게시판 ------------------- //
+	int myListCount(int userNo);
+	ArrayList<Board> myBoardList(PageInfo pi,int userNo);
+	ArrayList<Board> myBookmarksList(PageInfo pi,int userNo);
 }

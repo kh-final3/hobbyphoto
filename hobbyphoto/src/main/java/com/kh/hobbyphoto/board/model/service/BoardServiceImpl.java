@@ -12,6 +12,7 @@ import com.kh.hobbyphoto.board.model.dao.BoardDao;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Service
@@ -118,12 +119,21 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.deleteRcBoard(sqlSession, boardNo);
 	}
 
+	// ------------------------------------------------------------
+	@Override
+	public int myListCount(int userNo) {
+		return bDao.myListCount(sqlSession,userNo);
+	}
 
+	@Override
+	public ArrayList<Board> myBoardList(PageInfo pi, int userNo) {
+		return bDao.myBoardList(sqlSession, pi, userNo);
+	}
 
-
-	
-	
-
+	@Override
+	public ArrayList<Board> myBookmarksList(PageInfo pi, int userNo) {
+		return bDao.myBookmarksList(sqlSession, pi, userNo);
+	}
 
 
 }

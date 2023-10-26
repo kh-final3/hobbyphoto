@@ -146,7 +146,7 @@
 
                     <div class="login_id">
                         <h4>아이디</h4>
-                        <input class="login-input" type="text" name="userId" value="${ cookie }" required placeholder="아이디를 입력해주세요.">
+                        <input class="login-input" type="text" name="userId" value="${cookie.cookieId.value}" required placeholder="아이디를 입력해주세요.">
                     </div>
 
                     <div class="login_pw">
@@ -155,9 +155,16 @@
                     </div>
 
                     <div class="login_etc">
-
+						
                         <div class="checkbox">
-                            <input type="checkbox" name="cookie" id="cookie"> 아이디 저장
+                        	<c:choose>
+                        		<c:when test="${not empty cookie.cookieId.value}">
+                        			<input type="checkbox" class="cookie" name="cookie" id="cookie" checked> 아이디 저장
+                        		</c:when>
+                        		<c:otherwise>
+		                            <input type="checkbox" name="cookie" id="cookie"> 아이디 저장
+                        		</c:otherwise>
+                        	</c:choose>
                         </div>
 
                         <div class="forgot_pw">

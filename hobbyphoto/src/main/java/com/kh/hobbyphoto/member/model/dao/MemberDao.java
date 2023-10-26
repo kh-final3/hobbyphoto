@@ -38,4 +38,12 @@ public class MemberDao {
 	public int deleteMember(SqlSessionTemplate sqlSession,Member m) {
 		return sqlSession.update("memberMapper.deleteMember",m);
 	}
+	
+	public int myListCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("memberMapper.myListCount",userNo);
+	}
+	
+	public int myGroupCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("memberMapper.myGroupCount",userNo);
+	}
 }

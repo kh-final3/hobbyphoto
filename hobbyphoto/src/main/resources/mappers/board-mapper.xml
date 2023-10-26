@@ -279,9 +279,42 @@
 	    WHERE board_no = #{boardNo}
 	</delete>
 	
-
+	<!-- myPage 관련  -->
+	<select id="myListCount" resultType="_int">
+		select
+			count(*)
+			from board
+			where status = 'Y'
+			  and board_writer = #{ userNo }
+	</select>
 	
-
+	<select id="myBoardList" resultMap="boardResult">
+		select
+		       b.board_no
+		     , b.board_title
+	         , m.nickname
+		     , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
+		  from board b
+	      join member m on b.board_writer = m.user_no
+		 where b.status = 'Y'
+		   and board_writer = #{ userNo }
+		 order 
+		    by b.board_no desc
+	</select>
 	
+	<select id="myBookmarksList" resultMap="boardResult">
+		select
+		       b.board_no
+		     , b.board_title
+	         , m.nickname
+		     , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
+		  from bookmark m
+     left join board b on m.board_no = b.board_no
+	      join member m on b.board_writer = m.user_no
+	     where b.status = 'Y'
+		   and m.user_no = 1
+		 order 
+		    by b.board_no desc
+	</select>
 
 </mapper>

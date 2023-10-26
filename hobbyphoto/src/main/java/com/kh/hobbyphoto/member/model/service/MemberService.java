@@ -19,4 +19,8 @@ public interface MemberService {
 	int updatePwd(Member m);
 	
 	int deleteMember(Member m);
+	
+	int myListCount(int userNo);
+	
+	int myGroupCount(int userNo);
 }
