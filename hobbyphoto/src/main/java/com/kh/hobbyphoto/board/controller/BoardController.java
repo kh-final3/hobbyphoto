@@ -254,8 +254,8 @@ public class BoardController {
 	
 	//////////////// 축제,전시 ///////////////////////////
 	
-	@RequestMapping("festvalList.fs")
-	public ModelAndView festvalList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+	@RequestMapping("festivalList.fs")
+	public ModelAndView festivalList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
 			ModelAndView mv) {
 		String keyword = "축제";
 		int listCount = bService.cultureListCount(keyword);
@@ -315,11 +315,12 @@ public class BoardController {
 		int result = bService.insertCulture(fe);
 
 		if (result > 0) {
-	        // 게시물 수정 성공
+	        System.out.println(fe.getFeType());
 	        if ("전시".equals(fe.getFeType())) {
-	            // 전시인 경우
+	            System.out.println(1);
 	            return "redirect:exhibitList.fs";
 	        } else if ("축제".equals(fe.getFeType())) {
+	        	System.out.println(2);
 	            // 축제인 경우
 	            return "redirect:festivalList.fs";
 	        }
@@ -372,5 +373,12 @@ public class BoardController {
 	public String test() {
 		return "test/editor";
 	}
+	
+	@RequestMapping("test.fe")
+	public String testF() {
+		return "board/sds";
+	}
+	
+	
 	
 }

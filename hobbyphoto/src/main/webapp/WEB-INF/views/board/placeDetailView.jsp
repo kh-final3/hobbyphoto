@@ -47,11 +47,14 @@
             border: none;
         }
 
-        .photo-area{
-            border: 1px solid rebeccapurple;
-            width: 100%;
-            height: 40%;
-            border: none;
+       
+
+        .photo-area {
+            width: 100%;    
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center; 
+            align-items: flex-start; 
         }
 
         .map-area{
@@ -316,10 +319,16 @@
                     <h2 style="text-align: center;">상세 사진</h2>
                 </div>
                 <div class="photo-area">
-                    <img src="${ p.pimg1 }" alt="사진 1">
-                    <img src="${ p.pimg2 }" alt="사진 2">
-                    <img src="${ p.pimg3 }" alt="사진 3">
-                    <img src="${ p.pimg4 }" alt="사진 4">
+                    <img src="${ p.pimg1 }" >
+                    <c:if test="${ not empty p.pimg2}" >
+                        <img src="${ p.pimg2 }" >
+                    </c:if>
+                    <c:if test="${ not empty p.pimg3}" >
+                        <img src="${ p.pimg3 }" >
+                    </c:if>
+                    <c:if test="${ not empty p.pimg4}" >
+                        <img src="${ p.pimg4 }" >
+                    </c:if>
                 </div>
                 <hr>
                 <div class="map-area">
@@ -364,29 +373,39 @@
 					        var rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
 					        var rv = new kakao.maps.Roadview(rvContainer); //로드뷰 객체
 					        var rvClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper 객체
-					
 					        // Get the nearest panoId for Roadview from the map's center
-					        rvClient.getNearestPanoId(mapCenter, 50, function(panoId) {
-					            rv.setPanoId(panoId, mapCenter); //panoId와 중심좌표를 통해 로드뷰 실행
-					        });
-					
-					        kakao.maps.event.addListener(rv, 'init', function() {
-					            // 커스텀 오버레이를 생성합니다
-					            var rvCustomOverlay = new kakao.maps.CustomOverlay({
-					                position: mapCenter,
-					                content: '<div class="overlay_info">' +
-					                    '    <a href="https://place.map.kakao.com/17600274" target="_blank">${ p.ptitle }</a>' +
-					                    '    <div class="desc">' +
-					                    '        <img src="${p.pimg1}" width="56px" height="56px">' +
-					                    '        <span class="address">${ p.paddress }</span>' +
-					                    '    </div>' +
-					                    '</div>',
-					                xAnchor: 0.5,
-					                yAnchor: 0.5
-					            });
-					
-					            rvCustomOverlay.setMap(rv);
-					        });
+                            
+
+                                rvClient.getNearestPanoId(mapCenter, 50, function(panoId) {
+                                    if(panoId == null) {
+                                        $("#roadview").css('display', 'none');
+                                    return;
+                                    }else 
+                                    rv.setPanoId(panoId, mapCenter); //panoId와 중심좌표를 통해 로드뷰 실행
+                                    console.log(rv.getPanoId())
+                                    
+                                });
+                            
+        
+                                kakao.maps.event.addListener(rv, 'init', function() {
+                                    // 커스텀 오버레이를 생성합니다
+                                    var rvCustomOverlay = new kakao.maps.CustomOverlay({
+                                        position: mapCenter,
+                                        content: '<div class="overlay_info">' +
+                                            '    <a href="https://place.map.kakao.com/17600274" target="_blank">${ p.ptitle }</a>' +
+                                            '    <div class="desc">' +
+                                            '        <img src="${p.pimg1}" width="56px" height="56px">' +
+                                            '        <span class="address">${ p.paddress }</span>' +
+                                            '    </div>' +
+                                            '</div>',
+                                        xAnchor: 0.5,
+                                        yAnchor: 0.5
+                                    });
+                                    
+                                        rvCustomOverlay.setMap(rv);
+
+                                });
+                            
 					    }
 					});
 					</script>

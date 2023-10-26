@@ -207,7 +207,7 @@
                     <div class="pf_schedule">
                         <div class="pf_sche_tab">
                             <ul class="tab_ul">
-                                <li class="on"><a href="festvalList.fs">축제</a></li>
+                                <li class="on"><a href="festivalList.fs">축제</a></li>
                                 <li><a href="exhibitList.fs">전시</a></li>
                             </ul>
                         </div>
@@ -255,17 +255,17 @@
             <div class="page-btn" align="center">   
                 <c:choose>
                     <c:when test="${ pi.currentPage ne 1 }">
-                        <button onclick="location.href='festvalList.fs?cpage=${ pi.currentPage - 1 }';"> &lt; </button>
+                        <button onclick="location.href='festivalList.fs?cpage=${ pi.currentPage - 1 }';"> &lt; </button>
                     </c:when>
                 </c:choose>
                 
                 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <button onclick="location.href='festvalList.fs?cpage=${p}';">${p}</button>
+                    <button onclick="location.href='festivalList.fs?cpage=${p}';">${p}</button>
                 </c:forEach>
                 
                 <c:choose>
                     <c:when test="${ pi.currentPage ne pi.maxPage }">
-                        <button onclick="location.href='festvalList.fs?cpage=${ pi.currentPage + 1 }';"> &gt; </button>
+                        <button onclick="location.href='festivalList.fs?cpage=${ pi.currentPage + 1 }';"> &gt; </button>
                     </c:when>
                 </c:choose>
             </div>

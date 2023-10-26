@@ -216,7 +216,7 @@
                     <div class="pf_schedule">
                         <div class="pf_sche_tab">
                             <ul class="tab_ul">
-                                <li><a href="festvalList.fs">축제</a></li>
+                                <li><a href="festivalList.fs">축제</a></li>
                                 <li class="on"><a href="exhibitList.fs">전시</a></li>
                             </ul>
                         </div>
