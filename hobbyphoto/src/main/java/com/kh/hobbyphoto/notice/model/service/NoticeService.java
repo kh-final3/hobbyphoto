@@ -15,5 +15,7 @@ public interface NoticeService {
 	
 	// 3. 게시글 상세조회용 서비스
 	int increaseShCount(int boardNo);
-	Notice selectShNotice(int boardNo);
+	ArrayList<Notice> selectShNotice(int boardNo);
+	
+	
 }

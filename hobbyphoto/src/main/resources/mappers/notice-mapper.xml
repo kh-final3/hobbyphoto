@@ -33,4 +33,26 @@
 	 	where notice_type = 2
 	 	order by to_number(notice_no) desc
 	</select>
+	
+	<update id="increaseShCount">
+		update
+			notice
+		  	set count = count + 1
+		  where notice_no = #{boardNo}
+		    and status = 'Y'
+		    and notice_type = 2
+	</update>
+	
+	<select id="selectShNotice" resultMap="noticeResult">
+		select
+	        notice_no,
+	        notice_writer,
+	        notice_title,
+	        notice_content,
+	        count,
+	        create_date
+	    from notice
+	    order by to_number(notice_no) desc
+    
+	</select>
 </mapper>

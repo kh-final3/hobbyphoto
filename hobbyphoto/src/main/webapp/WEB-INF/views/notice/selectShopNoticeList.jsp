@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -26,8 +28,6 @@
 
         .container_myBoardList1{
           width: 900px;
-
-            
         }
         .container_myBoardList2{
             /* border: 1px solid red; */
@@ -38,19 +38,15 @@
             padding-left: 20px;
             display: block;
         }
-
         .myBoardList2_list li{
             padding: 0 0 0 20px;
             list-style-type: none;
             margin: 20px 0 0 -60px;
-
         }
-
         .myBoardList2_list li a{
           color: black;
           text-decoration: none;
         }
-
         .myBoardList2_list li:hover{
             cursor: pointer;
             background: url(https://korean.visitkorea.or.kr/resources/images/sub/ico_mypagemenu.png) 0 0 no-repeat;
@@ -88,22 +84,37 @@
           <table class="table table-hover" style="text-align: center;">
             <thead>
               <tr>
+              	<th>번호</th>
                 <th>제목</th>
                 <th>작성자</th>
+                <th>조회수</th>
                 <th>작성일</th>
               </tr>
             </thead>
             <tbody>
-            <c:forEach var="n" items="${ list }">
-              <tr>
-                <td>${ n.noticeContent }</td>
-                <td>${ n.noticeWriter }</td>
-                <td>${ n.createDate }</td>
-              </tr>
-              </c:forEach>
+		        <c:set var="listSize" value="${fn:length(list)}" />
+		        <c:forEach var="n" items="${list}" varStatus="status">
+		            <c:set var="reverseIndex" value="${listSize - status.count + 1}" />
+		            <tr class="clickable-row">
+		                <td>${ reverseIndex }</td>
+		                <td>${ n.noticeTitle }</td>
+		                <td>${ n.noticeWriter }</td>
+		                <td>${ n.count }</td>
+		                <td>${ n.createDate }</td>
+		                <input type="hidden" class="shno" value="${ n.noticeNo }">
+		            </tr>
+		        </c:forEach>
             </tbody>
           </table>
         </div>
+            <script>
+            	$(document).ready(function() {
+            		$('.table-hover > tbody').on('click', 'tr', function() {
+	                    var shno = $(this).find('.shno').val();
+	                    window.location.href = 'shDetail.list?shno=' + shno;
+	                });
+	            });
+            </script>
       </div>
     </div>
 </body>

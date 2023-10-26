@@ -19,4 +19,12 @@ public class NoticeDao {
 		return (ArrayList)sqlSession.selectList("noticeMapper.selectShopList", pi);
 	}
 
+	public int increaseShCount(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("noticeMapper.increaseShCount", boardNo);
+	}
+
+	public ArrayList<Notice> selectShNotice(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList) sqlSession.selectList("noticeMapper.selectShNotice", boardNo);
+	}
+
 }

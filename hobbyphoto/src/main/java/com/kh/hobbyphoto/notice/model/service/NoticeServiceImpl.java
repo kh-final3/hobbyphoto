@@ -32,11 +32,11 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 	@Override
 	public int increaseShCount(int boardNo) {
-		return 0;
+		return nDao.increaseShCount(sqlSession, boardNo);
 	}
 	@Override
-	public Notice selectShNotice(int boardNo) {
-		return null;
+	public ArrayList<Notice> selectShNotice(int boardNo) {
+		return nDao.selectShNotice(sqlSession, boardNo);
 	}
 	
 
