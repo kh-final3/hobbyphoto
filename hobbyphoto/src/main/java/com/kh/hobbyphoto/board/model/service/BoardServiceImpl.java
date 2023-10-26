@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hobbyphoto.board.model.dao.BoardDao;
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Service
@@ -117,10 +118,22 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.deleteRcBoard(sqlSession, boardNo);
 	}
 
+	// ------------------------------------------------------------
+	@Override
+	public int myListCount(int userNo) {
+		return bDao.myListCount(sqlSession,userNo);
+	}
 
+	@Override
+	public ArrayList<Board> myBoardList(PageInfo pi, int userNo) {
+		return bDao.myBoardList(sqlSession, pi, userNo);
+	}
 
+	@Override
+	public ArrayList<Board> myBookmarksList(PageInfo pi, int userNo) {
+		return bDao.myBookmarksList(sqlSession, pi, userNo);
+	}
 
-	
 	@Override
 	public int selectPlaceListCount() {
 		int result = bDao.selectPlaceListCount(sqlSession);
@@ -212,7 +225,7 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.updateCulture(sqlSession, fe);
 	}
 
-	
+}
 
 	
 

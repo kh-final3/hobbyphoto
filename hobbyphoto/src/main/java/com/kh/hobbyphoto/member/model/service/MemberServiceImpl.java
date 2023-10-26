@@ -56,4 +56,14 @@ public class MemberServiceImpl implements MemberService {
 		return md.deleteMember(sqlSession,m);
 	}
 
+	@Override
+	public int myListCount(int userNo) {
+		return md.myListCount(sqlSession,userNo);
+	}
+
+	@Override
+	public int myGroupCount(int userNo) {
+		return md.myGroupCount(sqlSession,userNo);
+	}
+
 }

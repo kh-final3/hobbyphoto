@@ -153,5 +153,18 @@
 		 where user_id = #{ userId }
 		   and status = 'Y'
 	</update>
-
+	
+	<select id="myListCount" resultType="_int">
+		select
+			   count(*)
+	      from bookmark
+		 where user_no = #{userId}
+	</select>
+	
+	<select id="myGroupCount" resultType="_int">
+		select
+			   count(*)
+	      from group_d
+		 where user_no = #{userId};
+	</select>
 </mapper>

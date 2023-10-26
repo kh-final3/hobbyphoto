@@ -58,7 +58,9 @@ public class GoogleController {
         	m.setUserName(resultEntity2.getBody().getName());
         	m.setNickName(resultEntity2.getBody().getName());
         	m.setEmail(email);
+        	
         	int result = ms.insertMemberGoogle(m);
+        	
         	if(result>0) {
         		loginMember = ms.loginMember(m);
         	}

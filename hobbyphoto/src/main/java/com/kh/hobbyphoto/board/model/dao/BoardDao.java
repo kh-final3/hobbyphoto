@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Repository
@@ -111,18 +112,38 @@ public class BoardDao {
 	public int deleteRcBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.delete("boardMapper.deleteRcBoard", boardNo);
 	}
-
 	
+	public int myListCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("boardMapper.myListCount",userNo);
+	}
+
+	public ArrayList<Board> myBoardList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
+  	int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.myBoardList", userNo, rowBounds);
+	}
+	public ArrayList<Board> myBookmarksList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
+    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+    return (ArrayList)sqlSession.selectList("boardMapper.myBookmarksList", userNo, rowBounds);
+  }
+  
 	public int selectPlaceListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.selectPlaceListCount");
 	}
 	
 	public ArrayList<Place> selectPlaceList(SqlSessionTemplate sqlSession, PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+
+  	int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
-		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.selectPlaceList", null, rowBounds);
+	}
+	
 	}
 	public int increaseCountPlace(SqlSessionTemplate sqlSession, int pno) {
 		return sqlSession.update("boardMapper.increaseCountPlace", pno);
@@ -137,7 +158,6 @@ public class BoardDao {
 	}
 
 	public int insertAttachmentPlace(SqlSessionTemplate sqlSession, ArrayList<Attachment> list) {
-		System.out.println(list);
 		return sqlSession.insert("boardMapper.insertAttachmentPlace", list);
 	}
 
@@ -149,10 +169,7 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.sortPlaceList", null, rowBounds);
 	}
 	
-
-
 	public int updatePlace(SqlSessionTemplate sqlSession, Place p) {
-		System.out.println(p);
 		return sqlSession.update("boardMapper.updatePlace", p);
 	}
 
@@ -164,18 +181,16 @@ public class BoardDao {
 	public int deletePlace(SqlSessionTemplate sqlSession, int pno) {
 		return sqlSession.delete("boardMapper.deletePlace", pno);
 	}
-	
-	
-	
-	
+
 	public int cultureListCount(SqlSessionTemplate sqlSession, String keyword) {
 		return sqlSession.selectOne("boardMapper.cultureListCount", keyword);
 	}
 
 	public ArrayList<Festival> cultureList(SqlSessionTemplate sqlSession, PageInfo pi, String keyword) {
+
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
-		
+	
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.cultureList", keyword, rowBounds);
 	}
@@ -196,7 +211,4 @@ public class BoardDao {
 	public int updateCulture(SqlSessionTemplate sqlSession, Festival fe) {
 		return sqlSession.update("boardMapper.updateCulture", fe);
 	}
-
-
-
 }

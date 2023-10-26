@@ -174,7 +174,7 @@
                 <div id="list_my">
                     <ul>
                         <li>
-                            <a href="myBookmarks.me" class="icon1"><img src="../../resources/images/bookmark-white.png" style="width: 50px; height: 50px;"></a>
+                            <a href="myBookmarks.me?cpage=1" class="icon1"><img src="../../resources/images/bookmark-white.png" style="width: 50px; height: 50px;"></a>
                             <span>북마크</span>
                         </li>
                         <li>
