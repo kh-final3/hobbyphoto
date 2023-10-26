@@ -144,7 +144,6 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectPlaceList", null, rowBounds);
 	}
 	
-	}
 	public int increaseCountPlace(SqlSessionTemplate sqlSession, int pno) {
 		return sqlSession.update("boardMapper.increaseCountPlace", pno);
 	}
