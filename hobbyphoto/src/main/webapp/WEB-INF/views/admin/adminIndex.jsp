@@ -226,105 +226,29 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>이름</th>
+                                            <th>신고 사유</th>
+                                            <th>신고자</th>
+                                            <th>제재 횟수</th>
+                                            <th>신고 날짜</th>
+                                            <th>신고된 게시물</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <c:forEach var="m" items="${ list }">
                                         <tr>
-                                            <td>홍길동</td>
+                                            <td class="mno">홍길동</td>
                                             <td>도박/사행성</td>
                                             <td>김철수</td>
                                             <td>1</td>
-                                            <td>2023/10/10</td>
+                                            <td>게시물 제목</td>
 
-                                            <td><button>신고된 게시물로 이동</button></td>
-
+                                            <td>
+                                            	<button type="button" onclick="">신고된 게시물로 이동</button>
+                                            </td>
+										
                                         </tr>
-                                        <tr>
-                                            <td>홍길동</td>
-                                            <td>도박/추측</td>
-                                            <td>김철수</td>
-                                            <td>1</td>
-                                            <td>2023/10/01</td>
-                                            <td><button>신고된 게시물로 이동</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>이영희</td>
-                                            <td>욕설</td>
-                                            <td>박지영</td>
-                                            <td>3</td>
-                                            <td>2023/10/02</td>
-                                            <td><button>신고된 게시물로 이동</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>김철민</td>
-                                            <td>사칭</td>
-                                            <td>이수진</td>
-                                            <td>2</td>
-                                            <td>2023/10/03</td>
-                                            <td><button>신고된 게시물로 이동</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>박지원</td>
-                                            <td>혐오 발언</td>
-                                            <td>이동욱</td>
-                                            <td>4</td>
-                                            <td>2023/10/04</td>
-                                            <td><button>신고된 게시물로 이동</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>최민호</td>
-                                            <td>거짓 정보</td>
-                                            <td>김하늘</td>
-                                            <td>2</td>
-                                            <td>2023/10/05</td>
-                                            <td><button>신고된 게시물로 이동</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>이지수</td>
-                                            <td>사생활 침해</td>
-                                            <td>박태현</td>
-                                            <td>1</td>
-                                            <td>2023/10/06</td>
-                                            <td><button>신고된 게시물로 이동</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>박영호</td>
-                                            <td>폭력적인 콘텐츠</td>
-                                            <td>정미경</td>
-                                            <td>3</td>
-                                            <td>2023/10/07</td>
-                                            <td><button>신고된 게시물로 이동</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>김수진</td>
-                                            <td>부적절한 행동</td>
-                                            <td>이승우</td>
-                                            <td>2</td>
-                                            <td>2023/10/08</td>
-                                            <td><button>신고된 게시물로 이동</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>장현우</td>
-                                            <td>표절</td>
-                                            <td>강지은</td>
-                                            <td>1</td>
-                                            <td>2023/10/09</td>
-                                            <td><button>신고된 게시물로 이동</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>송가람</td>
-                                            <td>길게 눈에 띄는 콘텐츠</td>
-                                            <td>이준호</td>
-                                            <td>5</td>
-                                            <td>2023/10/10</td>
-                                            <td><button>신고된 게시물로 이동</button></td>
-                                        </tr>
+                                       </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

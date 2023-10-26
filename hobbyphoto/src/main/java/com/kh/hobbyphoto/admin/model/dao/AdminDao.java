@@ -17,7 +17,7 @@ import com.kh.hobbyphoto.shop.model.vo.Product;
 @Repository
 public class AdminDao {
 	
-	// 회원 관리 리스트 조회
+	// 회원 관리 리스트 조회 (자동 페이징)
 	public ArrayList<Member> selectMember(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("adminMapper.selectMember");
 	}
@@ -28,8 +28,18 @@ public class AdminDao {
 	}
 	
 	// 게시글 관리 조회-사진게시판
-	public ArrayList<Board> selectBoard(SqlSessionTemplate sqlSession){
-		return (ArrayList)sqlSession.selectList("adminMapper.selectBoard");
+	public ArrayList<Board> selectBoard(SqlSessionTemplate sqlSession, PageInfo pi){
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectBoard", null, rowBounds);
+	}
+	
+	// 게시글 페이징 count
+	public int selectBoardCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.selectBoardCount");
 	}
 	
 	// 게시글 삭제 처리-사진게시판
@@ -60,6 +70,11 @@ public class AdminDao {
 	// 신고 게시글 완료처리
 	public int processed(SqlSessionTemplate sqlSession, String rpNo) {
 		return sqlSession.update("adminMapper.processed", rpNo);
+	}
+	
+	// 관리자 페이지 메인에 산고 회원 리스트
+	public ArrayList<Report> ajaxReportMList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("adminMapper.ajaxReportMList");
 	}
 	
 }

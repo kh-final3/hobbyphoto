@@ -14,7 +14,7 @@ import com.kh.hobbyphoto.shop.model.vo.Product;
 
 public interface AdminService {
 	
-	// 1_1. 회원 관리 리스트 페이지
+	// 1_1. 회원 관리 리스트 페이지 (자동 페이징)
 	ArrayList<Member> selectMember();
 	
 	// 1_2. 회원 삭제 처리
@@ -23,7 +23,8 @@ public interface AdminService {
 //-----------------------------------------------------------------
 	
 	// 2_1. 게시글 관리 조회 
-	ArrayList<Board> selectBoard();
+	int selectBoardCount();
+	ArrayList<Board> selectBoard(PageInfo pi);
 	
 	// 2_2. 게시글 삭제
 	int deleBoard(String boardTitle);
@@ -36,6 +37,9 @@ public interface AdminService {
 	
 	// 2_5. 배경화면게시판 관리 조회
 	ArrayList<BackGround> selectBoard4();
+	
+	// 2_6. 관리자 메인페이지 
+	ArrayList<Report> ajaxReportMList();
 	
 
 //-----------------------------------------------------------------
@@ -51,5 +55,4 @@ public interface AdminService {
 	// 4_2. 신고 게시물 처리완료 버튼
 	int processed(String rpNo);
 	
-
 }

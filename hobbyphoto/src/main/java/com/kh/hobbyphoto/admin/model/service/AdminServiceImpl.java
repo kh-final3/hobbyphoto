@@ -28,10 +28,16 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	// 회원 리스트 조회
+	// 회원 리스트 조회 (자동 페이징)
 	@Override
 	public ArrayList<Member> selectMember() {
 		return aDao.selectMember(sqlSession);
+	}
+	
+	// 신고된 회원 리스트
+	@Override
+	public ArrayList<Report> ajaxReportMList() {
+		return aDao.ajaxReportMList(sqlSession);
 	}
 	
 	// 회원 삭제 서비스
@@ -42,9 +48,16 @@ public class AdminServiceImpl implements AdminService{
 	
 	// 게시물 관리서비스-사진게시판
 	@Override
-	public ArrayList<Board> selectBoard() {
-		return aDao.selectBoard(sqlSession);
-}
+	public ArrayList<Board> selectBoard(PageInfo pi) {
+		return aDao.selectBoard(sqlSession, pi);
+	}
+	
+	// 게시판  페이징 count
+	@Override
+	public int selectBoardCount() {
+		return aDao.selectBoardCount(sqlSession);
+	}
+	
 	// 게시물 삭제서비스-사진게시판
 	@Override
 	public int deleBoard(String boardTitle) {
@@ -75,10 +88,14 @@ public class AdminServiceImpl implements AdminService{
 		return aDao.selectReport(sqlSession);
 	}
 
-	// 신고 게시물 처리완료 버튼
+	// 신고 게시물 처리완료
 	@Override
 	public int processed(String rpNo) {
 		return aDao.processed(sqlSession, rpNo);		
+	}
+
+	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("adminMapper.increaseCount", boardNo);
 	}
 
 }

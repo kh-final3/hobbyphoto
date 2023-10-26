@@ -127,7 +127,7 @@
 		                                            <td>
 								                        <form action="processed.me" method="post">
 								                        	<input type="hidden" name="rpNo" value="${ r.rpNo }">
-								                        	<button type="submit">처리완료</button>
+								                        	<button class="btn btn-success" type="submit">처리완료</button>
 														</form>
 		                                            </td>
 		                                        </tr>
@@ -154,17 +154,18 @@
         </div>
 		<script>
 		    $(function(){
+		    	
 		        $(document).on("click", "#datatablesSimple>tbody>tr", function(){
-		            var boardType = $(this).data("boardtype");
-		            var boardNo = $(this).children().eq(0).text();
-		            if (boardType === 1) {
-		                location.href = "phDetail.bo?phno=" + boardNo;
-		            } else if (boardType === 2) {
-		                location.href = "phDetail.bo?phno=" + boardNo;
-		            } else if (boardType === 3) {
-		                location.href = "SgroupDetail.bo?sno=" + boardNo;
+		            var boardType = $(this).children().eq(3).text();
+		            var refBno = $(this).children().eq(4).text();
+		            if (boardType === "사진 게시판") {
+		                location.href = "phDetail.bo?phno=" + refBno;
+		            } else if (boardType === "장비 게시판") {
+		                location.href = "phDetail.bo?phno=" + refBno;
+		            } else if (boardType === "모임 게시판") {
+		                location.href = "sgroupDetail.bo?sno=" + refBno;
 		            } else {
-		            	location.href = "meetDetail.bo?meetno=" + boardNo;
+		            	location.href = "backDetail.bo?bno=" + refBno;
 		            }
 		        });
 		    });

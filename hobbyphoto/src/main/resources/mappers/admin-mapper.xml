@@ -77,7 +77,6 @@
 		<result column="download" property="downLoad"></result>
 	</resultMap>
 	
-	
   	<!-- 관리자페이지 회원 조회 -->
 	<select id="selectMember" resultMap="resultMember">
 	select 
@@ -119,6 +118,13 @@
 	  order 
 	     by b.board_no desc
 	</select>
+	
+  <select id="selectBoardCount" resultType="_int">
+  select
+  		 count(*)
+  	from board
+   where status = 'Y'
+  </select>
 	
 	<!-- 사진 게시물 삭제 --> 
 	  <update id="deleBoard">
@@ -203,7 +209,7 @@
 	    BY R.RP_NO DESC
 	</select>
 	
-	<!-- 신고 게시물 처리완료로 표시 --> 
+	<!-- 신고 게시물 처리완료 누르면 삭제 처리 --> 
 	  <update id="processed">
 	  	update 
 	  		   report
@@ -238,4 +244,24 @@
   		,	#{pSimg}
   		)
   </insert>
+  
+  <!-- 관리자페이지 메인에 신고 회원리스트 -->
+  <select id="ajaxReportMList" resultMap="ReportResult">
+  select *
+  from (
+        select
+                board_no
+              , board_title
+              , board_writer
+              , count
+              , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+              , origin_name
+           from report
+          where process = 'Y'
+          order
+             by count desc
+     )
+    where rownum between 1 and 10
+  </select>
+  
 </mapper>

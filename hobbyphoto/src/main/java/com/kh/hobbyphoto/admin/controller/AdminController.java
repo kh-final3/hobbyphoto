@@ -9,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.hobbyphoto.admin.model.service.AdminServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
+import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.model.vo.Report;
+import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
 
@@ -30,6 +34,15 @@ public class AdminController {
 	public String adminIndex() {
 		
 		return "admin/adminIndex";
+	}
+	
+	// 관리자페이지 신고회원 리스트
+	@ResponseBody
+	@RequestMapping(value="rmList.bo", produces="application/json; charset=utf-8")
+	public String ajaxReportMList() {
+		ArrayList<Report> list = aService.ajaxReportMList();
+		//System.out.println(new Gson().toJson(list));
+		return new Gson().toJson(list);
 	}
 	
 	// 회원 목록 조회	
@@ -75,11 +88,15 @@ public class AdminController {
 	
 	// 게시물관리-사진게시판 리스트로 이동
 	@RequestMapping("plist.bo")
-	public ModelAndView selectBoard(ModelAndView mv) {
+	public ModelAndView selectBoard(@RequestParam(value="cpage", defaultValue = "1") int currentPage, ModelAndView mv) {
 		
-		ArrayList<Board> list = aService.selectBoard();
+		int listCount = aService.selectBoardCount();
 		
-		mv.addObject("list",list).setViewName("admin/postsManage");
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Board> list = aService.selectBoard(pi);
+		
+		mv.addObject("pi",pi).addObject("list",list).setViewName("admin/postsManage");
 		
 		return mv;
 	}
@@ -134,7 +151,7 @@ public class AdminController {
 	}
 	
 	
-	// 신고 관리 페이지로 연결
+	// 신고 관리 페이지로 연결 (자동 페이징)
 	@RequestMapping("rlist.me")
 	public ModelAndView selectReport(ModelAndView mv) {
 		
@@ -152,7 +169,7 @@ public class AdminController {
 		int result = aService.processed(rpNo);
 		
 		if(result > 0) { // 삭제 성공	
-			session.setAttribute("alertMsg", "성공적으로 처리되었습니다.");
+			session.setAttribute("alertMsg", "신고가 성공적으로 처리되었습니다.");
 			return "redirect:rlist.me";
 		}else { 		 // 삭제 실패
 			model.addAttribute("errorMsg", "신고 처리 실패");
@@ -183,5 +200,7 @@ public class AdminController {
 		
 		
 	}
+
+	
 
 

@@ -127,7 +127,7 @@
 							                        <td>
 							                        <form action="mdelete.me" method="post">
 							                        	<input type="hidden" name="userId" value="${ m.userId }">
-							                        	<button type="submit">탈퇴 처리</button>
+							                        	<button class="btn btn-danger" type="submit">탈퇴 처리</button>
 													</form>
 													</td>
 							                    </tr>
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                     </div>
-                </main>
+                </main>        
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
