@@ -12,15 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.kh.hobbyphoto.board.model.service.BoardServiceImpl;
-import com.kh.hobbyphoto.board.model.vo.Board;
-import com.kh.hobbyphoto.board.model.vo.Reply;
-import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.board.model.service.*;
+import com.kh.hobbyphoto.board.model.vo.*;
+import com.kh.hobbyphoto.common.model.vo.*;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
@@ -159,7 +157,7 @@ public class BoardController {
 		
 		if(result > 0) {
 			// 첨부파일이 있었을 경우 => 파일 삭제
-			if(!filePath.equals("")) { // filePath = "resources/uploadFiles/xxxx.jpg" | ""
+			if(!filePath.equals("")) { // filePath = "resources/upfiles/xxxx.jpg" | ""
 				new File(session.getServletContext().getRealPath(filePath)).delete();
 			}
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
@@ -247,39 +245,19 @@ public class BoardController {
 		
 		if(result > 0) {
 			// 첨부파일이 있었을 경우 => 파일 삭제
-			if(!filePath.equals("")) { // filePath = "resources/uploadFiles/xxxx.jpg" | ""
+			if(!filePath.equals("")) { // filePath = "resources/upfiles/xxxx.jpg" | ""
 				new File(session.getServletContext().getRealPath(filePath)).delete();
 			}
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
 			return "redirect:rcBoardList.bo";
-			
+		}else {
+			session.setAttribute("alertMsg", "게시글 삭제 실패");
+            return "redirect:rcBoardList.bo";
+        }
+	}
 	
 
-	public String saveFile(MultipartFile upfile, HttpSession session) {
 
-		// 파일명 수정 작업 후 서버에 업로드 시키기("flower.png" => "2023100412345.png")
-		String originName = upfile.getOriginalFilename(); // "flower.png"
-
-		// "2023100412345" ("년월일시분초")
-		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // "202031004143508"
-		int ranNum = (int) (Math.random() * 90000 + 10000); // 21381 (5자리 랜덤값)
-		String ext = originName.substring(originName.lastIndexOf("."));
-
-		String changeName = currentTime + ranNum + ext; // "202320055470821318.png"
-
-		// 업로드 시키고자 하는 폴더의 물리적인 경로를 알아내기
-
-		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-
-		try {
-			upfile.transferTo(new File(savePath + changeName));
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-		}
-
-		return changeName;
-
-	}
 
 	// *************출사명소시작************ //
 	@RequestMapping("list.pl")
@@ -312,8 +290,8 @@ public class BoardController {
 
 				Attachment at = new Attachment();
 				at.setOriginName(upfile.getOriginalFilename());
-				at.setChangeName("resources/uploadFiles/" + changeName);
-				at.setFilePath("resources/uploadFiles");
+				at.setChangeName("resources/upfiles/" + changeName);
+				at.setFilePath("resources/upfiles");
 				list.add(at);
 			}
 		}
@@ -382,9 +360,9 @@ public class BoardController {
 	}
 	
 
-}
 
-	}
+
+	
 
 	@RequestMapping("updateForm.pl")
 	public String plUpdateForm(int pno, Model model) {
@@ -412,24 +390,24 @@ public class BoardController {
 	            String changeName = saveFile(file, session);
 	            Attachment at = new Attachment();
 	            at.setOriginName(file.getOriginalFilename());
-	            at.setChangeName("resources/uploadFiles/" + changeName);
-	            at.setFilePath("resources/uploadFiles");
+	            at.setChangeName("resources/upfiles/" + changeName);
+	            at.setFilePath("resources/upfiles");
 	            at.setFileLevel(i + 1);
 	            at.setRefBno(String.valueOf(p.getPno()));
 
 	            // Switch 구문 안에서 더 이상 처리할 파일이 없으면 루프를 종료
 	            if (i == 0) {
 	                at.setFileNo(originFileNo1);
-	                p.setPimg1("resources/uploadFiles/" + changeName);
+	                p.setPimg1("resources/upfiles/" + changeName);
 	            } else if (i == 1) {
 	                at.setFileNo(originFileNo2);
-	                p.setPimg2("resources/uploadFiles/" + changeName);
+	                p.setPimg2("resources/upfiles/" + changeName);
 	            } else if (i == 2) {
 	                at.setFileNo(originFileNo3);
-	                p.setPimg3("resources/uploadFiles/" + changeName);
+	                p.setPimg3("resources/upfiles/" + changeName);
 	            } else if (i == 3) {
 	                at.setFileNo(originFileNo4);
-	                p.setPimg4("resources/uploadFiles/" + changeName);
+	                p.setPimg4("resources/upfiles/" + changeName);
 	            } else {
 	                // 처리할 파일이 없으면 루프 종료
 	                break;
@@ -540,7 +518,7 @@ public class BoardController {
 
 		String changeName = saveFile(upfile, session);
 		fe.setFeDate(fe.getFeDate1() +"~"+ fe.getFeDate2());
-		fe.setTimg("resources/uploadFiles/" + changeName);
+		fe.setTimg("resources/upfiles/" + changeName);
 
 		int result = bService.insertCulture(fe);
 
@@ -575,7 +553,7 @@ public class BoardController {
 			// 새로 넘어온 첨부파일 서버 업로드 시키기
 			String changeName = saveFile(reupfile, session);
 
-			fe.setTimg("resources/uploadFiles/" + changeName);
+			fe.setTimg("resources/upfiles/" + changeName);
 		}
 
 		int result = bService.updateCulture(fe);
@@ -593,11 +571,6 @@ public class BoardController {
 		
 	}
 	
-	
-	@RequestMapping(value = "/")
-	public String home() {		
-		return "main";
-	}
 	
 	@RequestMapping("test.t")
 	public String test() {

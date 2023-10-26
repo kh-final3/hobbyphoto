@@ -1,6 +1,6 @@
 package com.kh.hobbyphoto.board.model.service;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import javax.annotation.processing.SupportedSourceVersion;
 
@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.hobbyphoto.board.model.dao.BoardDao;
-import com.kh.hobbyphoto.board.model.vo.Board;
-import com.kh.hobbyphoto.board.model.vo.Reply;
+import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
@@ -151,7 +150,7 @@ public class BoardServiceImpl implements BoardService{
 		int result2 = 1;
 		
 		if(!list.isEmpty()) {
-			result2 = bDao.insertAttachment(sqlSession, list);
+			result2 = bDao.insertAttachmentPlace(sqlSession, list);
 		}
 		return  result1 * result2;
 	}
@@ -173,7 +172,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int insertAttachmentPlace(ArrayList<Attachment> list) {
 		
-		return bDao.insertAttachment(sqlSession, list);
+		return bDao.insertAttachmentPlace(sqlSession, list);
 	}
 	
 	@Override

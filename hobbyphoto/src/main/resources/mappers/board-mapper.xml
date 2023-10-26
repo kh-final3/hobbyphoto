@@ -415,7 +415,7 @@
 			  )
 	</insert>
 	
-	<insert id="insertAttachment" parameterType="java.util.List">
+	<insert id="insertAttachmentPlace" parameterType="java.util.List">
 	    INSERT INTO ATTACHMENT (FILE_NO, REF_BNO, FILE_level, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
 	    SELECT SEQ_FILE_NO.NEXTVAL, SEQ_PLACENO.CURRVAL,A.file_level, A.ORIGIN_NAME, A.CHANGE_NAME, A.FILE_PATH
 	    FROM (

@@ -1,9 +1,8 @@
 package com.kh.hobbyphoto.board.model.service;
 
-import java.util.ArrayList;
+import java.util.*;
 
-import com.kh.hobbyphoto.board.model.vo.Board;
-import com.kh.hobbyphoto.board.model.vo.Reply;
+import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
