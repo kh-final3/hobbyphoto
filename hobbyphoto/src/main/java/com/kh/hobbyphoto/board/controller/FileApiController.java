@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequestMapping("tui-editor")
 public class FileApiController {
     // 파일을 업로드할 디렉터리 경로
-    private final String uploadDir = Paths.get("E:\\workspace\\hobbyphoto\\hobbyphoto\\src\\main\\webapp\\resources\\uploadFiles").toString();
+    private final String uploadDir = Paths.get("C:\\hobbyphoto\\hobbyphoto\\src\\main\\webapp\\resources\\uploadFiles").toString();
 
     /**
      * 에디터 이미지 업로드

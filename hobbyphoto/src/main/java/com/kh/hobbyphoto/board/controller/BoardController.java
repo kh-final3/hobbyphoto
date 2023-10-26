@@ -259,10 +259,8 @@ public class BoardController {
 			ModelAndView mv) {
 		String keyword = "축제";
 		int listCount = bService.cultureListCount(keyword);
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<Festival> list = bService.cultureList(pi, keyword);
-		System.out.println(list);
 		mv.addObject("pi", pi).addObject("list", list).setViewName("culture/festival");
 
 		return mv;
@@ -286,12 +284,13 @@ public class BoardController {
 	@RequestMapping("cultureDetail.fs")
 	public String selectCulture(int feNo, Model model) {
 	    Festival fe = bService.selectCulture(feNo);
+	    System.out.println(fe.getFeType().substring(0, 2));
 	    if (fe != null) {
 	        model.addAttribute("fe", fe);
-	        if ("축제".equals(fe.getFeType())) {
+	        if ("축제".equals(fe.getFeType().substring(0, 2))) {
 	            // 축제인 경우
 	            return "culture/festivalDetail";
-	        } else if ("전시".equals(fe.getFeType())) {
+	        } else if ("전시".equals(fe.getFeType().substring(0, 2))) {
 	            // 전시인 경우
 	            return "culture/exhibitDetail";
 	        }
@@ -310,9 +309,7 @@ public class BoardController {
 	public String insertCulture(Festival fe, MultipartFile upfile, HttpSession session, Model model) {
 
 		String changeName = saveFile(upfile, session);
-		System.out.println(changeName);
 		fe.setFeDate(fe.getFeDate1() +"~"+ fe.getFeDate2());
-		System.out.println(fe.getFeDate());
 		fe.setTimg("resources/uploadFiles/" + changeName);
 
 		int result = bService.insertCulture(fe);

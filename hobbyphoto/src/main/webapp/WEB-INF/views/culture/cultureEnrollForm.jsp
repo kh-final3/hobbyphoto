@@ -227,6 +227,8 @@
 					resultDiv.innerHTML = message;
 
 				});
+
+				
 			</script>
 			<script>
 				function chooseFile(num) {

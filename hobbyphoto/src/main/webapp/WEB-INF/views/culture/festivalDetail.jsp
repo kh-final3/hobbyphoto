@@ -81,38 +81,8 @@
                         </div><!-- //view_tab -->
                         <div class="view_cont">
                             <br><br>
-                            <div style="text-align: center;">
-                                <strong style="font-size: 22px; text-align: center;">
-                                    <a href="https://www.mfac.or.kr/festival/mpf_info2023_2.jsp?sc_type=1"
-                                        style="color: inherit; margin: 0px; padding: 0px; border: 0px; font: inherit; vertical-align: baseline; text-decoration-line: none;"><span
-                                            style="color: rgb(0, 0, 255);">
-                                            <span
-                                                style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline;"><span
-                                                    style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline;"><span
-                                                        style="background-color: rgb(204, 255, 204);">◈◈▷▶ M클래식 축제 전체 일정
-                                                        바로가기
-                                                    </span>
-                                                    <span
-                                                        style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline;"><span
-                                                            style="background-color: rgb(204, 255, 204);">&nbsp;&nbsp;◁◀</span>
-                                                    </span>
-                                                    <span style="background-color: rgb(204, 255, 204);">◈◈</span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </strong>
-                                <br>
-                                <br>
-                                <br>
-                                <strong><span style="font-size:18px;"><span style="color:#000080;">※ 티켓오픈일정</span><br>
-                                        <span style="font-size:16px;"><span style="color:#006666;">☆ 유료회원 선예매 : 7.6(목)
-                                                오후2시&nbsp; &nbsp;&nbsp;<br>
-                                                ☆ 일반 예매 : 7.7(금) 오후2시</span></span></span></strong><br>
-                                <img alt="홍보이미지" src="/userfiles/img_20231010173642.jpg"
-                                    !style="width: 1000px; height: 709px;"><br>
-                                <br>
-                            </div>
+                            ${fe.feContent}
+                            
 
                         </div><!-- //view_cont -->
                         <a href="festvalList.fs" id="btnList" class="list_btn">
