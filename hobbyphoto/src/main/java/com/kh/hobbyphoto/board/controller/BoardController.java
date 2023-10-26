@@ -1,27 +1,24 @@
 package com.kh.hobbyphoto.board.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.*;
+import java.net.*;
+import java.text.*;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.kh.hobbyphoto.board.model.service.BoardServiceImpl;
-import com.kh.hobbyphoto.board.model.vo.Board;
-import com.kh.hobbyphoto.board.model.vo.Reply;
-import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.board.model.service.*;
+import com.kh.hobbyphoto.board.model.vo.*;
+import com.kh.hobbyphoto.common.model.vo.*;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
@@ -160,7 +157,7 @@ public class BoardController {
 		
 		if(result > 0) {
 			// 첨부파일이 있었을 경우 => 파일 삭제
-			if(!filePath.equals("")) { // filePath = "resources/uploadFiles/xxxx.jpg" | ""
+			if(!filePath.equals("")) { // filePath = "resources/upfiles/xxxx.jpg" | ""
 				new File(session.getServletContext().getRealPath(filePath)).delete();
 			}
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
@@ -248,12 +245,112 @@ public class BoardController {
 		
 		if(result > 0) {
 			// 첨부파일이 있었을 경우 => 파일 삭제
-			if(!filePath.equals("")) { // filePath = "resources/uploadFiles/xxxx.jpg" | ""
+			if(!filePath.equals("")) { // filePath = "resources/upfiles/xxxx.jpg" | ""
 				new File(session.getServletContext().getRealPath(filePath)).delete();
 			}
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
 			return "redirect:rcBoardList.bo";
-			
+		}else {
+			session.setAttribute("alertMsg", "게시글 삭제 실패");
+            return "redirect:rcBoardList.bo";
+        }
+	}
+	
+
+
+
+	// *************출사명소시작************ //
+	@RequestMapping("list.pl")
+	public ModelAndView selectPlaceList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			ModelAndView mv) {
+
+		int listCount = bService.selectPlaceListCount();
+
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Place> list = bService.selectPlaceList(pi);
+		System.out.println(pi);
+		mv.addObject("pi", pi).addObject("list", list).setViewName("board/placeListView");
+
+		return mv;
+	}
+
+	@RequestMapping("enrollForm.pl")
+	public String plEnrollForm() {
+		return "board/placeEnrollForm";
+	}
+
+	@RequestMapping("insert.pl")
+	public String insertPlace(Place p, @RequestParam("upfile") MultipartFile[] upfiles, HttpSession session,
+			Model model) {
+		ArrayList<Attachment> list = new ArrayList<>();
+
+		for (MultipartFile upfile : upfiles) {
+			if (upfile != null && !upfile.isEmpty()) {
+				String changeName = saveFile(upfile, session);
+
+				Attachment at = new Attachment();
+				at.setOriginName(upfile.getOriginalFilename());
+				at.setChangeName("resources/upfiles/" + changeName);
+				at.setFilePath("resources/upfiles");
+				list.add(at);
+			}
+		}
+
+		for (int i = 0; i < Math.min(list.size(), 4); i++) {
+			switch (i) {
+			case 0:
+				p.setPimg1(list.get(i).getChangeName());
+				break;
+			case 1:
+				p.setPimg2(list.get(i).getChangeName());
+				break;
+			case 2:
+				p.setPimg3(list.get(i).getChangeName());
+				break;
+			case 3:
+				p.setPimg4(list.get(i).getChangeName());
+				break;
+			default:
+				break;
+			}
+		}
+
+		int result = bService.insertPlace(p, list);
+
+		if (result > 0) {
+			session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
+			return "redirect:list.pl";
+		} else {
+			model.addAttribute("errorMsg", "게시글 등록 실패");
+			return "common/errorPage";
+		}
+	}
+
+	@RequestMapping("detail.pl")
+	public String selectPlace(int pno, Model model) {
+		int result = bService.increaseCountPlace(pno);
+		if (result > 0) {
+			Place p = bService.selectPlace(pno);
+			model.addAttribute("p", p);
+			System.out.println(p);
+			return "board/placeDetailView";
+
+		} else {
+			model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
+			return "common/errorPage";
+
+		}
+	}
+
+	@RequestMapping("delete.pl")
+	public String deletePlace(int pno, String filePath, HttpSession session, Model model) {
+		int result = bService.deletePlace(pno);
+
+		if (result > 0) {
+		
+			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+			return "redirect:list.pl";
+
 		} else {
 			// 삭제 실패
 			model.addAttribute("errorMsg", "게시글 삭제 실패");
@@ -263,4 +360,228 @@ public class BoardController {
 	}
 	
 
+
+
+	
+
+	@RequestMapping("updateForm.pl")
+	public String plUpdateForm(int pno, Model model) {
+		model.addAttribute("p", bService.selectPlace(pno));
+		return "board/placeUpdateForm";
+	}
+
+	@RequestMapping("update.pl")
+	public String updatePlace(Place p, @RequestParam("upfiles") MultipartFile[] upfiles,
+	        @RequestParam("originFileNo1") int originFileNo1, @RequestParam("originFileNo2") int originFileNo2,
+	        @RequestParam("originFileNo3") int originFileNo3, @RequestParam("originFileNo4") int originFileNo4,
+	        HttpSession session, Model model) {
+	    System.out.println(originFileNo1);
+	    ArrayList<Attachment> list = new ArrayList<>();
+	    Place existingPlace = bService.selectPlace(p.getPno());
+	    p.setPimg1(existingPlace.getPimg1());
+	    p.setPimg2(existingPlace.getPimg2());
+	    p.setPimg3(existingPlace.getPimg3());
+	    p.setPimg4(existingPlace.getPimg4());
+
+	    for (int i = 0; i < upfiles.length; i++) {
+	        MultipartFile file = upfiles[i];
+
+	        if (file != null && !file.isEmpty()) {
+	            String changeName = saveFile(file, session);
+	            Attachment at = new Attachment();
+	            at.setOriginName(file.getOriginalFilename());
+	            at.setChangeName("resources/upfiles/" + changeName);
+	            at.setFilePath("resources/upfiles");
+	            at.setFileLevel(i + 1);
+	            at.setRefBno(String.valueOf(p.getPno()));
+
+	            // Switch 구문 안에서 더 이상 처리할 파일이 없으면 루프를 종료
+	            if (i == 0) {
+	                at.setFileNo(originFileNo1);
+	                p.setPimg1("resources/upfiles/" + changeName);
+	            } else if (i == 1) {
+	                at.setFileNo(originFileNo2);
+	                p.setPimg2("resources/upfiles/" + changeName);
+	            } else if (i == 2) {
+	                at.setFileNo(originFileNo3);
+	                p.setPimg3("resources/upfiles/" + changeName);
+	            } else if (i == 3) {
+	                at.setFileNo(originFileNo4);
+	                p.setPimg4("resources/upfiles/" + changeName);
+	            } else {
+	                // 처리할 파일이 없으면 루프 종료
+	                break;
+	            }
+
+	            list.add(at);
+	        }
+	    }
+
+	    int result = bService.updatePlace(p);
+	    if (result <= 0) {
+	        model.addAttribute("errorMsg", "게시글 수정 실패");
+	        return "common/errorPage";
+	    }
+
+	    for (Attachment attachment : list) {
+	        if (attachment.getFileNo() != 0) {
+	            int attachmentResult = bService.updatePlaceAttachment(attachment);
+	            if (attachmentResult <= 0) {
+	                model.addAttribute("errorMsg", "첨부 파일 수정 실패");
+	                return "common/errorPage";
+	            }
+	        } else {
+	            int result1 = bService.insertAttachmentPlace2(attachment);  // 단일 파일을 추가하도록 수정
+	            if (result1 <= 0) {
+	                model.addAttribute("errorMsg", "첨부 파일 추가 실패");
+	                return "common/errorPage";
+	            }
+	        }
+	    }
+
+	    session.setAttribute("alertMsg", "게시글 수정에 성공했습니다.");
+	    return "redirect:detail.pl?pno=" + p.getPno();
+	}
+
+
+	
+
+	@RequestMapping("sortPlace.pl")
+	public ModelAndView sortPlace(String keyword, @RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			ModelAndView mv) {
+		int listCount = bService.selectPlaceListCount();
+		HashMap<String, String> map = new HashMap<>();
+		map.put("keyword", keyword);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Place> list = bService.sortPlaceList(pi, map);
+		mv.addObject("pi", pi).addObject("list", list).setViewName("board/placeListView");
+
+		return mv;
+	}
+
+	
+	//////////////// 축제,전시 ///////////////////////////
+	
+	@RequestMapping("festivalList.fs")
+	public ModelAndView festivalList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			ModelAndView mv) {
+		String keyword = "축제";
+		int listCount = bService.cultureListCount(keyword);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Festival> list = bService.cultureList(pi, keyword);
+		mv.addObject("pi", pi).addObject("list", list).setViewName("culture/festival");
+
+		return mv;
+	}
+	
+	@RequestMapping("exhibitList.fs")
+	public ModelAndView exhibitList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			ModelAndView mv) {
+		String keyword = "전시";
+		int listCount = bService.cultureListCount(keyword);
+
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Festival> list = bService.cultureList(pi, keyword);
+		System.out.println(list);
+		mv.addObject("pi", pi).addObject("list", list).setViewName("culture/exhibit");
+
+		return mv;
+	}
+	
+
+	@RequestMapping("cultureDetail.fs")
+	public String selectCulture(int feNo, Model model) {
+	    Festival fe = bService.selectCulture(feNo);
+	    System.out.println(fe.getFeType().substring(0, 2));
+	    if (fe != null) {
+	        model.addAttribute("fe", fe);
+	        if ("축제".equals(fe.getFeType().substring(0, 2))) {
+	            // 축제인 경우
+	            return "culture/festivalDetail";
+	        } else if ("전시".equals(fe.getFeType().substring(0, 2))) {
+	            // 전시인 경우
+	            return "culture/exhibitDetail";
+	        }
+	    } 
+        model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
+        return "common/errorPage";
+	   
+	}
+
+	@RequestMapping("cultureEnrollForm.fs")
+	public String fsEnrollForm() {
+		return "culture/cultureEnrollForm";
+	}
+
+	@RequestMapping("insertCulture.fs")
+	public String insertCulture(Festival fe, MultipartFile upfile, HttpSession session, Model model) {
+
+		String changeName = saveFile(upfile, session);
+		fe.setFeDate(fe.getFeDate1() +"~"+ fe.getFeDate2());
+		fe.setTimg("resources/upfiles/" + changeName);
+
+		int result = bService.insertCulture(fe);
+
+		if (result > 0) {
+	        System.out.println(fe.getFeType());
+	        if ("전시".equals(fe.getFeType())) {
+	            System.out.println(1);
+	            return "redirect:exhibitList.fs";
+	        } else if ("축제".equals(fe.getFeType())) {
+	        	System.out.println(2);
+	            // 축제인 경우
+	            return "redirect:festivalList.fs";
+	        }
+	    }
+			model.addAttribute("errorMsg", "게시글 등록 실패");
+			return "common/errorPage";
+	}
+
+	@RequestMapping("updateForm.fs")
+	public String updateForm(int feNo, Model model) {
+		model.addAttribute("fe", bService.selectCulture(feNo));
+		return "culture/cultureUpdateForm";
+	}
+	
+	@RequestMapping("updateCulture.fs")
+	public String updateCulture(Festival fe, MultipartFile reupfile, HttpSession session, Model model) {
+
+		// 새로 넘어온 첨부파일이 있을 경우
+		if (!reupfile.getOriginalFilename().equals("")) {
+
+			
+			// 새로 넘어온 첨부파일 서버 업로드 시키기
+			String changeName = saveFile(reupfile, session);
+
+			fe.setTimg("resources/upfiles/" + changeName);
+		}
+
+		int result = bService.updateCulture(fe);
+
+		if (result > 0) {
+	      
+	            return "redirect:cultureDetail.fs?feNo=" + fe.getFeNo();
+	       
+	    }else {
+	    	
+			// 수정 실패 => 에러페이지
+			model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
+			return "common/errorPage";
+	    }
+		
+	}
+	
+	
+	@RequestMapping("test.t")
+	public String test() {
+		return "test/editor";
+	}
+	
+	@RequestMapping("test.fe")
+	public String testF() {
+		return "board/sds";
+	}
+	
+	
+	
 }
