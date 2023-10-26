@@ -28,6 +28,57 @@
 		<result column="ref_bno" property="refBno"/>
 	</resultMap>
 	
+	<resultMap type="Place" id="placeResult">
+		<result column="p_no" property="pno"/>
+		<result column="p_title" property="ptitle"/>
+		<result column="p_content" property="pcontent"/>
+		<result column="p_address" property="paddress"/>
+		<result column="p_location" property="plocation"/>
+		<result column="p_writer" property="pwriter"/>
+		<result column="count" property="count"/>
+		<result column="create_date" property="createDate"/>
+		<result column="p_img1" property="pimg1"/>
+		<result column="p_img2" property="pimg2"/>
+		<result column="p_img3" property="pimg3"/>
+		<result column="p_img4" property="pimg4"/>
+		<result column="file_no1" property="fileNo1"/>
+		<result column="file_no2" property="fileNo2"/>
+		<result column="file_no3" property="fileNo3"/>
+		<result column="file_no4" property="fileNo4"/>
+	</resultMap>
+	
+	
+	<resultMap type="Reply" id="replyResult">
+		<result column="reply_no" property="replyNo"/>
+		<result column="reply_content" property="replyContent"/>
+		<result column="reply_writer" property="replyWriter"/>
+		<result column="nickname" property="replyWriter"/>
+		<result column="create_date" property="createDate"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<resultMap type="Festival" id="festivalResult">
+		<result column="FE_NO" property="feNo"/>
+		<result column="FE_TITLE" property="feTitle"/>
+		<result column="FE_CONTENT" property="feContent"/>
+		<result column="FE_DATE" property="feDate"/>
+		<result column="FE_DATE1" property="feDate1"/>
+		<result column="FE_DATE2" property="feDate2"/>
+		<result column="FE_LOCATION" property="feLocation"/>
+		<result column="CASH" property="cash"/>
+		<result column="FE_TYPE" property="feType"/>
+		<result column="LONGITUDE" property="longitude"/>
+		<result column="LATITUDE" property="latitude"/>
+		<result column="URL" property="url"/>
+		<result column="T_IMG" property="timg"/>
+		<result column="S_IMG" property="simg"/>
+		<result column="host" property="host"/>
+		<result column="age" property="age"/>
+		<result column="inq" property="inq"/>
+	</resultMap>
+	
+
+
 	<select id="selectPhListCount" resultType="_int">
 		select
 			count(*)
@@ -284,4 +335,261 @@
 
 	
 
+	
+	
+	
+	<select id="selectPlaceListCount" resultType="_int">
+		select count(*)
+		  from place
+	</select>
+	
+	<select id="selectPlaceList" resultMap="placeResult">
+		select p_no
+		     , p_title
+		     , p_content
+		     , p_location
+		     , p_address
+		     , count
+		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+		     , p_img1
+		  from place
+		 order 
+		    by p_no desc
+	</select>
+	
+	<update id="increaseCountPlace">
+		update place
+		   set count = count+1
+		   where p_no = #{ pno }
+	</update>
+	
+	<select id="selectPlace" resultMap="placeResult">
+	    SELECT p_no,
+	           p_title,
+	           p_content,
+	           p_location,
+	           p_address,
+	           p_writer,
+	           count,
+	           TO_CHAR(create_date, 'YYYY-MM-DD') AS "create_date",
+	           p_img1,
+	           p_img2,
+	           p_img3,
+	           p_img4,
+	           (SELECT file_no FROM attachment WHERE p_img1 = change_name) AS file_no1,
+	           (SELECT file_no FROM attachment WHERE p_img2 = change_name) AS file_no2,
+	           (SELECT file_no FROM attachment WHERE p_img3 = change_name) AS file_no3,
+	           (SELECT file_no FROM attachment WHERE p_img4 = change_name) AS file_no4
+	    FROM place
+	    WHERE p_no = #{pno}
+	</select>
+
+	
+	<insert id="insertPlace" parameterType="Place">
+		  insert 
+			into place
+			  (
+			    p_no
+			  , p_title
+			  , P_CONTENT
+			  , P_location
+			  , P_ADDRESS
+			  , p_writer
+			  , p_img1
+			  , p_img2
+			  , p_img3
+			  , p_img4
+			  ) 
+			  values
+			  (
+			   	SEQ_PLACENO.nextval
+			  , #{ptitle}
+			  , #{pcontent}
+			  , #{plocation}
+			  , #{paddress}
+			  , #{pwriter}
+			  , #{pimg1}
+			  , #{pimg2}
+			  , #{pimg3}
+			  , #{pimg4}
+			  )
+	</insert>
+	
+	<insert id="insertAttachment" parameterType="java.util.List">
+	    INSERT INTO ATTACHMENT (FILE_NO, REF_BNO, FILE_level, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
+	    SELECT SEQ_FILE_NO.NEXTVAL, SEQ_PLACENO.CURRVAL,A.file_level, A.ORIGIN_NAME, A.CHANGE_NAME, A.FILE_PATH
+	    FROM (
+	        <foreach item="attachment" collection="list" separator="UNION ALL">
+	            SELECT #{attachment.fileLevel} AS file_level, #{attachment.originName} AS ORIGIN_NAME, #{attachment.changeName} AS CHANGE_NAME, #{attachment.filePath} AS FILE_PATH FROM DUAL
+	        </foreach>
+		    ) A
+	</insert>
+	
+	<select id="sortPlaceList" resultMap="placeResult">
+		select p_no
+		     , p_title
+		     , p_content
+		     , p_location
+		     , p_address
+		     , count
+		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+		     , p_img1
+		  from place
+		  <if test="keyword == 'date'">
+		  	 order by create_date desc
+		    </if>
+		    <if test="keyword == 'best'">
+		   	order by count desc
+		    </if>
+	</select>
+	
+	<update id="updatePlace">
+	    update
+	    place
+	    set
+	    p_title = #{ptitle}
+	    , p_content = #{pcontent}
+	    , p_location = #{plocation}
+	    , p_address = #{paddress}
+	    <if test="pimg1 != null">, p_img1 = #{pimg1}</if>
+	    <if test="pimg2 != null">, p_img2 = #{pimg2}</if>
+	    <if test="pimg3 != null">, p_img3 = #{pimg3}</if>
+	    <if test="pimg4 != null">, p_img4 = #{pimg4}</if>
+	    where p_no = #{pno}
+	</update>
+	
+	<insert id="insertAttachment2" parameterType="Attachment">
+        INSERT 
+          INTO attachment 
+          (
+          file_no, 
+          file_level, 
+          origin_name, 
+          change_name, 
+          file_path,
+          REF_BNO
+          )
+        VALUES 
+        (
+        SEQ_FILE_NO.NEXTVAL,
+        #{fileLevel}, 
+        #{originName},
+        #{changeName}, 
+        #{filePath},
+        #{refBno}
+        )
+    </insert>
+	
+	<update id="updatePlaceAttachment" parameterType="Attachment">
+	    UPDATE ATTACHMENT
+	    SET
+	        ORIGIN_NAME = #{originName},
+	        CHANGE_NAME = #{changeName},
+	        FILE_PATH = #{filePath}
+	    WHERE FILE_NO = #{fileNo}
+	</update>
+
+	<delete id="deletePlace">
+		DELETE FROM place WHERE p_no = #{pno}
+	</delete>
+	
+	
+	
+	<select id="cultureListCount" resultType="_int">
+		SELECT COUNT(FE_NO) "COUNT"
+	      FROM festival
+	      WHERE fe_type like #{keyword}||'%'
+	</select>
+	
+	<select id="cultureList" resultMap="festivalResult">
+		select fe_no
+		     , fe_title
+		     , fe_date
+		     , fe_location
+		     , cash
+		     , fe_type
+		     , t_img
+		     , age
+		  from festival
+		  WHERE fe_type like #{keyword}||'%'
+	</select>
+	
+	<select id="selectCulture" resultMap="festivalResult">
+		select fe_no
+		     , fe_title
+		     , fe_content
+		     , fe_date
+             , substr(fe_date,1,10) as "fe_date1"
+             , substr(fe_date,12,20) as "fe_date2"
+		     , fe_location
+		     , cash
+		     , fe_type
+		     , LONGITUDE
+		     , latitude
+		     , url
+		     , t_img
+		     , s_img
+		     , age
+		     , host
+		     , inq
+		  from festival
+		 where fe_no = #{ feNo }
+	</select>
+	
+	<insert id="insertCulture" parameterType="Festival">
+		insert 
+			into festival
+			  (
+			    FE_NO
+			  , FE_TITLE
+			  , FE_CONTENT
+			  , FE_DATE
+			  , FE_LOCATION
+			  , CASH
+			  , FE_TYPE
+			  ,	LONGITUDE
+			  ,	LATITUDE
+			  ,	URL
+			  ,	T_IMG
+			  ,	HOST
+			  ,	INQ
+			  ,	AGE
+			  ) 
+			  values
+			  (
+			   	SEQ_FE_NO.nextval
+			  , #{feTitle}
+			  , #{feContent}
+			  , #{feDate}
+			  , #{feLocation}
+			  , #{cash}
+			  , #{feType}
+			  , #{longitude}
+			  , #{latitude}
+			  , #{url}
+			  , #{timg}
+			  , #{host}
+			  , #{inq}
+			  , #{age}
+			  )
+	</insert>
+	
+	<update id="updateCulture">
+		update
+			   festival
+		   set fe_title = #{feTitle}
+		     , fe_content = #{feContent}
+		     , t_img = #{timg}
+		     , fe_location = #{feLocation}
+		     , cash = #{cash}
+		     , fe_date = #{feDate}
+		     , longitude = #{longitude}
+		     , latitude = #{latitude}
+		     , age = #{age}
+		     , host = #{host}
+		     , inq = #{inq}
+		     , age = #{age}
+		 where fe_no = #{feNo}
+	</update>
+	
 </mapper>

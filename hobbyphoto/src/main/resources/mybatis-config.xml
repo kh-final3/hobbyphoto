@@ -17,6 +17,13 @@
 		<typeAlias type="com.kh.hobbyphoto.common.model.vo.Report" alias="Report"/>
         <typeAlias type="com.kh.hobbyphoto.group.model.vo.Sgroup" alias="S_group"/>
         <typeAlias type="com.kh.hobbyphoto.board.model.vo.BackGround" alias="BackGround"/>
+		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Attachment" alias="Attachment"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Place" alias="Place"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Reply" alias="Reply"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Festival" alias="Festival"/>
+		<typeAlias type="com.kh.hobbyphoto.notice.model.vo.Notice" alias="Notice"/>
 	</typeAliases>
 
 
@@ -26,5 +33,8 @@
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/shop-mapper.xml"/>
 		<mapper resource="/mappers/admin-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/notice-mapper.xml"/>
+		<mapper resource="/mappers/board-mapper.xml"/>
 	</mappers>
 </configuration>

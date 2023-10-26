@@ -18,6 +18,6 @@ public class Reply {
 	private String replyContent;
 	private Date createDate;
 	private String status;
-	private int replyWriter;
+	private String replyWriter;
 	private String refBno;
 }

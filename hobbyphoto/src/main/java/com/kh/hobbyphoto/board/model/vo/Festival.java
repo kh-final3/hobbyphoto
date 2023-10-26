@@ -16,12 +16,17 @@ public class Festival {
 	private String feTitle;
 	private String feContent;
 	private String feDate;
+	private String feDate1;
+	private String feDate2;
 	private String feLocation;
 	private String cash;
 	private String feType;
 	private String longitude;
 	private String latitude;
 	private String url;
-	private String tImg;
-	private String sImg;
+	private String timg;
+	private String simg;
+	private String age;
+	private String host;
+	private String inq;
 }
