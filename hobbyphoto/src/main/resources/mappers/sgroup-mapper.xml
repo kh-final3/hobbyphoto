@@ -23,46 +23,44 @@
 	</select>
 	
 	<select id="selectTgList" resultMap="SgroupResult">
-		SELECT
-		    sg.group_no,
-		    sg.img,
-		    sg.title,
-		    sg.user_no,
-		    m.nickname,
-            sg.location,
-            sg.me_total,
-		    TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
+		SELECT 
+		  sg.group_no,
+		  sg.img,
+		  sg.title,
+		  sg.user_no,
+		  m.nickname,
+		  sg.location,
+		  sg.me_total,
+		  TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
 		FROM
-		    s_group sg
+		  s_group sg
 		JOIN
-		    group_d g ON sg.user_no = g.user_no
-		JOIN
-		    member m on m.user_no = g.user_no
+		  member m on m.user_no = sg.user_no
 		WHERE
-		    sg.status = 'Y'
+		  sg.status = 'Y'
 		ORDER BY
-		    sg.group_no DESC
+		  sg.group_no DESC
 	</select>
 	
 	<select id="selectTgBoard" resultMap="SgroupResult">
 		SELECT
-		    sg.img,
+			sg.group_no,
+			sg.img,
 		    sg.title,
 		    sg.content,
 		    m.nickname,
-            sg.location,
-            sg.me_total,
+		    sg.location,
+		    sg.me_total,
 		    TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
 		FROM
 		    s_group sg
 		JOIN
-		    group_d g ON sg.user_no = g.user_no
-		JOIN
-		    member m on m.user_no = g.user_no
+		    member m ON m.user_no = sg.user_no
 		WHERE
 		    sg.group_no = #{boardNo}
 		ORDER BY
 		    sg.group_no DESC
+
 	</select>
 	
 	<insert id="insertSgBoard">
@@ -96,7 +94,11 @@
     	3
     	)
 	</insert>
-
+	
+	<delete id="deleteTogether">
+	    DELETE FROM s_group
+	    WHERE group_no = #{boardNo}
+	</delete>
 	
 	
 </mapper>

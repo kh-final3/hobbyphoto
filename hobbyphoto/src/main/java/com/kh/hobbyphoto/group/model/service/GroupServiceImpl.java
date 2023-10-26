@@ -28,13 +28,17 @@ public class GroupServiceImpl implements GroupService{
 	}
 	
 	@Override
-	public ArrayList<Sgroup> selectTgBoard(int boardNo) {
+	public Sgroup selectTgBoard(int boardNo) {
 		return GDao.selectTgBoard(sqlSession, boardNo);
 	}
 
 	@Override
 	public int insertSgBoard(Sgroup g) {
 		return GDao.insertSgBoard(sqlSession, g);
+	}
+
+	public int deleteTogether(int boardNo) {
+		return GDao.deleteTogether(sqlSession, boardNo);
 	}
 
 

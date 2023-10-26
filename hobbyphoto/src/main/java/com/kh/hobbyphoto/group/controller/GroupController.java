@@ -36,6 +36,7 @@ public class GroupController {
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 		ArrayList<Sgroup> list = GService.selectTgList(pi);
+		System.out.println(list);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("group/selectTogetherList");
 		
@@ -44,9 +45,10 @@ public class GroupController {
 	
 	@RequestMapping("togetherDetail.tg")
 	public String selcetTogether(int gno, Model model) {
-		ArrayList<Sgroup> sg = GService.selectTgBoard(gno); 
+		Sgroup sg = GService.selectTgBoard(gno); 
 		
 		model.addAttribute("sg", sg);
+		System.out.println(sg);
 		return "group/togetherDetailView";
 	}
 	
@@ -56,14 +58,12 @@ public class GroupController {
 	}
 	
 	@RequestMapping("tgInsert.tg")
-	public String insertTogether(@ModelAttribute("g") Sgroup g,
-	                             @RequestParam("upfile") MultipartFile upfile,
-	                             Model model,
-	                             HttpSession session) {
+	public String insertTogether(@ModelAttribute("g") Sgroup g, @RequestParam("upfile") MultipartFile upfile, Model model, HttpSession session) {
 
 	    if (upfile != null && !upfile.isEmpty()) {
 	        String changeName = saveFile(upfile, session);
-
+	        
+	        // changeName으로 img 변환
 	        g.setImg(changeName);
 	    }
 
@@ -79,7 +79,6 @@ public class GroupController {
 	    }
 	}
 
-	// 서버 폴더에 현재 받은 첨부 파일을 저장하는 역할
 	public String saveFile(MultipartFile upfile, HttpSession session) {
 	    String originName = upfile.getOriginalFilename();
 	    String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -89,13 +88,27 @@ public class GroupController {
 	    String savePath = session.getServletContext().getRealPath("/resources/upfiles/");
 
 	    try {
-	        // 업로드된 파일을 서버에 저장
 	        File dest = new File(savePath, changeName);
 	        upfile.transferTo(dest);
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
 	    return changeName;
+	}
+	
+	@RequestMapping("delete.tg")
+	public String deleteTogether(int gno, String filePath, HttpSession session, Model model) {
+		int result = GService.deleteTogether(gno);
+		System.out.println(result);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+			return "redirect:togetherList.tg";
+		} else {
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
+		
 	}
 
 	

@@ -93,7 +93,7 @@
 					<div class="list">
 					    <c:forEach var="g" items="${ list }">
 					        <div class="together">
-					            <input type="hidden" class="gno" value="${ g.groupNo }">
+					           <input type="hidden" class="gno" value="${ g.groupNo }">
 					            <table>
 					                <tbody>
 					                    <tr height="30" style="font-size: 18px; font-weight: bolder;">
