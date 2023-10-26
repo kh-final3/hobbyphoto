@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title><style>
+<title>Insert title here</title>
+    <style>
          div * {box-sizing: border-box;}
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
