@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <style>
-         div * {box-sizing: border-box;}
+        div * {box-sizing: border-box;}
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
             width: 1200px;
@@ -45,8 +45,7 @@
 
         .photo{
             border: 1px solid black;
-            width: 250px;
-            height: 150px;
+            height: 152px;
             float: left;
             border-radius: 5%;
         }
@@ -57,7 +56,6 @@
 
         .text{
             border: 1px solid blue;
-            width: 650px;
             height: 150px;
             float: left;
             margin-left: 14px;
@@ -86,7 +84,6 @@
         .btn-area button{
             float: right;
             width: 85px;
-            height: 30px;
         }
 
         .page-btn button{
@@ -96,14 +93,12 @@
 
         .ect{
             border: 1px solid black;
-            height: 3%;
             width: 20%;
-            float: left;
             border: none;
-            margin-left: 15px;
+            margin-left: 15px
         }
         
-        a{
+        .etca{
             text-decoration-line: none;
             color: black;
             font-size: medium;
@@ -126,6 +121,7 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
+
     <div class="warp">
 
         <div class="list-area">
@@ -134,13 +130,13 @@
 
                 <!--관리자일때만 보이게 하기  -->
                 <div class="btn-area">
-                    <button>글쓰기</button>
+                    <button class="btn btn-secondary">글쓰기</button>
                 </div>
               
                 <div class="ect">
-                    <a href="sortPlace.pl?keyword=date">최신순</a> | <a href="sortPlace.pl?keyword=best">인기순</a>
+                    <a class="etca" href="sortPlace.pl?keyword=date">최신순</a> | <a class="etca" href="sortPlace.pl?keyword=best">인기순</a>
                 </div>
-
+                
                 <ul class="ul-area">
 					<c:if test="${ not empty list }">
 						<c:forEach var="p" items="${ list }">
