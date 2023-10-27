@@ -637,6 +637,7 @@
 			  ,	HOST
 			  ,	INQ
 			  ,	AGE
+			  , TYPE
 			  ) 
 			  values
 			  (
@@ -654,6 +655,7 @@
 			  , #{host}
 			  , #{inq}
 			  , #{age}
+			  , #{type}
 			  )
 	</insert>
 	

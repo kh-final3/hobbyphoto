@@ -222,9 +222,7 @@
                         [장소] <input type="text" name="plocation" id="" value="${ p.plocation }" required> <br>
                         [상세주소] <input type="text" name="paddress" id="" value="${ p.paddress }" required> <br>
                         [내용] <input type="text" name="pcontent" id="" value="${ p.pcontent }" required> <br>
-                        [촬영 시기] <input type="text" name="" id="" value="5월 중순 ~ 8월 중순"> <br>
-                        [추천 카메라] <input type="text" name="" id="" value="24-70mm,..."> <br>
-                        [특징] <br><textarea name="" id="" style="width: 1000px; height: 100px; resize: none;"></textarea>
+                        
                         </div>
                     </div>
                 </div>

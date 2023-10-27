@@ -42565,7 +42565,7 @@ var parse_float_default = /*#__PURE__*/__webpack_require__.n(parse_float);
       loadButtonStyle = _ref.loadButtonStyle,
       downloadButtonStyle = _ref.downloadButtonStyle,
       submenuStyle = _ref.submenuStyle;
-  return concat_default()(_context = concat_default()(_context2 = concat_default()(_context3 = concat_default()(_context4 = concat_default()(_context5 = concat_default()(_context6 = concat_default()(_context7 = "\n    <div class=\"tui-image-editor-main-container\" style=\"".concat(commonStyle, "\">\n        <div class=\"tui-image-editor-header\" style=\"")).call(_context7, headerStyle, "\">\n            <div class=\"tui-image-editor-header-logo\">\n                <img src=\"")).call(_context6, biImage, "\" />\n            </div>\n            <div class=\"tui-image-editor-header-buttons\">\n                <div style=\"")).call(_context5, loadButtonStyle, "\">\n                    ")).call(_context4, locale.localize('Load'), "\n                    <input type=\"file\" class=\"tui-image-editor-load-btn\" />\n                </div>\n                <button class=\"tui-image-editor-download-btn\" style=\"")).call(_context3, downloadButtonStyle, "\">\n                    ")).call(_context2, locale.localize('Download'), "\n                </button>\n            </div>\n        </div>\n        <div class=\"tui-image-editor-main\">\n            <div class=\"tui-image-editor-submenu\">\n                <div class=\"tui-image-editor-submenu-style\" style=\"")).call(_context, submenuStyle, "\"></div>\n            </div>\n            <div class=\"tui-image-editor-wrap\">\n                <div class=\"tui-image-editor-size-wrap\">\n                    <div class=\"tui-image-editor-align-wrap\">\n                        <div class=\"tui-image-editor\"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n");
+  return concat_default()(_context = concat_default()(_context2 = concat_default()(_context3 = concat_default()(_context4 = concat_default()(_context5 = concat_default()(_context6 = concat_default()(_context7 = "\n    <div class=\"tui-image-editor-main-container\" style=\"".concat(commonStyle, "\">\n        <div class=\"tui-image-editor-header\" style=\"")).call(_context7, headerStyle, "\">\n            <div class=\"tui-image-editor-header-logo\">\n                <img src=\"")).call(_context6, biImage, "\" />\n            </div>\n            <div class=\"tui-image-editor-header-buttons\">\n                <div style=\"")).call(_context5, loadButtonStyle, "\">\n                    ")).call(_context4, locale.localize('이미지 불러오기'), "\n                    <input type=\"file\" class=\"tui-image-editor-load-btn\" />\n                </div>\n                <button class=\"tui-image-editor-download-btn\" style=\"")).call(_context3, downloadButtonStyle, "\">\n                    ")).call(_context2, locale.localize('다운로드'), "\n                </button>\n            </div>\n        </div>\n        <div class=\"tui-image-editor-main\">\n            <div class=\"tui-image-editor-submenu\">\n                <div class=\"tui-image-editor-submenu-style\" style=\"")).call(_context, submenuStyle, "\"></div>\n            </div>\n            <div class=\"tui-image-editor-wrap\">\n                <div class=\"tui-image-editor-size-wrap\">\n                    <div class=\"tui-image-editor-align-wrap\">\n                        <div class=\"tui-image-editor\"></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n");
 });
 ;// CONCATENATED MODULE: ./src/js/ui/template/controls.js
 
@@ -42578,7 +42578,7 @@ var parse_float_default = /*#__PURE__*/__webpack_require__.n(parse_float);
       loadButtonStyle = _ref.loadButtonStyle,
       downloadButtonStyle = _ref.downloadButtonStyle,
       menuBarPosition = _ref.menuBarPosition;
-  return concat_default()(_context = concat_default()(_context2 = concat_default()(_context3 = concat_default()(_context4 = concat_default()(_context5 = "\n    <ul class=\"tui-image-editor-help-menu ".concat(getHelpMenuBarPosition(menuBarPosition), "\"></ul>\n    <div class=\"tui-image-editor-controls\">\n        <div class=\"tui-image-editor-controls-logo\">\n            <img src=\"")).call(_context5, biImage, "\" />\n        </div>\n        <ul class=\"tui-image-editor-menu\"></ul>\n\n        <div class=\"tui-image-editor-controls-buttons\">\n            <div style=\"")).call(_context4, loadButtonStyle, "\">\n                ")).call(_context3, locale.localize('Load'), "\n                <input type=\"file\" class=\"tui-image-editor-load-btn\" />\n            </div>\n            <button class=\"tui-image-editor-download-btn\" style=\"")).call(_context2, downloadButtonStyle, "\">\n                ")).call(_context, locale.localize('Download'), "\n            </button>\n        </div>\n    </div>\n");
+  return concat_default()(_context = concat_default()(_context2 = concat_default()(_context3 = concat_default()(_context4 = concat_default()(_context5 = "\n    <ul class=\"tui-image-editor-help-menu ".concat(getHelpMenuBarPosition(menuBarPosition), "\"></ul>\n    <div class=\"tui-image-editor-controls\">\n        <div class=\"tui-image-editor-controls-logo\">\n            <img src=\"")).call(_context5, biImage, "\" />\n        </div>\n        <ul class=\"tui-image-editor-menu\"></ul>\n\n        <div class=\"tui-image-editor-controls-buttons\">\n            <div style=\"")).call(_context4, loadButtonStyle, "\">\n                ")).call(_context3, locale.localize('Load'), "\n                <input type=\"file\" class=\"tui-image-editor-load-btn\" />\n            </div>\n            <button class=\"tui-image-editor-download-btn\" style=\"")).call(_context2, downloadButtonStyle, "\">\n                ")).call(_context, locale.localize('test'), "\n            </button>\n        </div>\n    </div>\n");
 });
 // EXTERNAL MODULE: ../../node_modules/@babel/runtime-corejs3/core-js-stable/instance/map.js
 var instance_map = __webpack_require__(899);
@@ -47941,19 +47941,6 @@ var Ui = /*#__PURE__*/function () {
      */
 
   }, {
-    key: "_addDownloadEvent",
-    value: function _addDownloadEvent() {
-      var _this7 = this;
-
-      this.eventHandler.download = function () {
-        return _this7._actions.main.download();
-      };
-
-      forEach_default()(this._buttonElements.download, function (element) {
-        element.addEventListener('click', _this7.eventHandler.download);
-      });
-    }
-  }, {
     key: "_removeDownloadEvent",
     value: function _removeDownloadEvent() {
       var _this8 = this;
@@ -48088,8 +48075,6 @@ var Ui = /*#__PURE__*/function () {
       }
 
       this._addHelpActionEvent();
-
-      this._addDownloadEvent();
 
       this._addMenuEvent();
 
@@ -49960,27 +49945,7 @@ var ImageTracer = /*#__PURE__*/function () {
           return promise_default().reject(message);
         });
       },
-      download: function download() {
-        var dataURL = _this.toDataURL();
-
-        var imageName = _this.getImageName();
-
-        var blob, type, w;
-
-        if (isSupportFileApi() && window.saveAs) {
-          blob = base64ToBlob(dataURL);
-          type = blob.type.split('/')[1];
-
-          if (imageName.split('.').pop() !== type) {
-            imageName += ".".concat(type);
-          }
-
-          saveAs(blob, imageName); // eslint-disable-line
-        } else {
-          w = window.open();
-          w.document.body.innerHTML = "<img src='".concat(dataURL, "'>");
-        }
-      },
+      
       history: function history(event) {
         _this.ui.toggleHistoryMenu(event);
       },

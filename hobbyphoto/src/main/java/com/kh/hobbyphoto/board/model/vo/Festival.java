@@ -29,4 +29,5 @@ public class Festival {
 	private String age;
 	private String host;
 	private String inq;
+	private int type;
 }

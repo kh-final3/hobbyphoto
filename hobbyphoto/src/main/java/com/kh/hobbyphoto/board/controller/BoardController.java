@@ -1,28 +1,33 @@
 package com.kh.hobbyphoto.board.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
+import java.nio.*;
+import java.nio.file.*;
 import java.text.*;
 import java.util.*;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aspose.pdf.internal.imaging.internal.bouncycastle.util.encoders.Base64Encoder;
 import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.*;
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.*;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
-
-
 @Controller
 public class BoardController {
 	@Autowired
@@ -516,13 +521,17 @@ public class BoardController {
 		String changeName = saveFile(upfile, session);
 		fe.setFeDate(fe.getFeDate1() +"~"+ fe.getFeDate2());
 		fe.setTimg("resources/upfiles/" + changeName);
-
+		if ("전시".equals(fe.getFeType())) {
+			fe.setType(5);
+        } else if ("축제".equals(fe.getFeType())) {
+        	fe.setType(6);
+        }
 		int result = bService.insertCulture(fe);
 
 		if (result > 0) {
 	        System.out.println(fe.getFeType());
 	        if ("전시".equals(fe.getFeType())) {
-	            System.out.println(1);
+	            
 	            return "redirect:exhibitList.fs";
 	        } else if ("축제".equals(fe.getFeType())) {
 	        	System.out.println(2);
@@ -571,14 +580,45 @@ public class BoardController {
 	
 	@RequestMapping("test.t")
 	public String test() {
-		return "test/editor";
-	}
-	
-	@RequestMapping("test.fe")
-	public String testF() {
-		return "board/sds";
+		return "test/NewFile";
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping("test.tt")
+	private String saveImage(@RequestParam("pngData") String dataURL, HttpSession session) {
+	    // Extract the base64 part of the data URL
+	    String base64Data = dataURL.split(",")[1];
+	    
+	    // Decode the base64 string into bytes
+	    byte[] imageBytes = Base64.decodeBase64(base64Data);
+	    System.out.println(imageBytes);
+	    // Generate a unique file name (e.g., using a timestamp and a random number)
+	    String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	    int ranNum = (int)(Math.random() * 90000 + 10000);
+	    String fileName = currentTime + ranNum + ".png"; // You can change the extension as needed
+	    System.out.println(fileName);
+
+	    // Define the path to save the image
+	    String savePath = session.getServletContext().getRealPath("resources/upfiles/");
+	    System.out.println(savePath);
+
+	    // Create a file using the save path and the generated file name
+	    File imageFile = new File(savePath, fileName);
+	    
+	    System.out.println(imageFile);
+	    String changeName = "resources/upfiles/" + fileName;
+	    try {
+	        // Write the image bytes to the file
+	        Files.write(Paths.get(imageFile.toURI()), imageBytes);
+	        return changeName;
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return "Error saving the image.";
+	    }
+	}
+
+	
+
 	
 }
