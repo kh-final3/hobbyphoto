@@ -57,15 +57,9 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public int updateNotice(Notice n) {
-		
 		return nDao.updateNotice(sqlSession,n);
 	}
 
-	@Autowired
-	private NoticeDao nDao;
-	@Autowired
-	private SqlSessionTemplate sqlSession;
-	
 	@Override
 	public int selectShopListCount() {
 		return nDao.selectShopListCount(sqlSession);
