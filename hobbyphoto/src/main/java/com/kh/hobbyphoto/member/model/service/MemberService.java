@@ -23,4 +23,8 @@ public interface MemberService {
 	int myListCount(int userNo);
 	
 	int myGroupCount(int userNo);
+	
+	int myLikeCount(int userNo);
+	
+	int myBlockCount(int userNo);
 }

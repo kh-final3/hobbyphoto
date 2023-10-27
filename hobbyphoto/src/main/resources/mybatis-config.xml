@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Cart" alias="Cart"/>
 		<typeAlias type="com.kh.hobbyphoto.common.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.hobbyphoto.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Block" alias="Block"/>
 	</typeAliases>
 
 

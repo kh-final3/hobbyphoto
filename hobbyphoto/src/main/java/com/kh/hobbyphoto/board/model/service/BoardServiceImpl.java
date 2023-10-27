@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hobbyphoto.board.model.dao.BoardDao;
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.member.model.vo.Block;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
@@ -133,6 +134,26 @@ public class BoardServiceImpl implements BoardService{
 	public ArrayList<Board> myBookmarksList(PageInfo pi, int userNo) {
 		return bDao.myBookmarksList(sqlSession, pi, userNo);
 	}
+	
+	@Override
+	public ArrayList<Board> myLikeList(PageInfo pi, int userNo) {
+		return bDao.myLikeList(sqlSession,pi,userNo);
+	}
+	
+	@Override
+	public ArrayList<Board> myGroupList(PageInfo pi, int userNo) {
+		return bDao.myGroupList(sqlSession,pi,userNo);
+	}
+	
+
+	@Override
+	public ArrayList<Block> myBlockList(PageInfo pi, int userNo) {
+		ArrayList<Block> list = bDao.myBlockList(sqlSession,pi,userNo);
+		System.out.println("서비스" + list);
+		return list;
+	}
+
+
 
 	@Override
 	public int selectPlaceListCount() {

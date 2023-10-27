@@ -46,4 +46,12 @@ public class MemberDao {
 	public int myGroupCount(SqlSessionTemplate sqlSession,int userNo) {
 		return sqlSession.selectOne("memberMapper.myGroupCount",userNo);
 	}
+	
+	public int myLikeCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("memberMapper.myLikeCount",userNo);
+	}
+	
+	public int myBlockCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("memberMapper.myBlockCount",userNo);
+	}
 }

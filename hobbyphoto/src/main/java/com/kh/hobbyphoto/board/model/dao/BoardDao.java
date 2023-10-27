@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.member.model.vo.Block;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
@@ -118,19 +119,46 @@ public class BoardDao {
 	}
 
 	public ArrayList<Board> myBoardList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
-  	int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.myBoardList", userNo, rowBounds);
 	}
 	public ArrayList<Board> myBookmarksList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
-    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
-    return (ArrayList)sqlSession.selectList("boardMapper.myBookmarksList", userNo, rowBounds);
-  }
+		return (ArrayList)sqlSession.selectList("boardMapper.myBookmarksList", userNo, rowBounds);
+	}
+	
+	public ArrayList<Board> myLikeList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.myLikeList", userNo, rowBounds);
+	}
+	
+	public ArrayList<Board> myGroupList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.myGroupList", userNo, rowBounds);
+	}
+	
+	public ArrayList<Block> myBlockList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		ArrayList<Block> list = (ArrayList)sqlSession.selectList("boardMapper.myBlockList", userNo, rowBounds);
+		System.out.println("다오" + list);
+		return list;
+	}
+	
   
 	public int selectPlaceListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.selectPlaceListCount");
