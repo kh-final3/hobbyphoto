@@ -178,19 +178,19 @@
                             <span>북마크</span>
                         </li>
                         <li>
-                            <a href="myBoard.me" class="icon2"><img src="../../resources/images/noticeboard.png" style="width: 50px; height: 50px;"></a>
+                            <a href="myBoard.me?cpage=1" class="icon2"><img src="../../resources/images/noticeboard.png" style="width: 50px; height: 50px;"></a>
                             <span>게시글</span>
                         </li>
                         <li>
-                            <a href="myLike.me" class="icon3"><img src="../../resources/images/coment.png" style="width: 50px; height: 50px;"></a>
+                            <a href="myLike.me?cpage=1" class="icon3"><img src="../../resources/images/coment.png" style="width: 50px; height: 50px;"></a>
                             <span>좋아요</span>
                         </li>
                     <li>
-                        <a href="myGroup.me" class="icon4"><img src="../../resources/images/interview.png" style="width: 50px; height: 50px;"></a>
+                        <a href="myGroup.me?cpage=1" class="icon4"><img src="../../resources/images/interview.png" style="width: 50px; height: 50px;"></a>
                         <span>모임</span>
                     </li>
                     <li>
-                        <a href="myBlock.me" class="icon5"><img src="../../resources/images/block-user.png" style="width: 50px; height: 50px;"></a>
+                        <a href="myBlock.me?cpage=1" class="icon5"><img src="../../resources/images/block-user.png" style="width: 50px; height: 50px;"></a>
                         <span>차단 회원</span>
                     </li>
                 </ul>

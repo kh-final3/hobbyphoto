@@ -66,4 +66,14 @@ public class MemberServiceImpl implements MemberService {
 		return md.myGroupCount(sqlSession,userNo);
 	}
 
+	@Override
+	public int myLikeCount(int userNo) {
+		return md.myLikeCount(sqlSession,userNo);
+	}
+
+	@Override
+	public int myBlockCount(int userNo) {
+		return md.myBlockCount(sqlSession,userNo);
+	}
+
 }

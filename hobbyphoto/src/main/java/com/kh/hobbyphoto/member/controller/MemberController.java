@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,11 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.BoardServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.Board;
-import com.kh.hobbyphoto.common.model.service.CommonServiceImpl;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
-import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.service.MemberServiceImpl;
+import com.kh.hobbyphoto.member.model.vo.Block;
 import com.kh.hobbyphoto.member.model.vo.Member;
 
 @Controller
@@ -202,15 +200,37 @@ public class MemberController {
 		int listCount = ms.myGroupCount(userNo);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 		
+		ArrayList<Board> list = bService.myGroupList(pi,userNo);
+		model.addAttribute("listCount",listCount);
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
 		return "member/myGroup";
 	}
 	
 	@RequestMapping("myLike.me")
-	public String myLike() {
+	public String myLike(@RequestParam(value="cpage", defaultValue="1") int currentPage,HttpSession session,Model model) {
+		int userNo = ((Member)session.getAttribute("loginMember")).getUserNo();
+		int listCount = ms.myLikeCount(userNo);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Board> list = bService.myLikeList(pi,userNo);
+		model.addAttribute("listCount",listCount);
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
 		return "member/myLike";
 	}
 	@RequestMapping("myBlock.me")
-	public String myBlock() {
+	public String myBlock(@RequestParam(value="cpage", defaultValue="1") int currentPage,HttpSession session,Model model) {
+		int userNo = ((Member)session.getAttribute("loginMember")).getUserNo();
+		int listCount = ms.myBlockCount(userNo);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Block> list = bService.myBlockList(pi,userNo);
+		System.out.println("컨트롤러" + list);
+		
+		model.addAttribute("listCount",listCount);
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
 		return "member/myBlock";
 	}
 }

@@ -85,12 +85,29 @@
             <div class="container_mark0">
                 <table class="table table-hover" style="text-align: center;">
                   <thead>
+                  	<tr>
+                      <th>제목</th>
+                      <th>카테고리</th>
+                      <th>작성일</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                     <c:choose>
             		<c:when test="${ not empty list }">
             			<c:forEach var="b" items="${ list }">
 			              <tr>
 			                <td>${ b.boardTitle }</td>
-			                <td>${ b.boardWriter }</td>
+			                <td>
+			                	<c:if test="${ b.boardType eq 4 }">
+			                		명소
+			                	</c:if>
+			                	<c:if test="${ b.boardType eq 5 }">
+			                		전시
+			                	</c:if>
+			                	<c:if test="${ b.boardType eq 6 }">
+			                		축제
+			                	</c:if>
+			                </td>
 			                <td>${ b.createDate }</td>
 			              </tr>
             			</c:forEach>
@@ -100,7 +117,7 @@
 			            	<td colspan="3" class="notFound">게시글이 존재하지 않습니다.</td>
 			            </tr>
             		</c:otherwise>
-            	</c:choose>
+            		</c:choose>
                   </tbody>
                 </table>
               </div>

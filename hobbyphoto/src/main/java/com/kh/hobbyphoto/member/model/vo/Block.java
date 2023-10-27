@@ -16,6 +16,6 @@ import lombok.ToString;
 public class Block {
 	private int blockNo;
 	private int userNo;
-	private int refNo;
-	private Date blackDate;
+	private String refNo;
+	private Date blockDate;
 }

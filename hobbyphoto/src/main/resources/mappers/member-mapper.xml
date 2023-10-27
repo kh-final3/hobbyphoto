@@ -165,6 +165,19 @@
 		select
 			   count(*)
 	      from group_d
-		 where user_no = #{userId};
+		 where user_no = #{userId}
+	</select>
+	
+	<select id="myLikeCount" resultType="_int">
+		select
+			   count(*)
+	      from likes
+		 where user_no = #{userId}
+	</select>
+	<select id="myBlockCount" resultType="_int">
+		select
+			   count(*)
+	      from block
+		 where user_no = #{userId}
 	</select>
 </mapper>

@@ -77,7 +77,12 @@
 		<result column="inq" property="inq"/>
 	</resultMap>
 	
-
+	<resultMap type="Block" id="blockResult">
+		<result column="block_no" property="blockNo"/>
+		<result column="user_no" property="userNo"/>
+		<result column="ref_no" property="refNo"/>
+		<result column="block_date" property="blockDate"/>
+	</resultMap>
 
 	<select id="selectPhListCount" resultType="_int">
 		select
@@ -355,21 +360,66 @@
 	
 	<select id="myBookmarksList" resultMap="boardResult">
 		select
-		       b.board_no
-		     , b.board_title
-	         , m.nickname
-		     , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
-		  from bookmark m
-     left join board b on m.board_no = b.board_no
-	      join member m on b.board_writer = m.user_no
-	     where b.status = 'Y'
-		   and m.user_no = 1
-		 order 
-		    by b.board_no desc
+		       p_no as "board_no"
+		     , p_title as "board_title"
+		     , to_char(bmk_date, 'YYYY-MM-DD') as "create_date"
+             , b.type as "board_type"
+		  from bookmark b
+     left join place p on b.board_no = p_no
+	     where b.user_no = #{ userNo }
+           and b.type = 4 
+     union all
+        select
+		       fe_no
+		     , fe_title
+		     , to_char(bmk_date, 'YYYY-MM-DD') as "create_date"
+             , b.type
+		  from bookmark b
+     left join festival p on b.board_no = fe_no
+	     where b.user_no = #{ userNo }
+           and b.type in (5,6)
 	</select>
-
 	
 	
+	<select id="myLikeList" resultMap="boardResult">
+		select
+		       l.board_no
+		     , board_title
+		     , user_name as "board_writer"
+		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+             , l.board_type
+		  from likes l
+     left join board b on l.board_no = b.board_no
+          join member m on b.board_writer = m.user_no
+	     where l.user_no = #{ userNo }
+	</select>
+	
+	<select id="myGroupList" resultMap="boardResult">
+		select
+			   d.group_no as "board_no"
+	         , title as "board_title"
+	         , nickname as "board_writer"
+	         , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+	      from group_d d
+	 left join s_group s on d.group_no = s.group_no
+	      join member m on s.user_no = m.user_no
+	     where d.user_no = #{ userNo }
+	     order
+            by create_date desc
+	</select>
+	
+	<select id="myBlockList" resultMap="blockResult">
+		select
+			   block_no
+             , b.user_no
+             , nickname as "ref_no"
+             , block_date
+	      from block b
+          left join member m on (b.ref_no = m.user_no)
+	     where b.user_no = 2
+	     order
+            by block_date desc
+	</select>
 	
 	<select id="selectPlaceListCount" resultType="_int">
 		select count(*)

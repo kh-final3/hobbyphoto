@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.member.model.vo.Block;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
@@ -43,6 +44,9 @@ public interface BoardService {
 	int myListCount(int userNo);
 	ArrayList<Board> myBoardList(PageInfo pi,int userNo);
 	ArrayList<Board> myBookmarksList(PageInfo pi,int userNo);
+	ArrayList<Board> myLikeList(PageInfo pi,int userNo);
+	ArrayList<Board> myGroupList(PageInfo pi,int userNo);
+	ArrayList<Block> myBlockList(PageInfo pi,int userNo);
 	
 	ArrayList<Place> selectPlaceList(PageInfo pi);
 	int insertPlace(Place p, ArrayList<Attachment> list);
