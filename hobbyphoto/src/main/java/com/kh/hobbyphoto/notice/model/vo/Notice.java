@@ -15,10 +15,11 @@ import lombok.ToString;
 @ToString
 public class Notice {
 	
-	private String noticeNo;
+	private int noticeNo;
 	private String noticeWriter;
 	private String noticeTitle;
 	private String noticeContent;
+	private int noticeType;
 	private int count;
 	private Date createDate;
 	private String status;

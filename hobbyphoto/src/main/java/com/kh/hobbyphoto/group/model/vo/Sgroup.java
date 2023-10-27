@@ -18,7 +18,7 @@ public class Sgroup {
 	private String img;
 	private String userNo;
 	private String title;
-	private String conent;
+	private String content;
 	private int meTotal;
 	private String location;
 	private Date grDate;

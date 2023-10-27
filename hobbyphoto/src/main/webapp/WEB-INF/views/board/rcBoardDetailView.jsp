@@ -76,12 +76,14 @@
 	            </table>
 	        </div>
 	        <br>
-	        <div>
-	            <button class="btn btn-dark btn-sm">목록으로</button>
-	            <button class="btn btn-dark btn-sm" onclick="postFormSubmit(1);">수정하기</button>
-	            <button class="btn btn-dark btn-sm" onclick="postFormSubmit(2);">삭제하기</button>
-	        </div>
-	        <br><br>
+	        <button class="btn btn-dark btn-sm">목록으로</button>
+				<c:if test="${ loginMember.userId eq b.boardWriter }">
+		            <div align="center">
+		            		<a class="btn btn-primary" href="rcBoardList.bo">목록으로</a>
+			                <a class="btn btn-warning" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
+			                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
+		            </div><br><br>
+				</c:if>
 	        
             <form id="postForm" action="" method="post">
             	<input type="hidden" name="phno" value="${ b.boardNo }">

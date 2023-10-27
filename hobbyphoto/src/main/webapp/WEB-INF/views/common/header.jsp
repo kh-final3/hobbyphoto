@@ -224,7 +224,7 @@
 	                    <li><a href="festivalList.fs">축제 · 전시</a></li>
 	                    <li><a href="list.pl">출사명소</a></li>
 	                   	<li><a href="#">배경화면</a></li>
-	                    <li><a href="togetherList.bo">모임</a></li>
+	                    <li><a href="togetherList.tg">모임</a></li>
 	                    <li><a href="list.no">공지사항</a></li>
 	                </ul>
 	            </div>
@@ -245,7 +245,7 @@
                     <table class="login-area" align="center">
                         <tr height="75">
                             <td width="70"><a href="pro.list"><img width="60" src="resources/images/shopping-cart.png" alt=""></a></td>
-                            <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png"></td>
+                            <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/149/149071.png"></td>
                         </tr>
                     </table>
                 </div>

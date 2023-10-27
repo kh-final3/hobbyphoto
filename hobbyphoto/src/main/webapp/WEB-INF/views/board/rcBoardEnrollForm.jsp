@@ -32,6 +32,7 @@
         <br>
         <div class="recommend">
             <form action="rcInsert.bo"  enctype="multiPart/form-data"class="form-area" method="post">
+               <input type="hidden" id="boardWriter" value="${ loginMember.userNo }" name="boardWriter">
                 <table id="contentArea" align="center" class="table">
                     <tr>
                         <th width="100">제목</th>

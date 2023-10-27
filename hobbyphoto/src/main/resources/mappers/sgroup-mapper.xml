@@ -23,26 +23,82 @@
 	</select>
 	
 	<select id="selectTgList" resultMap="SgroupResult">
+		SELECT 
+		  sg.group_no,
+		  sg.img,
+		  sg.title,
+		  sg.user_no,
+		  m.nickname,
+		  sg.location,
+		  sg.me_total,
+		  TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
+		FROM
+		  s_group sg
+		JOIN
+		  member m on m.user_no = sg.user_no
+		WHERE
+		  sg.status = 'Y'
+		ORDER BY
+		  sg.group_no DESC
+	</select>
+	
+	<select id="selectTgBoard" resultMap="SgroupResult">
 		SELECT
-		    sg.group_no,
-		    sg.img,
+			sg.group_no,
+			sg.img,
 		    sg.title,
-		    sg.user_no,
+		    sg.content,
 		    m.nickname,
-            sg.location,
-            sg.me_total,
+		    sg.location,
+		    sg.me_total,
 		    TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
 		FROM
 		    s_group sg
 		JOIN
-		    group_d g ON sg.user_no = g.user_no
-		JOIN
-		    member m on m.user_no = g.user_no
+		    member m ON m.user_no = sg.user_no
 		WHERE
-		    sg.status = 'Y'
+		    sg.group_no = #{boardNo}
 		ORDER BY
 		    sg.group_no DESC
+
 	</select>
+	
+	<insert id="insertSgBoard">
+    INSERT 
+    	INTO s_group 
+    	( 
+    	 group_no,
+    	 title,
+    	 img,
+    	 content,
+    	 me_total,
+    	 location,
+    	 gr_date,
+    	 user_no,
+    	 create_date,
+    	 status,
+    	 board_type
+    	 )
+    	VALUES 
+    	(
+    	seq_sgr.nextval,
+    	#{title},
+    	#{img}, 
+    	#{content}, 
+    	#{meTotal}, 
+    	#{location}, 
+    	#{grDate},
+    	1,
+    	sysdate,
+    	'Y',
+    	3
+    	)
+	</insert>
+	
+	<delete id="deleteTogether">
+	    DELETE FROM s_group
+	    WHERE group_no = #{boardNo}
+	</delete>
 	
 	
 </mapper>

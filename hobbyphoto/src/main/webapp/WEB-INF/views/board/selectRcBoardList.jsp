@@ -112,8 +112,12 @@
 					        });
 					    });
 					</script>
-	
-	            	<a class="btn btn-secondary btn-sm" style="float:right" href="rcEnrollForm.bo">글쓰기</a>
+					
+					<c:choose>
+				        <c:when test="${ not empty loginMember }">
+				           <a class="btn btn-secondary btn-sm" style="float:right" href="rcEnrollForm.bo">글쓰기</a>
+				        </c:when>
+				    </c:choose>
 				           <div id="pagingArea">
 				               <ul class="pagination">
 				                    <li class="page-item disabled"><a class="page-link" href="">Previous</a></li>

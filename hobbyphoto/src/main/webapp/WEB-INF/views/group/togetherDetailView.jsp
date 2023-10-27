@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         .SocialingHostImage_host__kz5xl {
             position: relative
@@ -235,75 +240,82 @@
 	            <div class="detail-socialing_template__NkCnA">
 	                <div class="detail-socialing_content__6jFUF">
 	                    <div class="Main_template__t9QX6">
-	
-	                        <!-- 모임홍보사진 -->
-	                        <img alt="socialing-detail_image"
-	                            src="https://upload.wikimedia.org/wikipedia/ko/8/87/Kakaofriends.png"
-	                            width="600" height="200" decoding="async" data-nimg="1" class="Main_template__image__l4wQN"
-	                            loading="lazy" style="color: transparent;">
-	                        <div class="Main_content__MC5q_">
-	                            <div class="Main_content__host-img__3fO0S"
-	                            ><a href="/user-profile?id=486807">
+	                       <img src="resources/upfiles/${ sg.img }" alt="socialing-detail_image" width="600" height="200" decoding="async" data-nimg="1" class="Main_template__image__l4wQN" loading="lazy" style="color: transparent;">
+	                         <div class="Main_content__MC5q_">
+	                            <div class="Main_content__host-img__3fO0S">
+	                            	<a href="/user-profile?id=486807">
 	                                    <div class="SocialingHostImage_host__kz5xl">
-	
 	                                        <!-- 모임주최자프사 -->
-	                                        <img alt="socialinghost"
-	                                            src="https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/7r5X/image/9djEiPBPMLu_IvCYyvRPwmZkM1g.jpg"
+	                                        <img alt="socialinghost" src="https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/7r5X/image/9djEiPBPMLu_IvCYyvRPwmZkM1g.jpg"
 	                                            width="50" height="50" decoding="async" data-nimg="1"
-	                                            class="SocialingHostImage_host__image__NUYeg" loading="lazy"
-	                                            style="color: transparent;">
+	                                            class="SocialingHostImage_host__image__NUYeg" loading="lazy" style="color: transparent;">
 	                                    </div>
-	                                </a>
-	                                <div class="Main_content__host-name__5ligk">모임주최자</div>
+	                                	</a>
+	                            	<div class="Main_content__host-name__5ligk">${ sg.userNo }</div>
 	                            </div>
-	                            <div class="Main_content__title__2dJZx">${ g.title }
-	                            </div>
+	                            <div class="Main_content__title__2dJZx">${ sg.title }</div>
 	                        </div>
 	                        <div class="IntroduceHtml_introduce__KLDMs">
 	                            <div class="IntroduceHtml_introduce__content__AGQj0">
 	                                <div>
-	                                    <p>${ g.conent }</p>
+	                                    <p>${ sg.content }</p>
 	                                </div>
 	                            </div>
 	                        </div>
 	                    </div>
 	                    <div class="Info_template__qLVqv">
-	
 	                        <div class="Info_notification__7DgBr">
 	                            <div class="Info_notification__title">안내사항</div>
 	                            <div class="Info_notification__introduce">자세한 정보를 알려드릴게요</div>
-	                            <div class="Info_notification__detail__a5KSg">
-	                                <span class="Info_detail__4My9u">
-	                                    <img alt="map" src="https://images.munto.kr/munto-web/info_group.svg?s=48x48"
-	                                        width="24" height="24" decoding="async" data-nimg="1"
-	                                        class="Info_detail__image__Jg5Nb" loading="lazy" style="color: transparent;">
-	                                    <div class="Info_detail__info__hl0py">${ g.meTotal }</div>
-	                                </span>
+	                            	<div class="Info_notification__detail__a5KSg">
+		                                <span class="Info_detail__4My9u">
+		                                    <img alt="map" src="https://images.munto.kr/munto-web/info_group.svg?s=48x48"
+		                                        width="24" height="24" decoding="async" data-nimg="1"
+		                                        class="Info_detail__image__Jg5Nb" loading="lazy" style="color: transparent;">
+		                                    <div class="Info_detail__info__hl0py">${ sg.meTotal }명</div>
+		                                </span>
 	
-	                                <span class="Info_detail__4My9u">
-	                                    <img alt="member" src="https://images.munto.kr/munto-web/info_place_24px.svg?"
-	                                        height="24" decoding="async" data-nimg="1" class="Info_detail__image__Jg5Nb"
-	                                        loading="lazy" style="color: transparent;">
-	                                    <div class="Info_detail__info__hl0py">${ g.location }</div>
-	                                </span>
+		                                <span class="Info_detail__4My9u">
+		                                    <img alt="member" src="https://images.munto.kr/munto-web/info_place_24px.svg?"
+		                                        height="24" decoding="async" data-nimg="1" class="Info_detail__image__Jg5Nb"
+		                                        loading="lazy" style="color: transparent;">
+		                                    <div class="Info_detail__info__hl0py">${ sg.location }</div>
+		                                </span>
 	
-	                                <span class="Info_detail__4My9u">
-	                                    <img alt="map" src="https://cdn-icons-png.flaticon.com/512/1827/1827463.png"
-	                                        width="24" height="24" decoding="async" data-nimg="1"
-	                                        class="Info_detail__image__Jg5Nb" loading="lazy" style="color: transparent;">
-	                                    <div class="Info_detail__info__hl0py">${ g.grDate }</div>
-	                                </span>
-	
-	
-	                            </div>
+		                                <span class="Info_detail__4My9u">
+		                                    <img alt="map" src="https://cdn-icons-png.flaticon.com/512/1827/1827463.png"
+		                                        width="24" height="24" decoding="async" data-nimg="1"
+		                                        class="Info_detail__image__Jg5Nb" loading="lazy" style="color: transparent;">
+		                                    <div class="Info_detail__info__hl0py">${ sg.grDate }</div>
+		                                </span>
+	                            	</div>
+	                       		 </div>
+	                        <button id="enroll-btn">신청하기</button><br><br><br>
+								<c:if test="${ loginMember.userName eq sg.userNo }">
+						            <div align="center">
+						            		<a class="btn btn-primary" href="togetherList.tg">목록으로</a>
+							                <a class="btn btn-warning" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
+							                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
+						            </div><br><br>
+								</c:if>
+						        
+					            <form id="postForm" action="" method="post">
+					            	<input type="hidden" name="gno" value="${ sg.groupNo }">
+					            </form>
+					            
+							<script>
+							    function postFormSubmit(num) {
+							        if (num == 1) { // 수정하기 클릭시
+							            $("#postForm").attr("action", "update.tg").submit();
+							        } else { // 삭제하기 클릭시
+							            console.log($("#postForm"));
+							            $("#postForm").attr("action", "delete.tg").submit();
+							        }
+							    }
+							</script>
+
 	                        </div>
-	                        <button id="enroll-btn">신청하기</button>
-	                        <br><br><br>
 	                    </div>
-	                    <div>
-	
-	                    </div>
-	
 	                </div>
 	            </div>
 	        </div>

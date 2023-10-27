@@ -89,11 +89,11 @@
 	    <div class="outer">
 	        <div class="wrap">
 	            <h1 align="center" id="title">모임</h1>
-	            <div align="center"><button id="write-btn" class="btn btn-secondary">글 작성</button></div>
+	            <div align="center"><button type="submit" id="write-btn" class="btn btn-secondary">글 작성</button></div>
 					<div class="list">
 					    <c:forEach var="g" items="${ list }">
 					        <div class="together">
-					            <input type="hidden" class="gno" value="${ g.groupNo }">
+					           <input type="hidden" class="gno" value="${ g.groupNo }">
 					            <table>
 					                <tbody>
 					                    <tr height="30" style="font-size: 18px; font-weight: bolder;">
@@ -124,4 +124,20 @@
 	    	</div>
 		</body>
 	<jsp:include page="../common/footer.jsp"/>
+	
+	    <script>
+
+        // 게시글 상세보기
+	    $(".together").click(function(){
+		    let gno = $(this).find(".gno").val();
+		    location.href = "togetherDetail.tg?gno=" + gno;
+		
+	    })
+
+        // 게시글 작성
+        $("#write-btn").click(function(){
+            location.href="enrollFormView.tg";
+        })
+    </script>
+	
 </html>
