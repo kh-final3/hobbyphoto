@@ -180,4 +180,10 @@
 	      from block
 		 where user_no = #{userId}
 	</select>
+	<update id="updateNick">
+		update
+		       member
+		   set nickname = #{ nickName }
+		 where user_no = #{ userNo }
+	</update>
 </mapper>

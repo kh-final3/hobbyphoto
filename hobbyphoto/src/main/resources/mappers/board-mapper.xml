@@ -94,20 +94,21 @@
 	
 	<select id="selectPhList" resultMap="boardResult">
 		select
-		    b.board_no
+		      b.board_no
 		    , b.board_title
 		    , b.board_content
 		    , b.count
 	        , m.nickname
 		    , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
 		    , a.file_path as "thumbnail"
-		  from board b
-		  left join attachment a on b.board_no = a.ref_bno
-	      join member m on b.board_writer = m.user_no
-		  where b.status = 'Y'
+		 from board b
+		 left join attachment a on b.board_no = a.ref_bno
+	     join member m on b.board_writer = m.user_no
+		where b.status = 'Y'
 		  and b.board_type = 1
 	      and a.file_level = 1
-		  order by b.board_no desc
+		order 
+		   by b.board_no desc
 	</select>
 	
 	<insert id="insertPhBoard">
@@ -416,7 +417,7 @@
              , block_date
 	      from block b
           left join member m on (b.ref_no = m.user_no)
-	     where b.user_no = 2
+	     where b.user_no = #{ userNo }
 	     order
             by block_date desc
 	</select>
@@ -674,5 +675,41 @@
 		     , age = #{age}
 		 where fe_no = #{feNo}
 	</update>
+	<select id="selectTopBoardList" resultMap="boardResult">
+      select *
+        from (
+              select
+                     board_no
+                   , board_title
+                   , nickname as "board_writer"
+                   , a.file_path as "thumbnail"
+                   , count
+                   , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+                from board b
+           left join attachment a on b.board_no = a.ref_bno
+                join member m on b.board_writer = m.user_no
+               where b.status = 'Y'
+                 and b.board_type = 1
+                 and a.file_level = 1
+               order
+                  by count desc
+          )
+       where rownum between 1 and 4
+   </select>
+   <select id="selectTopPlaceList" resultMap="placeResult">
+      select *
+        from (
+              select
+                     p_no
+                   , p_title
+                   , p_img1
+                   , count
+                   , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+                from place
+               order
+                  by count desc
+          )
+       where rownum between 1 and 5
+   </select> 
 	
 </mapper>

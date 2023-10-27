@@ -27,4 +27,6 @@ public interface MemberService {
 	int myLikeCount(int userNo);
 	
 	int myBlockCount(int userNo);
+	
+	int updateNick(Member m);
 }

@@ -226,11 +226,34 @@ public class MemberController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 		
 		ArrayList<Block> list = bService.myBlockList(pi,userNo);
-		System.out.println("컨트롤러" + list);
 		
 		model.addAttribute("listCount",listCount);
 		model.addAttribute("pi",pi);
 		model.addAttribute("list",list);
 		return "member/myBlock";
 	}
+	
+	@RequestMapping("updateForm.me")
+	public String updateMember() {
+		return "member/update";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="updateNick.me",produces="text/html; charset=UTF-8")
+	public String updateNick(Member m,HttpSession session) {
+		int result = 0;
+		String nickName = "";
+		if(m.getNickName() !=null){
+			 result = ms.updateNick(m);
+		}
+		if(result > 0) {
+			Member loginMember = ms.loginMember(m);
+			System.out.println(loginMember);
+			session.setAttribute("loginMember", loginMember);
+			nickName = m.getNickName();
+		}
+		
+		return nickName;
+	}
+	
 }

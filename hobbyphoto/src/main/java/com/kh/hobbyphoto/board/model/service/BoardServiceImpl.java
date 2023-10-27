@@ -246,4 +246,14 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.updateCulture(sqlSession, fe);
 	}
 
+	@Override
+	public ArrayList<Board> selectTopBoardList() {
+		return bDao.selectTopBoardList(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Place> selectTopPlaceList() {
+		return bDao.selectTopPlaceList(sqlSession);
+	}
+
 }

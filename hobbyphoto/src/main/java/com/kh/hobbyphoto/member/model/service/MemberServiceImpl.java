@@ -76,4 +76,9 @@ public class MemberServiceImpl implements MemberService {
 		return md.myBlockCount(sqlSession,userNo);
 	}
 
+	@Override
+	public int updateNick(Member m) {
+		return md.updateNick(sqlSession,m);
+	}
+
 }

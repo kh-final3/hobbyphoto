@@ -1,0 +1,293 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<title>Insert title here</title>
+<style>
+        .outer_my{
+        /* border: 1px solid red; */
+        background-color: gainsboro;
+        width: 1200px;
+        height: 900px;
+        margin: auto;
+        margin-top: 50px;
+        }
+
+        /* 마이페이지 제목 */
+        #h_my{
+            font-weight: 600;
+            
+        }
+
+        .info_my{
+          /* border: 1px solid red; */
+          background-color: white;
+          width: 1180px;    
+          height: 800px;
+          margin: auto;
+        }
+
+        .info_my1{
+          /* border: 1px solid red; */
+          background-color: gainsboro;
+          width: 300px;
+          height: 500px;
+          float: left;
+          position: fixed;
+          top: 30%;
+          margin: 20px 20px;
+        }
+
+        .info_my2{
+          padding-left : 16px;
+          padding-top : 17px;
+          border: 1px solid black;
+          border-radius: 15px;
+          width: 780px;
+          float: right;
+          margin: 32px 40px 10px 10px;
+          height: 450px;
+          
+        }
+        .info_my3{
+          /* border: 1px solid red; */
+          background-color: gainsboro;
+          font-weight: 700;
+          width: 780px;
+          height: 390px;
+          float: right;
+          margin: 32px 40px 10px 10px;
+          padding: 20px 0 10px 0;
+        }
+
+        /* 프로필 div안의 버튼 */
+        #btnall_my{
+            /* border: 1px solid red; */
+            margin: 40px 74px;
+        }
+
+        #btn_my1{
+            width: 150px;
+            height: 35px;
+        }
+
+        #btn_my2{
+            margin: 10px 0 0 0;
+            width: 150px;
+            height: 35px;
+        }
+        
+        .my-update{
+        	padding: 0 30px;
+        }
+        
+
+        #list_my{
+            background-color: white;
+            margin: 5px;
+            border-radius: 10px;
+            height: 320px;
+        }
+        
+        .info_my2 tr{
+            font-size: larger;
+            font-weight: 600;
+        }
+
+        .info_my2 td{
+            font-size: 14px;
+            padding: 0 0 5px 15px;
+            font-weight: 500;
+        }
+		
+		.myPage-update{
+			margin-right: 20px;
+		}
+
+        .name_text{
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 29px;
+            letter-spacing: -.63px;
+            margin-bottom: 5px;
+        }
+
+        .id_text{
+            font-size: 19px;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: normal;
+            color: rgba(123,137,148,.8);
+        }
+
+        .info_area{
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(123,137,148,.8);
+        }
+
+        .nickName_text,.gender_text,.description_text{
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .text_update_btn{
+            float: right;
+            background-color: white;
+            border: 1px solid black;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 5px;
+        }
+        
+        .update_btn{
+            background-color: black;
+            border: 1px solid black;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 5px;
+            margin-top: 2px;
+        }
+
+        .cancle_btn{
+            background-color: white;
+            border: 1px solid black;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 5px;
+            margin-top: 2px;
+        }
+
+    </style>
+</head>
+<body>
+	<jsp:include page="../common/header.jsp"/>
+	<div class="outer_my">
+        <br><br>
+        <h4 id="h_my" style="margin-left: 30px;"> 마이페이지</h4>
+
+        <div class="info_my">
+            <div class="info_my1">
+                <img id="profileImg_my" src="../../resources/images/picture.png" style="width: 200px; height: 200px; margin: 50px;"></img><br>
+                <h6 style="font-weight: 600; text-align: center;">반가워요!</h6>
+                <h6 style="text-align: center;">${ loginMember.nickName }님</h6>
+                <div id="btnall_my">
+                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my1" onclick="history.back()">뒤로가기</button><br>                    
+                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my2" onclick ="location.href='deleteForm.me'">회원탈퇴</button>
+                </div>
+            </div>
+            <div class="info_my2">
+                <br>
+                <h style="font-weight: 700; margin: 0 0 5px 10px; font-size: larger;">회원정보</h><br><br>
+                <div class="my-update">
+	                    <table>
+	                    	<tr>
+                                <div class="info_area">
+                                    <div class="name_text">
+                                        ${ loginMember.userName }
+                                    </div>
+                                    <div class="id_text">
+                                        ${ loginMember.userId }
+                                    </div>
+                                </div>
+	                    	</tr>
+                            <tr>
+                                <td>이메일</td>
+                                <td style="width: 600px;">${ loginMember.email }</td>
+                            </tr>
+                            <tr>
+                                <td>전화번호</td>
+                                <td>${ loginMember.phone }</td>
+                            </tr>
+	                        <tr>
+	                            <td>닉네임</td>
+	                            <td class="nickName_td">
+                                    <div class="nickName_text" >
+                                        ${ loginMember.nickName }
+                                    </div>
+                                    <button class="text_update_btn" onclick="nickName_update()">변경</button>
+                                </td>
+	                        </tr>
+	                        <tr>
+	                            <td>한줄소개</td>
+	                            <td class="description_td">
+                                    <div class="description_text" >
+                                        ${ loginMember.description }
+                                    </div>
+                                    <button class="text_update_btn" onclick="description_update()">변경</button>
+                                </td>
+	                        </tr>
+                            <tr>
+	                            <td>성별</td>
+	                            <td class="gender_td">
+                                    <div class="gender_text" >
+                                        ${ loginMember.gender }
+                                    </div>
+                                    <button class="text_update_btn">변경</button>
+                                </td>
+	                        </tr>
+	                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function nickName_update() {
+            $(".nickName_td").html("<div><input type='text' id='change_nickName' placeholder='닉네임을 입력하세요'></div><button type='button' class='update_btn'>변경</button> <button class='cancle_btn'>취소</button>")
+        }
+
+        $(()=>{
+        	$(document).on("click", ".nickName_td .update_btn", function(){
+                $.ajax({
+                	url:"updateNick.me",
+                	data:{nickName:$("#change_nickName").val()},
+                	success:(data)=>{
+                		if(data != ""){
+                			$(".nickName_td").html("<div class='nickName_text'>"+ data +"</div><button class='text_update_btn' onclick='nickName_update()'>변경</button>")
+                		}else{
+	                		$(".nickName_td").html("<div class='nickName_text'>${ loginMember.nickName }</div><button class='text_update_btn' onclick='nickName_update()'>변경</button>")
+                		}
+                	},
+                	error:()=>{
+                		console.log("닉네임 변경 실패")
+                	}
+                })
+             })
+        })
+        
+        function description_update() {
+            $(".description_td").html("<div><input type='text' id='change_description' placeholder='닉네임을 입력하세요'></div><button type='button' class='update_btn'>변경</button> <button class='cancle_btn'>취소</button>")
+        }
+
+        $(()=>{
+        	$(document).on("click", ".description_td .update_btn", function(){
+                $.ajax({
+                	url:"description.me",
+                	data:{nickName:$("#change_description").val()},
+                	success:(data)=>{
+                		if(data != ""){
+                			$(".description_td").html("<div class='description_text'>"+ data +"</div><button class='text_update_btn' onclick='nickName_update()'>변경</button>")
+                		}else{
+	                		$(".description_td").html("<div class='description_text'>${ loginMember.nickName }</div><button class='text_update_btn' onclick='nickName_update()'>변경</button>")
+                		}
+                	},
+                	error:()=>{
+                		console.log("닉네임 변경 실패")
+                	}
+                })
+             })
+        })
+
+    </script>
+    <jsp:include page="../common/footer.jsp"/>
+</body>
+</html>

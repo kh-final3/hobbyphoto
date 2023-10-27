@@ -125,7 +125,10 @@
             padding: 0 0 5px 15px;
             font-weight: 500;
         }
-
+		
+		.myPage-update{
+			margin-right: 20px;
+		}
 
     </style>
 </head>
@@ -139,10 +142,10 @@
             <div class="info_my1">
                 <img id="profileImg_my" src="../../resources/images/picture.png" style="width: 200px; height: 200px; margin: 50px;"></img><br>
                 <h6 style="font-weight: 600; text-align: center;">반가워요!</h6>
-                <h6 style="text-align: center;">***님</h6>
+                <h6 style="text-align: center;">${ loginMember.nickName }님</h6>
                 <div id="btnall_my">
                     <button type="submit" class="btn btn-sm btn-primary" id="btn_my1" onclick="location.href='logout.me'">로그아웃</button><br>                    
-                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my2" onclick ="location.href='deleteForm.me'">회원탈퇴</button>
+                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my2" onclick ="location.href='updateForm.me'">정보수정</button>
                 </div>
             </div>
             <div class="info_my2">
@@ -152,11 +155,11 @@
                     <table align="center">
                         <tr>
                             <th>닉네임</th>
-                            <td>***의 닉네임</td>
+                            <td>${ loginMember.nickName }</td>
                         </tr>
                         <tr>
                             <th>한줄소개</th>
-                            <td>만나서 반갑습니다. 잘부탁드려요</td>
+                            <td>${ loginMember.description }</td>
                         </tr>
                         <tr>
                             <th>팔로우</th>

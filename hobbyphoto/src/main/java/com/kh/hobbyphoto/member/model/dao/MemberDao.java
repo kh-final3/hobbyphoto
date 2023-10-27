@@ -54,4 +54,8 @@ public class MemberDao {
 	public int myBlockCount(SqlSessionTemplate sqlSession,int userNo) {
 		return sqlSession.selectOne("memberMapper.myBlockCount",userNo);
 	}
+	
+	public int updateNick(SqlSessionTemplate sqlSession,Member m) {
+		return sqlSession.update("memberMapper.updateNick",m);
+	}
 }
