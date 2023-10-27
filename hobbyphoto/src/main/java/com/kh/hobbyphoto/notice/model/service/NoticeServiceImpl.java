@@ -27,16 +27,21 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDao.selectShopList(sqlSession, pi);
 	}
 	@Override
-	public int insertShNotice(Notice n, ArrayList<Notice> list) {
-		return 0;
+	public int insertShNotice(Notice n) {
+		return nDao.insertShNotice(sqlSession, n);
 	}
 	@Override
 	public int increaseShCount(int boardNo) {
 		return nDao.increaseShCount(sqlSession, boardNo);
 	}
 	@Override
-	public ArrayList<Notice> selectShNotice(int boardNo) {
+	public Notice selectShNotice(int boardNo) {
 		return nDao.selectShNotice(sqlSession, boardNo);
+	}
+	
+	@Override
+	public int shNoticeDelete(int num) {
+		return nDao.shNoticeDelete(sqlSession, num);
 	}
 	
 

@@ -25,7 +25,6 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         }
-
         .container_myBoardList1{
           width: 900px;
         }
@@ -60,7 +59,7 @@
         }
     </style>
 </head>
-<jsp:include page="../common/header.jsp"/>
+<jsp:include page="../common/shopHeader.jsp"/>
 <body>
     <div class="outer_myBoardList">
       <div class="container_myBoardList2">
@@ -74,9 +73,13 @@
       </div>
 
       <div class="container_myBoardList1">
-
         <h6 style="margin: 10px 0 0 10px; font-weight: 500;"><img src="resources/images/logo.png"> 쇼핑몰</h6>
         <h1 style="font-weight: 700;">공지사항</h1>
+        	<div style="width: 850px;" align="right">
+        	<c:if test="${ loginMember.userNo eq 1 }">
+	            <a href="shEnrollForm.no" class="btn btn-light" id="btn_th">글작성</a>
+	        </c:if>    
+	        </div>
         <hr>
         <h>총 ${ pi.listCount } 건</h>
         <br><br>
@@ -101,7 +104,7 @@
 		                <td>${ n.noticeWriter }</td>
 		                <td>${ n.count }</td>
 		                <td>${ n.createDate }</td>
-		                <input type="hidden" class="shno" value="${ n.noticeNo }">
+		               <input type="hidden" class="shno" value="${n.noticeNo}" />
 		            </tr>
 		        </c:forEach>
             </tbody>
@@ -111,7 +114,7 @@
             	$(document).ready(function() {
             		$('.table-hover > tbody').on('click', 'tr', function() {
 	                    var shno = $(this).find('.shno').val();
-	                    window.location.href = 'shDetail.list?shno=' + shno;
+	                    window.location.href = 'shDetail.no?shno=' + shno;
 	                });
 	            });
             </script>

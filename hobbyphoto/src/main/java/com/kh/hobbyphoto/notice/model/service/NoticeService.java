@@ -11,11 +11,17 @@ public interface NoticeService {
 	ArrayList<Notice> selectShopList(PageInfo pi);
 	
 	// 2. 게시글 작성하기 서비스
-	int insertShNotice(Notice n, ArrayList<Notice> list);
+	int insertShNotice(Notice n);
 	
 	// 3. 게시글 상세조회용 서비스
 	int increaseShCount(int boardNo);
-	ArrayList<Notice> selectShNotice(int boardNo);
+	Notice selectShNotice(int boardNo);
+	
+	// 4. 게시글 삭제하기 서비스
+	int shNoticeDelete(int num);
+	
+	// 5. 게시글 수정하기 서비스
+	
 	
 	
 }

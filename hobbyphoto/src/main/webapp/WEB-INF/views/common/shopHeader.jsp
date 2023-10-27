@@ -222,7 +222,7 @@
                     <li><a href="#">카메라</a></li>
                     <li><a href="#">포토북</a></li>
                     <li><a href="#">핸드폰 케이스</a></li>
-                    <li><a href="shNotice.list">공지사항</a></li>
+                    <li><a href="shNotice.no">공지사항</a></li>
                     
                 </ul>
             </div>

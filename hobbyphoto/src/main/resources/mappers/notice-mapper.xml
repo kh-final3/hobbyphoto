@@ -24,14 +24,15 @@
 	<select id="selectShopList" resultMap="noticeResult">
 	 	select
 		    notice_no,
-		    notice_writer,
+		    m.user_name as notice_writer,
 		    notice_title,
 		    notice_content,
 		    count,
 		    create_date
-		 from notice
+		 from notice n
+         join member m on (user_no = notice_writer)
 	 	where notice_type = 2
-	 	order by to_number(notice_no) desc
+	 	order by notice_no desc
 	</select>
 	
 	<update id="increaseShCount">
@@ -46,13 +47,43 @@
 	<select id="selectShNotice" resultMap="noticeResult">
 		select
 	        notice_no,
-	        notice_writer,
+	        m.user_name as notice_writer,
 	        notice_title,
 	        notice_content,
 	        count,
 	        create_date
 	    from notice
-	    order by to_number(notice_no) desc
-    
+	    join member m on (user_no = notice_writer)
+        where notice_type = 2
+        and notice_no = #{boardNo}
+	    order by notice_no desc
 	</select>
+	
+	<insert id="insertShNotice">
+		insert	
+		into notice
+			(
+			  notice_no
+			, notice_title
+			, notice_writer
+			, notice_content
+			, notice_type
+			, create_date
+			)
+			values
+			(
+			   seq_notice_no.nextval
+			 , #{noticeTitle}
+			 , 1
+			 , #{noticeContent}
+			 , 2
+			 , sysdate
+			)
+	</insert>
+	
+	<delete id="shNoticeDelete">
+		DELETE FROM notice
+	    WHERE notice_no = #{boardNo}
+	</delete>
+	
 </mapper>

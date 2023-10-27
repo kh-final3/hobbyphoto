@@ -33,7 +33,6 @@ public class BoardController {
 
 	@RequestMapping("phBoardList.bo")
 	public ModelAndView selectPhBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
-		
 		int listCount = bService.selectPhListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
@@ -70,7 +69,6 @@ public class BoardController {
 	
 	@RequestMapping("phInsert.bo")
 	public String insertPhBoard(Board b, MultipartFile[] upfiles, Model model, HttpSession session) {
-		
         ArrayList<Attachment> list = new ArrayList<>();
 
         for (int i = 0; i < upfiles.length; i++) {
@@ -86,8 +84,8 @@ public class BoardController {
                 list.add(at);
             }
         }
-
         int result = bService.insertPhBoard(b, list);
+        System.out.println(b);
 
         if (result > 0) {
             session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
@@ -247,8 +245,7 @@ public class BoardController {
 		int result = bService.deleteRcBoard(phno);
 		
 		if(result > 0) {
-			// 첨부파일이 있었을 경우 => 파일 삭제
-			if(!filePath.equals("")) { // filePath = "resources/uploadFiles/xxxx.jpg" | ""
+			if(!filePath.equals("")) {
 				new File(session.getServletContext().getRealPath(filePath)).delete();
 			}
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");

@@ -76,11 +76,13 @@
            <br>
             <h2 align="center">사진게시판</h2>
             <br>
-
-	        <div style="width: 850px;" align="right">
-	            <a href="phEnrollForm.bo" class="btn btn-light" id="btn_th">글작성</a>
-	        </div>
-	        
+				<div style="width: 850px;" align="right">
+				    <c:choose>
+				        <c:when test="${ not empty loginMember }">
+				            <a href="phEnrollForm.bo" class="btn btn-light" id="btn_th">글작성</a>
+				        </c:when>
+				    </c:choose>
+				</div>
 	        <div class="list-area_th">
 			   	<c:forEach var="b" items="${ list }">
 		           	<div class="thumbnail" align="center" data-phno="${ b.boardNo }">
@@ -92,7 +94,6 @@
 		            </div>
 			   	</c:forEach>
 	        </div>
-	        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
             <script>
 	            $(function(){
 	                $(".thumbnail").click(function(){
@@ -107,7 +108,7 @@
 		                		<button disabled> &lt; </button>
 		                	</c:when>
 		                	<c:otherwise>
-		                		<button style="border: 1px solid lightgray; font-weight: bolder;" onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage - 1 }'">Previous</button>
+		                		<button style="width:70px" onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage - 1 }'">Previous</button>
 		                	</c:otherwise>
 		                </c:choose>
 		                

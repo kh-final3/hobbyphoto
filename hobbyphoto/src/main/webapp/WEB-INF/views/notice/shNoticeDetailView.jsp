@@ -85,7 +85,6 @@
 
     <div class="outer">
         <div class="wrap">
-        <c:forEach var="n" items="${ n }">
             <div id="header">
                 <div id="subject">[ 공지 ]</div>
                 <div id="title">${ n.noticeTitle }</div>
@@ -98,12 +97,11 @@
             <div id="content">
 			${ n.noticeContent }
             </div>
-            </c:forEach>
             
     <div align="center">
         <a href="list.no" class="btn btn-sm btn-secondary" style="width: 90px; height: 35px; font-size: medium;">목록가기</a>
-        <a href="updateForm.no?num=${ n.noticeNo }" class="btn btn-sm btn-warning" style="width: 90px; height: 35px; font-size: medium;">수정하기</a>
-        <a href="delete.no?num=${ n.noticeNo }>"W class="btn btn-sm btn-danger" style="width: 90px; height: 35px; font-size: medium;">삭제하기</a>
+        <a href="shUpdateForm.no?num=${ n.noticeNo }" class="btn btn-sm btn-warning" style="width: 90px; height: 35px; font-size: medium;">수정하기</a>
+        <a href="shDelete.no?num=${ n.noticeNo }"W class="btn btn-sm btn-danger" style="width: 90px; height: 35px; font-size: medium;">삭제하기</a>
     
     </div>
   </div>

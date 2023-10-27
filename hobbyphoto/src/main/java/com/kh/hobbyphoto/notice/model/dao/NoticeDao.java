@@ -23,8 +23,16 @@ public class NoticeDao {
 		return sqlSession.update("noticeMapper.increaseShCount", boardNo);
 	}
 
-	public ArrayList<Notice> selectShNotice(SqlSessionTemplate sqlSession, int boardNo) {
-		return (ArrayList) sqlSession.selectList("noticeMapper.selectShNotice", boardNo);
+	public Notice selectShNotice(SqlSessionTemplate sqlSession, int boardNo) {
+		return (Notice) sqlSession.selectOne("noticeMapper.selectShNotice", boardNo);
+	}
+
+	public int insertShNotice(SqlSessionTemplate sqlSession, Notice n) {
+		return sqlSession.insert("noticeMapper.insertShNotice", n);
+	}
+
+	public int shNoticeDelete(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.delete("noticeMapper.shNoticeDelete", boardNo);
 	}
 
 }
