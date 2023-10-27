@@ -245,7 +245,7 @@
             padding: 14px;
             position: relative;
             min-width: 190px;
-            height: 56px;
+            height: 100%;
         }
 
         .overlay_info img {
@@ -308,9 +308,7 @@
                     <div class="list-content">
                         [주소] ${ p.paddress } <br>
                         [내용] ${p.pcontent}<br>
-                        [촬영 시기] 5월 중순 ~ 8월 중순 <br>
-                        [추천 카메라] 24-70mm,... <br>
-                        [특징] 동작대교에서 여의도 쌍둥이 빌딩 사이 일몰 촬영 및 야경 촬영을 할 수 있는 포인트 입니다.일몰은 시기에 따라 남단에서 북단응로 조금씩 위치 변화가 있으니 주의 바랍니다. 
+                      
                     </div>
                 </div>
 

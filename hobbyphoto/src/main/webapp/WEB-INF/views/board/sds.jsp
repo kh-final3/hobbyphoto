@@ -48,6 +48,8 @@
 
 </head>
 <body>
+<jsp:include page="../common/header.jsp" />
+
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
@@ -286,12 +288,15 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
-$(this).click(function() {
-    console.log($(this).find(".road").text());
-    $(".address").html($(this).find(".road").text());
+
+$('#placesList').on('click', 'li', function() {
+    $(".address").html($(this).find('.road').text());
+    $(".location").html($(this).find(".info>h5").text());
 });
 
 
+
 </script>
+<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
