@@ -72,7 +72,7 @@ public class BoardController {
 	@RequestMapping("phInsert.bo")
 	public String insertBoard( Board b, MultipartFile[] upfiles, Model model, HttpSession session) {
 		
-        ArrayList<Attachment> list = new ArrayList<>();
+        ArrayList<Attachment> list = new ArrayList();
 
         for (int i = 0; i < upfiles.length; i++) {
             if (upfiles[i] != null && !upfiles[i].isEmpty()) {

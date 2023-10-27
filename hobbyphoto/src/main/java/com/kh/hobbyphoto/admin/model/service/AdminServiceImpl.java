@@ -34,10 +34,10 @@ public class AdminServiceImpl implements AdminService{
 		return aDao.selectMember(sqlSession);
 	}
 	
-	// 신고된 회원 리스트
+	// 관리자 페이지 메인에 신고된 회원 리스트
 	@Override
-	public ArrayList<Report> ajaxReportMList() {
-		return aDao.ajaxReportMList(sqlSession);
+	public ArrayList<Report> selectReportMList() {
+		return aDao.selectReportMList(sqlSession);
 	}
 	
 	// 회원 삭제 서비스
@@ -70,16 +70,34 @@ public class AdminServiceImpl implements AdminService{
 		return aDao.selectBoard2(sqlSession);
 	}
 	
+	// 게시물 삭제서비스-장비추천게시판
+	@Override
+	public int edeleBoard(String boardTitle) {
+		return aDao.edeleBoard(sqlSession, boardTitle);		
+	}
+	
 	// 게시물 관리서비스-모임게시판
 	@Override
 	public ArrayList<Sgroup> selectBoard3() {
 		return aDao.selectBoard3(sqlSession);
 	}
 	
+	// 게시물 삭제서비스-모임게시판
+	@Override
+	public int gdeleBoard(String title) {
+		return aDao.gdeleBoard(sqlSession, title);		
+	}
+	
 	// 게시물 관리서비스-배경화면게시판
 	@Override
 	public ArrayList<BackGround> selectBoard4() {
 		return aDao.selectBoard4(sqlSession);
+	}
+	
+	// 게시물 삭제서비스-배경화면게시판
+	@Override
+	public int bkdeleBoard(String title) {
+		return aDao.gdeleBoard(sqlSession, title);		
 	}
 	
 	// 신고 게시물 조회
@@ -92,10 +110,6 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int processed(String rpNo) {
 		return aDao.processed(sqlSession, rpNo);		
-	}
-
-	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.update("adminMapper.increaseCount", boardNo);
 	}
 
 }

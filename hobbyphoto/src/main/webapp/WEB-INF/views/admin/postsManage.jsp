@@ -13,6 +13,15 @@
  <link href="resources/css/styles.css" rel="stylesheet" />
  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 <title>게시글 관리</title>
 
 <style>
@@ -141,6 +150,13 @@
 </style>
 </head>
 <body>
+ <c:if test="${ not empty alertMsg }">
+	<script>
+			alertify.alert("${ alertMsg }");
+	</script>
+	<c:remove var="alertMsg" scope="session"/>
+ </c:if>
+ 
 <div class="dashboard">
     <h2>게시물 관리</h2>
    <ol class="breadcrumb mb-4">
@@ -204,7 +220,10 @@
                  <td>${b.boardWriter}</td>
                 <td>${b.createDate}</td>
               <td class="button-container">
+               <form action="edelete.bo" method="post">
+               	  <input type="hidden" name="boardTitle" value="${ b.boardTitle }">
                   <button onclick="submit">삭제</button>
+               </form>  
                   <button onclick="">수정</button>
               </td>
             </tr>
@@ -218,7 +237,10 @@
               <td>${g.userNo}</td>
               <td>${g.createDate}</td>
               <td class="button-container">
+               <form action="gdelete.bo" method="post">
+               	  <input type="hidden" name="title" value="${ g.title }">
                   <button onclick="submit">삭제</button>
+               </form>  
                   <button onclick="">수정</button>
               </td>
             </tr>

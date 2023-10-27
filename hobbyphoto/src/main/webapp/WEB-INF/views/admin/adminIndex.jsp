@@ -21,6 +21,16 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="resources/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- JavaScript -->
+		<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+		
+		<!-- CSS -->
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+		<!-- Default theme -->
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+		<!-- Semantic UI theme -->
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
         
     </head>
     <body class="sb-nav-fixed">
@@ -216,39 +226,46 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>이름</th>
+                                            <th>신고된 계정</th>
                                             <th>신고 사유</th>
                                             <th>신고자</th>
-                                            <th>제재 횟수</th>
-                                            <th>신고 날짜</th>
-                                            <th>신고된 게시물</th>
+                                            <th>누적 신고 횟수</th>
+                                            <th>해당 게시판 순번</th>
+                                            <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>이름</th>
+                                            <th>신고된 계정</th>
                                             <th>신고 사유</th>
                                             <th>신고자</th>
-                                            <th>제재 횟수</th>
-                                            <th>신고 날짜</th>
-                                            <th>신고된 게시물</th>
+                                            <th>누적 신고 횟수</th>
+                                            <th>해당 게시판 순번</th>
+                                            <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    <c:forEach var="m" items="${ list }">
+                                     <c:forEach var="r" items="${ list }">
                                         <tr>
-                                            <td class="mno">홍길동</td>
-                                            <td>도박/사행성</td>
-                                            <td>김철수</td>
-                                            <td>1</td>
-                                            <td>게시물 제목</td>
-
+                                            <td class="rno">${ r.reportedUno }</td>
+                                            <td>${ r.guilty }</td>
+                                            <td>${ r.reportUno }</td>
+                                            <c:choose>
+                                            	<c:when test="${ r.count >= 3 }">
+                                            		<td><p class="text-danger" style="font-weight: 700; background-color: yellow;">${ r.count }</p></td>
+                                            	</c:when>
+                                            	<c:otherwise>
+                                            		<td>${ r.count }</td>
+                                            	</c:otherwise>
+                                            </c:choose>
+                                            
+                                            <td>${ r.refBno }</td>
                                             <td>
-                                            	<button type="button" onclick="">신고된 게시물로 이동</button>
+	                                            <button onclick="location.href='mlist.me'">회원 관리 페이지로 이동</button>
+	                                            <button onclick="location.href='rlist.me'">신고 관리 페이지로 이동</button>
                                             </td>
-										
                                         </tr>
-                                       </c:forEach>
+                                     </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -260,7 +277,6 @@
                 </footer>
             </div>
         </div>
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="resources/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

@@ -22,24 +22,30 @@ public interface AdminService {
 	
 //-----------------------------------------------------------------
 	
-	// 2_1. 게시글 관리 조회 
+	// 2_1. 사진 게시글 관리 조회 
 	int selectBoardCount();
 	ArrayList<Board> selectBoard(PageInfo pi);
 	
-	// 2_2. 게시글 삭제
+	// 2_2. 사진 게시글 삭제
 	int deleBoard(String boardTitle);
 	
-	// 2_3. 장비추천 관리 조회
+	// 2_3_1. 장비추천 관리 조회
 	ArrayList<Board> selectBoard2();
 	
-	// 2_4. 모임게시판 관리 조회
+	// 2_3_2. 장비 게시글 삭제
+	int edeleBoard(String boardTitle);
+	
+	// 2_4_1. 모임게시판 관리 조회
 	ArrayList<Sgroup> selectBoard3();
+	
+	// 2_4_2. 모임 게시글 삭제
+	int gdeleBoard(String title);
 	
 	// 2_5. 배경화면게시판 관리 조회
 	ArrayList<BackGround> selectBoard4();
 	
-	// 2_6. 관리자 메인페이지 
-	ArrayList<Report> ajaxReportMList();
+	// 2_6. 관리자 메인페이지에 신고 회원 리스트
+	ArrayList<Report> selectReportMList();
 	
 
 //-----------------------------------------------------------------

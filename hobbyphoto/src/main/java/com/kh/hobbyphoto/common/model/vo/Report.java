@@ -20,4 +20,5 @@ public class Report {
 	private String reportUno;
 	private String reportedUno;
 	private String boardType;
+	private int count;
 }

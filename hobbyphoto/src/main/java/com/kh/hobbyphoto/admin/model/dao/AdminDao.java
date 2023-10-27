@@ -52,9 +52,19 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectBoard2");
 	}
 	
+	// 게시글 삭제 처리-사진게시판
+	public int edeleBoard(SqlSessionTemplate sqlSession, String boardTitle) {
+		return sqlSession.update("adminMapper.edeleBoard", boardTitle);
+	}
+	
 	// 게시글 관리 조회-모임게시판
 	public ArrayList<Sgroup> selectBoard3(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("adminMapper.selectBoard3");
+	}
+	
+	// 게시글 삭제 처리-모임게시판
+	public int gdeleBoard(SqlSessionTemplate sqlSession, String title) {
+		return sqlSession.update("adminMapper.gdeleBoard", title);
 	}
 	
 	// 게시글 관리 조회-배경게시판
@@ -72,9 +82,9 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.processed", rpNo);
 	}
 	
-	// 관리자 페이지 메인에 산고 회원 리스트
-	public ArrayList<Report> ajaxReportMList(SqlSessionTemplate sqlSession){
-		return (ArrayList)sqlSession.selectList("adminMapper.ajaxReportMList");
+	// 관리자 페이지 메인에 신고 회원 리스트
+	public ArrayList<Report> selectReportMList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("adminMapper.selectReportMList");
 	}
 	
 }

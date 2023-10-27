@@ -8,7 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,20 +31,19 @@ public class AdminController {
 	@Autowired
 	private AdminServiceImpl aService;
 	
-	// 관리자페이지 메인화면
-	@RequestMapping("alist.da")
-	public String adminIndex() {
+	// 관리자페이지, 누적신고횟수 많은 회원
+	@RequestMapping(value = {"alist.da", "rmList.bo"}, method = RequestMethod.GET)
+	public ModelAndView selectReportMList(ModelAndView mv, Model model) {
 		
-		return "admin/adminIndex";
-	}
-	
-	// 관리자페이지 신고회원 리스트
-	@ResponseBody
-	@RequestMapping(value="rmList.bo", produces="application/json; charset=utf-8")
-	public String ajaxReportMList() {
-		ArrayList<Report> list = aService.ajaxReportMList();
-		//System.out.println(new Gson().toJson(list));
-		return new Gson().toJson(list);
+        int number = 3;
+        
+        model.addAttribute("number", number);
+		
+		ArrayList<Report> list = aService.selectReportMList();
+		
+		mv.addObject("list",list).setViewName("admin/adminIndex");
+
+		return mv;
 	}
 	
 	// 회원 목록 조회	
@@ -101,6 +102,8 @@ public class AdminController {
 		return mv;
 	}
 	
+	
+	
 	// 사진 게시물 삭제 서비스
 	@RequestMapping("pdelete.bo")
 	public String deleBoard(String boardTitle, HttpSession session, Model model) { 
@@ -128,6 +131,22 @@ public class AdminController {
 		return mv;
 	}
 	
+	// 장비추천 게시물 삭제 서비스
+	@RequestMapping("edelete.bo")
+	public String edeleBoard(String boardTitle, HttpSession session, Model model) { 
+		
+		int result = aService.edeleBoard(boardTitle);
+		
+		if(result > 0) { // 삭제 성공	
+			session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
+			return "redirect:elist.bo";
+		}else { // 삭제 실패
+			model.addAttribute("errorMsg", "사진 게시글 삭제 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
 	// 게시물관리-모임게시판 리스트로 이동
 	@RequestMapping("glist.bo")
 	public ModelAndView selectBoard3(ModelAndView mv) {
@@ -137,6 +156,22 @@ public class AdminController {
 		mv.addObject("list3",list3).setViewName("admin/postsManage");
 		
 		return mv;
+	}
+	
+	// 모임 게시물 삭제 서비스
+	@RequestMapping("gdelete.bo")
+	public String gdeleBoard(String title, HttpSession session, Model model) { 
+		
+		int result = aService.gdeleBoard(title);
+		
+		if(result > 0) { // 삭제 성공	
+			session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
+			return "redirect:glist.bo";
+		}else { // 삭제 실패
+			model.addAttribute("errorMsg", "사진 게시글 삭제 실패");
+			return "common/errorPage";
+		}
+		
 	}
 	
 	// 게시물관리-배경화면게시판 리스트로 이동
@@ -150,6 +185,21 @@ public class AdminController {
 		return mv;
 	}
 	
+	// 배경화면게시물 삭제 서비스
+	@RequestMapping("bkdelete.bo")
+	public String bkdeleBoard(String title, HttpSession session, Model model) { 
+		
+		int result = aService.bkdeleBoard(title);
+		
+		if(result > 0) { // 삭제 성공	
+			session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
+			return "redirect:backlist.bo";
+		}else { // 삭제 실패
+			model.addAttribute("errorMsg", "사진 게시글 삭제 실패");
+			return "common/errorPage";
+		}
+		
+	}
 	
 	// 신고 관리 페이지로 연결 (자동 페이징)
 	@RequestMapping("rlist.me")
@@ -168,10 +218,10 @@ public class AdminController {
 		
 		int result = aService.processed(rpNo);
 		
-		if(result > 0) { // 삭제 성공	
+		if(result > 0) { // 처리 성공	
 			session.setAttribute("alertMsg", "신고가 성공적으로 처리되었습니다.");
 			return "redirect:rlist.me";
-		}else { 		 // 삭제 실패
+		}else { 		 // 처리 실패
 			model.addAttribute("errorMsg", "신고 처리 실패");
 			return "common/errorPage";
 		}
