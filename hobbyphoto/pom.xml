@@ -22,15 +22,7 @@
 			<id>Datanucleus</id>
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
-		
-		<repository>
-		    <id>AsposeJavaAPI</id>
-		    <name>Aspose Java API</name>
-		    <url>https://repository.aspose.com/repo/</url>
-		</repository>
 	</repositories>
-	
-	
 	
 	<!-- 라이브러리 -->
 	<dependencies>
@@ -235,21 +227,9 @@
 		    <artifactId>spring-boot-starter-mail</artifactId>
 		    <version>2.7.2</version>
 		</dependency>
-		
-		<!-- 테스트 -->
-		<dependency>
-		    <groupId>commons-codec</groupId>
-		    <artifactId>commons-codec</artifactId>
-		    <version>1.9</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.aspose</groupId>
-		    <artifactId>aspose-pdf</artifactId>
-		    <version>20.7</version>
-		</dependency>
-				
+			
 	</dependencies>
+	
 	
     <build>
         <plugins>

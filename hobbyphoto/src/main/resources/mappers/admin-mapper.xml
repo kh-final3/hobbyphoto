@@ -69,13 +69,25 @@
 		<result column="board_type" property="boardType"></result>
 	</resultMap>
 	
-		<resultMap type="BackGround" id="BackResult">
+	<resultMap type="BackGround" id="BackResult">
 		<result column="back_no" property="backNo"></result>
 		<result column="nickname" property="userNo"></result>
 		<result column="img" property="img"></result>
 		<result column="create_date" property="createDate"></result>
 		<result column="count" property="count"></result>
 		<result column="download" property="downLoad"></result>
+	</resultMap>
+	
+	<resultMap type="Product" id="shopResult">
+		<result column="p_no" property="pNo"/>
+		<result column="p_name" property="pName"/>
+		<result column="category_no" property="categoryNo"/>
+		<result column="brand_no" property="brandNo"/>
+		<result column="price" property="price"/>
+		<result column="amount" property="amount"/>
+		<result column="thumbnail" property="thumbnail"/>
+		<result column="p_dimg" property="pDimg"/>
+		<result column="p_simg" property="pSimg"/>
 	</resultMap>
 	
   	<!-- 관리자페이지 회원 조회 -->
@@ -283,6 +295,8 @@
   	   where status='Y'
   	   order
   	   		by p_no desc
+  </select>
+  
   <!-- 관리자페이지 메인에 신고 회원리스트 -->
   <select id="selectReportMList" resultMap="ReportResult">
 	SELECT

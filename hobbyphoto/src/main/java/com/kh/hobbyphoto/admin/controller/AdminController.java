@@ -244,8 +244,7 @@ public class AdminController {
 	public String main() {
 		return "main";
 	}
-    
-	
+
 
 	@RequestMapping("proenro.from")
 	public String insertProFrom() {

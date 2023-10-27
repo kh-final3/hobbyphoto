@@ -7,7 +7,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.binary.Base64;
+//import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -575,7 +575,7 @@ public class BoardController {
 		return "test/NewFile";
 	}
 	
-	
+	/*
 	@ResponseBody
 	@RequestMapping("test.tt")
 	private String saveImage(@RequestParam("pngData") String dataURL, HttpSession session) {
@@ -609,7 +609,7 @@ public class BoardController {
 	        return "Error saving the image.";
 	    }
 	}
-
+*/
 	
 
 	

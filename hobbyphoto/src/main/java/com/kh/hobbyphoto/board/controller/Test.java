@@ -1,10 +1,10 @@
 package com.kh.hobbyphoto.board.controller;
 
 
-import org.apache.commons.codec.binary.Base64;
+//import org.apache.commons.codec.binary.Base64;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
+/*
 @RestController
 @RequestMapping("test")
 public class Test {
@@ -25,3 +25,4 @@ public class Test {
         return bytes;
     }
 }
+*/
