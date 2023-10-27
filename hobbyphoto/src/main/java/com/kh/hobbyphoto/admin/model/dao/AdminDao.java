@@ -1,13 +1,11 @@
 package com.kh.hobbyphoto.admin.model.dao;
 import java.util.ArrayList;
-import java.util.ArrayList;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
-import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.model.vo.Report;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
@@ -86,6 +84,13 @@ public class AdminDao {
 	public ArrayList<Report> selectReportMList(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("adminMapper.selectReportMList");
 	}
+	
+	//상품 등록
+	public int insertProduct(SqlSessionTemplate sqlSession,Product p) {
+		return sqlSession.insert("adminMapper.insertProduct", p);
+
+	}
+	
 	//상품 개수
 	public int selectAdminProListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("adminMapper.selectAdminProListCount");
@@ -99,5 +104,7 @@ public class AdminDao {
 		
 		return (ArrayList)sqlSession.selectList("adminMapper.selecAdminProtList", null, rowBounds);
 	}
+	
+	
 	
 }

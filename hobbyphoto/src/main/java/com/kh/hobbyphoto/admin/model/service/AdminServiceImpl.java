@@ -6,18 +6,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.springframework.web.bind.annotation.GetMapping;
-
 import com.kh.hobbyphoto.admin.model.dao.AdminDao;
 import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
-import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.model.vo.Report;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.vo.Product;
-import com.kh.hobbyphoto.upfile.model.vo.P_Attachment;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -95,10 +91,10 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	// 게시물 삭제서비스-배경화면게시판
-	@Override
-	public int bkdeleBoard(String title) {
-		return aDao.gdeleBoard(sqlSession, title);		
-	}
+//	@Override
+//	public int bkdeleBoard(String title) {
+//		return aDao.gdeleBoard(sqlSession, title);		
+//	}
 	
 	// 신고 게시물 조회
 	@Override
@@ -124,7 +120,7 @@ public class AdminServiceImpl implements AdminService{
 		return aDao.selectAdminProListCount(sqlSession);
   }
 
-		//상품 등록(지영)
+	//상품 등록(지영)
 	@Override
 	public int insertProduct(Product p) {
 		return aDao.insertProduct(sqlSession, p);

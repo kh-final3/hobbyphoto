@@ -1,8 +1,5 @@
 package com.kh.hobbyphoto.group.model.service;
 
-import java.util.ArrayList;
-
-import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 
 public interface GroupService {

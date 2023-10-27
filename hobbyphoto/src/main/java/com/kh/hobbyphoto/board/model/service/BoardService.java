@@ -5,7 +5,6 @@ import java.util.*;
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Block;
-import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 public interface BoardService {

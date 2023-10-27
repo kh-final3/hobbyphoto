@@ -1,28 +1,20 @@
 package com.kh.hobbyphoto.board.controller;
 
-import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.*;
-import java.nio.*;
 import java.nio.file.*;
 import java.text.*;
 import java.util.*;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.aspose.pdf.internal.imaging.internal.bouncycastle.util.encoders.Base64Encoder;
-import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.*;
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.*;

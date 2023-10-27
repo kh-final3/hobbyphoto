@@ -206,7 +206,7 @@
           src="https://mblogthumb-phinf.pstatic.net/MjAxOTAzMDZfMTMy/MDAxNTUxODE0NTI0MDE2.aHZ-ft3YNSC3XGhzrGEKFdU4o_lJ8qBRC-F4aftjplAg.gS9c4UEnLDY_kXveY6xVoM1GqUUqZSQM8BRFKCHl7LYg.JPEG.mong728/%EC%B4%88%EA%B3%A0%ED%99%94%EC%A7%88_%EC%BB%B4%ED%93%A8%ED%84%B0_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_(3).jpg?type=w800"
           alt="Third slide">
       </div>
-    
+    </div>
     <!-- / 슬라이드 쇼 끝 -->
 
     <!-- 왼쪽 오른쪽 화살표 버튼 -->

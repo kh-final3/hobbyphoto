@@ -2,8 +2,6 @@ package com.kh.hobbyphoto.board.model.service;
 
 import java.util.*;
 
-import javax.annotation.processing.SupportedSourceVersion;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +10,6 @@ import com.kh.hobbyphoto.board.model.dao.BoardDao;
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Block;
-import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Service

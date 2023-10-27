@@ -1,15 +1,12 @@
 package com.kh.hobbyphoto.admin.model.service;
 import java.util.ArrayList;
 import com.kh.hobbyphoto.shop.model.vo.Product;
-import com.kh.hobbyphoto.upfile.model.vo.P_Attachment;
 import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
-import com.kh.hobbyphoto.board.model.vo.Reply;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.model.vo.Report;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
-import com.kh.hobbyphoto.shop.model.vo.Product;
 
 public interface AdminService {
 	

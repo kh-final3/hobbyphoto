@@ -8,15 +8,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.kh.hobbyphoto.admin.model.service.AdminServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
@@ -92,25 +89,6 @@ public class AdminController {
 		
 		return mv;
 	}
-	
-
-	// 회원 삭제 서비스
-	   @RequestMapping("mdelete.me")
-	   public String deleMember(String userId, HttpSession session, Model model) { 
-	      
-	      int result = aService.deleMember(userId);
-	      
-	      if(result > 0) { // 삭제 성공   
-	         session.setAttribute("alertMsg", "성공적으로 회원정보가 삭제되었습니다.");
-	         return "redirect:mlist.me";
-	      }else { // 삭제 실패
-	         model.addAttribute("errorMsg", "회원 정보 삭제 실패");
-	         return "common/errorPage";
-	      }
-	      
-	   }
-
-	
 	
 	// 게시글 관리 페이지로 연결
 	@RequestMapping("blist.bo")
@@ -218,6 +196,7 @@ public class AdminController {
 	}
 	
 	// 배경화면게시물 삭제 서비스
+	/*
 	@RequestMapping("bkdelete.bo")
 	public String bkdeleBoard(String title, HttpSession session, Model model) { 
 		
@@ -232,6 +211,7 @@ public class AdminController {
 		}
 		
 	}
+	*/
 	
 	// 신고 관리 페이지로 연결 (자동 페이징)
 	@RequestMapping("rlist.me")
@@ -347,111 +327,23 @@ public class AdminController {
 			
 			return changeName;
 		}
-		
-		  // 게시물관리-사진게시판 리스트로 이동
-		   @RequestMapping("plist.bo")
-		   public ModelAndView selectBoard(ModelAndView mv) {
-		      
-		      ArrayList<Board> list = aService.selectBoard();
-		      
-		      mv.addObject("list",list).setViewName("admin/postsManage");
-		      
-		      return mv;
-		   }
 
-		// 사진 게시물 삭제 서비스
-		      @RequestMapping("pdelete.bo")
-		      public String deleBoard(String boardTitle, HttpSession session, Model model) { 
-		         
-		         int result = aService.deleBoard(boardTitle);
-		         
-		         if(result > 0) { // 삭제 성공   
-		            session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
-		            return "redirect:plist.bo";
-		         }else { // 삭제 실패
-		            model.addAttribute("errorMsg", "사진 게시글 삭제 실패");
-		            return "common/errorPage";
-		         }
-		         
-		      }
-		   
-		   // 게시물관리-장비게시판 리스트로 이동
-		   @RequestMapping("elist.bo")
-		   public ModelAndView selectBoard2(ModelAndView mv) {
-		      
-		      ArrayList<Board> list2 = aService.selectBoard2();
-		      
-		      mv.addObject("list2",list2).setViewName("admin/postsManage");
-		      
-		      return mv;
-		   }
-		   
-		   // 게시물관리-모임게시판 리스트로 이동
-		   @RequestMapping("glist.bo")
-		   public ModelAndView selectBoard3(ModelAndView mv) {
-		      
-		      ArrayList<Sgroup> list3 = aService.selectBoard3();
-		      
-		      mv.addObject("list3",list3).setViewName("admin/postsManage");
-		      
-		      return mv;
-		   }
-		   
-		   // 게시물관리-배경화면게시판 리스트로 이동
-		   @RequestMapping("backlist.bo")
-		   public ModelAndView selectBoard4(ModelAndView mv) {
-		      
-		      ArrayList<BackGround> list4 = aService.selectBoard4();
-		      
-		      mv.addObject("list4",list4).setViewName("admin/postsManage");
-		      
-		      return mv;
-		   }
-		   
-		   
-		   // 신고회원 관리 페이지로 연결
-		   @RequestMapping("rlist.me")
-		   public ModelAndView selectReport(ModelAndView mv) {
-		      
-		      ArrayList<Report> list = aService.selectReport();
-		      
-		      mv.addObject("list",list).setViewName("admin/reportManage");
-		      
-		      return mv;
-		   }
-
-		// 관리자페이지 차트
-		   @RequestMapping("chart.da")
-		   public String adminCharts() {
-		      
-		      return "admin/adminCharts";
-		   }
-		   
-		   // 관리자페이지 관리자 통계
-		   @RequestMapping("table.da")
-		   public String adminTables() {
-		      
-		      return "admin/adminTables";
-		   }   
-
-		
-	}
-	// 관리자페이지 차트
-	@RequestMapping("chart.da")
-	public String adminCharts() {
-		
-		return "admin/adminCharts";
-	}
-	
-	// 관리자페이지 관리자 통계
-	@RequestMapping("table.da")
-	public String adminTables() {
-		
-		return "admin/adminTables";
-	}	
-		
-		
-	}
+			// 관리자페이지 차트
+			@RequestMapping("chart.da")
+			public String adminCharts() {
+				
+				return "admin/adminCharts";
+			}
+			
+			// 관리자페이지 관리자 통계
+			@RequestMapping("table.da")
+			public String adminTables() {
+				
+				return "admin/adminTables";
+			}	
+				
+				
+			}
 
 	
 

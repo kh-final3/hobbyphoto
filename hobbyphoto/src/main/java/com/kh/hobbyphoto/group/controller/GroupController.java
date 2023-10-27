@@ -17,13 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
-import com.kh.hobbyphoto.group.model.service.GroupService;
 import com.kh.hobbyphoto.group.model.service.GroupServiceImpl;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
-import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Controller
 public class GroupController {

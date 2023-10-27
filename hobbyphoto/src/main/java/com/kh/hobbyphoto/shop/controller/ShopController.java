@@ -1,20 +1,15 @@
 package com.kh.hobbyphoto.shop.controller;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.service.ShopServiceImpl;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
