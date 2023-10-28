@@ -46,4 +46,16 @@ public interface AdminService {
 	//2. 상품 리스트 페이지 관리(지영)
 	int selectAdminProListCount();
 	ArrayList<Product> selecAdminProtList(PageInfo pi);
+	
+	//3.상품 삭제(지영)
+	int adminProdelete(int pNo);
+	
+	//4.상품 상세보기(지영)
+	Product selectProductdetail(int pno);
+	
+	//5.상품 수정 폼열기
+	Product adminProductupdateForm(int pNo);
+	
+	//6.상품 수정(지영)
+	int adminProductupdate(Product p);
 }

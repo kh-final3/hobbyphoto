@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.service.ShopServiceImpl;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
+import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
@@ -174,7 +175,7 @@ public class ShopController {
 		//System.out.println("리턴값 확이중 + " + buylist.get(i));
 		//}
 		model.addAttribute("buylist", buylist);
-		
+		System.out.println(buylist + "장바구니에서 구매");
 		return "shop/shopCartBuy";
 	}
 	
@@ -192,7 +193,7 @@ public class ShopController {
 		
 		if(amount > pamount) {//재고가 더 적을 경우
 			
-			session.setAttribute("alertMsg", "재고량이 주문 수량 보다 많습니다.");
+			session.setAttribute("alertMsg", "재고량이 주문 수량 보다 적습니다.");
 			mv.setViewName("redirect:detail.pro?pno="+p.getPNo());
 			
 		}else {//재고량이 더 많을 경우
@@ -201,6 +202,7 @@ public class ShopController {
 			Product list = sService.selectBuyProduct(pno);
 			
 			mv.addObject("list", list).setViewName("shop/shopCartBuy");
+			System.out.println(list + "상세보기에서 구매");
 		}
 		return mv;
 		
@@ -233,9 +235,13 @@ public class ShopController {
 //	    }
 		Map<String, Object> response = new HashMap<>();
 		
+		System.out.println(brand != null);
+		System.out.println(!brand.isEmpty());
+		
 		if (brand != null && !brand.isEmpty()) {
 	        int brandNo = Integer.parseInt(brand);
 
+	        
 	        if(category != null && !category.isEmpty()) {
 	        	int categoryNo = Integer.parseInt(category);
 	        	//브랜드 + 카테고리 선택
@@ -253,5 +259,60 @@ public class ShopController {
 		
 		return response;
 	      
+	}	
+	
+	@RequestMapping("pro.allbuy")
+	public String insertProductAllBuy(Orders ords, String[] pNo, String[] pType,String[] amount, Model model, HttpSession session, String userNo) {
+		System.out.println(ords);
+		
+		int uno = Integer.parseInt(userNo);
+		
+		
+			ArrayList<D_order> buylist = new ArrayList<D_order>();
+			
+			for(int i = 0; i<pNo.length;i++) {
+				D_order c = new D_order();
+				c.setPNo(Integer.parseInt(pNo[i]));
+				c.setUserNo(userNo);
+				c.setAmount(Integer.parseInt(amount[i]));
+				c.setPType(Integer.parseInt(pType[i]));
+				
+				buylist.add(c);
+			}
+			System.out.println("buylist2 확인"+buylist );
+			
+			int result = sService.insertProductAllBuy(ords, buylist);
+			
+			if(result>0) {//주문관련 전부 db찍으면 결제 api창
+				
+				Orders ord = sService.selectOrderNo(uno);
+				
+				model.addAttribute("ord", ord);
+				
+				System.out.println( buylist+ "결제로 넘어가는 값");
+				System.out.println(ord +"jsp로 넘길 값");
+				return "payment/success";
+			}else {
+				model.addAttribute("errorMsg", "주문하기 실패");
+				return "common/errorPage";
+			}
+			
+		}
+			
+	@RequestMapping("pro.onebuy")
+	public ModelAndView insertProductOneBuy(Orders ords, ModelAndView mv, String userNo) {
+		int uno = Integer.parseInt(userNo);
+		
+		int result = sService.insertOneOrder(ords);
+		
+		if(result >0) {//주문 테이블(주문, 주문상세)등록 성공
+			//api시작 -> 
+			
+			Orders o = sService.selectOrderNo(uno);
+			
+			mv.addObject("o", o).setViewName("payment/success");
+			System.out.println(mv);
+		}
+		return mv;
 	}	
 }

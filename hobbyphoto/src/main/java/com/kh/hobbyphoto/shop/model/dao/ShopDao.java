@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hobbyphoto.shop.model.vo.Cart;
+import com.kh.hobbyphoto.shop.model.vo.D_order;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Repository
@@ -56,4 +58,23 @@ public class ShopDao {
 	public ArrayList<Product> selectAllSearchProduct(SqlSessionTemplate sqlSession,Product p){
 		return (ArrayList)sqlSession.selectList("shopMapper.selectAllSearchProduct", p);
 	}
+	public int insertOneOrder(SqlSessionTemplate sqlSession,Orders ords) {
+		return sqlSession.insert("shopMapper.insertOneOrder", ords);
+	}
+	public int insertOneDorder(SqlSessionTemplate sqlSession,Orders ords) {
+		return sqlSession.insert("shopMapper.insertOneDorder", ords);
+	}
+	public int insertProductAllBuy(SqlSessionTemplate sqlSession,Orders ords) {
+		return sqlSession.insert("shopMapper.insertOneOrder", ords);
+	}
+	public int insertDOrderCart(SqlSessionTemplate sqlSession, D_order oCart) {
+		return sqlSession.insert("shopMapper.insertOneDorder", oCart);
+	}
+	
+	public Orders selectOrderNo(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("shopMapper.selectOrderNo", userNo);
+	}
+	
+	
+
 }

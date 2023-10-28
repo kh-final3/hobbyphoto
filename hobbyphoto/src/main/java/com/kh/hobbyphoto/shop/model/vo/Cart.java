@@ -23,6 +23,6 @@ public class Cart {
 	private String brandName;
 	private String thumbnail;
 	private String price;
-	
+	private String pType;
 	
 }

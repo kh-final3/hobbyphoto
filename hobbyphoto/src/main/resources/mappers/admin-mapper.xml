@@ -12,6 +12,8 @@
 		<result column="thumbnail" property="thumbnail"/>
 		<result column="p_dimg" property="pDimg"/>
 		<result column="p_simg" property="pSimg"/>
+		<result column="p_type" property="pType"/>
+		<result column="status" property="status"/>
 	</resultMap>
 	
 	<resultMap type="Member" id="resultMember">
@@ -81,7 +83,7 @@
       <result column="board_type" property="boardType"></result>
    </resultMap>
    
-      <resultMap type="BackGround" id="BackResult">
+   <resultMap type="BackGround" id="BackResult">
       <result column="back_no" property="backNo"></result>
       <result column="nickname" property="userNo"></result>
       <result column="img" property="img"></result>
@@ -211,6 +213,7 @@
   		,	thumbnail
   		,	p_dimg
   		,	p_simg
+  		,	p_type
   		)
   		values
   		(
@@ -223,6 +226,7 @@
   		,	#{thumbnail}
   		,	#{pDimg}
   		,	#{pSimg}
+  		,	1
   		)
   </insert>
   
@@ -240,10 +244,69 @@
   			,	price
   			,	amount
   			,	thumbnail
+  			,	p_dimg
+  			,	p_simg
   		from product
   	   where status='Y'
   	   order
   	   		by p_no desc
   </select>
+  
+  <update id="adminProdelete">
+  	update
+  			product
+  		set status = 'N'
+  		where p_no = #{pNo}
+  </update>
+  
+  <select id="selectProductdetail" resultMap="shopResult">
+  		select
+  				p_no
+  			,	p_name
+  			,	category_no
+  			,	brand_no
+  			,	price
+  			,	amount
+  			,	status
+  			,	thumbnail
+  			,	p_dimg
+  			,	p_simg
+  			,	p_type
+  		from product
+  	   where status='Y'
+  	     and p_no = #{pNo}	
+  </select>
+  
+  <select id="adminProductupdateForm" resultMap="shopResult">
+  		select
+  				p_no
+  			,	p_name
+  			,	category_no
+  			,	brand_no
+  			,	price
+  			,	amount
+  			,	status
+  			,	thumbnail
+  			,	p_dimg
+  			,	p_simg
+  			,	p_type
+  		from product
+  	   where p_no = #{pNo}	
+  </select>
+  
+  <update id="adminProductupdate">
+  	update
+  			product
+  	   set p_name = #{pName},
+  	  category_no = #{categoryNo},
+  	     brand_no = #{brandNo},
+  	        price = #{price},
+  	       amount = #{amount},
+  	    thumbnail = #{thumbnail},
+  	       p_dimg = #{pDimg},
+  	       p_simg = #{pSimg}
+  	   where 
+  	   		p_no = #{pNo}
+  </update>
   
 </mapper>

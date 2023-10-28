@@ -7,6 +7,14 @@
  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>결제페이지(상품 종류 한개)</title>
+    
+    <!-- PortOne SDK -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <!-- 아래 제이쿼리는 1.0이상이면 원하는 버전을 사용하셔도 무방합니다. -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    
+    
+    
     <style>
         /*div {border: 1px solid red;}*/
         .payment_outer {
@@ -26,7 +34,7 @@
         /* 여기 일단 늘리긴했는데.... */
         .information {
             width: 880px;
-            height: 500px;
+            /* height: 500px; */
         }
         .information p {
             border-bottom: 2px solid rgb(95, 95, 95);
@@ -82,6 +90,7 @@
             width: 150px;
             height: 40px;
         }
+        
         #sum2 {
             /* margin-top: 20px; */
             width: 300px;
@@ -101,9 +110,14 @@
     </style>
 </head>
 <body>
+
+<!-- buylist => 장바구니, list => 단품 -->
+<!-- buylist => pNo, pName, categoryNo, brandNo, price, amount-->
+<!-- list =>  pNo,userNo,pName, categoryNo, brandNo, price, amount-->
 <jsp:include page="../common/shopHeader.jsp"/>
 
 <form action="">
+<input type="hidden" name="userNo" value="${ loginMember.userNo }">
 <div class="payment_outer" align="center">
         <div class="order_pay">
             <!-- <img src="img/pay.png" alt="카메라 사진"> -->
@@ -122,13 +136,15 @@
             <c:choose>
             
             	<c:when test="${ empty buylist }">
+            	<input type="hidden" name="pType" value="${ list.PType }">
+            	<input type="hidden" name="pNo" value="${ list.PNo }">
 		            <tbody> 
 		                <tr>
 		                    <td style="text-align: center;"><img src="${ list.thumbnail }" alt=""></td>
-		                    <td style="text-align: center;">${ list.PName }</td>
-		                    <td style="text-align: center;">${ list.price }</td>
-		                    <td style="text-align: center;">${ amount }</td>
-		                    <td style="text-align: center;">${ list.price * amount }</td>
+		                    <td style="text-align: center;"><input type="text" name="pName" id="pName" value="${ list.PName }" readonly></td>
+		                    <td style="text-align: center;"><input type="text" name="price" id="price" value="${ list.price }" readonly></td>
+		                    <td style="text-align: center;"><input type="text" name="amount" id="amount" value="${ amount }" readonly></td>
+		                    <td style="text-align: center;"><input type="text" name="" id="" value="${ list.price * amount }" readonly></td>
 		                </tr>
 		            </tbody>   
             	</c:when>
@@ -140,16 +156,17 @@
             		<c:forEach var="c" items="${ buylist }">
          				<tbody> 
 			                <tr>
+			            		<input type="hidden" name="pType" value="${ c.PType }">
+			            		<input type="hidden" name="pNo" value="${ c.PNo }">
 			                    <td style="text-align: center;"><img src="${ c.thumbnail }" alt=""></td>
-			                    <td style="text-align: center;">${ c.PName }</td>
-			                    <td style="text-align: center;">${ c.price }</td>
-			                    <td style="text-align: center;">${ c.amount }</td>
-			                    <td style="text-align: center;">${ c.price * c.amount }</td>
+			                    <td style="text-align: center;"><input type="text" name="pNAme" id="pNAme" value="${ c.PName }" readonly></td>
+			                    <td style="text-align: center;"><input type="text" name="price" id="" value="${ c.price }" readonly></td>
+			                    <td style="text-align: center;"><input type="text" name="amount" id="amount" value="${ c.amount }" readonly></td>
+			                    <td style="text-align: center;"><input type="text" name="" id="price" value="${ c.price * c.amount }" readonly></td>
 			                </tr>
 			            </tbody>   
             		
             			<c:set var="totalPrice" value="${totalPrice + (c.price * c.amount)}"/>
-            			
             		</c:forEach>
             	</c:otherwise>
 
@@ -165,23 +182,24 @@
                 <table class="buyer_info">
                     <tr>
                         <td style="width: 120px;">이름</td>
-                        <td><input type="text" placeholder="이름을 입력하세요" value="${ loginMember.userName }"></td>
+                        <td><input type="text" placeholder="이름을 입력하세요" value="${ loginMember.userName }" name="userName" readonly></td>
                     </tr>
                     <tr>
                         <td>이메일</td>
-                        <td><input type="text" value="${loginMember.email }"></td>
+                        <td><input type="text" value="${loginMember.email }" name="" readonly></td>
                     </tr>
                     <tr>
                         <td>휴대폰 번호</td>
-                        <td><input type="text" value="${ loginMember.phone }"></td>
+                        <td><input type="text" value="${ loginMember.phone }" readonly></td>
                     </tr>
                 </table>
                 <br><br>
-                <p align="left">배송지 정보</p>
+                
+                <p align="left">받는 사람 정보</p>
                 <table class="buyer_info" style="line-height: 30px;">
                     <tr>
                         <td style="width: 120px;">수령인 이름</td>
-                        <td><input type="text" placeholder="이름을 입력하세요"></td>
+                        <td><input type="text" placeholder="이름을 입력하세요" name="name"></td>
                         <td></td>
                     </tr>
                     <!-- <tr>
@@ -189,18 +207,27 @@
                     </tr> -->
                     <tr>
                         <td>휴대폰 번호</td>
-                        <td><input type="text"></td>
+                        <td><input type="text" id="phone" name="phone"></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>주소</td>
-                        <td><input type="text" id="sample6_address" placeholder="주소"></td>
-                        <td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
+                        <td><input type="text" id="sample6_address" placeholder="주소" name="address"></td>
+                        <td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ></td>
                     </tr>
                     <tr>
                     	<td></td>
-                    	<td><input type="text" id="sample6_detailAddress" placeholder="상세주소"></td>
+                    	<td><input type="text" id="sample6_detailAddress" placeholder="상세주소" name="postcode"></td>
                     	<td></td>                    	
+                    </tr>
+                    <tr>
+                        <td>주문메시지</td>
+                    	<td colspan="2"><textarea name="oMsg" id="" style="resize: none; width: 200px; height: 50px;" ></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <td>배송메시지</td>
+                    	<td colspan="2"><textarea name="dMsg" id="" style="resize: none; width: 200px; height: 50px;" ></textarea></td>
                     </tr>
                     
                 
@@ -265,18 +292,18 @@
 		                <div id="amount">
 		                    <div id="sum">
 		                        결제예정 금액
-		                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;">${list.price * amount + (list.price * amount >= 50000 ? 0 : 3000)} 원</p>
+		                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input type="text" name="totalPrice" id="totalPrice" value="${list.price * amount + (list.price * amount >= 50000 ? 0 : 1)}" readonly> 원</p>
 		                    </div>
 		                    <hr class="hr2">
 		                    <table id="sum2" >
 		                        <tr>
 		                            <td>주문금액</td>
-		                            <td>${ list.price * amount } 원</td>
+		                            <td><input type="text" name="" id="" value="${ list.price * amount }" readonly>원</td>
 		                        </tr>
 		                        
 		                        <tr>
 		                            <td>배송비</td>
-		                            <td>${ list.price * amount  >= 50000 ? "0원" : "3000원" }</td>
+		                            <td><input type="text" name="" id="" value="${ list.price * amount  >= 50000 ? '0' : '1' }" readonly>원</td>
 		                        </tr>
 		                    </table>
 		                    <br><br>
@@ -284,7 +311,7 @@
 		                        [필수] 주문할 제품의 거래조건을 <br>
 		                        하였으며, 구매에 동의하시겠습니까? <br>
 		                        (전자상거래법 제8조 2항)<br><br>
-		                        <button class="orbtn">결제</button>
+		                        <button class="orbtn" id="onebuy" onclick="requestOnePay();">결제</button>
 		                    </div>
 		                </div>
 		               <pre>결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</pre>
@@ -297,18 +324,18 @@
 			                <div id="amount">
 			                    <div id="sum">
 			                        결제예정 금액
-			                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;">${totalPrice + (totalPrice >= 50000 ? 0 : 3000)} 원</p>
+			                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input type="text" name="totalPrice" id="totalPrice" value="${totalPrice + (totalPrice >= 50000 ? 0 : 1)}"> 원</p>
 			                    </div>
 			                    <hr class="hr2">
 			                    <table id="sum2" >
 			                        <tr>
 			                            <td>주문금액</td>
-			                            <td>${ totalPrice } 원</td>
+			                            <td><input type="text" name="" id="" value="${ totalPrice }"> 원</td>
 			                        </tr>
 			                        
 			                        <tr>
 			                            <td>배송비</td>
-			                            <td>${ totalPrice  >= 50000 ? "0원" : "3000원" }</td>
+			                            <td><input type="text" name="" id="" value="${ totalPrice  >= 50000 ? 0 : 1 }"></td>
 			                        </tr>
 			                    </table>
 			                    <br><br>
@@ -316,7 +343,7 @@
 			                        [필수] 주문할 제품의 거래조건을 <br>
 			                        하였으며, 구매에 동의하시겠습니까? <br>
 			                        (전자상거래법 제8조 2항)<br><br>
-			                        <button class="orbtn">결제</button>
+			                        <button class="orbtn" id="allbuy" onclick="requestPay()">결제</button>
 			                    </div>
 			                </div>
 			               <pre>결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</pre>
@@ -326,6 +353,65 @@
             	
             </c:choose>
             
+            <script>
+            	$("#allbuy").click(function(event){
+            		event.preventDefault();
+            		requestPay();
+            		
+            	});
+            	
+            	$("#onebuy").click(function(event){
+            		event.preventDefault();
+            		requestOnePay();
+            	})
+            	
+            	function requestOnePay() {
+			    	  IMP.init('imp25583820'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
+			    	  IMP.request_pay({
+			    	    pg: "inicis",
+			    	    pay_method: "card",
+			    	    merchant_uid : 'merchant_'+new Date().getTime(),
+			    	    name : $("#pName").val(),
+			    	    amount : $("#totalPrice").val(),
+			    	    buyer_email : '${loginMember.email}',
+			    	    buyer_name : '${loginMember.userName}',
+			    	    buyer_tel : $("#phone").val(),
+			    	    buyer_addr :$("#sample6_address").val(),
+			    	    buyer_postcode : $("#sample6_detailAddress").val()
+			    	  }, function (rsp) { // callback
+			    	      if (rsp.success) {
+			    	        console.log("성공")
+			    	        $("form").attr("action","pro.onebuy").submit();
+			    	      } else {
+			    	    	  console.log("실패")
+			    	      }
+			    	  });
+			    	}
+            	function requestPay() {
+			    	  IMP.init('imp25583820'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
+			    	  IMP.request_pay({
+			    	    pg: "inicis",
+			    	    pay_method: "card",
+			    	    merchant_uid : 'merchant_'+new Date().getTime(),
+			    	    name : $(".pd_table tbody").children().eq(0).children().eq(3).children().val(),
+			    	    amount : $("#totalPrice").val(),
+			    	    buyer_email : '${loginMember.email}',
+			    	    buyer_name : '${loginMember.userName}',
+			    	    buyer_tel : $("#phone").val(),
+			    	    buyer_addr :$("#sample6_address").val(),
+			    	    buyer_postcode : $("#sample6_detailAddress").val()
+			    	  }, function (rsp) { // callback
+			    	      if (rsp.success) {
+			    	        console.log("성공")
+			    	        $("form").attr("action","pro.allbuy").submit();
+			    	      } else {
+			    	    	  console.log("실패")
+			    	      }
+			    	  });
+			    	}
+            	
+      
+            </script>
             
             
             

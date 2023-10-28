@@ -3,6 +3,8 @@ package com.kh.hobbyphoto.shop.model.service;
 import java.util.ArrayList;
 
 import com.kh.hobbyphoto.shop.model.vo.Cart;
+import com.kh.hobbyphoto.shop.model.vo.D_order;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 public interface ShopService {
@@ -45,5 +47,17 @@ public interface ShopService {
 		
 		//12.브랜드+카테고리 선택 검색
 		ArrayList<Product> selectAllSearchProduct(Product p);
+		
+		//13.단품 결제하기(주문orders테이블 + 상세order)
+		int insertOneOrder(Orders ords);
+		
+		//14.장바구니 결제하기(주문상세테이블 주문테이블은 코드 재사용)
+		int insertProductAllBuy(Orders ords,ArrayList<D_order> buylist);
+		
+		//15. 주문번호 확인(장바구니용)
+		Orders selectOrderNo(int userNo);
+		
+		
+		
 		
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hobbyphoto.shop.model.dao.ShopDao;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
+import com.kh.hobbyphoto.shop.model.vo.D_order;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Service
@@ -104,6 +106,53 @@ public class ShopServiceImpl implements ShopService{
 	public ArrayList<Product> selectAllSearchProduct(Product p) {
 		return sDao.selectAllSearchProduct(sqlSession,p);
 	}
+
+	@Override
+	public int insertOneOrder(Orders ords) {
+		
+		int result1 = sDao.insertOneOrder(sqlSession,ords);
+		int result2 = 0;
+		
+		if(result1>0) {
+			result2 = sDao.insertOneDorder(sqlSession, ords);
+		}
+		
+		int result = result1*result2;
+		
+		return result;
+	}
+
+	@Override
+	public int insertProductAllBuy(Orders ords, ArrayList<D_order> buylist) {
+		
+		int result1 = sDao.insertProductAllBuy(sqlSession,ords);
+		int result2 =0;
+		
+		if(result1>0) {
+			
+			for(D_order oCart : buylist) {
+				result2 += sDao.insertDOrderCart(sqlSession,oCart);
+				
+			}
+		}
+		int result = result1*result2;
+		
+		return result;
+	}
+
+	@Override
+	public Orders selectOrderNo(int userNo) {
+		return sDao.selectOrderNo(sqlSession,userNo);
+	}
+
+	
+
+
+	
+
+	
+
+
 
 
 

@@ -12,6 +12,7 @@
 		<result column="thumbnail" property="thumbnail"/>
 		<result column="p_dimg" property="pDimg"/>
 		<result column="p_simg" property="pSimg"/>
+		<result column="p_type" property="pType"/>
 	</resultMap>
 
 	<resultMap type="Cart" id="cartResult">
@@ -22,6 +23,21 @@
 		<result column="brand_no" property="brandNo"/>
 		<result column="brand_name" property="brandName"/>
 		<result column="thumbnail" property="thumbnail"/>
+		<result column="p_type" property="pType"/>
+	</resultMap>
+	
+	<resultMap type="Orders" id="ordersResult">
+		<result column="order_no" property="orderNo"/>
+		<result column="user_no" property="userNo"/>
+		<result column="name" property="name"/>
+		<result column="address" property="address"/>
+		<result column="postcode" property="postcode"/>
+		<result column="phone" property="phone"/>
+		<result column="totalPrice" property="totalPrice"/>
+		<result column="o_msg" property="OMsg"/>
+		<result column="d_msg" property="DMsg"/>
+		<result column="order_date" property="orderDate"/>
+		<result column="status" property="status"/>
 	</resultMap>
 
 	 <select id="selectProductList" resultMap="shopResult">
@@ -36,6 +52,7 @@
 	 			,	thumbnail
 	 			,	p_dimg
 	 			,	p_simg
+	 			,	p_type
 	 		from product
 	 	   where status ='Y'
 	 	   order
@@ -54,6 +71,7 @@
  			,	thumbnail
  			,	p_dimg
  			,	p_simg
+ 			,	p_type
  		from product
  	   where p_no = #{pNo}
  	     and status = 'Y'
@@ -125,6 +143,7 @@
 		    ,   b.brand_no
 		    ,   b.brand_name
 		    ,	thumbnail
+		    ,	p_type
 		from cart c
 		join product p using (p_no)
 		join member using (user_no)
@@ -151,6 +170,7 @@
 	 			,	amount
 	 			,	status
 	 			,	thumbnail
+	 			,	p_type
 	 		from product
 	 	   where status ='Y'
 	 	    and p_no = #{pNo}
@@ -168,6 +188,7 @@
 	 			,	amount
 	 			,	status
 	 			,	thumbnail
+	 			,	p_type
 	 		from product
 	 	   where status ='Y'
 	 	      AND UPPER(p_name) LIKE UPPER('%' || #{keyword} || '%')
@@ -185,6 +206,7 @@
 	 			,	amount
 	 			,	status
 	 			,	thumbnail
+	 			,	p_type
 	 		from product
 	 	   where status ='Y'
 	 	     and brand_no = #{brandNo}
@@ -202,12 +224,89 @@
 	 			,	amount
 	 			,	status
 	 			,	thumbnail
+	 			,	p_type
 	 		from product
 	 	   where status ='Y'
 	 	     and brand_no = #{brandNo}
 	 	     and category_no = #{categoryNo}
 	 	   order
  	   		by p_no desc
+	</select>
+	
+	<insert id="insertOneOrder">
+		insert
+			into orders
+			(
+				order_no
+			,	user_no
+			,	name
+			,	address
+			,	postcode
+			,	phone
+			,	order_date
+			,	totalPrice
+			,	o_msg
+			,	d_msg
+			)
+			values
+			(
+				SEQ_ORDER_NO.nextval
+			,	#{userNo}
+			,	#{name}
+			,	#{address}
+			,	#{postcode}
+			,	#{phone}
+			,	sysdate
+			,	#{totalPrice}
+			,	#{oMsg}
+			,	#{dMsg}
+			)
+	</insert>
+	
+	<insert id="insertOneDorder">
+		insert
+			into d_order
+			(
+				order_no
+			,	p_no
+			,	user_no
+			,	amount
+			,	p_type
+			)
+			values
+			(
+				SEQ_ORDER_NO.currval
+			,	#{pNo}
+			,	#{userNo}
+			,	#{amount}
+			,	#{pType}
+			)
+	</insert>
+	
+	<select id="selectOrderNo" resultMap="ordersResult">
+		
+	select *	
+	from(
+		select e.*, rownum as r
+		from (	
+				select
+						order_no
+					,	user_no
+					,	name
+					,	address
+					,	postcode
+					,	phone
+					,	totalPrice
+					,	o_msg
+					,	d_msg
+					,	order_date
+					,	status
+			     from orders
+			     where user_No = #{userNo}
+			     order by order_no desc
+			   )e
+			)
+			where r = 1
 	</select>
 	
 </mapper>

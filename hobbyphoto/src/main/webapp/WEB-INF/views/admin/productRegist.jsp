@@ -128,7 +128,7 @@
             <label for="productamount">수량:</label>
             <input type="number" id="productamount" name="amount" required>
 
-            <label for="productImage">상품 이미지 URL:</label>
+            <label for="productImage">상품 이미지:</label>
             <input type="file" id="thumbnail" name="upfile" required>
 
             <label for="productDescription">상품 개요 :</label>

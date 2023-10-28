@@ -137,7 +137,7 @@
                     </div>
                
                     <div class="pb_charge">
-                       <span>${c.price * c.amount >= 50000 ? "0원" : "3000원"}</span>
+                       <span>${c.price * c.amount >= 50000 ? "0" : "3000"}</span>원
                     </div>
                 </div>
                 
@@ -231,7 +231,7 @@
                 	
                 	if($(this).find(".product_check").is(":checked")===true){
                     //총가격
-                    let price = $(this).find(".pb_price").text().replace(/,/g,'');
+                    var price = $(this).find(".pb_price").text().replace(/,/g,'');
                     totalPrice += parseInt(price);
                     //수량
                     totalCount += parseInt($(this).find(".count").val());
@@ -275,7 +275,7 @@
         	   var count = parseInt($input.val());
  
         	   $input.val(count + 1); //수량 1증가
-      
+      			
         	   //총 주문 정보 다시 계산
         	   setTotalInfo();
         	   
@@ -291,6 +291,7 @@
                 if(count > 1) { // 수량이 1 이상일 때만 감소
                     $input.val(count - 1); // 수량 1 감소
                 }
+                console.log(count)
 
                 // 총 주문 정보 다시 계산
                 setTotalInfo();

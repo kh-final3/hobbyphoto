@@ -146,9 +146,9 @@
 
                 <div id="category" align="center">
                 
-                <!-- <form id="searchul" action="shopli.search" method="post">
+                <!-- <form id="searchul" action="shopli.search" method="post">-->
                 <input type="hidden" name="brand" id="selectedbrand" value="">
-                <input type="hidden" id="selectedcategory" name="category" value=""> -->
+                <input type="hidden" id="selectedcategory" name="category" value=""> 
 
                     <div class="inner-category">
                         <ul class="category-ul" align="left">
@@ -161,7 +161,7 @@
                             
 	                            <li class="select-li">
 	                                <div class="select-wrap">
-	                                    <span class="label">브랜드</span>
+	                                    <span class="label" id="brandLabel">브랜드</span>
 	                                    <b class="select-btn" onclick="brandBtn()"><i class="ri-arrow-down-s-fill"></i></b>
 	                                </div>
 	                                <div class="select-item brand">
@@ -177,7 +177,7 @@
 	                            
 	                            <li class="select-li">
 	                                <div class="select-wrap">
-	                                    <span class="label">DSLR</span>
+	                                    <span class="label" id="categoryLabel">DSLR</span>
 	                                    <b class="select-btn" onclick="categoryBtn()"><i class="ri-arrow-down-s-fill"></i></b>
 	                                </div>
 	                                <div class="select-item category">
@@ -251,9 +251,19 @@
 		            // 브랜드 선택
 		            $(".select-item.brand ul").on("click", "li", function(){
 		                var selectedBrand = $(this).attr('value');
+		                $("#selectedbrand").val(selectedBrand); // 값을 숨겨진 input 필드에 저장
 		                console.log(selectedBrand)
+		                
+		                // 브랜드 이름으로 span 변경
+    					$("#brandLabel").text($(this).text());
+		                $(".brand").css("display", "none");
+		                
+		             	// 카테고리 초기화
+		                $("#categoryLabel").text("DSLR"); // 초기 상태로 span 변경
+		                $("#selectedcategory").val(""); // 숨겨진 input 필드 값 초기화
+		                
 		                var selectedCategory = $("#selectedcategory").val(); // 현재 선택된 카테고리 값
-		                ulselect(selectedBrand,selectedCategory);
+		                ulselect(selectedBrand,selectedCategory); //함수 실행
 		                //$("#selectedbrand").val(selectedBrand); // 값을 숨겨진 input 필드에 저장
 		                //$("#searchul").submit(); // form 제출
 		            });
@@ -261,8 +271,16 @@
 		            // 카테고리 선택
 		            $(".select-item.category ul").on("click", "li", function(){
 		                var selectedCategory = $(this).attr('value');
+		                $("#selectedcategory").val(selectedCategory); // 값을 숨겨진 input 필드에 저장
+		                
+		             	// 카테고리 이름으로 span 변경
+		                $("#categoryLabel").text($(this).text());
+		                $(".category").css("display", "none")
+		                
 		                var selectedBrand = $("#selectedbrand").val(); // 현재 선택된 브랜드 값
 		                ulselect(selectedBrand,selectedCategory);
+		                
+		                console.log(selectedBrand)
 		                console.log(selectedCategory)
 		                //$("#selectedcategory").val(selectedCategory); // 값을 숨겨진 input 필드에 저장
 		                //$("#searchul").submit(); // form 제출
@@ -271,11 +289,11 @@
 		            function ulselect(selectedBrand,selectedCategory){
 		            	$.ajax({
 		            		url:"shopli.search",
-		            		cache: false,
 		            		data:{
 		            			brand:selectedBrand,
 		            			category:selectedCategory
-		            		},success:function(data){
+		            		},
+		            		success:function(data){
 		            			console.log(data);
 		            			
 		            			let value ="";
