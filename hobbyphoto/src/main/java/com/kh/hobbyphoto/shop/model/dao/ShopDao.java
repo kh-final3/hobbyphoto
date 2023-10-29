@@ -75,6 +75,10 @@ public class ShopDao {
 		return sqlSession.selectOne("shopMapper.selectOrderNo", userNo);
 	}
 	
+	public int deleteCartBuyPro(SqlSessionTemplate sqlSession,D_order d) {
+		return sqlSession.delete("shopMapper.deleteCartBuyPro", d);
+	}
+	
 	
 
 }

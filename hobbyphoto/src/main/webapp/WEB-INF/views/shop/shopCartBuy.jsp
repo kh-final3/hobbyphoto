@@ -292,7 +292,7 @@
 		                <div id="amount">
 		                    <div id="sum">
 		                        결제예정 금액
-		                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input type="text" name="totalPrice" id="totalPrice" value="${list.price * amount + (list.price * amount >= 50000 ? 0 : 1)}" readonly> 원</p>
+		                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input type="text" name="totalPrice" id="totalPrice" value="${list.price * amount + (list.price * amount >= 50000 ? 0 : 3000)}" readonly> 원</p>
 		                    </div>
 		                    <hr class="hr2">
 		                    <table id="sum2" >
@@ -303,7 +303,7 @@
 		                        
 		                        <tr>
 		                            <td>배송비</td>
-		                            <td><input type="text" name="" id="" value="${ list.price * amount  >= 50000 ? '0' : '1' }" readonly>원</td>
+		                            <td><input type="text" name="" id="" value="${ list.price * amount  >= 50000 ? 0 : 3000 }" readonly>원</td>
 		                        </tr>
 		                    </table>
 		                    <br><br>
@@ -324,7 +324,7 @@
 			                <div id="amount">
 			                    <div id="sum">
 			                        결제예정 금액
-			                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input type="text" name="totalPrice" id="totalPrice" value="${totalPrice + (totalPrice >= 50000 ? 0 : 1)}"> 원</p>
+			                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input type="text" name="totalPrice" id="totalPrice" value="${totalPrice + (totalPrice >= 50000 ? 0 : 3000)}"> 원</p>
 			                    </div>
 			                    <hr class="hr2">
 			                    <table id="sum2" >
@@ -335,7 +335,7 @@
 			                        
 			                        <tr>
 			                            <td>배송비</td>
-			                            <td><input type="text" name="" id="" value="${ totalPrice  >= 50000 ? 0 : 1 }"></td>
+			                            <td><input type="text" name="" id="" value="${ totalPrice  >= 50000 ? 0 : 3000 }"></td>
 			                        </tr>
 			                    </table>
 			                    <br><br>
@@ -367,26 +367,32 @@
             	
             	function requestOnePay() {
 			    	  IMP.init('imp25583820'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
-			    	  IMP.request_pay({
+			    	  //IMP.request_pay(param, callback) 호출 => 결제창 호출
+			    	  IMP.request_pay({//param
 			    	    pg: "inicis",
 			    	    pay_method: "card",
 			    	    merchant_uid : 'merchant_'+new Date().getTime(),
-			    	    name : $("#pName").val(),
-			    	    amount : $("#totalPrice").val(),
+			    	    name : $("#pName").val(), //상품명
+			    	    amount : $("#totalPrice").val(),  //결제 가격
 			    	    buyer_email : '${loginMember.email}',
 			    	    buyer_name : '${loginMember.userName}',
 			    	    buyer_tel : $("#phone").val(),
 			    	    buyer_addr :$("#sample6_address").val(),
 			    	    buyer_postcode : $("#sample6_detailAddress").val()
-			    	  }, function (rsp) { // callback
-			    	      if (rsp.success) {
+			    	  }, function (rsp) { // callback => 결제 성공시 실행되는 함수 rsp에는 성공여부, 결제정보, 에러 정보등등
+			    		  	console.log(rsp);
+			    	
+			    	      if (rsp.success) {//결제 성공시 
 			    	        console.log("성공")
 			    	        $("form").attr("action","pro.onebuy").submit();
-			    	      } else {
+			    	 
+			    	      } else {//결제 실패시 
 			    	    	  console.log("실패")
 			    	      }
 			    	  });
 			    	}
+            	
+            	
             	function requestPay() {
 			    	  IMP.init('imp25583820'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
 			    	  IMP.request_pay({
@@ -401,9 +407,11 @@
 			    	    buyer_addr :$("#sample6_address").val(),
 			    	    buyer_postcode : $("#sample6_detailAddress").val()
 			    	  }, function (rsp) { // callback
+			    		  console.log(rsp);
 			    	      if (rsp.success) {
 			    	        console.log("성공")
 			    	        $("form").attr("action","pro.allbuy").submit();
+			    	        
 			    	      } else {
 			    	    	  console.log("실패")
 			    	      }

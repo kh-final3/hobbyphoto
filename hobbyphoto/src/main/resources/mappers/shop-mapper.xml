@@ -75,6 +75,8 @@
  		from product
  	   where p_no = #{pNo}
  	     and status = 'Y'
+ 	     order
+ 	   		by p_no desc
 	 </select>
 	 
 	 <select id="seletCartList" resultMap="cartResult">
@@ -84,6 +86,8 @@
 		 	,	amount
 		 	from cart
 		 where user_no = #{user_no}
+		 	order
+ 	   		by p_no desc
 	 </select>
 	 
 	 <insert id="insertCartProduct">
@@ -116,7 +120,9 @@
 		join product p using (p_no)
 		join member using (user_no)
 		join brand b on p.brand_no = b.brand_no
-		where user_no =#{userNo}	 
+		where user_no =#{userNo}	
+		order
+ 	   		by p_no desc 
 	 </select>
 	 
 	 <update id="updateCartAmount">
@@ -150,6 +156,8 @@
 		join brand b on p.brand_no = b.brand_no
 		where user_no =#{userNo}
 		  and p_no = #{pNo}
+		  order
+ 	   		by p_no desc 
 	</select>
 	
 	<select id="selectProductamount" resultType="_int">

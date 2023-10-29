@@ -149,7 +149,7 @@
             </div>
             <div class="product_btn">
                 <button class="cart_btn">선택상품 삭제</button>
-                <button class="cart_btn">품절상품 삭제</button>
+                <button class="cart_btn" type="button" onclick="amountzero()">품절상품 삭제</button>
             </div>
         </div>
 
@@ -425,6 +425,22 @@
                   location.href="pro.buy?pNo="+buyProduct;
               }
           })
+          
+          function amountzero(){
+        	  var pNo = $(".product_body").data('product-id');
+        	  
+        	  $.ajax({
+        		  url:"amount.zero",
+        		  data:{
+        			  pNo:pNo,
+        			  userNo:'${loginMember.userNo}'
+        		  },success:function(){
+        			  
+        		  },error:function(){
+        			  console.log("품절 상품 ajax통신 실패");
+        		  }
+        	  })
+          }
            
             
             

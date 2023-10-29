@@ -57,6 +57,9 @@ public interface ShopService {
 		//15. 주문번호 확인(장바구니용)
 		Orders selectOrderNo(int userNo);
 		
+		//16. 장바구니 주문 상품 삭제
+		
+		
 		
 		
 		

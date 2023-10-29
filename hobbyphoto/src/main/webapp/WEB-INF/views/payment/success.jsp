@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>결제성공</title>
+<!-- 
+o:
+orderNo=68, userNo=2, name=가나다라, address=서울특별시 송파구 올림픽로424, postcode=12345, 
+phone=111, orderDate=2023-10-29 17:32:17, totalPrice=2, status=미결제, 
+pType=null, oMsg=ㄱ나, dMsg=강, pNo=0, pName=null, price=0, amount=0, userName=null)}
+ -->
 
 	<style>
         .bigarea{
@@ -24,7 +30,7 @@
     
             <table border="1" >
             <c:choose>
-            	<c:when test="${ empty o }">
+            	<c:when test="${ not empty o }">
          			
                 <tr>
                     <td style="width: 200px; height: 40px;">최종결제금액</td>
@@ -32,11 +38,11 @@
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">주문번호</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value=""></td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="가나다${ o.userNo }"></td>
                 </tr>
                 <tr>
-                    <td style="width: 200px; height: 40px;">주문명</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value=""></td>
+                    <td style="width: 200px; height: 40px;">주문일자</td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="${ o.orderDate }"></td>
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">상품명</td>
@@ -44,34 +50,34 @@
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">주문 고객 이름</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value=""></td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="${ o.name }"></td>
                 </tr>
                 </c:when>
                <c:otherwise>
                
-               <c:forEach var="k" items="${ ord }">
+              
                
                <tr>
                     <td style="width: 200px; height: 40px;">최종결제금액</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="${ k.totalPrice }"></td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.totalPrice }"></td>
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">주문번호</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value=""></td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.totalPrice }"></td>
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">주문명</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value=""></td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.totalPrice }"></td>
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">상품명</td>
-                    <td style="width: 200px; height: 40px;"><input type="" value=""></td>
+                    <td style="width: 200px; height: 40px;"><input type="" value="${ ord.totalPrice }"></td>
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">주문 고객 이름</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value=""></td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.totalPrice }"></td>
                 </tr>
-                </c:forEach>
+                
                 </c:otherwise>
                </c:choose>
             </table>

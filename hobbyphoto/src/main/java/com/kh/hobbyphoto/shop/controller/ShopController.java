@@ -283,14 +283,30 @@ public class ShopController {
 			
 			int result = sService.insertProductAllBuy(ords, buylist);
 			
-			if(result>0) {//주문관련 전부 db찍으면 결제 api창
+			if(result>0) {
+			
+				ArrayList<Cart> clist = new ArrayList<Cart>();
+				
+				for(int i=0; i<pNo.length;i++) {
+					Cart k = new Cart();
+					k.setPNo(Integer.parseInt(pNo[i]));
+					k.setUserNo(uno);
+					
+					clist.add(k);
+				}
+				System.out.println("장바구니에서 구매한 물건 : " + clist);
+				
+				int result2 = sService.deleteCartProduct(clist);
+				System.out.println(result2 + "장바구니 삭제 결과값");
+				
 				
 				Orders ord = sService.selectOrderNo(uno);
-				
 				model.addAttribute("ord", ord);
 				
 				System.out.println( buylist+ "결제로 넘어가는 값");
 				System.out.println(ord +"jsp로 넘길 값");
+				
+				
 				return "payment/success";
 			}else {
 				model.addAttribute("errorMsg", "주문하기 실패");
@@ -302,6 +318,8 @@ public class ShopController {
 	@RequestMapping("pro.onebuy")
 	public ModelAndView insertProductOneBuy(Orders ords, ModelAndView mv, String userNo) {
 		int uno = Integer.parseInt(userNo);
+		System.out.println(uno);
+		System.out.println(ords);
 		
 		int result = sService.insertOneOrder(ords);
 		
@@ -315,4 +333,19 @@ public class ShopController {
 		}
 		return mv;
 	}	
+	//마이페이지 들어가기
+	@RequestMapping("shop.gomy")
+	public String selectShopMyInfo() {
+		return "shop/shopMyPage";
+	}
+	
+	@RequestMapping("amount.zero")
+	public void deleteAmountZero(Cart c, String userNo) {
+		System.out.println(c + "Cart 값");
+		System.out.println(userNo + "회원번호 세션이용할까?");
+		
+		
+		
+		
+	}
 }

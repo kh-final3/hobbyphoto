@@ -133,7 +133,7 @@
         }
         
         hr{
-          width: 1200px;
+          /*width: 1200px;*/
         }
 
 		.false{
@@ -271,7 +271,7 @@
 		              
 		                				<ul style="padding: 0px;">
 		                					<li class="member_menu_mypage first_menu" align="center">
-		                						<a href="">마이페이지</a>
+		                						<a href="shop.gomy?userNo=${loginMember.userNo }">마이페이지</a>
 		                					</li>
 		                					<li class="member_menu_mypage" align="center">
 			                					<c:choose>
