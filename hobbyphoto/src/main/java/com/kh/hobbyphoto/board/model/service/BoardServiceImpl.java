@@ -258,6 +258,12 @@ public class BoardServiceImpl implements BoardService{
 	public int deleteBookmark(Board b) {		
 		return bDao.deleteBookmark(sqlSession,b);
 	}
+	
+	@Override
+	public int insertWallPaper(Wallpaper wp) {
+		
+		return bDao.insertWallPaper(sqlSession,wp);
+	}
 
 
 }

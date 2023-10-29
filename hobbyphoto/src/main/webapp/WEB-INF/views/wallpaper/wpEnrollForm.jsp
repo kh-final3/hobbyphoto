@@ -60,7 +60,10 @@
         </div>
         <br>
         <div class="wallpaper">
-            <form action="">
+            <form action="insertWallPaper.wp">
+				<input type="hidden" name="img" id="">
+				<input type="hidden" name="userNo" id="">
+				<input type="hidden" name="" id="">
                 <table id="contentArea" align="center" class="table">
                     <tr>
                         <th width="100">제목</th>
@@ -80,8 +83,8 @@
         </div>
         <br>
         <div class="rc-btn" align="right" style="width: 1300px;" >
-            <button class="btn btn-dark">작성</button>
-            <button class="btn btn-dark">취소</button>
+            <button class="btn btn-dark" type="submit">작성</button>
+            <button class="btn btn-dark" type="reset">취소</button>
         </div>
     </div>
     <script type="text/javascript"
@@ -117,12 +120,12 @@
 					console.log(dataURL)
 					$.ajax({
 						type: 'POST',
-						url: "test.tt",
+						url: "base64.wp",
 						data: {
 							pngData: dataURL
 						}
 					}).done(function (data) {
-						console.log(data);
+						
 						$(".test").attr("src", data);
 					});
 				});

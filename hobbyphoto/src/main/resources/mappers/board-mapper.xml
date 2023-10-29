@@ -704,4 +704,24 @@
 		AND BOARD_NO = #{boardNo}
 		AND TYPE = #{boardType}
 	</delete>
+	
+	<insert id="insertWallPaper">
+		INSERT 
+		  INTO background
+		  (
+		  	back_no
+		  , user_no
+		  , img
+		  , board_type
+		  )
+		VALUES
+		(
+		  SEQ_BACK_NO.nextval
+		, #{userNo}
+		, #{img}
+		, #{boardType}
+		)
+	</insert>
+	
+	
 </mapper>

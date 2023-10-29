@@ -253,4 +253,9 @@ public class BoardDao {
 		System.out.println(b);
 		return sqlSession.delete("boardMapper.deleteBookmark",b);
 	}
+
+	public int insertWallPaper(SqlSessionTemplate sqlSession, Wallpaper wp) {
+		
+		return sqlSession.insert("boardMapper.insertWallPaper", wp);
+	}
 }

@@ -7,7 +7,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
-//import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -580,11 +580,20 @@ public class BoardController {
 		return "wallpaper/wpEnrollForm";
 	}
 	
+	@RequestMapping("insertWallPaper.wp")
+	public String insertWallPaper(Wallpaper wp) {
+		
+		int result = bService.insertWallPaper(wp);
+		
+		
+		return "wallpaper/wpList";
+	}
+	
 	
 	
 	
 	@ResponseBody
-	@RequestMapping("test.tt")
+	@RequestMapping("base64.wp")
 	private String saveImage(@RequestParam("pngData") String dataURL, HttpSession session) {
 	    // Extract the base64 part of the data URL
 	    String base64Data = dataURL.split(",")[1];
