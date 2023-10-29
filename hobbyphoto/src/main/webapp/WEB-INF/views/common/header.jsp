@@ -223,7 +223,7 @@
 	                    <li><a href="rcBoardList.bo">장비추천</a></li>
 	                    <li><a href="festivalList.fs">축제 · 전시</a></li>
 	                    <li><a href="list.pl">출사명소</a></li>
-	                   	<li><a href="test.t">배경화면</a></li>
+	                   	<li><a href="list.wp">배경화면</a></li>
 	                    <li><a href="togetherList.tg">모임</a></li>
 	                    <li><a href="list.no">공지사항</a></li>
 	                </ul>

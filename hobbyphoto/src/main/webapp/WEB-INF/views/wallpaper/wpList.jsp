@@ -46,6 +46,7 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/>
+	<a href="enrollForm.wp">글쓰기</a>
     <div class="content">
         <br><br>
         <div class="innerOuter" style="padding:5% 15%;">

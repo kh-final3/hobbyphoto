@@ -570,12 +570,19 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping("test.t")
-	public String test() {
-		return "test/NewFile";
+	@RequestMapping("list.wp")
+	public String wpList() {
+		return "wallpaper/wpList";
 	}
 	
-	/*
+	@RequestMapping("enrollForm.wp")
+	public String wpEnrollForm() {
+		return "wallpaper/wpEnrollForm";
+	}
+	
+	
+	
+	
 	@ResponseBody
 	@RequestMapping("test.tt")
 	private String saveImage(@RequestParam("pngData") String dataURL, HttpSession session) {
@@ -609,7 +616,7 @@ public class BoardController {
 	        return "Error saving the image.";
 	    }
 	}
-*/
+
 	
 
 	@ResponseBody
