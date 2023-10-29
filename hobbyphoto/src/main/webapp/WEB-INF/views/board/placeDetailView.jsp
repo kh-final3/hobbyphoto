@@ -41,13 +41,10 @@
         }
 
         .detail-area{
-            border: 1px solid black;
             width: 100%;
-            height: 20%;
+            height: 300px;
             border: none;
         }
-
-       
 
         .photo-area {
             width: 100%;    
@@ -77,7 +74,7 @@
         .ul-area{
             border: 1px solid red;
             width: 100%;
-            height: 90%;
+            height: 30px;
             padding: 0;
             margin-top: 20px;
             border: none;
@@ -93,7 +90,7 @@
         .li-area1{
             border: 1px solid blue;
             width: 100%;
-            height: 37%;
+            height: 30px;
             border: none;
         }
 
@@ -121,7 +118,6 @@
         .board-writer{
             border: 1px solid black;
             width: 49%;
-            height: 93%;
             float: left;
             border: none;
             font-size: larger;
@@ -271,7 +267,10 @@
             width: 22px;
             height: 12px;
             background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png) no-repeat 0 bottom;
-        }	
+        }
+        .list-content{
+            height: 100%;
+        }
         
     </style>
 </head>
@@ -294,7 +293,7 @@
                                     <a href="">❤️</a> &nbsp;&nbsp;
                                 <!-- 좋아요안눌럿을때 -->
                                     <a href="">🤍</a> &nbsp;&nbsp;
-                                    <a href="">❗</a>
+                                    <button type="button" data-toggle="modal" data-target="#reportBoard">❗</button>
                                 </div>
                             </li>
                             <hr>
@@ -305,9 +304,7 @@
                         </ul>
                     </div>
                     <hr>
-                    <div class="list-content">
-                        [주소] ${ p.paddress } <br>
-                        [내용] ${p.pcontent}<br>
+                    <div class="list-content">[주소] ${ p.paddress } <br> [내용] ${p.pcontent}<br>
                       
                     </div>
                 </div>
@@ -412,7 +409,7 @@
             <div class="btn-area" align="center">
                 <button type="button" class="update">수정하기</button>
                 <button type="button" class="golist">목록으로</button>
-                <button type="button" class="delete">t삭제</button>
+                <button type="button" class="delete">삭제</button>
             </div>
            <hr>
             
@@ -436,6 +433,52 @@
         })
         
     </script>
+
+<div class="modal" id="reportBoard">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><b>신고하기</b></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form action="reportBoard.bo" method="post">
+            <p>작성자 : ${ p.pwriter}</p>
+            <p>글 제목 : ${p.ptitle}</p>
+            
+            <input name="bno" type="hidden" value="${ p.pno}">
+            <input name="reportedUserNo" type="hidden" value="${ loginMember.userNo} ">
+           
+            <input name="reportUserNo" type="hidden" value="1">
+          
+            <hr>
+            
+                <input type="radio" id="r1" name="report" value="영리목적/홍보성">
+                <label for="r1">영리목적/홍보성</label><br>
+                <input type="radio" id="r2" name="report" value="욕설/인신공격">
+                <label for="r2">욕설/인신공격</label> <br>
+                <input type="radio" id="r3" name="report" value="도배">
+                <label for="r3">같은 내용 반복(도배)</label> <br>
+                <input type="radio" id="r4" name="report" value="개인정보노출">
+                <label for="r4">개인정보노출</label> <br>
+                <input type="radio" id="r5" name="report" value="불법정보">
+                <label for="r5">불법정보</label><br>
+                <input type="radio" id="r6" name="report" value="음란성/선정성">
+                <label for="r6">음란성/선정성</label> <br>
+    
+            <textarea name="reportContent" style="resize: none;" placeholder=" 신고 사유 설명이 필요하신 경우 작성해주세요." cols="50" rows="3" style="margin: 20px;"></textarea>
+            <br><button type="submit" class="btn btn-secondary" id="rpt_btn" style="width: 100%; height: 40px; margin-top: 15px;">신고</button>
+          </form>
+        </div>
+
+     </div>
+        
+    </div>
+</div>
     <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
