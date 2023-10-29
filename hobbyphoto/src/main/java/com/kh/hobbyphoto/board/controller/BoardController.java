@@ -612,5 +612,43 @@ public class BoardController {
 */
 	
 
+	@ResponseBody
+	@RequestMapping("bookCheck.bo")
+	public String bookmarkCheck(Board b){
+		int count = bService.checkBook(b);
+		System.out.println(count);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("book.bo")
+	public String insertBookmark(Board b){
+		int count = bService.insertBookmark(b);
+		System.out.println(count);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("deleteBook.bo")
+	public String deleteBookmark(Board b){
+		int count = bService.deleteBookmark(b);
+		System.out.println(count);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
 	
 }

@@ -64,4 +64,9 @@ public interface BoardService {
 	int insertCulture(Festival fe);
 	int insertAttachmentPlace2(Attachment attachment);
 	int updateCulture(Festival fe);
+	
+	
+	 int checkBook(Board b);
+	 int insertBookmark(Board b);
+	 int deleteBookmark(Board b);
 }

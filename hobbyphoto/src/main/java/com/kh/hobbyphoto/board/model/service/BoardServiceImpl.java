@@ -243,4 +243,21 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.updateCulture(sqlSession, fe);
 	}
 
+	
+	@Override
+	public int checkBook(Board b) {		
+		return bDao.checkBook(sqlSession,b);
+	}
+	
+	@Override
+	public int insertBookmark(Board b) {		
+		return bDao.insertBookmark(sqlSession,b);
+	}
+	
+	@Override
+	public int deleteBookmark(Board b) {		
+		return bDao.deleteBookmark(sqlSession,b);
+	}
+
+
 }

@@ -577,7 +577,6 @@
 	</delete>
 	
 	
-	
 	<select id="cultureListCount" resultType="_int">
 		SELECT COUNT(FE_NO) "COUNT"
 	      FROM festival
@@ -677,4 +676,32 @@
 		 where fe_no = #{feNo}
 	</update>
 	
+	
+	
+	
+	<select id="checkBook" resultType="_int">
+		SELECT count(BOARD_NO)
+		FROM BOOKMARK
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND TYPE = #{boardType}
+	</select>
+	
+	<insert id="insertBookmark">
+		INSERT INTO BOOKMARK
+		VALUES
+		(
+		  #{boardNo}
+		, #{boardWriter}
+		, SYSDATE
+		, #{boardType}
+		)
+	</insert>
+	
+	<delete id="deleteBookmark">
+		DELETE BOOKMARK
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND TYPE = #{boardType}
+	</delete>
 </mapper>

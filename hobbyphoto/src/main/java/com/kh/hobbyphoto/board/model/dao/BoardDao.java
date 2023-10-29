@@ -237,4 +237,20 @@ public class BoardDao {
 	public int updateCulture(SqlSessionTemplate sqlSession, Festival fe) {
 		return sqlSession.update("boardMapper.updateCulture", fe);
 	}
+
+
+	public int checkBook(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.selectOne("boardMapper.checkBook",b);
+	}
+	
+	public int insertBookmark(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.insert("boardMapper.insertBookmark",b);
+	}
+	
+	public int deleteBookmark(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.delete("boardMapper.deleteBookmark",b);
+	}
 }
