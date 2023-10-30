@@ -69,28 +69,6 @@ public class BoardDao {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int boardNo) {
 		return (ArrayList) sqlSession.selectList("boardMapper.selectReplyList", boardNo);
 	}
@@ -142,6 +120,14 @@ public class BoardDao {
 		return sqlSession.delete("boardMapper.deleteRcBoard", boardNo);
 	}
 	
+	public int updateRcBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.updateRcBoard", b);
+	}
+	
+	public int updateRcAtBoard(SqlSessionTemplate sqlSession, Attachment at) {
+		return sqlSession.update("boardMapper.updateRcAtBoard", at);
+	}
+	
 	public int myListCount(SqlSessionTemplate sqlSession,int userNo) {
 		return sqlSession.selectOne("boardMapper.myListCount",userNo);
 	}
@@ -183,7 +169,6 @@ public class BoardDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		ArrayList<Block> list = (ArrayList)sqlSession.selectList("boardMapper.myBlockList", userNo, rowBounds);
-		System.out.println("다오" + list);
 		return list;
 	}
 	
@@ -266,6 +251,8 @@ public class BoardDao {
 	public int updateCulture(SqlSessionTemplate sqlSession, Festival fe) {
 		return sqlSession.update("boardMapper.updateCulture", fe);
 	}
+
+
 
 
 }

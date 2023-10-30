@@ -73,4 +73,8 @@ public class NoticeDao {
 		return sqlSession.delete("noticeMapper.shNoticeDelete", boardNo);
 	}
 
+	public int updateShNotice(SqlSessionTemplate sqlSession, Notice n) {
+		return sqlSession.update("noticeMapper.updateShNotice", n);
+	}
+
 }

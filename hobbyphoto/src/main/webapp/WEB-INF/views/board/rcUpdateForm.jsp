@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,7 @@
     .rc-btn>button{margin-left: 10px;}
 </style>
 </head>
+<jsp:include page="../common/header.jsp"/>
 <body>
     <div class="content">
         <br><br>
@@ -31,27 +33,29 @@
         </div>
         <br>
         <div class="recommend">
-            <form action="rcInsert.bo"  enctype="multiPart/form-data"class="form-area" method="post">
+            <form action="rcUpdate.bo"  enctype="multiPart/form-data"class="form-area" method="post">
+               <input type="hidden" name="boardNo" value="${ b.boardNo }">
                <input type="hidden" id="boardWriter" value="${ loginMember.userNo }" name="boardWriter">
                 <table id="contentArea" align="center" class="table">
                     <tr>
                         <th width="100">제목</th>
-                        <td colspan=""><input type="text" name="boardTitle" style="width: 1200px;"></td>
+                        <td colspan=""><input type="text" name="boardTitle" value="${ b.boardTitle }" style="width: 1200px;"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><textarea name="boardContent" cols="180" rows="15" style="resize: none;"></textarea></td>
-                        <input type="text" name="hashTag" style="width: 1200px;">
+                        <td colspan="2"><textarea name="boardContent" cols="180" rows="15" style="resize: none;">${ b.boardContent }</textarea></td>
+                        <input type="text" name="hashTag" value="${ b.hashTag }" style="width: 1200px;">
                     </tr>
                 </table>
                 <input type="file" name="upfile">
                 <input type="file" name="upfile">
         		<br>
 			        <div class="rc-btn" align="right" style="width: 1300px;" >
-			            <button type="submit" class="btn btn-dark">작성</button>
+			            <button type="submit" class="btn btn-dark">수정하기</button>
 			            <button class="btn btn-dark">취소</button>
 			        </div>
         	</form>
         </div>
     </div>
 </body>
+<jsp:include page="../common/footer.jsp"/>
 </html>

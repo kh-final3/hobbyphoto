@@ -130,6 +130,21 @@ public class BoardServiceImpl implements BoardService{
 	public int deleteRcBoard(int boardNo) {
 		return bDao.deleteRcBoard(sqlSession, boardNo);
 	}
+	
+	public int updateRcBoard(Board b, ArrayList<Attachment> list) {
+		int result = bDao.updateRcBoard(sqlSession, b);
+		int result2 = 1;
+		
+		for(Attachment at : list) {
+			result2 = bDao.updatePhAtBoard(sqlSession, at);
+		}
+			
+		return result * result2;
+	}
+	
+	public int updateRcAtBoard(Attachment at) {
+		return bDao.updateRcAtBoard(sqlSession, at);
+	}
 
 	// ------------------------------------------------------------
 	@Override
@@ -257,6 +272,8 @@ public class BoardServiceImpl implements BoardService{
 	public int updateCulture(Festival fe) {
 		return bDao.updateCulture(sqlSession, fe);
 	}
+
+
 
 
 

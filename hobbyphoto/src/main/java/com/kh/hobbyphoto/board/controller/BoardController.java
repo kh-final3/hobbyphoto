@@ -138,7 +138,6 @@ public class BoardController {
                 list.add(at);
             }
         }
-        System.out.println(list +"controller에서 list!!!!!!!!!!!!!!!!!");
         
         int result = bService.updatePhBoard(b, list);
 	    if (result <= 0) {
@@ -255,7 +254,42 @@ public class BoardController {
         }
 	}
 	
-
+	@RequestMapping("rcUpdateForm.bo")
+	public String rcUpdateForm(int phno, Model model) {
+		model.addAttribute("b", bService.selectRcBoard(phno));
+		model.addAttribute("at", bService.selectRcAtBoard(phno));
+		return "board/rcUpdateForm";
+	}
+	
+	@RequestMapping("rcUpdate.bo")
+	public String rcUpdate(Board b, MultipartFile[] upfile, HttpSession session, Model model) {
+		ArrayList<Attachment> list = new ArrayList<>();
+		
+		for(int i = 0; i < upfile.length; i++) {
+			if(upfile[i] != null && !upfile[i].isEmpty()) {
+				String changeName = saveFile(upfile[i], session);
+				
+				Attachment at = new Attachment();
+                at.setFileNo(i + 1);
+                at.setOriginName(upfile[i].getOriginalFilename());
+                at.setChangeName(changeName);
+                at.setFilePath("resources/upfiles/" + changeName);
+                at.setFileLevel(i + 1);
+                at.setRefBno(String.valueOf(b.getBoardNo()));
+                list.add(at);
+			}
+		}
+		
+		int result = bService.updateRcBoard(b, list);
+	    if (result <= 0) {
+	        model.addAttribute("errorMsg", "게시글 수정 실패");
+	        return "common/errorPage";
+	    } else {
+	    	 session.setAttribute("alertMsg", "게시글 수정에 성공했습니다.");
+	  	    return "redirect:rcBoardList.bo?phno=" + b.getBoardNo();
+	    }
+	  
+	}
 
 
 	// *************출사명소시작************ //

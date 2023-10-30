@@ -62,6 +62,7 @@
 			 , notice_title
 			 , notice_writer
 			 , notice_content
+			 , notice_type
 			 , count
 			 , to_char(create_date, 'YYYY-MM-DD') as "create_date"
 			  from notice
@@ -80,6 +81,7 @@
 		   set notice_title = #{noticeTitle}
 		     , notice_content = #{noticeContent}
 		 where notice_no = #{noticeNo}
+		 and notice_type = 1
 	</update>
 	
 	<select id="selectShopListCount" resultType="_int">
@@ -154,5 +156,14 @@
 		DELETE FROM notice
 	    WHERE notice_no = #{boardNo}
 	</delete>
+	
+	<update id="updateShNotice">
+		update
+			   notice
+		   set notice_title = #{noticeTitle}
+		     , notice_content = #{noticeContent}
+		 where notice_no = #{noticeNo}
+		 and notice_type = 2
+	</update>
 	
 </mapper>
