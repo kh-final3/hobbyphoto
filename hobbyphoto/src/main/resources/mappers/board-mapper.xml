@@ -211,8 +211,29 @@
 		attachment
 	 set origin_name = #{originName}
 	   , change_name = #{changeName}
+	   , file_path = #{filePath}
 	 where ref_bno = #{refBno}
 	</update>
+	
+	<insert id="insertNewAttachment">
+		insert
+			into attachment
+			(
+				file_no
+              , file_level
+              , origin_name
+              , change_name
+              , file_path
+			)
+            values
+            (
+              seq_file_no.nextval
+             , #{fileLevel}
+             , #{originName}
+             , #{changeName}
+             , #{filePath}
+            )
+	</insert>
 	
 	<delete id="deletePhBoard">
 	    DELETE FROM board

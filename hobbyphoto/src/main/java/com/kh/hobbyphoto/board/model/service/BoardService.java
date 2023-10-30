@@ -25,8 +25,7 @@ public interface BoardService {
 	int deletePhBoard(int boardNo);
 	
 	// 5. 게시글 수정용 서비스
-	int updatePhBoard(Board b);
-	int updatePhAtBoard(Attachment at);
+	int updatePhBoard(Board b, ArrayList<Attachment> at);
 	
 	// ------------------- 장비추천 게시판 ------------------- //
 	// 1. 장비추천 게시판 리스트 페이지 서비스 (페이징)

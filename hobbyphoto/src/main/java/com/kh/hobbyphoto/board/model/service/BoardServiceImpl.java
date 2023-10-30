@@ -68,14 +68,26 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int updatePhBoard(Board b) {
-		return bDao.updatePhBoard(sqlSession, b);
+	public int updatePhBoard(Board b, ArrayList<Attachment> list) {
+		int result = bDao.updatePhBoard(sqlSession, b);
+		int result2 = 1;
+		
+		for(Attachment at : list) {
+			result2 = bDao.updatePhAtBoard(sqlSession, at);
+		}
+		return result * result2;
 	}
 	
-	@Override
 	public int updatePhAtBoard(Attachment at) {
 		return bDao.updatePhAtBoard(sqlSession, at);
 	}
+	
+
+	public int insertNewAttachment(Attachment at) {
+		return bDao.insertNewAttachment(sqlSession, at);
+	}
+
+	
 	
 	// ------------------------------------------------------------
 
@@ -245,5 +257,7 @@ public class BoardServiceImpl implements BoardService{
 	public int updateCulture(Festival fe) {
 		return bDao.updateCulture(sqlSession, fe);
 	}
+
+
 
 }

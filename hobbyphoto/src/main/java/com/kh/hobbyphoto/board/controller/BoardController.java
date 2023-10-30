@@ -82,7 +82,6 @@ public class BoardController {
             }
         }
         int result = bService.insertPhBoard(b, list);
-        System.out.println(b);
 
         if (result > 0) {
             session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
@@ -122,32 +121,35 @@ public class BoardController {
 	}
 	
 	@RequestMapping("phUpdate.bo")
-	public String updateBoard(Attachment at, Board b, MultipartFile reupfile, HttpSession session, Model model) {
-		
-		if(!reupfile.getOriginalFilename().equals("")) {
-			
-			if(at.getOriginName() != null) {
-				new File(session.getServletContext().getRealPath(at.getChangeName())).delete();
-			}
-			String changeName = saveFile(reupfile, session);
-			
-			at.setOriginName(reupfile.getOriginalFilename());
-			at.setChangeName("resources/upfiles/" + changeName);
-			}
-			
-			int result = bService.updatePhBoard(b);
-			int result2 = bService.updatePhAtBoard(at);
-			
-			if(result > 0) {
-				model.addAttribute("alertMsg", "게시글 수정에 성공했습니다.");
-				return "redirect:detail.bo?phno=" + b.getBoardNo();
-			} else {
-				// 수정 실패 => 에러페이지
-				model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
-				return "common/errorPage";
-			}
-			
-		}
+	public String updateBoard(Board b, MultipartFile[] reupfiles, HttpSession session, Model model) {
+        ArrayList<Attachment> list = new ArrayList<>();
+
+        for (int i = 0; i < reupfiles.length; i++) {
+            if (reupfiles[i] != null && !reupfiles[i].isEmpty()) {
+                String changeName = saveFile(reupfiles[i], session);
+
+                Attachment at = new Attachment();
+                at.setFileNo(i + 1);
+                at.setOriginName(reupfiles[i].getOriginalFilename());
+                at.setChangeName(changeName);
+                at.setFilePath("resources/upfiles/" + changeName);
+                at.setFileLevel(i + 1);
+                at.setRefBno(String.valueOf(b.getBoardNo()));
+                list.add(at);
+            }
+        }
+        System.out.println(list +"controller에서 list!!!!!!!!!!!!!!!!!");
+        
+        int result = bService.updatePhBoard(b, list);
+	    if (result <= 0) {
+	        model.addAttribute("errorMsg", "게시글 수정 실패");
+	        return "common/errorPage";
+	    } else {
+	    	 session.setAttribute("alertMsg", "게시글 수정에 성공했습니다.");
+	  	    return "redirect:phDetail.bo?phno=" + b.getBoardNo();
+	    }
+	  
+	}
 	
 	@RequestMapping("phDelete.bo")
 	public String deleteBoard(int phno, String filePath, HttpSession session, Model model) { 

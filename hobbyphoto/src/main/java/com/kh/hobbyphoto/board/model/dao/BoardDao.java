@@ -52,6 +52,9 @@ public class BoardDao {
 	public int deletePhBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deletePhBoard", boardNo);
 	}
+	
+	
+	
 
 	public int updatePhBoard(SqlSessionTemplate sqlSession, Board b) {
 		return sqlSession.update("boardMapper.updatePhBoard", b);
@@ -60,6 +63,31 @@ public class BoardDao {
 	public int updatePhAtBoard(SqlSessionTemplate sqlSession, Attachment at) {
 		return sqlSession.update("boardMapper.updatePhAtBoard", at);
 	}
+	
+	public int insertNewAttachment(SqlSessionTemplate sqlSession, Attachment at) {
+		return sqlSession.insert("boardMapper.insertNewAttachment", at);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -238,4 +266,6 @@ public class BoardDao {
 	public int updateCulture(SqlSessionTemplate sqlSession, Festival fe) {
 		return sqlSession.update("boardMapper.updateCulture", fe);
 	}
+
+
 }
