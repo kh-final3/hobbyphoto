@@ -335,17 +335,56 @@ public class ShopController {
 	}	
 	//마이페이지 들어가기
 	@RequestMapping("shop.gomy")
-	public String selectShopMyInfo() {
+	public String selectShopMyInfo(HttpSession session, int userNo,Model model) {
+		
+		System.out.println(userNo + "과연 넘어오니??");
+		
+		//주문관련
+		Orders o = sService.selectOrderInfo(userNo);
+		System.out.println(o + "과연 뭐가 나올것인가????");
+		model.addAttribute("o", o);
 		return "shop/shopMyPage";
 	}
 	
+	@ResponseBody
 	@RequestMapping("amount.zero")
-	public void deleteAmountZero(Cart c, String userNo) {
+	public String deleteAmountZero(Cart c, String userNo,String[] pNo) {
 		System.out.println(c + "Cart 값");
 		System.out.println(userNo + "회원번호 세션이용할까?");
+		int userno = Integer.parseInt(userNo);
 		
+		ArrayList<Cart> buylist = new ArrayList<Cart>();
+		for(int i = 0; i<pNo.length; i++) {
+			Cart p = new Cart();
+			
+			p.setPNo(Integer.parseInt(pNo[i]));
+			p.setUserNo(userno);
+			
+			buylist.add(p);
+		}
 		
+		System.out.println(buylist + "상품 번호 있니?");
 		
+		ArrayList<Cart> k = sService.selectAmount(buylist);
 		
+		ArrayList<Cart> de = new ArrayList<Cart>();
+		for(int i = 0; i<k.size();i++) {
+			//System.out.println(k.get(i) +"뭐가 들어있니?");
+			//System.out.println(k.get(i).getProductamount() +"상품 제고?뭐가 들어있니?");
+			Cart y = new Cart();
+			
+			//상품 제고가 0인거 삭제
+			if(k.get(i).getProductamount() == 0 ) {
+				k.get(i).setUserNo(userno);
+				de.add(k.get(i));
+			}
+		}
+		System.out.println(de + "여기에는 재고가 0인게 있을까?");
+		int restul = sService.deleteAmountZero(de);
+		
+		System.out.println(restul + "controller에서 result 값");
+		return restul>0 ? "success":"fail";
 	}
+		
 }
+

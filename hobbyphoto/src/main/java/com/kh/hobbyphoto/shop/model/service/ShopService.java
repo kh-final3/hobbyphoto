@@ -57,10 +57,14 @@ public interface ShopService {
 		//15. 주문번호 확인(장바구니용)
 		Orders selectOrderNo(int userNo);
 		
-		//16. 장바구니 주문 상품 삭제
+		//16. 장바구니 품절 상품 삭제
+		//상품 제고 조회(장바구니에 있는 상품)
+		ArrayList<Cart> selectAmount(ArrayList<Cart> buylist);
+		//장바구니에서 해당 상품 삭제
+		int deleteAmountZero(ArrayList<Cart> de);
 		
-		
-		
+		//17.마이페이지 들어갈시 주문관련 정보
+		Orders selectOrderInfo(int userNo);
 		
 		
 }

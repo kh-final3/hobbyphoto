@@ -145,23 +145,35 @@ public class ShopServiceImpl implements ShopService{
 		return sDao.selectOrderNo(sqlSession,userNo);
 	}
 
+	@Override
+	public ArrayList<Cart> selectAmount(ArrayList<Cart> buylist) {
+		
+		ArrayList<Cart> ilist = new ArrayList<>();
+		
+		for(Cart c : buylist) {
+			ArrayList<Cart> result = sDao.selectAmount(sqlSession,c);
+			
+			ilist.addAll(result);
+		}
+
+		return ilist;
+	}
+
+	@Override
+	public int deleteAmountZero(ArrayList<Cart> de) {
+		
+		int result = 0;
+		for(Cart k : de) {
+			result += sDao.deleteAmountZero(sqlSession,k);
+		}
+		System.out.println(result + "결과값 몇이야");
+		
+		return result;
+	}
+
+	@Override
+	public Orders selectOrderInfo(int userNo) {
+		return sDao.selectOrderInfo(sqlSession,userNo);
+	}
 	
-	
-
-	
-
-
-	
-
-	
-
-
-
-
-
-	
-
-
-	
-
 }

@@ -79,6 +79,17 @@ public class ShopDao {
 		return sqlSession.delete("shopMapper.deleteCartBuyPro", d);
 	}
 	
+	public ArrayList<Cart> selectAmount(SqlSessionTemplate sqlSession,Cart c){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectAmount", c);
+	}
+	public int deleteAmountZero(SqlSessionTemplate sqlSession,Cart de) {
+		return sqlSession.delete("shopMapper.deleteCartProduct", de);
+	}
+	public Orders selectOrderInfo(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("shopMapper.selectOrderInfo", userNo);
+	}
+	
+	
 	
 
 }

@@ -31,4 +31,7 @@ public class Orders {
 	private int price;
 	private int amount;
 	private String userName;
+	
+	private String ordercount;
+	private String ordertotalprice;
 }

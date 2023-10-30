@@ -115,29 +115,29 @@
                         </div>
                         <div>
                             <p>
-                                <span class="product_brand">${ c.brandName }</span>
+                                <span class="product_brand">${ c.brandnamee }</span>
                             </p>
                             <p>
                                 <a href="#" class="product_title">${ c.PName }</a>
                             </p>
                             <p>
-                                <span class="prodcut_price">${ c.price }</span>원
+                                <span class="prodcut_price">${ c.productprice }</span>원
                             </p>
                         </div>
                     </div>
                     <div class="pb_amount">
                         <div id="count-box" class="totalallamount">
                             <button class="minus">-</button>
-                            <input class="count" type="text" value="${ c.amount}" align="center">
+                            <input class="count" type="text" value="${ c.cartamount}" align="center">
                             <button class="plus">+</button>
                         </div>
                     </div>
                     <div class="pb_price">
-                        <span>${c.price * c.amount}</span>원
+                        <span>${c.productprice * c.cartamount}</span>원
                     </div>
                
                     <div class="pb_charge">
-                       <span>${c.price * c.amount >= 50000 ? "0" : "3000"}</span>원
+                       <span>${c.productprice * c.cartamount >= 50000 ? "0" : "3000"}</span>원
                     </div>
                 </div>
                 
@@ -426,16 +426,34 @@
               }
           })
           
+          //장바구니 품절 상품 삭제
           function amountzero(){
-        	  var pNo = $(".product_body").data('product-id');
+        	  var zeroAmountProduct = [];
+        	  
+        	  $(".product_body").each(function(){
+        		  
+        	  	var pNo = $(this).data('product-id');
+        	  	
+        	  	zeroAmountProduct.push(pNo);
+        		  
+        	  });//장바구니 상품번호
+        	  
+        	  //품절 상품이 없으면 함수 종료
+        	  //if(zeroAmountProduct.length ==0){
+        		//  alert("품절 상품이 없습니다.");
+        		//  return;
+        	  //}
+        	  
         	  
         	  $.ajax({
         		  url:"amount.zero",
+        		  traditional: true, 
         		  data:{
-        			  pNo:pNo,
+        			  pNo:zeroAmountProduct,
         			  userNo:'${loginMember.userNo}'
-        		  },success:function(){
-        			  
+        		  },success:function(restul){
+        			  console.log(restul);
+						location.reload();
         		  },error:function(){
         			  console.log("품절 상품 ajax통신 실패");
         		  }

@@ -24,5 +24,10 @@ public class Cart {
 	private String thumbnail;
 	private String price;
 	private String pType;
+	private int productamount;
 	
+	private int cartamount;
+	private int productprice;
+	private int brandnoe;
+	private String brandnamee;
 }

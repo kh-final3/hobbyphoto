@@ -160,13 +160,13 @@
 			            		<input type="hidden" name="pNo" value="${ c.PNo }">
 			                    <td style="text-align: center;"><img src="${ c.thumbnail }" alt=""></td>
 			                    <td style="text-align: center;"><input type="text" name="pNAme" id="pNAme" value="${ c.PName }" readonly></td>
-			                    <td style="text-align: center;"><input type="text" name="price" id="" value="${ c.price }" readonly></td>
-			                    <td style="text-align: center;"><input type="text" name="amount" id="amount" value="${ c.amount }" readonly></td>
-			                    <td style="text-align: center;"><input type="text" name="" id="price" value="${ c.price * c.amount }" readonly></td>
+			                    <td style="text-align: center;"><input type="text" name="price" id="" value="${ c.productprice }" readonly></td>
+			                    <td style="text-align: center;"><input type="text" name="amount" id="amount" value="${ c.cartamount }" readonly></td>
+			                    <td style="text-align: center;"><input type="text" name="" id="price" value="${ c.productprice * c.cartamount }" readonly></td>
 			                </tr>
 			            </tbody>   
             		
-            			<c:set var="totalPrice" value="${totalPrice + (c.price * c.amount)}"/>
+            			<c:set var="totalPrice" value="${totalPrice + (c.productprice * c.cartamount)}"/>
             		</c:forEach>
             	</c:otherwise>
 

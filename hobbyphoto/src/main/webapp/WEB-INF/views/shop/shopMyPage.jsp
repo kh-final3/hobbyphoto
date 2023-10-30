@@ -87,8 +87,8 @@
             <p>계정 설정</p>
             <a class="goj" href="#">회원 정보 수정</a><br>
             <a class="goj" href="#">회원 등급</a><br>
-            <a class="goj" href="#">쿠폰</a><br>
-            <a class="goj" href="#">마일리지</a><br>
+            <!-- <a class="goj" href="#">쿠폰</a><br> -->
+            <!-- <a class="goj" href="#">마일리지</a><br> -->
           </div>
         </div>
         <div class="gradeOrder">
@@ -96,7 +96,7 @@
             <br>
             <div id="gradeInfo">
               <p>${ loginMember.userName }은 기본등급입니다.</p>
-              <p>구매금액 0원 | 구매건수 1건</p>
+              <p>구매금액 ${ o.ordertotalprice }원 | 구매건수 ${ o.ordercount }건</p>
             </div>
           </div>
           <hr>

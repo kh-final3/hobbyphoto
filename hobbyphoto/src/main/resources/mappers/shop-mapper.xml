@@ -24,6 +24,11 @@
 		<result column="brand_name" property="brandName"/>
 		<result column="thumbnail" property="thumbnail"/>
 		<result column="p_type" property="pType"/>
+		<result column="productamount" property="productamount"/>
+		<result column="cartamount" property="cartamount"/>
+		<result column="productprice" property="productprice"/>
+		<result column="brandnoe" property="brandnoe"/>
+		<result column="brandnamee" property="brandnamee"/>
 	</resultMap>
 	
 	<resultMap type="Orders" id="ordersResult">
@@ -38,6 +43,8 @@
 		<result column="d_msg" property="DMsg"/>
 		<result column="order_date" property="orderDate"/>
 		<result column="status" property="status"/>
+		<result column="ordercount" property="ordercount"/>
+		<result column="ordertotalprice" property="ordertotalprice"/>
 	</resultMap>
 
 	 <select id="selectProductList" resultMap="shopResult">
@@ -110,11 +117,11 @@
 		select
 		        p_no
 		    ,   user_no
-		    ,   c.amount
-		    ,   p.price
+		    ,   c.amount as cartamount
+		    ,   p.price as productprice
 		    ,   p_name
-		    ,   b.brand_no
-		    ,   b.brand_name
+		    ,   b.brand_no as brandnoe
+		    ,   b.brand_name as brandnamee
 		    ,	thumbnail
 		from cart c
 		join product p using (p_no)
@@ -143,11 +150,11 @@
 		select
 		        p_no
 		    ,   user_no
-		    ,   c.amount
-		    ,   p.price
+		    ,   c.amount as cartamount
+		    ,   p.price as productprice
 		    ,   p_name
-		    ,   b.brand_no
-		    ,   b.brand_name
+		    ,   b.brand_no as brandnoe
+		    ,   b.brand_name as brandnamee
 		    ,	thumbnail
 		    ,	p_type
 		from cart c
@@ -315,6 +322,23 @@
 			   )e
 			)
 			where r = 1
+	</select>
+	
+	<select id="selectAmount" resultMap="cartResult">
+		select 
+		    p.amount as productamount
+		,   p_no
+		from cart c
+		join product p using(p_no)
+		where user_no = #{userNo}
+	</select>
+	
+	<select id="selectOrderInfo" resultMap="ordersResult">
+		select 
+				count(*) as ordercount
+			,	sum(totalprice) as ordertotalprice
+				from orders
+				where user_no=#{userNo}
 	</select>
 	
 </mapper>
