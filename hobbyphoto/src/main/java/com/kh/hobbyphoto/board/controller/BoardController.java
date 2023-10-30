@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hobbyphoto.board.model.service.*;
 import com.kh.hobbyphoto.board.model.vo.*;
+import com.kh.hobbyphoto.board.model.vo.Report;
 import com.kh.hobbyphoto.common.model.vo.*;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
@@ -79,8 +80,6 @@ public class BoardController {
             }
         }
         int result = bService.insertPhBoard(b, list);
-        System.out.println(b);
-
         if (result > 0) {
             session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
             return "redirect:phBoardList.bo";
@@ -262,7 +261,6 @@ public class BoardController {
 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<Place> list = bService.selectPlaceList(pi);
-		System.out.println(pi);
 		mv.addObject("pi", pi).addObject("list", list).setViewName("board/placeListView");
 
 		return mv;
@@ -369,7 +367,6 @@ public class BoardController {
 	        @RequestParam("originFileNo1") int originFileNo1, @RequestParam("originFileNo2") int originFileNo2,
 	        @RequestParam("originFileNo3") int originFileNo3, @RequestParam("originFileNo4") int originFileNo4,
 	        HttpSession session, Model model) {
-	    System.out.println(originFileNo1);
 	    ArrayList<Attachment> list = new ArrayList<>();
 	    Place existingPlace = bService.selectPlace(p.getPno());
 	    p.setPimg1(existingPlace.getPimg1());
@@ -581,16 +578,22 @@ public class BoardController {
 	}
 	
 	@RequestMapping("insertWallPaper.wp")
-	public String insertWallPaper(Wallpaper wp) {
-		
+	public String insertWallPaper(Wallpaper wp,Model model) {
+
+	    System.out.println(wp);
 		int result = bService.insertWallPaper(wp);
+
 		
-		
-		return "wallpaper/wpList";
+		if (result > 0) {
+		      
+			return "wallpaper/wpList";
+        
+	    }else {
+	    	
+			model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
+			return "common/errorPage";
+	    }
 	}
-	
-	
-	
 	
 	@ResponseBody
 	@RequestMapping("base64.wp")
@@ -600,21 +603,19 @@ public class BoardController {
 	    
 	    // Decode the base64 string into bytes
 	    byte[] imageBytes = Base64.decodeBase64(base64Data);
-	    System.out.println(imageBytes);
+
 	    // Generate a unique file name (e.g., using a timestamp and a random number)
 	    String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 	    int ranNum = (int)(Math.random() * 90000 + 10000);
 	    String fileName = currentTime + ranNum + ".png"; // You can change the extension as needed
-	    System.out.println(fileName);
+
 
 	    // Define the path to save the image
 	    String savePath = session.getServletContext().getRealPath("resources/upfiles/");
-	    System.out.println(savePath);
 
 	    // Create a file using the save path and the generated file name
 	    File imageFile = new File(savePath, fileName);
 	    
-	    System.out.println(imageFile);
 	    String changeName = "resources/upfiles/" + fileName;
 	    try {
 	        // Write the image bytes to the file
@@ -632,7 +633,6 @@ public class BoardController {
 	@RequestMapping("bookCheck.bo")
 	public String bookmarkCheck(Board b){
 		int count = bService.checkBook(b);
-		System.out.println(count);
 		if(count > 0) {
 			return "Y";
 		}else {
@@ -645,7 +645,6 @@ public class BoardController {
 	@RequestMapping("book.bo")
 	public String insertBookmark(Board b){
 		int count = bService.insertBookmark(b);
-		System.out.println(count);
 		if(count > 0) {
 			return "Y";
 		}else {
@@ -658,7 +657,6 @@ public class BoardController {
 	@RequestMapping("deleteBook.bo")
 	public String deleteBookmark(Board b){
 		int count = bService.deleteBookmark(b);
-		System.out.println(count);
 		if(count > 0) {
 			return "Y";
 		}else {
@@ -667,4 +665,19 @@ public class BoardController {
 		}
 	}
 	
+	
+	@RequestMapping("reportBoard.bo")
+	public String reportBoard(Report r,HttpSession session, Model model){
+		r.setBoardType(4);
+		int result = bService.reportBoard(r);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 게시글이 신고되었습니다.");
+			return "main";
+		}else {
+			model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
+			return "common/errorPage";
+		}
+		
+	}
 }

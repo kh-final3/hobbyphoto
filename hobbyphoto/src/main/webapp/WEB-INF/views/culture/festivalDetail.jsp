@@ -13,6 +13,7 @@
     <link href="https://www.mfac.or.kr/web/css/common.css?ver=20231011" rel="stylesheet" type="text/css">
     <link href="https://www.mfac.or.kr/web/css/sub.css?ver=20231011" rel="stylesheet" type="text/css">
     <link href="https://www.mfac.or.kr/web/css/responsive.css?ver=20231011" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -85,14 +86,21 @@
                             
 
                         </div><!-- //view_cont -->
-                        <a href="festivalList.fs" id="btnList" class="list_btn">
-                            <img src="https://www.mfac.or.kr/web/images/sub/list_ico.png" alt="목록 이미지">
-                            목록보기 
-                        </a>
-                        
-                        <a href="updateForm.fs?feNo=${fe.feNo}" id="btnList" class="list_btn">
-                            수정하기 
-                        </a>
+                  
+
+                        <div align="center" class="buttons">
+                            <a href="festivalList.fs" class="btn btn-sm btn-secondary"
+                                style="width: 90px; height: 35px; font-size: medium; margin-right: 10px; border-radius: 5px;">목록가기</a>
+                            <!-- 현재 로그인한 사용자가 해당 글을 쓴 본인일 경우 -->
+                            <c:if test="${ loginMember.userNo eq 1}">
+        
+                                <a href="updateForm.fs?feNo=${ fe.feNo }" class="btn btn-sm btn-warning"
+                                style="width: 90px; height: 35px; font-size: medium; margin-right: 10px; border-radius: 5px;">수정하기</a> 
+                                <a href="delete.fs?feNo=${ fe.feNo }" class="btn btn-sm btn-danger"
+                                style="width: 90px; height: 35px; font-size: medium; border-radius: 5px;">삭제하기</a>
+                            </c:if>
+        
+                        </div>
                     </div><!-- //view_contbox -->
                 </div><!-- //container -->
             </div>

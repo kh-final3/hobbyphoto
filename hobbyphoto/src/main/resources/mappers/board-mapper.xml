@@ -736,7 +736,6 @@
 		    RP_NO
 		  , GUILTY
 		  , RP_CONTENT
-		  , PROCESS
 		  ,	REF_BNO
 		  ,	REPORT_UNO
 		  ,	REPORTED_UNO
@@ -747,7 +746,6 @@
 		    SEQ_REPNO.NEXTVAL
 		  , #{guilty}
 		  , #{rpContent}
-		  , #{process}
 		  , #{refBno}
 		  , #{reportUno}
 		  , #{reportedUno}

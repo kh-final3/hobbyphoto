@@ -168,18 +168,12 @@
 					background-color: #fff
 				}
 
-				.exhibitionDetail-collectionBox {
+				.exhibitionDetail-collectionBox{
 					float: right;
 					width: 48px;
 					height: 48px;
 					border-left: 1px solid #eee;
-					background: #fff url(https://og-data.s3.amazonaws.com/static/pages/img/service/detailview/lined_heart_sprite.png) 3px 3px no-repeat;
-					background-size: 84px 42px;
 					cursor: pointer
-				}
-
-				.exhibitionDetail-collectionBox.collected {
-					background-position-x: -39px
 				}
 
 				.exhibitionDetail-shareButton {
@@ -864,6 +858,20 @@
 				.info .link {
 					color: #5085BB;
 				}
+
+				#bookmark1,
+				#bookmark2 {
+					width: 48px;
+					height: 48px;
+					text-align: center;
+				}
+
+				#bookmark1 img,
+				#bookmark2 img{
+					width: 100%;
+					margin: auto;
+					display: block;
+				}
 			</style>
 		</head>
 
@@ -907,12 +915,11 @@
 									<div class="exhibitionDetail-collectionBox">
 										<button id="bookmark1" onclick="insertBook();">
 											<img src="resources/images/bookmark_blank.png">
-											</button>
-									</div>
-									<div class="exhibitionDetail-collectionBox2">
+										</button>
 										<button id="bookmark2" onclick="deleteBook();" style="display: none;">
 											<img src="resources/images/bookmark.png"></button>
 									</div>
+									
 									<div class="exhibitionDetail-shareButton"></div>
 								</div>
 								<table class="exhibitionDetail-infoTable-table">
@@ -989,11 +996,13 @@
 					<a href="exhibitList.fs" class="btn btn-sm btn-secondary"
 						style="width: 90px; height: 35px; font-size: medium;">목록가기</a>
 					<!-- 현재 로그인한 사용자가 해당 글을 쓴 본인일 경우 -->
+					<c:if test="${ loginMember.userNo eq 1}">
 
-					<a href="updateForm.ex?feNo=${ fe.feNo }" class="btn btn-sm btn-warning"
+						<a href="updateForm.ex?feNo=${ fe.feNo }" class="btn btn-sm btn-warning"
 						style="width: 90px; height: 35px; font-size: medium;">수정하기</a>
-					<a href="delete.fs?feNo=${ fe.feNo }" class="btn btn-sm btn-danger"
+						<a href="delete.fs?feNo=${ fe.feNo }" class="btn btn-sm btn-danger"
 						style="width: 90px; height: 35px; font-size: medium;">삭제하기</a>
+					</c:if>
 
 				</div>
 

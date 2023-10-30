@@ -219,7 +219,10 @@
                             </ul>
                         </div>
                     </div>
-                    <a class="enrollForm btn btn-secondary" href="cultureEnrollForm.fs">글쓰기</a>
+                    <c:if test="${ loginMember.userNo eq 1}">
+
+                        <a class="enrollForm btn btn-secondary" href="cultureEnrollForm.fs">글쓰기</a>
+                    </c:if>
                 </div>
             </div>
         </div>

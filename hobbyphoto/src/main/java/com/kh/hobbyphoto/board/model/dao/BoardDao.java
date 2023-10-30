@@ -258,4 +258,9 @@ public class BoardDao {
 		
 		return sqlSession.insert("boardMapper.insertWallPaper", wp);
 	}
+
+	public int reportBoard(SqlSessionTemplate sqlSession, Report r) {
+		
+		return sqlSession.insert("boardMapper.reportBoard", r);
+	}
 }

@@ -265,5 +265,10 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.insertWallPaper(sqlSession,wp);
 	}
 
+	public int reportBoard(Report r) {
+		
+		return bDao.reportBoard(sqlSession,r);
+	}
+
 
 }

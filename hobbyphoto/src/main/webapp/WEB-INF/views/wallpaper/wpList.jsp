@@ -46,15 +46,17 @@
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/>
-	<a href="enrollForm.wp">글쓰기</a>
-    <div class="content">
-        <br><br>
-        <div class="innerOuter" style="padding:5% 15%;">
-            <div align="center">
-                <h2>배경 화면 공유</h2>
-                <h6 style="color: gray;">예쁘고 다양한 배경화면 공유하기!</h6>
-            </div>
-            <br>
+<div class="content">
+    <br><br>
+    <div class="innerOuter" style="padding:5% 15%;">
+        <div align="center">
+            <h2>배경 화면 공유</h2>
+            <h6 style="color: gray;">예쁘고 다양한 배경화면 공유하기!</h6>
+        </div>
+        <br>
+        <c:if test="${ not empty loginMember }">
+        	<a href="enrollForm.wp">글쓰기</a>
+        </c:if>
             <div class="list">
                 <div class="wallpaper">
                     <div class="img">

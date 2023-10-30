@@ -61,9 +61,10 @@
         <br>
         <div class="wallpaper">
             <form action="insertWallPaper.wp">
-				<input type="hidden" name="img" id="">
-				<input type="hidden" name="userNo" id="">
-				<input type="hidden" name="" id="">
+				<input type="hidden" name="img" id="changeName">
+				<input type="hidden" name="userNo" value="${ loginMember.userNo}">
+				<input type="hidden" name="boardType" value="4">
+
                 <table id="contentArea" align="center" class="table">
                     <tr>
                         <th width="100">제목</th>
@@ -125,8 +126,11 @@
 							pngData: dataURL
 						}
 					}).done(function (data) {
-						
-						$(".test").attr("src", data);
+						console.log(data)
+						$("#changeName").val(data);
+
+						// Submit the form after setting the changeName value
+						$("form").submit();
 					});
 				});
 

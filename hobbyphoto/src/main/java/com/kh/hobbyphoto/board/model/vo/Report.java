@@ -9,7 +9,7 @@ import lombok.*;
 @ToString
 public class Report {
 	int rpNo;
-	int guilty;
+	String guilty;
 	String rpContent;
 	String process;
 	int refBno;
