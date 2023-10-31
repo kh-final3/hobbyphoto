@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.shop.model.service.ShopServiceImpl;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
@@ -316,20 +318,26 @@ public class ShopController {
 		}
 			
 	@RequestMapping("pro.onebuy")
-	public ModelAndView insertProductOneBuy(Orders ords, ModelAndView mv, String userNo) {
+	public ModelAndView insertProductOneBuy(Orders ords, ModelAndView mv, String userNo,String pNo, Model model) {
 		int uno = Integer.parseInt(userNo);
 		System.out.println(uno);
 		System.out.println(ords);
-		
+		//주문 테이블 입력
 		int result = sService.insertOneOrder(ords);
 		
 		if(result >0) {//주문 테이블(주문, 주문상세)등록 성공
-			//api시작 -> 
+			//상품 수량 변경
+			int result2 = sService.updateProduct(ords);
 			
-			Orders o = sService.selectOrderNo(uno);
+			if(result2 > 0) {
+				//주문 리스트 조회
+				Orders o = sService.selectOrderNo(uno);				
+				mv.addObject("o", o).setViewName("payment/success");
+				System.out.println(mv);
+			}
 			
-			mv.addObject("o", o).setViewName("payment/success");
-			System.out.println(mv);
+		}else {
+			mv.addObject("errorMsg", "단품주문실패").setViewName("payment/fail");;
 		}
 		return mv;
 	}	
@@ -386,5 +394,25 @@ public class ShopController {
 		return restul>0 ? "success":"fail";
 	}
 		
+	@RequestMapping("shop.order")
+	public ModelAndView shopOrderList(@RequestParam(value="cpage",defaultValue = "1") int currentPage,HttpSession session, ModelAndView mv) {
+		
+		Member m = (Member)session.getAttribute("loginMember");
+		int userNo = m.getUserNo();
+		System.out.println(m.getUserNo() + "나와라!!!!!!");
+		
+		//페이징
+		int listCount = sService.selectOrderListCount(userNo);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		
+		//회원의 주문리트
+		ArrayList<Orders> olist = sService.selectOrder(userNo,pi);
+		
+		System.out.println(olist + "주문조회시 조회내용?");
+		
+		mv.addObject("pi", pi).addObject("olist", olist).setViewName("shop/shopOrderlist");;
+		return mv;
+	}
+	
 }
 

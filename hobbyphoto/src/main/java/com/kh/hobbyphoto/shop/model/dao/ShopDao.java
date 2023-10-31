@@ -2,9 +2,11 @@ package com.kh.hobbyphoto.shop.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
@@ -88,7 +90,20 @@ public class ShopDao {
 	public Orders selectOrderInfo(SqlSessionTemplate sqlSession,int userNo) {
 		return sqlSession.selectOne("shopMapper.selectOrderInfo", userNo);
 	}
-	
+	public ArrayList<Orders> selectOrder(SqlSessionTemplate sqlSession,int userNo,PageInfo pi){
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.selectOrder", userNo,rowBounds);
+	}
+	public int selectOrderListCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("shopMapper.selectOrderListCount", userNo);
+	}
+	public int updateProduct(SqlSessionTemplate sqlSession,Orders ords) {
+		return sqlSession.update("shopMapper.updateProduct", ords);
+	}
 	
 	
 

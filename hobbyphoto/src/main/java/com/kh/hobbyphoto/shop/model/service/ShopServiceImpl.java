@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.shop.model.dao.ShopDao;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
@@ -174,6 +175,21 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public Orders selectOrderInfo(int userNo) {
 		return sDao.selectOrderInfo(sqlSession,userNo);
+	}
+
+	@Override
+	public ArrayList<Orders> selectOrder(int userNo,PageInfo pi) {
+		return sDao.selectOrder(sqlSession, userNo,pi);
+	}
+
+	@Override
+	public int selectOrderListCount(int userNo) {
+		return sDao.selectOrderListCount(sqlSession,userNo);
+	}
+
+	@Override
+	public int updateProduct(Orders ords) {
+		return sDao.updateProduct(sqlSession,ords);
 	}
 	
 }

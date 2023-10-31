@@ -2,6 +2,7 @@ package com.kh.hobbyphoto.shop.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
@@ -66,5 +67,12 @@ public interface ShopService {
 		//17.마이페이지 들어갈시 주문관련 정보
 		Orders selectOrderInfo(int userNo);
 		
+		//18.마이페이지=> 주문 조회
+		ArrayList<Orders> selectOrder(int userNo,PageInfo pi);
 		
+		//19.주문조회 페이징
+		int selectOrderListCount(int userNo);
+		
+		//20.상품 구매 후 재고 변동(단품)
+		int updateProduct(Orders ords);
 }

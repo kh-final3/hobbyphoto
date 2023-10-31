@@ -34,4 +34,5 @@ public class Orders {
 	
 	private String ordercount;
 	private String ordertotalprice;
+	private String delivery;
 }

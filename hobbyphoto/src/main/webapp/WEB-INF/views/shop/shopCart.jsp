@@ -228,10 +228,10 @@
                 let finalTotlaPrice = 0; // 최종 가격(총가격 + 배송비)
 
                 $(".product_body").each(function(){
-                	
+                	var price = 0;
                 	if($(this).find(".product_check").is(":checked")===true){
                     //총가격
-                    var price = $(this).find(".pb_price").text().replace(/,/g,'');
+                    price = $(this).find(".pb_price").text().replace(/,/g,'');
                     totalPrice += parseInt(price);
                     //수량
                     totalCount += parseInt($(this).find(".count").val());
@@ -244,6 +244,7 @@
                 }else {
                 	deliveryPrice = 3000;
                 }
+                
                 
 
                 finalTotlaPrice = totalPrice + deliveryPrice;
@@ -275,9 +276,11 @@
         	   var count = parseInt($input.val());
  
         	   $input.val(count + 1); //수량 1증가
+        	   console.log($(".pb_price").text());
       			
         	   //총 주문 정보 다시 계산
         	   setTotalInfo();
+        	   console.log($(".pb_price").text());
         	   
         		// AJAX로 수량 업데이트
         	    upDateAmount(this,$input.val());
@@ -325,7 +328,7 @@
                             $productBody.find('.pb_price span').text(newTotalPrice.toLocaleString('ko-KR'));
 
                             // 전체 주문 정보 다시 계산
-                            //setTotalInfo();
+                            setTotalInfo();
                         } else {
                             console.log("장바구니 ajax통신 실패");
                         }

@@ -78,7 +78,7 @@
           
           <div class="shoppingInfo">
             <p>나의 쇼핑 정보</p>
-            <a class="goj" href="#">주문 배송 조회</a> <br>
+            <a class="goj" href="shop.order">주문 배송 조회</a> <br>
             <a class="goj" href="#">취소/교환/반품 상세</a><br>
             <a class="goj" href="#">상품 리뷰</a><br>
             <a class="goj" href="shop.mp?userNo=${ loginMember.userNo }">장바구니</a><br>

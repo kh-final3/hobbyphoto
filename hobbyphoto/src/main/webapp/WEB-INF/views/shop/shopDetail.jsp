@@ -110,7 +110,6 @@
                         <button class="final" type="submit">
                             구매하기
                         </button>
-                        
                     </div>
                 </div>
             </div>
@@ -143,8 +142,8 @@
 	            let count = Number($(".count").val());
 	            let price =  Number($(".st-price").text().replace(/,/g,''));
 	            let totalPrice = price;
-	
-	            if($(".count").val() != ${ p.amount}){
+				
+	            if($(".count").val() < ${ p.amount}){
 	                $(".count").val(count+1)
 	                $(".count").text($(".count").val())
 	                totalPrice = price * $(".count").val();

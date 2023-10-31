@@ -45,6 +45,7 @@
 		<result column="status" property="status"/>
 		<result column="ordercount" property="ordercount"/>
 		<result column="ordertotalprice" property="ordertotalprice"/>
+		<result column="delivery" property="delivery"/>
 	</resultMap>
 
 	 <select id="selectProductList" resultMap="shopResult">
@@ -340,5 +341,36 @@
 				from orders
 				where user_no=#{userNo}
 	</select>
+	
+	<select id="selectOrder" resultMap="ordersResult">
+		select 
+		        order_no
+		    ,   name
+		    ,   user_no
+		    ,   address || postcode as delivery
+		    ,   phone
+		    ,   order_date
+		    ,   totalprice
+		    ,   status
+		    ,   o_msg
+		    ,   d_msg
+		from orders
+		where user_no = #{userNo}
+		order
+			by order_no desc
+	</select>
+	
+	<select id="selectOrderListCount" resultType="_int">
+		select
+		        count(*)
+		    from orders
+		where user_no = #{userNo}
+	</select>
+	
+	<update id="updateProduct">
+		update product
+			set amount = amount - ${amount}
+			where p_no = #{pNo}
+	</update>
 	
 </mapper>
