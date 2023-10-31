@@ -15,6 +15,11 @@
 		<result column="status" property="status" />
 		<result column="social" property="social" />
 	</resultMap>
+	<resultMap type="Follow" id="resultFollow">
+		<result column="user_id" property="userId"/>
+		<result column="follow_id" property="followId"/>
+		<result column="follow_date" property="followDate"/>
+	</resultMap>
   
 	<insert id="insertMember" parameterType="Member">
 		insert
@@ -186,4 +191,52 @@
 		   set nickname = #{ nickName }
 		 where user_no = #{ userNo }
 	</update>
+	<update id="updateDescription">
+		update
+		       member
+		   set description = #{ description }
+		 where user_no = #{ userNo }
+	</update>
+	<update id="updateGender">
+		update
+		       member
+		   set gender = #{ gender }
+		 where user_no = #{ userNo }
+	</update>
+	
+	<select id="selectFollowCount" resultType="_int">
+		select
+		       count(*)
+		  from follow
+		 where follow_id = #{ userNo }
+	</select>
+	
+	<select id="selectFollow" resultMap="resultFollow">
+		select
+		       m.user_Id
+             , nickname
+             , profile_img
+             , follow_date
+		  from follow f
+          left join member m on (f.user_id = m.user_no)
+		 where follow_id = #{ userNo }
+	</select>
+	
+	<select id="selectFollowingCount" resultType="_int">
+		select
+		       count(*)
+		  from follow
+		 where user_id = #{ userNo }
+	</select>
+	
+	<select id="selectFollowing" resultMap="resultFollow">
+		select
+		       m.user_Id
+             , nickname
+             , profile_img
+             , follow_date
+		  from follow f
+          left join member m on (f.follow_id = m.user_no)
+		 where f.user_id = #{ userNo }
+	</select>
 </mapper>

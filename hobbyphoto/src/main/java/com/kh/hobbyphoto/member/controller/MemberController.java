@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.BoardServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.Board;
+import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.member.model.service.MemberServiceImpl;
@@ -91,7 +92,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping("myPage.me")
-	public String myPage() {
+	public String myPage(HttpSession session) {
+		int userNo = ((Member)session.getAttribute("loginMember")).getUserNo();
+		
+		// 나를 팔로우 하는 사람들
+		int countFollow = ms.selectFollowCount(userNo);
+		session.setAttribute("countFollower", countFollow);
+		if(countFollow>0) {
+			ArrayList<Follow> follow = ms.selectFollow(userNo);
+			session.setAttribute("follower", follow);
+		}
+		
+		// 내가 팔로우 하는 사람들
+		int countFollowing = ms.selectFollowCount(userNo);
+		session.setAttribute("countFollow", countFollowing);
+		if(countFollow>0) {
+			ArrayList<Follow> following = ms.selectFollowing(userNo);
+			session.setAttribute("follow", following);
+		}
+		
 		return "member/myPage";
 	}
 	
@@ -234,8 +253,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping("updateForm.me")
-	public String updateMember() {
+	public String updateMemberForm() {
 		return "member/update";
+	}
+	
+	@RequestMapping("update.me")
+	public String updateMember(HttpSession session) {
+			Member m = new Member();
+			m.setUserId(((Member)session.getAttribute("loginMember")).getUserId());
+			session.setAttribute("loginMember", ms.loginMember(m));
+				
+			return "redirect:myPage.me";
 	}
 	
 	@ResponseBody
@@ -244,16 +272,44 @@ public class MemberController {
 		int result = 0;
 		String nickName = "";
 		if(m.getNickName() !=null){
-			 result = ms.updateNick(m);
+			result = ms.updateNick(m);
 		}
 		if(result > 0) {
-			Member loginMember = ms.loginMember(m);
-			System.out.println(loginMember);
-			session.setAttribute("loginMember", loginMember);
 			nickName = m.getNickName();
 		}
 		
 		return nickName;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="updateDescription.me",produces="text/html; charset=UTF-8")
+	public String updateDescription(Member m,HttpSession session) {
+
+		int result = 0;
+		String description = "";
+		if(m.getDescription() !=null){
+			result = ms.updateDescription(m);
+		}
+		if(result > 0) {
+			description = m.getDescription();
+		}
+		
+		return description;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="updateGender.me",produces="text/html; charset=UTF-8")
+	public String updateGender(Member m,HttpSession session) {
+		int result = 0;
+		String gender = "";
+		if(m.getGender() !=null){
+			result = ms.updateGender(m);
+		}
+		if(result > 0) {
+			gender = m.getGender();
+		}
+		
+		return gender;
+	}
 }

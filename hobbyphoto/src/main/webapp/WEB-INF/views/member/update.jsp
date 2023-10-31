@@ -180,7 +180,7 @@
                 <h6 style="font-weight: 600; text-align: center;">반가워요!</h6>
                 <h6 style="text-align: center;">${ loginMember.nickName }님</h6>
                 <div id="btnall_my">
-                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my1" onclick="history.back()">뒤로가기</button><br>                    
+                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my1" onclick="location.href='update.me'">수정하기</button><br>                    
                     <button type="submit" class="btn btn-sm btn-primary" id="btn_my2" onclick ="location.href='deleteForm.me'">회원탈퇴</button>
                 </div>
             </div>
@@ -229,9 +229,20 @@
 	                            <td>성별</td>
 	                            <td class="gender_td">
                                     <div class="gender_text" >
-                                        ${ loginMember.gender }
+                                    	<c:choose>
+                                    		<c:when test="${ loginMember.gender eq 'M' }">
+                                    			남성
+                                    		</c:when>
+                                    		<c:when test="${ loginMember.gender eq 'F' }">
+                                    			여성
+                                    		</c:when>
+                                    		<c:otherwise>
+                                    			없음
+                                    		</c:otherwise>
+                                    	</c:choose>
+                                        
                                     </div>
-                                    <button class="text_update_btn">변경</button>
+                                    <button class="text_update_btn" onclick="gender_update()">변경</button>
                                 </td>
 	                        </tr>
 	                    </table>
@@ -249,7 +260,7 @@
         	$(document).on("click", ".nickName_td .update_btn", function(){
                 $.ajax({
                 	url:"updateNick.me",
-                	data:{nickName:$("#change_nickName").val()},
+                	data:{nickName:$("#change_nickName").val(),userNo:${loginMember.userNo}},
                 	success:(data)=>{
                 		if(data != ""){
                 			$(".nickName_td").html("<div class='nickName_text'>"+ data +"</div><button class='text_update_btn' onclick='nickName_update()'>변경</button>")
@@ -265,28 +276,61 @@
         })
         
         function description_update() {
-            $(".description_td").html("<div><input type='text' id='change_description' placeholder='닉네임을 입력하세요'></div><button type='button' class='update_btn'>변경</button> <button class='cancle_btn'>취소</button>")
+            $(".description_td").html("<div><input type='text' id='change_description' placeholder='자기소개를 입력하세요'></div><button type='button' class='update_btn'>변경</button> <button class='cancle_btn'>취소</button>")
         }
 
         $(()=>{
         	$(document).on("click", ".description_td .update_btn", function(){
                 $.ajax({
-                	url:"description.me",
-                	data:{nickName:$("#change_description").val()},
+                	url:"updateDescription.me",
+                	data:{description:$("#change_description").val(),userNo:${loginMember.userNo}},
                 	success:(data)=>{
+                		console.log(data)
                 		if(data != ""){
-                			$(".description_td").html("<div class='description_text'>"+ data +"</div><button class='text_update_btn' onclick='nickName_update()'>변경</button>")
+                			$(".description_td").html("<div class='description_text'>"+ data +"</div><button class='text_update_btn' onclick='description_update()'>변경</button>")
                 		}else{
-	                		$(".description_td").html("<div class='description_text'>${ loginMember.nickName }</div><button class='text_update_btn' onclick='nickName_update()'>변경</button>")
+	                		$(".description_td").html("<div class='description_text'>${ loginMember.description }</div><button class='text_update_btn' onclick='description_update()'>변경</button>")
                 		}
                 	},
                 	error:()=>{
-                		console.log("닉네임 변경 실패")
+                		console.log("자기소개 변경 실패")
                 	}
                 })
              })
         })
+        
+        function gender_update() {
+            $(".gender_td").html("<div><input type='text' id='change_gender' placeholder='남성 M/ 여성 F'></div><button type='button' class='update_btn'>변경</button> <button class='cancle_btn'>취소</button>")
+        }
 
+        $(()=>{
+        	$(document).on("click", ".gender_td .update_btn", function(){
+        		if($("#change_gender").val() == "M" || $("#change_gender").val() == "F"){
+	                $.ajax({
+	                	url:"updateGender.me",
+	                	data:{gender:$("#change_gender").val(),userNo:${loginMember.userNo}},
+	                	success:(data)=>{
+	                		console.log(data)
+	                		if(data != ""){
+	                			if(data == "M"){
+	                				$(".gender_td").html("<div class='gender_text'>남성</div><button class='text_update_btn' onclick='gender_update()'>변경</button>")
+	                			}else{
+	                				$(".gender_td").html("<div class='gender_text'>여성</div><button class='text_update_btn' onclick='gender_update()'>변경</button>")
+	                			}
+	                			
+	                		}else{
+		                		$(".gender_td").html("<div class='gender_text'>${ loginMember.gender }</div><button class='text_update_btn' onclick='gender_update()'>변경</button>")
+	                		}
+	                	},
+	                	error:()=>{
+	                		console.log("성별 변경 실패");
+	                	}
+	                })
+        		}else{
+                    alert("M 또는 F 로 입력해주세요");
+                }
+            })
+        })
     </script>
     <jsp:include page="../common/footer.jsp"/>
 </body>
