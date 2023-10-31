@@ -13,7 +13,6 @@
     <link href="https://www.mfac.or.kr/web/css/common.css?ver=20231011" rel="stylesheet" type="text/css">
     <link href="https://www.mfac.or.kr/web/css/sub.css?ver=20231011" rel="stylesheet" type="text/css">
     <link href="https://www.mfac.or.kr/web/css/responsive.css?ver=20231011" rel="stylesheet" type="text/css">
-
 </head>
 
 <body>
@@ -106,6 +105,70 @@
             </div>
         </div>
     </div>
+    <script>
+    if (${ loginMember.userNo } !== null) {
+        let userNo = ${ loginMember.userNo };
+
+        function insertBook() {
+            $.ajax({
+                url: "book.bo",
+                data: {
+                boardNo: ${ fe.feNo },
+                boardWriter: userNo,
+                boardType: 5
+            },
+                success: function (result) {
+                    if (result === 'Y') {
+                        $("#bookmark1").css("display", "none");
+                        $("#bookmark2").css("display", "");						
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+
+        function deleteBook() {
+            $.ajax({
+                url: "deleteBook.bo",
+                data: {
+                    boardNo: ${ fe.feNo },
+                    boardWriter: userNo,
+                    boardType: 5
+                    },
+                success: function (result) {
+                    if(result == 'Y'){
+                        $("#bookmark1").css("display", "");
+                        $("#bookmark2").css("display", "none");
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+                $(function () {
+                    $.ajax({
+                        url: "bookCheck.bo",
+                        data: {
+                            boardNo: ${ fe.feNo },
+                            boardWriter: userNo,
+                            boardType: 5
+                            },
+                    success: function (result) {
+                        if(result == 'Y'){
+                            $("#bookmark2").css("display", "");
+                            $("#bookmark1").css("display", "none");
+                        }else{
+                            $("#bookmark2").css("display", "none");
+                            $("#bookmark1").css("display", "");                    	
+                        }
+                    },
+                    error: function (result) {
+                    }
+                });
+        })
+    }
+    </script>
     <jsp:include page="../common/footer.jsp"/>
     
 </body>

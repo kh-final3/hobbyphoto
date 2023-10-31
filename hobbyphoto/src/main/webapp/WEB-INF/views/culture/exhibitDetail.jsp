@@ -917,7 +917,8 @@
 											<img src="resources/images/bookmark_blank.png">
 										</button>
 										<button id="bookmark2" onclick="deleteBook();" style="display: none;">
-											<img src="resources/images/bookmark.png"></button>
+											<img src="resources/images/bookmark.png">
+										</button>
 									</div>
 									
 									<div class="exhibitionDetail-shareButton"></div>

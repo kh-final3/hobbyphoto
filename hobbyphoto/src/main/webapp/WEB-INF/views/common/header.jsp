@@ -215,7 +215,7 @@
 	    <div class="mb_outer">
 	        <div class="mb_menu-area">
 	            <div id="mb_logo">
-	                <img src="resources/images/logo.png" alt="로고">
+	                <img src="resources/images/logo.png" alt="로고" class="gomain">
 	            </div> 
 	            <div id="mb_nav">
 	                <ul id="mb_navi">
@@ -318,5 +318,10 @@
         function logout() {
 			location.href="logout.me"
 		}
+    </script>
+    <script>
+	    $(".gomain").click(function(){
+	    	location.href='/hobbyphoto'
+	    })
     </script>
 </html>
