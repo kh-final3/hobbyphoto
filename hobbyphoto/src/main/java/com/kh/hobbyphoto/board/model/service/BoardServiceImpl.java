@@ -78,18 +78,24 @@ public class BoardServiceImpl implements BoardService{
 		return result * result2;
 	}
 	
+	@Override
 	public int updatePhAtBoard(Attachment at) {
 		return bDao.updatePhAtBoard(sqlSession, at);
 	}
 	
-
+	@Override
 	public int insertNewAttachment(Attachment at) {
 		return bDao.insertNewAttachment(sqlSession, at);
 	}
 	
-
+	@Override
 	public ArrayList<Reply> selectPhReplyList(int boardNo) {
 		return bDao.selectPhReplyList(sqlSession, boardNo);
+	}
+	
+	@Override
+	public int insertPhReply(Reply r) {
+		return bDao.insertPhReply(sqlSession, r);
 	}
 
 	// ------------------------------------------------------------
@@ -114,10 +120,12 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.selectRcBoard(sqlSession, boardNo);
 	}
 
+	@Override
 	public ArrayList<Attachment> selectRcAtBoard(int boardNo) {
 		return bDao.selectRcAtBoard(sqlSession, boardNo);
 	}
-
+	
+	@Override
 	public int insertRcBoard(Board b, ArrayList<Attachment> list) {
 		int result = bDao.insertRcBoard(sqlSession, b);
 		int result2 = 0;
@@ -130,6 +138,7 @@ public class BoardServiceImpl implements BoardService{
 		return result * result2;
 	}
 
+	@Override
 	public int deleteRcBoard(int boardNo) {
 		return bDao.deleteRcBoard(sqlSession, boardNo);
 	}
@@ -145,6 +154,7 @@ public class BoardServiceImpl implements BoardService{
 		return result * result2;
 	}
 	
+	@Override
 	public int updateRcAtBoard(Attachment at) {
 		return bDao.updateRcAtBoard(sqlSession, at);
 	}
@@ -179,7 +189,6 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public ArrayList<Block> myBlockList(PageInfo pi, int userNo) {
 		ArrayList<Block> list = bDao.myBlockList(sqlSession,pi,userNo);
-		System.out.println("서비스" + list);
 		return list;
 	}
 
@@ -274,14 +283,5 @@ public class BoardServiceImpl implements BoardService{
 	public int updateCulture(Festival fe) {
 		return bDao.updateCulture(sqlSession, fe);
 	}
-
-	public int insertPhReply(Reply r) {
-		return bDao.insertPhReply(sqlSession, r);
-	}
-
-
-
-
-
 
 }
