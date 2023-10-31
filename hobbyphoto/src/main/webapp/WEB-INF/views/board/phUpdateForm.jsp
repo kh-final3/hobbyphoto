@@ -117,7 +117,7 @@
                     <div class="photo-area">
 						<div class="mainpho">
 						    <img src="resources/upfiles/${at[0].changeName}" alt="" id="image1" width="450" height="200" onclick="chooseFile(1);">
-						    <input type="file" name="reupfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;" required>
+						    <input type="file" name="reupfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;">
 						</div>
 			            <div class="pho">
 	                        <div class="pho1">

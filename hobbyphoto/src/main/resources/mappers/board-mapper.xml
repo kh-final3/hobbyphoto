@@ -51,7 +51,7 @@
 	<resultMap type="Reply" id="replyResult">
 		<result column="reply_no" property="replyNo"/>
 		<result column="reply_content" property="replyContent"/>
-		<result column="reply_writer" property="replyWriter"/>
+		<result column="user_id" property="replyWriter"/>
 		<result column="nickname" property="replyWriter"/>
 		<result column="create_date" property="createDate"/>
 		<result column="status" property="status"/>
@@ -239,6 +239,37 @@
 	    DELETE FROM board
 	    WHERE board_no = #{boardNo}
 	</delete>
+	
+	<select id="selectPhReplyList" resultMap="replyResult">
+		select
+		    r.reply_no,
+		    m.user_id,
+		    r.reply_content,
+		    to_char(create_date, 'YYYY-MM-DD') as create_date
+		from Reply r
+		join member m on m.user_no = reply_writer
+		where r.status = 'Y'
+		    and ref_bno = #{boardNo}
+		order by reply_no desc
+	</select>
+	
+	<insert id="insertPhReply">
+		insert
+			into reply
+			(
+			   reply_no
+			 , reply_content
+			 , ref_bno
+			 , reply_writer
+			)	
+			values 
+			(
+			   seq_rep_no.nextval
+			 , #{replyContent}
+			 , #{refBno}
+			 , #{replyWriter}
+			)
+	</insert>
 	
 	<select id="selectRcListCount" resultType="_int">
 		select

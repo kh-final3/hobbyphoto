@@ -86,9 +86,12 @@ public class BoardServiceImpl implements BoardService{
 	public int insertNewAttachment(Attachment at) {
 		return bDao.insertNewAttachment(sqlSession, at);
 	}
+	
 
-	
-	
+	public ArrayList<Reply> selectPhReplyList(int boardNo) {
+		return bDao.selectPhReplyList(sqlSession, boardNo);
+	}
+
 	// ------------------------------------------------------------
 
 	@Override
@@ -264,7 +267,6 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public int insertAttachmentPlace2(Attachment attachment) {
-		
 		return bDao.insertAttachment2(sqlSession, attachment);
 	}
 	
@@ -272,6 +274,11 @@ public class BoardServiceImpl implements BoardService{
 	public int updateCulture(Festival fe) {
 		return bDao.updateCulture(sqlSession, fe);
 	}
+
+	public int insertPhReply(Reply r) {
+		return bDao.insertPhReply(sqlSession, r);
+	}
+
 
 
 

@@ -111,8 +111,6 @@ public class BoardController {
 		return changeName;
 	}
 	
-	//---------------------------------------------------------------------
-	
 	@RequestMapping("phUpdateForm.bo")
 	public String phUpdate(int phno, Model model) {
 		model.addAttribute("b", bService.selectPhBoard(phno));
@@ -123,7 +121,6 @@ public class BoardController {
 	@RequestMapping("phUpdate.bo")
 	public String updateBoard(Board b, MultipartFile[] reupfiles, HttpSession session, Model model) {
         ArrayList<Attachment> list = new ArrayList<>();
-
         for (int i = 0; i < reupfiles.length; i++) {
             if (reupfiles[i] != null && !reupfiles[i].isEmpty()) {
                 String changeName = saveFile(reupfiles[i], session);
@@ -167,6 +164,22 @@ public class BoardController {
 			model.addAttribute("errorMsg", "게시글 삭제 실패");
 			return "common/errorPage";
 		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="phRlist.bo", produces="application/json; charset=UTF-8")
+	public String ajaxSelectReplyList(int phno) {
+		ArrayList<Reply> list = bService.selectPhReplyList(phno);
+		return new Gson().toJson(list);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="phRinsert.bo")
+	public String ajaxInsertReply(Reply r) {
+		int result = bService.insertPhReply(r);
+		return result > 0 ? "success" : "fail";
 		
 	}
 	
@@ -391,11 +404,6 @@ public class BoardController {
 		}
 		
 	}
-	
-
-
-
-	
 
 	@RequestMapping("updateForm.pl")
 	public String plUpdateForm(int pno, Model model) {
@@ -408,7 +416,6 @@ public class BoardController {
 	        @RequestParam("originFileNo1") int originFileNo1, @RequestParam("originFileNo2") int originFileNo2,
 	        @RequestParam("originFileNo3") int originFileNo3, @RequestParam("originFileNo4") int originFileNo4,
 	        HttpSession session, Model model) {
-	    System.out.println(originFileNo1);
 	    ArrayList<Attachment> list = new ArrayList<>();
 	    Place existingPlace = bService.selectPlace(p.getPno());
 	    p.setPimg1(existingPlace.getPimg1());

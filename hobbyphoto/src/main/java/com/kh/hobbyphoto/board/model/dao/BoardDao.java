@@ -69,12 +69,12 @@ public class BoardDao {
 	}
 	
 	
-	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int boardNo) {
-		return (ArrayList) sqlSession.selectList("boardMapper.selectReplyList", boardNo);
+	public ArrayList<Reply> selectPhReplyList(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList) sqlSession.selectList("boardMapper.selectPhReplyList", boardNo);
 	}
 
-	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
-		return sqlSession.insert("boardMapper.insertReply", r);
+	public int insertPhReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("boardMapper.insertPhReply", r);
 	}
 	
 	public ArrayList<Board> selectTopBoardList(SqlSessionTemplate sqlSession){
@@ -251,6 +251,10 @@ public class BoardDao {
 	public int updateCulture(SqlSessionTemplate sqlSession, Festival fe) {
 		return sqlSession.update("boardMapper.updateCulture", fe);
 	}
+
+
+
+
 
 
 

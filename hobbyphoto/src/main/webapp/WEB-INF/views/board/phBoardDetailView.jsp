@@ -216,50 +216,53 @@
                     <button class="back">❮</button>
                     <button class="next">❯</button>
                 </div>
-                
-                <script>
-                    let pages = 1;//현재 인덱스 번호
-                    let positionValue = 0;//images 위치값
-                    const IMAGE_WIDTH = 580;//한번 이동 시 IMAGE_WIDTH만큼 이동한다.
-                    //DOM
-                    const backBtn = document.querySelector(".back")
-                    const nextBtn = document.querySelector(".next")
-                    const images = document.querySelector(".images")
-            		
+
+				<script>
+                    let pages = ${at.size()};
+                    let positionValue = 0;
+                    const IMAGE_WIDTH = 580;
+                    const backBtn = document.querySelector(".back");
+                    const nextBtn = document.querySelector(".next");
+                    const images = document.querySelector(".images");
+
                     function next() {
-                    if (pages< 5) {
-                        backBtn.removeAttribute('disabled')//뒤로 이동해 더이상 disabled가 아니여서 속성을 삭제한다.
-                        positionValue -= IMAGE_WIDTH;//IMAGE_WIDTH의 증감을 positionValue에 저장한다.
-                        images.style.transform = "translateX("+positionValue+"px)";
-                            //x축으로 positionValue만큼의 px을 이동한다.
-                        pages += 1; //다음 페이지로 이동해서 pages를 1증가 시킨다.
+                        if (pages > 1) {
+                            backBtn.removeAttribute('disabled');
+                            positionValue -= IMAGE_WIDTH;
+                            images.style.transform = "translateX(" + positionValue + "px)";
+                            pages -= 1;
+                        }
+                        if (pages === 1) {
+                            backBtn.setAttribute('disabled', 'true');
+                        }
                     }
-                    if (pages === ${at.size()}) { //
-                        nextBtn.setAttribute('disabled', 'true')//마지막 장일 때 next버튼이 disabled된다.
-                    }
-                    }
-            
+
                     function back() {
-                    if (pages > 0) {
-                        nextBtn.removeAttribute('disabled')
-                        positionValue += IMAGE_WIDTH;
-                        images.style.transform = "translateX("+positionValue+"px)";
-                        pages -= 1; //이전 페이지로 이동해서 pages를 1감소 시킨다.
+                        if (pages < ${at.size()}) {
+                            nextBtn.removeAttribute('disabled');
+                            positionValue += IMAGE_WIDTH;
+                            images.style.transform = "translateX(" + positionValue + "px)";
+                            pages += 1;
+                        }
+                        if (pages === ${at.size()}) {
+                            nextBtn.setAttribute('disabled', 'true');
+                        }
                     }
-                    if (pages === 1) {
-                        backBtn.setAttribute('disabled', 'true')//마지막 장일 때 back버튼이 disabled된다.
+
+                    function init() {
+                        backBtn.setAttribute('disabled', 'true');
+                        backBtn.addEventListener("click", back);
+                        nextBtn.addEventListener("click", next);
+
+                        if (pages <= 1) {
+                            nextBtn.setAttribute('disabled', 'true');
+                        }
                     }
-                    }
-            
-                    function init() {  //초기 화면 상태
-                    backBtn.setAttribute('disabled', 'true'); //속성이 disabled가 된다.
-                    backBtn.addEventListener("click", back); //클릭시 다음으로 이동한다.
-                    nextBtn.addEventListener("click", next);//클릭시 이전으로 이동한다.
-                    }
+
                     init();
                 </script>
-                
-                <c:if test="${ loginMember.userId eq b.boardWriter }">
+
+				<c:if test="${ loginMember.userId eq b.boardWriter }">
 		            <div align="center">
 		             		<a class="btn btn-primary" href="phBoardList.bo">목록으로</a>
 			                <a class="btn btn-warning" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
@@ -314,20 +317,75 @@
                 <hr id="detail-hr">
                 <div class="content-area">
                     <div class="review-area">
-                        
+                        <!-- 댓글 들어가는 자리 -->
                     </div>
                 </div>
                 <hr id="detail-hr">
                 <div class="under-area">
-                    <p>댓글(2)</p>
+                    <p>댓글(<span id="rcount">0</span>)</p>
                     <div class="writer">
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
-                        <button>등록</button>
+                        <textarea name="" id="content" cols="30" rows="10"></textarea>
+                        <button onclick="addReply();">등록</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+    	$(function(){
+    		selectPhReplyList();
+    	})
+    	
+    	function addReply(){
+    		if($("#content").val().trim().length != 0){
+    			
+    			$.ajax({
+    				url:"phRinsert.bo",
+    				data:{
+    					refBno:${b.boardNo},
+    					replyContent:$("#content").val(),
+    					replyWriter:'${ loginMember.userNo }'
+    					
+    				}, success:function(status){
+    					if(status == "success"){
+    						selectPhReplyList();
+    					}
+    				}, error:function(){
+    					console.log("댓글 작성용 ajax 요청 실패!")
+    				}
+    			})
+    		} else {
+    			alertify.alert("댓글 작성 후 등록 요청해주세요!");
+    		}
+    	}
+    	
+    	function selectPhReplyList(){
+    		$.ajax({
+    			url:"phRlist.bo",
+    			data:{
+    				phno:${ b.boardNo }
+    			}, success:function(list){
+    				console.log(list);
+    				
+	    				let value = "";
+	    				for(let i in list){
+	    					value += "<tr>"
+	    						  + "<th>" + list[i].replyWriter + "</th>"
+	    						  + "<td>" + list[i].replyContent + "</td>"
+	    						  + "<td>" + list[i].createDate + "</td>"
+	    						  + "</tr>"
+	    					}
+    				
+    				$(".review-area").html(value);
+    				$("#rcount").text(list.length);
+
+    			}, error:function(){
+    				console.log("댓글리스트 조회용 ajax 통신 실패!")
+    			}
+    		})
+    	}
+    </script>
+    
 <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
