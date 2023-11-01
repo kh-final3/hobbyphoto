@@ -184,26 +184,24 @@
       <div class="carousel-item active">
         <!--가로(사진 변경은 여기서)-->
         <img class="d-block w-100" 
-          src="https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+          src="resources/images/사진피크닉.jpg"
           alt="First slide">
           <div class="carousel-caption d-none d-md-block">
-              <h5>TEST</h5>
-              <p>테스트입니다.</p>
           </div>
       </div>
       <div class="carousel-item">
         <img class="d-block w-100"
-          src="https://images.pexels.com/photos/2355519/pexels-photo-2355519.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+          src="resources/images/영상의기초.jpg"
           alt="Second slide">
       </div>
       <div class="carousel-item">
         <img class="d-block w-100"
-          src="https://images.pexels.com/photos/2544554/pexels-photo-2544554.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+          src="resources/images/오픈클래스.jpg"
           alt="Third slide">
       </div>
       <div class="carousel-item">
         <img class="d-block w-100"
-          src="https://mblogthumb-phinf.pstatic.net/MjAxOTAzMDZfMTMy/MDAxNTUxODE0NTI0MDE2.aHZ-ft3YNSC3XGhzrGEKFdU4o_lJ8qBRC-F4aftjplAg.gS9c4UEnLDY_kXveY6xVoM1GqUUqZSQM8BRFKCHl7LYg.JPEG.mong728/%EC%B4%88%EA%B3%A0%ED%99%94%EC%A7%88_%EC%BB%B4%ED%93%A8%ED%84%B0_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_(3).jpg?type=w800"
+          src="resources/images/인물사진.jpg"
           alt="Third slide">
       </div>
     </div>

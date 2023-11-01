@@ -371,7 +371,7 @@
 	    				for(let i in list){
 	    					value += "<tr>"
 	    						  + "<th>" + list[i].replyWriter + "</th>"
-	    						  + "<td>" + list[i].replyContent + "</td>"
+	    						  + "<td style='width:200px;'>" + list[i].replyContent + "</td>"
 	    						  + "<td>" + list[i].createDate + "</td>"
 	    						  + "</tr>"
 	    					}
@@ -380,9 +380,9 @@
     				$("#rcount").text(list.length);
 
     			}, error:function(){
-    				console.log("댓글리스트 조회용 ajax 통신 실패!")
+    				console.log("댓글리스트 조회용 ajax 통신 실패!");
     			}
-    		})
+    		});
     	}
     </script>
     

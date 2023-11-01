@@ -81,7 +81,7 @@
 	            	</div>
 	            	<br>
 		            <div id="write3">
-		                <label id="ff4">내용</label><em style="color: red;">*</em><br><textarea name="content" cols="90" rows="8" style="resize: none;" required></textarea>
+		                <label id="ff4">내용</label><em style="color: red;">*</em><br><textarea name="content" cols="71" rows="8" style="resize: none;" required></textarea>
 		                <br>
 		            </div>
 		            <br>
