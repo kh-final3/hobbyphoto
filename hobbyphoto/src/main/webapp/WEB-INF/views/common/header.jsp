@@ -113,14 +113,14 @@
         }
         
         #sh_text {
-            margin-left: 10px;
+            margin-left: -30px;
             margin-top: 5px;
-            width: 180px;
+            width: 185px;
             border: none; 
-            border-bottom: 1px solid #aeaeae; 
+            border-bottom: 1px solid #aeaeae6b; 
         }
         #search_text {
-        display: flex;
+        	display: flex;
         }
 
         #search {
@@ -202,7 +202,10 @@
             font-weight: bolder;
         }
         
-       	
+        input::placeholder{
+          font-size: 14px;
+        }
+        
   </style>
 </head>
 	<c:if test="${ not empty alertMsg }">
@@ -233,7 +236,7 @@
 	            <div id="mb_search">
 	                <form action="#" id="search_form">
 	                    <div id="search_text">
-	                        <input type="text" name="keyword" id="sh_text" placeholder="검색어를 입력해주세요">
+	                        <input type="text" name="keyword" id="sh_text" placeholder="&nbsp&nbsp&nbsp검색어를 입력해주세요">
 	                        <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
 	                    </div>
 	                    

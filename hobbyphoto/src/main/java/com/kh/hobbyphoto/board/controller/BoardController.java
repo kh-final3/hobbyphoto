@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.*;
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.*;
@@ -272,7 +273,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping("rcUpdate.bo")
-	public String rcUpdate(Board b, MultipartFile[] upfile, HttpSession session, Model model) {
+	public String rcUpdate(Board b, MultipartFile[] upfile, HttpSession session, Model model,  
+			@RequestParam("originFileNo1") int originFileNo1, @RequestParam("originFileNo2") int originFileNo2,
+	        @RequestParam("originFileNo3") int originFileNo3, @RequestParam("originFileNo4") int originFileNo4 ) {
 		ArrayList<Attachment> list = new ArrayList<>();
 		
 		for(int i = 0; i < upfile.length; i++) {
@@ -299,6 +302,22 @@ public class BoardController {
 	  	    return "redirect:rcBoardList.bo?phno=" + b.getBoardNo();
 	    }
 	  
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="rcRlist.bo", produces="application/json; charset=UTF-8")
+	public String ajaxSelectRcReplyList(int phno) {
+		ArrayList<Reply> list = bService.selectRcReplyList(phno);
+		return new Gson().toJson(list);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="rcRinsert.bo")
+	public String ajaxInsertRcReply(Reply r) {
+		int result = bService.insertRcReply(r);
+		return result > 0 ? "success" : "fail";
+		
 	}
 
 

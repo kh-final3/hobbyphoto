@@ -55,7 +55,7 @@
 		<result column="count" property="count"></result>
 	</resultMap>
 	
-	<resultMap type="S_group" id="SgroupResult">
+	<resultMap type="Sgroup" id="SgroupResult">
 		<result column="group_no" property="groupNo"></result>
 		<result column="img" property="img"></result>
 		<result column="nickname" property="userNo"></result>

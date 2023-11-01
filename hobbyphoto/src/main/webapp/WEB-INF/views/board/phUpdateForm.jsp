@@ -118,23 +118,28 @@
 						<div class="mainpho">
 						    <img src="resources/upfiles/${at[0].changeName}" alt="" id="image1" width="450" height="200" onclick="chooseFile(1);">
 						    <input type="file" name="reupfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;">
+						    <input type="hidden" name="originFileNo1" value=${ at[0].fileLevel }>
 						</div>
 			            <div class="pho">
 	                        <div class="pho1">
 	                            <img src="resources/upfiles/${at[1].changeName}" alt="" id="image2" width="200" height="200" onclick="chooseFile(2);">
 	                            <input type="file" name="reupfiles" id="file2" onchange="loadImg(this, 2);" style="display: none;">
+	                            <input type="hidden" name="originFileNo2" value=${ at[1].fileLevel }>
 	                        </div>
 	                        <div class="pho1">
 	                            <img src="resources/upfiles/${at[2].changeName}" alt="" id="image2" width="200" height="200" onclick="chooseFile(3);">
 	                            <input type="file" name="reupfiles" id="file3" onchange="loadImg(this, 3);" style="display: none;">
+	                            <input type="hidden" name="originFileNo3" value=${ at[2].fileLevel }>
 	                        </div>
 	                        <div class="pho1">
 	                            <img src="resources/upfiles/${at[3].changeName}" alt="" id="image2" width="200" height="200" onclick="chooseFile(4);">
 	                            <input type="file" name="reupfiles" id="file4" onchange="loadImg(this, 4);" style="display: none;">
+	                            <input type="hidden" name="originFileNo4" value=${ at[3].fileLevel }>
 	                        </div>
 	                        <div class="pho1">
 	                            <img src="resources/upfiles/${at[4].changeName}" alt="" id="image2" width="200" height="200" onclick="chooseFile(5);">
 	                            <input type="file" name="reupfiles" id="file5" onchange="loadImg(this, 5);" style="display: none;">
+	                            <input type="hidden" name="originFileNo5" value=${ at[4].fileLevel }>
 	                        </div>
 			            </div>
                     </div>
