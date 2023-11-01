@@ -60,7 +60,12 @@
 	                    <td>${ b.boardWriter }</td>
 	                </tr>
 	                <tr>
-	                    <td colspan="2" id="etc"><span>작성일</span> <span class="text">${ b.createDate }</span> <span>조회수</span> <span class="text">${ b.count }</span></td>
+	                    <td colspan="2" id="etc">
+		                    <span>작성일</span>
+		                    <span class="text">${ b.createDate }</span>
+		                    <span>조회수</span>
+		                    <span class="text">${ b.count }</span>
+	                    </td>
 	                </tr>
 	                <tr>
 	                    <td colspan="2">
@@ -70,14 +75,14 @@
 							</p>
 						</td>
 	                </tr>
-		                <tr>
-		                    <th>첨부파일</th>
-		                    <td>
+	                <tr>
+	                    <th>첨부파일</th>
+	                    <td>
 		                     <c:forEach var="a" items="${ at }">    
 				                <img src="${ a.filePath }">
 				             </c:forEach>
-		                    </td>
-	                	</tr>
+	                    </td>
+                	</tr>
 	            </table>
 	        </div>
 	        <br>
@@ -109,43 +114,80 @@
 			</script> 
 	            <ul class="replyArea">
 	                <ul class="reply">
-	                    <div class="reply-title">
-	                        <div class="reply-info"><span style="margin-right: 10px;">user01</span> <span class="text">2023-10-10</span></div>
-	                        <div class="reply-btn">
-	                            <button class="btn btn-dark btn-sm">삭제</button>
-	                        </div>
-	                    </div>
-	                    <div class="reply-content">댓글입니다.</div>
-	                </ul>
-	                <ul class="reply">
-	                    <div class="reply-title">
-	                        <div class="reply-info"><span style="margin-right: 10px;">user01</span> <span class="text">2023-10-10</span></div>
-	                        <div class="reply-btn">
-	                            <button class="btn btn-dark btn-sm">삭제</button>
-	                        </div>
-	                    </div>
-	                    <div class="reply-content">댓글입니다.</div>
-	                </ul>
-	                <ul class="reply">
-	                    <div class="reply-title">
-	                        <div class="reply-info"><span style="margin-right: 10px;">user01</span> <span class="text">2023-10-10</span></div>
-	                        <div class="reply-btn">
-	                            <button class="btn btn-dark btn-sm">삭제</button>
-	                        </div>
-	                    </div>
-	                    <div class="reply-content">댓글입니다.</div>
+	                    <!-- 댓글 들어가는 자리 -->
 	                </ul>
 	            </ul>
 	            <br>
 	            <div class="insertReply">
-	                    <div class="ir-title">댓글달기</div>
-	                    <div class="ir-content">
-	                            <textarea name="" id="" cols="120" rows="3" style="resize: none;"></textarea>
-	                            <button class="ir-btn btn-dark">작성</button>
-	                    </div>
+                    <div class="ir-title">댓글달기</div>
+                    <div class="ir-content">
+                            <textarea name="" id="content" cols="130" rows="3"></textarea>
+                            <button class="ir-btn btn-dark" onclick="addReply();">작성</button>
+                    </div>
 	            </div>
 	        <br><br>
 	    </div>
 	</body>
+	    <script>
+    	$(function(){
+    		selectRcReplyList();
+    	})
+    	
+    	function addReply(){
+    		if($("#content").val().trim().length != 0){
+    			
+    			$.ajax({
+    				url:"rcRinsert.bo",
+    				data:{
+    					refBno:${ b.boardNo },
+    					replyContent:$("#content").val(),
+    					replyWriter:'${ loginMember.userNo }'
+    					
+    				}, success:function(status){
+    					if(status == "success"){
+    						selectRcReplyList();
+    					}
+    				}, error:function(){
+    					console.log("댓글 작성용 ajax 요청 실패!")
+    				}
+    			})
+    		} else {
+    			alertify.alert("댓글 작성 후 등록 요청해주세요!");
+    		}
+    	}
+    	
+    	function selectRcReplyList(){
+    		$.ajax({
+    			url:"rcRlist.bo",
+    			data:{
+    				phno:${ b.boardNo }
+    			}, success:function(list){
+    				console.log(list);
+    				
+	    				let value = "";
+	    				for(let i in list){
+	    					value += "<ul class='reply'>"
+		    						   + "<div class='reply-title'>"
+			                        	   + "<div class='reply-info'>"
+					                           + "<span style='margin-right: 10px;'>" + list[i].replyWriter + "</span>"
+					                           + "<span>" + list[i].createDate + "</span>"
+			                        	   + "</div>"
+					                       + "<div>"
+					                       	   + "<button class='btn btn-dark btn-sm'>삭제</button>"
+					                       + "</div>"
+		                    		   + "</div>"
+	                    		   + "<div class='reply-content'>" + list[i].replyContent + "</div>"
+	                    		   + "</ul>"
+	    					}
+    				
+    				$(".reply").html(value);
+    				$("#rcount").text(list.length);
+
+    			}, error:function(){
+    				console.log("댓글리스트 조회용 ajax 통신 실패!")
+    			}
+    		})
+    	}
+    </script>
 	<jsp:include page="../common/footer.jsp"/>
 </html>

@@ -250,7 +250,7 @@
 		join member m on m.user_no = reply_writer
 		where r.status = 'Y'
 		    and ref_bno = #{boardNo}
-		order by reply_no desc
+		order by reply_no asc
 	</select>
 	
 	<insert id="insertPhReply">
@@ -403,6 +403,37 @@
 	   , file_path = #{filePath}
 	 where ref_bno = #{refBno}
 	</update>
+	
+	<select id="selectRcReplyList" resultMap="replyResult">
+			select
+		    r.reply_no,
+		    m.user_id,
+		    r.reply_content,
+		    to_char(r.create_date, 'YYYY-MM-DD') as "create_date"
+		from Reply r
+		join member m on m.user_no = reply_writer
+		where r.status = 'Y'
+		    and ref_bno = #{boardNo}
+		order by reply_no desc
+	</select>
+	
+	<insert id="insertRcReply">
+		insert
+			into reply
+			(
+			   reply_no
+			 , reply_content
+			 , ref_bno
+			 , reply_writer
+			)	
+			values 
+			(
+			   seq_rep_no.nextval
+			 , #{replyContent}
+			 , #{refBno}
+			 , #{replyWriter}
+			)
+	</insert>
 
 	
 	<!-- myPage 관련  -->

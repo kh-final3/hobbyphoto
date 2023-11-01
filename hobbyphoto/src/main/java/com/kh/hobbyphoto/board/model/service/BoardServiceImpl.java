@@ -155,6 +155,16 @@ public class BoardServiceImpl implements BoardService{
 	public int updateRcAtBoard(Attachment at) {
 		return bDao.updateRcAtBoard(sqlSession, at);
 	}
+	
+	@Override
+	public ArrayList<Reply> selectRcReplyList(int boardNo) {
+		return bDao.selectRcReplyList(sqlSession, boardNo);
+	}
+
+	@Override
+	public int insertRcReply(Reply r) {
+		return bDao.insertRcReply(sqlSession, r);
+	}
 
 	// ------------------------------------------------------------
 	@Override
@@ -280,5 +290,7 @@ public class BoardServiceImpl implements BoardService{
 	public int updateCulture(Festival fe) {
 		return bDao.updateCulture(sqlSession, fe);
 	}
+
+
 
 }
