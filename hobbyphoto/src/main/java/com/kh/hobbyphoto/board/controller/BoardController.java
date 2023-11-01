@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.*;
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.*;

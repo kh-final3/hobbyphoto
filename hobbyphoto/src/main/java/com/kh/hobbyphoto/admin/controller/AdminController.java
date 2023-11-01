@@ -294,7 +294,7 @@ public class AdminController {
 			return "common/errorPage";
 		}
 		
-		
+	}
 	
 		
 		//현재 넘어온 첨부파일 그 자체를 서버의 폴더에 저장 시키는 역할(지영)
@@ -341,23 +341,6 @@ public class AdminController {
 				return "admin/adminTables";
 			}	
 				
-				
-			}
-	
-		// 관리자페이지 차트
-		   @RequestMapping("chart.da")
-		   public String adminCharts() {
-		      
-		      return "admin/adminCharts";
-		   }
-		   
-		   // 관리자페이지 관리자 통계
-		   @RequestMapping("table.da")
-		   public String adminTables() {
-		      
-		      return "admin/adminTables";
-		   }   
-		   
 		   //관리자페이지 상품 상세보기
 		   @RequestMapping("adminPro.de")
 		   public ModelAndView selectProductdetail(String pNo, ModelAndView mv) {

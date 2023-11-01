@@ -128,15 +128,18 @@ public class ShopServiceImpl implements ShopService{
 		
 		int result1 = sDao.insertProductAllBuy(sqlSession,ords);
 		int result2 =0;
+		int result3 =0;
 		
 		if(result1>0) {
 			
 			for(D_order oCart : buylist) {
 				result2 += sDao.insertDOrderCart(sqlSession,oCart);
-				
+				result3 += sDao.updateProductAll(sqlSession,oCart);
 			}
+
 		}
-		int result = result1*result2;
+	
+		int result = result1*result2*result3;
 		
 		return result;
 	}

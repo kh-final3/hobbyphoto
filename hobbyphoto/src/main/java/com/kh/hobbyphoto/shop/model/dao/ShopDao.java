@@ -73,6 +73,10 @@ public class ShopDao {
 		return sqlSession.insert("shopMapper.insertOneDorder", oCart);
 	}
 	
+	public int updateProductAll(SqlSessionTemplate sqlSession,D_order oCart) {
+		return sqlSession.update("shopMapper.updateProduct", oCart);
+	}
+	
 	public Orders selectOrderNo(SqlSessionTemplate sqlSession,int userNo) {
 		return sqlSession.selectOne("shopMapper.selectOrderNo", userNo);
 	}

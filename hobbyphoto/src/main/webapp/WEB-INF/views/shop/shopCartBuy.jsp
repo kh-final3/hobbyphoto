@@ -373,7 +373,7 @@
 			    	    pay_method: "card",
 			    	    merchant_uid : 'merchant_'+new Date().getTime(),
 			    	    name : $("#pName").val(), //상품명
-			    	    amount : $("#totalPrice").val(),  //결제 가격
+			    	    amount : 1,  //결제 가격
 			    	    buyer_email : '${loginMember.email}',
 			    	    buyer_name : '${loginMember.userName}',
 			    	    buyer_tel : $("#phone").val(),
@@ -400,7 +400,7 @@
 			    	    pay_method: "card",
 			    	    merchant_uid : 'merchant_'+new Date().getTime(),
 			    	    name : $(".pd_table tbody").children().eq(0).children().eq(3).children().val(),
-			    	    amount : $("#totalPrice").val(),
+			    	    amount : 1,
 			    	    buyer_email : '${loginMember.email}',
 			    	    buyer_name : '${loginMember.userName}',
 			    	    buyer_tel : $("#phone").val(),
