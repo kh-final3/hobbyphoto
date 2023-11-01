@@ -70,6 +70,9 @@ public interface BoardService {
 	 int insertBookmark(Board b);
 	 int deleteBookmark(Board b);
 	 
+	 int checkLike(Board b);
+	 int insertLike(Board b);
+	 int deleteLike(Board b);
 	 
-	 int insertWallPaper(Wallpaper wp);
+	 int insertWallPaper(WallPaper wp);
 }

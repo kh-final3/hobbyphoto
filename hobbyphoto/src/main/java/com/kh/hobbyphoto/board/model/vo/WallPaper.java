@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
-public class Wallpaper {
+public class WallPaper {
 	int backNo;
 	String userNo;
 	String img;
@@ -18,4 +18,5 @@ public class Wallpaper {
 	int download;
 	int boardType;
 	String status;
+	String bgTitle;
 }

@@ -84,6 +84,20 @@
 		<result column="block_date" property="blockDate"/>
 	</resultMap>
 
+	<resultMap type="WallPaper" id="wallResult">
+		<result column="BACK_NO" property="backNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="IMG" property="IMG"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="COUNT" property="COUNT"/>
+		<result column="DOWNLOAD" property="download"/>
+		<result column="BOARD_TYPE" property="boardType"/>
+		<result column="BACK_TITLE" property="bgTitle"/>
+		<result column="STATUS" property="STATUS"/>
+	</resultMap>
+	
+	
+	
 	<select id="selectPhListCount" resultType="_int">
 		select
 			count(*)
@@ -703,6 +717,32 @@
 		WHERE USER_NO = #{boardWriter}
 		AND BOARD_NO = #{boardNo}
 		AND TYPE = #{boardType}
+	</delete>
+	
+	
+	<select id="checkLike" resultType="_int">
+		SELECT count(BOARD_NO)
+		FROM likes
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND board_type = #{boardType}
+	</select>
+	
+	<insert id="insertLike">
+		INSERT INTO likes
+		VALUES
+		(
+		  #{boardWriter}
+		, #{boardNo}
+		, #{boardType}
+		)
+	</insert>
+	
+	<delete id="deleteLike">
+		DELETE LIKEs
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND board_type = #{boardType}
 	</delete>
 	
 	<insert id="insertWallPaper">

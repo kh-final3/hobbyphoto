@@ -13,6 +13,7 @@
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Festival" alias="Festival"/>
         <typeAlias type="com.kh.hobbyphoto.board.model.vo.BackGround" alias="BackGround"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.WallPaper" alias="WallPaper"/>
 		<typeAlias type="com.kh.hobbyphoto.group.model.vo.Sgroup" alias="Sgroup"/>
 		<typeAlias type="com.kh.hobbyphoto.group.model.vo.Sgroup" alias="S_group"/>
 		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Member" alias="Member"/>

@@ -260,7 +260,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public int insertWallPaper(Wallpaper wp) {
+	public int insertWallPaper(WallPaper wp) {
 		
 		return bDao.insertWallPaper(sqlSession,wp);
 	}
@@ -268,6 +268,24 @@ public class BoardServiceImpl implements BoardService{
 	public int reportBoard(Report r) {
 		
 		return bDao.reportBoard(sqlSession,r);
+	}
+	
+	@Override
+	public int checkLike(Board b) {
+		
+		return bDao.checkLike(sqlSession,b);
+	}
+	
+	@Override
+	public int insertLike(Board b) {
+		
+		return bDao.insertLike(sqlSession,b);
+	}
+	
+	@Override
+	public int deleteLike(Board b) {
+		
+		return bDao.deleteLike(sqlSession,b);
 	}
 
 

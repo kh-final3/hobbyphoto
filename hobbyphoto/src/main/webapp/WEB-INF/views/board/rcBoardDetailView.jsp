@@ -37,6 +37,11 @@
     .ir-title{height: 55px; padding: 10px 30px; font-weight: bolder;}
     .ir-content{padding: 10px 30px;}
     .ir-btn{margin-left: 10px; width: 100px; height: 75px; position: relative; bottom: 33px;}
+	#etc>button{
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+            font-size: 14px;
+        }
 </style>
 </head>
 	<jsp:include page="../common/header.jsp"/>
@@ -59,7 +64,15 @@
 	                    <td>${ b.boardWriter }</td>
 	                </tr>
 	                <tr>
-	                    <td colspan="2" id="etc"><span>작성일</span> <span class="text">${ b.createDate }</span> <span>조회수</span> <span class="text">${ b.count }</span></td>
+	                    <td colspan="2" id="etc">
+							<span>작성일</span> 
+							<span class="text">${ b.createDate }</span> 
+							<span>조회수</span><span class="text">${ b.count }</span>
+							
+							<button id="like1" onclick="insertLike();">좋아요 🤍</button>
+							<button id="like2" style="display: none;" onclick="deleteLike();">좋아요 💚</button>
+							<button type="button" data-toggle="modal" data-target="#reportBoard">신고</button>	
+						</td>
 	                </tr>
 	                <tr>
 	                    <td colspan="2"><p style="height:150px">${ b.boardContent }</p></td>
@@ -142,5 +155,75 @@
 	        <br><br>
 	    </div>
 	</body>
+	<script>
+        if (${ loginMember.userNo } !== null) {
+            let userNo = ${ loginMember.userNo };
+            let bno = ${ b.boardNo };
+            function insertLike(){
+                $.ajax({
+                    url:"like.bo",
+                    data:{boardNo:bno, 
+						boardWriter:userNo,
+						  boardType: 2
+                        },
+                    success:function(result){
+                        
+                        if(result == 'Y'){
+                            $("#like1").css("display", "none");
+                            $("#like2").css("display", "");
+                        }
+                    },
+                    error:function(){
+                        
+                    }
+                })
+            }
+            
+            function deleteLike(){
+        
+                $.ajax({
+                    url:"deleteLike.bo",
+                    data:{boardNo:bno, 
+						boardWriter:userNo,
+                          boardType: 2
+                        },
+                    success:function(result){
+                        
+                        if(result == 'Y'){
+                            $("#like2").css("display", "none");
+                            $("#like1").css("display", "");
+                        }
+                    },
+                    error:function(){
+                        
+                    }
+                })
+            }
+            
+            $(function(){
+                
+                $.ajax({
+                    url:"likeCheck.bo",
+                    data:{boardNo:bno, 
+						  boardWriter:userNo,
+						  boardType: 2
+                        },
+                    success:function(result){
+                        ;
+                        if(result == 'Y'){
+                            $("#like2").css("display", "");
+                            $("#like1").css("display", "none");
+                        }else{
+                            $("#like2").css("display", "none");
+                            $("#like1").css("display", "");                    	
+                        }
+                    },
+                    error:function(result){
+                        ;
+                    }
+                })
+            })
+        }
+    </script>
 	<jsp:include page="../common/footer.jsp"/>
 </html>

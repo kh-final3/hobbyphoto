@@ -578,7 +578,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("insertWallPaper.wp")
-	public String insertWallPaper(Wallpaper wp,Model model) {
+	public String insertWallPaper(WallPaper wp,Model model) {
 
 	    System.out.println(wp);
 		int result = bService.insertWallPaper(wp);
@@ -631,7 +631,7 @@ public class BoardController {
 
 	@ResponseBody
 	@RequestMapping("bookCheck.bo")
-	public String bookmarkCheck(Board b){
+	public String checkBookmark(Board b){
 		int count = bService.checkBook(b);
 		if(count > 0) {
 			return "Y";
@@ -657,6 +657,44 @@ public class BoardController {
 	@RequestMapping("deleteBook.bo")
 	public String deleteBookmark(Board b){
 		int count = bService.deleteBookmark(b);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping("likeCheck.bo")
+	public String checkLike(Board b){
+		int count = bService.checkLike(b);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("like.bo")
+	public String insertLike(Board b){
+		int count = bService.insertLike(b);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("deleteLike.bo")
+	public String deleteLike(Board b){
+		int count = bService.deleteLike(b);
 		if(count > 0) {
 			return "Y";
 		}else {
