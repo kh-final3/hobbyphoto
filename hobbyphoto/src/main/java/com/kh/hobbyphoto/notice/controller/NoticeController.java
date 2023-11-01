@@ -170,4 +170,24 @@ public class NoticeController {
 		}
 	}
 	
+	@RequestMapping("shUpdateForm.no")
+	public String shUpdateForm(int num, Model model) {
+		model.addAttribute("n", nService.selectShNotice(num));
+		return "notice/shNoticeUpdateForm";
+	}
+	
+	@RequestMapping("shUpdate.no")
+	public String shUpdate(Notice n, HttpSession session, Model model) {
+		int result = nService.updateShNotice(n);
+		
+	    if (result <= 0) {
+	        model.addAttribute("errorMsg", "게시글 수정 실패");
+	        return "common/errorPage";
+	    } else {
+	    	 session.setAttribute("alertMsg", "게시글 수정에 성공했습니다.");
+	  	    return "redirect:shDetail.no?shno=" + n.getNoticeNo();
+	    }
+		
+	}
+	
 }

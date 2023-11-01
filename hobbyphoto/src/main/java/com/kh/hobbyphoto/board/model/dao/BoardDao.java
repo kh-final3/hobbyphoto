@@ -51,6 +51,9 @@ public class BoardDao {
 	public int deletePhBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deletePhBoard", boardNo);
 	}
+	
+	
+	
 
 	public int updatePhBoard(SqlSessionTemplate sqlSession, Board b) {
 		return sqlSession.update("boardMapper.updatePhBoard", b);
@@ -60,14 +63,17 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.updatePhAtBoard", at);
 	}
 	
+	public int insertNewAttachment(SqlSessionTemplate sqlSession, Attachment at) {
+		return sqlSession.insert("boardMapper.insertNewAttachment", at);
+	}
 	
 	
-	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int boardNo) {
-		return (ArrayList) sqlSession.selectList("boardMapper.selectReplyList", boardNo);
+	public ArrayList<Reply> selectPhReplyList(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList) sqlSession.selectList("boardMapper.selectPhReplyList", boardNo);
 	}
 
-	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
-		return sqlSession.insert("boardMapper.insertReply", r);
+	public int insertPhReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("boardMapper.insertPhReply", r);
 	}
 	
 	public ArrayList<Board> selectTopBoardList(SqlSessionTemplate sqlSession){
@@ -113,6 +119,14 @@ public class BoardDao {
 		return sqlSession.delete("boardMapper.deleteRcBoard", boardNo);
 	}
 	
+	public int updateRcBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.updateRcBoard", b);
+	}
+	
+	public int updateRcAtBoard(SqlSessionTemplate sqlSession, Attachment at) {
+		return sqlSession.update("boardMapper.updateRcAtBoard", at);
+	}
+	
 	public int myListCount(SqlSessionTemplate sqlSession,int userNo) {
 		return sqlSession.selectOne("boardMapper.myListCount",userNo);
 	}
@@ -154,7 +168,6 @@ public class BoardDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		ArrayList<Block> list = (ArrayList)sqlSession.selectList("boardMapper.myBlockList", userNo, rowBounds);
-		System.out.println("다오" + list);
 		return list;
 	}
 	
@@ -237,4 +250,12 @@ public class BoardDao {
 	public int updateCulture(SqlSessionTemplate sqlSession, Festival fe) {
 		return sqlSession.update("boardMapper.updateCulture", fe);
 	}
+
+
+
+
+
+
+
+
 }

@@ -85,6 +85,10 @@ public class NoticeServiceImpl implements NoticeService{
 	public int shNoticeDelete(int num) {
 		return nDao.shNoticeDelete(sqlSession, num);
 	}
+
+	public int updateShNotice(Notice n) {
+		return nDao.updateShNotice(sqlSession, n);
+	}
 	
 
 

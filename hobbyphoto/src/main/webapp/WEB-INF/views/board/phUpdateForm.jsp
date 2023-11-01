@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<style>
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
@@ -86,7 +88,7 @@
         .mainpho{
             border: 1px solid black;
             width: 79%;
-            height: 45%;
+            height: 23%;
             margin: auto;
             margin-top: 45px;
             border: none;
@@ -109,33 +111,33 @@
 <body>
     <div class="warp">
         <div class="innerOut">
-            <form action="" class="form-area">
+            <form action="phUpdate.bo"  enctype="multiPart/form-data" class="form-area" method="post" class="form-area">
+			  <input type="hidden" name="boardNo" value="${ b.boardNo }">
                 <div class="content-area">
                     <div class="photo-area">
-                        <div class="mainpho">
-                            <img src="${ filePath }" alt="" id="image1" width="450" height="400" onclick="chooseFile(1);">
-                            <input type="file" name="upfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;" required>
-                        </div>
-                        <div class="pho">
-                            <div class="pho1">
-                                <img src="" alt="" id="image2" width="200" height="200" onclick="chooseFile(2);">
-                                <input type="file" name="upfiles" id="file2" onchange="loadImg(this, 2);" style="display: none;">
-                            </div>
-                            <div class="pho2">
-                                <img src="" alt="" id="image3" width="200" height="200" onclick="chooseFile(3);">
-                                <input type="file" name="upfiles" id="file3" onchange="loadImg(this, 3);" style="display: none;">
-                            </div>
-                            <div class="pho3">
-                                <img src="" alt="" id="image4" width="200" height="200" onclick="chooseFile(4);">
-                                <input type="file" name="upfiles" id="file4" onchange="loadImg(this, 4);" style="display: none;">
-                            </div>
-                            <div class="pho4">
-                                <img src="" alt="" id="image5" width="200" height="200" onclick="chooseFile(5);">
-                                <input type="file" name="upfiles" id="file5" onchange="loadImg(this, 5);" style="display: none;">
-                            </div>
-                        </div>
+						<div class="mainpho">
+						    <img src="resources/upfiles/${at[0].changeName}" alt="" id="image1" width="450" height="200" onclick="chooseFile(1);">
+						    <input type="file" name="reupfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;">
+						</div>
+			            <div class="pho">
+	                        <div class="pho1">
+	                            <img src="resources/upfiles/${at[1].changeName}" alt="" id="image2" width="200" height="200" onclick="chooseFile(2);">
+	                            <input type="file" name="reupfiles" id="file2" onchange="loadImg(this, 2);" style="display: none;">
+	                        </div>
+	                        <div class="pho1">
+	                            <img src="resources/upfiles/${at[2].changeName}" alt="" id="image2" width="200" height="200" onclick="chooseFile(3);">
+	                            <input type="file" name="reupfiles" id="file3" onchange="loadImg(this, 3);" style="display: none;">
+	                        </div>
+	                        <div class="pho1">
+	                            <img src="resources/upfiles/${at[3].changeName}" alt="" id="image2" width="200" height="200" onclick="chooseFile(4);">
+	                            <input type="file" name="reupfiles" id="file4" onchange="loadImg(this, 4);" style="display: none;">
+	                        </div>
+	                        <div class="pho1">
+	                            <img src="resources/upfiles/${at[4].changeName}" alt="" id="image2" width="200" height="200" onclick="chooseFile(5);">
+	                            <input type="file" name="reupfiles" id="file5" onchange="loadImg(this, 5);" style="display: none;">
+	                        </div>
+			            </div>
                     </div>
-
                     <script>
                         function chooseFile(num) {
                             $("#file" + num).click();
@@ -188,9 +190,9 @@
                     </script>
 
                     <div class="writer-area">
-                        <input type="text" name="boardTitle" id="boardTitle" class="title-input" placeholder="제목을 입력해주세요." value="${ b.boardTitle }" readonly><br>
-                       <textarea name="boardContent" id="boardContent" class="text-area" placeholder="내용을 입력해주세요.">${ b.boardContent }</textarea> <br>
-                        <input type="text" name="hashTag" id="hashTag" class="tag-input" placeholder="해시태그를 입력해주세요." value="${ b.hashTag }">
+                        <input type="text" name="boardTitle" id="" class="title-input" placeholder="제목을 입력해주세요." value="${ b.boardTitle }"><br>
+                       <textarea name="boardContent" id="" class="text-area" placeholder="내용을 입력해주세요.">${ b.boardContent }</textarea> <br>
+                        <input type="text" name="hashTag" id="" class="tag-input" placeholder="해시태그를 입력해주세요." value="${ b.hashTag }">
                     </div>
                     <div class="btn-area">
                         <button>수정하기</button>
