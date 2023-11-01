@@ -281,7 +281,7 @@ public class AdminController {
 			return "common/errorPage";
 		}
 		
-		
+	}
 	
 		
 		//현재 넘어온 첨부파일 그 자체를 서버의 폴더에 저장 시키는 역할(지영)
@@ -438,7 +438,7 @@ public class AdminController {
 			   
 		   }
 		   
-}
+
 		// 사진 게시물 삭제 서비스
 		      @RequestMapping("pdelete.bo")
 		      public String deleBoard(String boardTitle, HttpSession session, Model model) { 

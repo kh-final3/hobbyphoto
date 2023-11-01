@@ -16,22 +16,6 @@
 		<result column="social" property="social" />
 	</resultMap>
 	
-	<resultMap type="Board" id="boardResult">
-		<result column="board_no" property="boardNo"/>
-		<result column="board_title" property="boardTitle"/>
-		<result column="board_content" property="boardContent"/>
-		<result column="nickname" property="boardWriter"/>
-		<result column="count" property="count"/>
-		<result column="board_type" property="boardType"/>
-		<result column="status" property="status"/>
-		<result column="create_date" property="createDate"/>
-		<result column="board_content" property="boardContent"/>
-		<result column="hashtag" property="hashTag"/>
-		<result column="thumbnail" property="thumbnail"/>
-		<result column="board_writer" property="boardWriter"/>
-		<result column="file_path" property="filePath"/>
-	</resultMap>
-	
 	<resultMap type="Attachment" id="AttachmentResult">
 		<result column="file_no" property="fileNo"/>
 		<result column="file_level" property="fileLevel"/>
@@ -69,15 +53,6 @@
 		<result column="board_type" property="boardType"></result>
 	</resultMap>
 	
-	<resultMap type="BackGround" id="BackResult">
-		<result column="back_no" property="backNo"></result>
-		<result column="nickname" property="userNo"></result>
-		<result column="img" property="img"></result>
-		<result column="create_date" property="createDate"></result>
-		<result column="count" property="count"></result>
-		<result column="download" property="downLoad"></result>
-	</resultMap>
-	
 	<resultMap type="Product" id="shopResult">
 		<result column="p_no" property="pNo"/>
 		<result column="p_name" property="pName"/>
@@ -91,21 +66,6 @@
 		<result column="p_type" property="pType"/>
 		<result column="status" property="status"/>
 	</resultMap>
-	
-	<resultMap type="Member" id="resultMember">
-      <result column="user_no" property="userNo" />
-      <result column="user_id" property="userId" />
-      <result column="user_pwd" property="userPwd" />
-      <result column="user_name" property="userName" />
-      <result column="nickname" property="nickName" />
-      <result column="email" property="email" />
-      <result column="gender" property="gender" />
-      <result column="phone" property="phone" />
-      <result column="description" property="description" />
-      <result column="profile_img" property="profileImg" />
-      <result column="status" property="status" />
-      <result column="social" property="social" />
-   </resultMap>
 	
 	<resultMap type="Board" id="boardResult">
       <result column="board_no" property="boardNo"/>
@@ -122,43 +82,7 @@
       <result column="board_writer" property="boardWriter"/>
       <result column="file_path" property="filePath"/>
    </resultMap>
-   
-   <resultMap type="Attachment" id="AttachmentResult">
-      <result column="file_no" property="fileNo"/>
-      <result column="file_level" property="fileLevel"/>
-      <result column="origin_name" property="originName"/>
-      <result column="change_name" property="changeName"/>
-      <result column="file_path" property="filePath"/>
-      <result column="upload_date" property="uploadDate"/>
-      <result column="status" property="status"/>
-      <result column="ref_bno" property="refBno"/>
-   </resultMap>
-   
-	<resultMap type="Report" id="ReportResult">
-      <result column="rp_no" property="rpNo"></result>
-      <result column="guilty" property="guilty"></result>
-      <result column="rp_content" property="rpContent"></result>
-      <result column="process" property="process"></result>
-      <result column="ref_bno" property="refBno"></result>
-      <result column="report_uno" property="reportUno"></result>
-      <result column="reported_uno" property="reportedUno"></result>
-      <result column="board_type" property="boardType"></result>
-   </resultMap>
-   
-   <resultMap type="S_group" id="SgroupResult">
-      <result column="group_no" property="groupNo"></result>
-      <result column="img" property="img"></result>
-      <result column="nickname" property="userNo"></result>
-      <result column="title" property="title"></result>
-      <result column="conent" property="conent"></result>
-      <result column="p_total" property="pTotal"></result>
-      <result column="location" property="location"></result>
-      <result column="g_date" property="gDate"></result>
-      <result column="create_date" property="createDate"></result>
-      <result column="status" property="status"></result>
-      <result column="board_type" property="boardType"></result>
-   </resultMap>
-   
+
    <resultMap type="BackGround" id="BackResult">
       <result column="back_no" property="backNo"></result>
       <result column="nickname" property="userNo"></result>
