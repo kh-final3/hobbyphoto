@@ -61,4 +61,17 @@ public interface AdminService {
 	// 4_2. 신고 게시물 처리완료 버튼
 	int processed(String rpNo);
 	
+
+	//3.상품 삭제(지영)
+	int adminProdelete(int pNo);
+	
+	//4.상품 상세보기(지영)
+	Product selectProductdetail(int pno);
+	
+	//5.상품 수정 폼열기
+	Product adminProductupdateForm(int pNo);
+	
+	//6.상품 수정(지영)
+	int adminProductupdate(Product p);
+
 }

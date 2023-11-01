@@ -2,10 +2,14 @@ package com.kh.hobbyphoto.shop.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
+import com.kh.hobbyphoto.shop.model.vo.D_order;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Repository
@@ -35,9 +39,9 @@ public class ShopDao {
 	public int deleteCartProduct(SqlSessionTemplate sqlSession,Cart c) {
 		return sqlSession.delete("shopMapper.deleteCartProduct", c);
 	}
-//	public ArrayList<Cart> selectCartBuy(SqlSessionTemplate sqlSession,Cart b){
-//		return (ArrayList)sqlSession.selectList("shopMapper.selectCartBuy", b);
-//	}
+	public ArrayList<Cart> selectCartBuy(SqlSessionTemplate sqlSession,Cart b){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectCartBuy", b);
+	}
 	
 	public int selectProductamount(SqlSessionTemplate sqlSession,int pno) {
 		return sqlSession.selectOne("shopMapper.selectProductamount", pno);
@@ -46,5 +50,61 @@ public class ShopDao {
 	public Product selectBuyProduct(SqlSessionTemplate sqlSession,int pno) {
 		return sqlSession.selectOne("shopMapper.selectBuyProduct", pno);
 	}
+	public ArrayList<Product> selectshopkeyword(SqlSessionTemplate sqlSession,String keyword) {
+		return (ArrayList)sqlSession.selectList("shopMapper.selectshopkeyword", keyword);
+	}
 	
+	public ArrayList<Product> selectbrandProduct(SqlSessionTemplate sqlSession,int brandNo){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectbrandProduct", brandNo);
+	}
+	public ArrayList<Product> selectAllSearchProduct(SqlSessionTemplate sqlSession,Product p){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectAllSearchProduct", p);
+	}
+	public int insertOneOrder(SqlSessionTemplate sqlSession,Orders ords) {
+		return sqlSession.insert("shopMapper.insertOneOrder", ords);
+	}
+	public int insertOneDorder(SqlSessionTemplate sqlSession,Orders ords) {
+		return sqlSession.insert("shopMapper.insertOneDorder", ords);
+	}
+	public int insertProductAllBuy(SqlSessionTemplate sqlSession,Orders ords) {
+		return sqlSession.insert("shopMapper.insertOneOrder", ords);
+	}
+	public int insertDOrderCart(SqlSessionTemplate sqlSession, D_order oCart) {
+		return sqlSession.insert("shopMapper.insertOneDorder", oCart);
+	}
+	
+	public Orders selectOrderNo(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("shopMapper.selectOrderNo", userNo);
+	}
+	
+	public int deleteCartBuyPro(SqlSessionTemplate sqlSession,D_order d) {
+		return sqlSession.delete("shopMapper.deleteCartBuyPro", d);
+	}
+	
+	public ArrayList<Cart> selectAmount(SqlSessionTemplate sqlSession,Cart c){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectAmount", c);
+	}
+	public int deleteAmountZero(SqlSessionTemplate sqlSession,Cart de) {
+		return sqlSession.delete("shopMapper.deleteCartProduct", de);
+	}
+	public Orders selectOrderInfo(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("shopMapper.selectOrderInfo", userNo);
+	}
+	public ArrayList<Orders> selectOrder(SqlSessionTemplate sqlSession,int userNo,PageInfo pi){
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		return (ArrayList)sqlSession.selectList("shopMapper.selectOrder", userNo,rowBounds);
+	}
+	public int selectOrderListCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("shopMapper.selectOrderListCount", userNo);
+	}
+	public int updateProduct(SqlSessionTemplate sqlSession,Orders ords) {
+		return sqlSession.update("shopMapper.updateProduct", ords);
+	}
+	
+	
+
 }

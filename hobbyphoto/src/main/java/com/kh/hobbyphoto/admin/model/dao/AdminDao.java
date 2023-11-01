@@ -104,6 +104,21 @@ public class AdminDao {
 		
 		return (ArrayList)sqlSession.selectList("adminMapper.selecAdminProtList", null, rowBounds);
 	}
+	public int adminProdelete(SqlSessionTemplate sqlSession,int pno) {
+		return sqlSession.delete("adminMapper.adminProdelete", pno);
+	}
+	
+	public Product selectProductdetail(SqlSessionTemplate sqlSession,int pNo) {
+		return sqlSession.selectOne("adminMapper.selectProductdetail", pNo);
+	}
+	public Product adminProductupdateForm(SqlSessionTemplate sqlSession,int pNo) {
+		return sqlSession.selectOne("adminMapper.adminProductupdateForm", pNo);
+	}
+	
+	public int adminProductupdate(SqlSessionTemplate sqlSession, Product p) {
+		System.out.println("dao에서의 p" + p);
+		return sqlSession.update("adminMapper.adminProductupdate", p);
+	}
 	
 	
 	

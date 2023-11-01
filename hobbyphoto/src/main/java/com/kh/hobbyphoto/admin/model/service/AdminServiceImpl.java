@@ -108,21 +108,44 @@ public class AdminServiceImpl implements AdminService{
 		return aDao.processed(sqlSession, rpNo);		
 	}
 
-	//리스트에 뿌릴 상품 정보 조회
+	//리스트에 뿌릴 상품 정보 조회(지영)
 	@Override
 	public ArrayList<Product> selecAdminProtList(PageInfo pi) {
 		return aDao.selecAdminProtList(sqlSession,pi);
 	}
 
-	//페이징위한 상품 개수 조회
+	//페이징위한 상품 개수 조회(지영)
 	@Override
 	public int selectAdminProListCount() {
 		return aDao.selectAdminProListCount(sqlSession);
   }
+
 
 	//상품 등록(지영)
 	@Override
 	public int insertProduct(Product p) {
 		return aDao.insertProduct(sqlSession, p);
   }
+
+	@Override
+	public int adminProdelete(int pNo) {
+		return aDao.adminProdelete(sqlSession,pNo);
+	}
+
+	@Override
+	public Product selectProductdetail(int pno) {
+		return aDao.selectProductdetail(sqlSession,pno);
+	}
+
+	@Override
+	public Product adminProductupdateForm(int pNo) {
+		return aDao.adminProductupdateForm(sqlSession,pNo);
+	}
+	
+	@Override
+	public int adminProductupdate(Product p) {
+		System.out.println(p+"service에서의 p");
+		return aDao.adminProductupdate(sqlSession,p);
+	}
+
 }

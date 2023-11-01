@@ -12,6 +12,7 @@
 		<result column="thumbnail" property="thumbnail"/>
 		<result column="p_dimg" property="pDimg"/>
 		<result column="p_simg" property="pSimg"/>
+		<result column="p_type" property="pType"/>
 	</resultMap>
 
 	<resultMap type="Cart" id="cartResult">
@@ -22,6 +23,29 @@
 		<result column="brand_no" property="brandNo"/>
 		<result column="brand_name" property="brandName"/>
 		<result column="thumbnail" property="thumbnail"/>
+		<result column="p_type" property="pType"/>
+		<result column="productamount" property="productamount"/>
+		<result column="cartamount" property="cartamount"/>
+		<result column="productprice" property="productprice"/>
+		<result column="brandnoe" property="brandnoe"/>
+		<result column="brandnamee" property="brandnamee"/>
+	</resultMap>
+	
+	<resultMap type="Orders" id="ordersResult">
+		<result column="order_no" property="orderNo"/>
+		<result column="user_no" property="userNo"/>
+		<result column="name" property="name"/>
+		<result column="address" property="address"/>
+		<result column="postcode" property="postcode"/>
+		<result column="phone" property="phone"/>
+		<result column="totalPrice" property="totalPrice"/>
+		<result column="o_msg" property="OMsg"/>
+		<result column="d_msg" property="DMsg"/>
+		<result column="order_date" property="orderDate"/>
+		<result column="status" property="status"/>
+		<result column="ordercount" property="ordercount"/>
+		<result column="ordertotalprice" property="ordertotalprice"/>
+		<result column="delivery" property="delivery"/>
 	</resultMap>
 
 	 <select id="selectProductList" resultMap="shopResult">
@@ -36,6 +60,7 @@
 	 			,	thumbnail
 	 			,	p_dimg
 	 			,	p_simg
+	 			,	p_type
 	 		from product
 	 	   where status ='Y'
 	 	   order
@@ -54,9 +79,12 @@
  			,	thumbnail
  			,	p_dimg
  			,	p_simg
+ 			,	p_type
  		from product
  	   where p_no = #{pNo}
  	     and status = 'Y'
+ 	     order
+ 	   		by p_no desc
 	 </select>
 	 
 	 <select id="seletCartList" resultMap="cartResult">
@@ -66,6 +94,8 @@
 		 	,	amount
 		 	from cart
 		 where user_no = #{user_no}
+		 	order
+ 	   		by p_no desc
 	 </select>
 	 
 	 <insert id="insertCartProduct">
@@ -88,17 +118,19 @@
 		select
 		        p_no
 		    ,   user_no
-		    ,   c.amount
-		    ,   p.price
+		    ,   c.amount as cartamount
+		    ,   p.price as productprice
 		    ,   p_name
-		    ,   b.brand_no
-		    ,   b.brand_name
+		    ,   b.brand_no as brandnoe
+		    ,   b.brand_name as brandnamee
 		    ,	thumbnail
 		from cart c
 		join product p using (p_no)
 		join member using (user_no)
 		join brand b on p.brand_no = b.brand_no
-		where user_no =#{userNo}	 
+		where user_no =#{userNo}	
+		order
+ 	   		by p_no desc 
 	 </select>
 	 
 	 <update id="updateCartAmount">
@@ -119,18 +151,21 @@
 		select
 		        p_no
 		    ,   user_no
-		    ,   c.amount
-		    ,   p.price
+		    ,   c.amount as cartamount
+		    ,   p.price as productprice
 		    ,   p_name
-		    ,   b.brand_no
-		    ,   b.brand_name
+		    ,   b.brand_no as brandnoe
+		    ,   b.brand_name as brandnamee
 		    ,	thumbnail
+		    ,	p_type
 		from cart c
 		join product p using (p_no)
 		join member using (user_no)
 		join brand b on p.brand_no = b.brand_no
 		where user_no =#{userNo}
 		  and p_no = #{pNo}
+		  order
+ 	   		by p_no desc 
 	</select>
 	
 	<select id="selectProductamount" resultType="_int">
@@ -151,11 +186,191 @@
 	 			,	amount
 	 			,	status
 	 			,	thumbnail
+	 			,	p_type
 	 		from product
 	 	   where status ='Y'
 	 	    and p_no = #{pNo}
 	 	   order
  	   		by p_no desc
 	</select>
+	
+	<select id="selectshopkeyword" resultMap="shopResult">
+		select
+	 				p_no
+	 			,	p_name
+	 			,	category_no
+	 			,	brand_no
+	 			,	price
+	 			,	amount
+	 			,	status
+	 			,	thumbnail
+	 			,	p_type
+	 		from product
+	 	   where status ='Y'
+	 	      AND UPPER(p_name) LIKE UPPER('%' || #{keyword} || '%')
+	 	   order
+ 	   		by p_no desc
+	</select>
+	
+	<select id="selectbrandProduct" resultMap="shopResult">
+		select
+	 				p_no
+	 			,	p_name
+	 			,	category_no
+	 			,	brand_no
+	 			,	price
+	 			,	amount
+	 			,	status
+	 			,	thumbnail
+	 			,	p_type
+	 		from product
+	 	   where status ='Y'
+	 	     and brand_no = #{brandNo}
+	 	   order
+ 	   		by p_no desc
+	</select>
+	
+	<select id="selectAllSearchProduct" resultMap="shopResult">
+		select
+	 				p_no
+	 			,	p_name
+	 			,	category_no
+	 			,	brand_no
+	 			,	price
+	 			,	amount
+	 			,	status
+	 			,	thumbnail
+	 			,	p_type
+	 		from product
+	 	   where status ='Y'
+	 	     and brand_no = #{brandNo}
+	 	     and category_no = #{categoryNo}
+	 	   order
+ 	   		by p_no desc
+	</select>
+	
+	<insert id="insertOneOrder">
+		insert
+			into orders
+			(
+				order_no
+			,	user_no
+			,	name
+			,	address
+			,	postcode
+			,	phone
+			,	order_date
+			,	totalPrice
+			,	o_msg
+			,	d_msg
+			)
+			values
+			(
+				SEQ_ORDER_NO.nextval
+			,	#{userNo}
+			,	#{name}
+			,	#{address}
+			,	#{postcode}
+			,	#{phone}
+			,	sysdate
+			,	#{totalPrice}
+			,	#{oMsg}
+			,	#{dMsg}
+			)
+	</insert>
+	
+	<insert id="insertOneDorder">
+		insert
+			into d_order
+			(
+				order_no
+			,	p_no
+			,	user_no
+			,	amount
+			,	p_type
+			)
+			values
+			(
+				SEQ_ORDER_NO.currval
+			,	#{pNo}
+			,	#{userNo}
+			,	#{amount}
+			,	#{pType}
+			)
+	</insert>
+	
+	<select id="selectOrderNo" resultMap="ordersResult">
+		
+	select *	
+	from(
+		select e.*, rownum as r
+		from (	
+				select
+						order_no
+					,	user_no
+					,	name
+					,	address
+					,	postcode
+					,	phone
+					,	totalPrice
+					,	o_msg
+					,	d_msg
+					,	order_date
+					,	status
+			     from orders
+			     where user_No = #{userNo}
+			     order by order_no desc
+			   )e
+			)
+			where r = 1
+	</select>
+	
+	<select id="selectAmount" resultMap="cartResult">
+		select 
+		    p.amount as productamount
+		,   p_no
+		from cart c
+		join product p using(p_no)
+		where user_no = #{userNo}
+	</select>
+	
+	<select id="selectOrderInfo" resultMap="ordersResult">
+		select 
+				count(*) as ordercount
+			,	sum(totalprice) as ordertotalprice
+				from orders
+				where user_no=#{userNo}
+	</select>
+	
+	<select id="selectOrder" resultMap="ordersResult">
+		select 
+		        order_no
+		    ,   name
+		    ,   user_no
+		    ,   address || postcode as delivery
+		    ,   phone
+		    ,   order_date
+		    ,   totalprice
+		    ,   status
+		    ,   o_msg
+		    ,   d_msg
+		from orders
+		where user_no = #{userNo}
+		order
+			by order_no desc
+	</select>
+	
+	<select id="selectOrderListCount" resultType="_int">
+		select
+		        count(*)
+		    from orders
+		where user_no = #{userNo}
+	</select>
+	
+	<update id="updateProduct">
+		update product
+			set amount = amount - ${amount}
+			where p_no = #{pNo}
+	</update>
 	
 </mapper>

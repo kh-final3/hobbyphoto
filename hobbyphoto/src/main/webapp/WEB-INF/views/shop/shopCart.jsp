@@ -115,29 +115,29 @@
                         </div>
                         <div>
                             <p>
-                                <span class="product_brand">${ c.brandName }</span>
+                                <span class="product_brand">${ c.brandnamee }</span>
                             </p>
                             <p>
                                 <a href="#" class="product_title">${ c.PName }</a>
                             </p>
                             <p>
-                                <span class="prodcut_price">${ c.price }</span>원
+                                <span class="prodcut_price">${ c.productprice }</span>원
                             </p>
                         </div>
                     </div>
                     <div class="pb_amount">
                         <div id="count-box" class="totalallamount">
                             <button class="minus">-</button>
-                            <input class="count" type="text" value="${ c.amount}" align="center">
+                            <input class="count" type="text" value="${ c.cartamount}" align="center">
                             <button class="plus">+</button>
                         </div>
                     </div>
                     <div class="pb_price">
-                        <span>${c.price * c.amount}</span>원
+                        <span>${c.productprice * c.cartamount}</span>원
                     </div>
                
                     <div class="pb_charge">
-                       <span>${c.price * c.amount >= 50000 ? "0원" : "3000원"}</span>
+                       <span>${c.productprice * c.cartamount >= 50000 ? "0" : "3000"}</span>원
                     </div>
                 </div>
                 
@@ -149,7 +149,7 @@
             </div>
             <div class="product_btn">
                 <button class="cart_btn">선택상품 삭제</button>
-                <button class="cart_btn">품절상품 삭제</button>
+                <button class="cart_btn" type="button" onclick="amountzero()">품절상품 삭제</button>
             </div>
         </div>
 
@@ -185,7 +185,7 @@
         </div>
         <div class="price_btn">
             <button class="continue_btn" onclick="continueshopping()">CONTINUE SHOPPING</button>
-            <button class="cbuy_btn" onclick="productbuy()">BUY NOW</button>
+            <button class="cbuy_btn" type="button">BUY NOW</button>
         </div>
     </div>
 
@@ -228,10 +228,10 @@
                 let finalTotlaPrice = 0; // 최종 가격(총가격 + 배송비)
 
                 $(".product_body").each(function(){
-                	
+                	var price = 0;
                 	if($(this).find(".product_check").is(":checked")===true){
                     //총가격
-                    let price = $(this).find(".pb_price").text().replace(/,/g,'');
+                    price = $(this).find(".pb_price").text().replace(/,/g,'');
                     totalPrice += parseInt(price);
                     //수량
                     totalCount += parseInt($(this).find(".count").val());
@@ -244,6 +244,7 @@
                 }else {
                 	deliveryPrice = 3000;
                 }
+                
                 
 
                 finalTotlaPrice = totalPrice + deliveryPrice;
@@ -275,9 +276,11 @@
         	   var count = parseInt($input.val());
  
         	   $input.val(count + 1); //수량 1증가
-      
+        	   console.log($(".pb_price").text());
+      			
         	   //총 주문 정보 다시 계산
         	   setTotalInfo();
+        	   console.log($(".pb_price").text());
         	   
         		// AJAX로 수량 업데이트
         	    upDateAmount(this,$input.val());
@@ -291,6 +294,7 @@
                 if(count > 1) { // 수량이 1 이상일 때만 감소
                     $input.val(count - 1); // 수량 1 감소
                 }
+                console.log(count)
 
                 // 총 주문 정보 다시 계산
                 setTotalInfo();
@@ -324,7 +328,7 @@
                             $productBody.find('.pb_price span').text(newTotalPrice.toLocaleString('ko-KR'));
 
                             // 전체 주문 정보 다시 계산
-                            //setTotalInfo();
+                            setTotalInfo();
                         } else {
                             console.log("장바구니 ajax통신 실패");
                         }
@@ -380,7 +384,6 @@
                     },success:function(result){
 						console.log(result);
 						location.reload();
-                    	
                     },error:function(){
                         console.log("장바구니 상품 선택 삭제 ajax통신 실패");
                     }
@@ -393,7 +396,72 @@
         	   location.href="pro.list"
            }    
            
+          //1.체크박스 클릭된 상품 
+          function buyCheckBox(){
+        	  
+        	  var buyProduct = [];
+        	  
+        	//체크된 박스 찾기
+              $(".product_check:checked").each(function() {
+              var $productBody = $(this).closest('.product_body');
+              var pNo = $productBody.data('product-id');
+              buyProduct.push(pNo);
+          });
+        	return buyProduct;
+        	
+          }
           
+          $(".cbuy_btn").click(function(){
+        	  var buyProduct = buyCheckBox();
+        	  
+        	//체크박스 선택x
+              if(buyProduct.length ===0){
+                  alert("선택된 상품이 없습니다.");
+                  return;
+              }
+
+              //선택된 상품이 있어서 사용자에게 확인창 뜨우기
+              var Comfirmchecked = confirm("선택된 상품을 구매하시겠습니까?");
+
+              //사용자가 확인 클릭
+              if(Comfirmchecked){
+                  location.href="pro.buy?pNo="+buyProduct;
+              }
+          })
+          
+          //장바구니 품절 상품 삭제
+          function amountzero(){
+        	  var zeroAmountProduct = [];
+        	  
+        	  $(".product_body").each(function(){
+        		  
+        	  	var pNo = $(this).data('product-id');
+        	  	
+        	  	zeroAmountProduct.push(pNo);
+        		  
+        	  });//장바구니 상품번호
+        	  
+        	  //품절 상품이 없으면 함수 종료
+        	  //if(zeroAmountProduct.length ==0){
+        		//  alert("품절 상품이 없습니다.");
+        		//  return;
+        	  //}
+        	  
+        	  
+        	  $.ajax({
+        		  url:"amount.zero",
+        		  traditional: true, 
+        		  data:{
+        			  pNo:zeroAmountProduct,
+        			  userNo:'${loginMember.userNo}'
+        		  },success:function(restul){
+        			  console.log(restul);
+						location.reload();
+        		  },error:function(){
+        			  console.log("품절 상품 ajax통신 실패");
+        		  }
+        	  })
+          }
            
             
             

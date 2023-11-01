@@ -22,7 +22,14 @@
 			<id>Datanucleus</id>
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
+		
+	    <repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+	    </repository>
 	</repositories>
+	
+
 	
 	<!-- 라이브러리 -->
 	<dependencies>
@@ -226,6 +233,13 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-mail</artifactId>
 		    <version>2.7.2</version>
+		</dependency>
+		
+		<!-- 결제관련 -->
+		<dependency>
+		  <groupId>com.github.iamport</groupId>
+		  <artifactId>iamport-rest-client-java</artifactId>
+		  <version>0.2.14</version>
 		</dependency>
 			
 	</dependencies>

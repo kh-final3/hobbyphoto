@@ -2,7 +2,10 @@ package com.kh.hobbyphoto.shop.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
+import com.kh.hobbyphoto.shop.model.vo.D_order;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 public interface ShopService {
@@ -29,11 +32,47 @@ public interface ShopService {
 		int deleteCartProduct(ArrayList<Cart> clist);
 		
 		//8.장바구니에서 상품 선택해서 구매페이지 넘기기
-		//ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist);
+		ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist);
 		
 		//8.상품 상세에서 바로 구매하기 누렸을 경우 재고 확인
 		int selectProductamount(int pno);
 		
 		//9.구매상품 조회
 		Product selectBuyProduct(int pno);
+		
+		//10.키워드 검색
+		ArrayList<Product> selectshopkeyword(String keyword);
+		
+		//11.브랜드만 선택 검색
+		ArrayList<Product> selectbrandProduct(int brandNo);
+		
+		//12.브랜드+카테고리 선택 검색
+		ArrayList<Product> selectAllSearchProduct(Product p);
+		
+		//13.단품 결제하기(주문orders테이블 + 상세order)
+		int insertOneOrder(Orders ords);
+		
+		//14.장바구니 결제하기(주문상세테이블 주문테이블은 코드 재사용)
+		int insertProductAllBuy(Orders ords,ArrayList<D_order> buylist);
+		
+		//15. 주문번호 확인(장바구니용)
+		Orders selectOrderNo(int userNo);
+		
+		//16. 장바구니 품절 상품 삭제
+		//상품 제고 조회(장바구니에 있는 상품)
+		ArrayList<Cart> selectAmount(ArrayList<Cart> buylist);
+		//장바구니에서 해당 상품 삭제
+		int deleteAmountZero(ArrayList<Cart> de);
+		
+		//17.마이페이지 들어갈시 주문관련 정보
+		Orders selectOrderInfo(int userNo);
+		
+		//18.마이페이지=> 주문 조회
+		ArrayList<Orders> selectOrder(int userNo,PageInfo pi);
+		
+		//19.주문조회 페이징
+		int selectOrderListCount(int userNo);
+		
+		//20.상품 구매 후 재고 변동(단품)
+		int updateProduct(Orders ords);
 }

@@ -254,10 +254,10 @@ public class AdminController {
 	@RequestMapping("regist.pro")
 	public String insertproduct(Product p, MultipartFile[] upfile, HttpSession session, Model model) {
 		
-//		System.out.println(p);
-//		for(int i = 0; i<upfile.length;i++) {
-//			System.out.println(upfile[i]);
-//		}
+		//		System.out.println(p);
+		//		for(int i = 0; i<upfile.length;i++) {
+		//			System.out.println(upfile[i]);
+		//		}
 		
 		
 		for(int i = 0; i<upfile.length ; i++) {
@@ -295,7 +295,7 @@ public class AdminController {
 		}
 		
 		
-	}
+	
 		
 		//현재 넘어온 첨부파일 그 자체를 서버의 폴더에 저장 시키는 역할(지영)
 		public String saveFile(MultipartFile upfile, HttpSession session) {
@@ -343,7 +343,144 @@ public class AdminController {
 				
 				
 			}
-
 	
+		// 관리자페이지 차트
+		   @RequestMapping("chart.da")
+		   public String adminCharts() {
+		      
+		      return "admin/adminCharts";
+		   }
+		   
+		   // 관리자페이지 관리자 통계
+		   @RequestMapping("table.da")
+		   public String adminTables() {
+		      
+		      return "admin/adminTables";
+		   }   
+		   
+		   //관리자페이지 상품 상세보기
+		   @RequestMapping("adminPro.de")
+		   public ModelAndView selectProductdetail(String pNo, ModelAndView mv) {
+			   int pno = Integer.parseInt(pNo);
+			   Product p = aService.selectProductdetail(pno);
+			   
+			   mv.addObject("p", p).setViewName("admin/prodetail");
+			   
+			   return mv;
+		   }
+		   
+		   //관리자 페이지 상품 삭제
+		   @RequestMapping("adminPro.delete")
+		   public String adminProdelete(int pNo, HttpSession session,String thumbnail, Model model) {
+			   
+			   int result = aService.adminProdelete(pNo);
+			   
+			   if(result > 0) {//삭제 성공
+				   if(!thumbnail.equals("")) {
+					   new File(session.getServletContext().getRealPath(thumbnail)).delete();
+				   }
+				   session.setAttribute("alertMsg", "성공적으로 상품이 삭제되었습니다.");
+				   return "redirect:plist.pr";
+				   
+			   }else {//삭제 실패
+				   model.addAttribute("errorMsg", "게시글 삭제에 실패했습니다.");
+					return "common/errorPage";
+			   }
+			   
+		   }
+		   //수정폼 열기
+		   @RequestMapping("adminPro.updateForm")
+		   public ModelAndView adminProductupdateForm(int pNo,ModelAndView mv) {
+			   
+			   Product p = aService.adminProductupdateForm(pNo);
+			   
+			   mv.addObject("p", p).setViewName("admin/proUpdate");
+			   
+			   return mv;
+		   }
+		   
+		   //상품 수정
+		   @RequestMapping("adminPro.update")
+		   public String adminProductupdate(Product p,String pno,MultipartFile[] upfile,HttpSession session, Model model) {
+			   int pNo = Integer.parseInt(pno);
+			   System.out.println(pNo + "상품번호");
+			   p.setPNo(pNo);
+			   
+			   
+			   System.out.println(p);//jsp에서 입력되어 있는 값
+			   
+			   Product op = aService.selectProductdetail(pNo);
+			   System.out.println(op + "op의 값");
+			   op.setPNo(pNo);
+			   
+			   String newThumbnail = null;
+			   String newPDimg = null;
+			   String newPSimg = null;
+			  
+			   for(int i = 0; i < upfile.length; i++) {
+				    if(upfile[i].getSize() > 0) {
+				        String changeName = saveFile(upfile[i], session);
+				        switch(i) {
+				            case 0:
+				                p.setThumbnail("resources/proUpFiles/" + changeName);
+				                newThumbnail = p.getThumbnail();
+				                break;
+				            case 1:
+				                p.setPDimg("resources/proUpFiles/" + changeName);
+				                newPDimg = p.getPDimg();
+				                break;
+				            case 2:
+				                p.setPSimg("resources/proUpFiles/" + changeName);
+				                newPSimg = p.getPSimg();
+				                break;
+				        }
+				    } else { // 파일이 업로드 되지 않았을 때, 기존의 값을 유지
+				        switch(i) {
+				            case 0:
+				                if(p.getThumbnail() == null || p.getThumbnail().isEmpty()) {
+				                    p.setThumbnail(op.getThumbnail());
+				                }
+				                break;
+				            case 1:
+				                if(p.getPDimg() == null || p.getPDimg().isEmpty()) {
+				                    p.setPDimg(op.getPDimg());
+				                }
+				                break;
+				            case 2:
+				                if(p.getPSimg() == null || p.getPSimg().isEmpty()) {
+				                    p.setPSimg(op.getPSimg());
+				                }
+				                break;
+				        }
+				    }
+				}
+			   
+			   int result = aService.adminProductupdate(p);
+			   
+			   System.out.println(result + "리턴된 result 값");
+			   
+			   if(result>0) { //업데이트 성공시
+				   
+				   if(newThumbnail != null && !newThumbnail.equals(op.getThumbnail())) {
+				        new File(session.getServletContext().getRealPath(op.getThumbnail())).delete();
+				    }
+				    if(newPDimg != null && !newPDimg.equals(op.getPDimg())) {
+				        new File(session.getServletContext().getRealPath(op.getPDimg())).delete();
+				    }
+				    if(newPSimg != null && !newPSimg.equals(op.getPSimg())) {
+				        new File(session.getServletContext().getRealPath(op.getPSimg())).delete();
+				    }
+				   
+				   session.setAttribute("alertMsg", "상품 정보 수정 성공");
+				   return "redirect:adminPro.de?pNo="+pno;
+				   
+			   }else {//업데이트 실패시
+				   model.addAttribute("errorMsg", "게시글 삭제에 실패했습니다.");
+					return "common/errorPage";
+			   }
+			   
+		   }
+		   
+}
 
 
