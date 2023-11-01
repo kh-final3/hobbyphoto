@@ -211,6 +211,9 @@
 <body>
 	<jsp:include page="../common/header.jsp"/>
     <div class="wrap">
+        <br>
+        <h2 align="center">축제</h2>
+        <br>
         <div class="content">
             <div class="performance_wrap">
                 <div class="container">

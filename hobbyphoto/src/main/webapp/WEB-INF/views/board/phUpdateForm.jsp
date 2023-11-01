@@ -109,6 +109,7 @@
     </style>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp"/>
     <div class="warp">
         <div class="innerOut">
             <form action="phUpdate.bo"  enctype="multiPart/form-data" class="form-area" method="post" class="form-area">
@@ -207,5 +208,6 @@
             </form>
         </div>
     </div>
+        <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

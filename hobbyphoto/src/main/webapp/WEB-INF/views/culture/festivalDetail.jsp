@@ -15,9 +15,35 @@
     <link href="https://www.mfac.or.kr/web/css/responsive.css?ver=20231011" rel="stylesheet" type="text/css">
 </head>
 
-<body>
-<jsp:include page="../common/header.jsp"/>
+<style>
+	#fedeBody .btn{
+		font-size: 15px;
+	}
+
+    #fedeBody a{
+		font-size: 15px;
+	}
+
+	.wrap {
+        width: 1300px;
+        margin: auto;        
+	}
+
+    #festivaltitle{
+        font-size: xx-large;
+        font-weight: 500;
+        margin-top: 30px;
+        margin-bottom: -30px;
+    }
+
+</style>
+
+<body id="fedeBody">
+		<jsp:include page="../common/header.jsp"/>
     <div class="wrap">
+        <br>
+        <h2 align="center" id="festivaltitle">축제</h2>
+        <br>
         <div class="contents">
             <div class="view_wrap whole_wrap">
                 <div class="container">

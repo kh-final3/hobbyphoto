@@ -235,6 +235,7 @@
     </style>
 </head>
 	<body>
+		<jsp:include page="../common/header.jsp" />
 	    <div id="__next">
 	        <div class="__className_ff1e61">
 	            <div class="detail-socialing_template__NkCnA">
@@ -358,6 +359,6 @@
 	                </div>
 	            </div>
 	        </div>
-	    </div>
+	    	<jsp:include page="../common/footer.jsp" />
 	</body>
 </html>

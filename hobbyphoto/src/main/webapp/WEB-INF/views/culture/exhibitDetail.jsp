@@ -831,7 +831,9 @@
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<div id="wrap" class="header_banner_padding">
-
+		<br>
+        <h2 align="center";>전시</h2>
+        <br>
 		<div id="contents">
 			<div class="exhibitionDetail">
 				<section class="exhibitionDetail-head">

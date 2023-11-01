@@ -65,7 +65,7 @@
 <jsp:include page="../common/header.jsp"/>
 	<body>
 	    <div id="write">
-	    	 <h1 align="center" id="ttl">모임 작성폼</h1>
+	    	 <h1 align="center" id="ttl">모임 작성</h1>
 	        <form action="tgInsert.tg" method="post" enctype="multipart/form-data">
 	        	<input type="hidden" name="userNo" value="${ loginMember.userNo }">
 	            	<div id="write1">
