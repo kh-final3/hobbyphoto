@@ -52,6 +52,10 @@ public interface BoardService {
 	int updateRcBoard(Board b, ArrayList<Attachment> list);
 	int updateRcAtBoard(Attachment at);
 	
+	// 6. 댓글 작성, 조회용 서비스
+	ArrayList<Reply> selectRcReplyList(int boardNo);
+	int insertRcReply(Reply r);
+	
 	// ------------------- 마이 페이지 게시판 ------------------- //
 	int myListCount(int userNo);
 	ArrayList<Board> myBoardList(PageInfo pi,int userNo);

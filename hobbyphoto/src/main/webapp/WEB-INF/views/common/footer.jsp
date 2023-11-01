@@ -15,10 +15,11 @@
             margin-top: 50px;
             text-align: left;
             font-family: 'NanumBarunGothic';
+            margin-left: 100px;
         }
         .footer_info {
           margin-top: 10px;
-          margin-left: 20px;
+          margin-left: 100px;
         }
 
         #ft_logo {
