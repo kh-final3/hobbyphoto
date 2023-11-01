@@ -74,7 +74,7 @@
 		                    <th>첨부파일</th>
 		                    <td>
 		                     <c:forEach var="a" items="${ at }">    
-				                <img src="${ a.filePath }">
+				                <img src="${ a.filePath }" style="width: 800px;">
 				             </c:forEach>
 		                    </td>
 	                	</tr>

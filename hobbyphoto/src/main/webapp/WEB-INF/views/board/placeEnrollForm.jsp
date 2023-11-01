@@ -11,8 +11,10 @@
             width: 1200px;
             height: 1400px;
             margin: auto;
-            background-color: rgba(0, 0,0,0.1);
+            /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
+            margin-top: 50px;
+            margin-left: 160px;
         }
         
         .innerOut{
@@ -42,6 +44,7 @@
             margin-top: 10px;
             /* border: none; */
         }
+
         .text textarea{
             width: 600px;
             height: 400px;
@@ -108,7 +111,7 @@
                 <h2 style="text-align: center;">출사 명소</h2> 
             </div>
             <div class="map_wrap">
-                <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+                <div id="map" style="width:90%;height:100%;position:relative;overflow:hidden;margin-left: 10px;"></div>
             
                 <div id="menu_wrap" class="bg_white">
                     <div class="option">
@@ -128,10 +131,10 @@
                 
                 <div class="text">
                 <div class="text-area">
-                제목 : <input type="text" name="ptitle" id="ptitle" placeholder="제목을 입력해주세요." required> <br>
-                작성자 : <input type="text" name="pwriter" id="pwriter" value="user01" style="border: none;"> <br>
-                상세주소 : <input type="text" name="paddress" id="paddress" placeholder="주소를 입력해주세요. ex) 서울 강남구 테헤란로14길 6" required> <br><br>
-                한줄평 : <input type="text" name="plocation" id="plocation" placeholder="이 장소를 한줄로 표현해주세요" required> <br><br>
+                제목 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="ptitle" id="ptitle" placeholder="제목을 입력해주세요." required style="width: 530px;"> <br>
+                작성자 : &nbsp;&nbsp;&nbsp;<input type="text" name="pwriter" id="pwriter" value="user01" style="border: none; "> <br>
+                상세주소 : <input type="text" name="paddress" id="paddress" placeholder="주소를 입력해주세요. ex) 서울 강남구 테헤란로14길 6" required style="width: 530px;"> <br><br>
+                한줄평 : &nbsp;&nbsp;&nbsp;<input type="text" name="plocation" id="plocation" placeholder="이 장소를 한줄로 표현해주세요" required style="width: 530px;"> <br><br>
                 
                 <br>
                 <textarea name="pcontent" id="pcontent" cols="30" rows="10" placeholder="" required>
@@ -144,7 +147,7 @@
             </div>
         </div>
         
-        <div class="photo">
+        <div class="photo" style="width: 550px;">
             <div class="photo-area">
                 <img src="" alt="사진1"  id="titleImg"  width="150" height="120"onclick="chooseFile(1);" >
                 <img src="" alt="사진2" id="contentImg1" width="150" height="120" onclick="chooseFile(2);">

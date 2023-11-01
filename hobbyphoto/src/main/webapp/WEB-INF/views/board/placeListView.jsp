@@ -12,7 +12,9 @@
             border: 1px solid rgba(0, 0,0,0.1);
             width: 1200px;
             height: 1400px;
-            margin: auto;
+            /* margin: auto; */
+            margin-top: 50px;
+            margin-left: 160px;
             /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
         }
@@ -124,7 +126,7 @@
             width: 35px;
             height: 35px;
             margin-top: 20px;
-            background-color: white
+            background-color: white;
         }
     </style>
 </head>
@@ -132,7 +134,9 @@
 	<jsp:include page="../common/header.jsp"/>
 
     <div class="warp">
-
+        <br>
+        <h2 align="center">출사명소</h2>
+        <br>
         <div class="list-area">
 
             <div class="list">

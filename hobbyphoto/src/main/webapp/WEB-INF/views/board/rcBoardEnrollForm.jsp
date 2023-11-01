@@ -36,12 +36,15 @@
                <input type="hidden" id="boardWriter" value="${ loginMember.userNo }" name="boardWriter">
                 <table id="contentArea" align="center" class="table">
                     <tr>
+                        <tr>
+                            <th width="100">해시태그</th>
+                            <td colspan=""><input type="text" name="hashTag" value="${ b.hashTag }" style="width: 1200px;"></td>
+                        </tr>
                         <th width="100">제목</th>
                         <td colspan=""><input type="text" name="boardTitle" style="width: 1200px;"></td>
                     </tr>
                     <tr>
                         <td colspan="2"><textarea name="boardContent" cols="145" rows="15" style="resize: none;"></textarea></td>
-                        <input type="text" name="hashTag" style="width: 1200px;">
                     </tr>
                 </table>
                 <input type="file" name="upfile" style="margin: 0 0 0 12px;">

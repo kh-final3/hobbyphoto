@@ -10,16 +10,16 @@
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
             width: 1400px;
-            height: 1700px;
+            height: 1200px;
             margin: auto;
-            background-color: rgba(0, 0,0,0.1);
+            /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
         }
         
         .outline{
             border: 1px solid white;
             width: 90%;
-            height: 1600px;
+            height: 1100px;
             margin: auto;
             margin-top: 45px;
             background-color: white;
@@ -46,8 +46,6 @@
             height: 20%;
             border: none;
         }
-
-       
 
         .photo-area {
             width: 100%;    
@@ -278,6 +276,9 @@
 <body>
 	<jsp:include page="../common/header.jsp"/>
     <div class="warp">
+        <br>
+        <h2 align="center">출사명소</h2>
+        <br>
         <div class="outline">
         
             <div class="content-area">
@@ -289,13 +290,14 @@
                                 
                                 <div class="board-create">${ p.createDate }</div>
 
-                                <div class="boare-ect">
-                                <!-- 좋아요눌럿을때 -->
-                                    <a href="">❤️</a> &nbsp;&nbsp;
-                                <!-- 좋아요안눌럿을때 -->
-                                    <a href="">🤍</a> &nbsp;&nbsp;
-                                    <a href="">❗</a>
-                                </div>
+                                            <!--좋아요눌럿을때-->
+                                            <a href="">❤️</a> &nbsp;&nbsp;
+                                            좋아요안눌럿을때
+                                            <a href="">🤍</a> &nbsp;&nbsp;
+                                            <a href="">❗</a>
+                                        </div>
+                                    
+                                
                             </li>
                             <hr>
                             <li class="li-area1">
