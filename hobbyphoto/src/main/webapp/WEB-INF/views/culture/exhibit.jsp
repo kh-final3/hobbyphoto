@@ -22,16 +22,19 @@
 
         body {
             font-family: 'NanumSquare', sans-serif;
+            margin: 0;
+            padding: 0;
             overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 50px 0;
         }
 
         body.fixed {
             overflow: hidden;
-        }
-
-        .container {
-            width: 1400px;
-            margin: 0 auto;
         }
 
         img {
@@ -104,18 +107,7 @@
             background: #fff;
             color: #7989d9;
         }
-        body {
-            font-family: 'NanumBarunGothic', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 50px 0;
-        }
-
+        
         .pf_list_box {
             display: flex;
             border: 1px solid #dadada;
@@ -185,11 +177,12 @@
         }
 
         .exhibit {
-            width: 100%;    
+            width: 1460px;    
             display: flex;
             flex-wrap: wrap; 
             justify-content: center; 
             align-items: flex-start; 
+            margin: auto;
         }
 
         .card {
@@ -198,10 +191,19 @@
             height: 510px;
             box-sizing: border-box;
         }
-    .enrollForm{
-        float: right;
-    }
+        
+	    .enrollForm{
+	        float: right;
+	    }
 
+    	/* 페이징바 */
+       .paging-area>button{
+            border: none;
+            background-color: white;
+            width: 35px;
+            height: 35px;
+            margin-top: 20px;
+        }
        
     </style>
 </head>
@@ -242,25 +244,33 @@
         	</c:forEach>
     	</c:if>
     </div>
-	<div id="pagingArea">
-            <div class="page-btn" align="center">   
-                <c:choose>
-                    <c:when test="${ pi.currentPage ne 1 }">
-                        <button onclick="location.href='exhibitList.fs?cpage=${ pi.currentPage - 1 }';"> &lt; </button>
-                    </c:when>
-                </c:choose>
-                
-                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <button onclick="location.href='exhibitList.fs?cpage=${p}';">${p}</button>
-                </c:forEach>
-                
-                <c:choose>
-                    <c:when test="${ pi.currentPage ne pi.maxPage }">
-                        <button onclick="location.href='exhibitList.fs?cpage=${ pi.currentPage + 1 }';"> &gt; </button>
-                    </c:when>
-                </c:choose>
-            </div>
-        </div>
+		            <div class="paging-area" align="center">
+		            	<c:choose>
+		            		<c:when test="${ pi.currentPage eq 1 }">
+		                		<button disabled> &lt; </button>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<button style="width:70px" onclick="location.href='exhibitList.fs?cpage=${ pi.currentPage - 1 }'">Previous</button>
+		                	</c:otherwise>
+		                </c:choose>
+		                
+		                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		                    <button onclick="location.href='exhibitList.fs?cpage=${ p }'">${ p }</button>
+		                </c:forEach>
+		                
+		                <button onclick="location.href='exhibitList.fs?cpage=${ p }'">${ p }</button>
+		                
+		               	<c:choose>
+		                   	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		                    		<button onclick="location.href=''" disabled>Next</button>
+		                   	</c:when>
+		                     <c:otherwise>
+		                     	<button style="width:40px;" onclick="location.href='exhibitList.fs?cpage=${ pi.currentPage + 1 }'">Next</button>
+		                   	</c:otherwise>
+		                </c:choose>
+		                
+		                <button> &gt; </button>
+            		</div>
      <script>
       
     </script>

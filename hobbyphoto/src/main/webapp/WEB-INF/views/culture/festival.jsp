@@ -119,7 +119,7 @@
         .pf_list_box {
             margin: auto;
             display: flex;
-            width: 1200px;
+            width: 1110px;
             border: 1px solid #dadada;
             margin-bottom: 20px;
             transition: box-shadow 0.3s ease-in-out;
@@ -174,13 +174,14 @@
             padding: 5px 15px;
             border-radius: 5px;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.3s; 
         }
 
         .view_btn:hover {
             font-weight: bold;
             border: 1px solid #000;
             background-color: #dadada;
+            text-decoration: none;
         }
 
         .pf_list_box:hover, .card:hover {
@@ -193,7 +194,16 @@
         }
         .enrollForm{
         float: right;
-    }
+        }
+
+	    /* 페이징바 */
+	    .paging-area>button{
+	            border: none;
+	            background-color: white;
+	            width: 35px;
+	            height: 35px;
+	            margin-top: 20px;
+	        }
 
     </style>
 </head>
@@ -251,25 +261,34 @@
     	</c:forEach>
     </c:if>
     </div>
-    <div id="pagingArea">
-            <div class="page-btn" align="center">   
+            <!--festivalList.fs-->
+            <div class="paging-area" align="center">   
                 <c:choose>
-                    <c:when test="${ pi.currentPage ne 1 }">
-                        <button onclick="location.href='festivalList.fs?cpage=${ pi.currentPage - 1 }';"> &lt; </button>
+                    <c:when test="${ pi.currentPage eq 1 }">
+                        <button disabled> &lt; </button>
                     </c:when>
+                    <c:otherwise>
+                        <button style="width:70px" onclick="location.href='festivalList.fs?cpage=${ pi.currentPage - 1 }'">Previous</button>
+                    </c:otherwise>
                 </c:choose>
                 
                 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <button onclick="location.href='festivalList.fs?cpage=${p}';">${p}</button>
+                    <button onclick="location.href='festivalList.fs?cpage=${ p }'">${ p }</button>
                 </c:forEach>
                 
-                <c:choose>
-                    <c:when test="${ pi.currentPage ne pi.maxPage }">
-                        <button onclick="location.href='festivalList.fs?cpage=${ pi.currentPage + 1 }';"> &gt; </button>
-                    </c:when>
+                <button onclick="location.href='festivalList.fs?cpage=${ p }'">${ p }</button>
+                
+                   <c:choose>
+                       <c:when test="${ pi.currentPage eq pi.maxPage }">
+                            <button onclick="location.href=''" disabled>Next</button>
+                       </c:when>
+                     <c:otherwise>
+                         <button onclick="location.href='festivalList.fs?cpage=${ pi.currentPage + 1 }'">Next</button>
+                       </c:otherwise>
                 </c:choose>
+                
+                <button> &gt; </button>
             </div>
-        </div>
     <script>
     
     </script>

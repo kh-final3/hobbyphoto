@@ -13,17 +13,17 @@
             width: 1200px;
             height: 1400px;
             margin: auto;
-            background-color: rgba(0, 0,0,0.1);
+            /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
         }
 
         .list-area{
-            border: 1px solid white;
+            /* border: 1px solid white; */
             width: 85%;
             height: 90%;
             margin: auto;
             margin-top: 5%;
-            background-color: white;
+            /* background-color: white; */
             border-radius: 15px;
         }
 
@@ -44,7 +44,7 @@
         }
 
         .photo{
-            border: 1px solid black;
+            /* border: 1px solid black; */
             height: 152px;
             float: left;
             border-radius: 5%;
@@ -74,7 +74,7 @@
         }
 
         .btn-area{
-            border: 1px solid black;
+            /* border: 1px solid black; */
             height: 3%;
             width: 10%;
             float: right;
@@ -92,7 +92,7 @@
         }
 
         .ect{
-            border: 1px solid black;
+            /* border: 1px solid black; */
             width: 20%;
             border: none;
             margin-left: 15px
@@ -116,6 +116,15 @@
         
         .pno{
         	display: none;
+        }
+
+        /* 페이징바 */
+       .paging-area>button{
+            border: none;
+            width: 35px;
+            height: 35px;
+            margin-top: 20px;
+            background-color: white
         }
     </style>
 </head>
@@ -165,24 +174,32 @@
             </div>
         </div>
 
-        <div id="pagingArea">
-            <div class="page-btn" align="center">   
-                <c:choose>
-                    <c:when test="${ pi.currentPage ne 1 }">
-                        <button onclick="location.href='list.pl?cpage=${ pi.currentPage - 1 }';"> &lt; </button>
-                    </c:when>
-                </c:choose>
-                
-                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <button onclick="location.href='list.pl?cpage=${p}';">${p}</button>
-                </c:forEach>
-                
-                <c:choose>
-                    <c:when test="${ pi.currentPage ne pi.maxPage }">
-                        <button onclick="location.href='list.pl?cpage=${ pi.currentPage + 1 }';"> &gt; </button>
-                    </c:when>
-                </c:choose>
-            </div>
+        <div class="paging-area" align="center">
+            <c:choose>
+                <c:when test="${ pi.currentPage eq 1 }">
+                    <button disabled> &lt; </button>
+                </c:when>
+                <c:otherwise>
+                    <button style="width:70px" onclick="location.href='list.pl?cpage=${ pi.currentPage - 1 }'">Previous</button>
+                </c:otherwise>
+            </c:choose>
+            
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                <button onclick="location.href='list.pl?cpage=${ p }'">${ p }</button>
+            </c:forEach>
+            
+            <button onclick="location.href='list.pl?cpage=${ p }'">${ p }</button>
+            
+               <c:choose>
+                   <c:when test="${ pi.currentPage eq pi.maxPage }">
+                        <button onclick="location.href=''" disabled>Next</button>
+                   </c:when>
+                 <c:otherwise>
+                     <button style="width:40px;" onclick="location.href='list.pl?cpage=${ pi.currentPage + 1 }'">Next</button>
+                   </c:otherwise>
+            </c:choose>
+            
+            <button> &gt; </button>
         </div>
     </div>
      <script>

@@ -13,6 +13,7 @@
     }
     .recommend{
         border-bottom: 1px solid lightgray;
+		width: 1280px;
     }
 
     #contentArea th{
@@ -34,9 +35,9 @@
     .reply-content{padding: 30px;}
 
     .insertReply{border: 1px solid lightgray; padding: 0px;}
-    .ir-title{height: 55px; padding: 10px 30px; font-weight: bolder;}
+    .ir-title{height: 55px; padding: 10px 20px; font-weight: bolder; font-size: 17px;}
     .ir-content{padding: 10px 30px;}
-    .ir-btn{margin-left: 10px; width: 100px; height: 75px; position: relative; bottom: 33px;}
+    .ir-btn{margin-left: 10px; width: 100px; height: 75px; position: relative; bottom: 33px; margin-bottom: 5px;}
 </style>
 </head>
 	<jsp:include page="../common/header.jsp"/>
@@ -62,8 +63,12 @@
 	                    <td colspan="2" id="etc"><span>작성일</span> <span class="text">${ b.createDate }</span> <span>조회수</span> <span class="text">${ b.count }</span></td>
 	                </tr>
 	                <tr>
-	                    <td colspan="2"><p style="height:150px">${ b.boardContent }</p></td>
-	                    <td colspan="2"><p style="height:150px">${ b.hashTag }</p></td>
+	                    <td colspan="2">
+							<p style="height:150px">${ b.boardContent }</p>
+							<p style="height:30px;">
+								<h style="font-weight: 700; background-color: rgb(240, 240, 240);">#</h>  ${ b.hashTag }
+							</p>
+						</td>
 	                </tr>
 		                <tr>
 		                    <th>첨부파일</th>
@@ -79,9 +84,9 @@
 	        <button class="btn btn-dark btn-sm">목록으로</button>
 				<c:if test="${ loginMember.userId eq b.boardWriter }">
 		            <div align="center">
-		            		<a class="btn btn-primary" href="rcBoardList.bo">목록으로</a>
-			                <a class="btn btn-warning" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
-			                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
+		            		<a class="btn btn-primary btn-sm" href="rcBoardList.bo">목록으로</a>
+			                <a class="btn btn-warning btn-sm" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
+			                <a class="btn btn-danger btn-sm" onclick="postFormSubmit(2);">삭제하기</a>
 		            </div><br><br>
 				</c:if>
 	        
@@ -135,7 +140,7 @@
 	            <div class="insertReply">
 	                    <div class="ir-title">댓글달기</div>
 	                    <div class="ir-content">
-	                            <textarea name="" id="" cols="130" rows="3"></textarea>
+	                            <textarea name="" id="" cols="120" rows="3" style="resize: none;"></textarea>
 	                            <button class="ir-btn btn-dark">작성</button>
 	                    </div>
 	            </div>
