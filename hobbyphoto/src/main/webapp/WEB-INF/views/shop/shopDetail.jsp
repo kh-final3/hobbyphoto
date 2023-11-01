@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
     <style>
-        .innerOuter{width: 1300px; height: 600px; margin: auto;}
+        .innerOuter{width: 1300px; height: 600px; margin: 10px 0 0 200px;}
         .innerOuter>div{box-sizing: border-box; display: block; float: left;}
-        .product-img{width: 500px; height: 500px;}
+        .product-img{width: 500px; height: 500px; margin-right: 40px;}
         .product-info{width: 570px; height: 525px;}
         .product-name{width: 570px; height: 52px; font-size: 36px; word-break: break-all;}
         .product-price{width: 570px; height: 63px; margin-top: 24px; font-size: 29px; padding-top: 21px; word-break: break-all;}
@@ -96,13 +96,7 @@
                         </p>
                     </div>
                     <br><br>
-                    <div class="product-btn">
-                    
-                    <!--   -->
-                        <button type="button" class="pd-btn" id="wishbtn">
-                            <img src="resources/images/wish.png" style="width: 40px; height: 40px;">
-                        </button>
-                       
+                    <div class="product-btn" style="margin-left: 100px;">
                         <button type="submit" class="pd-btn" id="cartbtn-cart">
                             <img src="resources/images/cart.png" style="width: 40px; height: 40px;">
                         </button>

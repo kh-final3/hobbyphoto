@@ -141,7 +141,7 @@
 	<jsp:include page="../common/shopHeader.jsp"/>
             <div class="all">
                 <div id="banner" align="center">
-                        여기는 배너입니다.
+                       <img src="resources/images/니콘배너.png" style="width:100%; height:100%;">
                 </div>
 
                 <div id="category" align="center">

@@ -157,7 +157,7 @@
     
         .member_inner{
         	width: 130px;
-        	height: 150px;
+        	height: 170px;
             background-color: white;
         	position: absolute;
         	top: 100px;
@@ -277,6 +277,7 @@
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
 					                					<a href="admin.pg">관리자페이지</a>
+					                					<div><p></p></div>
 					                					<a href="shop.mp?userNo=${ loginMember.userNo }" id="cartbtn">장바구니</a>
 				                					</c:when>
 				                					<c:otherwise>
