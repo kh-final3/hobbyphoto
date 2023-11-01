@@ -37,8 +37,11 @@ public interface AdminService {
 	// 2_4_2. 모임 게시글 삭제
 	int gdeleBoard(String title);
 	
-	// 2_5. 배경화면게시판 관리 조회
+	// 2_5_1. 배경화면게시판 관리 조회
 	ArrayList<BackGround> selectBoard4();
+
+	// 2_5_2. 배경화면 게시글 삭제
+	int bkdeleBoard(int backNo);
 	
 	// 2_6. 관리자 메인페이지에 신고 회원 리스트
 	ArrayList<Report> selectReportMList();
@@ -60,6 +63,7 @@ public interface AdminService {
 	
 	// 4_2. 신고 게시물 처리완료 버튼
 	int processed(String rpNo);
+
 	
 
 	//3.상품 삭제(지영)

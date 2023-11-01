@@ -33,7 +33,7 @@
 	</c:if>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="rlist.me">신고게시물관리</a>
+            <a class="navbar-brand ps-3" href="rlist.me">상품주문관리</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -83,56 +83,59 @@
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-								회원의 신고된 게시물을 관리할 수 있습니다. <br>
-								관리 버튼을 통해 신고된 게시물의 상세 화면으로 이동합니다.
+								회원의 주문완료된 상품을 관리할 수 있습니다. <br>
                             </div>
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                신고 목록
+                                주문 목록
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
-                                            <th>혐의</th>
-                                            <th>신고 내용</th>
-                                            <th>게시판 유형</th>
-                                            <th>게시글번호</th>
-                                            <th>신고자</th>
-                                            <th>혐의자</th>
-                                            <th>처리여부</th>
-                                            <th>처리</th>
+                                            <th>주문번호</th>
+                                            <th>회원번호</th>
+                                            <th>받는사람</th>
+                                            <th>배송지</th>
+                                            <th>상세주소</th>
+                                            <th>휴대폰번호</th>
+                                            <th>주문날짜</th>
+                                            <th>가격</th>
+                                            <th>상태</th>
+                                            <th>주문메세지</th>
+                                            <th>배송메세지</th>
                                         </tr>
                                     </thead>
                                     
                                     <tfoot>
                                         <tr>
-                                            <th>번호</th>
-                                            <th>혐의</th>
-                                            <th>신고 내용</th>
-                                            <th>게시판 유형</th>
-                                            <th>게시글번호</th>
-                                            <th>신고자</th>
-                                            <th>혐의자</th>
-                                            <th>처리여부</th>
-                                            <th>처리</th>
+                                            <th>주문번호</th>
+                                            <th>회원번호</th>
+                                            <th>받는사람</th>
+                                            <th>배송지</th>
+                                            <th>상세주소</th>
+                                            <th>휴대폰번호</th>
+                                            <th>주문날짜</th>
+                                            <th>가격</th>
+                                            <th>상태</th>
+                                            <th>주문메세지</th>
+                                            <th>배송메세지</th>
                                         </tr>
                                     </tfoot>
                                     
                                     <tbody>
-		                                   <c:forEach var="r" items="${ list }">
+		                                   <c:forEach var="#" items="">
 		                                        <tr>
-		                                            <td class="rno">${ r.rpNo }</td>
-		                                            <td>${ r.guilty }</td>
-		                                            <td>${ r.rpContent }</td>
-		                                            <td>${ r.boardType }</td>
-		                                            <td>${ r.refBno }</td>
-		                                            <td>${ r.reportUno }</td>
-		                                            <td>${ r.reportedUno }</td>
-		                                            <td>${ r.process }</td>
+		                                            <td class="rno"></td>
+		                                            <td></td>
+		                                            <td></td>
+		                                            <td></td>
+		                                            <td></td>
+		                                            <td></td>
+		                                            <td></td>
+		                                            <td></td>
 		                                            <td>
 		                                            <!-- 
 														<form action="processed.me" method="post">
@@ -141,7 +144,7 @@
 														</form>
 		                                             -->
 														<form action="processed.me" method="post">
-							                        		<input type="hidden" name="rpNo" value="${ r.rpNo }">
+							                        		<input type="hidden" name="" value="">
 								                        	<button class="btn btn-success" type="submit" id="button">처리완료</button>
 														</form>
 		                                            </td>

@@ -241,7 +241,20 @@
 		  <artifactId>iamport-rest-client-java</artifactId>
 		  <version>0.2.14</version>
 		</dependency>
-			
+		
+		<dependency>
+		    <groupId>com.aspose</groupId>
+		    <artifactId>aspose-pdf</artifactId>
+		    <version>20.7</version>
+		</dependency>
+		
+		<!-- select를 위한 thymeleaf  -->
+		<dependency>
+		  <groupId>org.thymeleaf</groupId>
+		  <artifactId>thymeleaf</artifactId>
+		  <version>3.1.2.RELEASE</version>
+		</dependency>
+				
 	</dependencies>
 	
 	

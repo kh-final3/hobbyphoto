@@ -76,10 +76,12 @@
                             <div class="sb-sidenav-menu-heading">메인</div>
 
                             <a class="nav-link" href="alist.da">
-
-
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
+                            </a>
+                            <a class="nav-link" href="checkList.da">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                관리 CheckList
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
@@ -127,14 +129,14 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 신고회원관리
                             </a>
-                            <div class="sb-sidenav-menu-heading">주요 현황</div>
-                            <a class="nav-link" href="chart.da">
+                            <div class="sb-sidenav-menu-heading">상품 관리</div>
+                            <a class="nav-link" href="orderlist.pr">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                상품 매출 현황
+                                상품 주문 관리
                             </a>
                             <a class="nav-link" href="table.da">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                커뮤니티 이용자수
+                                상품 매출 관리
                             </a>
                         </div>
                     </div>

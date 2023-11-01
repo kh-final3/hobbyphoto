@@ -70,6 +70,11 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectBoard4");
 	}
 	
+	// 게시글 삭제 처리-배경게시판
+	public int bkdeleBoard(SqlSessionTemplate sqlSession, int backNo) {
+		return sqlSession.update("adminMapper.bkdeleBoard", backNo);
+	}
+	
 	// 신고 게시글 관리 조회
 	public ArrayList<Report> selectReport(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("adminMapper.selectReport");
@@ -104,22 +109,10 @@ public class AdminDao {
 		
 		return (ArrayList)sqlSession.selectList("adminMapper.selecAdminProtList", null, rowBounds);
 	}
-	public int adminProdelete(SqlSessionTemplate sqlSession,int pno) {
-		return sqlSession.delete("adminMapper.adminProdelete", pno);
+
+	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
-	public Product selectProductdetail(SqlSessionTemplate sqlSession,int pNo) {
-		return sqlSession.selectOne("adminMapper.selectProductdetail", pNo);
-	}
-	public Product adminProductupdateForm(SqlSessionTemplate sqlSession,int pNo) {
-		return sqlSession.selectOne("adminMapper.adminProductupdateForm", pNo);
-	}
-	
-	public int adminProductupdate(SqlSessionTemplate sqlSession, Product p) {
-		System.out.println("dao에서의 p" + p);
-		return sqlSession.update("adminMapper.adminProductupdate", p);
-	}
-	
-	
 	
 }

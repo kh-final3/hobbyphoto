@@ -285,6 +285,15 @@
 	  order 
 	     by k.back_no desc
 	</select>
+	
+	<!-- 배경화면 게시물 삭제 --> 
+	  <update id="bkdeleBoard">
+	  	update 
+	  		   background
+	       set status = 'N'
+	     where board_type = 4
+	       and bankNo = #{backNo}
+	  </update>
 
 	<!-- 신고 게시물 조회 -->
 	<select id="selectReport" resultMap="ReportResult">
@@ -378,7 +387,6 @@
   	   order
   	   		by p_no desc
   </select>
-
   <!-- 관리자페이지 메인에 신고 회원리스트 -->
   <select id="selectReportMList" resultMap="ReportResult">
 	SELECT

@@ -412,7 +412,7 @@
             <div class="btn-area" align="center">
                 <button type="button" class="update">수정하기</button>
                 <button type="button" class="golist">목록으로</button>
-                <button type="button" class="delete">t삭제</button>
+                <button type="button" class="delete">삭제</button>
             </div>
            <hr>
             

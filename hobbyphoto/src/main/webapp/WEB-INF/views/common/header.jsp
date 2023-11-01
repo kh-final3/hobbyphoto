@@ -177,6 +177,9 @@
             color: #5865f5;
             font-weight: bolder;
             box-sizing: border-box;
+            /* border: 1px solid red; */
+            width: 100px;
+            
         }
 
         .btn_login:hover{
@@ -215,7 +218,7 @@
 	    <div class="mb_outer">
 	        <div class="mb_menu-area">
 	            <div id="mb_logo">
-	                <img src="resources/images/logo.png" alt="로고">
+	                <img src="resources/images/logo.png" alt="로고" onclick="location.href='main.ho'">
 	            </div> 
 	            <div id="mb_nav">
 	                <ul id="mb_navi">
