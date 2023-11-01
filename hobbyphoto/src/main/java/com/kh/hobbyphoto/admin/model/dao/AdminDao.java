@@ -72,6 +72,11 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectBoard4");
 	}
 	
+	// 게시글 삭제 처리-배경게시판
+	public int bkdeleBoard(SqlSessionTemplate sqlSession, int backNo) {
+		return sqlSession.update("adminMapper.bkdeleBoard", backNo);
+	}
+	
 	// 신고 게시글 관리 조회
 	public ArrayList<Report> selectReport(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("adminMapper.selectReport");
@@ -98,6 +103,11 @@ public class AdminDao {
 		RowBounds rowBounds = new RowBounds(poffset,plimit);
 		
 		return (ArrayList)sqlSession.selectList("adminMapper.selecAdminProtList", null, rowBounds);
+	}
+
+	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

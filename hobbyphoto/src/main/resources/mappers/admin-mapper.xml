@@ -69,7 +69,7 @@
 		<result column="board_type" property="boardType"></result>
 	</resultMap>
 	
-		<resultMap type="BackGround" id="BackResult">
+	<resultMap type="BackGround" id="BackResult">
 		<result column="back_no" property="backNo"></result>
 		<result column="nickname" property="userNo"></result>
 		<result column="img" property="img"></result>
@@ -77,6 +77,19 @@
 		<result column="count" property="count"></result>
 		<result column="download" property="downLoad"></result>
 	</resultMap>
+	
+	<resultMap type="Product" id="shopResult">
+		<result column="p_no" property="pNo"/>
+		<result column="p_name" property="pName"/>
+		<result column="category_no" property="categoryNo"/>
+		<result column="brand_no" property="brandNo"/>
+		<result column="price" property="price"/>
+		<result column="amount" property="amount"/>
+		<result column="thumbnail" property="thumbnail"/>
+		<result column="p_dimg" property="pDimg"/>
+		<result column="p_simg" property="pSimg"/>
+	</resultMap>
+	
 	
   	<!-- 관리자페이지 회원 조회 -->
 	<select id="selectMember" resultMap="resultMember">
@@ -195,6 +208,15 @@
 	  order 
 	     by k.back_no desc
 	</select>
+	
+	<!-- 배경화면 게시물 삭제 --> 
+	  <update id="bkdeleBoard">
+	  	update 
+	  		   background
+	       set status = 'N'
+	     where board_type = 4
+	       and bankNo = #{backNo}
+	  </update>
 
 	<!-- 신고 게시물 조회 -->
 	<select id="selectReport" resultMap="ReportResult">
@@ -283,6 +305,8 @@
   	   where status='Y'
   	   order
   	   		by p_no desc
+  </select>
+  
   <!-- 관리자페이지 메인에 신고 회원리스트 -->
   <select id="selectReportMList" resultMap="ReportResult">
 	SELECT
