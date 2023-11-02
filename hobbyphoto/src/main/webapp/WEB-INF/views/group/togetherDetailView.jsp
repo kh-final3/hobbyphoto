@@ -234,6 +234,7 @@
 
     </style>
 </head>
+<jsp:include page="../common/header.jsp"/>
 	<body>
 	    <div id="__next">
 	        <div class="__className_ff1e61">
@@ -290,7 +291,7 @@
 		                                </span>
 	                            	</div>
 	                       		 </div>
-	                        <button id="enroll-btn">신청하기</button><br><br><br>
+	                        <button id="enroll-btn" onclick="enrollMember();">신청하기</button><br><br><br>
 								<c:if test="${ loginMember.userName eq sg.userNo }">
 						            <div align="center">
 						            		<a class="btn btn-primary" href="togetherList.tg">목록으로</a>
@@ -302,6 +303,10 @@
 					            <form id="postForm" action="" method="post">
 					            	<input type="hidden" name="gno" value="${ sg.groupNo }">
 					            </form>
+					            
+					            <c:if test="${not empty loginMember}">
+								    <c:set var="userNo" value="${loginMember.userNo}" />
+								</c:if>
 					            
 							<script>
 							    function postFormSubmit(num) {
@@ -315,24 +320,25 @@
 							    
 							    let gno = ${ sg.groupNo };
 							    
-							       if(loginMember != null){
-							       let userNo = ${ loginMember.userNo };
-							       }
+							    <c:if test="${not empty userNo}">
+						        	let userNo = ${userNo};
+						    	</c:if>
 							       
 							       function booking(){
 							           
 							              $.ajax({
 							               url:"booking.bo",
 							               data:{
-							            	   boardNo:bno,
-							            	   userNo:userNo
-							            	   }, success:function(result){
+							            	   boardNo: gno,
+							            	   userNo: userNo}, 
+							            	   success:function(result){
 							                   if(result == 'Y'){
 							                      $("#bookmark1").css("display", "none");
 							                       $("#bookmark2").css("display", "");
 							                   }
 							               },
 							               error:function(){
+							            	   console.log("ajax 통신 실패!");
 							               }
 							           	})
 							       }
@@ -341,7 +347,9 @@
 							       
 							              $.ajax({
 							               url:"delBooking.bo",
-							               data:{boardNo:bno, userNo:userNo},
+							               data:{
+							            	   boardNo: gno,
+							            	   userNo: userNo },
 							               success:function(result){
 							                   if(result == 'Y'){
 							                      $("#bookmark1").css("display", "");
@@ -349,9 +357,25 @@
 							                   }
 							               },
 							               error:function(){
+							            	   console.log("ajax 통신 실패!~")
 							               	}
 							            })
 							       }
+							       
+							       function enrollMember(){
+							           
+							           if(confirm("모임에 신청하시겠습니까?")){
+							              location.href = "enroll.tg?gno=" + gno + "&uno=" + userNo;
+							           }
+							        }
+							        
+							        // 모임 탈퇴
+							        function dropOut(){
+							           
+							           if(confirm("모임에 탈퇴하시겠습니까?")){
+							              location.href = "dropOut.tg?tno=" + bno + "&uno=" + userNo;
+							           }
+							        }
 							</script>
 	                        </div>
 	                    </div>
@@ -360,4 +384,5 @@
 	        </div>
 	    </div>
 	</body>
+<jsp:include page="../common/footer.jsp"/>	
 </html>

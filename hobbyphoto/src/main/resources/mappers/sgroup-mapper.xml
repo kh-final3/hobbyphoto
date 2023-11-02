@@ -100,6 +100,21 @@
 	    WHERE group_no = #{boardNo}
 	</delete>
 	
+	<insert id="enrollGroup">
+		INSERT INTO group_d
+			VALUES
+			(
+			  #{groupNo}
+			, #{userNo}
+			)
+	</insert>
+	
+	<update id="groupCount">
+		update s_group
+		set me_count = me_count + 1
+		where group_no = #{groupNo}
+	</update>
+	
 	
 </mapper>
 	

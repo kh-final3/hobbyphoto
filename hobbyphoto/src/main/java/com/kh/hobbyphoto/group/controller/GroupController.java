@@ -20,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.group.model.service.GroupServiceImpl;
+import com.kh.hobbyphoto.group.model.vo.GroupD;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
+import com.kh.hobbyphoto.member.model.vo.Member;
 
 @Controller
 public class GroupController {
@@ -33,7 +35,6 @@ public class GroupController {
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 		ArrayList<Sgroup> list = GService.selectTgList(pi);
-		System.out.println(list);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("group/selectTogetherList");
 		
@@ -45,7 +46,6 @@ public class GroupController {
 		Sgroup sg = GService.selectTgBoard(gno); 
 		
 		model.addAttribute("sg", sg);
-		System.out.println(sg);
 		return "group/togetherDetailView";
 	}
 	
@@ -64,7 +64,6 @@ public class GroupController {
 	        g.setImg(changeName);
 	    }
 
-	    System.out.println(g);
 	    int result = GService.insertSgBoard(g);
 
 	    if (result > 0) {
@@ -96,7 +95,6 @@ public class GroupController {
 	@RequestMapping("delete.tg")
 	public String deleteTogether(int gno, String filePath, HttpSession session, Model model) {
 		int result = GService.deleteTogether(gno);
-		System.out.println(result);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
@@ -105,10 +103,30 @@ public class GroupController {
 			model.addAttribute("errorMsg", "게시글 삭제 실패");
 			return "common/errorPage";
 		}
-		
+	}
+	
+	@RequestMapping("enroll.tg")
+	public String enrollGroup(@RequestParam(required = false) Integer gno, @RequestParam(required = false) Integer uno, HttpSession session, Model model) {
+	    System.out.println("나는 gno라고해" + gno);
+	    System.out.println("나는 uno라고해" + uno);
+	    GroupD gr = new GroupD();
+	    gr.setGroupNo(gno);
+	    gr.setUserNo(uno);
+
+	    System.out.println(gr);
+
+	    int result = GService.enrollGroup(gr);
+
+	    if(result > 0) {
+	        session.setAttribute("alertMsg", "모임 신청이 완료되었습니다.");
+	    } else {
+	        session.setAttribute("alertMsg", "모임 신청에 실패했습니다.");
+	    }
+	    System.out.println("나는 result에오" + result);
+	    
+	    return "redirect:togetherDetail.tg?gno=" + gno;
 	}
 
-	
 
 	
 }
