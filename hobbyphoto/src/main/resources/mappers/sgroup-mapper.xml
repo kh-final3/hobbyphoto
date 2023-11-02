@@ -13,6 +13,7 @@
 		<result column="gr_date" property="grDate"/>
 		<result column="create_date" property="createDate"/>
 		<result column="status" property="status"/>
+		<result column="me_count" property="meCount"/>
 	</resultMap>
 
 	<select id="selectTgListCount" resultType="_int">
@@ -31,6 +32,7 @@
 		  m.nickname,
 		  sg.location,
 		  sg.me_total,
+		  sg.me_count,
 		  TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
 		FROM
 		  s_group sg
@@ -51,6 +53,7 @@
 		    m.nickname,
 		    sg.location,
 		    sg.me_total,
+		    sg.me_count,
 		    TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
 		FROM
 		    s_group sg

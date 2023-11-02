@@ -46,7 +46,7 @@ public class GroupDao {
 	}
 
 	public int groupCount(SqlSessionTemplate sqlSession, GroupD gr) {
-		return sqlSession.update("sgropuMapper.groupCount", gr);
+		return sqlSession.update("sgroupMapper.groupCount", gr);
 	}
 
 

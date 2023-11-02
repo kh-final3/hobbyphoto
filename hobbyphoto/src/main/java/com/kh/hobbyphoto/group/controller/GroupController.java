@@ -107,8 +107,6 @@ public class GroupController {
 	
 	@RequestMapping("enroll.tg")
 	public String enrollGroup(@RequestParam(required = false) Integer gno, @RequestParam(required = false) Integer uno, HttpSession session, Model model) {
-	    System.out.println("나는 gno라고해" + gno);
-	    System.out.println("나는 uno라고해" + uno);
 	    GroupD gr = new GroupD();
 	    gr.setGroupNo(gno);
 	    gr.setUserNo(uno);
@@ -122,9 +120,8 @@ public class GroupController {
 	    } else {
 	        session.setAttribute("alertMsg", "모임 신청에 실패했습니다.");
 	    }
-	    System.out.println("나는 result에오" + result);
 	    
-	    return "redirect:togetherDetail.tg?gno=" + gno;
+	    return "redirect:togetherList.tg";
 	}
 
 
