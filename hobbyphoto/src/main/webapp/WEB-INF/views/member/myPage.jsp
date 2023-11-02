@@ -125,8 +125,47 @@
             padding: 0 0 5px 15px;
             font-weight: 500;
         }
-
-
+		
+		.myPage-update{
+			margin-right: 20px;
+		}
+		
+		#follow,#following:hover{
+			cursor: pointer;
+		}
+		
+		.followProfile img{
+            vertical-align: bottom;
+			width: 50px;
+			height: 50px;
+		}
+		
+		.follow{
+			width: 450px;
+			height: 65px;
+			padding: 8px 16px;
+		}
+		.followInfo{width: 275px;}
+		
+		.follow>div{display: inline-block;}
+		.follow div{box-sizing: border-box;}
+		.followId{font-size: 16px; font-weight: 700;}
+		.followNick{font-size: 14px; color: gray;}
+		.btnF{
+			background-color: black;
+			color:white;
+			border-radius: 12px;
+			width: 80px; 
+			height: 40px;
+			vertical-align: bottom;
+			font-size: 13px;
+			font-weight: 700;
+		}
+		
+		.noFollow{
+			font-size: 16px;
+			font-weight: 700;
+		}
     </style>
 </head>
 <body>
@@ -137,12 +176,12 @@
 
         <div class="info_my">
             <div class="info_my1">
-                <img id="profileImg_my" src="../../resources/images/picture.png" style="width: 200px; height: 200px; margin: 50px;"></img><br>
+                <img id="profileImg_my" src="resources/images/picture.png" style="width: 200px; height: 200px; margin: 50px;"></img><br>
                 <h6 style="font-weight: 600; text-align: center;">반가워요!</h6>
-                <h6 style="text-align: center;">***님</h6>
+                <h6 style="text-align: center;">${ loginMember.nickName }님</h6>
                 <div id="btnall_my">
                     <button type="submit" class="btn btn-sm btn-primary" id="btn_my1" onclick="location.href='logout.me'">로그아웃</button><br>                    
-                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my2" onclick ="location.href='deleteForm.me'">회원탈퇴</button>
+                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my2" onclick ="location.href='updateForm.me'">정보수정</button>
                 </div>
             </div>
             <div class="info_my2">
@@ -152,19 +191,19 @@
                     <table align="center">
                         <tr>
                             <th>닉네임</th>
-                            <td>***의 닉네임</td>
+                            <td>${ loginMember.nickName }</td>
                         </tr>
                         <tr>
                             <th>한줄소개</th>
-                            <td>만나서 반갑습니다. 잘부탁드려요</td>
+                            <td>${ loginMember.description }</td>
                         </tr>
                         <tr>
                             <th>팔로우</th>
-                            <td>0</td>
+                            <td><span id="follow">${ countFollow }</span></td>
                         </tr>
                         <tr>
-                            <th>팔로잉</th>
-                            <td>0</td>
+                            <th>팔로워</th>
+                            <td><span id="following">${ countFollower }</span></td>
                         </tr>
                     </table>
                 </div>
@@ -174,23 +213,23 @@
                 <div id="list_my">
                     <ul>
                         <li>
-                            <a href="myBookmarks.me?cpage=1" class="icon1"><img src="../../resources/images/bookmark-white.png" style="width: 50px; height: 50px;"></a>
+                            <a href="myBookmarks.me?cpage=1" class="icon1"><img src="resources/images/bookmark-white.png" style="width: 50px; height: 50px;"></a>
                             <span>북마크</span>
                         </li>
                         <li>
-                            <a href="myBoard.me?cpage=1" class="icon2"><img src="../../resources/images/noticeboard.png" style="width: 50px; height: 50px;"></a>
+                            <a href="myBoard.me?cpage=1" class="icon2"><img src="resources/images/noticeboard.png" style="width: 50px; height: 50px;"></a>
                             <span>게시글</span>
                         </li>
                         <li>
-                            <a href="myLike.me?cpage=1" class="icon3"><img src="../../resources/images/coment.png" style="width: 50px; height: 50px;"></a>
+                            <a href="myLike.me?cpage=1" class="icon3"><img src="resources/images/coment.png" style="width: 50px; height: 50px;"></a>
                             <span>좋아요</span>
                         </li>
                     <li>
-                        <a href="myGroup.me?cpage=1" class="icon4"><img src="../../resources/images/interview.png" style="width: 50px; height: 50px;"></a>
+                        <a href="myGroup.me?cpage=1" class="icon4"><img src="resources/images/interview.png" style="width: 50px; height: 50px;"></a>
                         <span>모임</span>
                     </li>
                     <li>
-                        <a href="myBlock.me?cpage=1" class="icon5"><img src="../../resources/images/block-user.png" style="width: 50px; height: 50px;"></a>
+                        <a href="myBlock.me?cpage=1" class="icon5"><img src="resources/images/block-user.png" style="width: 50px; height: 50px;"></a>
                         <span>차단 회원</span>
                     </li>
                 </ul>
@@ -198,6 +237,105 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+	<div class="modal fade" id="followModal" role="dialog">
+	  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	  
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">팔로우</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	      <div class="modal-body">
+	       	<c:choose>
+	       		<c:when test="${ countFollowing eq 0 }">
+	       			<br>
+	       			<div class="noFollow">팔로우 중인 회원이 없습니다.</div>
+	       			<br>
+	       		</c:when>
+	       		<c:otherwise>
+			    	<c:forEach var="a" items="${ follow }">
+			    		<div class="follow">
+			    			<input type="hidden" name="userNo" value="${ a.userNo }">
+			    			<div class="followProfile">
+                                <img src="${a.profileImg}">
+                            </div>
+                            <div class="followInfo">
+                                <div class="followId">${a.userId}</div>
+                                <div class="followNick">${a.nickname}</div>
+                            </div>
+                            <div class="followBtn">
+                            	<button type="button" class="btnF">팔로우</button>
+                            </div>
+			    		</div>
+			       	</c:forEach>
+	       		</c:otherwise>
+	       	</c:choose>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="followingModal" role="dialog">
+	  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	  
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">팔로워</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	      <div class="modal-body">
+	      	<c:choose>
+	       		<c:when test="${ countFollow eq 0 }">
+	       			<br>
+	       			<div class="noFollow">팔로우 중인 회원이 없습니다.</div>
+	       			<br>
+	       		</c:when>
+	       		<c:otherwise>
+			    	<c:forEach var="b" items="${ follower }">
+			    		<div class="follow">
+			    			<input type="hidden" name="userNo" value="${ b.userNo }">
+			    			<div class="followProfile">
+                                <img src="${b.profileImg}">
+                            </div>
+                            <div class="followInfo">
+                                <div class="followId">${b.userId}</div>
+                                <div class="followNick">${b.nickname}</div>
+                            </div>
+                            <div class="followBtn">
+                            	<button type="button" class="btnF">팔로우</button>
+                            </div>
+			    		</div>
+			       	</c:forEach>
+	       		</c:otherwise>
+	       	</c:choose>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<script>
+		$(document).ready(function(){
+			  $("#follow").click(function(){
+			    $("#followModal").modal({backdrop: true});
+			  });
+		});
+		
+		$(document).ready(function(){
+			  $("#following").click(function(){
+			    $("#followingModal").modal({backdrop: true});
+			  });
+		});
+		
+		$(()=>{
+    		$(document).on("click", ".modal-body .follow",function(){
+    			location.href="profile.me?userNo=" + $(this).children().eq(0).val() + "&userId=" + $(this).find(".followId").text();
+            })
+    	})
+	</script>
     <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

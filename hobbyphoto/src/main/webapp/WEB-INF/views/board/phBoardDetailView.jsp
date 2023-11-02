@@ -7,10 +7,11 @@
 <meta charset="UTF-8">
 <title>사진게시판 상세</title>
     <style>
+    	/* div {border: 1px solid black;} */
         /* 전체 */
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
-            width: 1200px;
+            width: 1400px;
             height: 1000px;
             margin: auto;
             background-color: rgba(44, 44, 44, 0.026);
@@ -67,7 +68,7 @@
         /* 글내용 */
         .content{
             border: 1px solid green;
-            width: 100%;
+            width: 400px;
             height: 70%;
             border: none;
             margin-left: 20px;
@@ -92,8 +93,8 @@
         .box{
             width: 550px; 
             margin: 0 auto; /**중앙 정렬한다.**/
-            margin-top: 100px;
-            margin-right: 90px;
+            margin-top: 80px;
+            margin-right: 140px;
         }
 
         /**사진**/
@@ -187,7 +188,7 @@
             border: 1px solid rgba(220, 220, 220, 0.340);
             margin-right: 10px;
             margin: auto;
-            width: 360px
+            width: 420px
         }
         .profile{
             display: flex;
@@ -227,25 +228,29 @@
 
                     function next() {
                         if (pages > 1) {
-                            backBtn.removeAttribute('disabled');
                             positionValue -= IMAGE_WIDTH;
                             images.style.transform = "translateX(" + positionValue + "px)";
                             pages -= 1;
+
+                            backBtn.removeAttribute('disabled');
                         }
+
                         if (pages === 1) {
-                            backBtn.setAttribute('disabled', 'true');
+                            nextBtn.setAttribute('disabled', 'true');
                         }
                     }
 
                     function back() {
                         if (pages < ${at.size()}) {
-                            nextBtn.removeAttribute('disabled');
                             positionValue += IMAGE_WIDTH;
                             images.style.transform = "translateX(" + positionValue + "px)";
                             pages += 1;
+
+                            nextBtn.removeAttribute('disabled');
                         }
+
                         if (pages === ${at.size()}) {
-                            nextBtn.setAttribute('disabled', 'true');
+                            backBtn.setAttribute('disabled', 'true');
                         }
                     }
 
@@ -292,7 +297,7 @@
                 <div class="head-area">
                     <div class="profile">
                         <div class="writer_name">
-                            <img src="resources/pro.png" alt="" width="95">
+                            <img src="resources/images/profile.png" width="45" style="margin-top:25px">
                             <p>${ b.boardWriter }</p>
                             <p style="color: blue; cursor: pointer;">팔로우</p>
                         </div>
@@ -315,6 +320,7 @@
                     </div>
                 </div>
                 <hr id="detail-hr">
+                <br>
                 <div class="content-area">
                     <div class="review-area">
                         <!-- 댓글 들어가는 자리 -->
@@ -371,7 +377,7 @@
 	    				for(let i in list){
 	    					value += "<tr>"
 	    						  + "<th>" + list[i].replyWriter + "</th>"
-	    						  + "<td>" + list[i].replyContent + "</td>"
+	    						  + "<td style='width:200px;'>" + list[i].replyContent + "</td>"
 	    						  + "<td>" + list[i].createDate + "</td>"
 	    						  + "</tr>"
 	    					}
@@ -380,12 +386,84 @@
     				$("#rcount").text(list.length);
 
     			}, error:function(){
-    				console.log("댓글리스트 조회용 ajax 통신 실패!")
+    				console.log("댓글리스트 조회용 ajax 통신 실패!");
     			}
-    		})
+    		});
     	}
     </script>
     
+
+    
+    <script>
+        if (${ loginMember.userNo } !== null) {
+            let userNo = ${ loginMember.userNo };
+            let bno = ${ b.boardNo }
+            function insertLike(){
+                $.ajax({
+                    url:"like.bo",
+                    data:{boardNo:bno, 
+                          userNo:userNo,
+						  boardType: 1
+                        },
+                    success:function(result){
+                        
+                        if(result == 'Y'){
+                            $("#like1").css("display", "none");
+                            $("#like2").css("display", "");
+                        }
+                    },
+                    error:function(){
+                        
+                    }
+                })
+            }
+            
+            function deleteLike(){
+        
+                $.ajax({
+                    url:"likeDelete.bo",
+                    data:{boardNo:bno, 
+                          userNo:userNo,
+                          boardType: 1
+                        },
+                    success:function(result){
+                        
+                        if(result == 'Y'){
+                            $("#like2").css("display", "none");
+                            $("#like1").css("display", "");
+                        }
+                    },
+                    error:function(){
+                        
+                    }
+                })
+            }
+            
+            $(function(){
+                
+                $.ajax({
+                    url:"likeCheck.bo",
+                    data:{boardNo:bno, 
+                          userNo:userNo,
+						  boardType: 1
+                        },
+                    success:function(result){
+                        ;
+                        if(result == 'Y'){
+                            $("#like2").css("display", "");
+                            $("#like1").css("display", "none");
+                        }else{
+                            $("#like2").css("display", "none");
+                            $("#like1").css("display", "");                    	
+                        }
+                    },
+                    error:function(result){
+                        ;
+                    }
+                })
+            })
+        }
+    </script>
 <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

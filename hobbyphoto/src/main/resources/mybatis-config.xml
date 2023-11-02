@@ -12,9 +12,9 @@
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Place" alias="Place"/>
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Festival" alias="Festival"/>
-        <typeAlias type="com.kh.hobbyphoto.board.model.vo.BackGround" alias="BackGround"/>
+    <typeAlias type="com.kh.hobbyphoto.board.model.vo.BackGround" alias="BackGround"/>
+		<typeAlias type="com.kh.hobbyphoto.board.model.vo.WallPaper" alias="WallPaper"/>
 		<typeAlias type="com.kh.hobbyphoto.group.model.vo.Sgroup" alias="Sgroup"/>
-		<typeAlias type="com.kh.hobbyphoto.group.model.vo.Sgroup" alias="S_group"/>
 		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.hobbyphoto.upfile.model.vo.Attachment" alias="Attachment"/>
 		<typeAlias type="com.kh.hobbyphoto.notice.model.vo.Notice" alias="Notice"/>
@@ -22,7 +22,8 @@
 		<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Cart" alias="Cart"/>
 		<typeAlias type="com.kh.hobbyphoto.common.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Block" alias="Block"/>
-        <typeAlias type="com.kh.hobbyphoto.shop.model.vo.Orders" alias="Orders"/>
+		<typeAlias type="com.kh.hobbyphoto.common.model.vo.Follow" alias="Follow"/>
+    <typeAlias type="com.kh.hobbyphoto.shop.model.vo.Orders" alias="Orders"/>
 
 	</typeAliases>
 

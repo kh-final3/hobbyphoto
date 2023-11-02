@@ -52,6 +52,10 @@ public interface BoardService {
 	int updateRcBoard(Board b, ArrayList<Attachment> list);
 	int updateRcAtBoard(Attachment at);
 	
+	// 6. 댓글 작성, 조회용 서비스
+	ArrayList<Reply> selectRcReplyList(int boardNo);
+	int insertRcReply(Reply r);
+	
 	// ------------------- 마이 페이지 게시판 ------------------- //
 	int myListCount(int userNo);
 	ArrayList<Board> myBoardList(PageInfo pi,int userNo);
@@ -60,6 +64,12 @@ public interface BoardService {
 	ArrayList<Board> myGroupList(PageInfo pi,int userNo);
 	ArrayList<Block> myBlockList(PageInfo pi,int userNo);
 	
+	
+	// ------------------------------------------------------ //
+	ArrayList<Board> selectTopBoardList();
+	ArrayList<Place> selectTopPlaceList();
+	
+	// ------------------------------------------------------ //
 	ArrayList<Place> selectPlaceList(PageInfo pi);
 	int insertPlace(Place p, ArrayList<Attachment> list);
 	int insertAttachmentPlace(ArrayList<Attachment> list);
@@ -78,4 +88,15 @@ public interface BoardService {
 	int insertAttachmentPlace2(Attachment attachment);
 	int updateCulture(Festival fe);
 
+	
+	
+	 int checkBook(Board b);
+	 int insertBookmark(Board b);
+	 int deleteBookmark(Board b);
+	 
+	 int checkLike(Board b);
+	 int insertLike(Board b);
+	 int deleteLike(Board b);
+	 
+	 int insertWallPaper(WallPaper wp);
 }

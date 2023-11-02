@@ -17,15 +17,20 @@
     
     <style>
         /*div {border: 1px solid red;}*/
+
         .payment_outer {
-            /* width: 1400px; */
+            width: 1300px;
             justify-content: center; 
             align-items: center; 
+            margin-left: 110px;
+            border-bottom: 1px solid gainsboro;
+            padding-bottom: 50px;
         }
 
         .order_pay{
             width: 100%;
             height: 50px;
+            margin-top: 15px;
         }
         .order_pay img{
             width: 290px;
@@ -33,14 +38,14 @@
         }
         /* 여기 일단 늘리긴했는데.... */
         .information {
-            width: 880px;
+            width: 400px;
             /* height: 500px; */
+            margin-left: 50px;
         }
         .information p {
             border-bottom: 2px solid rgb(95, 95, 95);
-            width: 750px;
+            width: 720px;
             height: 30px;
-            margin-right: 50px;
         }
         .buyer_info {
             border: none;
@@ -61,30 +66,33 @@
         }
 
         .pd_table img{
-            width: 80px;
-            height: 80px;
+            width: 130px;
+            height: 130px;
         }
         .all_info{
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             
         }
         #amount{
             border: 2px solid rgb(69, 69, 69);
-            width: 300px;
-            height: 430px;
+            width: 90px;
+            height: 54px;
         }
         .payment_outer input{
             border: none;
             border-bottom: 1px solid rgba(79, 45, 45, 0.453);
             width: 350px;
             height: 50px;
+            vertical-align: bottom;
         }
         #sum {
             text-align: right;
             margin-top: 15px;
             margin-right: 10px;
             margin-bottom: 15px;
+            font-weight: 500;
+            font-size: larger;
         }
         .addressbtn,.orbtn {
             width: 150px;
@@ -107,6 +115,17 @@
             /* text-align: center; */
         }
 
+        .amount_outer{
+            width: 500px;
+        }
+
+        #amount2{
+            border: 2px solid rgb(69, 69, 69);
+            width: 400px;
+            margin-left: 10px;
+            padding-bottom: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -119,12 +138,12 @@
 <form action="">
 <input type="hidden" name="userNo" value="${ loginMember.userNo }">
 <div class="payment_outer" align="center">
-        <div class="order_pay">
+        <div class="order_pay" style="margin-bottom: 10px;">
             <!-- <img src="img/pay.png" alt="카메라 사진"> -->
             <h1>ORDER</h1>
         </div>
         <table class="pd_table" border="1">
-            <thead id="pd_thead">
+            <thead id="pd_thead" style="text-align: center;">
                 <tr>
                     <th colspan="2">제품</th>
                     <th>가격</th>
@@ -213,7 +232,7 @@
                     <tr>
                         <td>주소</td>
                         <td><input type="text" id="sample6_address" placeholder="주소" name="address"></td>
-                        <td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ></td>
+                        <td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 250px; margin-right: 80px;" ></td>
                     </tr>
                     <tr>
                     	<td></td>
@@ -222,12 +241,12 @@
                     </tr>
                     <tr>
                         <td>주문메시지</td>
-                    	<td colspan="2"><textarea name="oMsg" id="" style="resize: none; width: 200px; height: 50px;" ></textarea></td>
+                    	<td colspan="2"><textarea name="oMsg" id="" style="resize: none; width: 350px; height: 50px;" ></textarea></td>
                     </tr>
 
                     <tr>
                         <td>배송메시지</td>
-                    	<td colspan="2"><textarea name="dMsg" id="" style="resize: none; width: 200px; height: 50px;" ></textarea></td>
+                    	<td colspan="2"><textarea name="dMsg" id="" style="resize: none; width: 350px; height: 50px;" ></textarea></td>
                     </tr>
                     
                 
@@ -289,7 +308,7 @@
             
             	<c:when test="${ empty buylist }">
             		<div class="amount_outer">
-		                <div id="amount">
+		                <div id="amount2">
 		                    <div id="sum">
 		                        결제예정 금액
 		                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input type="text" name="totalPrice" id="totalPrice" value="${list.price * amount + (list.price * amount >= 50000 ? 0 : 3000)}" readonly> 원</p>
@@ -298,15 +317,15 @@
 		                    <table id="sum2" >
 		                        <tr>
 		                            <td>주문금액</td>
-		                            <td><input type="text" name="" id="" value="${ list.price * amount }" readonly>원</td>
+		                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ list.price * amount }" readonly>원</td>
 		                        </tr>
 		                        
 		                        <tr>
 		                            <td>배송비</td>
-		                            <td><input type="text" name="" id="" value="${ list.price * amount  >= 50000 ? 0 : 3000 }" readonly>원</td>
+		                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ list.price * amount  >= 50000 ? 0 : 3000 }" readonly>원</td>
 		                        </tr>
 		                    </table>
-		                    <br><br>
+		                    <br>
 		                    <div>
 		                        [필수] 주문할 제품의 거래조건을 <br>
 		                        하였으며, 구매에 동의하시겠습니까? <br>
@@ -314,31 +333,31 @@
 		                        <button class="orbtn" id="onebuy" onclick="requestOnePay();">결제</button>
 		                    </div>
 		                </div>
-		               <pre>결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</pre>
+		               <p style="margin-top: 10px;">결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</p>
 		            </div>
             	</c:when>
             	
             	<c:otherwise>
             	
             			<div class="amount_outer">
-			                <div id="amount">
+			                <div id="amount2">
 			                    <div id="sum">
-			                        결제예정 금액
-			                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input type="text" name="totalPrice" id="totalPrice" value="${totalPrice + (totalPrice >= 50000 ? 0 : 3000)}"> 원</p>
+			                        <h5>결제예정 금액</h5>
+			                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input style="width: 300px;" type="text" name="totalPrice" id="totalPrice" value="${totalPrice + (totalPrice >= 50000 ? 0 : 3000)}"> 원</p>
 			                    </div>
 			                    <hr class="hr2">
-			                    <table id="sum2" >
+			                    <table id="sum2">
 			                        <tr>
 			                            <td>주문금액</td>
-			                            <td><input type="text" name="" id="" value="${ totalPrice }"> 원</td>
+			                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ totalPrice }"> 원</td>
 			                        </tr>
 			                        
 			                        <tr>
 			                            <td>배송비</td>
-			                            <td><input type="text" name="" id="" value="${ totalPrice  >= 50000 ? 0 : 3000 }"></td>
+			                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ totalPrice  >= 50000 ? 0 : 3000 }"> 원</td>
 			                        </tr>
 			                    </table>
-			                    <br><br>
+			                    <br>
 			                    <div>
 			                        [필수] 주문할 제품의 거래조건을 <br>
 			                        하였으며, 구매에 동의하시겠습니까? <br>
@@ -346,7 +365,7 @@
 			                        <button class="orbtn" id="allbuy" onclick="requestPay()">결제</button>
 			                    </div>
 			                </div>
-			               <pre>결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</pre>
+			               <p style="margin-top: 10px;">결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</p>
 			            </div>
             		
             	</c:otherwise>

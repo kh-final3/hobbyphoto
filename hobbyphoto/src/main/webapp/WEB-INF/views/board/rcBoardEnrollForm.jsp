@@ -23,6 +23,7 @@
 </style>
 </head>
 <body>
+    <jsp:include page="../common/header.jsp"/>
     <div class="content">
         <br><br>
         <div align="center">
@@ -35,23 +36,27 @@
                <input type="hidden" id="boardWriter" value="${ loginMember.userNo }" name="boardWriter">
                 <table id="contentArea" align="center" class="table">
                     <tr>
+                        <tr>
+                            <th width="100">해시태그</th>
+                            <td colspan=""><input type="text" name="hashTag" value="${ b.hashTag }" style="width: 1200px;"></td>
+                        </tr>
                         <th width="100">제목</th>
                         <td colspan=""><input type="text" name="boardTitle" style="width: 1200px;"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><textarea name="boardContent" cols="180" rows="15" style="resize: none;"></textarea></td>
-                        <input type="text" name="hashTag" style="width: 1200px;">
+                        <td colspan="2"><textarea name="boardContent" cols="145" rows="15" style="resize: none;"></textarea></td>
                     </tr>
                 </table>
-                <input type="file" name="upfile">
+                <input type="file" name="upfile" style="margin: 0 0 0 12px;">
                 <input type="file" name="upfile">
         		<br>
-			        <div class="rc-btn" align="right" style="width: 1300px;" >
+			        <div class="rc-btn" align="right" style="width: 1300px; margin-bottom: 20px;" >
 			            <button type="submit" class="btn btn-dark">작성</button>
 			            <button class="btn btn-dark">취소</button>
 			        </div>
         	</form>
         </div>
     </div>
+    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

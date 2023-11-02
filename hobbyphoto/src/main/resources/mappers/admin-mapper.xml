@@ -16,22 +16,6 @@
 		<result column="social" property="social" />
 	</resultMap>
 	
-	<resultMap type="Board" id="boardResult">
-		<result column="board_no" property="boardNo"/>
-		<result column="board_title" property="boardTitle"/>
-		<result column="board_content" property="boardContent"/>
-		<result column="nickname" property="boardWriter"/>
-		<result column="count" property="count"/>
-		<result column="board_type" property="boardType"/>
-		<result column="status" property="status"/>
-		<result column="create_date" property="createDate"/>
-		<result column="board_content" property="boardContent"/>
-		<result column="hashtag" property="hashTag"/>
-		<result column="thumbnail" property="thumbnail"/>
-		<result column="board_writer" property="boardWriter"/>
-		<result column="file_path" property="filePath"/>
-	</resultMap>
-	
 	<resultMap type="Attachment" id="AttachmentResult">
 		<result column="file_no" property="fileNo"/>
 		<result column="file_level" property="fileLevel"/>
@@ -55,7 +39,7 @@
 		<result column="count" property="count"></result>
 	</resultMap>
 	
-	<resultMap type="S_group" id="SgroupResult">
+	<resultMap type="Sgroup" id="SgroupResult">
 		<result column="group_no" property="groupNo"></result>
 		<result column="img" property="img"></result>
 		<result column="nickname" property="userNo"></result>
@@ -67,15 +51,6 @@
 		<result column="create_date" property="createDate"></result>
 		<result column="status" property="status"></result>
 		<result column="board_type" property="boardType"></result>
-	</resultMap>
-	
-	<resultMap type="BackGround" id="BackResult">
-		<result column="back_no" property="backNo"></result>
-		<result column="nickname" property="userNo"></result>
-		<result column="img" property="img"></result>
-		<result column="create_date" property="createDate"></result>
-		<result column="count" property="count"></result>
-		<result column="download" property="downLoad"></result>
 	</resultMap>
 	
 	<resultMap type="Product" id="shopResult">
@@ -91,7 +66,32 @@
 		<result column="p_type" property="pType"/>
 		<result column="status" property="status"/>
 	</resultMap>
-	
+
+	<resultMap type="Board" id="boardResult">
+      <result column="board_no" property="boardNo"/>
+      <result column="board_title" property="boardTitle"/>
+      <result column="board_content" property="boardContent"/>
+      <result column="nickname" property="boardWriter"/>
+      <result column="count" property="count"/>
+      <result column="board_type" property="boardType"/>
+      <result column="status" property="status"/>
+      <result column="create_date" property="createDate"/>
+      <result column="board_content" property="boardContent"/>
+      <result column="hashtag" property="hashTag"/>
+      <result column="thumbnail" property="thumbnail"/>
+      <result column="board_writer" property="boardWriter"/>
+      <result column="file_path" property="filePath"/>
+   </resultMap>
+
+   <resultMap type="BackGround" id="BackResult">
+      <result column="back_no" property="backNo"></result>
+      <result column="nickname" property="userNo"></result>
+      <result column="img" property="img"></result>
+      <result column="create_date" property="createDate"></result>
+      <result column="count" property="count"></result>
+      <result column="download" property="downLoad"></result>
+   </resultMap>
+
 	<!-- 관리자페이지 회원 조회 -->
    <select id="selectMember" resultMap="resultMember">
    select 
@@ -209,6 +209,15 @@
 	  order 
 	     by k.back_no desc
 	</select>
+	
+	<!-- 배경화면 게시물 삭제 --> 
+	  <update id="bkdeleBoard">
+	  	update 
+	  		   background
+	       set status = 'N'
+	     where board_type = 4
+	       and bankNo = #{backNo}
+	  </update>
 
 	<!-- 신고 게시물 조회 -->
 	<select id="selectReport" resultMap="ReportResult">
@@ -302,7 +311,6 @@
   	   order
   	   		by p_no desc
   </select>
-
   <!-- 관리자페이지 메인에 신고 회원리스트 -->
   <select id="selectReportMList" resultMap="ReportResult">
 	SELECT

@@ -11,7 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
 	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-	
+	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
@@ -113,14 +113,14 @@
         }
         
         #sh_text {
-            margin-left: 10px;
+            margin-left: -30px;
             margin-top: 5px;
-            width: 180px;
+            width: 185px;
             border: none; 
-            border-bottom: 1px solid #aeaeae; 
+            border-bottom: 1px solid #aeaeae6b; 
         }
         #search_text {
-        display: flex;
+        	display: flex;
         }
 
         #search {
@@ -177,6 +177,9 @@
             color: #5865f5;
             font-weight: bolder;
             box-sizing: border-box;
+            /* border: 1px solid red; */
+            width: 100px;
+            
         }
 
         .btn_login:hover{
@@ -202,7 +205,10 @@
             font-weight: bolder;
         }
         
-       	
+        input::placeholder{
+          font-size: 14px;
+        }
+        
   </style>
 </head>
 	<c:if test="${ not empty alertMsg }">
@@ -215,7 +221,7 @@
 	    <div class="mb_outer">
 	        <div class="mb_menu-area">
 	            <div id="mb_logo">
-	                <img src="resources/images/logo.png" alt="로고">
+	                <img src="resources/images/logo.png" alt="로고" onclick="location.href='main.ho'">
 	            </div> 
 	            <div id="mb_nav">
 	                <ul id="mb_navi">
@@ -223,7 +229,7 @@
 	                    <li><a href="rcBoardList.bo">장비추천</a></li>
 	                    <li><a href="festivalList.fs">축제 · 전시</a></li>
 	                    <li><a href="list.pl">출사명소</a></li>
-	                   	<li><a href="test.t">배경화면</a></li>
+	                   	<li><a href="list.wp">배경화면</a></li>
 	                    <li><a href="togetherList.tg">모임</a></li>
 	                    <li><a href="list.no">공지사항</a></li>
 	                </ul>
@@ -233,7 +239,7 @@
 	            <div id="mb_search">
 	                <form action="#" id="search_form">
 	                    <div id="search_text">
-	                        <input type="text" name="keyword" id="sh_text" placeholder="검색어를 입력해주세요">
+	                        <input type="text" name="keyword" id="sh_text" placeholder="&nbsp&nbsp&nbsp검색어를 입력해주세요">
 	                        <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
 	                    </div>
 	                    
@@ -318,5 +324,10 @@
         function logout() {
 			location.href="logout.me"
 		}
+    </script>
+    <script>
+	    $(".gomain").click(function(){
+	    	location.href='/hobbyphoto'
+	    })
     </script>
 </html>

@@ -203,7 +203,7 @@
 	                	<input type="hidden" name="boardTitle" value="${ b.boardTitle }">
 	                    <button type="submit">삭제</button>
                     </form>
-                    <form action="phDetail.bo?phno=" method="post">
+                    <form action="phUpdateForm.bo?phno=" method="post">
                     <input type="hidden" name="boardNo" value="${ b.boardNo }">
                     <button type="submit">수정</button>
                     
@@ -241,7 +241,10 @@
                	  <input type="hidden" name="title" value="${ g.title }">
                   <button onclick="submit">삭제</button>
                </form>  
-                  <button onclick="">수정</button>
+               <form action="phUpdateForm.bo?phno=" method="post">
+               		<input type="hidden" name="title" value="${ g.title }">
+                  <button onclick="submit">수정</button>
+               </form>
               </td>
             </tr>
             </c:forEach>

@@ -208,24 +208,34 @@ h1 {
 					</tbody>
 				</table>
 			</div>
-
-			<div class="paging-area" align="center">
-				<c:choose>
-                    <c:when test="${ pi.currentPage ne 1 }">
-                        <button onclick="location.href='list.no?cpage=${ pi.currentPage - 1 }';"> &lt; </button>
+			<!-- list.no -->
+			<div class="paging-area" align="center">   
+                <c:choose>
+                    <c:when test="${ pi.currentPage eq 1 }">
+                        <button disabled> &lt; </button>
                     </c:when>
+                    <c:otherwise>
+                        <button style="width:70px" onclick="location.href='list.no?cpage=${ pi.currentPage - 1 }'">Previous</button>
+                    </c:otherwise>
                 </c:choose>
                 
                 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <button onclick="location.href='list.no?cpage=${p}';">${p}</button>
+                    <button onclick="location.href='list.no?cpage=${ p }'">${ p }</button>
                 </c:forEach>
                 
-                <c:choose>
-                    <c:when test="${ pi.currentPage ne pi.maxPage }">
-                        <button onclick="location.href='list.no?cpage=${ pi.currentPage + 1 }';"> &gt; </button>
-                    </c:when>
+                <button onclick="location.href='list.no?cpage=${ p }'">${ p }</button>
+                
+                   <c:choose>
+                       <c:when test="${ pi.currentPage eq pi.maxPage }">
+                            <button onclick="location.href=''" disabled>Next</button>
+                       </c:when>
+                     <c:otherwise>
+                         <button onclick="location.href='list.no?cpage=${ pi.currentPage + 1 }'">Next</button>
+                       </c:otherwise>
                 </c:choose>
-			</div>
+                
+                <button> &gt; </button>
+            </div>
 		</div>
 	</div>
 	<script>

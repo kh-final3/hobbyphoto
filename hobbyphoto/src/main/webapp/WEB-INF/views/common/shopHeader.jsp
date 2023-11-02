@@ -157,7 +157,7 @@
     
         .member_inner{
         	width: 130px;
-        	height: 150px;
+        	height: 170px;
             background-color: white;
         	position: absolute;
         	top: 100px;
@@ -242,7 +242,7 @@
                 <div id="mb_user_1">
                     <table class="login-area" align="center">
                         <tr height="75">
-                            <td width="70"><a href=""><img width="60" src="resources/images/clipboard.png" alt=""></a></td>
+                            <td width="70"><a href="/hobbyphoto"><img width="60" src="resources/images/clipboard.png" alt=""></a></td>
                             <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png" alt=""></td>
                         </tr>
                     </table>
@@ -277,6 +277,7 @@
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
 					                					<a href="admin.pg">관리자페이지</a>
+					                					<div><p></p></div>
 					                					<a href="shop.mp?userNo=${ loginMember.userNo }" id="cartbtn">장바구니</a>
 				                					</c:when>
 				                					<c:otherwise>

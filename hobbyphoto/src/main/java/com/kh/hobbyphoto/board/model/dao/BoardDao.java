@@ -80,6 +80,10 @@ public class BoardDao {
 		return (ArrayList) sqlSession.selectList("boardMapper.selectTopBoardList");
 	}
 	
+	public ArrayList<Place> selectTopPlaceList(SqlSessionTemplate sqlSession){
+		return (ArrayList) sqlSession.selectList("boardMapper.selectTopPlaceList");
+	}
+	
 	
 	//-----------------------------------------------------------
 
@@ -126,6 +130,16 @@ public class BoardDao {
 	public int updateRcAtBoard(SqlSessionTemplate sqlSession, Attachment at) {
 		return sqlSession.update("boardMapper.updateRcAtBoard", at);
 	}
+	
+	public ArrayList<Reply> selectRcReplyList(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectRcReplyList", boardNo);
+	}
+
+	public int insertRcReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("boardMapper.insertRcReply", r);
+	}
+	
+	//-----------------------------------------------------------
 	
 	public int myListCount(SqlSessionTemplate sqlSession,int userNo) {
 		return sqlSession.selectOne("boardMapper.myListCount",userNo);
@@ -253,9 +267,40 @@ public class BoardDao {
 
 
 
+	public int checkBook(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.selectOne("boardMapper.checkBook",b);
+	}
+	
+	public int insertBookmark(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.insert("boardMapper.insertBookmark",b);
+	}
+	
+	public int deleteBookmark(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.delete("boardMapper.deleteBookmark",b);
+	}
 
+	public int insertWallPaper(SqlSessionTemplate sqlSession, WallPaper wp) {
+		
+		return sqlSession.insert("boardMapper.insertWallPaper", wp);
+	}
 
+	public int reportBoard(SqlSessionTemplate sqlSession, Report r) {
+		
+		return sqlSession.insert("boardMapper.reportBoard", r);
+	}
 
-
-
+	public int checkLike(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.selectOne("boardMapper.checkLike",b);
+	}
+	
+	public int insertLike(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertLike",b);
+	}
+	
+	public int deleteLike(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.delete("boardMapper.deleteLike",b);
+	}
 }

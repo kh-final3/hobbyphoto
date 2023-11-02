@@ -11,9 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aspose.pdf.internal.imaging.system.collections.Generic.List;
+import com.google.gson.Gson;
 import com.kh.hobbyphoto.admin.model.service.AdminServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
@@ -112,24 +115,6 @@ public class AdminController {
 		return mv;
 	}
 	
-	
-	
-	// 사진 게시물 삭제 서비스
-	@RequestMapping("pdelete.bo")
-	public String deleBoard(String boardTitle, HttpSession session, Model model) { 
-		
-		int result = aService.deleBoard(boardTitle);
-		
-		if(result > 0) { // 삭제 성공	
-			session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
-			return "redirect:plist.bo";
-		}else { // 삭제 실패
-			model.addAttribute("errorMsg", "사진 게시글 삭제 실패");
-			return "common/errorPage";
-		}
-		
-	}
-	
 	// 게시물관리-장비게시판 리스트로 이동
 	@RequestMapping("elist.bo")
 	public ModelAndView selectBoard2(ModelAndView mv) {
@@ -148,10 +133,10 @@ public class AdminController {
 		int result = aService.edeleBoard(boardTitle);
 		
 		if(result > 0) { // 삭제 성공	
-			session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
+			session.setAttribute("alertMsg", "성공적으로 장비추천 게시글이 삭제되었습니다.");
 			return "redirect:elist.bo";
 		}else { // 삭제 실패
-			model.addAttribute("errorMsg", "사진 게시글 삭제 실패");
+			model.addAttribute("errorMsg", "장비추천 게시글 삭제 실패");
 			return "common/errorPage";
 		}
 		
@@ -175,10 +160,10 @@ public class AdminController {
 		int result = aService.gdeleBoard(title);
 		
 		if(result > 0) { // 삭제 성공	
-			session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
+			session.setAttribute("alertMsg", "성공적으로 모임 게시글이 삭제되었습니다.");
 			return "redirect:glist.bo";
 		}else { // 삭제 실패
-			model.addAttribute("errorMsg", "사진 게시글 삭제 실패");
+			model.addAttribute("errorMsg", "모임 게시글 삭제 실패");
 			return "common/errorPage";
 		}
 		
@@ -198,9 +183,9 @@ public class AdminController {
 	// 배경화면게시물 삭제 서비스
 	/*
 	@RequestMapping("bkdelete.bo")
-	public String bkdeleBoard(String title, HttpSession session, Model model) { 
+	public String bkdeleBoard(int backNo, HttpSession session, Model model) { 
 		
-		int result = aService.bkdeleBoard(title);
+		int result = aService.bkdeleBoard(backNo);
 		
 		if(result > 0) { // 삭제 성공	
 			session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
@@ -214,8 +199,10 @@ public class AdminController {
 	*/
 	
 	// 신고 관리 페이지로 연결 (자동 페이징)
-	@RequestMapping("rlist.me")
-	public ModelAndView selectReport(ModelAndView mv) {
+	@RequestMapping(value = {"selectOption.me", "rlist.me"}, method = RequestMethod.GET)
+	public ModelAndView selectReport(ModelAndView mv, @RequestParam(name = "option", required = false) String option, Model model) {
+		
+	    model.addAttribute("selectedOption", option);
 		
 		ArrayList<Report> list = aService.selectReport();
 		
@@ -327,20 +314,6 @@ public class AdminController {
 			return changeName;
 		}
 
-			// 관리자페이지 차트
-			@RequestMapping("chart.da")
-			public String adminCharts() {
-				
-				return "admin/adminCharts";
-			}
-			
-			// 관리자페이지 관리자 통계
-			@RequestMapping("table.da")
-			public String adminTables() {
-				
-				return "admin/adminTables";
-			}	
-				
 		   //관리자페이지 상품 상세보기
 		   @RequestMapping("adminPro.de")
 		   public ModelAndView selectProductdetail(String pNo, ModelAndView mv) {
@@ -464,6 +437,47 @@ public class AdminController {
 			   
 		   }
 		   
-}
+
+		// 사진 게시물 삭제 서비스
+		      @RequestMapping("pdelete.bo")
+		      public String deleBoard(String boardTitle, HttpSession session, Model model) { 
+		         
+		         int result = aService.deleBoard(boardTitle);
+		         
+		         if(result > 0) { // 삭제 성공   
+		            session.setAttribute("alertMsg", "성공적으로 사진 게시글이 삭제되었습니다.");
+		            return "redirect:plist.bo";
+		         }else { // 삭제 실패
+		            model.addAttribute("errorMsg", "사진 게시글 삭제 실패");
+		            return "common/errorPage";
+		         }
+		         
+		      }
+		      
+
+		// 관리자페이지 상품 관리
+		@RequestMapping("orderlist.pr")
+		public String adminCharts() {
+			
+			return "admin/productOrder";
+		}
+		
+		// 관리자페이지 관리자 통계
+		@RequestMapping("table.da")
+		public String adminTables() {
+			
+			return "admin/adminTables";
+		}	
+		
+		// checklist
+		@RequestMapping("checkList.da")
+		public String adminCheckList() {
+			return "admin/adminCheckList";
+		}
+		
+		
+	}
+
+	
 
 

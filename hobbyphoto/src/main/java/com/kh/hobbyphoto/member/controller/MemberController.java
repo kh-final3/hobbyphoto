@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.BoardServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.Board;
+import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.member.model.service.MemberServiceImpl;
@@ -91,7 +92,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping("myPage.me")
-	public String myPage() {
+	public String myPage(HttpSession session,Model model) {
+		int userNo = ((Member)session.getAttribute("loginMember")).getUserNo();
+		
+		// 나를 팔로우 하는 사람들
+		int countFollow = ms.selectFollowCount(userNo);
+		model.addAttribute("countFollower", countFollow);
+		if(countFollow>0) {
+			ArrayList<Follow> follow = ms.selectFollow(userNo);
+			model.addAttribute("follower", follow);
+		}
+		
+		// 내가 팔로우 하는 사람들
+		int countFollowing = ms.selectFollowingCount(userNo);
+		model.addAttribute("countFollow", countFollowing);
+		if(countFollow>0) {
+			ArrayList<Follow> following = ms.selectFollowing(userNo);
+			model.addAttribute("follow", following);
+		}
+		
 		return "member/myPage";
 	}
 	
@@ -226,11 +245,103 @@ public class MemberController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 		
 		ArrayList<Block> list = bService.myBlockList(pi,userNo);
-		System.out.println("컨트롤러" + list);
 		
 		model.addAttribute("listCount",listCount);
 		model.addAttribute("pi",pi);
 		model.addAttribute("list",list);
 		return "member/myBlock";
+	}
+	
+	@RequestMapping("updateForm.me")
+	public String updateMemberForm() {
+		return "member/update";
+	}
+	
+	@RequestMapping("update.me")
+	public String updateMember(HttpSession session) {
+			Member m = new Member();
+			m.setUserId(((Member)session.getAttribute("loginMember")).getUserId());
+			session.setAttribute("loginMember", ms.loginMember(m));
+				
+			return "redirect:myPage.me";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="updateNick.me",produces="text/html; charset=UTF-8")
+	public String updateNick(Member m,HttpSession session) {
+		int result = 0;
+		String nickName = "";
+		if(m.getNickName() !=null){
+			result = ms.updateNick(m);
+		}
+		if(result > 0) {
+			nickName = m.getNickName();
+		}
+		
+		return nickName;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="updateDescription.me",produces="text/html; charset=UTF-8")
+	public String updateDescription(Member m,HttpSession session) {
+
+		int result = 0;
+		String description = "";
+		if(m.getDescription() !=null){
+			result = ms.updateDescription(m);
+		}
+		if(result > 0) {
+			description = m.getDescription();
+		}
+		
+		return description;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="updateGender.me",produces="text/html; charset=UTF-8")
+	public String updateGender(Member m,HttpSession session) {
+		int result = 0;
+		String gender = "";
+		if(m.getGender() !=null){
+			result = ms.updateGender(m);
+		}
+		if(result > 0) {
+			gender = m.getGender();
+		}
+		
+		return gender;
+	}
+	
+	@RequestMapping("profile.me")
+	public String profile(@RequestParam(value="cpage", defaultValue="1") int currentPage,Member m,HttpSession session,Model model) {
+		int userNo = m.getUserNo();
+		Member member = ms.loginMember(m);
+		model.addAttribute("member", member);
+		
+		int listCount = bService.myListCount(userNo);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
+		
+		ArrayList<Board> list = bService.myBoardList(pi,userNo);
+		model.addAttribute("listCount",listCount);
+		model.addAttribute("pi",pi);
+		model.addAttribute("list",list);
+		
+		// 나를 팔로우 하는 사람들
+		int countFollow = ms.selectFollowCount(userNo);
+		model.addAttribute("countFollower", countFollow);
+		if(countFollow>0) {
+			ArrayList<Follow> follow = ms.selectFollow(userNo);
+			model.addAttribute("follower", follow);
+		}
+		
+		// 내가 팔로우 하는 사람들
+		int countFollowing = ms.selectFollowingCount(userNo);
+		model.addAttribute("countFollowing", countFollowing);
+		if(countFollowing>0) {
+			ArrayList<Follow> following = ms.selectFollowing(userNo);
+			model.addAttribute("follow", following);
+		}
+		return "member/profile";
 	}
 }

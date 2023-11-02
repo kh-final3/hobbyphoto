@@ -79,9 +79,9 @@ public class GroupController {
 	public String saveFile(MultipartFile upfile, HttpSession session) {
 	    String originName = upfile.getOriginalFilename();
 	    String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-	    int ranNum = (int)(Math.random() * 90000 + 10000); // 5자리 랜덤 값
+	    int ranNum = (int)(Math.random() * 90000 + 10000); 
 	    String ext = originName.substring(originName.lastIndexOf("."));
-	    String changeName = currentTime + ranNum + ext; //"202320055470821318.png"
+	    String changeName = currentTime + ranNum + ext; 
 	    String savePath = session.getServletContext().getRealPath("/resources/upfiles/");
 
 	    try {

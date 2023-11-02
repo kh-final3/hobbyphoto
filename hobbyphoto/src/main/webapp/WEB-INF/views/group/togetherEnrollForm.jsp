@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +65,7 @@
 <jsp:include page="../common/header.jsp"/>
 	<body>
 	    <div id="write">
-	    	 <h1 align="center" id="ttl">모임 작성폼</h1>
+	    	 <h1 align="center" id="ttl">모임 작성</h1>
 	        <form action="tgInsert.tg" method="post" enctype="multipart/form-data">
 	        	<input type="hidden" name="userNo" value="${ loginMember.userNo }">
 	            	<div id="write1">
@@ -81,7 +82,7 @@
 	            	</div>
 	            	<br>
 		            <div id="write3">
-		                <label id="ff4">내용</label><em style="color: red;">*</em><br><textarea name="content" cols="90" rows="8" style="resize: none;" required></textarea>
+		                <label id="ff4">내용</label><em style="color: red;">*</em><br><textarea name="content" cols="71" rows="8" style="resize: none;" required></textarea>
 		                <br>
 		            </div>
 		            <br>

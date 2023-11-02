@@ -171,14 +171,14 @@
 						<hr>
 					</div>
 					<br>
-					<div id="map" style="width: 100%; height: 350px;"></div>
-					<input type="text" name="latitude" id="lat" readonly>
+					<div id="map" style="width: 54%; height: 350px; margin:0 0 0 265px;"></div>
+					<input type="text" name="latitude" id="lat" style="margin:0 0 0 265px;" readonly>
 					<input type="text" name="longitude" id="lon" readonly>
 					
 
 					<div align="right" id="write12">
-						<button type="reset" class="btn btn-light" id="ff4">취소</button>
-						<button type="submit" class="btn btn-primary" id="ff4">등록</button>
+						<button type="reset" class="btn btn-light" id="ff4" style="margin:15px 0 0 0;">취소</button>
+						<button type="submit" class="btn btn-primary" id="ff4" style="margin:15px 25px 0 0;">등록</button>
 					</div>
 
 					<div id="topbtn">

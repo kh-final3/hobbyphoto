@@ -91,10 +91,10 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	// 게시물 삭제서비스-배경화면게시판
-//	@Override
-//	public int bkdeleBoard(String title) {
-//		return aDao.gdeleBoard(sqlSession, title);		
-//	}
+	@Override
+	public int bkdeleBoard(int backNo) {
+		return aDao.bkdeleBoard(sqlSession, backNo);		
+	}
 	
 	// 신고 게시물 조회
 	@Override
@@ -119,7 +119,6 @@ public class AdminServiceImpl implements AdminService{
 	public int selectAdminProListCount() {
 		return aDao.selectAdminProListCount(sqlSession);
   }
-
 
 	//상품 등록(지영)
 	@Override

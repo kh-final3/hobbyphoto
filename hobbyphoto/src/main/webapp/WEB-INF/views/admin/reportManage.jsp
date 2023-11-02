@@ -76,10 +76,10 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">신고게시물관리</h1>
+                        <h1 class="mt-4">상품주문관리</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="alist.da">Dashboard</a></li>
-                            <li class="breadcrumb-item active">신고게시물관리</li>
+                            <li class="breadcrumb-item active">상품주문관리</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
@@ -134,9 +134,15 @@
 		                                            <td>${ r.reportedUno }</td>
 		                                            <td>${ r.process }</td>
 		                                            <td>
-								                        <form action="processed.me" method="post">
-								                        	<input type="hidden" name="rpNo" value="${ r.rpNo }">
-								                        	<button class="btn btn-success" type="submit">처리완료</button>
+		                                            <!-- 
+														<form action="processed.me" method="post">
+							                        		<input type="hidden" name="rpNo" value="${ r.rpNo }">
+								                        	<button class="btn btn-success" type="submit" style="float:right;" id="button">관리</button>
+														</form>
+		                                             -->
+														<form action="processed.me" method="post">
+							                        		<input type="hidden" name="rpNo" value="${ r.rpNo }">
+								                        	<button class="btn btn-success" type="submit" id="button">처리완료</button>
 														</form>
 		                                            </td>
 		                                        </tr>
@@ -161,25 +167,25 @@
                 </footer>
             </div>
         </div>
+		
 		<script>
 		    $(function(){
-		    	
 		        $(document).on("click", "#datatablesSimple>tbody>tr", function(){
 		            var boardType = $(this).children().eq(3).text();
 		            var refBno = $(this).children().eq(4).text();
 		            if (boardType === "사진 게시판") {
 		                location.href = "phDetail.bo?phno=" + refBno;
 		            } else if (boardType === "장비 게시판") {
-		                location.href = "phDetail.bo?phno=" + refBno;
+		                location.href = "rcDetail.bo?phno=" + refBno;
 		            } else if (boardType === "모임 게시판") {
-		                location.href = "sgroupDetail.bo?sno=" + refBno;
+		                location.href = "togetherDetail.tg?gno=" + refBno;
 		            } else {
 		            	location.href = "backDetail.bo?bno=" + refBno;
 		            }
 		        });
 		    });
 		</script>
-        
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="resources/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>

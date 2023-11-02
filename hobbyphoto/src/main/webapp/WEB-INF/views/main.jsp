@@ -154,6 +154,9 @@
 
     .title_on {
       text-decoration: none;
+      text-shadow: -2px 0px black, 0px 2px black, 2px 0px black, 0px -2px black;
+      font-size:27px;
+      font-weight:700;
       color: white;
     }
   </style>
@@ -176,149 +179,157 @@
 	    interval: 2000 //기본 5초
 	  })
 	</script>
-<!-- <div class="container"> </div> -->
-  <div id="demo" class="carousel slide" data-ride="carousel">
-
-    <div class="carousel-inner">
-      <!-- 슬라이드 쇼 -->
-      <div class="carousel-item active">
+	<!-- <div class="container"> </div> -->
+    <div id="demo" class="carousel slide" data-ride="carousel">
+	  
+		<div class="carousel-inner">
+		      <!-- 슬라이드 쇼 -->
+			<div class="carousel-item active">
         <!--가로(사진 변경은 여기서)-->
         <img class="d-block w-100" 
-          src="https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+          src="resources/images/사진피크닉.jpg"
           alt="First slide">
           <div class="carousel-caption d-none d-md-block">
-              <h5>TEST</h5>
-              <p>테스트입니다.</p>
-          </div>
+					<h5>TEST</h5>
+					<p>테스트입니다.</p>
+				</div>
       </div>
       <div class="carousel-item">
         <img class="d-block w-100"
-          src="https://images.pexels.com/photos/2355519/pexels-photo-2355519.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+          src="resources/images/영상의기초.jpg"
           alt="Second slide">
       </div>
       <div class="carousel-item">
         <img class="d-block w-100"
-          src="https://images.pexels.com/photos/2544554/pexels-photo-2544554.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+          src="resources/images/오픈클래스.jpg"
           alt="Third slide">
       </div>
       <div class="carousel-item">
         <img class="d-block w-100"
-          src="https://mblogthumb-phinf.pstatic.net/MjAxOTAzMDZfMTMy/MDAxNTUxODE0NTI0MDE2.aHZ-ft3YNSC3XGhzrGEKFdU4o_lJ8qBRC-F4aftjplAg.gS9c4UEnLDY_kXveY6xVoM1GqUUqZSQM8BRFKCHl7LYg.JPEG.mong728/%EC%B4%88%EA%B3%A0%ED%99%94%EC%A7%88_%EC%BB%B4%ED%93%A8%ED%84%B0_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_(3).jpg?type=w800"
+          src="resources/images/인물사진.jpg"
           alt="Third slide">
-      </div>
+     </div>
     </div>
-    <!-- / 슬라이드 쇼 끝 -->
-
-    <!-- 왼쪽 오른쪽 화살표 버튼 -->
-    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <!-- <span>Previous</span> -->
-    </a>
-    <a class="carousel-control-next" href="#demo" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <!-- <span>Next</span> -->
-    </a>
-    <!-- / 화살표 버튼 끝 -->
-    
-    <!-- 인디케이터 -->
-    <ul class="carousel-indicators">
-      <li data-target="#demo" data-slide-to="0" class="active"></li> <!--0번부터시작-->
-      <li data-target="#demo" data-slide-to="1"></li>
-      <li data-target="#demo" data-slide-to="2"></li>
-      <li data-target="#demo" data-slide-to="3"></li>
-    </ul>
-    <!-- 인디케이터 끝 -->
-  </div>
-
-  <!--중간-->
-  <div class="midd">
-    <div class="midd-content">
-      <h2 style="text-align: center; cursor: pointer;">HobbyPhoto's Pick</h2>
-      <p style="text-align: center;">hobby photo의 사진작가</p>
-    </div>
-
-    <div class="pick-area">
-      <div class="pick1">
-        <img src="resources/images/풍경1.jpg" alt="사진게시판 인기1" width="270" height="200">
-        <p style="text-align: center;">닉네임</p>
-      </div>
-      <div class="pick2">
-        <img src="resources/images/풍경2.jpg" alt="사진게시판 인기2" width="270" height="200">
-        <p style="text-align: center;">닉네임</p>
-      </div>
-      <div class="pick3">
-        <img src="resources/images/풍경3.jpg" alt="사진게시판 인기3" width="270" height="200">
-        <p style="text-align: center;">닉네임</p>
-      </div>
-      <div class="pick4">
-        <img src="resources/images/풍경4.jpg" alt="시진게시판 인기4" width="270" height="200">
-        <p style="text-align: center;">닉네임</p>
-      </div>
-    </div>
-  </div>
-
-  <!--하단-->
-  <div class="under">
-    <div class="under-content">
-      <h2 style="text-align: center; cursor: pointer;">여기저기 콕콕!!</h2> 
-      <p style="text-align: center;">hobby photo가 추천하는 명소</p>
-    </div>
-
-    <div class="p-area">
-
-      <div id="section">								
-  
-        <div class="section">
-
-          <div class="cont on">					
-            <span class="bg"><img src="resources/images/풍경4.jpg" width="500" height="500" /></span>	
-            <span class="title_off"><img src="resources/images/cont_title01_out.png" /></span>
-            <span class="title_on">서울 특별시 동대문</span>
-            <!-- <span class="layer"></span> -->
-          </div>
-
-          <div class="cont">					
-            <span class="bg"><img src="resources/images/풍경2.jpg" width="500" height="500"/></span>	
-            <!-- <span class="title_off"><img src="img/cont_title02_out.png" /></span>-->			
-            <span class="title_on"><a href="#">서울 특별시 동대문</a></span> 
-            <!-- <span class="layer"></span> -->
-          </div>
-
-          <div class="cont">					
-            <span class="bg"><img src="resources/images/풍경3.jpg" width="500" height="500" /></span>	
-            <!-- <span class="title_off"><img src="img/cont_title03_out.png" /></span>-->			
-            <span class="title_on"><a href="#">서울 특별시 동대문</a></span> 
-            <!-- <span class="layer"></span> -->
-          </div>
-
-          <div class="cont">					
-            <span class="bg"><img src="resources/images/풍경4.jpg" width="500" height="500" /></span>	
-            <!-- <span class="title_off"><img src="img/cont_title04_out.png" /></span>-->			
-            <span class="title_on">서울 특별시 동대문</span> 
-            <!-- <span class="layer"></span> -->
-          </div>
-
-          <div class="cont">					
-            <span class="bg"><img src="resources/images/풍경1.jpg" width="500" height="500"/></span>	
-            <!-- <span class="title_off"><img src="img/cont_title05_out.png" /></span>-->			
-            <span class="title_on">서울 특별시 동대문</span> 
-            <!-- <span class="layer"></span> -->
-          </div>
-
-        </div>
-      </div>         
-    </div>
-  </div>
+			
+			<!-- / 슬라이드 쇼 끝 -->
+			
+			<!-- 왼쪽 오른쪽 화살표 버튼 -->
+			<a class="carousel-control-prev" href="#demo" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<!-- <span>Previous</span> -->
+			</a>
+			<a class="carousel-control-next" href="#demo" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<!-- <span>Next</span> -->
+			</a>
+			<!-- / 화살표 버튼 끝 -->
+			
+			<!-- 인디케이터 -->
+			<ul class="carousel-indicators">
+				<li data-target="#demo" data-slide-to="0" class="active"></li> <!--0번부터시작-->
+				<li data-target="#demo" data-slide-to="1"></li>
+				<li data-target="#demo" data-slide-to="2"></li>
+				<li data-target="#demo" data-slide-to="3"></li>
+			</ul>
+			<!-- 인디케이터 끝 -->
+		</div>
+			
+			<!--중간-->
+		<div class="midd">
+			<div class="midd-content">
+				<h2 style="text-align: center; cursor: pointer;">HobbyPhoto's Pick</h2>
+				<p style="text-align: center;">hobby photo의 사진작가</p>
+			</div>
+					
+			<div class="pick-area">
+			</div>
+		</div>
+					
+					<!--하단-->
+		<div class="under">
+			<div class="under-content">
+				<h2 style="text-align: center; cursor: pointer;">여기저기 콕콕!!</h2> 
+				<p style="text-align: center;">hobby photo가 추천하는 명소</p>
+			</div>
+				
+			<div class="p-area">
+				<div id="section">								
+					<div class="section">
+					
+					</div>
+				</div>         
+			</div>
+		</div>
+	</div>
 
   <script>
     $(function() {
 
-    $(".section .cont").mouseover(function() {					
-        $(".section .cont").stop().animate({width:"153px"}, 900, 'easeOutCirc').removeClass("on");
-        $(this).stop().animate({width:"413px"}, 900, 'easeOutCirc').addClass("on");	
-    });
+	    $(document).on("mouseover", ".section .cont" ,function() {					
+	        $(".section .cont").stop().animate({width:"153px"}, 900, 'easeOutCirc').removeClass("on");
+	        $(this).stop().animate({width:"413px"}, 900, 'easeOutCirc').addClass("on");	
+	    });
+	    
+	    topBoardList();
+	    $(document).on("click", ".pick-area>div", function(){
+            location.href="phDetail.bo?phno=" + $(this).children().eq(0).val();
+         })
 
+        topPlaceList();
+	    
     });
+    
+    function topBoardList() {
+    	 $.ajax({
+             url:"topList.bo",
+             success:function(data){
+                let value = "";
+                for(let i in data){
+                   value += "<div class='pick"+(Number(i)+1)+"'>"
+                   		  + "<input type='hidden' value='"+ data[i].boardNo +"'>"
+                   	      + "<img src='"+ data[i].thumbnail +"' alt='사진게시판 인기1' width='270' height='200'>"
+                   	      + "<p style='text-align: center;'>" + data[i].boardWriter + "</p>"
+                          + "</div>";
+                          
+                }
+                
+                $(".pick-area").html(value);
+             },
+             error:function(){
+                console.log("조회수 top5 게시글 조회용 ajax 통신 실패");
+             }
+          })
+	}
+    
+    function topPlaceList() {
+   	 $.ajax({
+            url:"topList.pl",
+            success:function(data){
+               let value = "";
+               for(let i in data){
+            	   if(i == 0){
+            		  value += "<div class='cont on'>"
+	                  		 + "<input type='hidden' value='"+ data[i].pno +"'>"
+	                  	     + " <span class='bg'><img src='"+ data[i].pimg1 +"' width='500' height='500' /></span>>"
+	                  	     + "<span class='title_on'>" + data[i].ptitle + "</span>"
+	                         + "</div>";
+            	   }else{
+	                  value += "<div class='cont'>"
+	                  		 + "<input type='hidden' value='"+ data[i].pno +"'>"
+	                  	     + " <span class='bg'><img src='"+ data[i].pimg1 +"' width='500' height='500' /></span>>"
+	                  	     + "<span class='title_on'>" + data[i].ptitle + "</span>"
+	                         + "</div>";
+            	   }
+                         
+               }
+               
+               $(".section").html(value);
+            },
+            error:function(){
+               console.log("조회수 top5 게시글 조회용 ajax 통신 실패");
+            }
+         })
+	}
   </script>
 <jsp:include page="common/footer.jsp"/>
 </body>

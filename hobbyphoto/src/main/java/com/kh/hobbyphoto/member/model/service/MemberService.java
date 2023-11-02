@@ -1,5 +1,8 @@
 package com.kh.hobbyphoto.member.model.service;
 
+import java.util.ArrayList;
+
+import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.member.model.vo.Member;
 
 public interface MemberService {
@@ -27,4 +30,18 @@ public interface MemberService {
 	int myLikeCount(int userNo);
 	
 	int myBlockCount(int userNo);
+	
+	int updateNick(Member m);
+	
+	int updateDescription(Member m);
+	
+	int updateGender(Member m);
+	
+	int selectFollowCount(int userNo);
+	
+	int selectFollowingCount(int userNo);
+	
+	ArrayList<Follow> selectFollow(int userNo);
+	
+	ArrayList<Follow> selectFollowing(int userNo);
 }

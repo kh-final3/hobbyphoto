@@ -235,6 +235,7 @@
     </style>
 </head>
 	<body>
+		<jsp:include page="../common/header.jsp" />
 	    <div id="__next">
 	        <div class="__className_ff1e61">
 	            <div class="detail-socialing_template__NkCnA">
@@ -312,13 +313,52 @@
 							            $("#postForm").attr("action", "delete.tg").submit();
 							        }
 							    }
+							    
+							    let gno = ${ sg.groupNo };
+							    
+							       if(loginMember != null){
+							       let userNo = ${ loginMember.userNo };
+							       }
+							       
+							       function booking(){
+							           
+							              $.ajax({
+							               url:"booking.bo",
+							               data:{
+							            	   boardNo:bno,
+							            	   userNo:userNo
+							            	   }, success:function(result){
+							                   if(result == 'Y'){
+							                      $("#bookmark1").css("display", "none");
+							                       $("#bookmark2").css("display", "");
+							                   }
+							               },
+							               error:function(){
+							               }
+							           	})
+							       }
+							   
+							       function delBooking(){
+							       
+							              $.ajax({
+							               url:"delBooking.bo",
+							               data:{boardNo:bno, userNo:userNo},
+							               success:function(result){
+							                   if(result == 'Y'){
+							                      $("#bookmark1").css("display", "");
+							                       $("#bookmark2").css("display", "none");
+							                   }
+							               },
+							               error:function(){
+							               	}
+							            })
+							       }
 							</script>
-
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
-	    </div>
+	    	<jsp:include page="../common/footer.jsp" />
 	</body>
 </html>

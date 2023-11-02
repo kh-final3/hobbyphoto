@@ -87,6 +87,9 @@
 								삭제 버튼을 통해 회원 탈퇴 처리가 가능합니다.
                             </div>
                         </div>
+
+                        
+                        <div style="margin-left: 1150px; margin-bottom: 10px;"><button class="btn btn-primary" onclick="location.href='memberEnrollForm.me'">회원등록</button></div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>

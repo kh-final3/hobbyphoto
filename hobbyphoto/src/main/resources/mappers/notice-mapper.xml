@@ -27,8 +27,9 @@
 		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
 		  from notice
 		 where status = 'Y'
+		   and notice_type = 1
 		 order 
-		    by notice_no desc
+		       by notice_no desc
 	</select>
 	
 	<insert id="insertNotice" parameterType="notice">

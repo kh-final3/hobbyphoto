@@ -109,6 +109,7 @@
     </style>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp"/>
     <div class="warp">
         <div class="innerOut">
             <form action="phInsert.bo" enctype="multiPart/form-data" class="form-area" method="post">
@@ -192,8 +193,8 @@
 
                     <div class="writer-area">
                      	<input type="hidden" id="boardWriter" value="${ loginMember.userNo }" name="boardWriter">
-                        <input type="text" name="boardTitle" id="boardTitle" class="title-input" placeholder="제목을 입력해주세요."> <br>
-                        <textarea name="boardContent" id="boardContent" class="text-area" placeholder="내용을 입력해주세요."></textarea> <br>
+                        <input type="text" name="boardTitle" id="boardTitle" class="title-input" placeholder="제목을 입력해주세요." required> <br>
+                        <textarea name="boardContent" id="boardContent" class="text-area" placeholder="내용을 입력해주세요." required></textarea> <br>
                         <input type="text" name="hashTag" id="hashTag" class="tag-input" placeholder="해시태그를 입력해주세요.">
                     </div>
                     <div class="btn-area">
@@ -204,5 +205,6 @@
             </form>
         </div>
     </div>
+        <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

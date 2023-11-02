@@ -27,7 +27,7 @@ public class NoticeController {
 
 		int listCount = nService.selectListCount();
 
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 2);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<Notice> list = nService.selectList(pi);
 
 		mv.addObject("pi", pi).addObject("list", list).setViewName("notice/noticeListView");

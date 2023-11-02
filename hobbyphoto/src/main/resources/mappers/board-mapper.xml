@@ -84,6 +84,20 @@
 		<result column="block_date" property="blockDate"/>
 	</resultMap>
 
+	<resultMap type="WallPaper" id="wallResult">
+		<result column="BACK_NO" property="backNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="IMG" property="IMG"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="COUNT" property="COUNT"/>
+		<result column="DOWNLOAD" property="download"/>
+		<result column="BOARD_TYPE" property="boardType"/>
+		<result column="BACK_TITLE" property="bgTitle"/>
+		<result column="STATUS" property="STATUS"/>
+	</resultMap>
+	
+	
+	
 	<select id="selectPhListCount" resultType="_int">
 		select
 			count(*)
@@ -94,20 +108,21 @@
 	
 	<select id="selectPhList" resultMap="boardResult">
 		select
-		    b.board_no
+		      b.board_no
 		    , b.board_title
 		    , b.board_content
 		    , b.count
 	        , m.nickname
 		    , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
 		    , a.file_path as "thumbnail"
-		  from board b
-		  left join attachment a on b.board_no = a.ref_bno
-	      join member m on b.board_writer = m.user_no
-		  where b.status = 'Y'
+		 from board b
+		 left join attachment a on b.board_no = a.ref_bno
+	     join member m on b.board_writer = m.user_no
+		where b.status = 'Y'
 		  and b.board_type = 1
 	      and a.file_level = 1
-		  order by b.board_no desc
+		order 
+		   by b.board_no desc
 	</select>
 	
 	<insert id="insertPhBoard">
@@ -206,13 +221,13 @@
 	 where board_no = #{boardNo}
 	</update>
 	
-	<update id="updatePhAtBoard">
+	<update id="updatePhAtBoard" parameterType="Attachment">
 	 update
 		attachment
 	 set origin_name = #{originName}
 	   , change_name = #{changeName}
 	   , file_path = #{filePath}
-	 where ref_bno = #{refBno}
+	 where file_no = #{fileNo}
 	</update>
 	
 	<insert id="insertNewAttachment">
@@ -250,7 +265,7 @@
 		join member m on m.user_no = reply_writer
 		where r.status = 'Y'
 		    and ref_bno = #{boardNo}
-		order by reply_no desc
+		order by reply_no asc
 	</select>
 	
 	<insert id="insertPhReply">
@@ -403,6 +418,37 @@
 	   , file_path = #{filePath}
 	 where ref_bno = #{refBno}
 	</update>
+	
+	<select id="selectRcReplyList" resultMap="replyResult">
+			select
+		    r.reply_no,
+		    m.user_id,
+		    r.reply_content,
+		    to_char(r.create_date, 'YYYY-MM-DD') as "create_date"
+		from Reply r
+		join member m on m.user_no = reply_writer
+		where r.status = 'Y'
+		    and ref_bno = #{boardNo}
+		order by reply_no desc
+	</select>
+	
+	<insert id="insertRcReply">
+		insert
+			into reply
+			(
+			   reply_no
+			 , reply_content
+			 , ref_bno
+			 , reply_writer
+			)	
+			values 
+			(
+			   seq_rep_no.nextval
+			 , #{replyContent}
+			 , #{refBno}
+			 , #{replyWriter}
+			)
+	</insert>
 
 	
 	<!-- myPage 관련  -->
@@ -486,7 +532,7 @@
              , block_date
 	      from block b
           left join member m on (b.ref_no = m.user_no)
-	     where b.user_no = 2
+	     where b.user_no = #{ userNo }
 	     order
             by block_date desc
 	</select>
@@ -647,7 +693,6 @@
 	</delete>
 	
 	
-	
 	<select id="cultureListCount" resultType="_int">
 		SELECT COUNT(FE_NO) "COUNT"
 	      FROM festival
@@ -746,5 +791,146 @@
 		     , age = #{age}
 		 where fe_no = #{feNo}
 	</update>
+	<select id="selectTopBoardList" resultMap="boardResult">
+      select *
+        from (
+              select
+                     board_no
+                   , board_title
+                   , nickname as "board_writer"
+                   , a.file_path as "thumbnail"
+                   , count
+                   , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+                from board b
+           left join attachment a on b.board_no = a.ref_bno
+                join member m on b.board_writer = m.user_no
+               where b.status = 'Y'
+                 and b.board_type = 1
+                 and a.file_level = 1
+               order
+                  by count desc
+          )
+       where rownum between 1 and 4
+   </select>
+   <select id="selectTopPlaceList" resultMap="placeResult">
+      select *
+        from (
+              select
+                     p_no
+                   , p_title
+                   , p_img1
+                   , count
+                   , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+                from place
+               order
+                  by count desc
+          )
+       where rownum between 1 and 5
+   </select> 
+	
+	
+	
+	
+	<select id="checkBook" resultType="_int">
+		SELECT count(BOARD_NO)
+		FROM BOOKMARK
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND TYPE = #{boardType}
+	</select>
+	
+	<insert id="insertBookmark">
+		INSERT INTO BOOKMARK
+		VALUES
+		(
+		  #{boardNo}
+		, #{boardWriter}
+		, SYSDATE
+		, #{boardType}
+		)
+	</insert>
+	
+	<delete id="deleteBookmark">
+		DELETE BOOKMARK
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND TYPE = #{boardType}
+	</delete>
+	
+	
+	<select id="checkLike" resultType="_int">
+		SELECT count(BOARD_NO)
+		FROM likes
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND board_type = #{boardType}
+	</select>
+	
+	<insert id="insertLike">
+		INSERT INTO likes
+		VALUES
+		(
+		  #{boardNo}
+		, #{boardWriter}
+		, #{boardType}
+		)
+	</insert>
+	
+	<delete id="deleteLike">
+		DELETE LIKEs
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND board_type = #{boardType}
+	</delete>
+	
+	<insert id="insertWallPaper">
+		INSERT 
+		  INTO background
+		  (
+		  	back_no
+		  , back_title
+		  , user_no
+		  , img
+		  , board_type
+		  )
+		VALUES
+		(
+		  SEQ_BACK_NO.nextval
+		, #{bgTitle}
+		, #{userNo}
+		, #{img}
+		, #{boardType}
+		)
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	<insert id="reportBoard">
+		INSERT
+		  INTO REPORT
+		  (
+		    RP_NO
+		  , GUILTY
+		  , RP_CONTENT
+		  ,	REF_BNO
+		  ,	REPORT_UNO
+		  ,	REPORTED_UNO
+		  ,	BOARD_TYPE
+		  )
+		  VALUES
+		  (
+		    SEQ_REPNO.NEXTVAL
+		  , #{guilty}
+		  , #{rpContent}
+		  , #{refBno}
+		  , #{reportUno}
+		  , #{reportedUno}
+		  , #{boardType}
+		  )
+	</insert>
 	
 </mapper>
