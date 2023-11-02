@@ -46,6 +46,12 @@
 		<result column="ordercount" property="ordercount"/>
 		<result column="ordertotalprice" property="ordertotalprice"/>
 		<result column="delivery" property="delivery"/>
+		<result column="oorder_no" property="oorderNo"/>
+		<result column="ouser_no" property="ouserNo"/>
+		<result column="pp_no" property="ppNo"/>
+		<result column="ostatus" property="ostatus"/>
+		<result column="thumbnail" property="thumbnail"/>
+		<result column="p_name" property="pName"/>
 	</resultMap>
 
 	 <select id="selectProductList" resultMap="shopResult">
@@ -343,21 +349,23 @@
 	</select>
 	
 	<select id="selectOrder" resultMap="ordersResult">
-		select 
-		        order_no
+		select
+		        o.order_no as oorder_no
+		    ,   o.user_no as ouser_no
 		    ,   name
-		    ,   user_no
-		    ,   address || postcode as delivery
 		    ,   phone
+		    ,   p_name
+		    ,   p.p_no as pp_no
+		    ,   thumbnail
+		    ,   o.status as ostatus
+		    ,   address || postcode as delivery
 		    ,   order_date
-		    ,   totalprice
-		    ,   status
-		    ,   o_msg
-		    ,   d_msg
-		from orders
-		where user_no = #{userNo}
-		order
-			by order_no desc
+		    ,   totalPrice
+		from orders o
+		left join d_order d on(o.order_no = d.order_no)
+		left join product p on(d.p_no = p.p_no)
+		where o.user_no = #{userNo}
+		order by o.order_no
 	</select>
 	
 	<select id="selectOrderListCount" resultType="_int">

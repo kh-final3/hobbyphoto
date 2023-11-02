@@ -314,7 +314,6 @@ public class AdminController {
 			return changeName;
 		}
 
-		   
 		   //관리자페이지 상품 상세보기
 		   @RequestMapping("adminPro.de")
 		   public ModelAndView selectProductdetail(String pNo, ModelAndView mv) {
