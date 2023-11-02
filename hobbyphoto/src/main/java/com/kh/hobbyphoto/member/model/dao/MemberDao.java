@@ -74,8 +74,8 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectFollowCount",userNo);
 	}
 	
-public int selectFollowingCount(SqlSessionTemplate sqlSession,int userNo) {
-	return sqlSession.selectOne("memberMapper.selectFollowingCount",userNo);
+	public int selectFollowingCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("memberMapper.selectFollowingCount",userNo);
 	}
 	
 	public ArrayList<Follow> selectFollow(SqlSessionTemplate sqlSession,int userNo) {

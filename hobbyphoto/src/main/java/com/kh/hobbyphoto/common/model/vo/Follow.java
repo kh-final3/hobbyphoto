@@ -12,7 +12,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Follow {
-	private int userId;
-	private int followId;
+	private int userNo;
+	private String userId;
+	private String followId;
+	private String nickname;
+	private String profileImg;
 	private String followDate;
 }

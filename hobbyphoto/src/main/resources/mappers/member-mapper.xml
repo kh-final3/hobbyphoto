@@ -19,6 +19,9 @@
 		<result column="user_id" property="userId"/>
 		<result column="follow_id" property="followId"/>
 		<result column="follow_date" property="followDate"/>
+		<result column="profile_img" property="profileImg"/>
+		<result column="nickname" property="nickname"/>
+		<result column="user_no" property="userNo"/>
 	</resultMap>
   
 	<insert id="insertMember" parameterType="Member">
@@ -213,7 +216,8 @@
 	
 	<select id="selectFollow" resultMap="resultFollow">
 		select
-		       m.user_Id
+               user_no
+             , m.user_id
              , nickname
              , profile_img
              , follow_date
@@ -231,7 +235,8 @@
 	
 	<select id="selectFollowing" resultMap="resultFollow">
 		select
-		       m.user_Id
+               user_no
+		     , m.user_id
              , nickname
              , profile_img
              , follow_date
