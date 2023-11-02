@@ -220,13 +220,13 @@
 	 where board_no = #{boardNo}
 	</update>
 	
-	<update id="updatePhAtBoard">
+	<update id="updatePhAtBoard" parameterType="Attachment">
 	 update
 		attachment
 	 set origin_name = #{originName}
 	   , change_name = #{changeName}
 	   , file_path = #{filePath}
-	 where ref_bno = #{refBno}
+	 where file_no = #{fileNo}
 	</update>
 	
 	<insert id="insertNewAttachment">

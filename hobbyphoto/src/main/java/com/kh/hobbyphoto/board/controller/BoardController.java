@@ -133,7 +133,7 @@ public class BoardController {
                 list.add(at);
             }
         }
-        
+        System.out.println(list);
         int result = bService.updatePhBoard(b, list);
 	    if (result <= 0) {
 	        model.addAttribute("errorMsg", "게시글 수정 실패");
