@@ -198,14 +198,14 @@
             
                <c:choose>
                    <c:when test="${ pi.currentPage eq pi.maxPage }">
-                        <button onclick="location.href=''" disabled>Next</button>
+                     <button onclick="location.href=''" disabled>Next</button>
+                     <button disabled> &gt; </button>
                    </c:when>
                  <c:otherwise>
                      <button style="width:40px;" onclick="location.href='list.pl?cpage=${ pi.currentPage + 1 }'">Next</button>
-                   </c:otherwise>
+                     <button> &gt; </button>
+                  </c:otherwise>
             </c:choose>
-            
-            <button> &gt; </button>
         </div>
     </div>
      <script>
@@ -215,7 +215,7 @@
             		console.log($(this).children(".pno").text());
         		})
         		
-        			$(".btn-area").click(function(){
+        		$(".btn-area").click(function(){
             		location.href = 'enrollForm.pl';
         		})
         	})

@@ -71,11 +71,11 @@
 	<div class="outer_myBoardList">
       <div class="container_myBoardList2">
         <ul class="myBoardList2_list">
-            <li><a href="#">북마크</a></li>
-            <li><a href="#">게시글</a></li>
-            <li><a href="#">댓글</a></li>
-            <li><a href="#">모임</a></li>
-            <li><a href="#">차단회원</a></li>
+            <li><a href="myBookmarks.me">북마크</a></li>
+            <li><a href="myBoard.me">게시글</a></li>
+            <li><a href="myLike.me">좋아요</a></li>
+            <li><a href="myGroup.me">모임</a></li>
+            <li><a href="myBlock.me">차단회원</a></li>
         </ul>  
       </div>
 
@@ -121,7 +121,7 @@
       </div>
     </div>
 	<div class="paging-area" align="center">
-	    <c:choose>
+	   <c:choose>
 			<c:when test="${ pi.currentPage eq 1 }">
 				<button disabled> &lt; </button>
 			</c:when>
@@ -134,13 +134,12 @@
 		</c:forEach>
 		<c:choose>
 			<c:when test="${ pi.currentPage eq pi.maxPage }">
-				<button onclick="location.href=''" disabled>Next</button>
+				<button disabled> &gt; </button>
 			</c:when>
 			<c:otherwise>
-				<button onclick="location.href='myBoard.me?cpage=${ pi.currentPage + 1 }'">Next</button>
+				<button onclick="location.href='myBoard.me?cpage=${ pi.currentPage + 1 }'"> &gt;</button>
 			</c:otherwise>
 		</c:choose>
-		<button> &gt; </button>
 	</div>
     <script>
     	$(()=>{

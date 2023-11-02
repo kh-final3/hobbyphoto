@@ -100,10 +100,12 @@
 	
 	<select id="selectPhListCount" resultType="_int">
 		select
-			count(*)
-			from board
-			where status = 'Y'
-            and board_type = 1 
+	 	 	   count(*)
+          from board b
+     left join attachment a on b.board_no = a.ref_bno
+         where b.status = 'Y'
+           and board_type = 1 
+           and a.file_level = 1
 	</select>
 	
 	<select id="selectPhList" resultMap="boardResult">

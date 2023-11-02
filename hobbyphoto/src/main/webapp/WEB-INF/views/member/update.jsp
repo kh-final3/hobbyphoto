@@ -12,7 +12,6 @@
 <title>Insert title here</title>
 <style>
         .outer_my{
-        /* border: 1px solid red; */
         background-color: gainsboro;
         width: 1200px;
         height: 900px;
@@ -27,7 +26,6 @@
         }
 
         .info_my{
-          /* border: 1px solid red; */
           background-color: white;
           width: 1180px;    
           height: 800px;
@@ -35,14 +33,12 @@
         }
 
         .info_my1{
-          /* border: 1px solid red; */
           background-color: gainsboro;
           width: 300px;
           height: 500px;
           float: left;
-          position: fixed;
           top: 30%;
-          margin: 20px 20px;
+          margin: 32px 20px;
         }
 
         .info_my2{
@@ -188,6 +184,7 @@
                 <br>
                 <h style="font-weight: 700; margin: 0 0 5px 10px; font-size: larger;">회원정보</h><br><br>
                 <div class="my-update">
+                	<form>
 	                    <table>
 	                    	<tr>
                                 <div class="info_area">
@@ -246,6 +243,7 @@
                                 </td>
 	                        </tr>
 	                    </table>
+	                </form>
                 </div>
             </div>
         </div>
