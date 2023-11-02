@@ -303,4 +303,17 @@ public class BoardDao {
 	public int deleteLike(SqlSessionTemplate sqlSession, Board b) {
 		return sqlSession.delete("boardMapper.deleteLike",b);
 	}
+
+	public int selectWpListCount(SqlSessionTemplate sqlSession) {
+	return sqlSession.selectOne("boardMapper.selectWpListCount");
+
+	}
+
+	public ArrayList<WallPaper> selectWpList(SqlSessionTemplate sqlSession, PageInfo pi) {
+
+	  	int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+			int limit = pi.getBoardLimit();
+			RowBounds rowBounds = new RowBounds(offset, limit);
+			return (ArrayList)sqlSession.selectList("boardMapper.selectWpList", null, rowBounds);
+	}
 }

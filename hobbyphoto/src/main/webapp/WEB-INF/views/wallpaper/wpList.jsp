@@ -58,114 +58,26 @@
         	<a href="enrollForm.wp">글쓰기</a>
         </c:if>
             <div class="list">
-                <div class="wallpaper">
-                    <div class="img">
-                        <img src="file.webp">
-                    </div>
-                    <div class="title" align="center">  
-                        배경화면 제목
-                    </div>
-                    <div class="wp-content">
-                        <div style="width: 240px;">아이디</div>
-                        <div class="count">10</div>
-                    </div>
-                </div>
-                <div class="wallpaper">
-                    <div class="img">
-                        <img src="">
-                    </div>
-                    <div class="title" align="center">
-                        배경화면 제목
-                    </div>
-                    <div class="wp-content" >
-                        <div style="width: 240px;">아이디</div>
-                        <div class="count">10</div>
-                    </div>
-                </div>
-                <div class="wallpaper">
-                    <div class="img">
-                        <img src="">
-                    </div>
-                    <div class="title" align="center">
-                        배경화면 제목
-                    </div>
-                    <div class="wp-content">
-                        <div style="width: 240px;">아이디</div>
-                        <div class="count">10</div>
-                    </div>
-                </div>
-                <div class="wallpaper">
-                    <div class="img">
-                        <img src="">
-                    </div>
-                    <div class="title" align="center">
-                        배경화면 제목
-                    </div>
-                    <div class="wp-content">
-                        <div style="width: 240px;">아이디</div>
-                        <div class="count">10</div>
-                    </div>
-                </div>
-                <div class="wallpaper">
-                    <div class="img">
-                        <img src="">
-                    </div>
-                    <div class="title" align="center">
-                        배경화면 제목
-                    </div>
-                    <div class="wp-content">
-                        <div style="width: 240px;">아이디</div>
-                        <div class="count">10</div>
-                    </div>
-                </div>
-                <div class="wallpaper">
-                    <div class="img">
-                        <img src="">
-                    </div>
-                    <div class="title" align="center">
-                        배경화면 제목
-                    </div>
-                    <div class="wp-content">
-                        <div style="width: 240px;">아이디</div>
-                        <div class="count">10</div>
-                    </div>
-                </div>
-                <div class="wallpaper">
-                    <div class="img">
-                        <img src="">
-                    </div>
-                    <div class="title" align="center">
-                        배경화면 제목
-                    </div>
-                    <div class="wp-content">
-                        <div style="width: 240px;">아이디</div>
-                        <div class="count">10</div>
-                    </div>
-                </div>
-                <div class="wallpaper">
-                    <div class="img">
-                        <img src="">
-                    </div>
-                    <div class="title" align="center">
-                        배경화면 제목
-                    </div>
-                    <div class="wp-content">
-                        <div style="width: 240px;">아이디</div>
-                        <div class="count">10</div>
-                    </div>
-                </div>
-                <div class="wallpaper">
-                    <div class="img">
-                        <img src="">
-                    </div>
-                    <div class="title" align="center">
-                        배경화면 제목
-                    </div>
-                    <div class="wp-content">
-                        <div style="width: 240px;">아이디</div>
-                        <div class="count">10</div>
-                    </div>
-                </div>
+
+
+                <c:if test="${ not empty list }">
+                    <c:forEach var="wp" items="${ list }">
+                        <div class="wallpaper">
+                            <div class="img">
+                                <img src="${ wp.img }">
+                            </div>
+                            <div class="title" align="center">  
+                                ${ wp.bgTitle}
+                            </div>
+                            <div class="wp-content">
+                                <div style="width: 240px;">${ wp.userNo }</div>
+                                <div class="count">${ count }</div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:if>
+
+                
             </div>
             <br clear="both"><br>
             <div id="pagingArea">

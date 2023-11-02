@@ -87,9 +87,9 @@
 	<resultMap type="WallPaper" id="wallResult">
 		<result column="BACK_NO" property="backNo"/>
 		<result column="USER_NO" property="userNo"/>
-		<result column="IMG" property="IMG"/>
+		<result column="IMG" property="img"/>
 		<result column="CREATE_DATE" property="createDate"/>
-		<result column="COUNT" property="COUNT"/>
+		<result column="COUNT" property="count"/>
 		<result column="DOWNLOAD" property="download"/>
 		<result column="BOARD_TYPE" property="boardType"/>
 		<result column="BACK_TITLE" property="bgTitle"/>
@@ -882,6 +882,57 @@
 		AND BOARD_NO = #{boardNo}
 		AND board_type = #{boardType}
 	</delete>
+	
+	<select id="selectWpListCount" resultType="_int">
+		select
+			count(*)
+			from background
+			where status = 'Y'
+	</select>
+	
+	<select id="selectWpList" resultMap="wallResult">
+		 select
+			      back_no
+			    , nickname
+			    , img
+		        , count
+		        , download
+		        , board_type
+			    , to_char(bg.create_date, 'YYYY-MM-DD') as "create_date"
+			    , back_title
+			  from background bg
+		      join member using(USER_NO)
+			  where bg.status = 'Y'
+			  order by back_no desc
+	</select>
+	
+	
+	<update id="increaseWpCount">
+		update
+		 background
+		  	set count = count + 1
+		  where back_no = #{backNo}
+		    and status = 'Y'
+	</update>
+	
+	<select id="selectWpBoard" resultMap="wallResult">
+		 select
+			      back_no
+			    , nickname
+			    , img
+		        , count
+		        , download
+		        , board_type
+			    , to_char(bg.create_date, 'YYYY-MM-DD') as "create_date"
+			    , back_title
+			  from background bg
+		      join member using(USER_NO)
+			  where bg.status = 'Y'
+			  order by back_no desc
+	</select>
+	
+	
+	
 	
 	<insert id="insertWallPaper">
 		INSERT 

@@ -632,8 +632,14 @@ public class BoardController {
 	
 	
 	@RequestMapping("list.wp")
-	public String wpList() {
-		return "wallpaper/wpList";
+	public ModelAndView wpList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+			int listCount = bService.selectWpListCount();
+			
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
+			ArrayList<WallPaper> list = bService.selectWpList(pi);
+			
+			mv.addObject("pi", pi).addObject("list", list).setViewName("wallpaper/wpList");
+			return mv;
 	}
 	
 	@RequestMapping("enrollForm.wp")
@@ -643,14 +649,14 @@ public class BoardController {
 	
 	@RequestMapping("insertWallPaper.wp")
 	public String insertWallPaper(WallPaper wp,Model model) {
-
-	    System.out.println(wp);
+		
+	    System.out.println(wp);	
 		int result = bService.insertWallPaper(wp);
 
 		
 		if (result > 0) {
 		      
-			return "wallpaper/wpList";
+			return "redirect:list.wp";
         
 	    }else {
 	    	
@@ -690,6 +696,7 @@ public class BoardController {
 	        return "Error saving the image.";
 	    }
 	}
+
 
 	
 

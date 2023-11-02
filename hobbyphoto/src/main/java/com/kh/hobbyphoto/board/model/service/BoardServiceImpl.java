@@ -345,4 +345,13 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.deleteLike(sqlSession,b);
 	}
 
+	public int selectWpListCount() {
+		return bDao.selectWpListCount(sqlSession);
+	}
+
+	public ArrayList<WallPaper> selectWpList(PageInfo pi) {
+		return bDao.selectWpList(sqlSession, pi);
+	}
+
+
 }
