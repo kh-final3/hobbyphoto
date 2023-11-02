@@ -80,6 +80,10 @@ public class BoardDao {
 		return (ArrayList) sqlSession.selectList("boardMapper.selectTopBoardList");
 	}
 	
+	public ArrayList<Place> selectTopPlaceList(SqlSessionTemplate sqlSession){
+		return (ArrayList) sqlSession.selectList("boardMapper.selectTopPlaceList");
+	}
+	
 	
 	//-----------------------------------------------------------
 

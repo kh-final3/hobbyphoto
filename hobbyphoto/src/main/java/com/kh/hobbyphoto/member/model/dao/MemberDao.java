@@ -1,8 +1,11 @@
 package com.kh.hobbyphoto.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.member.model.vo.Member;
 
 @Repository
@@ -53,5 +56,33 @@ public class MemberDao {
 	
 	public int myBlockCount(SqlSessionTemplate sqlSession,int userNo) {
 		return sqlSession.selectOne("memberMapper.myBlockCount",userNo);
+	}
+	
+	public int updateNick(SqlSessionTemplate sqlSession,Member m) {
+		return sqlSession.update("memberMapper.updateNick",m);
+	}
+	
+	public int updateDescription(SqlSessionTemplate sqlSession,Member m) {
+		return sqlSession.update("memberMapper.updateDescription",m);
+	}
+	
+	public int updateGender(SqlSessionTemplate sqlSession,Member m) {
+		return sqlSession.update("memberMapper.updateGender",m);
+	}
+	
+	public int selectFollowCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("memberMapper.selectFollowCount",userNo);
+	}
+	
+	public int selectFollowingCount(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("memberMapper.selectFollowingCount",userNo);
+	}
+	
+	public ArrayList<Follow> selectFollow(SqlSessionTemplate sqlSession,int userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectFollow",userNo);
+	}
+	
+	public ArrayList<Follow> selectFollowing(SqlSessionTemplate sqlSession,int userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectFollowing",userNo);
 	}
 }

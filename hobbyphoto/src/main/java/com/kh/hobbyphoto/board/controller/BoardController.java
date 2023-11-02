@@ -729,7 +729,19 @@ public class BoardController {
 		}
 	}
 	
+	@RequestMapping(value="topList.bo", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String topList() {
+		ArrayList<Board> list = bService.selectTopBoardList();
+		return new Gson().toJson(list);
+	}
 	
+	@RequestMapping(value="topList.pl", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String topPlaceList() {
+		ArrayList<Place> list = bService.selectTopPlaceList();
+		return new Gson().toJson(list);
+	}
 	
 	@ResponseBody
 	@RequestMapping("likeCheck.bo")

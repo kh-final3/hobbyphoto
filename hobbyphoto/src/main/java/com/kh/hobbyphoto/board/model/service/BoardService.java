@@ -64,6 +64,12 @@ public interface BoardService {
 	ArrayList<Board> myGroupList(PageInfo pi,int userNo);
 	ArrayList<Block> myBlockList(PageInfo pi,int userNo);
 	
+	
+	// ------------------------------------------------------ //
+	ArrayList<Board> selectTopBoardList();
+	ArrayList<Place> selectTopPlaceList();
+	
+	// ------------------------------------------------------ //
 	ArrayList<Place> selectPlaceList(PageInfo pi);
 	int insertPlace(Place p, ArrayList<Attachment> list);
 	int insertAttachmentPlace(ArrayList<Attachment> list);

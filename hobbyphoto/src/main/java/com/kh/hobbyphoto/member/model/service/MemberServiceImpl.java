@@ -1,9 +1,12 @@
 package com.kh.hobbyphoto.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.member.model.dao.MemberDao;
 import com.kh.hobbyphoto.member.model.vo.Member;
 
@@ -75,5 +78,41 @@ public class MemberServiceImpl implements MemberService {
 	public int myBlockCount(int userNo) {
 		return md.myBlockCount(sqlSession,userNo);
 	}
+
+	@Override
+	public int updateNick(Member m) {
+		return md.updateNick(sqlSession,m);
+	}
+
+	@Override
+	public int updateDescription(Member m) {
+		return md.updateDescription(sqlSession,m);
+	}
+
+	@Override
+	public int updateGender(Member m) {
+		return md.updateGender(sqlSession,m);
+	}
+
+	@Override
+	public int selectFollowCount(int userNo) {
+		return md.selectFollowCount(sqlSession,userNo);
+	}
+	
+	@Override
+	public ArrayList<Follow> selectFollow(int userNo) {
+		return md.selectFollow(sqlSession,userNo);
+	}
+
+	@Override
+	public int selectFollowingCount(int userNo) {
+		return md.selectFollowingCount(sqlSession,userNo);
+	}
+	
+	@Override
+	public ArrayList<Follow> selectFollowing(int userNo) {
+		return md.selectFollowing(sqlSession,userNo);
+	}
+
 
 }
