@@ -1106,16 +1106,17 @@
 							boardWriter: userNo,
 							boardType: 5
 							},
-				success: function (result) {
-					if(result == 'Y'){
-						$("#bookmark1").css("display", "");
-						$("#bookmark2").css("display", "none");
-					}
-				},
-				error: function () {
+						success: function (result) {
+							if(result == 'Y'){
+								$("#bookmark1").css("display", "");
+								$("#bookmark2").css("display", "none");
+							}
+						},
+						error: function () {
+						}
+					});
 				}
-			});
-		}
+				
 				$(function () {
 					$.ajax({
 						url: "bookCheck.bo",
@@ -1135,9 +1136,9 @@
 					},
 					error: function (result) {
 					}
-		});
-	})
-	}
+						});
+					})
+			}
 			</script>
 <script>
 if (${ loginMember.userNo } !== null) {

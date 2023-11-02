@@ -68,7 +68,7 @@
                 <table id="contentArea" align="center" class="table">
                     <tr>
                         <th width="100">제목</th>
-                        <td colspan=""><input name="title" type="text" style="width: 1200px;"></td>
+                        <td colspan=""><input name="bgTitle" type="text" style="width: 1200px;"></td>
                     </tr>
                     <tr>
                         <td colspan="2">

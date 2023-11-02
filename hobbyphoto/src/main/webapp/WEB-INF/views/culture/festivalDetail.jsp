@@ -13,6 +13,25 @@
     <link href="https://www.mfac.or.kr/web/css/common.css?ver=20231011" rel="stylesheet" type="text/css">
     <link href="https://www.mfac.or.kr/web/css/sub.css?ver=20231011" rel="stylesheet" type="text/css">
     <link href="https://www.mfac.or.kr/web/css/responsive.css?ver=20231011" rel="stylesheet" type="text/css">
+    <style>
+        .bookmark{
+            text-align: right;
+        }
+
+        #bookmark1,
+        #bookmark2 {
+            width: 48px;
+            height: 48px;
+            text-align: center;
+        }
+
+        #bookmark1 img,
+        #bookmark2 img{
+            width: 100%;
+            margin: auto;
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,7 +48,15 @@
                         </div><!-- //imgbox -->
                         <div class="txtbox">
 
-                            <h3>${ fe.feTitle }</h3>
+                            <h3>${ fe.feTitle } 
+                                <div class="bookmark">
+                                <button id="bookmark1" onclick="insertBook();">
+                                    <img src="resources/images/bookmark_blank.png">
+                                </button>
+                                <button id="bookmark2" onclick="deleteBook();" style="display: none;">
+                                    <img src="resources/images/bookmark.png">
+                                </button>
+                            </div></h3> 
                             <ul>
                                 <li>
                                     <p>장르</p><span>${ fe.feType }</span>

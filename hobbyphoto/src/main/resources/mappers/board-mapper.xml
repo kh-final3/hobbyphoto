@@ -732,8 +732,8 @@
 		INSERT INTO likes
 		VALUES
 		(
-		  #{boardWriter}
-		, #{boardNo}
+		  #{boardNo}
+		, #{boardWriter}
 		, #{boardType}
 		)
 	</insert>
@@ -750,6 +750,7 @@
 		  INTO background
 		  (
 		  	back_no
+		  , back_title
 		  , user_no
 		  , img
 		  , board_type
@@ -757,6 +758,7 @@
 		VALUES
 		(
 		  SEQ_BACK_NO.nextval
+		, #{bgTitle}
 		, #{userNo}
 		, #{img}
 		, #{boardType}

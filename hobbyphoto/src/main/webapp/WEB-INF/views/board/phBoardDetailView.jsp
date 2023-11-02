@@ -333,7 +333,7 @@
     <script>
         if (${ loginMember.userNo } !== null) {
             let userNo = ${ loginMember.userNo };
-            
+            let bno = ${ b.boardNo }
             function insertLike(){
                 $.ajax({
                     url:"like.bo",
