@@ -461,23 +461,38 @@
             </selection>
             <ol class="eqrs5a06 css-u60zkf e1yx3arz0">
                 
-              <c:forEach var="p" items="${ olist }">  
+                
+                
+                
+                
+                
+           <c:forEach var="p" items="${ olist }">  
+           <c:if test="${p.oorderNo != prevOrderNo}">
+           		
+           		  
+           		
+           		
+              <input type="hidden" value="${ p.oorderNo }">
                 <li class="css-16ulwnk e1c6si9n0">
-                    <div class="css-15hsq6m e1c6si9n1">
-                        <a href="" class="css-1afa6oj e1c6si9n2">
-                            <span class="css-xvv623 e1c6si9n3">주문일자</span>
-                            ${ p.orderDate } <!-- 주문일자 들어가는 자리-->
-                        </a>
 
-                        <a href="" class="css-1afa6oj e1c6si9n2">
-                            <span class="css-xvv623 e1c6si9n3">주문번호</span>
-                            ORD<fmt:parseDate value="${ p.orderDate }" var="orderDate" pattern="yyyy-MM-dd HH:mm:ss"/><fmt:formatDate value="${orderDate}" pattern="yyyyMMdd"/>-6400521${ p.orderNo } <!-- 주문번호 들어가는 자리 -->
-                        </a>
+                   
+	                    <div class="css-15hsq6m e1c6si9n1">
+	                        <a href="" class="css-1afa6oj e1c6si9n2">
+	                            <span class="css-xvv623 e1c6si9n3">주문일자</span>
+	                            ${ p.orderDate } <!-- 주문일자 들어가는 자리-->
+	                        </a>
+	
+	                        <a href="" class="css-1afa6oj e1c6si9n2">
+	                            <span class="css-xvv623 e1c6si9n3">주문번호</span>
+	                            ORD<fmt:parseDate value="${ p.orderDate }" var="orderDate" pattern="yyyy-MM-dd HH:mm:ss"/><fmt:formatDate value="${orderDate}" pattern="yyyyMMdd"/>-6400521${ p.oorderNo } <!-- 주문번호 들어가는 자리 -->
+	                        </a>
+	                    </div>
 
-                    </div>
+
                     <ul class="e1c6si9n4 css-1t02r7v e13cop140">
                         <li class="css-1nfy9my e83jho12">
                             <ul class="css-0 e3pp3ol0" >
+
                                 <li class="e3pp3ol1 css-2zqz7m e15inpgb0">
                                     <a href="" class="e15inpgb1 css-upe1zs e1gwa9iy0">
 
@@ -487,13 +502,13 @@
                                             </div>
                                             <div class="css-xl3rnq e1gwa9iy3">
                                             <p class="css-1pwvd6w e1gwa9iy4">브랜드명</p>
-                                            <p class="css-1k4liyy e1gwa9iy5">제품명</p>
+                                            <p class="css-1k4liyy e1gwa9iy5">${ p.PName }</p>
                                             <ul class="css-78pcur e5gez6t0">
                                                 <li class="css-1mfx2ad e5gez6t1">[사이즈]ONE SIZE</li>
                                             </ul>
                                             <p class="css-1hq4sz7 e1gwa9iy6">
                                                 금액
-                                                100,000원 / 수량 1개
+                                                ${ p.totalPrice }원 / 수량 1개
                                             </p>
                                             </div>
                                         </div>
@@ -505,7 +520,7 @@
                                         <div class="css-r6mp3u e15inpgb2"></div>
                                         <div class="e15inpgb3 css-nov509 ejqsfj40">
                                             <div class="css-1nzfn4d ejqsfj41">
-                                                <p class="css-1ezkxtw ejqsfj42">${ p.status }</p>
+                                                <p class="css-1ezkxtw ejqsfj42">${ p.ostatus }</p>
                                                 <p class="ejqsfj43 css-ltezg3 e1bnten30">2023.10.30</p>
                                             </div>
                                             <button class="css-11krjga ejungq0">
@@ -523,12 +538,19 @@
                                         </div>
                                     </div>
                                 </li>
+                                <c:set var="prevOrderNo" value="${p.oorderNo}" />
+							</c:if>
+
+
+                                
                             </ul>
-                        </li>
+
+
                     </ul>                    
                 </li>
-               
+            
                </c:forEach>
+
             </ol>
         </selection>
     </div>
