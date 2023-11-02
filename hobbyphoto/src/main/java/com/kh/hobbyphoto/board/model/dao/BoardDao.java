@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Block;
-import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Repository
@@ -52,6 +51,9 @@ public class BoardDao {
 	public int deletePhBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deletePhBoard", boardNo);
 	}
+	
+	
+	
 
 	public int updatePhBoard(SqlSessionTemplate sqlSession, Board b) {
 		return sqlSession.update("boardMapper.updatePhBoard", b);
@@ -61,14 +63,17 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.updatePhAtBoard", at);
 	}
 	
+	public int insertNewAttachment(SqlSessionTemplate sqlSession, Attachment at) {
+		return sqlSession.insert("boardMapper.insertNewAttachment", at);
+	}
 	
 	
-	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int boardNo) {
-		return (ArrayList) sqlSession.selectList("boardMapper.selectReplyList", boardNo);
+	public ArrayList<Reply> selectPhReplyList(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList) sqlSession.selectList("boardMapper.selectPhReplyList", boardNo);
 	}
 
-	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
-		return sqlSession.insert("boardMapper.insertReply", r);
+	public int insertPhReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("boardMapper.insertPhReply", r);
 	}
 	
 	public ArrayList<Board> selectTopBoardList(SqlSessionTemplate sqlSession){
@@ -118,6 +123,24 @@ public class BoardDao {
 		return sqlSession.delete("boardMapper.deleteRcBoard", boardNo);
 	}
 	
+	public int updateRcBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.updateRcBoard", b);
+	}
+	
+	public int updateRcAtBoard(SqlSessionTemplate sqlSession, Attachment at) {
+		return sqlSession.update("boardMapper.updateRcAtBoard", at);
+	}
+	
+	public ArrayList<Reply> selectRcReplyList(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectRcReplyList", boardNo);
+	}
+
+	public int insertRcReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("boardMapper.insertRcReply", r);
+	}
+	
+	//-----------------------------------------------------------
+	
 	public int myListCount(SqlSessionTemplate sqlSession,int userNo) {
 		return sqlSession.selectOne("boardMapper.myListCount",userNo);
 	}
@@ -159,7 +182,6 @@ public class BoardDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		ArrayList<Block> list = (ArrayList)sqlSession.selectList("boardMapper.myBlockList", userNo, rowBounds);
-		System.out.println("다오" + list);
 		return list;
 	}
 	
@@ -241,5 +263,44 @@ public class BoardDao {
 
 	public int updateCulture(SqlSessionTemplate sqlSession, Festival fe) {
 		return sqlSession.update("boardMapper.updateCulture", fe);
+	}
+
+
+
+	public int checkBook(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.selectOne("boardMapper.checkBook",b);
+	}
+	
+	public int insertBookmark(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.insert("boardMapper.insertBookmark",b);
+	}
+	
+	public int deleteBookmark(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.delete("boardMapper.deleteBookmark",b);
+	}
+
+	public int insertWallPaper(SqlSessionTemplate sqlSession, WallPaper wp) {
+		
+		return sqlSession.insert("boardMapper.insertWallPaper", wp);
+	}
+
+	public int reportBoard(SqlSessionTemplate sqlSession, Report r) {
+		
+		return sqlSession.insert("boardMapper.reportBoard", r);
+	}
+
+	public int checkLike(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.selectOne("boardMapper.checkLike",b);
+	}
+	
+	public int insertLike(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertLike",b);
+	}
+	
+	public int deleteLike(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.delete("boardMapper.deleteLike",b);
 	}
 }

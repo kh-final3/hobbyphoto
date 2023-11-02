@@ -1,14 +1,14 @@
 package com.kh.hobbyphoto.board.controller;
 
 import java.io.*;
-import java.net.*;
+import java.nio.file.*;
 import java.text.*;
 import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.*;
 import com.kh.hobbyphoto.board.model.vo.*;
+import com.kh.hobbyphoto.board.model.vo.Report;
 import com.kh.hobbyphoto.common.model.vo.*;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
-
-
 @Controller
 public class BoardController {
 	@Autowired
@@ -30,7 +29,6 @@ public class BoardController {
 
 	@RequestMapping("phBoardList.bo")
 	public ModelAndView selectPhBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
-		
 		int listCount = bService.selectPhListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
@@ -67,7 +65,6 @@ public class BoardController {
 	
 	@RequestMapping("phInsert.bo")
 	public String insertPhBoard(Board b, MultipartFile[] upfiles, Model model, HttpSession session) {
-		
         ArrayList<Attachment> list = new ArrayList<>();
 
         for (int i = 0; i < upfiles.length; i++) {
@@ -83,9 +80,7 @@ public class BoardController {
                 list.add(at);
             }
         }
-
         int result = bService.insertPhBoard(b, list);
-
         if (result > 0) {
             session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
             return "redirect:phBoardList.bo";
@@ -114,8 +109,6 @@ public class BoardController {
 		return changeName;
 	}
 	
-	//---------------------------------------------------------------------
-	
 	@RequestMapping("phUpdateForm.bo")
 	public String phUpdate(int phno, Model model) {
 		model.addAttribute("b", bService.selectPhBoard(phno));
@@ -124,32 +117,33 @@ public class BoardController {
 	}
 	
 	@RequestMapping("phUpdate.bo")
-	public String updateBoard(Attachment at, Board b, MultipartFile reupfile, HttpSession session, Model model) {
-		
-		if(!reupfile.getOriginalFilename().equals("")) {
-			
-			if(at.getOriginName() != null) {
-				new File(session.getServletContext().getRealPath(at.getChangeName())).delete();
-			}
-			String changeName = saveFile(reupfile, session);
-			
-			at.setOriginName(reupfile.getOriginalFilename());
-			at.setChangeName("resources/upfiles/" + changeName);
-			}
-			
-			int result = bService.updatePhBoard(b);
-			int result2 = bService.updatePhAtBoard(at);
-			
-			if(result > 0) {
-				model.addAttribute("alertMsg", "게시글 수정에 성공했습니다.");
-				return "redirect:detail.bo?phno=" + b.getBoardNo();
-			} else {
-				// 수정 실패 => 에러페이지
-				model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
-				return "common/errorPage";
-			}
-			
-		}
+	public String updateBoard(Board b, MultipartFile[] reupfiles, HttpSession session, Model model) {
+        ArrayList<Attachment> list = new ArrayList<>();
+        for (int i = 0; i < reupfiles.length; i++) {
+            if (reupfiles[i] != null && !reupfiles[i].isEmpty()) {
+                String changeName = saveFile(reupfiles[i], session);
+
+                Attachment at = new Attachment();
+                at.setFileNo(i + 1);
+                at.setOriginName(reupfiles[i].getOriginalFilename());
+                at.setChangeName(changeName);
+                at.setFilePath("resources/upfiles/" + changeName);
+                at.setFileLevel(i + 1);
+                at.setRefBno(String.valueOf(b.getBoardNo()));
+                list.add(at);
+            }
+        }
+        System.out.println(list);
+        int result = bService.updatePhBoard(b, list);
+	    if (result <= 0) {
+	        model.addAttribute("errorMsg", "게시글 수정 실패");
+	        return "common/errorPage";
+	    } else {
+	    	 session.setAttribute("alertMsg", "게시글 수정에 성공했습니다.");
+	  	    return "redirect:phDetail.bo?phno=" + b.getBoardNo();
+	    }
+	  
+	}
 	
 	@RequestMapping("phDelete.bo")
 	public String deleteBoard(int phno, String filePath, HttpSession session, Model model) { 
@@ -168,6 +162,22 @@ public class BoardController {
 			model.addAttribute("errorMsg", "게시글 삭제 실패");
 			return "common/errorPage";
 		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="phRlist.bo", produces="application/json; charset=UTF-8")
+	public String ajaxSelectReplyList(int phno) {
+		ArrayList<Reply> list = bService.selectPhReplyList(phno);
+		return new Gson().toJson(list);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="phRinsert.bo")
+	public String ajaxInsertReply(Reply r) {
+		int result = bService.insertPhReply(r);
+		return result > 0 ? "success" : "fail";
 		
 	}
 	
@@ -244,8 +254,7 @@ public class BoardController {
 		int result = bService.deleteRcBoard(phno);
 		
 		if(result > 0) {
-			// 첨부파일이 있었을 경우 => 파일 삭제
-			if(!filePath.equals("")) { // filePath = "resources/upfiles/xxxx.jpg" | ""
+			if(!filePath.equals("")) {
 				new File(session.getServletContext().getRealPath(filePath)).delete();
 			}
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
@@ -256,7 +265,60 @@ public class BoardController {
         }
 	}
 	
-
+	@RequestMapping("rcUpdateForm.bo")
+	public String rcUpdateForm(int phno, Model model) {
+		model.addAttribute("b", bService.selectRcBoard(phno));
+		model.addAttribute("at", bService.selectRcAtBoard(phno));
+		return "board/rcUpdateForm";
+	}
+	
+	@RequestMapping("rcUpdate.bo")
+	public String rcUpdate(Board b, MultipartFile[] upfile, HttpSession session, Model model,  
+			@RequestParam("originFileNo1") int originFileNo1, @RequestParam("originFileNo2") int originFileNo2,
+	        @RequestParam("originFileNo3") int originFileNo3, @RequestParam("originFileNo4") int originFileNo4 ) {
+		ArrayList<Attachment> list = new ArrayList<>();
+		
+		for(int i = 0; i < upfile.length; i++) {
+			if(upfile[i] != null && !upfile[i].isEmpty()) {
+				String changeName = saveFile(upfile[i], session);
+				
+				Attachment at = new Attachment();
+                at.setFileNo(i + 1);
+                at.setOriginName(upfile[i].getOriginalFilename());
+                at.setChangeName(changeName);
+                at.setFilePath("resources/upfiles/" + changeName);
+                at.setFileLevel(i + 1);
+                at.setRefBno(String.valueOf(b.getBoardNo()));
+                list.add(at);
+			}
+		}
+		
+		int result = bService.updateRcBoard(b, list);
+	    if (result <= 0) {
+	        model.addAttribute("errorMsg", "게시글 수정 실패");
+	        return "common/errorPage";
+	    } else {
+	    	 session.setAttribute("alertMsg", "게시글 수정에 성공했습니다.");
+	  	    return "redirect:rcBoardList.bo?phno=" + b.getBoardNo();
+	    }
+	  
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="rcRlist.bo", produces="application/json; charset=UTF-8")
+	public String ajaxSelectRcReplyList(int phno) {
+		ArrayList<Reply> list = bService.selectRcReplyList(phno);
+		return new Gson().toJson(list);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="rcRinsert.bo")
+	public String ajaxInsertRcReply(Reply r) {
+		int result = bService.insertRcReply(r);
+		return result > 0 ? "success" : "fail";
+		
+	}
 
 
 	// *************출사명소시작************ //
@@ -268,7 +330,6 @@ public class BoardController {
 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<Place> list = bService.selectPlaceList(pi);
-		System.out.println(pi);
 		mv.addObject("pi", pi).addObject("list", list).setViewName("board/placeListView");
 
 		return mv;
@@ -358,11 +419,6 @@ public class BoardController {
 		}
 		
 	}
-	
-
-
-
-	
 
 	@RequestMapping("updateForm.pl")
 	public String plUpdateForm(int pno, Model model) {
@@ -375,7 +431,6 @@ public class BoardController {
 	        @RequestParam("originFileNo1") int originFileNo1, @RequestParam("originFileNo2") int originFileNo2,
 	        @RequestParam("originFileNo3") int originFileNo3, @RequestParam("originFileNo4") int originFileNo4,
 	        HttpSession session, Model model) {
-	    System.out.println(originFileNo1);
 	    ArrayList<Attachment> list = new ArrayList<>();
 	    Place existingPlace = bService.selectPlace(p.getPno());
 	    p.setPimg1(existingPlace.getPimg1());
@@ -519,13 +574,17 @@ public class BoardController {
 		String changeName = saveFile(upfile, session);
 		fe.setFeDate(fe.getFeDate1() +"~"+ fe.getFeDate2());
 		fe.setTimg("resources/upfiles/" + changeName);
-
+		if ("전시".equals(fe.getFeType())) {
+			fe.setType(5);
+        } else if ("축제".equals(fe.getFeType())) {
+        	fe.setType(6);
+        }
 		int result = bService.insertCulture(fe);
 
 		if (result > 0) {
 	        System.out.println(fe.getFeType());
 	        if ("전시".equals(fe.getFeType())) {
-	            System.out.println(1);
+	            
 	            return "redirect:exhibitList.fs";
 	        } else if ("축제".equals(fe.getFeType())) {
 	        	System.out.println(2);
@@ -572,14 +631,102 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping("test.t")
-	public String test() {
-		return "test/editor";
+	@RequestMapping("list.wp")
+	public String wpList() {
+		return "wallpaper/wpList";
 	}
 	
-	@RequestMapping("test.fe")
-	public String testF() {
-		return "board/sds";
+	@RequestMapping("enrollForm.wp")
+	public String wpEnrollForm() {
+		return "wallpaper/wpEnrollForm";
+	}
+	
+	@RequestMapping("insertWallPaper.wp")
+	public String insertWallPaper(WallPaper wp,Model model) {
+
+	    System.out.println(wp);
+		int result = bService.insertWallPaper(wp);
+
+		
+		if (result > 0) {
+		      
+			return "wallpaper/wpList";
+        
+	    }else {
+	    	
+			model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
+			return "common/errorPage";
+	    }
+	}
+	
+	@ResponseBody
+	@RequestMapping("base64.wp")
+	private String saveImage(@RequestParam("pngData") String dataURL, HttpSession session) {
+	    // Extract the base64 part of the data URL
+	    String base64Data = dataURL.split(",")[1];
+	    
+	    // Decode the base64 string into bytes
+	    byte[] imageBytes = Base64.decodeBase64(base64Data);
+
+	    // Generate a unique file name (e.g., using a timestamp and a random number)
+	    String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	    int ranNum = (int)(Math.random() * 90000 + 10000);
+	    String fileName = currentTime + ranNum + ".png"; // You can change the extension as needed
+
+
+	    // Define the path to save the image
+	    String savePath = session.getServletContext().getRealPath("resources/upfiles/");
+
+	    // Create a file using the save path and the generated file name
+	    File imageFile = new File(savePath, fileName);
+	    
+	    String changeName = "resources/upfiles/" + fileName;
+	    try {
+	        // Write the image bytes to the file
+	        Files.write(Paths.get(imageFile.toURI()), imageBytes);
+	        return changeName;
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return "Error saving the image.";
+	    }
+	}
+
+	
+
+	@ResponseBody
+	@RequestMapping("bookCheck.bo")
+	public String checkBookmark(Board b){
+		int count = bService.checkBook(b);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("book.bo")
+	public String insertBookmark(Board b){
+		int count = bService.insertBookmark(b);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("deleteBook.bo")
+	public String deleteBookmark(Board b){
+		int count = bService.deleteBookmark(b);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
 	}
 	
 	@RequestMapping(value="topList.bo", produces = "application/json; charset=utf-8")
@@ -596,4 +743,55 @@ public class BoardController {
 		return new Gson().toJson(list);
 	}
 	
+	@ResponseBody
+	@RequestMapping("likeCheck.bo")
+	public String checkLike(Board b){
+		int count = bService.checkLike(b);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("like.bo")
+	public String insertLike(Board b){
+		int count = bService.insertLike(b);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("deleteLike.bo")
+	public String deleteLike(Board b){
+		int count = bService.deleteLike(b);
+		if(count > 0) {
+			return "Y";
+		}else {
+			return "N";
+			
+		}
+	}
+	
+	
+	@RequestMapping("reportBoard.bo")
+	public String reportBoard(Report r,HttpSession session, Model model){
+		r.setBoardType(4);
+		int result = bService.reportBoard(r);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 게시글이 신고되었습니다.");
+			return "main";
+		}else {
+			model.addAttribute("errorMsg", "게시물 수정에 실패했습니다.");
+			return "common/errorPage";
+		}
+		
+	}
 }

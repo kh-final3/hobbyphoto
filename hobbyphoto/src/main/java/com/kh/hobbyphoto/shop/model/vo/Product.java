@@ -23,5 +23,5 @@ public class Product {
 	private String thumbnail;
 	private String pDimg;
 	private String pSimg;
-	
+	private int pType;
 }

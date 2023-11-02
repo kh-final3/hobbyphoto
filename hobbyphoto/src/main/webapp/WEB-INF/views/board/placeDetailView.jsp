@@ -10,16 +10,16 @@
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
             width: 1400px;
-            height: 1700px;
+            height: 1200px;
             margin: auto;
-            background-color: rgba(0, 0,0,0.1);
+            /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
         }
         
         .outline{
             border: 1px solid white;
             width: 90%;
-            height: 1600px;
+            height: 1100px;
             margin: auto;
             margin-top: 45px;
             background-color: white;
@@ -41,13 +41,10 @@
         }
 
         .detail-area{
-            border: 1px solid black;
             width: 100%;
-            height: 20%;
+            height: 300px;
             border: none;
         }
-
-       
 
         .photo-area {
             width: 100%;    
@@ -77,7 +74,7 @@
         .ul-area{
             border: 1px solid red;
             width: 100%;
-            height: 90%;
+            height: 30px;
             padding: 0;
             margin-top: 20px;
             border: none;
@@ -93,7 +90,7 @@
         .li-area1{
             border: 1px solid blue;
             width: 100%;
-            height: 37%;
+            height: 30px;
             border: none;
         }
 
@@ -121,7 +118,6 @@
         .board-writer{
             border: 1px solid black;
             width: 49%;
-            height: 93%;
             float: left;
             border: none;
             font-size: larger;
@@ -245,7 +241,7 @@
             padding: 14px;
             position: relative;
             min-width: 190px;
-            height: 56px;
+            height: 100%;
         }
 
         .overlay_info img {
@@ -271,13 +267,19 @@
             width: 22px;
             height: 12px;
             background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png) no-repeat 0 bottom;
-        }	
+        }
+        .list-content{
+            height: 100%;
+        }
         
     </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
     <div class="warp">
+        <br>
+        <h2 align="center">출사명소</h2>
+        <br>
         <div class="outline">
         
             <div class="content-area">
@@ -294,7 +296,7 @@
                                     <a href="">❤️</a> &nbsp;&nbsp;
                                 <!-- 좋아요안눌럿을때 -->
                                     <a href="">🤍</a> &nbsp;&nbsp;
-                                    <a href="">❗</a>
+                                    <button type="button" data-toggle="modal" data-target="#reportBoard">❗</button>
                                 </div>
                             </li>
                             <hr>
@@ -305,12 +307,8 @@
                         </ul>
                     </div>
                     <hr>
-                    <div class="list-content">
-                        [주소] ${ p.paddress } <br>
-                        [내용] ${p.pcontent}<br>
-                        [촬영 시기] 5월 중순 ~ 8월 중순 <br>
-                        [추천 카메라] 24-70mm,... <br>
-                        [특징] 동작대교에서 여의도 쌍둥이 빌딩 사이 일몰 촬영 및 야경 촬영을 할 수 있는 포인트 입니다.일몰은 시기에 따라 남단에서 북단응로 조금씩 위치 변화가 있으니 주의 바랍니다. 
+                    <div class="list-content">[주소] ${ p.paddress } <br> [내용] ${p.pcontent}<br>
+                      
                     </div>
                 </div>
 
@@ -414,7 +412,7 @@
             <div class="btn-area" align="center">
                 <button type="button" class="update">수정하기</button>
                 <button type="button" class="golist">목록으로</button>
-                <button type="button" class="delete">t삭제</button>
+                <button type="button" class="delete">삭제</button>
             </div>
            <hr>
             
@@ -438,6 +436,52 @@
         })
         
     </script>
+
+<div class="modal" id="reportBoard">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><b>신고하기</b></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form action="reportBoard.bo" method="post">
+            <p>작성자 : ${ p.pwriter}</p>
+            <p>글 제목 : ${p.ptitle}</p>
+            
+            <input name="refBno" type="hidden" value="${ p.pno}">
+            <input name="reportedUno" type="hidden" value="${ loginMember.userNo} ">
+           
+            <input name="reportUno" type="hidden" value="2">
+          
+            <hr>
+            
+                <input type="radio" id="r1" name="guilty" value="영리목적/홍보성">
+                <label for="r1">영리목적/홍보성</label><br>
+                <input type="radio" id="r2" name="guilty" value="욕설/인신공격">
+                <label for="r2">욕설/인신공격</label> <br>
+                <input type="radio" id="r3" name="guilty" value="도배">
+                <label for="r3">같은 내용 반복(도배)</label> <br>
+                <input type="radio" id="r4" name="guilty" value="개인정보노출">
+                <label for="r4">개인정보노출</label> <br>
+                <input type="radio" id="r5" name="guilty" value="불법정보">
+                <label for="r5">불법정보</label><br>
+                <input type="radio" id="r6" name="guilty" value="음란성/선정성">
+                <label for="r6">음란성/선정성</label> <br>
+    
+            <textarea name="rpContent" style="resize: none;" placeholder=" 신고 사유 설명이 필요하신 경우 작성해주세요." cols="50" rows="3" style="margin: 20px;"></textarea>
+            <br><button type="submit" class="btn btn-secondary" id="rpt_btn" style="width: 100%; height: 40px; margin-top: 15px;">신고</button>
+          </form>
+        </div>
+
+     </div>
+        
+    </div>
+</div>
     <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

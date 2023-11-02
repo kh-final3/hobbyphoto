@@ -6,8 +6,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.shop.model.dao.ShopDao;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
+import com.kh.hobbyphoto.shop.model.vo.D_order;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Service
@@ -63,22 +66,22 @@ public class ShopServiceImpl implements ShopService{
 		return result;
 	}
 
-//	@Override
-//	public ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist) {
-//		
-//		ArrayList<Cart> resultList = new ArrayList<>();
-//		
-//		for(Cart b : blist) {
-//	        ArrayList<Cart> resultCarts = sDao.selectCartBuy(sqlSession, b);
-//	        if(resultCarts != null && !resultCarts.isEmpty()) {
-//	            resultList.addAll(resultCarts);
-//	        }
-//	    }
-//		for(int i = 0 ; i<resultList.size();i++) {
-//		System.out.println("서비스에서 확인중 + " + resultList.get(i));
-//		}
-//		return resultList;
-//	}
+	@Override
+	public ArrayList<Cart> selectCartBuy(ArrayList<Cart> blist) {
+		
+		ArrayList<Cart> resultList = new ArrayList<>();
+		
+		for(Cart b : blist) {
+	        ArrayList<Cart> resultCarts = sDao.selectCartBuy(sqlSession, b);
+	        if(resultCarts != null && !resultCarts.isEmpty()) {
+	            resultList.addAll(resultCarts);
+	        }
+	    }
+		for(int i = 0 ; i<resultList.size();i++) {
+		System.out.println("서비스에서 확인중 + " + resultList.get(i));
+		}
+		return resultList;
+	}
 
 	@Override
 	public int selectProductamount(int pno) {
@@ -90,11 +93,103 @@ public class ShopServiceImpl implements ShopService{
 		return sDao.selectBuyProduct(sqlSession,pno);
 	}
 
+	@Override
+	public ArrayList<Product> selectshopkeyword(String keyword) {
+		return sDao.selectshopkeyword(sqlSession,keyword);
+	}
 
+	@Override
+	public ArrayList<Product> selectbrandProduct(int brandNo) {
+		return sDao.selectbrandProduct(sqlSession, brandNo);
+	}
 
+	@Override
+	public ArrayList<Product> selectAllSearchProduct(Product p) {
+		return sDao.selectAllSearchProduct(sqlSession,p);
+	}
+
+	@Override
+	public int insertOneOrder(Orders ords) {
+		
+		int result1 = sDao.insertOneOrder(sqlSession,ords);
+		int result2 = 0;
+		
+		if(result1>0) {
+			result2 = sDao.insertOneDorder(sqlSession, ords);
+		}
+		
+		int result = result1*result2;
+		
+		return result;
+	}
+
+	@Override
+	public int insertProductAllBuy(Orders ords, ArrayList<D_order> buylist) {
+		
+		int result1 = sDao.insertProductAllBuy(sqlSession,ords);
+		int result2 =0;
+		
+		if(result1>0) {
+			
+			for(D_order oCart : buylist) {
+				result2 += sDao.insertDOrderCart(sqlSession,oCart);
+				
+			}
+		}
+		int result = result1*result2;
+		
+		return result;
+	}
+
+	@Override
+	public Orders selectOrderNo(int userNo) {
+		return sDao.selectOrderNo(sqlSession,userNo);
+	}
+
+	@Override
+	public ArrayList<Cart> selectAmount(ArrayList<Cart> buylist) {
+		
+		ArrayList<Cart> ilist = new ArrayList<>();
+		
+		for(Cart c : buylist) {
+			ArrayList<Cart> result = sDao.selectAmount(sqlSession,c);
+			
+			ilist.addAll(result);
+		}
+
+		return ilist;
+	}
+
+	@Override
+	public int deleteAmountZero(ArrayList<Cart> de) {
+		
+		int result = 0;
+		for(Cart k : de) {
+			result += sDao.deleteAmountZero(sqlSession,k);
+		}
+		System.out.println(result + "결과값 몇이야");
+		
+		return result;
+	}
+
+	@Override
+	public Orders selectOrderInfo(int userNo) {
+		return sDao.selectOrderInfo(sqlSession,userNo);
+	}
+
+	@Override
+	public ArrayList<Orders> selectOrder(int userNo,PageInfo pi) {
+		return sDao.selectOrder(sqlSession, userNo,pi);
+	}
+
+	@Override
+	public int selectOrderListCount(int userNo) {
+		return sDao.selectOrderListCount(sqlSession,userNo);
+	}
+
+	@Override
+	public int updateProduct(Orders ords) {
+		return sDao.updateProduct(sqlSession,ords);
+	}
 	
-
-
-	
-
 }

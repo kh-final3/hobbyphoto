@@ -25,10 +25,14 @@
             cursor: pointer;
         }
         
-        #pagingArea {
-            width: fit-content;
-            margin: auto;
-        }
+	    /* 페이징바 */
+	    .paging-area>button{
+	            border: none;
+	            background-color: white;
+	            width: 35px;
+	            height: 35px;
+	            margin-top: 20px;
+	        }
         
         #searchForm {
             width: 500px;
@@ -112,19 +116,39 @@
 					        });
 					    });
 					</script>
-	
-	            	<a class="btn btn-secondary btn-sm" style="float:right" href="rcEnrollForm.bo">글쓰기</a>
-				           <div id="pagingArea">
-				               <ul class="pagination">
-				                    <li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-				                   	<li class="page-item"><a class="page-link" href="">1</a></li>
-				                   	<li class="page-item"><a class="page-link" href="">2</a></li>
-				                   	<li class="page-item"><a class="page-link" href="">3</a></li>
-				                   	<li class="page-item"><a class="page-link" href="">4</a></li>
-				                   	<li class="page-item"><a class="page-link" href="">5</a></li>
-				                    <li class="page-item"><a class="page-link" href="">Next</a></li>
-				               </ul>
-				           </div>
+					
+					<c:choose>
+				        <c:when test="${ not empty loginMember }">
+				           <a class="btn btn-secondary btn-sm" style="float:right" href="rcEnrollForm.bo">글쓰기</a>
+				        </c:when>
+				    </c:choose>
+				        <div class="paging-area" align="center">
+		            	<c:choose>
+		            		<c:when test="${ pi.currentPage eq 1 }">
+		                		<button disabled> &lt; </button>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<button style="width:70px" onclick="location.href='rcBoardList.bo?cpage=${ pi.currentPage - 1 }'">Previous</button>
+		                	</c:otherwise>
+		                </c:choose>
+		                
+		                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		                    <button onclick="location.href='rcBoardList.bo?cpage=${ p }'">${ p }</button>
+		                </c:forEach>
+		                
+		                <button onclick="location.href='rcBoardList.bo?cpage=${ p }'">${ p }</button>
+		                
+		               	<c:choose>
+		                   	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		                    		<button onclick="location.href=''" disabled>Next</button>
+		                   	</c:when>
+		                     <c:otherwise>
+		                     	<button onclick="location.href='rcBoardList.bo?cpage=${ pi.currentPage + 1 }'">Next</button>
+		                   	</c:otherwise>
+		                </c:choose>
+		                
+		                <button> &gt; </button>
+            		</div>
 	            		<br clear="both"><br>
 	            	<br><br>
 	        	</div>

@@ -22,7 +22,19 @@
 			<id>Datanucleus</id>
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
+		
+	    <repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+	    </repository>
+		<repository>
+		    <id>AsposeJavaAPI</id>
+		    <name>Aspose Java API</name>
+		    <url>https://repository.aspose.com/repo/</url>
+		</repository>
 	</repositories>
+	
+
 	
 	<!-- 라이브러리 -->
 	<dependencies>
@@ -40,6 +52,7 @@
 				 </exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -227,7 +240,36 @@
 		    <artifactId>spring-boot-starter-mail</artifactId>
 		    <version>2.7.2</version>
 		</dependency>
+		
+		<!-- 결제관련 -->
+		<dependency>
+		  <groupId>com.github.iamport</groupId>
+		  <artifactId>iamport-rest-client-java</artifactId>
+		  <version>0.2.14</version>
+			</dependency>
+			
+		<!-- 테스트 -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.9</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.aspose</groupId>
+		    <artifactId>aspose-pdf</artifactId>
+		    <version>20.7</version>
+		</dependency>
+		
+		<!-- select를 위한 thymeleaf  -->
+		<dependency>
+		  <groupId>org.thymeleaf</groupId>
+		  <artifactId>thymeleaf</artifactId>
+		  <version>3.1.2.RELEASE</version>
+		</dependency>
+				
 	</dependencies>
+	
 	
     <build>
         <plugins>
@@ -250,8 +292,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>

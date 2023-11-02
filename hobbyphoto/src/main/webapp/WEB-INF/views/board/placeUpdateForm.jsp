@@ -12,7 +12,7 @@
             width: 1400px;
             height: 100%;
             margin: auto;
-            background-color: rgba(0, 0,0,0.1);
+            /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
         }
         
@@ -182,7 +182,6 @@
             border: 1px solid black;
             width: 80%;
             height: 50%;
-            margin: auto;
             border: none;
         }
     </style>
@@ -190,6 +189,9 @@
 <body>
 <jsp:include page="../common/header.jsp"/>
     <div class="warp">
+        <br>
+        <h2 align="center">출사명소</h2>
+        <br>
         <form method="post" action="update.pl" enctype="multipart/form-data">
        	<input type="hidden" value="${ p.pno }" name="pno">
         <div class="outline">
@@ -204,7 +206,6 @@
                                 
                                 <div class="board-create">${ p.createDate }</div>
 
-                                <div class="boare-ect">
                                     <a href=""><img src="resources/like.png" alt="좋아요" width="35"></a> &nbsp;&nbsp;
                                     <a href=""><img src="resources/report.png" alt="신고" width="35"></a>
                                 </div>
@@ -218,13 +219,11 @@
                     </div>
                     <hr>
                     <div class="list-content">
-                        <div class="list">
-                        [장소] <input type="text" name="plocation" id="" value="${ p.plocation }" required> <br>
-                        [상세주소] <input type="text" name="paddress" id="" value="${ p.paddress }" required> <br>
-                        [내용] <input type="text" name="pcontent" id="" value="${ p.pcontent }" required> <br>
-                        [촬영 시기] <input type="text" name="" id="" value="5월 중순 ~ 8월 중순"> <br>
-                        [추천 카메라] <input type="text" name="" id="" value="24-70mm,..."> <br>
-                        [특징] <br><textarea name="" id="" style="width: 1000px; height: 100px; resize: none;"></textarea>
+                        <div class="list" style="font-weight: 600;">
+                        [장소] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="plocation" id="" value="${ p.plocation }" required > <br>
+                        [상세주소] <input type="text" name="paddress" id="" value="${ p.paddress }" required style="width: 300px;"> <br>
+                        [내용] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="pcontent" id="" value="${ p.pcontent }" required> <br>
+                        
                         </div>
                     </div>
                 </div>

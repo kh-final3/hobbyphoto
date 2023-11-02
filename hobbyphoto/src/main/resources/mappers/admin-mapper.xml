@@ -1,7 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="adminMapper">
-
+	<resultMap type="Member" id="resultMember">
+		<result column="user_no" property="userNo" />
+		<result column="user_id" property="userId" />
+		<result column="user_pwd" property="userPwd" />
+		<result column="user_name" property="userName" />
+		<result column="nickname" property="nickName" />
+		<result column="email" property="email" />
+		<result column="gender" property="gender" />
+		<result column="phone" property="phone" />
+		<result column="description" property="description" />
+		<result column="profile_img" property="profileImg" />
+		<result column="status" property="status" />
+		<result column="social" property="social" />
+	</resultMap>
+	
+	<resultMap type="Attachment" id="AttachmentResult">
+		<result column="file_no" property="fileNo"/>
+		<result column="file_level" property="fileLevel"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+		<result column="file_path" property="filePath"/>
+		<result column="upload_date" property="uploadDate"/>
+		<result column="status" property="status"/>
+		<result column="ref_bno" property="refBno"/>
+	</resultMap>
+	
+	<resultMap type="Report" id="ReportResult">
+		<result column="rp_no" property="rpNo"></result>
+		<result column="guilty" property="guilty"></result>
+		<result column="rp_content" property="rpContent"></result>
+		<result column="process" property="process"></result>
+		<result column="BOARD_NO" property="refBno"></result>
+		<result column="REPORTUSER" property="reportUno"></result>
+		<result column="REPORTEDUSER" property="reportedUno"></result>
+		<result column="BOARD_TYPE_DESCRIPTION" property="boardType"></result>
+		<result column="count" property="count"></result>
+	</resultMap>
+	
+	<resultMap type="Sgroup" id="SgroupResult">
+		<result column="group_no" property="groupNo"></result>
+		<result column="img" property="img"></result>
+		<result column="nickname" property="userNo"></result>
+		<result column="title" property="title"></result>
+		<result column="conent" property="conent"></result>
+		<result column="p_total" property="pTotal"></result>
+		<result column="location" property="location"></result>
+		<result column="g_date" property="gDate"></result>
+		<result column="create_date" property="createDate"></result>
+		<result column="status" property="status"></result>
+		<result column="board_type" property="boardType"></result>
+	</resultMap>
+	
 	<resultMap type="Product" id="shopResult">
 		<result column="p_no" property="pNo"/>
 		<result column="p_name" property="pName"/>
@@ -12,22 +63,9 @@
 		<result column="thumbnail" property="thumbnail"/>
 		<result column="p_dimg" property="pDimg"/>
 		<result column="p_simg" property="pSimg"/>
+		<result column="p_type" property="pType"/>
+		<result column="status" property="status"/>
 	</resultMap>
-	
-	<resultMap type="Member" id="resultMember">
-      <result column="user_no" property="userNo" />
-      <result column="user_id" property="userId" />
-      <result column="user_pwd" property="userPwd" />
-      <result column="user_name" property="userName" />
-      <result column="nickname" property="nickName" />
-      <result column="email" property="email" />
-      <result column="gender" property="gender" />
-      <result column="phone" property="phone" />
-      <result column="description" property="description" />
-      <result column="profile_img" property="profileImg" />
-      <result column="status" property="status" />
-      <result column="social" property="social" />
-   </resultMap>
 	
 	<resultMap type="Board" id="boardResult">
       <result column="board_no" property="boardNo"/>
@@ -44,44 +82,8 @@
       <result column="board_writer" property="boardWriter"/>
       <result column="file_path" property="filePath"/>
    </resultMap>
-   
-   <resultMap type="Attachment" id="AttachmentResult">
-      <result column="file_no" property="fileNo"/>
-      <result column="file_level" property="fileLevel"/>
-      <result column="origin_name" property="originName"/>
-      <result column="change_name" property="changeName"/>
-      <result column="file_path" property="filePath"/>
-      <result column="upload_date" property="uploadDate"/>
-      <result column="status" property="status"/>
-      <result column="ref_bno" property="refBno"/>
-   </resultMap>
-   
-	<resultMap type="Report" id="ReportResult">
-      <result column="rp_no" property="rpNo"></result>
-      <result column="guilty" property="guilty"></result>
-      <result column="rp_content" property="rpContent"></result>
-      <result column="process" property="process"></result>
-      <result column="ref_bno" property="refBno"></result>
-      <result column="report_uno" property="reportUno"></result>
-      <result column="reported_uno" property="reportedUno"></result>
-      <result column="board_type" property="boardType"></result>
-   </resultMap>
-   
-   <resultMap type="Sgroup" id="SgroupResult">
-      <result column="group_no" property="groupNo"></result>
-      <result column="img" property="img"></result>
-      <result column="nickname" property="userNo"></result>
-      <result column="title" property="title"></result>
-      <result column="conent" property="conent"></result>
-      <result column="p_total" property="pTotal"></result>
-      <result column="location" property="location"></result>
-      <result column="g_date" property="gDate"></result>
-      <result column="create_date" property="createDate"></result>
-      <result column="status" property="status"></result>
-      <result column="board_type" property="boardType"></result>
-   </resultMap>
-   
-      <resultMap type="BackGround" id="BackResult">
+
+   <resultMap type="BackGround" id="BackResult">
       <result column="back_no" property="backNo"></result>
       <result column="nickname" property="userNo"></result>
       <result column="img" property="img"></result>
@@ -103,101 +105,161 @@
       , PHONE
       , STATUS
       , SOCIAL
-   from member
+   	from member
    where status = 'Y'
-   order 
-      by user_no
-   </select>
-   
-   <!-- 관리자페이지 회원 삭제 --> 
-     <update id="deleMember">
-        update 
-              member
-          set status = 'N'
-        where user_id = #{userId}
-     </update>
-     
-    <!-- 사진 게시물 리스트 조회 --> 
-    <select id="selectBoard" resultMap="boardResult">
-     select
-           b.board_no
-         , b.board_title
-         , m.nickname
-         , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
-      from board b
+	order 
+	   by user_no
+	</select>
+	
+	<!-- 관리자페이지 회원 삭제 --> 
+	  <update id="deleMember">
+	  	update 
+	  		   member
+	       set status = 'N'
+	     where user_id = #{userId}
+	  </update>
+	  
+	 <!-- 사진 게시물 리스트 조회 --> 
+	 <select id="selectBoard" resultMap="boardResult">
+	  select
+	        b.board_no
+	      , b.board_title
+	      , m.nickname
+	      , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
+	   from board b
        join member m on b.board_writer = m.user_no
-     where b.status = 'Y'
-       and b.board_type = 1
-     order 
-        by b.board_no desc
-   </select>
-   
-   <!-- 사진 게시물 삭제 --> 
-     <update id="deleBoard">
-        update 
-              board
-          set status = 'N'
-        where board_title = #{boardTitle}
-     </update>
-   
-   <!-- 장비 게시판 리스트 조회 --> 
-    <select id="selectBoard2" resultMap="boardResult">
-     select
-           b.board_no
-         , b.board_title
-         , m.nickname
-         , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
-      from board b
+	  where b.status = 'Y'
+	    and b.board_type = 1
+	  order 
+	     by b.board_no desc
+	</select>
+	
+  <select id="selectBoardCount" resultType="_int">
+  select
+  		 count(*)
+  	from board
+   where status = 'Y'
+  </select>
+	
+	<!-- 사진 게시물 삭제 --> 
+	  <update id="deleBoard">
+	  	update 
+	  		   board
+	       set status = 'N'
+	     where board_type = 1
+	       and board_title = #{boardTitle}
+	  </update>
+	
+	<!-- 장비 게시판 리스트 조회 --> 
+	 <select id="selectBoard2" resultMap="boardResult">
+	  select
+	        b.board_no
+	      , b.board_title
+	      , m.nickname
+	      , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
+	   from board b
        join member m on b.board_writer = m.user_no
-     where b.status = 'Y'
-       and b.board_type = 2
-     order 
-        by b.board_no desc
-   </select>
-   
-   <!-- 모임 게시판 리스트 조회 --> 
-    <select id="selectBoard3" resultMap="SgroupResult">
-     select
-           g.group_no
-         , g.title
-         , m.nickname
-         , to_char(g.create_date, 'YYYY-MM-DD') as "create_date"
-      from s_group g
+	  where b.status = 'Y'
+	    and b.board_type = 2
+	  order 
+	     by b.board_no desc
+	</select>
+	
+	  <!-- 장비 게시물 삭제 --> 
+	  <update id="edeleBoard">
+	  	update 
+	  		   board
+	       set status = 'N'
+	     where board_type = 2 
+	       and board_title = #{boardTitle}
+	  </update>
+	
+	<!-- 모임 게시판 리스트 조회 --> 
+	 <select id="selectBoard3" resultMap="SgroupResult">
+	  select
+	        g.group_no
+	      , g.title
+	      , m.nickname
+	      , to_char(g.create_date, 'YYYY-MM-DD') as "create_date"
+	   from s_group g
        join member m on g.user_no = m.user_no
-     where g.status = 'Y'
-       and g.board_type = 3
-     order 
-        by g.group_no desc
-   </select>
-   
-   <!-- 배경화면 게시판 조회 -->
-   <select id="selectBoard4" resultMap="BackResult">
-     select
-           k.back_no
-         , m.nickname
-         , to_char(k.create_date, 'YYYY-MM-DD') as "create_date"
-      from BackGround k
+	  where g.status = 'Y'
+	    and g.board_type = 3
+	  order 
+	     by g.group_no desc
+	</select>
+	
+	<!-- 모임 게시물 삭제 --> 
+	  <update id="gdeleBoard">
+	  	update 
+	  		   s_group
+	       set status = 'N'
+	     where board_type = 3
+	       and title = #{title}
+	  </update>
+	
+	<!-- 배경화면 게시판 조회 -->
+	<select id="selectBoard4" resultMap="BackResult">
+	  select
+	        k.back_no
+	      , m.nickname
+	      , to_char(k.create_date, 'YYYY-MM-DD') as "create_date"
+	   from BackGround k
        join member m on k.user_no = m.user_no
-     order 
-        by k.back_no desc
-   </select>
+	  order 
+	     by k.back_no desc
+	</select>
+	
+	<!-- 배경화면 게시물 삭제 --> 
+	  <update id="bkdeleBoard">
+	  	update 
+	  		   background
+	       set status = 'N'
+	     where board_type = 4
+	       and bankNo = #{backNo}
+	  </update>
 
-   <!-- 신고 게시물 조회 -->
-   <select id="selectReport" resultMap="ReportResult">
-   SELECT
-            R.RP_NO
-       , B.BOARD_NO
-       , R.RP_CONTENT
-       , B.BOARD_TYPE
-       , M.USER_ID
-     FROM BOARD B
-     JOIN REPORT R ON(BOARD_NO = REF_BNO)
-     JOIN MEMBER M ON(USER_NO = BOARD_WRITER)
-    WHERE B.BOARD_TYPE = #{boardtype}
-   </select>
+	<!-- 신고 게시물 조회 -->
+	<select id="selectReport" resultMap="ReportResult">
+	SELECT
+   		   R.RP_NO
+		 , R.GUILTY
+		 , R.RP_CONTENT
+         ,
+		CASE
+        WHEN R.BOARD_TYPE = '1' THEN '사진 게시판'
+        WHEN R.BOARD_TYPE = '2' THEN '장비 게시판'
+        WHEN R.BOARD_TYPE = '3' THEN '모임 게시판'
+        WHEN R.BOARD_TYPE = '4' THEN '배경화면 게시판'
+        ELSE '기타'
+    END AS BOARD_TYPE_DESCRIPTION
+      	 , M1.USER_ID AS REPORTUSER
+	     , M2.USER_ID AS REPORTEDUSER
+	     , R.PROCESS
+         ,
+       (CASE
+        WHEN R.BOARD_TYPE = 1 THEN (SELECT BOARD_NO FROM BOARD B WHERE B.BOARD_NO = R.REF_BNO)
+        WHEN R.BOARD_TYPE = 2 THEN (SELECT BOARD_NO FROM BOARD B WHERE B.BOARD_NO = R.REF_BNO)
+        WHEN R.BOARD_TYPE = 3 THEN (SELECT GROUP_NO FROM S_GROUP G WHERE G.GROUP_NO = R.REF_BNO)
+        WHEN R.BOARD_TYPE = 4 THEN (SELECT BACK_NO FROM BACKGROUND D WHERE D.BACK_NO = R.REF_BNO)
+        ELSE NULL
+        END) AS BOARD_NO
+	  FROM BOARD B
+	  JOIN REPORT R ON(BOARD_NO = REF_BNO)
+	  JOIN MEMBER M1 ON R.REPORT_UNO = M1.USER_NO
+	  JOIN MEMBER M2 ON R.REPORTED_UNO = M2.USER_NO
+	 ORDER 
+	    BY R.RP_NO DESC
+	</select>
 	
-	
-	
+	<!-- 신고 게시물 처리완료 누르면 삭제 처리 --> 
+	  <update id="processed">
+	  	update 
+	  		   report
+	       set process = 'Y'
+	     where rp_no = #{rpNo}
+	  </update>
+
   <insert id="insertProduct">
   	insert
   		into Product
@@ -211,6 +273,7 @@
   		,	thumbnail
   		,	p_dimg
   		,	p_simg
+  		,	p_type
   		)
   		values
   		(
@@ -223,6 +286,7 @@
   		,	#{thumbnail}
   		,	#{pDimg}
   		,	#{pSimg}
+  		,	1
   		)
   </insert>
   
@@ -240,10 +304,98 @@
   			,	price
   			,	amount
   			,	thumbnail
+  			,	p_dimg
+  			,	p_simg
   		from product
   	   where status='Y'
   	   order
   	   		by p_no desc
   </select>
+  <!-- 관리자페이지 메인에 신고 회원리스트 -->
+  <select id="selectReportMList" resultMap="ReportResult">
+	SELECT
+	       M2.USER_ID AS REPORTEDUSER
+	     , R.GUILTY
+	     , M1.USER_ID AS REPORTUSER
+	     ,
+	     (
+	     SELECT 
+	             COUNT(*) 
+	        FROM REPORT R2 
+	       WHERE R2.REPORTED_UNO = R.REPORTED_UNO
+	      ) AS count
+	     ,
+	     (
+	     CASE
+	        WHEN R.BOARD_TYPE = '1' THEN 
+	        (SELECT BOARD_NO FROM BOARD B WHERE B.BOARD_NO = R.REF_BNO)
+	        WHEN R.BOARD_TYPE = '2' THEN (SELECT BOARD_NO FROM BOARD B WHERE B.BOARD_NO = R.REF_BNO)
+	        WHEN R.BOARD_TYPE = '3' THEN (SELECT GROUP_NO FROM S_GROUP G WHERE G.GROUP_NO = R.REF_BNO)
+	        WHEN R.BOARD_TYPE = '4' THEN (SELECT BACK_NO FROM BACKGROUND D WHERE D.BACK_NO = R.REF_BNO)
+	        ELSE NULL
+	    END) AS BOARD_NO
+	 FROM REPORT R
+	 JOIN MEMBER M1 ON R.REPORT_UNO = M1.USER_NO
+	 JOIN MEMBER M2 ON R.REPORTED_UNO = M2.USER_NO
+	WHERE PROCESS = 'N'
+	ORDER BY R.RP_NO DESC
+  </select>
   
+  <update id="adminProdelete">
+  	update
+  			product
+  		set status = 'N'
+  		where p_no = #{pNo}
+  </update>
+  
+  <select id="selectProductdetail" resultMap="shopResult">
+  		select
+  				p_no
+  			,	p_name
+  			,	category_no
+  			,	brand_no
+  			,	price
+  			,	amount
+  			,	status
+  			,	thumbnail
+  			,	p_dimg
+  			,	p_simg
+  			,	p_type
+  		from product
+  	   where status='Y'
+  	     and p_no = #{pNo}	
+  </select>
+  
+  <select id="adminProductupdateForm" resultMap="shopResult">
+  		select
+  				p_no
+  			,	p_name
+  			,	category_no
+  			,	brand_no
+  			,	price
+  			,	amount
+  			,	status
+  			,	thumbnail
+  			,	p_dimg
+  			,	p_simg
+  			,	p_type
+  		from product
+  	   where p_no = #{pNo}	
+  </select>
+  
+  <update id="adminProductupdate">
+  	update
+  			product
+  	   set p_name = #{pName},
+  	  category_no = #{categoryNo},
+  	     brand_no = #{brandNo},
+  	        price = #{price},
+  	       amount = #{amount},
+  	    thumbnail = #{thumbnail},
+  	       p_dimg = #{pDimg},
+  	       p_simg = #{pSimg}
+  	   where 
+  	   		p_no = #{pNo}
+  </update>
+
 </mapper>

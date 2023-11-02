@@ -6,7 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 	<!-- JavaScript -->
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 	    <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -97,8 +106,9 @@
         <a href="proenro.from">등록</a>  /
 
         <a href="alist.da">관리자 페이지</a>
-
-        <table>
+        
+		
+        <table id="protable">
             <thead>
                 <tr>
                     <th><input type="checkbox" name="" id=""></th>
@@ -112,21 +122,23 @@
             	<c:forEach var="p" items="${ plist }">
             	
 	                <tr>
+	                	<input type="hidden" name="thumbnail" value="${ p.thumbnail}">
 	                    <td><input type="checkbox" name="" id=""></td>
 	                    <td>${ p.PNo }</td>
 	                    <td>${ p.PName }</td>
 	                    <td>${ p.amount }</td>
 	                    <td class="button-container">
-	                        <button>상세</button>
-	                        <button>수정</button>
-	                        <button>삭제</button>
+	                        <button onclick="selectProductdetail(${p.PNo})">상세</button>
+	                        <button onclick="updateProduct(${p.PNo})">수정</button>
+	                        <button onclick="admindedelete(${p.PNo} ,'${ p.thumbnail }')">삭제</button>
 	                    </td>
 	                </tr>
                 </c:forEach>
                 
             </tbody>
         </table>
-
+		
+		
         <div align="center" class="btn-area">
         
         	<c:choose>
@@ -155,6 +167,20 @@
         </div>
 
     </div>
+    <script>
+    
+    function selectProductdetail(pNo){
+    	location.href="adminPro.de?pNo="+pNo;
+    }
+    function admindedelete(pNo, thumbnail){
+        location.href="adminPro.delete?pNo="+pNo+"&thumbnail="+thumbnail;
+    }
+    function updateProduct(pNo){
+    	location.href="adminPro.updateForm?pNo="+pNo;
+    }
+ 
+    </script>
+    
 
 </body>
 </html>

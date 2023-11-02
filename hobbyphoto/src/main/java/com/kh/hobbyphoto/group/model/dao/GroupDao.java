@@ -6,7 +6,6 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 
@@ -30,7 +29,15 @@ public class GroupDao {
 	}
 
 	public Sgroup selectTgBoard(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.selectOne("sgroup.selectTgBoard", boardNo);
+		return (Sgroup) sqlSession.selectOne("sgroupMapper.selectTgBoard", boardNo);
+	}
+
+	public int insertSgBoard(SqlSessionTemplate sqlSession, Sgroup g) {
+		return sqlSession.insert("sgroupMapper.insertSgBoard", g);
+	}
+
+	public int deleteTogether(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.delete("sgroupMapper.deleteTogether", boardNo);
 	}
 
 

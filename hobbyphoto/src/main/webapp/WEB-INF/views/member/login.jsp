@@ -151,7 +151,7 @@
 
                     <div class="login_pw">
                         <h4>비밀번호</h4>
-                        <input class="login-input" type="password" name="userPwd" required" placeholder="비밀번호를 입력해주세요.">
+                        <input class="login-input" type="password" name="userPwd" required placeholder="비밀번호를 입력해주세요.">
                     </div>
 
                     <div class="login_etc">

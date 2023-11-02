@@ -141,68 +141,74 @@
 	<jsp:include page="../common/shopHeader.jsp"/>
             <div class="all">
                 <div id="banner" align="center">
-                        여기는 배너입니다.
+                       <img src="resources/images/니콘배너.png" style="width:100%; height:100%;">
                 </div>
 
                 <div id="category" align="center">
+                
+                <!-- <form id="searchul" action="shopli.search" method="post">-->
+                <input type="hidden" name="brand" id="selectedbrand" value="">
+                <input type="hidden" id="selectedcategory" name="category" value=""> 
 
                     <div class="inner-category">
                         <ul class="category-ul" align="left">
                             <li class="home-btn" align="center">
-                                <a href="">
+                                <a href="pro.list">
                                    <i class="ri-home-line"></i>
                                 </a>
                             </li>
-                            <li class="select-li">
-                                <div class="select-wrap">
-                                    <span class="label">브랜드</span>
-                                    <b class="select-btn" onclick="brandBtn()"><i class="ri-arrow-down-s-fill"></i></b>
-                                </div>
-                                <div class="select-item brand">
-                                    <ul class="select-ul">
-                                        <li>CANON</li>
-                                        <li>NIKON</li>
-                                        <li>OLYMPUS</li>
-                                        <li>SONY</li>
-                                        <li>FUJIFILM</li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="select-li">
-                                <div class="select-wrap">
-                                    <span class="label">DSLR</span>
-                                    <b class="select-btn" onclick="categoryBtn()"><i class="ri-arrow-down-s-fill"></i></b>
-                                </div>
-                                <div class="select-item category">
-                                    <ul class="select-ul">
-                                        <li>CANON</li>
-                                        <li>NIKON</li>
-                                        <li>OLYMPUS</li>
-                                        <li>SONY</li>
-                                        <li>FUJIFILM</li>
-                                    </ul>
-                                </div>
-                            </li>
+                            
+                            
+	                            <li class="select-li">
+	                                <div class="select-wrap">
+	                                    <span class="label" id="brandLabel">브랜드</span>
+	                                    <b class="select-btn" onclick="brandBtn()"><i class="ri-arrow-down-s-fill"></i></b>
+	                                </div>
+	                                <div class="select-item brand">
+	                                    <ul class="select-ul">
+	                                        <li name="brand" value="1">CANON</li>
+	                                        <li name="brand" value="2">NIKON</li>
+	                                        <li name="brand" value="3">OLYMPUS</li>
+	                                        <li name="brand" value="4">SONY</li>
+	                                        <li name="brand" value="5">FUJIFILM</li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                            
+	                            <li class="select-li">
+	                                <div class="select-wrap">
+	                                    <span class="label" id="categoryLabel">DSLR</span>
+	                                    <b class="select-btn" onclick="categoryBtn()"><i class="ri-arrow-down-s-fill"></i></b>
+	                                </div>
+	                                <div class="select-item category">
+	                                    <ul class="select-ul">
+	                                        <li name="category" value="1">DSLR</li>
+	                                        <li name="category" value="2">SLR</li>
+	                                        <li name="category" value="3">미러리스트</li>
+	                                        <li name="category" value="4">임펙트</li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+                            
+                            
                         </ul>
                     </div>
+                            <!-- </form> -->
                 </div>
                 
-                
-                <div class="list clearfix" style="width: 90%;">
-                    <c:forEach var="p" items="${ list }">
-                        <div class="product" id="clickpro">
-                            <input type="hidden" name="pNo" class="pNo" value="${ p.PNo }">
-                            <div class="img">
-                                <img src="${ p.thumbnail }">
-                            </div>
-                            <div class="text">
-                                ${ p.PName }
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
-                
-		        
+	                <div class="list clearfix" style="width: 90%;">
+	                    <c:forEach var="c" items="${ list }">
+	                        <div class="product" id="clickpro">
+	                            <input type="hidden" name="pNo" class="pNo" value="${ c.PNo }">
+	                            <div class="img">
+	                                <img src="${ c.thumbnail }">
+	                            </div>
+	                            <div class="text">
+	                                ${ c.PName }
+	                            </div>
+	                        </div>
+	                    </c:forEach>
+	                </div>
             </div>
 
             <br>
@@ -239,6 +245,81 @@
 		                $(".category").css("display", "none")
 		            }   
 		        }
+		        
+		        $(document).ready(function(){
+
+		            // 브랜드 선택
+		            $(".select-item.brand ul").on("click", "li", function(){
+		                var selectedBrand = $(this).attr('value');
+		                $("#selectedbrand").val(selectedBrand); // 값을 숨겨진 input 필드에 저장
+		                console.log(selectedBrand)
+		                
+		                // 브랜드 이름으로 span 변경
+    					$("#brandLabel").text($(this).text());
+		                $(".brand").css("display", "none");
+		                
+		             	// 카테고리 초기화
+		                $("#categoryLabel").text("DSLR"); // 초기 상태로 span 변경
+		                $("#selectedcategory").val(""); // 숨겨진 input 필드 값 초기화
+		                
+		                var selectedCategory = $("#selectedcategory").val(); // 현재 선택된 카테고리 값
+		                ulselect(selectedBrand,selectedCategory); //함수 실행
+		                //$("#selectedbrand").val(selectedBrand); // 값을 숨겨진 input 필드에 저장
+		                //$("#searchul").submit(); // form 제출
+		            });
+
+		            // 카테고리 선택
+		            $(".select-item.category ul").on("click", "li", function(){
+		                var selectedCategory = $(this).attr('value');
+		                $("#selectedcategory").val(selectedCategory); // 값을 숨겨진 input 필드에 저장
+		                
+		             	// 카테고리 이름으로 span 변경
+		                $("#categoryLabel").text($(this).text());
+		                $(".category").css("display", "none")
+		                
+		                var selectedBrand = $("#selectedbrand").val(); // 현재 선택된 브랜드 값
+		                ulselect(selectedBrand,selectedCategory);
+		                
+		                console.log(selectedBrand)
+		                console.log(selectedCategory)
+		                //$("#selectedcategory").val(selectedCategory); // 값을 숨겨진 input 필드에 저장
+		                //$("#searchul").submit(); // form 제출
+		            });
+		            
+		            function ulselect(selectedBrand,selectedCategory){
+		            	$.ajax({
+		            		url:"shopli.search",
+		            		data:{
+		            			brand:selectedBrand,
+		            			category:selectedCategory
+		            		},
+		            		success:function(data){
+		            			console.log(data);
+		            			
+		            			let value ="";
+		            			$.each(data.list, function(index, product) {
+		            		        value += '<div class="product" id="clickpro">'
+		            		               + '<input type="hidden" name="pNo" class="pNo" value="' + product.PNo + '">'
+		            		               + '<div class="img">'
+		            		               + '<img src="' + product.thumbnail + '">'
+		            		               + '</div>'
+		            		               + '<div class="text">'
+		            		               + product.pName
+		            		               + '</div>'
+		            		               + '</div>';
+		            		    });
+
+		            		    $(".list").html(value);
+		            			
+		            		},error:function(){
+		            			console.error("검색 ajax 요청 실패")
+		            		}
+		            	})
+		            }
+
+		        });
+		        
+		        
 		    </script>
 
 

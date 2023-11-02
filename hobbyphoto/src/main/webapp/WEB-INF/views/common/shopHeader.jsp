@@ -133,7 +133,7 @@
         }
         
         hr{
-          width: 1200px;
+          /*width: 1200px;*/
         }
 
 		.false{
@@ -157,7 +157,7 @@
     
         .member_inner{
         	width: 130px;
-        	height: 150px;
+        	height: 170px;
             background-color: white;
         	position: absolute;
         	top: 100px;
@@ -214,22 +214,22 @@
 	<div class="mb_outer">
         <div class="mb_menu-area">
             <div id="mb_logo">
-                <img src="resources/images/logo.png" alt="로고">
+                <img src="resources/images/logo.png" alt="로고" onclick="shopHome()">
             </div> 
             <div id="mb_nav">
                 <ul id="mb_navi">
-                    <li><a href="pro.list">홈</a></li>
+                    <!--<li><a href="pro.list">홈</a></li> -->
                     <li><a href="#">카메라</a></li>
                     <li><a href="#">포토북</a></li>
                     <li><a href="#">핸드폰 케이스</a></li>
-                    <li><a href="#">공지사항</a></li>
+                    <li><a href="shNotice.no">공지사항</a></li>
                     
                 </ul>
             </div>
         </div>
         <div class="mb_search-area">
             <div id="mb_search">
-                <form action="#" id="search_form">
+                <form action="shop.search" id="search_form">
                     <div id="search_text">
                         <input type="text" name="keyword" id="sh_text" placeholder="검색어를 입력해주세요">
                         <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
@@ -242,7 +242,7 @@
                 <div id="mb_user_1">
                     <table class="login-area" align="center">
                         <tr height="75">
-                            <td width="70"><a href=""><img width="60" src="resources/images/clipboard.png" alt=""></a></td>
+                            <td width="70"><a href="/hobbyphoto"><img width="60" src="resources/images/clipboard.png" alt=""></a></td>
                             <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png" alt=""></td>
                         </tr>
                     </table>
@@ -271,12 +271,13 @@
 		              
 		                				<ul style="padding: 0px;">
 		                					<li class="member_menu_mypage first_menu" align="center">
-		                						<a href="">마이페이지</a>
+		                						<a href="shop.gomy?userNo=${loginMember.userNo }">마이페이지</a>
 		                					</li>
 		                					<li class="member_menu_mypage" align="center">
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
 					                					<a href="admin.pg">관리자페이지</a>
+					                					<div><p></p></div>
 					                					<a href="shop.mp?userNo=${ loginMember.userNo }" id="cartbtn">장바구니</a>
 				                					</c:when>
 				                					<c:otherwise>
@@ -317,6 +318,19 @@
 	        function logout() {
 				location.href="logout.me"
 			}
+	        
+	        function shopHome(){
+	        	location.href="pro.list"
+	        }
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
 	        
 	        
 	        //$("#cartbtn").click(function(event) {

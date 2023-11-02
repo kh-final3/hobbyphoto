@@ -29,4 +29,5 @@ public class Photo {
 	private String img0;
 	private Date createDate;
 	private String status;
+	private int pType;
 }

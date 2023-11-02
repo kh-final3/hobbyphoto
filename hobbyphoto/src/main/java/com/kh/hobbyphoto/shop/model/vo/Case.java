@@ -21,4 +21,5 @@ public class Case {
 	private String kind;
 	private Date createDate;
 	private String status;
+	private int pType;
 }

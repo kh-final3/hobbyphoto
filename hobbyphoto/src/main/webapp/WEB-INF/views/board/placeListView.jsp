@@ -5,24 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title><style>
-         div * {box-sizing: border-box;}
+<title>Insert title here</title>
+    <style>
+        div * {box-sizing: border-box;}
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
             width: 1200px;
             height: 1400px;
-            margin: auto;
-            background-color: rgba(0, 0,0,0.1);
+            /* margin: auto; */
+            margin-top: 50px;
+            margin-left: 160px;
+            /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
         }
 
         .list-area{
-            border: 1px solid white;
+            /* border: 1px solid white; */
             width: 85%;
             height: 90%;
             margin: auto;
             margin-top: 5%;
-            background-color: white;
+            /* background-color: white; */
             border-radius: 15px;
         }
 
@@ -43,9 +46,8 @@
         }
 
         .photo{
-            border: 1px solid black;
-            width: 250px;
-            height: 150px;
+            /* border: 1px solid black; */
+            height: 152px;
             float: left;
             border-radius: 5%;
         }
@@ -56,7 +58,6 @@
 
         .text{
             border: 1px solid blue;
-            width: 650px;
             height: 150px;
             float: left;
             margin-left: 14px;
@@ -75,7 +76,7 @@
         }
 
         .btn-area{
-            border: 1px solid black;
+            /* border: 1px solid black; */
             height: 3%;
             width: 10%;
             float: right;
@@ -85,7 +86,6 @@
         .btn-area button{
             float: right;
             width: 85px;
-            height: 30px;
         }
 
         .page-btn button{
@@ -94,15 +94,13 @@
         }
 
         .ect{
-            border: 1px solid black;
-            height: 3%;
+            /* border: 1px solid black; */
             width: 20%;
-            float: left;
             border: none;
-            margin-left: 15px;
+            margin-left: 15px
         }
         
-        a{
+        .etca{
             text-decoration-line: none;
             color: black;
             font-size: medium;
@@ -121,25 +119,39 @@
         .pno{
         	display: none;
         }
+
+        /* 페이징바 */
+       .paging-area>button{
+            border: none;
+            width: 35px;
+            height: 35px;
+            margin-top: 20px;
+            background-color: white;
+        }
     </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
-    <div class="warp">
 
+    <div class="warp">
+        <br>
+        <h2 align="center">출사명소</h2>
+        <br>
         <div class="list-area">
 
             <div class="list">
 
                 <!--관리자일때만 보이게 하기  -->
-                <div class="btn-area">
-                    <button>글쓰기</button>
-                </div>
-              
-                <div class="ect">
-                    <a href="sortPlace.pl?keyword=date">최신순</a> | <a href="sortPlace.pl?keyword=best">인기순</a>
-                </div>
+                <c:if test="${ loginMember.userNo eq 1}">
 
+                    <div class="btn-area">
+                        <button class="btn btn-secondary">글쓰기</button>
+                    </div>
+                </c:if>
+                <div class="ect">
+                    <a class="etca" href="sortPlace.pl?keyword=date">최신순</a> | <a class="etca" href="sortPlace.pl?keyword=best">인기순</a>
+                </div>
+                
                 <ul class="ul-area">
 					<c:if test="${ not empty list }">
 						<c:forEach var="p" items="${ list }">
@@ -168,24 +180,32 @@
             </div>
         </div>
 
-        <div id="pagingArea">
-            <div class="page-btn" align="center">   
-                <c:choose>
-                    <c:when test="${ pi.currentPage ne 1 }">
-                        <button onclick="location.href='list.pl?cpage=${ pi.currentPage - 1 }';"> &lt; </button>
-                    </c:when>
-                </c:choose>
-                
-                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <button onclick="location.href='list.pl?cpage=${p}';">${p}</button>
-                </c:forEach>
-                
-                <c:choose>
-                    <c:when test="${ pi.currentPage ne pi.maxPage }">
-                        <button onclick="location.href='list.pl?cpage=${ pi.currentPage + 1 }';"> &gt; </button>
-                    </c:when>
-                </c:choose>
-            </div>
+        <div class="paging-area" align="center">
+            <c:choose>
+                <c:when test="${ pi.currentPage eq 1 }">
+                    <button disabled> &lt; </button>
+                </c:when>
+                <c:otherwise>
+                    <button style="width:70px" onclick="location.href='list.pl?cpage=${ pi.currentPage - 1 }'">Previous</button>
+                </c:otherwise>
+            </c:choose>
+            
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                <button onclick="location.href='list.pl?cpage=${ p }'">${ p }</button>
+            </c:forEach>
+            
+            <button onclick="location.href='list.pl?cpage=${ p }'">${ p }</button>
+            
+               <c:choose>
+                   <c:when test="${ pi.currentPage eq pi.maxPage }">
+                        <button onclick="location.href=''" disabled>Next</button>
+                   </c:when>
+                 <c:otherwise>
+                     <button style="width:40px;" onclick="location.href='list.pl?cpage=${ pi.currentPage + 1 }'">Next</button>
+                   </c:otherwise>
+            </c:choose>
+            
+            <button> &gt; </button>
         </div>
     </div>
      <script>

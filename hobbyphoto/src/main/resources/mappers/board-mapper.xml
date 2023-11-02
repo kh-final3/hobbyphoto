@@ -51,7 +51,7 @@
 	<resultMap type="Reply" id="replyResult">
 		<result column="reply_no" property="replyNo"/>
 		<result column="reply_content" property="replyContent"/>
-		<result column="reply_writer" property="replyWriter"/>
+		<result column="user_id" property="replyWriter"/>
 		<result column="nickname" property="replyWriter"/>
 		<result column="create_date" property="createDate"/>
 		<result column="status" property="status"/>
@@ -84,6 +84,20 @@
 		<result column="block_date" property="blockDate"/>
 	</resultMap>
 
+	<resultMap type="WallPaper" id="wallResult">
+		<result column="BACK_NO" property="backNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="IMG" property="IMG"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="COUNT" property="COUNT"/>
+		<result column="DOWNLOAD" property="download"/>
+		<result column="BOARD_TYPE" property="boardType"/>
+		<result column="BACK_TITLE" property="bgTitle"/>
+		<result column="STATUS" property="STATUS"/>
+	</resultMap>
+	
+	
+	
 	<select id="selectPhListCount" resultType="_int">
 		select
 			count(*)
@@ -127,7 +141,7 @@
 				(
 				   seq_board_no.nextval
 				 , #{boardTitle}
-				 , 1
+				 , #{boardWriter}
 				 , #{boardContent}
 				 , 1
 				 , sysdate
@@ -207,18 +221,70 @@
 	 where board_no = #{boardNo}
 	</update>
 	
-	<update id="updatePhAtBoard">
+	<update id="updatePhAtBoard" parameterType="Attachment">
 	 update
 		attachment
 	 set origin_name = #{originName}
 	   , change_name = #{changeName}
-	 where ref_bno = #{refBno}
+	   , file_path = #{filePath}
+	 where file_no = #{fileNo}
 	</update>
+	
+	<insert id="insertNewAttachment">
+		insert
+			into attachment
+			(
+				file_no
+              , file_level
+              , origin_name
+              , change_name
+              , file_path
+			)
+            values
+            (
+              seq_file_no.nextval
+             , #{fileLevel}
+             , #{originName}
+             , #{changeName}
+             , #{filePath}
+            )
+	</insert>
 	
 	<delete id="deletePhBoard">
 	    DELETE FROM board
 	    WHERE board_no = #{boardNo}
 	</delete>
+	
+	<select id="selectPhReplyList" resultMap="replyResult">
+		select
+		    r.reply_no,
+		    m.user_id,
+		    r.reply_content,
+		    to_char(create_date, 'YYYY-MM-DD') as create_date
+		from Reply r
+		join member m on m.user_no = reply_writer
+		where r.status = 'Y'
+		    and ref_bno = #{boardNo}
+		order by reply_no asc
+	</select>
+	
+	<insert id="insertPhReply">
+		insert
+			into reply
+			(
+			   reply_no
+			 , reply_content
+			 , ref_bno
+			 , reply_writer
+			)	
+			values 
+			(
+			   seq_rep_no.nextval
+			 , #{replyContent}
+			 , #{refBno}
+			 , #{replyWriter}
+			)
+	</insert>
 	
 	<select id="selectRcListCount" resultType="_int">
 		select
@@ -335,6 +401,55 @@
 		DELETE FROM board
 	    WHERE board_no = #{boardNo}
 	</delete>
+	
+	<update id="updateRcBoard">
+	 update
+		board
+	 set board_title = #{boardTitle}
+	   , board_content = #{boardContent}
+	 where board_no = #{boardNo}
+	</update>
+	
+	<update id="updateRcAtBoard">
+	 update
+		attachment
+	 set origin_name = #{originName}
+	   , change_name = #{changeName}
+	   , file_path = #{filePath}
+	 where ref_bno = #{refBno}
+	</update>
+	
+	<select id="selectRcReplyList" resultMap="replyResult">
+			select
+		    r.reply_no,
+		    m.user_id,
+		    r.reply_content,
+		    to_char(r.create_date, 'YYYY-MM-DD') as "create_date"
+		from Reply r
+		join member m on m.user_no = reply_writer
+		where r.status = 'Y'
+		    and ref_bno = #{boardNo}
+		order by reply_no desc
+	</select>
+	
+	<insert id="insertRcReply">
+		insert
+			into reply
+			(
+			   reply_no
+			 , reply_content
+			 , ref_bno
+			 , reply_writer
+			)	
+			values 
+			(
+			   seq_rep_no.nextval
+			 , #{replyContent}
+			 , #{refBno}
+			 , #{replyWriter}
+			)
+	</insert>
+
 	
 	<!-- myPage 관련  -->
 	<select id="myListCount" resultType="_int">
@@ -578,7 +693,6 @@
 	</delete>
 	
 	
-	
 	<select id="cultureListCount" resultType="_int">
 		SELECT COUNT(FE_NO) "COUNT"
 	      FROM festival
@@ -638,6 +752,7 @@
 			  ,	HOST
 			  ,	INQ
 			  ,	AGE
+			  , TYPE
 			  ) 
 			  values
 			  (
@@ -655,6 +770,7 @@
 			  , #{host}
 			  , #{inq}
 			  , #{age}
+			  , #{type}
 			  )
 	</insert>
 	
@@ -711,5 +827,110 @@
           )
        where rownum between 1 and 5
    </select> 
+	
+	
+	
+	
+	<select id="checkBook" resultType="_int">
+		SELECT count(BOARD_NO)
+		FROM BOOKMARK
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND TYPE = #{boardType}
+	</select>
+	
+	<insert id="insertBookmark">
+		INSERT INTO BOOKMARK
+		VALUES
+		(
+		  #{boardNo}
+		, #{boardWriter}
+		, SYSDATE
+		, #{boardType}
+		)
+	</insert>
+	
+	<delete id="deleteBookmark">
+		DELETE BOOKMARK
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND TYPE = #{boardType}
+	</delete>
+	
+	
+	<select id="checkLike" resultType="_int">
+		SELECT count(BOARD_NO)
+		FROM likes
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND board_type = #{boardType}
+	</select>
+	
+	<insert id="insertLike">
+		INSERT INTO likes
+		VALUES
+		(
+		  #{boardNo}
+		, #{boardWriter}
+		, #{boardType}
+		)
+	</insert>
+	
+	<delete id="deleteLike">
+		DELETE LIKEs
+		WHERE USER_NO = #{boardWriter}
+		AND BOARD_NO = #{boardNo}
+		AND board_type = #{boardType}
+	</delete>
+	
+	<insert id="insertWallPaper">
+		INSERT 
+		  INTO background
+		  (
+		  	back_no
+		  , back_title
+		  , user_no
+		  , img
+		  , board_type
+		  )
+		VALUES
+		(
+		  SEQ_BACK_NO.nextval
+		, #{bgTitle}
+		, #{userNo}
+		, #{img}
+		, #{boardType}
+		)
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	<insert id="reportBoard">
+		INSERT
+		  INTO REPORT
+		  (
+		    RP_NO
+		  , GUILTY
+		  , RP_CONTENT
+		  ,	REF_BNO
+		  ,	REPORT_UNO
+		  ,	REPORTED_UNO
+		  ,	BOARD_TYPE
+		  )
+		  VALUES
+		  (
+		    SEQ_REPNO.NEXTVAL
+		  , #{guilty}
+		  , #{rpContent}
+		  , #{refBno}
+		  , #{reportUno}
+		  , #{reportedUno}
+		  , #{boardType}
+		  )
+	</insert>
 	
 </mapper>

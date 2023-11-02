@@ -40,7 +40,7 @@
             position: absolute;
             top: 10; bottom: 0; left: 5; right: 0;
             margin: auto;
-            background-color: rgba(202, 240, 248, 0.404);
+            background-color: rgba(244, 244, 244, 0.368);
             border-radius: 10px;
             margin-right: 5px;
             margin-top: 20px
@@ -54,7 +54,7 @@
             border-collapse: inherit;
         }
         tbody>tr{
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bolder;
         }
         
@@ -68,8 +68,8 @@
             text-align: center;
             font-size: 18px;
             position: absolute;
-            top: 155px;
-            left: 200px;
+            top: 185px;
+            left: 210px;
         }
         #title {
             font-weight: bolder;
@@ -89,11 +89,11 @@
 	    <div class="outer">
 	        <div class="wrap">
 	            <h1 align="center" id="title">모임</h1>
-	            <div align="center"><button id="write-btn" class="btn btn-secondary">글 작성</button></div>
+	            <div align="center"><button type="submit" id="write-btn" class="btn btn-secondary">글 작성</button></div>
 					<div class="list">
 					    <c:forEach var="g" items="${ list }">
 					        <div class="together">
-					            <input type="hidden" class="gno" value="${ g.groupNo }">
+					           <input type="hidden" class="gno" value="${ g.groupNo }">
 					            <table>
 					                <tbody>
 					                    <tr height="30" style="font-size: 18px; font-weight: bolder;">
@@ -112,7 +112,7 @@
 					                        <td>🕒 시간</td>
 					                    </tr>
 					                    <tr>
-					                        <td>🙋 ?/${ g.meTotal }명</td>
+					                        <td>🙋 ? /${ g.meTotal }명</td>
 					                    </tr>
 					                </tbody>
 					            </table>
@@ -124,4 +124,22 @@
 	    	</div>
 		</body>
 	<jsp:include page="../common/footer.jsp"/>
+	
+	    <script>
+	    
+	    
+
+        // 게시글 상세보기
+	    $(".together").click(function(){
+		    let gno = $(this).find(".gno").val();
+		    location.href = "togetherDetail.tg?gno=" + gno;
+		
+	    })
+
+        // 게시글 작성
+        $("#write-btn").click(function(){
+            location.href="enrollFormView.tg";
+        })
+    </script>
+	
 </html>
