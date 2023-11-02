@@ -225,7 +225,7 @@
 							    <br>
 							    <div class="board_text">게시물 ${ listCount }</div>
 							    <div class="follower_text">팔로워 <span id="following">${ countFollower }</span></div>
-							    <div class="follow_text">팔로우 <span id="follow">${ countFollow }</span></div>
+							    <div class="follow_text">팔로우 <span id="follow">${ countFollowing }</span></div>
 							</div>
 							<div class="description_td">
 							       <div class="description_text" >

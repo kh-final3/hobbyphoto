@@ -17,6 +17,7 @@
 		select count(*)
 		  from notice
 		 where status='Y'
+		   and notice_type = 1
 	</select>
 	
 	<select id="selectList" resultMap="noticeResult">

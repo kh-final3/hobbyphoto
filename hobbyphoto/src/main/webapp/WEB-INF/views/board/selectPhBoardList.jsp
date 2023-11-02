@@ -120,14 +120,16 @@
 		                
 		               	<c:choose>
 		                   	<c:when test="${ pi.currentPage eq pi.maxPage }">
-		                    		<button onclick="location.href=''" disabled>Next</button>
+		                    	<button disabled>Next</button>
+		                    	<button disabled> &gt; </button>
 		                   	</c:when>
 		                     <c:otherwise>
 		                     	<button onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage + 1 }'">Next</button>
+		                     	<button> &gt; </button>
 		                   	</c:otherwise>
 		                </c:choose>
 		                
-		                <button> &gt; </button>
+		                
             		</div>
 
             		<div id="topbtn">
