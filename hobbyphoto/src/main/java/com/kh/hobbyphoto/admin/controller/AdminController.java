@@ -33,6 +33,7 @@ public class AdminController {
 	@Autowired
 	private AdminServiceImpl aService;
 	
+	
 	// 관리자페이지, 누적신고횟수 많은 회원
 	@RequestMapping(value = {"alist.da", "rmList.bo"}, method = RequestMethod.GET)
 	public ModelAndView selectReportMList(ModelAndView mv, Model model) {
@@ -48,6 +49,11 @@ public class AdminController {
 		return mv;
 	}
 
+	// 회원조회에서 회원가입
+	@RequestMapping("mEnrollForm.me")
+	public String menrollForm() {
+		return "admin/memberManage";
+	}
 
 	// 회원 목록 조회	
 	@RequestMapping("mlist.me")
