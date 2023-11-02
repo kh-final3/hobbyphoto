@@ -13,6 +13,25 @@
     <link href="https://www.mfac.or.kr/web/css/common.css?ver=20231011" rel="stylesheet" type="text/css">
     <link href="https://www.mfac.or.kr/web/css/sub.css?ver=20231011" rel="stylesheet" type="text/css">
     <link href="https://www.mfac.or.kr/web/css/responsive.css?ver=20231011" rel="stylesheet" type="text/css">
+    <style>
+        .bookmark{
+            text-align: right;
+        }
+
+        #bookmark1,
+        #bookmark2 {
+            width: 48px;
+            height: 48px;
+            text-align: center;
+        }
+
+        #bookmark1 img,
+        #bookmark2 img{
+            width: 100%;
+            margin: auto;
+            display: block;
+        }
+    </style>
 </head>
 
 <style>
@@ -55,7 +74,15 @@
                         </div><!-- //imgbox -->
                         <div class="txtbox">
 
-                            <h3>${ fe.feTitle }</h3>
+                            <h3>${ fe.feTitle } 
+                                <div class="bookmark">
+                                <button id="bookmark1" onclick="insertBook();">
+                                    <img src="resources/images/bookmark_blank.png">
+                                </button>
+                                <button id="bookmark2" onclick="deleteBook();" style="display: none;">
+                                    <img src="resources/images/bookmark.png">
+                                </button>
+                            </div></h3> 
                             <ul>
                                 <li>
                                     <p>장르</p><span>${ fe.feType }</span>
@@ -111,19 +138,90 @@
                             
 
                         </div><!-- //view_cont -->
-                        <a href="festivalList.fs" id="btnList" class="list_btn">
-                            <img src="https://www.mfac.or.kr/web/images/sub/list_ico.png" alt="목록 이미지">
-                            목록보기 
-                        </a>
-                        
-                        <a href="updateForm.fs?feNo=${fe.feNo}" id="btnList" class="list_btn">
-                            수정하기 
-                        </a>
+                  
+
+                        <div align="center" class="buttons">
+                            <a href="festivalList.fs" class="btn btn-sm btn-secondary"
+                                style="width: 90px; height: 35px; font-size: medium; margin-right: 10px; border-radius: 5px;">목록가기</a>
+                            <!-- 현재 로그인한 사용자가 해당 글을 쓴 본인일 경우 -->
+                            <c:if test="${ loginMember.userNo eq 1}">
+        
+                                <a href="updateForm.fs?feNo=${ fe.feNo }" class="btn btn-sm btn-warning"
+                                style="width: 90px; height: 35px; font-size: medium; margin-right: 10px; border-radius: 5px;">수정하기</a> 
+                                <a href="delete.fs?feNo=${ fe.feNo }" class="btn btn-sm btn-danger"
+                                style="width: 90px; height: 35px; font-size: medium; border-radius: 5px;">삭제하기</a>
+                            </c:if>
+        
+                        </div>
                     </div><!-- //view_contbox -->
                 </div><!-- //container -->
             </div>
         </div>
     </div>
+    <script>
+    if (${ loginMember.userNo } !== null) {
+        let userNo = ${ loginMember.userNo };
+
+        function insertBook() {
+            $.ajax({
+                url: "book.bo",
+                data: {
+                boardNo: ${ fe.feNo },
+                boardWriter: userNo,
+                boardType: 5
+            },
+                success: function (result) {
+                    if (result === 'Y') {
+                        $("#bookmark1").css("display", "none");
+                        $("#bookmark2").css("display", "");						
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+
+        function deleteBook() {
+            $.ajax({
+                url: "deleteBook.bo",
+                data: {
+                    boardNo: ${ fe.feNo },
+                    boardWriter: userNo,
+                    boardType: 5
+                    },
+                success: function (result) {
+                    if(result == 'Y'){
+                        $("#bookmark1").css("display", "");
+                        $("#bookmark2").css("display", "none");
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+                $(function () {
+                    $.ajax({
+                        url: "bookCheck.bo",
+                        data: {
+                            boardNo: ${ fe.feNo },
+                            boardWriter: userNo,
+                            boardType: 5
+                            },
+                    success: function (result) {
+                        if(result == 'Y'){
+                            $("#bookmark2").css("display", "");
+                            $("#bookmark1").css("display", "none");
+                        }else{
+                            $("#bookmark2").css("display", "none");
+                            $("#bookmark1").css("display", "");                    	
+                        }
+                    },
+                    error: function (result) {
+                    }
+                });
+        })
+    }
+    </script>
     <jsp:include page="../common/footer.jsp"/>
     
 </body>

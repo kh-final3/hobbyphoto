@@ -82,4 +82,15 @@ public interface BoardService {
 	int insertAttachmentPlace2(Attachment attachment);
 	int updateCulture(Festival fe);
 
+	
+	
+	 int checkBook(Board b);
+	 int insertBookmark(Board b);
+	 int deleteBookmark(Board b);
+	 
+	 int checkLike(Board b);
+	 int insertLike(Board b);
+	 int deleteLike(Board b);
+	 
+	 int insertWallPaper(WallPaper wp);
 }

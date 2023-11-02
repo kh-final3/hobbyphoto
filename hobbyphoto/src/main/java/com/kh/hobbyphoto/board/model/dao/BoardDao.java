@@ -263,4 +263,40 @@ public class BoardDao {
 
 
 
+	public int checkBook(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.selectOne("boardMapper.checkBook",b);
+	}
+	
+	public int insertBookmark(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.insert("boardMapper.insertBookmark",b);
+	}
+	
+	public int deleteBookmark(SqlSessionTemplate sqlSession, Board b) {
+		System.out.println(b);
+		return sqlSession.delete("boardMapper.deleteBookmark",b);
+	}
+
+	public int insertWallPaper(SqlSessionTemplate sqlSession, WallPaper wp) {
+		
+		return sqlSession.insert("boardMapper.insertWallPaper", wp);
+	}
+
+	public int reportBoard(SqlSessionTemplate sqlSession, Report r) {
+		
+		return sqlSession.insert("boardMapper.reportBoard", r);
+	}
+
+	public int checkLike(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.selectOne("boardMapper.checkLike",b);
+	}
+	
+	public int insertLike(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertLike",b);
+	}
+	
+	public int deleteLike(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.delete("boardMapper.deleteLike",b);
+	}
 }

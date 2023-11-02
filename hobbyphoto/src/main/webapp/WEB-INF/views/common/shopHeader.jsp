@@ -242,7 +242,7 @@
                 <div id="mb_user_1">
                     <table class="login-area" align="center">
                         <tr height="75">
-                            <td width="70"><a href=""><img width="60" src="resources/images/clipboard.png" alt=""></a></td>
+                            <td width="70"><a href="/hobbyphoto"><img width="60" src="resources/images/clipboard.png" alt=""></a></td>
                             <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png" alt=""></td>
                         </tr>
                     </table>

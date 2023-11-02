@@ -27,6 +27,11 @@
 		    <id>jitpack.io</id>
 		    <url>https://jitpack.io</url>
 	    </repository>
+		<repository>
+		    <id>AsposeJavaAPI</id>
+		    <name>Aspose Java API</name>
+		    <url>https://repository.aspose.com/repo/</url>
+		</repository>
 	</repositories>
 	
 
@@ -241,6 +246,13 @@
 		  <groupId>com.github.iamport</groupId>
 		  <artifactId>iamport-rest-client-java</artifactId>
 		  <version>0.2.14</version>
+			
+			
+		<!-- 테스트 -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.9</version>
 		</dependency>
 		
 		<dependency>

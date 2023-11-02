@@ -142,10 +142,12 @@
             <div class="list">
 
                 <!--관리자일때만 보이게 하기  -->
-                <div class="btn-area">
-                    <button class="btn btn-secondary">글쓰기</button>
-                </div>
-              
+                <c:if test="${ loginMember.userNo eq 1}">
+
+                    <div class="btn-area">
+                        <button class="btn btn-secondary">글쓰기</button>
+                    </div>
+                </c:if>
                 <div class="ect">
                     <a class="etca" href="sortPlace.pl?keyword=date">최신순</a> | <a class="etca" href="sortPlace.pl?keyword=best">인기순</a>
                 </div>

@@ -9,8 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공연 목록</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -226,7 +224,10 @@
                             </ul>
                         </div>
                     </div>
-                    <a class="enrollForm btn btn-secondary" href="cultureEnrollForm.fs">글쓰기</a>
+                    <c:if test="${ loginMember.userNo eq 1}">
+
+                        <a class="enrollForm btn btn-secondary" href="cultureEnrollForm.fs">글쓰기</a>
+                    </c:if>
                 </div>
             </div>
         </div>

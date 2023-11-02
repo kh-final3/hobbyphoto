@@ -392,6 +392,78 @@
     	}
     </script>
     
+
+    
+    <script>
+        if (${ loginMember.userNo } !== null) {
+            let userNo = ${ loginMember.userNo };
+            let bno = ${ b.boardNo }
+            function insertLike(){
+                $.ajax({
+                    url:"like.bo",
+                    data:{boardNo:bno, 
+                          userNo:userNo,
+						  boardType: 1
+                        },
+                    success:function(result){
+                        
+                        if(result == 'Y'){
+                            $("#like1").css("display", "none");
+                            $("#like2").css("display", "");
+                        }
+                    },
+                    error:function(){
+                        
+                    }
+                })
+            }
+            
+            function deleteLike(){
+        
+                $.ajax({
+                    url:"likeDelete.bo",
+                    data:{boardNo:bno, 
+                          userNo:userNo,
+                          boardType: 1
+                        },
+                    success:function(result){
+                        
+                        if(result == 'Y'){
+                            $("#like2").css("display", "none");
+                            $("#like1").css("display", "");
+                        }
+                    },
+                    error:function(){
+                        
+                    }
+                })
+            }
+            
+            $(function(){
+                
+                $.ajax({
+                    url:"likeCheck.bo",
+                    data:{boardNo:bno, 
+                          userNo:userNo,
+						  boardType: 1
+                        },
+                    success:function(result){
+                        ;
+                        if(result == 'Y'){
+                            $("#like2").css("display", "");
+                            $("#like1").css("display", "none");
+                        }else{
+                            $("#like2").css("display", "none");
+                            $("#like1").css("display", "");                    	
+                        }
+                    },
+                    error:function(result){
+                        ;
+                    }
+                })
+            })
+        }
+    </script>
 <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
