@@ -60,33 +60,36 @@
         </div>
         <br>
         <div class="wallpaper">
-            <form action="insertWallPaper.wp">
+            
+			<form action="insertWallPaper.wp" method="post" enctype="multipart/form-data">
+
 				<input type="hidden" name="img" id="changeName">
 				<input type="hidden" name="userNo" value="${ loginMember.userNo}">
 				<input type="hidden" name="boardType" value="4">
-
+				
                 <table id="contentArea" align="center" class="table">
-                    <tr>
-                        <th width="100">제목</th>
+					<tr>
+						<th width="100">제목</th>
                         <td colspan=""><input name="bgTitle" type="text" style="width: 1200px;"></td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <div class="wallpaper-file" align="center">
-                                <div id="tui-image-editor-container" class="tui-image-editor-container bottom">
-				
+						<td colspan="2">
+							<div class="wallpaper-file" align="center">
+								<div id="tui-image-editor-container" class="tui-image-editor-container bottom">
+									
 								</div>
                             </div>
                         </td>
                     </tr>
                 </table>
-            </form>
+				<div class="rc-btn" align="right" style="width: 1300px;" >
+					<button class="btn btn-dark" id="realSubmit" type="submit">작성</button>
+					<button class="btn btn-dark" type="reset">취소</button>
+				</div>
+				
+			</form>
         </div>
         <br>
-        <div class="rc-btn" align="right" style="width: 1300px;" >
-            <button class="btn btn-dark" type="submit">작성</button>
-            <button class="btn btn-dark" type="reset">취소</button>
-        </div>
     </div>
     <script type="text/javascript"
 				src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.4.0/fabric.js"></script>
@@ -114,27 +117,22 @@
 					imageEditor.ui.resizeEditor();
 				};
 			</script>
-			
-			<script>
-				$(".tui-image-editor-download-btn").click(function () {
-					var dataURL = imageEditor.toDataURL();
-					console.log(dataURL)
-					$.ajax({
-						type: 'POST',
-						url: "base64.wp",
-						data: {
-							pngData: dataURL
-						}
-					}).done(function (data) {
-						console.log(data)
-						$("#changeName").val(data);
-
-						// Submit the form after setting the changeName value
-						$("form").submit();
-					});
-				});
-
-			</script>
+<script>
+    $(".tui-image-editor-canvas-container").click(function () {
+        var dataURL = imageEditor.toDataURL();
+        console.log(dataURL)
+        $.ajax({	
+            type: 'POST',
+            url: "${path}/base64.wp",
+            data: {
+                pngData: dataURL
+            }
+        }).done(function (data) {
+            console.log(data);
+            $("#changeName").val(data);
+        });
+    });
+</script>
     <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

@@ -191,7 +191,6 @@ h1 {
 						</tr>
 					</thead>
 					<tbody>
-						<!-- case1. 공지글이 없을 경우-->
 						<c:if test="${ not empty list }">
 							<c:forEach var="n" items="${ list }">
 								<tr>
