@@ -22,7 +22,7 @@
 
     #contentArea th,td{
         padding-left: 20px;
-		border: none;
+
     }
 
     .text{font-size: 14px; color: gray; margin-right: 70px;}

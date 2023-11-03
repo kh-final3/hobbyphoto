@@ -1000,7 +1000,7 @@
 					</div>
 				</div>
 				<div align="center" style="margin-top: 20px;">
-					<a href="exhibitList.fs" class="btn btn-sm btn-primary"
+					<a href="exhibitList.fs" class="btn btn-primary"
 						style="width: 90px; height: 35px; font-size: medium;">목록가기</a>
 					<!-- 현재 로그인한 사용자가 해당 글을 쓴 본인일 경우 -->
 					<c:if test="${ loginMember.userNo eq 1}">

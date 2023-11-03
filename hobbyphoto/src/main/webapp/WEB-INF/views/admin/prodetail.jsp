@@ -139,7 +139,7 @@
             <label for="productDescription">제품 상세 :</label> <br>
             <img src="${ p.PSimg }" alt="PSimg Preview" width="100"> <br>
             
-            <button type="button" onclick="Prolistgo()">목록으로</button>
+            <button type="button" onclick="Prolistgo()">목록가기</button>
        
     </div>
     

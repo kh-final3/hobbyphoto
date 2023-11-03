@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<style>
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
@@ -79,8 +82,8 @@
         }
 
         .btn-area button{
-            width: 30%;
-            height: 20%;
+            width: 35%;
+            height: 23%;
             cursor: pointer;
             padding-right: 5px;
         }
@@ -196,13 +199,13 @@
                     </script>
 
                     <div class="writer-area">
-                        <input type="text" name="boardTitle" id="" class="title-input" placeholder="제목을 입력해주세요." value="${ b.boardTitle }"><br>
+                        제목 <input type="text" name="boardTitle" id="" class="title-input" style="width: 317px;" placeholder="제목을 입력해주세요." value="${ b.boardTitle }"><br>
                        <textarea name="boardContent" id="" class="text-area" placeholder="내용을 입력해주세요.">${ b.boardContent }</textarea> <br>
-                        <input type="text" name="hashTag" id="" class="tag-input" placeholder="해시태그를 입력해주세요." value="${ b.hashTag }">
+                        해시태그 <input type="text" name="hashTag" id="" class="tag-input" placeholder="해시태그를 입력해주세요." style="width: 290px;" value="${ b.hashTag }">
                     </div>
                     <div class="btn-area">
-                        <button>수정하기</button>
-                        <button onclick="javascript:history.go(-1)">목록으로</button>
+                        <button class="btn btn-warning">수정하기</button>
+                        <button onclick="javascript:history.go(-1)" class="btn btn-primary">목록가기</button>
                     </div>
                 </div>
             </form>

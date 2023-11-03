@@ -142,7 +142,7 @@
                   
 
                         <div align="center" class="buttons">
-                            <a href="festivalList.fs" class="btn btn-sm btn-primary" 
+                            <a href="festivalList.fs" class="btn btn-primary"
                             style="width: 90px; height: 35px; font-size: medium; border-radius: 5%; margin-left: 5px; padding-top: 5px;">목록가기</a>
                             <!-- 현재 로그인한 사용자가 해당 글을 쓴 본인일 경우 -->
                             <c:if test="${ loginMember.userNo eq 1}">
