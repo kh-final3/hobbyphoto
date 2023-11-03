@@ -117,22 +117,23 @@
 					imageEditor.ui.resizeEditor();
 				};
 			</script>
-<script>
-    $(".tui-image-editor-canvas-container").click(function () {
-        var dataURL = imageEditor.toDataURL();
-        console.log(dataURL)
-        $.ajax({	
-            type: 'POST',
-            url: "${path}/base64.wp",
-            data: {
-                pngData: dataURL
-            }
-        }).done(function (data) {
-            console.log(data);
-            $("#changeName").val(data);
+        <script>
+        $(".tui-image-editor-canvas-container").click(function () {
+            console.log($("#changeName").val());
+            var dataURL = imageEditor.toDataURL();
+            $.ajax({
+                type: 'POST',
+                url: "${path}/base64.wp",
+                data: {
+                    pngData: dataURL
+                },
+            }).done(function (data) {
+                console.log(data);
+                $("#changeName").val(data);
+            });
         });
-    });
-</script>
+
+        </script>
     <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

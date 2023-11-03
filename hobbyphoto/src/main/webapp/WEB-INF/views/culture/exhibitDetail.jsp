@@ -1087,7 +1087,7 @@
 							data: {
 							boardNo: ${ fe.feNo },
 							boardWriter: userNo,
-							boardType: 5
+							boardType: 4
 						},
 							success: function (result) {
 								if (result === 'Y') {
@@ -1106,7 +1106,7 @@
 						data: {
 							boardNo: ${ fe.feNo },
 							boardWriter: userNo,
-							boardType: 5
+							boardType: 4
 							},
 						success: function (result) {
 							if(result == 'Y'){
@@ -1125,7 +1125,7 @@
 						data: {
 							boardNo: ${ fe.feNo },
 							boardWriter: userNo,
-							boardType: 5
+							boardType: 4
 							},
 					success: function (result) {
 						if(result == 'Y'){
@@ -1142,70 +1142,6 @@
 					})
 			}
 			</script>
-<script>
-if (${ loginMember.userNo } !== null) {
-	let userNo = ${ loginMember.userNo };
-
-	function insertBook() {
-		$.ajax({
-			url: "book.bo",
-			data: {
-			boardNo: ${ fe.feNo },
-			boardWriter: userNo,
-			boardType: 4
-		},
-			success: function (result) {
-				if (result === 'Y') {
-					$("#bookmark1").css("display", "none");
-					$("#bookmark2").css("display", "");						
-				}
-			},
-			error: function () {
-			}
-		});
-	}
-
-	function deleteBook() {
-		$.ajax({
-			url: "deleteBook.bo",
-			data: {
-				boardNo: ${ fe.feNo },
-				boardWriter: userNo,
-				boardType: 4
-				},
-			success: function (result) {
-				if(result == 'Y'){
-					$("#bookmark1").css("display", "");
-					$("#bookmark2").css("display", "none");
-				}
-			},
-			error: function () {
-			}
-		});
-	}
-			$(function () {
-				$.ajax({
-					url: "bookCheck.bo",
-					data: {
-						boardNo: ${ fe.feNo },
-						boardWriter: userNo,
-						boardType: 4
-						},
-					success: function (result) {
-						if(result == 'Y'){
-							$("#bookmark2").css("display", "");
-							$("#bookmark1").css("display", "none");
-						}else{
-							$("#bookmark2").css("display", "none");
-							$("#bookmark1").css("display", "");                    	
-						}
-					},
-					error: function (result) {
-					}
-				});
-			})
-}
-</script>
 			<jsp:include page="../common/footer.jsp" />
 		</body>
 

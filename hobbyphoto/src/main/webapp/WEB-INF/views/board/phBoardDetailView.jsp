@@ -198,6 +198,13 @@
             width: 20px;
             height: 20px;
         }
+        .content button{
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+            font-size: 18px;
+            color: black;
+            width: 50px;
+        }
     </style>
 </head>
 <body>
@@ -314,7 +321,9 @@
                         <br>
                         <div>
                             작성일 : ${ b.createDate } | 
-                            조회수 : ${ b.count }
+                            조회수 : ${ b.count }  <button id="like1" onclick="insertLike();">🤍</button>
+							<button id="like2" style="display: none;" onclick="deleteLike();">❤️</button>
+							<button type="button" data-toggle="modal" data-target="#reportBoard">신고</button>	
                         </div>
                         
                     </div>
@@ -396,13 +405,13 @@
     
     <script>
         if (${ loginMember.userNo } !== null) {
-            let userNo = ${ loginMember.userNo };
-            let bno = ${ b.boardNo }
+            userNo = ${ loginMember.userNo };
+            let bno = ${ b.boardNo };
             function insertLike(){
                 $.ajax({
                     url:"like.bo",
                     data:{boardNo:bno, 
-                          userNo:userNo,
+                          boardWriter:userNo,
 						  boardType: 1
                         },
                     success:function(result){
@@ -421,9 +430,9 @@
             function deleteLike(){
         
                 $.ajax({
-                    url:"likeDelete.bo",
+                    url:"deleteLike.bo",
                     data:{boardNo:bno, 
-                          userNo:userNo,
+                        boardWriter:userNo,
                           boardType: 1
                         },
                     success:function(result){
@@ -444,7 +453,7 @@
                 $.ajax({
                     url:"likeCheck.bo",
                     data:{boardNo:bno, 
-                          userNo:userNo,
+                          boardWriter:userNo,
 						  boardType: 1
                         },
                     success:function(result){
