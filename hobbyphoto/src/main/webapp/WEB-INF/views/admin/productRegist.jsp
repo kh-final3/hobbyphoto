@@ -94,12 +94,7 @@
 </head>
 <body>
 
-<c:if test="${ not empty alertMsg }">
-		<script>
-			alert("${alertMsg}");
-		</script>
-		<c:remove var="alertMsg" scope="session"/>
-	</c:if>
+ <jsp:include page="adminAlert.jsp"/>
 
 	<div class="container">
         <h2>상품 등록</h2>

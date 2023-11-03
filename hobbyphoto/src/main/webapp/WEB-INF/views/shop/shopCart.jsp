@@ -109,7 +109,7 @@
                     </div>
                     <div class="pb_title" align="left">
                         <div>
-                            <a href="#">
+                            <a href="detail.pro?pno=${ c.PNo }">
                                 <img src="${ c.thumbnail }" class="pb_img">
                             </a>
                         </div>
@@ -118,7 +118,7 @@
                                 <span class="product_brand">${ c.brandnamee }</span>
                             </p>
                             <p>
-                                <a href="#" class="product_title">${ c.PName }</a>
+                                <a href="detail.pro?pno=${ c.PNo }" class="product_title">${ c.PName }</a>
                             </p>
                             <p>
                                 <span class="prodcut_price">${ c.productprice }</span>원

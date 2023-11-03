@@ -11,6 +11,7 @@ import com.kh.hobbyphoto.shop.model.dao.ShopDao;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
+import com.kh.hobbyphoto.shop.model.vo.Photo;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Service
@@ -194,5 +195,10 @@ public class ShopServiceImpl implements ShopService{
 	public int updateProduct(Orders ords) {
 		return sDao.updateProduct(sqlSession,ords);
 	}
+
+//	@Override
+//	public int insertPhoto(Photo p) {
+//		return sDao.insertPhoto(sqlSession,p);
+//	}
 	
 }

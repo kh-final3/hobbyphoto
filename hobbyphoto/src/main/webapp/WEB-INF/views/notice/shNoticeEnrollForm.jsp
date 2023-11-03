@@ -113,6 +113,7 @@
         }
     </style>
 </head>
+<jsp:include page="../common/header.jsp" />
     <div class="outer">
         <br>
         <h2 align="center">공지사항 작성</h2>
@@ -143,5 +144,6 @@
             </div>
         </form>
     </div>
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

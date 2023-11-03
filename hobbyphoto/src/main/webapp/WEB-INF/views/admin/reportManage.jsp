@@ -24,13 +24,9 @@
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
     <title>신고게시물관리</title>
 </head>
+<jsp:include page="adminAlert.jsp"/>
     <body class="sb-nav-fixed">
-    <c:if test="${ not empty alertMsg }">
-		<script>
-			alertify.alert("${ alertMsg }");
-		</script>
-		<c:remove var="alertMsg" scope="session"/>
-	</c:if>
+    
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="rlist.me">신고게시물관리</a>

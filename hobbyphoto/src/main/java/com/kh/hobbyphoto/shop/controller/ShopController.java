@@ -26,6 +26,7 @@ import com.kh.hobbyphoto.shop.model.service.ShopServiceImpl;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
+import com.kh.hobbyphoto.shop.model.vo.Photo;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Controller
@@ -415,6 +416,19 @@ public class ShopController {
 		mv.addObject("pi", pi).addObject("olist", olist).setViewName("shop/shopOrderlist");;
 		return mv;
 	}
+//	@RequestMapping("shop.photo")
+//	public String shopPhoto() {
+//		return "shop/shopPhoto";
+//	}
+//	
+//	@ResponseBody
+//	@RequestMapping("save.photo")
+//	public String savePhoto(Photo p, HttpSession session) {
+//		//Member m =(Member)session.getAttribute("loginMember");
+//		int result = sService.insertPhoto(p);
+//		System.out.println(result +"과연 결과는???");
+//		return result>0 ? "success":"fail";
+//	}
 	
 }
 

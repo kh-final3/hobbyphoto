@@ -503,12 +503,12 @@
                                             <div class="css-xl3rnq e1gwa9iy3">
                                             <p class="css-1pwvd6w e1gwa9iy4">브랜드명</p>
                                             <p class="css-1k4liyy e1gwa9iy5">${ p.PName }</p>
-                                            <ul class="css-78pcur e5gez6t0">
+                                            <!-- <ul class="css-78pcur e5gez6t0">
                                                 <li class="css-1mfx2ad e5gez6t1">[사이즈]ONE SIZE</li>
-                                            </ul>
+                                            </ul> -->
                                             <p class="css-1hq4sz7 e1gwa9iy6">
                                                 금액
-                                                ${ p.totalPrice }원 / 수량 1개
+                                                ${ p.totalPrice }원 
                                             </p>
                                             </div>
                                         </div>

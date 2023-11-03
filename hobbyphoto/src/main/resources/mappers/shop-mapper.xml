@@ -365,7 +365,7 @@
 		left join d_order d on(o.order_no = d.order_no)
 		left join product p on(d.p_no = p.p_no)
 		where o.user_no = #{userNo}
-		order by o.order_no
+		order by o.order_no desc
 	</select>
 	
 	<select id="selectOrderListCount" resultType="_int">
@@ -380,5 +380,6 @@
 			set amount = amount - ${amount}
 			where p_no = #{pNo}
 	</update>
+	
 	
 </mapper>

@@ -219,8 +219,8 @@
             <div id="mb_nav">
                 <ul id="mb_navi">
                     <!--<li><a href="pro.list">홈</a></li> -->
-                    <li><a href="#">카메라</a></li>
-                    <li><a href="#">포토북</a></li>
+                    <li><a href="pro.list">카메라</a></li>
+                    <li><a href="">포토북</a></li>
                     <li><a href="#">핸드폰 케이스</a></li>
                     <li><a href="shNotice.no">공지사항</a></li>
                     
@@ -276,7 +276,7 @@
 		                					<li class="member_menu_mypage" align="center">
 			                					<c:choose>
 				                					<c:when test="${ loginMember.userNo == 1 }">
-					                					<a href="admin.pg">관리자페이지</a>
+					                					<a href="alist.da">관리자페이지</a>
 					                					<div><p></p></div>
 					                					<a href="shop.mp?userNo=${ loginMember.userNo }" id="cartbtn">장바구니</a>
 				                					</c:when>

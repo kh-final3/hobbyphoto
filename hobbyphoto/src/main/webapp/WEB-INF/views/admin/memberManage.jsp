@@ -25,12 +25,7 @@
     <title>회원관리</title>
 </head>
     <body class="sb-nav-fixed">
-    <c:if test="${ not empty alertMsg }">
-		<script>
-			alertify.alert("${ alertMsg }");
-		</script>
-		<c:remove var="alertMsg" scope="session"/>
-	</c:if>
+    <jsp:include page="adminAlert.jsp"/>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="mlist.me">회원 관리</a>

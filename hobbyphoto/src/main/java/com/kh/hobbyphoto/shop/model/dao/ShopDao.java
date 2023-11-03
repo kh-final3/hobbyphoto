@@ -10,6 +10,7 @@ import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
+import com.kh.hobbyphoto.shop.model.vo.Photo;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Repository
@@ -108,7 +109,8 @@ public class ShopDao {
 	public int updateProduct(SqlSessionTemplate sqlSession,Orders ords) {
 		return sqlSession.update("shopMapper.updateProduct", ords);
 	}
-	
-	
+//	public int insertPhoto(SqlSessionTemplate sqlSession,Photo p) {
+//		return sqlSession.insert("shopMapper.insertPhoto", p);
+//	}
 
 }

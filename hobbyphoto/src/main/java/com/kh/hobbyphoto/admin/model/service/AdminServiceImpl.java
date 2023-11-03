@@ -13,6 +13,8 @@ import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.model.vo.Report;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
+import com.kh.hobbyphoto.notice.model.vo.Notice;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Service
@@ -145,6 +147,16 @@ public class AdminServiceImpl implements AdminService{
 	public int adminProductupdate(Product p) {
 		System.out.println(p+"service에서의 p");
 		return aDao.adminProductupdate(sqlSession,p);
+	}
+
+	@Override
+	public ArrayList<Orders> selectMemberOredr() {
+		return aDao.selectMemberOredr(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Notice> selectAdminNotice() {
+		return aDao.selectAdminNotice(sqlSession);
 	}
 
 }

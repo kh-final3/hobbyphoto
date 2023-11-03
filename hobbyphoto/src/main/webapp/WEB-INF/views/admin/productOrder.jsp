@@ -25,12 +25,7 @@
     <title>신고게시물관리</title>
 </head>
     <body class="sb-nav-fixed">
-    <c:if test="${ not empty alertMsg }">
-		<script>
-			alertify.alert("${ alertMsg }");
-		</script>
-		<c:remove var="alertMsg" scope="session"/>
-	</c:if>
+    <jsp:include page="adminAlert.jsp"/>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="rlist.me">상품주문관리</a>
@@ -109,45 +104,20 @@
                                         </tr>
                                     </thead>
                                     
-                                    <tfoot>
-                                        <tr>
-                                            <th>주문번호</th>
-                                            <th>회원번호</th>
-                                            <th>받는사람</th>
-                                            <th>배송지</th>
-                                            <th>상세주소</th>
-                                            <th>휴대폰번호</th>
-                                            <th>주문날짜</th>
-                                            <th>가격</th>
-                                            <th>상태</th>
-                                            <th>주문메세지</th>
-                                            <th>배송메세지</th>
-                                        </tr>
-                                    </tfoot>
-                                    
                                     <tbody>
-		                                   <c:forEach var="#" items="">
+		                                   <c:forEach var="p" items="${ list }">
 		                                        <tr>
-		                                            <td class="rno"></td>
-		                                            <td></td>
-		                                            <td></td>
-		                                            <td></td>
-		                                            <td></td>
-		                                            <td></td>
-		                                            <td></td>
-		                                            <td></td>
-		                                            <td>
-		                                            <!-- 
-														<form action="processed.me" method="post">
-							                        		<input type="hidden" name="rpNo" value="${ r.rpNo }">
-								                        	<button class="btn btn-success" type="submit" style="float:right;" id="button">관리</button>
-														</form>
-		                                             -->
-														<form action="processed.me" method="post">
-							                        		<input type="hidden" name="" value="">
-								                        	<button class="btn btn-success" type="submit" id="button">처리완료</button>
-														</form>
-		                                            </td>
+		                                            <td>${ p.orderNo }</td>
+		                                            <td>${ p.userNo }</td>
+		                                            <td>${ p.name }</td>
+		                                            <td>${ p.address }</td>
+		                                            <td>${ p.postcode }</td>
+		                                            <td>${ p.phone }</td>
+		                                            <td>${ p.orderDate }</td>
+		                                            <td>${ p.totalPrice }</td>
+		                                            <td>${ p.status }</td>
+		                                            <td>${ p.OMsg }</td>
+		                                            <td>${ p.DMsg }</td>
 		                                        </tr>
 		                                   </c:forEach>
 	                                    </tbody>

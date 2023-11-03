@@ -25,6 +25,8 @@ import com.kh.hobbyphoto.common.model.vo.Report;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
+import com.kh.hobbyphoto.notice.model.vo.Notice;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Controller
@@ -457,14 +459,20 @@ public class AdminController {
 
 		// 관리자페이지 상품 관리
 		@RequestMapping("orderlist.pr")
-		public String adminCharts() {
+		public String adminCharts(Model model) {
+			
+			ArrayList<Orders> list = aService.selectMemberOredr();
+			model.addAttribute("list", list);
 			
 			return "admin/productOrder";
 		}
 		
 		// 관리자페이지 관리자 통계
 		@RequestMapping("table.da")
-		public String adminTables() {
+		public String adminTables(Model model) {
+			
+			ArrayList<Notice> list = aService.selectAdminNotice();
+			model.addAttribute("list", list);
 			
 			return "admin/adminTables";
 		}	

@@ -114,6 +114,7 @@
         }
     </style>
 </head>
+<jsp:include page="../common/header.jsp" />
     <div class="outer">
         <br>
         <h2 align="center">공지사항 작성</h2>
@@ -136,12 +137,13 @@
                     </div>
                     <br>
                     <div class="Write_btn_area">
-                        <button type="reset" class="btn btn-warning">취소</button>
+                        <button type="reset" class="btn btn-warning" onclick="history.back();">취소</button>
                         <button type="submit" class="btn btn-secondary">등록</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>
