@@ -870,27 +870,26 @@
 	</select>
 	
 	
-	<update id="increaseWpCount">
-		update
-		 background
+	<update id="increaseCountWp">
+		 update background
 		  	set count = count + 1
 		  where back_no = #{backNo}
 		    and status = 'Y'
 	</update>
 	
-	<select id="selectWpBoard" resultMap="wallResult">
+	<select id="selectWp" resultMap="wallResult">
 		 select
 			      back_no
-			    , nickname
+			    , user_no
 			    , img
 		        , count
 		        , download
 		        , board_type
-			    , to_char(bg.create_date, 'YYYY-MM-DD') as "create_date"
+			    , to_char(create_date, 'YYYY-MM-DD') as "create_date"
 			    , back_title
-			  from background bg
-		      join member using(USER_NO)
-			  where bg.status = 'Y'
+			  from background
+			  where status = 'Y'
+			  and back_no = #{backNo}
 			  order by back_no desc
 	</select>
 	
@@ -917,10 +916,18 @@
 		)
 	</insert>
 	
+	<delete id="wpDelete">
+	    DELETE FROM background
+	    WHERE back_no = #{backNo}
+	</delete>
 	
 	
-	
-	
+	<update id="increaseDownload">
+		 update background
+		  	set download = download + 1
+		  where back_no = #{backNo}
+		    and status = 'Y'
+	</update>
 	
 	
 	<insert id="reportBoard">

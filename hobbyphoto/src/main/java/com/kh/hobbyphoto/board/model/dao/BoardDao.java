@@ -306,10 +306,25 @@ public class BoardDao {
 	}
 
 	public ArrayList<WallPaper> selectWpList(SqlSessionTemplate sqlSession, PageInfo pi) {
-
 	  	int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-			int limit = pi.getBoardLimit();
-			RowBounds rowBounds = new RowBounds(offset, limit);
-			return (ArrayList)sqlSession.selectList("boardMapper.selectWpList", null, rowBounds);
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectWpList", null, rowBounds);
+	}
+
+	public int increaseCountWp(SqlSessionTemplate sqlSession, int backNo) {
+		return sqlSession.update("boardMapper.increaseCountWp", backNo);
+	}
+
+	public WallPaper selectWp(SqlSessionTemplate sqlSession, int backNo) {
+		return (WallPaper)sqlSession.selectOne("boardMapper.selectWp", backNo);
+	}
+
+	public int wpDelete(SqlSessionTemplate sqlSession, int backNo) {
+		return sqlSession.delete("boardMapper.wpDelete",backNo);
+	}
+
+	public int increaseDownload(SqlSessionTemplate sqlSession, int backNo) {
+		return sqlSession.update("boardMapper.increaseDownload", backNo);
 	}
 }
