@@ -50,6 +50,10 @@ public class GroupServiceImpl implements GroupService{
 		return result * result2;
 	}
 
+	public int deleteMember(GroupD gr) {
+		return GDao.deleteMember(sqlSession, gr);
+	}
+
 
 
 

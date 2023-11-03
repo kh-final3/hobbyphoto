@@ -118,6 +118,11 @@
 		where group_no = #{groupNo}
 	</update>
 	
+	<delete id="deleteMember">
+		delete 
+	</delete>
+	
+	
 	
 </mapper>
 	

@@ -49,5 +49,9 @@ public class GroupDao {
 		return sqlSession.update("sgroupMapper.groupCount", gr);
 	}
 
+	public int deleteMember(SqlSessionTemplate sqlSession, GroupD gr) {
+		return sqlSession.delete("sgroupMapper.deleteMember", gr);
+	}
+
 
 }

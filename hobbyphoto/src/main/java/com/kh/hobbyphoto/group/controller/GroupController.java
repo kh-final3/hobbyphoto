@@ -123,6 +123,17 @@ public class GroupController {
 	    
 	    return "redirect:togetherList.tg";
 	}
+	
+	@RequsetMapping("dropOut.tg")
+	public String deleteMember(HttpSession session) {
+		int result = GService.deleteMember();
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "모임 신청을 취소했습니다.");
+		} else {
+			session.setAttribute("alertMsg", "모임 신청 취소를 실패했습니다.");
+		}
+	}
 
 
 	
