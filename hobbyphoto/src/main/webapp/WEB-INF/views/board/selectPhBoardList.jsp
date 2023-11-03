@@ -79,7 +79,7 @@
 				<div style="width: 850px;" align="right">
 				    <c:choose>
 				        <c:when test="${ not empty loginMember }">
-				            <a href="phEnrollForm.bo" class="btn btn-light" id="btn_th">글작성</a>
+				            <a href="phEnrollForm.bo" class="btn btn-secondary" id="btn_th">글작성</a>
 				        </c:when>
 				    </c:choose>
 				</div>
@@ -120,14 +120,16 @@
 		                
 		               	<c:choose>
 		                   	<c:when test="${ pi.currentPage eq pi.maxPage }">
-		                    		<button onclick="location.href=''" disabled>Next</button>
+		                    	<button disabled>Next</button>
+		                    	<button disabled> &gt; </button>
 		                   	</c:when>
 		                     <c:otherwise>
 		                     	<button onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage + 1 }'">Next</button>
+		                     	<button> &gt; </button>
 		                   	</c:otherwise>
 		                </c:choose>
 		                
-		                <button> &gt; </button>
+		                
             		</div>
 
             		<div id="topbtn">

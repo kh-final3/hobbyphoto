@@ -165,7 +165,7 @@
             <div class="brn-area" align="center">
                 <button type="submit">작성하기</button>
                 <button type="reset">취소하기</button>
-                <button type="button" class="golist">목록으로 </button>
+                <button type="button" class="golist">목록가기</button>
             </div>
         </form>
         

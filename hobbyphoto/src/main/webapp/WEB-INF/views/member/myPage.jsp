@@ -27,7 +27,6 @@
         }
 
         .info_my{
-          /* border: 1px solid red; */
           background-color: white;
           width: 1180px;    
           height: 800px;
@@ -35,18 +34,15 @@
         }
 
         .info_my1{
-          /* border: 1px solid red; */
           background-color: gainsboro;
           width: 300px;
           height: 500px;
           float: left;
-          position: fixed;
           top: 30%;
-          margin: 20px 20px;
+          margin: 32px 20px;
         }
 
         .info_my2{
-          /* border: 1px solid red; */
           background-color: gainsboro;
           width: 780px;
           float: right;
@@ -212,27 +208,27 @@
                 <h style="font-weight: 700; margin: 0 0 15px 10px; font-size: larger;">나의 활동</h>
                 <div id="list_my">
                     <ul>
-                        <li>
-                            <a href="myBookmarks.me?cpage=1" class="icon1"><img src="resources/images/bookmark-white.png" style="width: 50px; height: 50px;"></a>
+                        <li onclick="myActivity(1);">
+                            <a class="icon1"><img src="resources/images/bookmark-white.png" style="width: 50px; height: 50px;"></a>
                             <span>북마크</span>
                         </li>
-                        <li>
-                            <a href="myBoard.me?cpage=1" class="icon2"><img src="resources/images/noticeboard.png" style="width: 50px; height: 50px;"></a>
+                        <li onclick="myActivity(2);">
+                            <a class="icon2"><img src="resources/images/noticeboard.png" style="width: 50px; height: 50px;"></a>
                             <span>게시글</span>
                         </li>
-                        <li>
-                            <a href="myLike.me?cpage=1" class="icon3"><img src="resources/images/coment.png" style="width: 50px; height: 50px;"></a>
+                        <li onclick="myActivity(3);">
+                            <a class="icon3"><img src="resources/images/coment.png" style="width: 50px; height: 50px;"></a>
                             <span>좋아요</span>
                         </li>
-                    <li>
-                        <a href="myGroup.me?cpage=1" class="icon4"><img src="resources/images/interview.png" style="width: 50px; height: 50px;"></a>
-                        <span>모임</span>
-                    </li>
-                    <li>
-                        <a href="myBlock.me?cpage=1" class="icon5"><img src="resources/images/block-user.png" style="width: 50px; height: 50px;"></a>
-                        <span>차단 회원</span>
-                    </li>
-                </ul>
+	                    <li onclick="myActivity(4);">
+	                        <a class="icon4"><img src="resources/images/interview.png" style="width: 50px; height: 50px;"></a>
+	                        <span>모임</span>
+	                    </li>
+	                    <li onclick="myActivity(5);">
+	                        <a class="icon5"><img src="resources/images/block-user.png" style="width: 50px; height: 50px;"></a>
+	                        <span>차단 회원</span>
+	                    </li>
+	                </ul>
                 </div>
             </div>
         </div>
@@ -335,6 +331,26 @@
     			location.href="profile.me?userNo=" + $(this).children().eq(0).val() + "&userId=" + $(this).find(".followId").text();
             })
     	})
+    	
+    	function myActivity(num) {
+			switch (num) {
+			case 1:
+				location.href="myBookmarks.me?cpage=1";
+				break;
+			case 2:
+				location.href="myBoard.me?cpage=1";
+				break;
+			case 3:
+				location.href="myLike.me?cpage=1";
+				break;
+			case 4:
+				location.href="myGroup.me?cpage=1";
+				break;
+			case 5:
+				location.href="myBlock.me?cpage=1";
+				break;
+			}
+		}
 	</script>
     <jsp:include page="../common/footer.jsp"/>
 </body>

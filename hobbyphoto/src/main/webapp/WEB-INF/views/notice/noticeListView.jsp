@@ -50,7 +50,7 @@
 }
 
 #header {
-	display: inline-block;
+	height: 50px;
 }
 
 #header>div {
@@ -152,33 +152,6 @@ h1 {
 		<div class="wrap">
 			<h1 align="center">공지사항</h1>
 			<br>
-			<br>
-			<div id="header">
-				<div id="filter"></div>
-				<div id="searchNotice">
-					<form action="search.no" id="search-form" method="get">
-						<select name="searchCondition" id="search-select">
-							<option value="notice_title">글제목</option>
-							<option value="notice_writer">글쓴이</option>
-						</select>
-
-						<div id="box-search">
-							<input type="text" id="insearch" name="searchKeyword"
-								placeholder="검색어를 입력하세요">
-							<button type="submit" class="img-button">
-								<img
-									src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
-									alt="" id="searchimg">
-							</button>
-						</div>
-					</form>
-				</div>
-
-				<div align="right" style="width: 85px;">
-					<a href="enrollForm.no" class="btn btn-m btn-secondary">글작성</a> <br>
-					<br>
-				</div>
-			</div>
 			<div class="list">
 				<table align="center" class="list-area">
 					<thead>
@@ -191,7 +164,6 @@ h1 {
 						</tr>
 					</thead>
 					<tbody>
-						<!-- case1. 공지글이 없을 경우-->
 						<c:if test="${ not empty list }">
 							<c:forEach var="n" items="${ list }">
 								<tr>
@@ -227,14 +199,14 @@ h1 {
                 
                    <c:choose>
                        <c:when test="${ pi.currentPage eq pi.maxPage }">
-                            <button onclick="location.href=''" disabled>Next</button>
+                            <button disabled>Next</button>
+                            <button disabled> &gt; </button>
                        </c:when>
                      <c:otherwise>
                          <button onclick="location.href='list.no?cpage=${ pi.currentPage + 1 }'">Next</button>
-                       </c:otherwise>
+                         <button> &gt; </button>
+                     </c:otherwise>
                 </c:choose>
-                
-                <button> &gt; </button>
             </div>
 		</div>
 	</div>
@@ -242,10 +214,6 @@ h1 {
         $(function(){
         		$(".list-area>tbody>tr").click(function(){
             		location.href = 'detail.no?noticeNo='+ $(this).children().eq(0).text();
-        		})
-        		
-        			$(".btn-area").click(function(){
-            		location.href = 'enrollForm.pl';
         		})
         	})
     </script>

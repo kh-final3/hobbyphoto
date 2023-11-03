@@ -31,32 +31,33 @@
             margin: auto;
             display: block;
         }
-    </style>
-</head>
 
-<style>
-	#fedeBody .btn{
-		font-size: 15px;
-	}
+        #fedeBody .btn{
+            font-size: 15px;
+        }
 
-    #fedeBody a{
-		font-size: 15px;
-	}
+        #fedeBody a{
+            font-size: 15px;
+        }
 
-	.wrap {
-        width: 1300px;
-        margin: auto;        
-	}
+        .wrap {
+            width: 1300px;
+            margin: auto;        
+        }
 
-    #festivaltitle{
-        font-size: xx-large;
-        font-weight: 500;
-        margin-top: 30px;
-        margin-bottom: -30px;
-    }
+        #festivaltitle{
+            font-size: xx-large;
+            font-weight: 500;
+            margin-top: 30px;
+            margin-bottom: -30px;
+        }
+
+        .buttons{
+            margin-top: 20px;
+        }
 
 </style>
-
+</head>
 <body id="fedeBody">
 		<jsp:include page="../common/header.jsp"/>
     <div class="wrap">
@@ -76,10 +77,10 @@
 
                             <h3>${ fe.feTitle } 
                                 <div class="bookmark">
-                                <button id="bookmark1" onclick="insertBook();">
+                                <button id="bookmark1" onclick="insertBook();" style="border: none; background-color: white;">
                                     <img src="resources/images/bookmark_blank.png">
                                 </button>
-                                <button id="bookmark2" onclick="deleteBook();" style="display: none;">
+                                <button id="bookmark2" onclick="deleteBook();" style="display: none; border: none; background-color: white;">
                                     <img src="resources/images/bookmark.png">
                                 </button>
                             </div></h3> 
@@ -141,15 +142,15 @@
                   
 
                         <div align="center" class="buttons">
-                            <a href="festivalList.fs" class="btn btn-sm btn-secondary"
-                                style="width: 90px; height: 35px; font-size: medium; margin-right: 10px; border-radius: 5px;">목록가기</a>
+                            <a href="festivalList.fs" class="btn btn-primary"
+                            style="width: 90px; height: 35px; font-size: medium; border-radius: 5%; margin-left: 5px; padding-top: 5px;">목록가기</a>
                             <!-- 현재 로그인한 사용자가 해당 글을 쓴 본인일 경우 -->
                             <c:if test="${ loginMember.userNo eq 1}">
         
                                 <a href="updateForm.fs?feNo=${ fe.feNo }" class="btn btn-sm btn-warning"
-                                style="width: 90px; height: 35px; font-size: medium; margin-right: 10px; border-radius: 5px;">수정하기</a> 
+                                style="width: 90px; height: 35px; font-size: medium; border-radius: 5%; margin-left: 5px; padding-top: 5px;">수정하기</a> 
                                 <a href="delete.fs?feNo=${ fe.feNo }" class="btn btn-sm btn-danger"
-                                style="width: 90px; height: 35px; font-size: medium; border-radius: 5px;">삭제하기</a>
+                                style="width: 90px; height: 35px; font-size: medium; border-radius: 5%; margin-left: 5px; padding-top: 5px;">삭제하기</a>
                             </c:if>
         
                         </div>

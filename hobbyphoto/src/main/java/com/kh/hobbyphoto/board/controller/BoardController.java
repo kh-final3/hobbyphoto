@@ -239,7 +239,6 @@ public class BoardController {
         }
 
         int result = bService.insertRcBoard(b, list);
-
         if (result > 0) {
             session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
             return "redirect:rcBoardList.bo";
@@ -310,7 +309,6 @@ public class BoardController {
 		ArrayList<Reply> list = bService.selectRcReplyList(phno);
 		return new Gson().toJson(list);
 	}
-	
 	
 	@ResponseBody
 	@RequestMapping(value="rcRinsert.bo")
@@ -632,9 +630,34 @@ public class BoardController {
 	
 	
 	@RequestMapping("list.wp")
-	public String wpList() {
-		return "wallpaper/wpList";
+	public ModelAndView wpList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+			int listCount = bService.selectWpListCount();
+			
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
+			ArrayList<WallPaper> list = bService.selectWpList(pi);
+			mv.addObject("pi", pi).addObject("list", list).setViewName("wallpaper/wpList");
+			return mv;
 	}
+	
+	
+	@RequestMapping("detail.wp")
+	public String selectWp(int backNo, Model model) {
+		int result = bService.increaseCountWp(backNo);
+		if (result > 0) {
+			WallPaper wp = bService.selectWp(backNo);
+			model.addAttribute("wp", wp);
+
+			return "wallpaper/wpDetail";
+
+		} else {
+			model.addAttribute("errorMsg", "게시글 상세 조회 실패!");
+			return "common/errorPage";
+
+		}
+	}
+	
+	
+	
 	
 	@RequestMapping("enrollForm.wp")
 	public String wpEnrollForm() {
@@ -643,14 +666,14 @@ public class BoardController {
 	
 	@RequestMapping("insertWallPaper.wp")
 	public String insertWallPaper(WallPaper wp,Model model) {
-
-	    System.out.println(wp);
+		
+	    System.out.println(wp);	
 		int result = bService.insertWallPaper(wp);
 
 		
 		if (result > 0) {
 		      
-			return "wallpaper/wpList";
+			return "redirect:list.wp";
         
 	    }else {
 	    	
@@ -662,7 +685,7 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping("base64.wp")
 	private String saveImage(@RequestParam("pngData") String dataURL, HttpSession session) {
-	    // Extract the base64 part of the data URL
+	    System.out.println(dataURL);
 	    String base64Data = dataURL.split(",")[1];
 	    
 	    // Decode the base64 string into bytes
@@ -691,8 +714,36 @@ public class BoardController {
 	    }
 	}
 
+	@RequestMapping("wpDelete.wp")
+	public String wpDelete(int backNo,HttpSession session, Model model) { 
+		System.out.println(backNo);
+		int result = bService.wpDelete(backNo);
+		System.out.println(result);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+			return "redirect:list.wp";
+			
+		} else {
+			// 삭제 실패
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
+		
+	}
 	
+	@ResponseBody
+	@RequestMapping("increaseDownload.wp")
+	public String increaseDownload(int backNo) {
+	    int result = bService.increaseDownload(backNo);
 
+	    if (result > 0) {
+	        return "success";
+	    } else {
+	        return "faiL";
+	    }
+	}
+
+	
 	@ResponseBody
 	@RequestMapping("bookCheck.bo")
 	public String checkBookmark(Board b){

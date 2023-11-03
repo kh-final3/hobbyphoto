@@ -119,7 +119,8 @@
 					
 					<c:choose>
 				        <c:when test="${ not empty loginMember }">
-				           <a class="btn btn-secondary btn-sm" style="float:right" href="rcEnrollForm.bo">글쓰기</a>
+				           <a class="btn btn-secondary btn-m;" style="float:right;
+						   " href="rcEnrollForm.bo">글작성</a>
 				        </c:when>
 				    </c:choose>
 				        <div class="paging-area" align="center">

@@ -179,10 +179,10 @@
         }
 
         .writer button{
-            width: 13%;
-            height: 60%;
+            width: 14%;
+            height: 40px;
             margin-left: 3px;
-            margin-top: 10px;
+            /* margin-top: 10px; */
         }
         #detail-hr {
             border: 1px solid rgba(220, 220, 220, 0.340);
@@ -197,6 +197,13 @@
        	.writer_name2 img {
             width: 20px;
             height: 20px;
+        }
+        .content button{
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+            font-size: 18px;
+            color: black;
+            width: 50px;
         }
     </style>
 </head>
@@ -269,7 +276,7 @@
 
 				<c:if test="${ loginMember.userId eq b.boardWriter }">
 		            <div align="center">
-		             		<a class="btn btn-primary" href="phBoardList.bo">목록으로</a>
+		             		<a class="btn btn-primary" href="phBoardList.bo">목록가기</a>
 			                <a class="btn btn-warning" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
 			                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
 		            </div><br><br>
@@ -314,7 +321,9 @@
                         <br>
                         <div>
                             작성일 : ${ b.createDate } | 
-                            조회수 : ${ b.count }
+                            조회수 : ${ b.count }  <button id="like1" onclick="insertLike();">🤍</button>
+							<button id="like2" style="display: none;" onclick="deleteLike();">❤️</button>
+							<button type="button" data-toggle="modal" data-target="#reportBoard">신고</button>	
                         </div>
                         
                     </div>
@@ -331,7 +340,7 @@
                     <p>댓글(<span id="rcount">0</span>)</p>
                     <div class="writer">
                         <textarea name="" id="content" cols="30" rows="10"></textarea>
-                        <button onclick="addReply();">등록</button>
+                        <button type="button" onclick="addReply();" class="btn btn-secondary btn-lg;">등록</button>
                     </div>
                 </div>
             </div>
@@ -344,7 +353,6 @@
     	
     	function addReply(){
     		if($("#content").val().trim().length != 0){
-    			
     			$.ajax({
     				url:"phRinsert.bo",
     				data:{
@@ -355,6 +363,16 @@
     				}, success:function(status){
     					if(status == "success"){
     						selectPhReplyList();
+    						
+    						if("${ loginMember.userId }" != "${ b.boardWriter }"){
+    							if(socket){
+    								let socketMsg = "reply,${ loginMember.userId },${ b.boardWriter },${b.boardNo},${b.boardTitle},1";
+    								console.log(socketMsg);
+    								socket.send(socketMsg);
+    							}
+    			           	}
+    			           		
+    						$("#content").val("");
     					}
     				}, error:function(){
     					console.log("댓글 작성용 ajax 요청 실패!")
@@ -362,6 +380,12 @@
     			})
     		} else {
     			alertify.alert("댓글 작성 후 등록 요청해주세요!");
+    		}
+    		if("${ loginMember.userId }" != "${ b.boardWriter }"){
+    			 $.ajax({
+    			        url : "insertAlram",
+    			        data : {sendId: "${ loginMember.userId }" , fromId: "${ b.boardWriter }" , bno:${ b.boardNo },title:"${ b.boardTitle }" , cmd: "reply", type:1 },
+    			 });
     		}
     	}
     	
@@ -371,8 +395,6 @@
     			data:{
     				phno:${ b.boardNo }
     			}, success:function(list){
-    				console.log(list);
-    				
 	    				let value = "";
 	    				for(let i in list){
 	    					value += "<tr>"
@@ -396,13 +418,13 @@
     
     <script>
         if (${ loginMember.userNo } !== null) {
-            let userNo = ${ loginMember.userNo };
-            let bno = ${ b.boardNo }
+            userNo = ${ loginMember.userNo };
+            let bno = ${ b.boardNo };
             function insertLike(){
                 $.ajax({
                     url:"like.bo",
                     data:{boardNo:bno, 
-                          userNo:userNo,
+                          boardWriter:userNo,
 						  boardType: 1
                         },
                     success:function(result){
@@ -421,9 +443,9 @@
             function deleteLike(){
         
                 $.ajax({
-                    url:"likeDelete.bo",
+                    url:"deleteLike.bo",
                     data:{boardNo:bno, 
-                          userNo:userNo,
+                        boardWriter:userNo,
                           boardType: 1
                         },
                     success:function(result){
@@ -444,7 +466,7 @@
                 $.ajax({
                     url:"likeCheck.bo",
                     data:{boardNo:bno, 
-                          userNo:userNo,
+                          boardWriter:userNo,
 						  boardType: 1
                         },
                     success:function(result){

@@ -87,9 +87,9 @@
 	<resultMap type="WallPaper" id="wallResult">
 		<result column="BACK_NO" property="backNo"/>
 		<result column="USER_NO" property="userNo"/>
-		<result column="IMG" property="IMG"/>
+		<result column="IMG" property="img"/>
 		<result column="CREATE_DATE" property="createDate"/>
-		<result column="COUNT" property="COUNT"/>
+		<result column="COUNT" property="count"/>
 		<result column="DOWNLOAD" property="download"/>
 		<result column="BOARD_TYPE" property="boardType"/>
 		<result column="BACK_TITLE" property="bgTitle"/>
@@ -100,10 +100,12 @@
 	
 	<select id="selectPhListCount" resultType="_int">
 		select
-			count(*)
-			from board
-			where status = 'Y'
-            and board_type = 1 
+	 	 	   count(*)
+          from board b
+     left join attachment a on b.board_no = a.ref_bno
+         where b.status = 'Y'
+           and board_type = 1 
+           and a.file_level = 1
 	</select>
 	
 	<select id="selectPhList" resultMap="boardResult">
@@ -883,6 +885,56 @@
 		AND board_type = #{boardType}
 	</delete>
 	
+	<select id="selectWpListCount" resultType="_int">
+		select
+			count(*)
+			from background
+			where status = 'Y'
+	</select>
+	
+	<select id="selectWpList" resultMap="wallResult">
+		 select
+			      back_no
+			    , nickname
+			    , img
+		        , count
+		        , download
+		        , board_type
+			    , to_char(bg.create_date, 'YYYY-MM-DD') as "create_date"
+			    , back_title
+			  from background bg
+		      join member using(USER_NO)
+			  where bg.status = 'Y'
+			  order by back_no desc
+	</select>
+	
+	
+	<update id="increaseCountWp">
+		 update background
+		  	set count = count + 1
+		  where back_no = #{backNo}
+		    and status = 'Y'
+	</update>
+	
+	<select id="selectWp" resultMap="wallResult">
+		 select
+			      back_no
+			    , user_no
+			    , img
+		        , count
+		        , download
+		        , board_type
+			    , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+			    , back_title
+			  from background
+			  where status = 'Y'
+			  and back_no = #{backNo}
+			  order by back_no desc
+	</select>
+	
+	
+	
+	
 	<insert id="insertWallPaper">
 		INSERT 
 		  INTO background
@@ -903,10 +955,18 @@
 		)
 	</insert>
 	
+	<delete id="wpDelete">
+	    DELETE FROM background
+	    WHERE back_no = #{backNo}
+	</delete>
 	
 	
-	
-	
+	<update id="increaseDownload">
+		 update background
+		  	set download = download + 1
+		  where back_no = #{backNo}
+		    and status = 'Y'
+	</update>
 	
 	
 	<insert id="reportBoard">
