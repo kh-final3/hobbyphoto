@@ -17,13 +17,13 @@
 					width: 96%;
 					max-width: 800px;
 					margin: 0 auto;
-					line-height: 1.5
+					line-height: 1.5;
 				}
 
 				.exhibitionDetail-head {
 					padding-bottom: 60px;
 					border-bottom: 1px solid #dfdfdf;
-					margin-top: 40px
+					margin-top: 40px;
 				}
 
 				.exhibitionDetail-head-title {
@@ -34,21 +34,21 @@
 
 				.exhibitionDetail-head-location {
 					font-size: 14px;
-					color: #989898
+					color: #989898;
 				}
 
 				.exhibitionDetail-carousel {
-					margin-top: 12px
+					margin-top: 12px;
 				}
 
 				.exhibitionDetail-carousel-item {
 					position: relative;
 					width: 100%;
-					padding-bottom: 75%
+					padding-bottom: 75%;
 				}
 
 				.exhibitionDetail-carousel-item:nth-child(n+2) {
-					display: none
+					display: none;
 				}
 
 				.exhibitionDetail-carousel-imageWrap {
@@ -59,7 +59,7 @@
 					right: 0;
 					border: 1px solid #eee;
 					background-color: #fafafa;
-					overflow: hidden
+					overflow: hidden;
 				}
 
 				.exhibitionDetail-carousel-image {
@@ -75,12 +75,12 @@
 				}
 
 				.exhibitionDetail-carousel>.owl-dots {
-					margin-top: 24px
+					margin-top: 24px;
 				}
 
 				.exhibitionDetail-carousel .owl-dots {
 					line-height: 8px;
-					text-align: center
+					text-align: center;
 				}
 
 				.exhibitionDetail-carousel .owl-dot {
@@ -90,28 +90,28 @@
 					height: 8px;
 					border-radius: 50%;
 					margin: 0 6px;
-					vertical-align: top
+					vertical-align: top;
 				}
 
 				.exhibitionDetail-carousel .owl-dot.active {
-					background-color: #989898
+					background-color: #989898;
 				}
 
 				.exhibitionDetail-section {
-					margin-top: 72px
+					margin-top: 72px;
 				}
 
 				.exhibitionDetail-section-title {
 					font-size: 20px;
 					font-weight: bold;
-					text-align: center
+					text-align: center;
 				}
 
 				.exhibitionDetail-section-bar {
 					width: 42px;
 					height: 3px;
 					margin: 8px auto 24px;
-					background-color: #222
+					background-color: #222;
 				}
 
 				.exhibitionDetail-section-description {
@@ -119,7 +119,7 @@
 					padding: 24px 24px 24px 94px;
 					margin: 8px 0 30px;
 					background-color: #eff3fa;
-					border-radius: 4px
+					border-radius: 4px;
 				}
 
 				.exhibitionDetail-section-description>img {
@@ -127,14 +127,14 @@
 					top: 50%;
 					left: 40px;
 					transform: translateY(-50%);
-					width: 22px
+					width: 22px;
 				}
 
 				.exhibitionDetail-section-description>p {
 					margin-bottom: 8px;
 					font-size: 14px;
 					color: #222;
-					line-height: 1.5
+					line-height: 1.5;
 				}
 
 				.exhibitionDetail-section-description>a {
@@ -155,35 +155,36 @@
 					margin: 0 auto;
 					font-size: 14px;
 					text-align: justify;
-					color: #4a4a4a
+					color: #4a4a4a;
 				}
 
 				.exhibitionDetail-infoTable {
 					border: 1px solid #dfdfdf;
-					background-color: #fafafa
+					background-color: #fafafa;
 				}
 
 				.exhibitionDetail-infoTable-head {
 					border-bottom: 1px solid #dfdfdf;
-					background-color: #fff
+					background-color: #fff;
 				}
 
 				.exhibitionDetail-collectionBox{
 					float: right;
 					width: 48px;
 					height: 48px;
-					border-left: 1px solid #eee;
-					cursor: pointer
+					/* border-left: 1px solid #eee; */
+					padding: 2px 0 0 0;
+					cursor: pointer;
 				}
 
 				.exhibitionDetail-shareButton {
 					float: right;
 					width: 48px;
 					height: 48px;
-					border-left: 1px solid #eee;
-					background: #fff url(https://og-data.s3.amazonaws.com/static/pages/img/service/detailview/share_icon.png) 3px 3px no-repeat;
+					/* border-left: 1px solid #eee; */
+					background: url(https://og-data.s3.amazonaws.com/static/pages/img/service/detailview/share_icon.png) 3px 3px no-repeat;
 					background-size: 42px 42px;
-					cursor: pointer
+					cursor: pointer;
 				}
 
 				.exhibitionDetail-infoTable-table {
@@ -201,33 +202,33 @@
 
 				.exhibitionDetail-infoTable-table td {
 					padding: 16px 20px 0 20px;
-					vertical-align: top
+					vertical-align: top;
 				}
 
 				.exhibitionDetail-infoTable-table a {
 					color: #4085df;
-					text-decoration: underline
+					text-decoration: underline;
 				}
 
 				.exhibitionDetail-infoTable-admissionDetail {
 					padding-bottom: 16px;
 					border-bottom: 1px solid #eee;
-					margin-top: 6px
+					margin-top: 6px;
 				}
 
 				.exhibitionDetail-infoTable-footer {
 					padding: 14px 20px;
 					border-top: 1px solid #eee;
-					margin-top: 16px
+					margin-top: 16px;
 				}
 
 				.exhibitionDetail-location {
-					border: 1px solid #dfdfdf
+					border: 1px solid #dfdfdf;
 				}
 
 				.exhibitionDetail-location-map {
 					height: 248px;
-					background-color: #eee
+					background-color: #eee;
 				}
 
 				.exhibitionDetail-location-caption {
@@ -864,6 +865,9 @@
 					width: 48px;
 					height: 48px;
 					text-align: center;
+					border: 0px;
+					background-color:#f9f9f9;
+					
 				}
 
 				#bookmark1 img,

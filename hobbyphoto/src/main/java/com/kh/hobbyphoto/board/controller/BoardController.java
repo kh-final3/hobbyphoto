@@ -239,7 +239,6 @@ public class BoardController {
         }
 
         int result = bService.insertRcBoard(b, list);
-
         if (result > 0) {
             session.setAttribute("alertMsg", "게시글 등록에 성공했습니다.");
             return "redirect:rcBoardList.bo";
@@ -310,7 +309,6 @@ public class BoardController {
 		ArrayList<Reply> list = bService.selectRcReplyList(phno);
 		return new Gson().toJson(list);
 	}
-	
 	
 	@ResponseBody
 	@RequestMapping(value="rcRinsert.bo")

@@ -179,10 +179,10 @@
         }
 
         .writer button{
-            width: 13%;
-            height: 60%;
+            width: 14%;
+            height: 40px;
             margin-left: 3px;
-            margin-top: 10px;
+            /* margin-top: 10px; */
         }
         #detail-hr {
             border: 1px solid rgba(220, 220, 220, 0.340);
@@ -340,7 +340,7 @@
                     <p>댓글(<span id="rcount">0</span>)</p>
                     <div class="writer">
                         <textarea name="" id="content" cols="30" rows="10"></textarea>
-                        <button onclick="addReply();" class="btn btn-secondary btn-ml;">등록</button>
+                        <button type="button" onclick="addReply();" class="btn btn-secondary btn-lg;">등록</button>
                     </div>
                 </div>
             </div>

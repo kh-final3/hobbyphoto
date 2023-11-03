@@ -153,3 +153,4 @@ $RECYCLE.BIN/
 hobbyphoto/src/main/resources/mappers/member-mapper.xml
 *.jpg
 *.PNG
+hobbyphoto/src/main/java/com/kh/hobbyphoto/board/controller/BoardController.java
