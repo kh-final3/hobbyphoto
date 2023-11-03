@@ -6,6 +6,7 @@ import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
+import com.kh.hobbyphoto.shop.model.vo.Photo;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 public interface ShopService {
@@ -75,4 +76,7 @@ public interface ShopService {
 		
 		//20.상품 구매 후 재고 변동(단품)
 		int updateProduct(Orders ords);
+		
+		//21.사진 저장(인생넷컷)
+		//int insertPhoto(Photo p);
 }

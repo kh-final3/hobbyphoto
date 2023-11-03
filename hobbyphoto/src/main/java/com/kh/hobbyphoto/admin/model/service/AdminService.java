@@ -1,5 +1,7 @@
 package com.kh.hobbyphoto.admin.model.service;
 import java.util.ArrayList;
+
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
@@ -7,6 +9,7 @@ import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.model.vo.Report;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
+import com.kh.hobbyphoto.notice.model.vo.Notice;
 
 public interface AdminService {
 	
@@ -72,10 +75,15 @@ public interface AdminService {
 	//4.상품 상세보기(지영)
 	Product selectProductdetail(int pno);
 	
-	//5.상품 수정 폼열기
+	//5.상품 수정 폼열기(지영)
 	Product adminProductupdateForm(int pNo);
 	
 	//6.상품 수정(지영)
 	int adminProductupdate(Product p);
-
+	
+	//7.주문조회(지영)
+	ArrayList<Orders> selectMemberOredr();
+	
+	//8.공지사항(지영)
+	ArrayList<Notice> selectAdminNotice();
 }

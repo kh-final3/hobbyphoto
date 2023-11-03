@@ -91,7 +91,32 @@
       <result column="count" property="count"></result>
       <result column="download" property="downLoad"></result>
    </resultMap>
-
+   
+   <resultMap type="Orders" id="OrderResult">
+   		<result column="order_no" property="orderNo"/>
+   		<result column="user_no" property="userNo"/>
+   		<result column="name" property="name"/>
+   		<result column="address" property="address"/>
+   		<result column="postcode" property="postcode"/>
+   		<result column="phone" property="phone"/>
+   		<result column="order_date" property="orderDate"/>
+   		<result column="totalPrice" property="totalPrice"/>
+   		<result column="status" property="status"/>
+   		<result column="o_msg" property="OMsg"/>
+   		<result column="d_msg" property="DMsg"/>
+   </resultMap>
+   
+   <resultMap type="Notice" id="NoticeResult">
+   		<result column="notice_no" property="noticeNo"/>
+   		<result column="notice_writer" property="noticeWriter"/>
+   		<result column="notice_title" property="noticeTitle"/>
+   		<result column="notice_content" property="noticeContent"/>
+   		<result column="notice_type" property="noticeType"/>
+   		<result column="count" property="count"/>
+   		<result column="create_date" property="createDate"/>
+   		<result column="status" property="status"/>
+   </resultMap>
+   
 	<!-- 관리자페이지 회원 조회 -->
    <select id="selectMember" resultMap="resultMember">
    select 
@@ -397,5 +422,36 @@
   	   where 
   	   		p_no = #{pNo}
   </update>
+  
+  <select id="selectMemberOredr" resultMap="OrderResult">
+  	select
+  			order_no
+  		,	user_no
+  		,	name
+  		,	address
+  		,	postcode
+  		,	phone
+  		,	order_date
+  		,	totalPrice
+  		,	status
+  		,	o_msg
+  		,	d_msg
+  	from orders
+  	order by order_no desc
+  </select>
+  
+  <select id="selectAdminNotice" resultMap="NoticeResult">
+  		select
+  				notice_no
+  			,	notice_writer
+  			,	notice_title
+  			,	notice_content
+  			,	count
+  			,	create_date
+  			,	status
+  			,	notice_type
+  		from notice
+  		order by notice_no desc
+  </select>
 
 </mapper>

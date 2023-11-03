@@ -39,7 +39,7 @@ pType=null, oMsg=ㄱ나, dMsg=강, pNo=0, pName=null, price=0, amount=0, userNam
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">주문번호</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="가나다${ o.userNo }"></td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="ORD<fmt:parseDate value="${ o.orderDate }" var="orderDate" pattern="yyyy-MM-dd HH:mm:ss"/><fmt:formatDate value="${orderDate}" pattern="yyyyMMdd"/>-6400521${ o.userNo }"></td>
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">주문일자</td>
@@ -64,11 +64,11 @@ pType=null, oMsg=ㄱ나, dMsg=강, pNo=0, pName=null, price=0, amount=0, userNam
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">주문번호</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.totalPrice }"></td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="ORD<fmt:parseDate value="${ ord.orderDate }" var="orderDate" pattern="yyyy-MM-dd HH:mm:ss"/><fmt:formatDate value="${orderDate}" pattern="yyyyMMdd"/>-6400521${ ord.userNo }"></td>
                 </tr>
                 <tr>
-                    <td style="width: 200px; height: 40px;">주문명</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.totalPrice }"></td>
+                    <td style="width: 200px; height: 40px;">주문일자</td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.orderDate }"></td>
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">상품명</td>
@@ -76,7 +76,7 @@ pType=null, oMsg=ㄱ나, dMsg=강, pNo=0, pName=null, price=0, amount=0, userNam
                 </tr>
                 <tr>
                     <td style="width: 200px; height: 40px;">주문 고객 이름</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.totalPrice }"></td>
+                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.name }"></td>
                 </tr>
                 
                 </c:otherwise>
@@ -97,7 +97,7 @@ pType=null, oMsg=ㄱ나, dMsg=강, pNo=0, pName=null, price=0, amount=0, userNam
 		}
 		
 		function list(){
-			location.href="pro.list";
+			location.href="shop.order?userNo='${loginMember.userNo}'";
 		}
 	</script>
 

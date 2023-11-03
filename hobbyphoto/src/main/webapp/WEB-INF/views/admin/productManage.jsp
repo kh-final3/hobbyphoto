@@ -99,7 +99,7 @@
 
 </head>
 <body>
-
+ <jsp:include page="adminAlert.jsp"/>
 <div class="dashboard">
         <h2>상품 관리</h2>
 

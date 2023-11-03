@@ -150,12 +150,7 @@
 </style>
 </head>
 <body>
- <c:if test="${ not empty alertMsg }">
-	<script>
-			alertify.alert("${ alertMsg }");
-	</script>
-	<c:remove var="alertMsg" scope="session"/>
- </c:if>
+ <jsp:include page="adminAlert.jsp"/>
  
 <div class="dashboard">
     <h2>게시물 관리</h2>

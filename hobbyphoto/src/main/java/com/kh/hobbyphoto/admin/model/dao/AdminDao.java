@@ -10,6 +10,8 @@ import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.model.vo.Report;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 import com.kh.hobbyphoto.member.model.vo.Member;
+import com.kh.hobbyphoto.notice.model.vo.Notice;
+import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
 
 @Repository
@@ -125,5 +127,10 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.bkdeleBoard", backNo);
 	}
    
-   
+   public ArrayList<Orders> selectMemberOredr(SqlSessionTemplate sqlSession) {
+	   return (ArrayList)sqlSession.selectList("adminMapper.selectMemberOredr");
+   }
+   public ArrayList<Notice> selectAdminNotice(SqlSessionTemplate sqlSession){
+	   return (ArrayList)sqlSession.selectList("adminMapper.selectAdminNotice");
+   }
 }

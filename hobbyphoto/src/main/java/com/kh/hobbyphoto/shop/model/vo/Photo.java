@@ -30,4 +30,6 @@ public class Photo {
 	private Date createDate;
 	private String status;
 	private int pType;
+	
+	private String img;
 }
