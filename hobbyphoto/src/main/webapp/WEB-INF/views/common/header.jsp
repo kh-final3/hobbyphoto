@@ -9,12 +9,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
 	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+	<!-- 웹소켓 -->
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
   <style>
     div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'NanumBarunGothic';}
         .mb_outer{
@@ -211,6 +212,43 @@
         
   </style>
 </head>
+	<script>
+	var socket = null;
+	$(document).ready(function(){
+		if(${loginMember != null}){
+			connectWs();
+		}
+	})
+	
+	
+	//소켓
+	
+	
+	function connectWs(){
+		var ws = new SockJS("echo");
+		socket = ws;
+		
+		ws.onopen = function() {
+	 		console.log('open');
+	 	};
+	
+		ws.onmessage = function(event) {
+			console.log("onmessage"+event.data);
+			let $socketAlert = $('#socketAlert');
+			$socketAlert.html(event.data)
+			$socketAlert.css('display', 'block');
+			
+			setTimeout(function(){
+				$socketAlert.css('display','none');
+			}, 5000);
+		};
+	
+		ws.onclose = function() {
+		    console.log('close');
+		 };
+	};
+	</script>
+	
 	<c:if test="${ not empty alertMsg }">
       <script>
          alert("${alertMsg}");
@@ -324,8 +362,7 @@
         function logout() {
 			location.href="logout.me"
 		}
-    </script>
-    <script>
+    
 	    $(".gomain").click(function(){
 	    	location.href='/hobbyphoto'
 	    })

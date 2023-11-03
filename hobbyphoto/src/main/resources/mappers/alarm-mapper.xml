@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="alarmMapper">
+
+	<resultMap id="alamResult" type="Alarm">
+		<result column="alarm_no" property="alarmNo"/>
+		<result column="to_id" property="sendId"/>
+		<result column="from_id" property="fromId"/>
+		<result column="b_no" property="bno"/>
+		<result column="title" property="title"/>
+		<result column="cmd" property="cmd"/>
+		<result column="type" property="type"/>
+	</resultMap>
+	
+	<insert id="insertAlram">
+		insert 
+		  into alarm
+		  (
+		    alarm_no
+		  , to_id 
+		  , from_id 
+		  , b_no 
+		  , title 
+		  , cmd 
+		  , type
+		  ) 
+     values 
+          (
+            seq_alarm_no.nextval
+          , #{sendId}
+          , #{fromId}
+          , #{bno}
+          , #{title}
+          , #{cmd}
+          , #{type})
+	</insert>
+	
+</mapper>
+	
