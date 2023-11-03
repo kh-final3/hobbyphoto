@@ -271,7 +271,26 @@
         .list-content{
             height: 100%;
         }
-        
+        .bookmark{
+            text-align: right;
+        }
+
+        #bookmark1,
+        #bookmark2 {
+            background-color: white;
+            border: white;
+            width: 48px;
+            height: 48px;
+            text-align: center;
+        }
+
+        #bookmark1 img,
+        #bookmark2 img{
+
+            width: 100%;
+            margin: auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -291,12 +310,13 @@
                                 
                                 <div class="board-create">${ p.createDate }</div>
 
-                                <div class="boare-ect">
-                                <!-- 좋아요눌럿을때 -->
-                                    <a href="">❤️</a> &nbsp;&nbsp;
-                                <!-- 좋아요안눌럿을때 -->
-                                    <a href="">🤍</a> &nbsp;&nbsp;
-                                    <button type="button" data-toggle="modal" data-target="#reportBoard">❗</button>
+                                <div class="bookmark">
+                                    <button id="bookmark1" onclick="insertBook();">
+                                        <img src="resources/images/bookmark_blank.png">
+                                    </button>
+                                    <button id="bookmark2" onclick="deleteBook();" style="display: none;">
+                                        <img src="resources/images/bookmark.png">
+                                    </button>
                                 </div>
                             </li>
                             <hr>
@@ -482,6 +502,71 @@
         
     </div>
 </div>
+
+<script>
+    if (${ loginMember.userNo } !== null) {
+        userNo = ${ loginMember.userNo };
+
+        function insertBook() {
+            $.ajax({
+                url: "book.bo",
+                data: {
+                boardNo: ${ p.pno },
+                boardWriter: userNo,
+                boardType: 6
+            },
+                success: function (result) {
+                    if (result === 'Y') {
+                        $("#bookmark1").css("display", "none");
+                        $("#bookmark2").css("display", "");						
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+
+        function deleteBook() {
+            $.ajax({
+                url: "deleteBook.bo",
+                data: {
+                    boardNo: ${ p.pno },
+                    boardWriter: userNo,
+                    boardType: 6
+                    },
+                success: function (result) {
+                    if(result == 'Y'){
+                        $("#bookmark1").css("display", "");
+                        $("#bookmark2").css("display", "none");
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+                $(function () {
+                    $.ajax({
+                        url: "bookCheck.bo",
+                        data: {
+                            boardNo: ${ p.pno },
+                            boardWriter: userNo,
+                            boardType: 6
+                            },
+                    success: function (result) {
+                        if(result == 'Y'){
+                            $("#bookmark2").css("display", "");
+                            $("#bookmark1").css("display", "none");
+                        }else{
+                            $("#bookmark2").css("display", "none");
+                            $("#bookmark1").css("display", "");                    	
+                        }
+                    },
+                    error: function (result) {
+                    }
+                });
+        })
+    }
+    </script>
     <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
