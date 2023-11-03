@@ -213,6 +213,8 @@
 	   , change_name = #{changeName}
 	   , file_path = #{filePath}
 	 where ref_bno = #{refBno}
+	 and file_level = #{fileLevel}
+	 and file_no = #{fileNo}
 	</update>
 	
 	<insert id="insertNewAttachment">

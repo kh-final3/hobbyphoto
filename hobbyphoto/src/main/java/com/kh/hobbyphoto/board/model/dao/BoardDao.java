@@ -2,7 +2,9 @@ package com.kh.hobbyphoto.board.model.dao;
 
 import java.util.*;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
