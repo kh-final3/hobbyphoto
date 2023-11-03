@@ -344,7 +344,6 @@
     	
     	function addReply(){
     		if($("#content").val().trim().length != 0){
-    			
     			$.ajax({
     				url:"phRinsert.bo",
     				data:{
@@ -355,6 +354,16 @@
     				}, success:function(status){
     					if(status == "success"){
     						selectPhReplyList();
+    						
+    						if("${ loginMember.userId }" != "${ b.boardWriter }"){
+    							if(socket){
+    								let socketMsg = "reply,${ loginMember.userId },${ b.boardWriter },${b.boardNo},${b.boardTitle},1";
+    								console.log(socketMsg);
+    								socket.send(socketMsg);
+    							}
+    			           	}
+    			           		
+    						$("#content").val("");
     					}
     				}, error:function(){
     					console.log("댓글 작성용 ajax 요청 실패!")
@@ -362,6 +371,12 @@
     			})
     		} else {
     			alertify.alert("댓글 작성 후 등록 요청해주세요!");
+    		}
+    		if("${ loginMember.userId }" != "${ b.boardWriter }"){
+    			 $.ajax({
+    			        url : "insertAlram",
+    			        data : {sendId: "${ loginMember.userId }" , fromId: "${ b.boardWriter }" , bno:${ b.boardNo },title:"${ b.boardTitle }" , cmd: "reply", type:1 },
+    			 });
     		}
     	}
     	
@@ -371,8 +386,6 @@
     			data:{
     				phno:${ b.boardNo }
     			}, success:function(list){
-    				console.log(list);
-    				
 	    				let value = "";
 	    				for(let i in list){
 	    					value += "<tr>"
