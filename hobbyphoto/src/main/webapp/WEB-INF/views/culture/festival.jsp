@@ -190,6 +190,7 @@
         .card-img-top {
             height: 300px;
         }
+        
         .enrollForm{
         float: right;
         }
@@ -224,7 +225,7 @@
                         </div>
                     </div>
                     <c:if test="${ loginMember.userNo eq 1}">
-                        <a class="enrollForm btn btn-secondary" href="cultureEnrollForm.fs">글쓰기</a>
+                        <a class="enrollForm btn btn-secondary" href="cultureEnrollForm.fs">글작성</a>
                     </c:if>
                 </div>
             </div>

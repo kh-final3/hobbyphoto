@@ -331,7 +331,7 @@
                     <p>댓글(<span id="rcount">0</span>)</p>
                     <div class="writer">
                         <textarea name="" id="content" cols="30" rows="10"></textarea>
-                        <button onclick="addReply();">등록</button>
+                        <button onclick="addReply();" class="btn btn-secondary btn-ml;">등록</button>
                     </div>
                 </div>
             </div>

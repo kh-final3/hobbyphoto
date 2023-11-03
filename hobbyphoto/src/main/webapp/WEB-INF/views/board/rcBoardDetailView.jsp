@@ -13,7 +13,7 @@
     }
     .recommend{
         border-bottom: 1px solid lightgray;
-		width: 1280px;
+		width: 1295px;
     }
 
     #contentArea th{
@@ -22,6 +22,7 @@
 
     #contentArea th,td{
         padding-left: 20px;
+		border: none;
     }
 
     .text{font-size: 14px; color: gray; margin-right: 70px;}
@@ -42,7 +43,7 @@
             border: none;
             background-color: rgba(0, 0, 0, 0);
             font-size: 14px;
-        }
+}
 </style>
 </head>
 	<jsp:include page="../common/header.jsp"/>
@@ -94,12 +95,12 @@
 	            </table>
 	        </div>
 	        <br>
-	        <button class="btn btn-dark btn-sm">목록으로</button>
+	        <button class="btn btn-sm btn-secondary" style="margin-bottom: 10px;">목록가기</button>
 				<c:if test="${ loginMember.userId eq b.boardWriter }">
 		            <div align="center">
-		            		<a class="btn btn-primary btn-sm" href="rcBoardList.bo">목록으로</a>
-			                <a class="btn btn-warning btn-sm" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
-			                <a class="btn btn-danger btn-sm" onclick="postFormSubmit(2);">삭제하기</a>
+		            		<a class="btn btn-primary btn-m" href="rcBoardList.bo">목록가기</a>
+			                <a class="btn btn-warning btn-m" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
+			                <a class="btn btn-danger btn-m" onclick="postFormSubmit(2);">삭제하기</a>
 		            </div><br><br>
 				</c:if>
 	        
@@ -129,7 +130,7 @@
 	            <div class="insertReply">
                     <div class="ir-title">댓글달기</div>
                     <div class="ir-content">
-                            <textarea name="" id="content" cols="130" rows="3"></textarea>
+                            <textarea name="" id="content" cols="120" rows="3" style="resize: none;"></textarea>
                             <button class="ir-btn btn-dark" onclick="addReply();">작성</button>
                     </div>
 	            </div>

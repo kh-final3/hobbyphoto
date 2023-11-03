@@ -145,7 +145,7 @@
                 <c:if test="${ loginMember.userNo eq 1}">
 
                     <div class="btn-area">
-                        <button class="btn btn-secondary">글쓰기</button>
+                        <button class="btn btn-secondary">글작성</button>
                     </div>
                 </c:if>
                 <div class="ect">

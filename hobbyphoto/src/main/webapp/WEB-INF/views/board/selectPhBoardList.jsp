@@ -79,7 +79,7 @@
 				<div style="width: 850px;" align="right">
 				    <c:choose>
 				        <c:when test="${ not empty loginMember }">
-				            <a href="phEnrollForm.bo" class="btn btn-light" id="btn_th">글작성</a>
+				            <a href="phEnrollForm.bo" class="btn btn-secondary" id="btn_th">글작성</a>
 				        </c:when>
 				    </c:choose>
 				</div>

@@ -202,6 +202,23 @@
             height: 35px;
             margin-top: 20px;
         }
+
+        .view_btn {
+            border: 1px solid #dadada;
+            color: black;
+            padding: 5px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s; 
+            margin: 0 0 0 210px;
+        }
+
+        .view_btn:hover {
+            font-weight: bold;
+            border: 1px solid #000;
+            background-color: #dadada;
+            text-decoration: none;
+        }
        
     </style>
 </head>
@@ -226,7 +243,7 @@
                     </div>
                     <c:if test="${ loginMember.userNo eq 1}">
 
-                        <a class="enrollForm btn btn-secondary" href="cultureEnrollForm.fs">글쓰기</a>
+                        <a class="enrollForm btn btn-secondary" href="cultureEnrollForm.fs">글작성</a>
                     </c:if>
                 </div>
             </div>
@@ -242,7 +259,7 @@
 		            <div class="card-body">
 		                <h4 class="card-title">${ fe.feTitle }</h4>
 		                <p class="card-text">기 간${ fe.feDate }</p>
-		                <a href="cultureDetail.fs?feNo=${ fe.feNo}" class="btn btn-primary">자세히보기</a>
+		                <a href="cultureDetail.fs?feNo=${fe.feNo}" class="view_btn">자세히보기</a>
 		            </div>
 		        </div>
         	</c:forEach>
