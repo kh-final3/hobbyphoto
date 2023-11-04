@@ -259,7 +259,7 @@
 	    <div class="mb_outer">
 	        <div class="mb_menu-area">
 	            <div id="mb_logo">
-	                <img src="resources/images/logo.png" alt="로고" onclick="location.href='main.ho'">
+	                <img src="resources/images/logo.png" alt="로고" onclick="location.href='/hobbyphoto'">
 	            </div> 
 	            <div id="mb_nav">
 	                <ul id="mb_navi">

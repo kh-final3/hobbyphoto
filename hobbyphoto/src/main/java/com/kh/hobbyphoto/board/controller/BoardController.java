@@ -45,9 +45,10 @@ public class BoardController {
 		if (result > 0) {
 			Board b = bService.selectPhBoard(phno); 
 			ArrayList<Attachment> at = bService.selectAtBoard(phno);
-			
+			ArrayList<Follow> f = bService.selectFollowMember(b);
 			model.addAttribute("b", b);
 			model.addAttribute("at", at);
+			model.addAttribute("f", f);
 			
 			return "board/phBoardDetailView";
 			
@@ -133,7 +134,6 @@ public class BoardController {
                 list.add(at);
             }
         }
-        System.out.println(list);
         int result = bService.updatePhBoard(b, list);
 	    if (result <= 0) {
 	        model.addAttribute("errorMsg", "게시글 수정 실패");
@@ -535,7 +535,6 @@ public class BoardController {
 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<Festival> list = bService.cultureList(pi, keyword);
-		System.out.println(list);
 		mv.addObject("pi", pi).addObject("list", list).setViewName("culture/exhibit");
 
 		return mv;
@@ -545,7 +544,6 @@ public class BoardController {
 	@RequestMapping("cultureDetail.fs")
 	public String selectCulture(int feNo, Model model) {
 	    Festival fe = bService.selectCulture(feNo);
-	    System.out.println(fe.getFeType().substring(0, 2));
 	    if (fe != null) {
 	        model.addAttribute("fe", fe);
 	        if ("축제".equals(fe.getFeType().substring(0, 2))) {
@@ -845,4 +843,23 @@ public class BoardController {
 		}
 		
 	}
+	@ResponseBody
+	@RequestMapping("follow")
+	public String followMember(Follow f,int userId, String memberId) {
+		
+		int result = bService.insertfollow(f);
+		
+		return result > 0? "success" : "fail";
+	}
+	
+	@ResponseBody
+	@RequestMapping("unfollow")
+	public String unFollowMember(Follow f, int userId, String memberId) {
+		
+		int result = bService.unfollow(f);
+		
+		return result>0 ? "success" : "fail";
+	}
+
+	
 }

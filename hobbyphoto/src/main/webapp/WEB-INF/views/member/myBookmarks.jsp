@@ -62,6 +62,7 @@
 	            height: 35px;
 	            margin-top: 20px;
 	    }
+	    .pno,.type{display: none;}
     </style>
 </head>
 <body>
@@ -96,18 +97,8 @@
             		<c:when test="${ not empty list }">
             			<c:forEach var="b" items="${ list }">
 			              <tr>
-			                <td>${ b.boardTitle }</td>
-			                <td>
-			                	<c:if test="${ b.boardType eq 4 }">
-			                		명소
-			                	</c:if>
-			                	<c:if test="${ b.boardType eq 5 }">
-			                		전시
-			                	</c:if>
-			                	<c:if test="${ b.boardType eq 6 }">
-			                		축제
-			                	</c:if>
-			                </td>
+			                <td><span class="pno">${ b.boardNo }</span>${ b.boardTitle }</td>
+			                <td><span class="type">${ b.boardType }</span><c:if test="${ b.boardType eq 4 }">명소</c:if><c:if test="${ b.boardType eq 5 }">전시</c:if><c:if test="${ b.boardType eq 6 }">축제</c:if></td>
 			                <td>${ b.createDate }</td>
 			              </tr>
             			</c:forEach>
@@ -115,9 +106,9 @@
             		<c:otherwise>
             			<tr>
 			            	<td colspan="3" class="notFound">게시글이 존재하지 않습니다.</td>
-			            </tr>
+			           </tr>
             		</c:otherwise>
-            		</c:choose>
+            		</c:choose> 
                   </tbody>
                 </table>
               </div>
@@ -146,8 +137,17 @@
 	</div>
     <script>
     	$(()=>{
-    		$(document).on("click", ".table>tbody>tr",()=>{
-				console.log("클릭")
+    		$(document).on("click", ".table>tbody>tr",function(){
+    			let type = $(this).find(".type").text();
+    			if(type == "4"){
+    				location.href = 'detail.pl?pno='+ $(this).find(".pno").text();
+    			}
+    			if(type == "5"){
+    				location.href = 'cultureDetail.fs?feNo='+ $(this).find(".pno").text();
+    			}
+    			if(type == "6"){
+    				location.href = 'cultureDetail.fs?feNo='+ $(this).find(".pno").text();
+    			}
     		})
     	})
     </script>

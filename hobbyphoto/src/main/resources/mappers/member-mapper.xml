@@ -21,7 +21,6 @@
 		<result column="follow_date" property="followDate"/>
 		<result column="profile_img" property="profileImg"/>
 		<result column="nickname" property="nickname"/>
-		<result column="user_no" property="userNo"/>
 	</resultMap>
   
 	<insert id="insertMember" parameterType="Member">
@@ -211,37 +210,35 @@
 		select
 		       count(*)
 		  from follow
-		 where follow_id = #{ userNo }
+		 where follow_id = #{ userId }
 	</select>
 	
 	<select id="selectFollow" resultMap="resultFollow">
 		select
-               user_no
-             , m.user_id
+               f.user_id
              , nickname
              , profile_img
              , follow_date
 		  from follow f
-          left join member m on (f.user_id = m.user_no)
-		 where follow_id = #{ userNo }
+          left join member m on (f.user_id = m.user_id)
+		 where follow_id = #{ userId }
 	</select>
 	
 	<select id="selectFollowingCount" resultType="_int">
 		select
 		       count(*)
 		  from follow
-		 where user_id = #{ userNo }
+		 where user_id = #{ userId }
 	</select>
 	
 	<select id="selectFollowing" resultMap="resultFollow">
 		select
-               user_no
-		     , m.user_id
+               f.follow_id
              , nickname
              , profile_img
              , follow_date
 		  from follow f
-          left join member m on (f.follow_id = m.user_no)
-		 where f.user_id = #{ userNo }
+          left join member m on (f.follow_id = m.user_id)
+		 where f.user_id = #{ userId }
 	</select>
 </mapper>

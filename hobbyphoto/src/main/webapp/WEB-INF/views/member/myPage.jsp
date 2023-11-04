@@ -253,12 +253,11 @@
 	       		<c:otherwise>
 			    	<c:forEach var="a" items="${ follow }">
 			    		<div class="follow">
-			    			<input type="hidden" name="userNo" value="${ a.userNo }">
 			    			<div class="followProfile">
                                 <img src="${a.profileImg}">
                             </div>
                             <div class="followInfo">
-                                <div class="followId">${a.userId}</div>
+                                <div class="followId">${a.followId}</div>
                                 <div class="followNick">${a.nickname}</div>
                             </div>
                             <div class="followBtn">
@@ -293,7 +292,6 @@
 	       		<c:otherwise>
 			    	<c:forEach var="b" items="${ follower }">
 			    		<div class="follow">
-			    			<input type="hidden" name="userNo" value="${ b.userNo }">
 			    			<div class="followProfile">
                                 <img src="${b.profileImg}">
                             </div>
@@ -328,7 +326,7 @@
 		
 		$(()=>{
     		$(document).on("click", ".modal-body .follow",function(){
-    			location.href="profile.me?userNo=" + $(this).children().eq(0).val() + "&userId=" + $(this).find(".followId").text();
+    			location.href="profile.me?userId=" + $(this).find(".followId").text();
             })
     	})
     	
