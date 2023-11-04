@@ -17,12 +17,16 @@
 	<!-- 웹소켓 -->
 	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
   <style>
-    div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'NanumBarunGothic';}
+	@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+	.notosanskr * { 
+	font-family: 'Noto Sans KR', sans-serif;
+	}
+    div{/*box-sizing: border-box; border: 1px solid;*/ font-family: 'Noto Sans KR';}
         .mb_outer{
             height: 120px;
             margin-top: 10px;
             margin: auto;
-            margin-left: 50px;
+            margin-left: 140px;
             display: flex;
             justify-content: space-between;
             align-items: center; 
@@ -35,14 +39,14 @@
             /* border: 1px solid blue;  */
         }
         .mb_login-area{
-            width: 20%;
+            width: 30%;
             margin-left: 20px; 
             /* border: 1px solid red; */
         }
 
         .mb_menu-area>div{height: 100%; float: left;}
         #mb_logo{width: 15%; height: 100%;}
-        #mb_nav{width: 80%;}
+        #mb_nav{width: 80%; margin-left: 30px;}
         #mb_logo>img{
             display: block; 
             width: 100%; 
@@ -158,12 +162,24 @@
             border-bottom-color: #fff;
             transform: translate(-50%,calc(-100% + 1px))
         }
-        
     
         .member_inner{
         	width: 130px;
         	height: 150px;
             background-color: white;
+        	position: absolute;
+        	top: 100px;
+            right: 117px;
+        	border: 1px solid black;
+        	z-index: 120;
+            text-align: center;
+            padding: 10px 15px;
+        }
+        
+        .alarm_inner{
+        	width: 250px;
+        	height: 200px;
+        	background-color: white;
         	position: absolute;
         	top: 100px;
             right: 117px;
@@ -210,6 +226,23 @@
           font-size: 14px;
         }
         
+        .alarmArea{
+        	width: 100%;
+        	height: 90%;
+        	overflow: auto;
+        }
+        
+        .alarmClose{
+        	border-top: 1px solid #f1f1f1;
+        	color: rgb(120, 118, 118);
+        	font-size: 14px;
+        	font-weight: 700;
+        }
+        
+        .bno,.type{
+        	display: none;
+        }
+        
   </style>
 </head>
 	<script>
@@ -233,14 +266,8 @@
 	 	};
 	
 		ws.onmessage = function(event) {
-			console.log("onmessage"+event.data);
-			let $socketAlert = $('#socketAlert');
+			let $socketAlert = $('.alarmArea');
 			$socketAlert.html(event.data)
-			$socketAlert.css('display', 'block');
-			
-			setTimeout(function(){
-				$socketAlert.css('display','none');
-			}, 5000);
 		};
 	
 		ws.onclose = function() {
@@ -273,17 +300,7 @@
 	                </ul>
 	            </div>
 	        </div>
-	        <div class="mb_search-area">
-	            <div id="mb_search">
-	                <form action="#" id="search_form">
-	                    <div id="search_text">
-	                        <input type="text" name="keyword" id="sh_text" placeholder="&nbsp&nbsp&nbsp검색어를 입력해주세요">
-	                        <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
-	                    </div>
-	                    
-	                </form>
-	            </div>
-	        </div>
+	       
 	        <div class="mb_login-area">
                 <div id="mb_user_1">
                     <table class="login-area" align="center">
@@ -326,7 +343,7 @@
 
 				                					</c:when>
 				                					<c:otherwise>
-				                						<a href="#">알림(0)</a>
+				                						<a id="alarmText">알림<span id="alarmCount">(0)</span></a>
 				                					</c:otherwise>
 			                					</c:choose>
 		                					</li>
@@ -336,6 +353,15 @@
 		                	</div>
                 		</c:otherwise>
                 	</c:choose>
+                	<div class="alarm false">
+                		<div class="alarm_inner">
+                			<div class="alarmArea">
+                			</div>
+	                		<div class="alarmClose">
+	                			닫기
+	                		</div>
+                		</div>
+		            </div>
                 </div>
 	        </div>
 	    </div>
@@ -353,6 +379,21 @@
 	        		$(".member").addClass("false")
         		}
         	})
+        	
+        	$("#alarmText").click(()=>{
+                $(".alarm").before();
+        		if($(".alarm").hasClass("false")){
+	        		$(".alarm").removeClass("false")
+	        		$(".alarm").addClass("member--visible")
+        		}
+        	})
+        	
+        	$(".alarmClose").click(()=>{
+        		$(".alarm").removeClass("member--visible")
+        		$(".alarm").addClass("false")
+        		$(".member").removeClass("member--visible")
+	        	$(".member").addClass("false")
+        	})
         })
         
         function login() {
@@ -366,5 +407,92 @@
 	    $(".gomain").click(function(){
 	    	location.href='/hobbyphoto'
 	    })
+	    
+	    $(()=>{
+	    	if(${loginMember != null}){
+		    	$.ajax({
+		    		url:"alramCount",
+		    		data:{fromId:"${loginMember.userId}"},
+		    		success:data=>{
+		    			$("#alarmCount").text("("+ data +")")
+		    		},
+		    		error:()=>{
+			    		console.log("알림 카운트 수 로딩 실패")	
+		    		}
+		    	})
+		    	
+		    	$.ajax({
+		    		url:"alramList",
+		    		data:{fromId:"${loginMember.userId}"},
+		    		success:data=>{
+		    			let value = "";
+		                for(let i in data){
+		                	if(data[i].type == 1){
+			                   value += "<div class='alarmMsg'><span class='bno'>"+data[i].bno+"</span>"
+			                   		  + "<span class='type'>"+data[i].type+"</span>"
+			                   		  + "<span class='sendId'>" +data[i].sendId + "</span>"
+			                   		  + "님이 "+ data[i].title +" 에 댓글을 달았습니다!</div>";
+		                	}
+		                          
+		                }
+		                
+		                $(".alarmArea").html(value);
+		    		},
+		    		error:()=>{
+			    		console.log("알림 카운트 수 로딩 실패")	
+		    		}
+		    	})
+		    	
+		    	 $(document).on("click", ".alarmMsg", function(){
+		    		 let type = $(this).find(".type").text();
+						// 댓글
+						if(type==1){
+				    		$.ajax({
+				    			url:"alramClick",
+				    			data:{bno:$(this).find(".bno").text(),sendId:$(this).find(".sendId").text(),type:$(this).find(".type").text()},
+				    			type:"post",
+				    			success:data=>{
+				    				location.href="phDetail.bo?phno="+data
+				    			},
+				    			error:()=>{
+				    				console.log("알림 삭제 실패")
+				    			}
+				    		})
+						}
+		    		 
+		    		 	// 좋아요
+		    		 	if(type==2){
+		    		 		$.ajax({
+				    			url:"alramClick",
+				    			data:{bno:$(this).find(".bno").text(),sendId:$(this).find(".sendId").text(),type:$(this).find(".type").text()},
+				    			type:"post",
+				    			success:data=>{
+				    				location.href="phDetail.bo?phno="+data
+				    			},
+				    			error:()=>{
+				    				console.log("알림 삭제 실패")
+				    			}
+				    		})
+		    		 	}
+		    		 	
+		    		 	// 팔로우
+		    		 	if(type==3){
+		    		 		$.ajax({
+		    		 			url:"alramClick",
+		    		 			data:{bno:$(this).find(".bno").text(),sendId:$(this).find(".sendId").text(),type:$(this).find(".type").text()},
+		    		 			type:"post",
+		    		 			success:data=>{
+		    		 				location.href="phDetail.bo?phno="+data
+		    		 			},
+		    		 			error:()=>{
+		    		 				console.log("알림 삭제 실패");
+		    		 			}
+		    		 		})
+		    		 	}
+		    	})
+	    	}
+	    })
+	    
+	    
     </script>
 </html>

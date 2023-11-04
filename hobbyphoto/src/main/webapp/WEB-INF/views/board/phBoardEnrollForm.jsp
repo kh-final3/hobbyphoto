@@ -198,7 +198,7 @@
 
                     <div class="writer-area">
                         제목 <input type="hidden" id="boardWriter" value="${ loginMember.userNo }" name="boardWriter">
-                        <input type="text" name="boardTitle" id="boardTitle" class="title-input" style="width: 317px;" placeholder="제목을 입력해주세요." required> <br>
+                        <input type="text" name="boardTitle" id="boardTitle" class="title-input" style="width: 317px;" placeholder="제목을 입력해주세요."   required> <br>
                         <textarea name="boardContent" id="boardContent" class="text-area" placeholder="내용을 입력해주세요." required></textarea> <br>
                         해시태그 <input type="text" name="hashTag" id="hashTag" class="tag-input" style="width: 290px;" placeholder="해시태그를 입력해주세요.">
                     </div>

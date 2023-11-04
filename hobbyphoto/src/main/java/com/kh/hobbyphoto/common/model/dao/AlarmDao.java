@@ -14,13 +14,13 @@ public class AlarmDao {
 	}
 	
 	public int alramCount(SqlSessionTemplate sqlSession,Alarm a) {
-		return 0;
+		return sqlSession.selectOne("alarmMapper.alramCount",a);
 	}
 	public ArrayList<Alarm> alramList(SqlSessionTemplate sqlSession,Alarm a) {
-		return null;
+		return (ArrayList)sqlSession.selectList("alarmMapper.alramList",a);
 	}
 	public int alramClick(SqlSessionTemplate sqlSession,Alarm a) {
-		return 0;
+		return sqlSession.delete("alarmMapper.alramClick",a);
 	}
 	
 }

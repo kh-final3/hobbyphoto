@@ -35,24 +35,19 @@ public class EchoHandler extends TextWebSocketHandler{
 				int bno = Integer.parseInt(strs[3]);
 				String title = strs[4];
 				int type = Integer.parseInt(strs[5]);
-				
-				System.out.println(cmd);
-				
 				WebSocketSession boardWriterSession = userSessionsMap.get(boardWriter);
 				System.out.println(boardWriterSession);
 				
 				//댓글
 				if (cmd.equals("reply") && boardWriterSession != null) {
-					TextMessage tmpMsg = new TextMessage(replyWriter + "님이 <a href='phDetail.bo?phno="+bno+" style='color: black'>"+ title+" 에 댓글을 달았습니다!</a>");
+					TextMessage tmpMsg = new TextMessage("<div class='alarmMsg'><span class='bno'>"+bno+"</span><span class='type'>"+type+"</span>"+replyWriter + "님이 "+title+" 에 댓글을 달았습니다!</div>");
 					boardWriterSession.sendMessage(tmpMsg);
 				}
 				
 				//좋아요
 				else if("like".equals(cmd) && boardWriterSession != null) {
 					//replyWriter = 좋아요누른사람 , boardWriter = 게시글작성자
-					TextMessage tmpMsg = new TextMessage(replyWriter + "님이 "
-							+ "<a href='phDetail.bo?phno="+bno+" style='color: black'><strong>"
-							+ title+"</strong> 에 작성한 글을 좋아요했습니다!</a>");
+					TextMessage tmpMsg = new TextMessage("<div class='alarmMsg'><span class='bno'>"+bno+"</span>"+replyWriter + "님이 "+title+" 에 댓글을 달았습니다!</div>");
 
 					boardWriterSession.sendMessage(tmpMsg);
 					

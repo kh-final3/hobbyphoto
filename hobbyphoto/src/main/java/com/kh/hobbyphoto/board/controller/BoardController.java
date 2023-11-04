@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.kh.hobbyphoto.board.model.service.*;
 import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.board.model.vo.Report;
+import com.kh.hobbyphoto.common.model.service.AlarmServiceImpl;
 import com.kh.hobbyphoto.common.model.vo.*;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
@@ -26,7 +27,7 @@ import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 public class BoardController {
 	@Autowired
 	private BoardServiceImpl bService;
-
+	
 	@RequestMapping("phBoardList.bo")
 	public ModelAndView selectPhBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
 		int listCount = bService.selectPhListCount();
@@ -41,10 +42,11 @@ public class BoardController {
 	@RequestMapping("phDetail.bo")
 	public String selectPhBoard(int phno, Model model) {
 		int result = bService.increaseCount(phno);
-		
+		Alarm a = new Alarm();
 		if (result > 0) {
 			Board b = bService.selectPhBoard(phno); 
 			ArrayList<Attachment> at = bService.selectAtBoard(phno);
+			
 			
 			model.addAttribute("b", b);
 			model.addAttribute("at", at);

@@ -10,9 +10,11 @@
         div * {box-sizing: border-box;}
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
-            width: 1200px;
-            height: 1400px;
-            margin: auto; 
+
+            width: 1400px;
+            height: 1300px;
+            /* margin: auto; */
+
             margin-top: 50px;
             /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
@@ -21,7 +23,7 @@
         .list-area{
             /* border: 1px solid white; */
             width: 85%;
-            height: 90%;
+            height: 1000px;
             margin: auto;
             margin-top: 5%;
             /* background-color: white; */
@@ -193,7 +195,7 @@
                 <button onclick="location.href='list.pl?cpage=${ p }'">${ p }</button>
             </c:forEach>
             
-            <button onclick="location.href='list.pl?cpage=${ p }'">${ p }</button>
+            <!-- <button onclick="location.href='list.pl?cpage=${ p }'">${ p }</button> -->
             
                <c:choose>
                    <c:when test="${ pi.currentPage eq pi.maxPage }">
@@ -207,6 +209,8 @@
             </c:choose>
         </div>
     </div>
+    <jsp:include page="../common/footer.jsp"/>
+</body>
      <script>
         $(function(){
         		$(".ul-area>.li-area>.text").click(function(){
@@ -219,6 +223,4 @@
         		})
         	})
     </script>
-    <jsp:include page="../common/footer.jsp"/>
-</body>
 </html>

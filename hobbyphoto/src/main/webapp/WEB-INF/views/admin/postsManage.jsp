@@ -34,7 +34,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 115%;
+        /* height: 115%; */
     }
 
     .dashboard {
