@@ -14,7 +14,11 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <style>
-    div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'NanumBarunGothic';}
+    @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+	.notosanskr * { 
+	font-family: 'Noto Sans KR', sans-serif;
+	}
+    div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'Noto Sans KR';}
         .mb_outer{
             height: 120px;
             margin-top: 10px;
@@ -243,7 +247,7 @@
                     <table class="login-area" align="center">
                         <tr height="75">
                             <td width="70"><a href="/hobbyphoto"><img width="60" src="resources/images/clipboard.png" alt=""></a></td>
-                            <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/848/848006.png" alt=""></td>
+                            <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt=""></td>
                         </tr>
                     </table>
                 </div>
