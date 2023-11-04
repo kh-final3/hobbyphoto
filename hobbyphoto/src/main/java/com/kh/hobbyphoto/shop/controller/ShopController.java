@@ -416,19 +416,20 @@ public class ShopController {
 		mv.addObject("pi", pi).addObject("olist", olist).setViewName("shop/shopOrderlist");;
 		return mv;
 	}
-//	@RequestMapping("shop.photo")
-//	public String shopPhoto() {
-//		return "shop/shopPhoto";
-//	}
-//	
-//	@ResponseBody
-//	@RequestMapping("save.photo")
-//	public String savePhoto(Photo p, HttpSession session) {
-//		//Member m =(Member)session.getAttribute("loginMember");
-//		int result = sService.insertPhoto(p);
-//		System.out.println(result +"과연 결과는???");
-//		return result>0 ? "success":"fail";
-//	}
-	
+	@RequestMapping("shop.photo")
+		public String shopPhoto() {
+			return "shop/shopPhoto";
+		}
+
+	@ResponseBody
+	@RequestMapping("save.photo")
+		public String savePhoto(Photo p, HttpSession session) {
+		System.out.println(p);
+		Member m =(Member)session.getAttribute("loginMember");
+		int result = sService.insertPhoto(p);
+		System.out.println(result +"과연 결과는???");
+		return result>0 ? "success":"fail";
+	}
+			
 }
 

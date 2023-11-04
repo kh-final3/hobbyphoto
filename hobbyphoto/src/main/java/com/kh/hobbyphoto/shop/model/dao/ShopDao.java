@@ -109,8 +109,11 @@ public class ShopDao {
 	public int updateProduct(SqlSessionTemplate sqlSession,Orders ords) {
 		return sqlSession.update("shopMapper.updateProduct", ords);
 	}
-//	public int insertPhoto(SqlSessionTemplate sqlSession,Photo p) {
-//		return sqlSession.insert("shopMapper.insertPhoto", p);
-//	}
+	
+	public int insertPhoto(SqlSessionTemplate sqlSession,Photo p) {
+		return sqlSession.insert("shopMapper.insertPhoto", p);
+	}
+
+
 
 }

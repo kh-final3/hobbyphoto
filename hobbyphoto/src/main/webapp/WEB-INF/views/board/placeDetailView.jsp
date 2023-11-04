@@ -10,7 +10,7 @@
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
             width: 1400px;
-            height: 1200px;
+            height: 2000px;
             margin: auto;
             /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
