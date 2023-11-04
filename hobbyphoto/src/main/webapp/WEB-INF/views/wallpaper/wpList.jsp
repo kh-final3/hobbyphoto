@@ -55,7 +55,7 @@
 <jsp:include page="../common/header.jsp"/>
 <div class="content">
     <br><br>
-    <div class="innerOuter" style="padding:5% 15%;">
+    <div class="innerOuter" style="padding:5px 15%;">
         <div align="center">
             <h2>배경 화면 공유</h2>
             <h6 style="color: gray;">예쁘고 다양한 배경화면 공유하기!</h6>
