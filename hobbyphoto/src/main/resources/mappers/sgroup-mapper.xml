@@ -13,6 +13,12 @@
 		<result column="gr_date" property="grDate"/>
 		<result column="create_date" property="createDate"/>
 		<result column="status" property="status"/>
+		<result column="me_count" property="meCount"/>
+	</resultMap>
+	
+	<resultMap id="groupDResult" type="GroupD">
+		<result column="user_no" property="userNo"/>
+		<result column="group_no" property="groupNo"/>
 	</resultMap>
 
 	<select id="selectTgListCount" resultType="_int">
@@ -31,6 +37,7 @@
 		  m.nickname,
 		  sg.location,
 		  sg.me_total,
+		  sg.me_count,
 		  TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
 		FROM
 		  s_group sg
@@ -51,6 +58,7 @@
 		    m.nickname,
 		    sg.location,
 		    sg.me_total,
+		    sg.me_count,
 		    TO_CHAR(sg.gr_date, 'YYYY-MM-DD') AS gr_date
 		FROM
 		    s_group sg
@@ -99,6 +107,42 @@
 	    DELETE FROM s_group
 	    WHERE group_no = #{boardNo}
 	</delete>
+	
+	<insert id="enrollGroup">
+		INSERT INTO group_d
+			VALUES
+			(
+			  #{groupNo}
+			, #{userNo}
+			)
+	</insert>
+	
+	<update id="groupCount">
+		update s_group
+		set me_count = me_count + 1
+		where group_no = #{groupNo}
+	</update>
+	
+	<delete id="deleteMember">
+		delete from group_d
+		where user_no = #{userNo}
+		and group_no = #{groupNo}
+	</delete>
+	
+	<update id="groupCountDown">
+		update s_group
+		set me_count = me_count - 1
+		where group_no = #{groupNo}
+	</update>
+	
+	<select id="selectGroupPeople" resultMap="groupDResult">
+		select 
+		user_no,
+		group_no
+		from group_d
+		where group_no = #{groupNo}
+	</select>
+	
 	
 	
 </mapper>

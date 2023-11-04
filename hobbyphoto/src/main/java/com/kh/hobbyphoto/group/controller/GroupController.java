@@ -20,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.group.model.service.GroupServiceImpl;
+import com.kh.hobbyphoto.group.model.vo.GroupD;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
+import com.kh.hobbyphoto.member.model.vo.Member;
 
 @Controller
 public class GroupController {
@@ -33,7 +35,6 @@ public class GroupController {
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 		ArrayList<Sgroup> list = GService.selectTgList(pi);
-		System.out.println(list);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("group/selectTogetherList");
 		
@@ -43,9 +44,9 @@ public class GroupController {
 	@RequestMapping("togetherDetail.tg")
 	public String selcetTogether(int gno, Model model) {
 		Sgroup sg = GService.selectTgBoard(gno); 
-		
+		ArrayList<GroupD> list = GService.selectGroupPeople(gno);
 		model.addAttribute("sg", sg);
-		System.out.println(sg);
+		model.addAttribute("list", list);
 		return "group/togetherDetailView";
 	}
 	
@@ -64,7 +65,6 @@ public class GroupController {
 	        g.setImg(changeName);
 	    }
 
-	    System.out.println(g);
 	    int result = GService.insertSgBoard(g);
 
 	    if (result > 0) {
@@ -94,9 +94,9 @@ public class GroupController {
 	}
 	
 	@RequestMapping("delete.tg")
-	public String deleteTogether(int gno, String filePath, HttpSession session, Model model) {
+	public String deleteTogether(@RequestParam(required = false) Integer gno, String filePath, HttpSession session, Model model) {
+		System.out.println(gno);
 		int result = GService.deleteTogether(gno);
-		System.out.println(result);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
@@ -105,10 +105,43 @@ public class GroupController {
 			model.addAttribute("errorMsg", "게시글 삭제 실패");
 			return "common/errorPage";
 		}
+	}
+	
+	//모임
+	@RequestMapping("enroll.tg")
+	public String enrollGroup(@RequestParam(required = false) Integer gno, @RequestParam(required = false) Integer uno, HttpSession session, Model model) {
+	    GroupD gr = new GroupD();
+	    gr.setGroupNo(gno);
+	    gr.setUserNo(uno);
+
+
+	    int result = GService.enrollGroup(gr);
+
+	    if(result > 0) {
+	        session.setAttribute("alertMsg", "모임 신청이 완료되었습니다.");
+	    } else {
+	        session.setAttribute("alertMsg", "모임 신청에 실패했습니다.");
+	    }
+	    return "redirect:togetherList.tg";
+	}
+	
+	@RequestMapping("dropOut.tg")
+	public String deleteMember(@RequestParam(required = false) Integer gno, @RequestParam(required = false) Integer uno, HttpSession session) {
+	    GroupD gr = new GroupD();
+	    gr.setGroupNo(gno);
+	    gr.setUserNo(uno);
+
+		int result = GService.deleteMember(gr);
+		System.out.println(result);
 		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "모임 신청을 취소했습니다.");
+		} else {
+			session.setAttribute("alertMsg", "모임 신청 취소를 실패했습니다.");
+		}
+		return "redirect:togetherList.tg";
 	}
 
-	
 
 	
 }

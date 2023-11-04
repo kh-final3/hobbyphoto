@@ -69,8 +69,10 @@ public class BoardServiceImpl implements BoardService{
 		int result = bDao.updatePhBoard(sqlSession, b);
 		int result2 = 1;
 		
-		for(Attachment at : list) {
-			result2 = bDao.updatePhAtBoard(sqlSession, at);
+		if(list != null) {
+			for(Attachment at : list) {
+				result2 = bDao.updatePhAtBoard(sqlSession, at);
+			}
 		}
 		return result * result2;
 	}
