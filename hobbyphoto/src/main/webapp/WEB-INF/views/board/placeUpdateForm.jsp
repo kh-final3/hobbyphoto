@@ -251,15 +251,13 @@
 		            <input type="file" name="upfiles" id="file2" onchange="loadImg(this, 2);">
 		            <input type="file" name="upfiles" id="file3" onchange="loadImg(this, 3);">
 		            <input type="file" name="upfiles" id="file4" onchange="loadImg(this, 4);">
-		        </div>
-                <hr>
-
-                
+		        </div> 
+                <br><br>
             </div>
             
         </div>
 
-        <div class="btn-area" align="center">
+        <div class="btn-area" align="center" style="margin-top: 20px;">
             <button type="submit" class="btn btn-warning">수정하기</button>
             <button type="button" class="golist btn btn-primary">목록가기</button>
         </div>

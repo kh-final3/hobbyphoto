@@ -10,16 +10,17 @@
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
             width: 1400px;
-            height: 1200px;
+            /* height: 1200px; */
             margin: auto;
             /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
+            margin-top: 20px;
         }
         
         .outline{
             border: 1px solid white;
             width: 90%;
-            height: 1100px;
+            /* height: 1100px; */
             margin: auto;
             margin-top: 45px;
             background-color: white;
@@ -296,7 +297,7 @@
 <body>
 	<jsp:include page="../common/header.jsp"/>
     <div class="warp">
-        <br>
+        <br><br>
         <h2 align="center">출사명소</h2>
         <br>
         <div class="outline">
@@ -306,18 +307,18 @@
                     <div class="text-area">
                         <ul class="ul-area">
                             <li class="li-area">
-                                <div class="board-title">&nbsp;&nbsp;제목 : ${ p.ptitle }</div>
-                                
+                                <div class="board-title">&nbsp;&nbsp;제목 : ${ p.ptitle }</div>                               
                                 <div class="board-create">${ p.createDate }</div>
-
-                                <div class="bookmark">
-                                    <button id="bookmark1" onclick="insertBook();">
-                                        <img src="resources/images/bookmark_blank.png">
-                                    </button>
-                                    <button id="bookmark2" onclick="deleteBook();" style="display: none;">
-                                        <img src="resources/images/bookmark.png">
-                                    </button>
-                                </div>
+                                <br><br>
+                                    <div class="bookmark">
+                                        <button id="bookmark1" onclick="insertBook();">
+                                            <img src="resources/images/bookmark_blank.png">
+                                        </button>
+                                        <button id="bookmark2" onclick="deleteBook();" style="display: none;">
+                                            <img src="resources/images/bookmark.png">
+                                        </button>
+                                    </div>
+                                
                             </li>
                             <hr>
                             <li class="li-area1">
@@ -334,7 +335,7 @@
 
                 <hr>
                 <div>
-                    <h2 style="text-align: center;">상세 사진</h2>
+                    <h2 style="text-align: center; margin-top: 30px;">상세 사진</h2>
                 </div>
                 <div class="photo-area">
                     <img src="${ p.pimg1 }" >
@@ -429,12 +430,11 @@
 					</script>
                 </div>
             </div>
-            <div class="btn-area" align="center">
-                <button type="button" class="update">수정하기</button>
-                <button type="button" class="golist">목록가기</button>
-                <button type="button" class="delete">삭제</button>
+            <div class="btn-area" style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+                <button type="button" class="golist btn btn-primary">목록가기</button>
+                <button type="button" class="update btn btn-warning">수정하기</button>
+                <button type="button" class="delete btn btn-danger">삭제하기</button>
             </div>
-           <hr>
             
             
         </div>
@@ -566,7 +566,8 @@
                 });
         })
     }
-    </script>
-    <jsp:include page="../common/footer.jsp"/>
+</script>
+
+<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

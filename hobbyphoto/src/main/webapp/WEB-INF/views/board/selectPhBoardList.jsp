@@ -127,9 +127,7 @@
 		                     	<button onclick="location.href='phBoardList.bo?cpage=${ pi.currentPage + 1 }'">Next</button>
 		                     	<button> &gt; </button>
 		                   	</c:otherwise>
-		                </c:choose>
-		                
-		                
+		                </c:choose>		                
             		</div>
 
             		<div id="topbtn">

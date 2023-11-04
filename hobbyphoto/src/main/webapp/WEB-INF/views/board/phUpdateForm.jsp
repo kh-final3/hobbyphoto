@@ -204,8 +204,8 @@
                         해시태그 <input type="text" name="hashTag" id="" class="tag-input" placeholder="해시태그를 입력해주세요." style="width: 290px;" value="${ b.hashTag }">
                     </div>
                     <div class="btn-area">
+                        <button onclick="javascript:history.go(-1)" class="btn btn-primary" style="margin-left: 35px;">목록가기</button>
                         <button class="btn btn-warning">수정하기</button>
-                        <button onclick="javascript:history.go(-1)" class="btn btn-primary">목록가기</button>
                     </div>
                 </div>
             </form>
