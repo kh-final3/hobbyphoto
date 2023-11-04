@@ -51,7 +51,17 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	public int deleteMember(GroupD gr) {
-		return GDao.deleteMember(sqlSession, gr);
+		int result = GDao.deleteMember(sqlSession, gr);
+		int result2 = 1;
+		
+		if(result > 0) {
+			result2 = GDao.groupCountDown(sqlSession, gr);
+		}
+		return result * result2;
+	}
+
+	public ArrayList<GroupD> selectGroupPeople(int gno) {
+		return GDao.selectGroupPeople(sqlSession, gno);
 	}
 
 

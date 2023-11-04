@@ -14,6 +14,7 @@
 		<typeAlias type="com.kh.hobbyphoto.board.model.vo.Festival" alias="Festival"/>
         <typeAlias type="com.kh.hobbyphoto.board.model.vo.BackGround" alias="BackGround"/>
 		<typeAlias type="com.kh.hobbyphoto.group.model.vo.Sgroup" alias="Sgroup"/>
+		<typeAlias type="com.kh.hobbyphoto.group.model.vo.GroupD" alias="GroupD"/>
 		<typeAlias type="com.kh.hobbyphoto.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.hobbyphoto.upfile.model.vo.Attachment" alias="Attachment"/>
 		<typeAlias type="com.kh.hobbyphoto.notice.model.vo.Notice" alias="Notice"/>

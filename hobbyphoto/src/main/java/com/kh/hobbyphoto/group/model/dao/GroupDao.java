@@ -53,5 +53,13 @@ public class GroupDao {
 		return sqlSession.delete("sgroupMapper.deleteMember", gr);
 	}
 
+	public int groupCountDown(SqlSessionTemplate sqlSession, GroupD gr) {
+		return sqlSession.update("sgroupMapper.groupCountDown", gr);
+	}
+
+	public ArrayList<GroupD> selectGroupPeople(SqlSessionTemplate sqlSession, int gno) {
+		return (ArrayList)sqlSession.selectList("sgroupMapper.selectGroupPeople", gno);
+	}
+
 
 }

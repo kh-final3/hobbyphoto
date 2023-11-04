@@ -44,8 +44,9 @@ public class GroupController {
 	@RequestMapping("togetherDetail.tg")
 	public String selcetTogether(int gno, Model model) {
 		Sgroup sg = GService.selectTgBoard(gno); 
-		
+		ArrayList<GroupD> list = GService.selectGroupPeople(gno);
 		model.addAttribute("sg", sg);
+		model.addAttribute("list", list);
 		return "group/togetherDetailView";
 	}
 	
@@ -93,7 +94,8 @@ public class GroupController {
 	}
 	
 	@RequestMapping("delete.tg")
-	public String deleteTogether(int gno, String filePath, HttpSession session, Model model) {
+	public String deleteTogether(@RequestParam(required = false) Integer gno, String filePath, HttpSession session, Model model) {
+		System.out.println(gno);
 		int result = GService.deleteTogether(gno);
 		
 		if(result > 0) {
@@ -105,13 +107,13 @@ public class GroupController {
 		}
 	}
 	
+	//모임
 	@RequestMapping("enroll.tg")
 	public String enrollGroup(@RequestParam(required = false) Integer gno, @RequestParam(required = false) Integer uno, HttpSession session, Model model) {
 	    GroupD gr = new GroupD();
 	    gr.setGroupNo(gno);
 	    gr.setUserNo(uno);
 
-	    System.out.println(gr);
 
 	    int result = GService.enrollGroup(gr);
 
@@ -120,19 +122,24 @@ public class GroupController {
 	    } else {
 	        session.setAttribute("alertMsg", "모임 신청에 실패했습니다.");
 	    }
-	    
 	    return "redirect:togetherList.tg";
 	}
 	
-	@RequsetMapping("dropOut.tg")
-	public String deleteMember(HttpSession session) {
-		int result = GService.deleteMember();
+	@RequestMapping("dropOut.tg")
+	public String deleteMember(@RequestParam(required = false) Integer gno, @RequestParam(required = false) Integer uno, HttpSession session) {
+	    GroupD gr = new GroupD();
+	    gr.setGroupNo(gno);
+	    gr.setUserNo(uno);
+
+		int result = GService.deleteMember(gr);
+		System.out.println(result);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "모임 신청을 취소했습니다.");
 		} else {
 			session.setAttribute("alertMsg", "모임 신청 취소를 실패했습니다.");
 		}
+		return "redirect:togetherList.tg";
 	}
 
 
