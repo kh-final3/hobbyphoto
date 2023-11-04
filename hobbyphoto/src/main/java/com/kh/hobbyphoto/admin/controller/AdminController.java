@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.aspose.pdf.internal.imaging.system.collections.Generic.List;
 import com.google.gson.Gson;
 import com.kh.hobbyphoto.admin.model.service.AdminServiceImpl;
 import com.kh.hobbyphoto.board.model.vo.BackGround;

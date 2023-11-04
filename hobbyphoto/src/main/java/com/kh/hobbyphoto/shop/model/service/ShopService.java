@@ -78,5 +78,5 @@ public interface ShopService {
 		int updateProduct(Orders ords);
 		
 		//21.사진 저장(인생넷컷)
-		//int insertPhoto(Photo p);
+		int insertPhoto(Photo p);
 }

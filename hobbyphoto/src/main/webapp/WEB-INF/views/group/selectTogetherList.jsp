@@ -112,11 +112,13 @@
 					                        <td>🕒 시간</td>
 					                    </tr>
 					                    <tr>
-					                        <td>🙋 ? /${ g.meTotal }명</td>
+					                        <td>🙋 ${ g.meCount }/${ g.meTotal }명</td>
 					                    </tr>
 					                </tbody>
 					            </table>
+					            <c:if test="${ g.meCount eq g.meTotal }">
 					            <div class="end">마감</div>
+					            </c:if>
 					        </div>
 					    </c:forEach>
 					</div>

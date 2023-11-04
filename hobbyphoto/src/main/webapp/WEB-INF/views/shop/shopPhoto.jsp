@@ -155,7 +155,8 @@
                 };
                 reader.readAsDataURL(file);
             }
-        }//이미지 변경
+        }
+        //이미지 변경
    
         
         //function partShot() {
@@ -180,24 +181,33 @@
         function partShot() {
 		    html2canvas(document.getElementById("innerOuter"))
 		        .then(function (canvas) {
-		            var capturedImage = canvas.toDataURL('image/jpeg');
-		            console.log("캡처된 이미지 데이터 URL:", capturedImage);
-		            saveImageOnServer(capturedImage);
+		            var capturedImage = canvas.toDataURL();
+                    $.ajax({
+                        type: 'POST',
+                        url: "base64.wp",
+                        data: {
+                            pngData: capturedImage
+                        },
+                    }).done(function (data) {
+                        console.log(data);
+                        saveImageOnServer(data);
+                    });
+		            console.log("캡처된 이미지 데이터 URL:", data);
 		        })
 		        .catch(function (err) {
 		            console.log(err);
 		        });
 		}
-		
 		function saveImageOnServer(imageData) {
 			//imageData는 canvas.toDataURL메서드 때문에 자동으로 생성 => 임의 변경 불가
 		    // POST 요청을 사용하여 캡처한 이미지 데이터를 서버로 전송합니다.
+            console.log(imageData)
 		    $.ajax({
 		    	type: "POST",
 		        url: "save.photo", // 서버의 엔드포인트로 교체
 		        data: { 
 		        	img1: imageData, 
-					userNo: '${loginMember.userNo}'		        	
+					userNo: 1        	
 		        	},
 		        success: function (response) {
 		            console.log("서버에 이미지 저장됨:", response);

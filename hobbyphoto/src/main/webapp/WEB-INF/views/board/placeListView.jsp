@@ -12,9 +12,8 @@
             border: 1px solid rgba(0, 0,0,0.1);
             width: 1200px;
             height: 1400px;
-            /* margin: auto; */
+            margin: auto; 
             margin-top: 50px;
-            margin-left: 160px;
             /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
         }

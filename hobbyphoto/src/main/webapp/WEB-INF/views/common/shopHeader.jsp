@@ -220,7 +220,7 @@
                 <ul id="mb_navi">
                     <!--<li><a href="pro.list">홈</a></li> -->
                     <li><a href="pro.list">카메라</a></li>
-                    <li><a href="">포토북</a></li>
+                    <li><a href="shop.photo">포토북</a></li>
                     <li><a href="#">핸드폰 케이스</a></li>
                     <li><a href="shNotice.no">공지사항</a></li>
                     

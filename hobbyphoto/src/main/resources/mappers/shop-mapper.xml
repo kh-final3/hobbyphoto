@@ -381,5 +381,39 @@
 			where p_no = #{pNo}
 	</update>
 	
-	
+	<insert id="insertPhoto">
+		insert 
+		  into photo
+		 (
+		   P_NO
+		 , T_NO
+	 	 , USER_NO
+		 , IMG1
+		 , IMG2
+		 , IMG3
+		 , IMG4
+		 , IMG5
+		 , IMG6
+		 , IMG7
+		 , IMG8
+		 , IMG9
+		 , IMG0
+		 ) 
+		  values
+		 (
+		  SEQ_PHOTO_NO.nextval
+		 , 1
+		 , #{userNo}
+		 , #{img1}
+		 , 1 
+		 , 1 
+		 , 1 
+		 , 1 
+		 , 1 
+		 , 1 
+		 , 1 
+		 , 1 
+		 , 1 
+		 )
+	</insert>
 </mapper>
