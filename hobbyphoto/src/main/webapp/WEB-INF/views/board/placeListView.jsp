@@ -10,11 +10,12 @@
         div * {box-sizing: border-box;}
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
+
             width: 1400px;
             height: 1300px;
             /* margin: auto; */
+
             margin-top: 50px;
-            margin-left: 160px;
             /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
         }

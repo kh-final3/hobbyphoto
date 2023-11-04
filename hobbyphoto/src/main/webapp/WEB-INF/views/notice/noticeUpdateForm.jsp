@@ -155,9 +155,9 @@ button.active {
 					</div>
 					<br>
 					<div class="Write_btn_area">
-						<button type="reset" class="btn btn-warning"
+						<button type="reset" class="btn btn-dark"
 							onclick="history.back();">뒤로가기</button>
-						<button type="submit" class="btn btn-secondary">수정하기</button>
+						<button type="submit" class="btn btn-warning">수정하기</button>
 					</div>
 				</div>
 			</div>

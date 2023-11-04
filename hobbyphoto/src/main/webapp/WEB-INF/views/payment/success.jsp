@@ -24,12 +24,12 @@ pType=null, oMsg=ㄱ나, dMsg=강, pNo=0, pName=null, price=0, amount=0, userNam
 <body>
 
 	<div class="bigarea" align="center">
-        <h3>결제가 완료되었습다.</h3>
+        <h3>결제가 완료되었습니다.</h3>
 		
         <div class="innerOut">
             <h4>결제 정보</h4>
     
-            <table border="1" >
+            <table border="1">
             <c:choose>
             	<c:when test="${ not empty o }">
          			

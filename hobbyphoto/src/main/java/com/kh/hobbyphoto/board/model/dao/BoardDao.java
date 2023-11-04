@@ -2,7 +2,9 @@ package com.kh.hobbyphoto.board.model.dao;
 
 import java.util.*;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -52,9 +54,6 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.deletePhBoard", boardNo);
 	}
 	
-	
-	
-
 	public int updatePhBoard(SqlSessionTemplate sqlSession, Board b) {
 		return sqlSession.update("boardMapper.updatePhBoard", b);
 	}

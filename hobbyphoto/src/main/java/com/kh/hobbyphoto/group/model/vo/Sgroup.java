@@ -20,6 +20,7 @@ public class Sgroup {
 	private String title;
 	private String content;
 	private int meTotal;
+	private int meCount;
 	private String location;
 	private Date grDate;
 	private Date createDate;

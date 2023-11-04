@@ -203,7 +203,7 @@
                         해시태그 <input type="text" name="hashTag" id="hashTag" class="tag-input" style="width: 290px;" placeholder="해시태그를 입력해주세요.">
                     </div>
                     <div class="btn-area">
-                        <button type="submit" class="btn btn-secondary">등록하기</button>
+                        <button type="submit" class="btn btn-secondary" style="margin-left: 35px;">등록하기</button>
                         <button type="button" onclick="" class="btn btn-primary">목록가기</button>
                     </div>
                 </div>

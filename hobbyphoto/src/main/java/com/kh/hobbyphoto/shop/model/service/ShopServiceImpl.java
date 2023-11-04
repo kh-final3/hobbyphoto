@@ -196,9 +196,11 @@ public class ShopServiceImpl implements ShopService{
 		return sDao.updateProduct(sqlSession,ords);
 	}
 
-//	@Override
-//	public int insertPhoto(Photo p) {
-//		return sDao.insertPhoto(sqlSession,p);
-//	}
+
 	
+	@Override
+	public int insertPhoto(Photo p) {
+		return sDao.insertPhoto(sqlSession,p);
+	}
+		
 }

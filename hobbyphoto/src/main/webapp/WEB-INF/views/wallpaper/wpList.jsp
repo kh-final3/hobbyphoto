@@ -41,21 +41,28 @@
 
     .count{font-size: 14px;}    
 
-    #pagingArea {width: fit-content; margin: auto;}
+    /* 페이징바 */
+    .paging-area>button{
+        border: none;
+        background-color: white;
+        width: 35px;
+        height: 35px;
+        margin-top: 20px;
+    }
 </style>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/>
 <div class="content">
     <br><br>
-    <div class="innerOuter" style="padding:5% 15%;">
+    <div class="innerOuter" style="padding:5px 15%;">
         <div align="center">
             <h2>배경 화면 공유</h2>
             <h6 style="color: gray;">예쁘고 다양한 배경화면 공유하기!</h6>
         </div>
         <br>
         <c:if test="${ not empty loginMember }">
-        	<a href="enrollForm.wp">글쓰기</a>
+        	<a href="enrollForm.wp" class="btn btn-secondary" style="margin-left: 900px;">글작성</a>
         </c:if>
             <div class="list">
 
@@ -80,33 +87,32 @@
                 
             </div>
             <br clear="both"><br>
-            <div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                        <c:when test="${ pi.currentPage eq 1 }">
-                            <li class="page-item disabled"><a class="page-link" href='list.wp?cpage=${ pi.currentPage - 1 }'>Previous</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="page-item"><a class="page-link" href="list.wp?cpage=${ pi.currentPage - 1 }">Previous</a></li>
-                        </c:otherwise>
-                    </c:choose>
-
-                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }"> 
-                        <li class="page-item"><a class="page-link" href='list.wp?cpage=${ p }'>${ p }</a></li>
-                    </c:forEach>
-
-                    <c:choose>
-                        <c:when test="${ pi.currentPage eq pi.maxPage }">
-                            <li class="page-item disabled"><a class="page-link" href="list.wp?cpage=${ pi.currentPage + 1 }">Next</a></li>
-                        </c:when>
-
-                        <c:otherwise>
-                            <li class="page-item"><a class="page-link" href='list.wp?cpage=${ pi.currentPage + 1 }'>Next</a></li>
-                        </c:otherwise>
-                    </c:choose>
-
-	                   
-                </ul>
+            <div class="paging-area" align="center">
+                <c:choose>
+                    <c:when test="${ pi.currentPage eq 1 }">
+                        <button disabled> &lt; </button>
+                    </c:when>
+                    <c:otherwise>
+                        <button style="width:70px" onclick="location.href='list.wp?cpage=${ pi.currentPage - 1 }'">Previous</button>
+                    </c:otherwise>
+                </c:choose>
+                
+                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    <button onclick="location.href='list.wp?cpage=${ p }'">${ p }</button>
+                </c:forEach>
+                
+                <button onclick="location.href='list.wp?cpage=${ p }'">${ p }</button>
+                
+                   <c:choose>
+                       <c:when test="${ pi.currentPage eq pi.maxPage }">
+                        <button disabled>Next</button>
+                        <button disabled> &gt; </button>
+                       </c:when>
+                     <c:otherwise>
+                         <button onclick="location.href='list.wp?cpage=${ pi.currentPage + 1 }'">Next</button>
+                         <button> &gt; </button>
+                       </c:otherwise>
+                </c:choose>		                
             </div>
 
           
