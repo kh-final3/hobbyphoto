@@ -91,9 +91,14 @@
 		                    <img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" style="border-radius: 100%; margin-bottom: 3px;" width="20px" height="20px">${ b.boardWriter }<br><h class="h_a">${ b.boardTitle }</h>
 		                    
 		                    <p style="font-size: small;">
-		                    <c:if test="${ b.boardContent.length() > 20}">
-		                    ${ b.boardContent.substring(0,20)}... 
-		                    </c:if>
+		                    <c:choose>
+			                    <c:when test="${ b.boardContent.length() > 20}">
+			                    	${ b.boardContent.substring(0,20)}... 
+			                    </c:when>
+			                    <c:otherwise>
+			                    	${ b.boardContent }
+			                    </c:otherwise>
+		                    </c:choose>
 		                    </p>
 		                    
 		                </p>

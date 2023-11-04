@@ -17,12 +17,16 @@
 	<!-- 웹소켓 -->
 	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
   <style>
-    div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'NanumBarunGothic';}
+	@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+	.notosanskr * { 
+	font-family: 'Noto Sans KR', sans-serif;
+	}
+    div{/*box-sizing: border-box; border: 1px solid;*/ font-family: 'Noto Sans KR';}
         .mb_outer{
             height: 120px;
             margin-top: 10px;
             margin: auto;
-            margin-left: 50px;
+            margin-left: 140px;
             display: flex;
             justify-content: space-between;
             align-items: center; 
@@ -35,14 +39,14 @@
             /* border: 1px solid blue;  */
         }
         .mb_login-area{
-            width: 20%;
+            width: 30%;
             margin-left: 20px; 
             /* border: 1px solid red; */
         }
 
         .mb_menu-area>div{height: 100%; float: left;}
         #mb_logo{width: 15%; height: 100%;}
-        #mb_nav{width: 80%;}
+        #mb_nav{width: 80%; margin-left: 30px;}
         #mb_logo>img{
             display: block; 
             width: 100%; 
@@ -296,17 +300,7 @@
 	                </ul>
 	            </div>
 	        </div>
-	        <div class="mb_search-area">
-	            <div id="mb_search">
-	                <form action="#" id="search_form">
-	                    <div id="search_text">
-	                        <input type="text" name="keyword" id="sh_text" placeholder="&nbsp&nbsp&nbsp검색어를 입력해주세요">
-	                        <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
-	                    </div>
-	                    
-	                </form>
-	            </div>
-	        </div>
+	       
 	        <div class="mb_login-area">
                 <div id="mb_user_1">
                     <table class="login-area" align="center">
@@ -483,7 +477,17 @@
 		    		 	
 		    		 	// 팔로우
 		    		 	if(type==3){
-		    		 		
+		    		 		$.ajax({
+		    		 			url:"alramClick",
+		    		 			data:{bno:$(this).find(".bno").text(),sendId:$(this).find(".sendId").text(),type:$(this).find(".type").text()},
+		    		 			type:"post",
+		    		 			success:data=>{
+		    		 				location.href="phDetail.bo?phno="+data
+		    		 			},
+		    		 			error:()=>{
+		    		 				console.log("알림 삭제 실패");
+		    		 			}
+		    		 		})
 		    		 	}
 		    	})
 	    	}

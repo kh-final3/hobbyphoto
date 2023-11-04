@@ -11,7 +11,7 @@
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
             width: 1400px;
-            height: 1400px;
+            height: 1300px;
             /* margin: auto; */
             margin-top: 50px;
             margin-left: 160px;
@@ -22,7 +22,7 @@
         .list-area{
             /* border: 1px solid white; */
             width: 85%;
-            height: 90%;
+            height: 1000px;
             margin: auto;
             margin-top: 5%;
             /* background-color: white; */
@@ -208,6 +208,8 @@
             </c:choose>
         </div>
     </div>
+    <jsp:include page="../common/footer.jsp"/>
+</body>
      <script>
         $(function(){
         		$(".ul-area>.li-area>.text").click(function(){
@@ -220,6 +222,4 @@
         		})
         	})
     </script>
-    <jsp:include page="../common/footer.jsp"/>
-</body>
 </html>
