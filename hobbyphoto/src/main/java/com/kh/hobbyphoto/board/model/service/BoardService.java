@@ -3,6 +3,7 @@ package com.kh.hobbyphoto.board.model.service;
 import java.util.*;
 
 import com.kh.hobbyphoto.board.model.vo.*;
+import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Block;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
@@ -99,4 +100,17 @@ public interface BoardService {
 	 int deleteLike(Board b);
 	 
 	 int insertWallPaper(WallPaper wp);
+	 
+	 //팔로우
+	 int insertfollow(Follow f);
+	 
+	 // 프로필 조회
+	 int profileListCount(String userId);
+	 ArrayList<Board> profileBoardList(PageInfo pi, String userId);
+	 
+	 //팔로우 취소
+	 int unfollow(Follow f);
+	 
+	 //작성자 팔로우
+	 ArrayList<Follow> selectFollowMember(Board b);
 }

@@ -213,7 +213,6 @@
         $(function(){
         		$(".ul-area>.li-area>.text").click(function(){
             		location.href = 'detail.pl?pno='+ $(this).children(".pno").text();
-            		console.log($(this).children(".pno").text());
         		})
         		
         		$(".btn-area").click(function(){

@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hobbyphoto.board.model.vo.*;
+import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Block;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
@@ -143,6 +144,10 @@ public class BoardDao {
 	public int myListCount(SqlSessionTemplate sqlSession,int userNo) {
 		return sqlSession.selectOne("boardMapper.myListCount",userNo);
 	}
+	
+	public int profileListCount(SqlSessionTemplate sqlSession,String userId) {
+		return sqlSession.selectOne("boardMapper.profileListCount",userId);
+	}
 
 	public ArrayList<Board> myBoardList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
@@ -151,6 +156,14 @@ public class BoardDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.myBoardList", userNo, rowBounds);
 	}
+	public ArrayList<Board> profileBoardList(SqlSessionTemplate sqlSession,PageInfo pi,String userId){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.profileBoardList", userId, rowBounds);
+	}
+	
 	public ArrayList<Board> myBookmarksList(SqlSessionTemplate sqlSession,PageInfo pi,int userNo){
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
@@ -329,5 +342,16 @@ public class BoardDao {
 
 	public int increaseDownload(SqlSessionTemplate sqlSession, int backNo) {
 		return sqlSession.update("boardMapper.increaseDownload", backNo);
+	}
+	
+	public int insertfollow(SqlSessionTemplate sqlSession,Follow f) {
+		return sqlSession.insert("boardMapper.insertfollow", f);
+	}
+
+	public int unfollow(SqlSessionTemplate sqlSession, Follow f) {
+		return sqlSession.delete("boardMapper.unfollow", f);
+	}
+	public ArrayList<Follow> selectFollowMember(SqlSessionTemplate sqlSession,Board b){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectFollowMember", b);
 	}
 }

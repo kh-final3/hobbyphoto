@@ -95,23 +95,23 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int selectFollowCount(int userNo) {
-		return md.selectFollowCount(sqlSession,userNo);
+	public int selectFollowCount(String userId) {
+		return md.selectFollowCount(sqlSession,userId);
 	}
 	
 	@Override
-	public ArrayList<Follow> selectFollow(int userNo) {
-		return md.selectFollow(sqlSession,userNo);
+	public ArrayList<Follow> selectFollow(String userId) {
+		return md.selectFollow(sqlSession,userId);
 	}
 
 	@Override
-	public int selectFollowingCount(int userNo) {
-		return md.selectFollowingCount(sqlSession,userNo);
+	public int selectFollowingCount(String userId) {
+		return md.selectFollowingCount(sqlSession,userId);
 	}
 	
 	@Override
-	public ArrayList<Follow> selectFollowing(int userNo) {
-		return md.selectFollowing(sqlSession,userNo);
+	public ArrayList<Follow> selectFollowing(String userId) {
+		return md.selectFollowing(sqlSession,userId);
 	}
 
 

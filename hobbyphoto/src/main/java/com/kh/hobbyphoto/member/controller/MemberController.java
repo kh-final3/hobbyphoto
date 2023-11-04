@@ -93,21 +93,21 @@ public class MemberController {
 	
 	@RequestMapping("myPage.me")
 	public String myPage(HttpSession session,Model model) {
-		int userNo = ((Member)session.getAttribute("loginMember")).getUserNo();
+		String userId = ((Member)session.getAttribute("loginMember")).getUserId();
 		
 		// 나를 팔로우 하는 사람들
-		int countFollow = ms.selectFollowCount(userNo);
+		int countFollow = ms.selectFollowCount(userId);
 		model.addAttribute("countFollower", countFollow);
 		if(countFollow>0) {
-			ArrayList<Follow> follow = ms.selectFollow(userNo);
+			ArrayList<Follow> follow = ms.selectFollow(userId);
 			model.addAttribute("follower", follow);
 		}
 		
 		// 내가 팔로우 하는 사람들
-		int countFollowing = ms.selectFollowingCount(userNo);
+		int countFollowing = ms.selectFollowingCount(userId);
 		model.addAttribute("countFollow", countFollowing);
 		if(countFollow>0) {
-			ArrayList<Follow> following = ms.selectFollowing(userNo);
+			ArrayList<Follow> following = ms.selectFollowing(userId);
 			model.addAttribute("follow", following);
 		}
 		
@@ -315,31 +315,33 @@ public class MemberController {
 	
 	@RequestMapping("profile.me")
 	public String profile(@RequestParam(value="cpage", defaultValue="1") int currentPage,Member m,HttpSession session,Model model) {
-		int userNo = m.getUserNo();
+		String userId = m.getUserId();
 		Member member = ms.loginMember(m);
 		model.addAttribute("member", member);
 		
-		int listCount = bService.myListCount(userNo);
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
-		
-		ArrayList<Board> list = bService.myBoardList(pi,userNo);
-		model.addAttribute("listCount",listCount);
-		model.addAttribute("pi",pi);
-		model.addAttribute("list",list);
+		int listCount = bService.profileListCount(userId);
+		if(listCount>0) {
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
+			
+			ArrayList<Board> list = bService.profileBoardList(pi,userId);
+			model.addAttribute("listCount",listCount);
+			model.addAttribute("pi",pi);
+			model.addAttribute("list",list);
+		}
 		
 		// 나를 팔로우 하는 사람들
-		int countFollow = ms.selectFollowCount(userNo);
+		int countFollow = ms.selectFollowCount(userId);
 		model.addAttribute("countFollower", countFollow);
 		if(countFollow>0) {
-			ArrayList<Follow> follow = ms.selectFollow(userNo);
+			ArrayList<Follow> follow = ms.selectFollow(userId);			
 			model.addAttribute("follower", follow);
 		}
 		
 		// 내가 팔로우 하는 사람들
-		int countFollowing = ms.selectFollowingCount(userNo);
+		int countFollowing = ms.selectFollowingCount(userId);
 		model.addAttribute("countFollowing", countFollowing);
 		if(countFollowing>0) {
-			ArrayList<Follow> following = ms.selectFollowing(userNo);
+			ArrayList<Follow> following = ms.selectFollowing(userId);
 			model.addAttribute("follow", following);
 		}
 		return "member/profile";

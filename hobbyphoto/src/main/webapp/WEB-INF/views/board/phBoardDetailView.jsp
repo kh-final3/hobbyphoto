@@ -306,7 +306,14 @@
                         <div class="writer_name">
                             <img src="resources/images/profile.png" width="45" style="margin-top:25px">
                             <p>${ b.boardWriter }</p>
-                            <p style="color: blue; cursor: pointer;">팔로우</p>
+                            <c:forEach var="f" items="${ p }">
+                            	<c:if test="${ loginMember.userNo eq f.userId }">
+                            		<p style="color: blue; cursor: pointer;" onclick="follow();" id="follow">팔로우</p>
+                            	</c:if>
+                            	<c:otherwise>
+                            		<p style="color: blue; cursor: pointer;" onclick="unfollow();" id="follow">팔로우취소</p>
+                            	</c:otherwise>
+                            </c:forEach>
                         </div>
                         <div class="writer_name2">
                            <img src="resources/images/option.png">
@@ -485,6 +492,49 @@
                 })
             })
         }
+        
+        function follow(){
+        	$.ajax({
+        		url:"follow",
+        		data:{
+        			userId:'${loginMember.userNo}',
+        			followId:'${b.boardWriter}'
+        		},success:function(result){
+        			console.log(result);
+        			if (result == 'success') {
+        			    $("#follow").text("팔로우").css("color", "gray");
+        			} else {
+        			    $("#follow").css("color", "red");
+        			}
+
+        		},error:function(){
+        			console.log("팔로우 ajax 통신 실패");
+        		}
+        	})
+        }
+        
+        function unfollow() {
+            $.ajax({
+                url: "unfollow",
+                data: {
+                    userId: '${loginMember.userNo}',
+                    followId: '${b.boardWriter}'
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result == 'success') {
+                        $("#follow").text("팔로우").css("color", "gray");
+                    } else {
+                        $("#follow").css("color", "red");
+                    }
+                },
+                error: function () {
+                    console.log("언팔로우 ajax 통신 실패");
+                }
+            });
+        }
+
+        
     </script>
 <jsp:include page="../common/footer.jsp"/>
 </body>

@@ -88,7 +88,7 @@
 	            		<c:when test="${ not empty list }">
 	            			<c:forEach var="b" items="${ list }">
 				              <tr>
-				                <td>${ b.refNo }</td>
+				                <td class="blockId">${ b.refNo }</td>
 				                <td>${ b.blockDate }</td>
 				              </tr>
 	            			</c:forEach>
@@ -128,8 +128,8 @@
 	</div>
     <script>
     	$(()=>{
-    		$(document).on("click", ".table>tbody>tr",()=>{
-				console.log("클릭")
+    		$(document).on("click", ".table>tbody>tr",function(){
+				location.href="profile.me?userId="+ $(this).find(".blockId").text();
     		})
     	})
     </script>

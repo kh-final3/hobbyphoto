@@ -70,19 +70,19 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateGender",m);
 	}
 	
-	public int selectFollowCount(SqlSessionTemplate sqlSession,int userNo) {
-		return sqlSession.selectOne("memberMapper.selectFollowCount",userNo);
+	public int selectFollowCount(SqlSessionTemplate sqlSession,String userId) {
+		return sqlSession.selectOne("memberMapper.selectFollowCount",userId);
 	}
 	
-	public int selectFollowingCount(SqlSessionTemplate sqlSession,int userNo) {
-		return sqlSession.selectOne("memberMapper.selectFollowingCount",userNo);
+	public int selectFollowingCount(SqlSessionTemplate sqlSession,String userId) {
+		return sqlSession.selectOne("memberMapper.selectFollowingCount",userId);
 	}
 	
-	public ArrayList<Follow> selectFollow(SqlSessionTemplate sqlSession,int userNo) {
-		return (ArrayList)sqlSession.selectList("memberMapper.selectFollow",userNo);
+	public ArrayList<Follow> selectFollow(SqlSessionTemplate sqlSession,String userId) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectFollow",userId);
 	}
 	
-	public ArrayList<Follow> selectFollowing(SqlSessionTemplate sqlSession,int userNo) {
-		return (ArrayList)sqlSession.selectList("memberMapper.selectFollowing",userNo);
+	public ArrayList<Follow> selectFollowing(SqlSessionTemplate sqlSession,String userId) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectFollowing",userId);
 	}
 }

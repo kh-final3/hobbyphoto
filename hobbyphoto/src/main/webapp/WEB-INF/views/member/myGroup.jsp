@@ -58,6 +58,8 @@
             font-weight: 600;
             padding: 0 0 0 20px;
         }
+        
+        .gno{display: none;}
     </style>
 </head>
 <body>
@@ -91,7 +93,7 @@
 	            		<c:when test="${ not empty list }">
 	            			<c:forEach var="b" items="${ list }">
 				              <tr>
-				                <td>${ b.boardTitle }</td>
+				                <td><span class="gno">${ b.boardNo }</span>${ b.boardTitle }</td>
 				                <td>${ b.boardWriter }</td>
 				                <td>${ b.createDate }</td>
 				              </tr>
@@ -131,8 +133,8 @@
 	</div>
     <script>
     	$(()=>{
-    		$(document).on("click", ".table>tbody>tr",()=>{
-				console.log("클릭")
+    		$(document).on("click", ".table>tbody>tr",function(){
+    			location.href="togetherDetail.tg?gno="+ $(this).find(".gno").text();
     		})
     	})
     </script>

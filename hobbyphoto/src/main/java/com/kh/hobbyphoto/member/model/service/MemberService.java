@@ -37,11 +37,11 @@ public interface MemberService {
 	
 	int updateGender(Member m);
 	
-	int selectFollowCount(int userNo);
+	int selectFollowCount(String userId);
 	
-	int selectFollowingCount(int userNo);
+	int selectFollowingCount(String userId);
 	
-	ArrayList<Follow> selectFollow(int userNo);
+	ArrayList<Follow> selectFollow(String userId);
 	
-	ArrayList<Follow> selectFollowing(int userNo);
+	ArrayList<Follow> selectFollowing(String userId);
 }

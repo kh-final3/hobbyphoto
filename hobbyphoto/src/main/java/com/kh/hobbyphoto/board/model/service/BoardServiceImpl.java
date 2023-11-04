@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hobbyphoto.board.model.dao.BoardDao;
 import com.kh.hobbyphoto.board.model.vo.*;
+import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Block;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
@@ -173,10 +174,20 @@ public class BoardServiceImpl implements BoardService{
 	public int myListCount(int userNo) {
 		return bDao.myListCount(sqlSession,userNo);
 	}
+	
+	@Override
+	public int profileListCount(String userId) {
+		return bDao.profileListCount(sqlSession,userId);
+	}
 
 	@Override
 	public ArrayList<Board> myBoardList(PageInfo pi, int userNo) {
 		return bDao.myBoardList(sqlSession, pi, userNo);
+	}
+	
+	@Override
+	public ArrayList<Board> profileBoardList(PageInfo pi, String userId) {
+		return bDao.profileBoardList(sqlSession, pi, userId);
 	}
 
 	@Override
@@ -369,6 +380,21 @@ public class BoardServiceImpl implements BoardService{
 
 	public int increaseDownload(int backNo) {
 		return bDao.increaseDownload(sqlSession,backNo);
+	}
+
+	//팔로우
+	@Override
+	public int insertfollow(Follow f) {
+		return bDao.insertfollow(sqlSession, f);
+	}
+
+	public int unfollow(Follow f) {
+		return bDao.unfollow(sqlSession, f);
+	}
+
+	@Override
+	public ArrayList<Follow> selectFollowMember(Board b) {
+		return bDao.selectFollowMember(sqlSession,b);
 	}
 
 

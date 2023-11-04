@@ -96,6 +96,9 @@
 		<result column="STATUS" property="STATUS"/>
 	</resultMap>
 	
+	<resultMap type="Follow" id="FollowResult">
+		<result column="user_id" property="userId"/>
+	</resultMap>
 	
 	
 	<select id="selectPhListCount" resultType="_int">
@@ -463,16 +466,40 @@
 			  and board_writer = #{ userNo }
 	</select>
 	
+	<select id="profileListCount" resultType="_int">
+			select
+                   count(*)
+			  from board b
+         left join member on (board_writer = user_no)
+             where b.status = 'Y'
+			   and user_id = #{userId}
+	</select>
+	
 	<select id="myBoardList" resultMap="boardResult">
 		select
 		       b.board_no
 		     , b.board_title
 	         , m.nickname
 		     , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
+		     , board_type
 		  from board b
 	      join member m on b.board_writer = m.user_no
 		 where b.status = 'Y'
 		   and board_writer = #{ userNo }
+		 order 
+		    by b.board_no desc
+	</select>
+	
+	<select id="profileBoardList" resultMap="boardResult">
+		select
+		       b.board_no
+		     , b.board_title
+	         , m.nickname
+		     , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
+		  from board b
+     left join member m on b.board_writer = m.user_no
+		 where b.status = 'Y'
+		   and user_id = #{userId}
 		 order 
 		    by b.board_no desc
 	</select>
@@ -531,7 +558,7 @@
 		select
 			   block_no
              , b.user_no
-             , nickname as "ref_no"
+             , user_id as "ref_no"
              , block_date
 	      from block b
           left join member m on (b.ref_no = m.user_no)
@@ -993,5 +1020,33 @@
 		  , #{boardType}
 		  )
 	</insert>
+	
+	<insert id="insertfollow">
+		insert
+			into follow
+			(
+				user_id
+			,	follow_id
+			,	follow_date
+			)
+			values
+			(
+				#{userId}
+			,	#{followId}
+			,	sysdate	
+			)
+	</insert>
+	<delete id="unfollow">
+		delete from follow
+		where user_id = #{userId}
+		and follow_id = #{followId}
+	</delete>
+	
+	<select id="selectFollowMember" resultMap="FollowResult">
+		select
+			user_id
+		from follow
+		where follow_id = #{boardWriter}
+	</select>
 	
 </mapper>

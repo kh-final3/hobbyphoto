@@ -64,6 +64,8 @@
 	            height: 35px;
 	            margin-top: 20px;
 	    }
+	    
+	    .bno,.type{display: none;}
     </style>
 </head>
 <body>
@@ -103,8 +105,8 @@
             		<c:when test="${ not empty list }">
             			<c:forEach var="b" items="${ list }">
 			              <tr>
-			                <td>${ b.boardTitle }</td>
-			                <td>${ b.boardWriter }</td>
+			                <td><span class="bno">${ b.boardNo }</span>${ b.boardTitle }</td>
+			                <td><span class="type">${ b.boardType }</span>${ b.boardWriter }</td>
 			                <td>${ b.createDate }</td>
 			              </tr>
             			</c:forEach>
@@ -143,8 +145,16 @@
 	</div>
     <script>
     	$(()=>{
-    		$(document).on("click", ".table>tbody>tr",()=>{
-				console.log("클릭")
+    		$(document).on("click", ".table>tbody>tr",function(){
+    			let type = $(this).find(".type").text();
+    			if(type == 1){
+    				location.href="phDetail.bo?phno="+$(this).find(".bno").text();
+    			}
+    			
+				if(type == 2){
+					location.href="rcDetail.bo?phno="+$(this).find(".bno").text();
+    			}
+    			
     		})
     	})
     </script>
