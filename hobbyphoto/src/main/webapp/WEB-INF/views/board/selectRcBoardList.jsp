@@ -137,7 +137,7 @@
 		                    <button onclick="location.href='rcBoardList.bo?cpage=${ p }'">${ p }</button>
 		                </c:forEach>
 		                
-		                <button onclick="location.href='rcBoardList.bo?cpage=${ p }'">${ p }</button>
+		                <!-- <button onclick="location.href='rcBoardList.bo?cpage=${ p }'">${ p }</button> -->
 		                
 		               	<c:choose>
 		                   	<c:when test="${ pi.currentPage eq pi.maxPage }">

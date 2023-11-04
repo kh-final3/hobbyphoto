@@ -35,5 +35,33 @@
           , #{type})
 	</insert>
 	
+	<select id="alramCount" resultType="_int">
+		select
+		       count(*)
+		  from alarm
+		 where from_id = #{fromId}
+	</select>
+	
+	<select id="alramList" resultMap="alamResult">
+		select
+		       alarm_no
+             , to_id
+             , from_id
+             , b_no
+             , title
+             , cmd
+             , type
+		  from alarm
+		 where from_id = #{fromId}
+	</select>
+	
+	<delete id="alramClick">
+		delete 
+          from alarm
+         where to_id = #{sendId}
+           and b_no = #{bno}
+           and type = #{type}
+	</delete>
+	
 </mapper>
 	

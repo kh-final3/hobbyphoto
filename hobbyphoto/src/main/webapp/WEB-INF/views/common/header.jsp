@@ -158,12 +158,24 @@
             border-bottom-color: #fff;
             transform: translate(-50%,calc(-100% + 1px))
         }
-        
     
         .member_inner{
         	width: 130px;
         	height: 150px;
             background-color: white;
+        	position: absolute;
+        	top: 100px;
+            right: 117px;
+        	border: 1px solid black;
+        	z-index: 120;
+            text-align: center;
+            padding: 10px 15px;
+        }
+        
+        .alarm_inner{
+        	width: 250px;
+        	height: 200px;
+        	background-color: white;
         	position: absolute;
         	top: 100px;
             right: 117px;
@@ -210,6 +222,23 @@
           font-size: 14px;
         }
         
+        .alarmArea{
+        	width: 100%;
+        	height: 90%;
+        	overflow: auto;
+        }
+        
+        .alarmClose{
+        	border-top: 1px solid #f1f1f1;
+        	color: rgb(120, 118, 118);
+        	font-size: 14px;
+        	font-weight: 700;
+        }
+        
+        .bno,.type{
+        	display: none;
+        }
+        
   </style>
 </head>
 	<script>
@@ -233,14 +262,8 @@
 	 	};
 	
 		ws.onmessage = function(event) {
-			console.log("onmessage"+event.data);
-			let $socketAlert = $('#socketAlert');
+			let $socketAlert = $('.alarmArea');
 			$socketAlert.html(event.data)
-			$socketAlert.css('display', 'block');
-			
-			setTimeout(function(){
-				$socketAlert.css('display','none');
-			}, 5000);
 		};
 	
 		ws.onclose = function() {
@@ -326,7 +349,7 @@
 
 				                					</c:when>
 				                					<c:otherwise>
-				                						<a href="#">알림(0)</a>
+				                						<a id="alarmText">알림<span id="alarmCount">(0)</span></a>
 				                					</c:otherwise>
 			                					</c:choose>
 		                					</li>
@@ -336,6 +359,15 @@
 		                	</div>
                 		</c:otherwise>
                 	</c:choose>
+                	<div class="alarm false">
+                		<div class="alarm_inner">
+                			<div class="alarmArea">
+                			</div>
+	                		<div class="alarmClose">
+	                			닫기
+	                		</div>
+                		</div>
+		            </div>
                 </div>
 	        </div>
 	    </div>
@@ -353,6 +385,21 @@
 	        		$(".member").addClass("false")
         		}
         	})
+        	
+        	$("#alarmText").click(()=>{
+                $(".alarm").before();
+        		if($(".alarm").hasClass("false")){
+	        		$(".alarm").removeClass("false")
+	        		$(".alarm").addClass("member--visible")
+        		}
+        	})
+        	
+        	$(".alarmClose").click(()=>{
+        		$(".alarm").removeClass("member--visible")
+        		$(".alarm").addClass("false")
+        		$(".member").removeClass("member--visible")
+	        	$(".member").addClass("false")
+        	})
         })
         
         function login() {
@@ -366,5 +413,82 @@
 	    $(".gomain").click(function(){
 	    	location.href='/hobbyphoto'
 	    })
+	    
+	    $(()=>{
+	    	if(${loginMember != null}){
+		    	$.ajax({
+		    		url:"alramCount",
+		    		data:{fromId:"${loginMember.userId}"},
+		    		success:data=>{
+		    			$("#alarmCount").text("("+ data +")")
+		    		},
+		    		error:()=>{
+			    		console.log("알림 카운트 수 로딩 실패")	
+		    		}
+		    	})
+		    	
+		    	$.ajax({
+		    		url:"alramList",
+		    		data:{fromId:"${loginMember.userId}"},
+		    		success:data=>{
+		    			let value = "";
+		                for(let i in data){
+		                	if(data[i].type == 1){
+			                   value += "<div class='alarmMsg'><span class='bno'>"+data[i].bno+"</span>"
+			                   		  + "<span class='type'>"+data[i].type+"</span>"
+			                   		  + "<span class='sendId'>" +data[i].sendId + "</span>"
+			                   		  + "님이 "+ data[i].title +" 에 댓글을 달았습니다!</div>";
+		                	}
+		                          
+		                }
+		                
+		                $(".alarmArea").html(value);
+		    		},
+		    		error:()=>{
+			    		console.log("알림 카운트 수 로딩 실패")	
+		    		}
+		    	})
+		    	
+		    	 $(document).on("click", ".alarmMsg", function(){
+		    		 let type = $(this).find(".type").text();
+						// 댓글
+						if(type==1){
+				    		$.ajax({
+				    			url:"alramClick",
+				    			data:{bno:$(this).find(".bno").text(),sendId:$(this).find(".sendId").text(),type:$(this).find(".type").text()},
+				    			type:"post",
+				    			success:data=>{
+				    				location.href="phDetail.bo?phno="+data
+				    			},
+				    			error:()=>{
+				    				console.log("알림 삭제 실패")
+				    			}
+				    		})
+						}
+		    		 
+		    		 	// 좋아요
+		    		 	if(type==2){
+		    		 		$.ajax({
+				    			url:"alramClick",
+				    			data:{bno:$(this).find(".bno").text(),sendId:$(this).find(".sendId").text(),type:$(this).find(".type").text()},
+				    			type:"post",
+				    			success:data=>{
+				    				location.href="phDetail.bo?phno="+data
+				    			},
+				    			error:()=>{
+				    				console.log("알림 삭제 실패")
+				    			}
+				    		})
+		    		 	}
+		    		 	
+		    		 	// 팔로우
+		    		 	if(type==3){
+		    		 		
+		    		 	}
+		    	})
+	    	}
+	    })
+	    
+	    
     </script>
 </html>

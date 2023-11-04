@@ -88,8 +88,14 @@
 		           	<div class="thumbnail" align="center" data-phno="${ b.boardNo }">
 		                <img src= "${ b.thumbnail }" width="295" height="220"> 
 		                <p id="thumbText">
-		                    <img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" style="border-radius: 100%; margin-bottom: 3px;" width="20px" height="20px"> ${ b.boardWriter } <br><h class="h_a">${ b.boardTitle }</h>
-		                    <p style="font-size: small;">${ b.boardContent }</p>
+		                    <img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" style="border-radius: 100%; margin-bottom: 3px;" width="20px" height="20px">${ b.boardWriter }<br><h class="h_a">${ b.boardTitle }</h>
+		                    
+		                    <p style="font-size: small;">
+		                    <c:if test="${ b.boardContent.length() > 20}">
+		                    ${ b.boardContent.substring(0,20)}... 
+		                    </c:if>
+		                    </p>
+		                    
 		                </p>
 		            </div>
 			   	</c:forEach>
@@ -115,8 +121,6 @@
 		                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 		                    <button onclick="location.href='phBoardList.bo?cpage=${ p }'">${ p }</button>
 		                </c:forEach>
-		                
-		                <button onclick="location.href='phBoardList.bo?cpage=${ p }'">${ p }</button>
 		                
 		               	<c:choose>
 		                   	<c:when test="${ pi.currentPage eq pi.maxPage }">

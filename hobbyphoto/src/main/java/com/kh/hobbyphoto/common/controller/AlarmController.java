@@ -28,9 +28,8 @@ public class AlarmController {
 
 	//알람수
 	@ResponseBody
-	@RequestMapping(value = "alramCount", method=RequestMethod.GET)
+	@RequestMapping("alramCount")
 	public int alramCount (Alarm a) throws Exception{
-		
 		int alram = aService.alramCount(a);
 		
 		return alram;
@@ -39,7 +38,7 @@ public class AlarmController {
 	
 	//알람목록
 	@ResponseBody
-	@RequestMapping(value = "alramList",produces="application/json; charset=UTF-8" ,method=RequestMethod.GET)
+	@RequestMapping(value = "alramList",produces="application/json; charset=UTF-8")
 	public String alramList(Alarm a) throws Exception{
 		ArrayList<Alarm> list = aService.alramList(a);
 		return new Gson().toJson(list);
@@ -51,7 +50,9 @@ public class AlarmController {
 	@RequestMapping(value = "alramClick", method=RequestMethod.POST)
 	public int alramClick(Alarm a) throws Exception{
 		int result = aService.alramClick(a);
-		
-		return result;
+		if(result>0) {
+			return a.getBno();
+		}
+		return 0;
 	}
 }

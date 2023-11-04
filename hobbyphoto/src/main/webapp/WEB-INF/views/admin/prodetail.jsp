@@ -126,13 +126,13 @@
             <input type="number" id="productamount" name="amount" value="${ p.amount }" readonly> <br>
 
             <label for="productImage">상품 이미지:</label> <br>
-            <img src="${ p.thumbnail }" alt="" width="100"> <br>
+            <img src="${ p.thumbnail }" alt="" width="80px" height="80px"> <br>
 
             <label for="productDescription">상품 개요 :</label> <br>
-            <img src="${ p.PDimg }" alt="pdimg Preview" width="100"> <br>
+            <img src="${ p.PDimg }" alt="pdimg Preview" width="80px" height="80px"> <br>
             
             <label for="productDescription">제품 상세 :</label> <br>
-            <img src="${ p.PSimg }" alt="PSimg Preview" width="100"> <br>
+            <img src="${ p.PSimg }" alt="PSimg Preview" width="80px" height="80px"> <br>
             
             <button type="button" onclick="Prolistgo()">목록가기</button>
        

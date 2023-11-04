@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Alarm {
-	private int alramNo;
+	private int alarmNo;
 	private String sendId;
 	private	String fromId;
 	private int bno;

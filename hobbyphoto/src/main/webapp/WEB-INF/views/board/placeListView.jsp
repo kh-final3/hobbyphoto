@@ -10,7 +10,7 @@
         div * {box-sizing: border-box;}
         .warp{
             border: 1px solid rgba(0, 0,0,0.1);
-            width: 1200px;
+            width: 1400px;
             height: 1400px;
             /* margin: auto; */
             margin-top: 50px;
@@ -194,7 +194,7 @@
                 <button onclick="location.href='list.pl?cpage=${ p }'">${ p }</button>
             </c:forEach>
             
-            <button onclick="location.href='list.pl?cpage=${ p }'">${ p }</button>
+            <!-- <button onclick="location.href='list.pl?cpage=${ p }'">${ p }</button> -->
             
                <c:choose>
                    <c:when test="${ pi.currentPage eq pi.maxPage }">
