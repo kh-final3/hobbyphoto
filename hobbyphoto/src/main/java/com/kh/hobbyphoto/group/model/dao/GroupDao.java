@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
+import com.kh.hobbyphoto.group.model.vo.GroupD;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 
 @Repository
@@ -38,6 +39,26 @@ public class GroupDao {
 
 	public int deleteTogether(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.delete("sgroupMapper.deleteTogether", boardNo);
+	}
+
+	public int enrollGroup(SqlSessionTemplate sqlSession, GroupD gr) {
+		return sqlSession.insert("sgroupMapper.enrollGroup", gr);
+	}
+
+	public int groupCount(SqlSessionTemplate sqlSession, GroupD gr) {
+		return sqlSession.update("sgroupMapper.groupCount", gr);
+	}
+
+	public int deleteMember(SqlSessionTemplate sqlSession, GroupD gr) {
+		return sqlSession.delete("sgroupMapper.deleteMember", gr);
+	}
+
+	public int groupCountDown(SqlSessionTemplate sqlSession, GroupD gr) {
+		return sqlSession.update("sgroupMapper.groupCountDown", gr);
+	}
+
+	public ArrayList<GroupD> selectGroupPeople(SqlSessionTemplate sqlSession, int gno) {
+		return (ArrayList)sqlSession.selectList("sgroupMapper.selectGroupPeople", gno);
 	}
 
 

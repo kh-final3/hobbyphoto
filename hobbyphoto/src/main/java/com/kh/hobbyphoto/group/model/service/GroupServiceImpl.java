@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.group.model.dao.GroupDao;
+import com.kh.hobbyphoto.group.model.vo.GroupD;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
 
 @Service
@@ -38,6 +39,29 @@ public class GroupServiceImpl implements GroupService{
 
 	public int deleteTogether(int boardNo) {
 		return GDao.deleteTogether(sqlSession, boardNo);
+	}
+
+	public int enrollGroup(GroupD gr) {
+		int result = GDao.enrollGroup(sqlSession, gr);
+		int result2 = 0;
+		if(result > 0) {
+			result2 = GDao.groupCount(sqlSession, gr);
+		}
+		return result * result2;
+	}
+
+	public int deleteMember(GroupD gr) {
+		int result = GDao.deleteMember(sqlSession, gr);
+		int result2 = 1;
+		
+		if(result > 0) {
+			result2 = GDao.groupCountDown(sqlSession, gr);
+		}
+		return result * result2;
+	}
+
+	public ArrayList<GroupD> selectGroupPeople(int gno) {
+		return GDao.selectGroupPeople(sqlSession, gno);
 	}
 
 

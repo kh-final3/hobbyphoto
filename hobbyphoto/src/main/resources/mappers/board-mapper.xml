@@ -229,7 +229,9 @@
 	 set origin_name = #{originName}
 	   , change_name = #{changeName}
 	   , file_path = #{filePath}
-	 where file_no = #{fileNo}
+	 where ref_bno = #{refBno}
+	 and file_level = #{fileLevel}
+	 and file_no = #{fileNo}
 	</update>
 	
 	<insert id="insertNewAttachment">

@@ -231,9 +231,28 @@
             font-weight: 200;
             letter-spacing: 20px;
         }
+        
+        #delete-btn:hover{
+            font-weight: bolder;
+            cursor: pointer;
+        }
+
+        #delete-btn{
+            width: 90%;
+            height: 50px;
+            margin-top: 10px;
+            border: none;
+            background-color: grey;
+            color: white;
+            border-radius: 7px;
+            font-size: 18px;
+            font-weight: 200;
+            letter-spacing: 20px;
+        }
 
     </style>
 </head>
+<jsp:include page="../common/header.jsp"/>
 	<body>
 		<jsp:include page="../common/header.jsp" />
 	    <div id="__next">
@@ -291,68 +310,53 @@
 		                                </span>
 	                            	</div>
 	                       		 </div>
-	                        <button id="enroll-btn">신청하기</button><br><br><br>
+	                       		 <c:forEach var="l" items="${ list }">
+	                       		 	<c:if test="${ loginMember.userNo eq l.userNo }">
+	                       		 		<c:set var="result" value="1" />
+	                       		 	</c:if>
+	                       		 </c:forEach>
+	                       		 	<c:choose>
+									    <c:when test="${ not empty loginMember and result ne 1 and loginMember.nickName ne sg.userNo }">
+									        <button id="enroll-btn" onclick="enrollMember();">신청하기</button><br><br><br>
+									    </c:when>
+							            <c:when test="${ not empty loginMember and result eq 1 and loginMember.nickName ne sg.userNo }">
+							                <button id="delete-btn" onclick="deleteMember();">취소하기</button><br><br><br>
+							            </c:when>
+							        </c:choose>
+								
+	                       		 
 								<c:if test="${ loginMember.userName eq sg.userNo }">
 						            <div align="center">
-						            		<a class="btn btn-primary" href="togetherList.tg">목록가기</a>
-							                <a class="btn btn-warning" onclick="postFormSubmit(1);">수정하기</a> <!-- 요기에 href="" 를 작성하면 get방식이기 떄문에 노출된다. -->
-							                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
+						            		<a class="btn btn-primary" href="togetherList.tg">목록으로</a>
+							                <a class="btn btn-danger" href="delete.tg?gno=${ sg.groupNo }">삭제하기</a>
 						            </div><br><br>
 								</c:if>
 						        
-					            <form id="postForm" action="" method="post">
-					            	<input type="hidden" name="gno" value="${ sg.groupNo }">
-					            </form>
+					            <c:if test="${not empty loginMember}">
+								    <c:set var="userNo" value="${ loginMember.userNo }" />
+								</c:if>
 					            
 							<script>
-							    function postFormSubmit(num) {
-							        if (num == 1) { // 수정하기 클릭시
-							            $("#postForm").attr("action", "update.tg").submit();
-							        } else { // 삭제하기 클릭시
-							            console.log($("#postForm"));
-							            $("#postForm").attr("action", "delete.tg").submit();
-							        }
-							    }
 							    
 							    let gno = ${ sg.groupNo };
 							    
-							       if(loginMember != null){
-							       let userNo = ${ loginMember.userNo };
-							       }
+							    <c:if test="${not empty userNo}">
+						        	let userNo = ${userNo};
+						    	</c:if>
 							       
-							       function booking(){
+							       function enrollMember(){
 							           
-							              $.ajax({
-							               url:"booking.bo",
-							               data:{
-							            	   boardNo:bno,
-							            	   userNo:userNo
-							            	   }, success:function(result){
-							                   if(result == 'Y'){
-							                      $("#bookmark1").css("display", "none");
-							                       $("#bookmark2").css("display", "");
-							                   }
-							               },
-							               error:function(){
-							               }
-							           	})
-							       }
-							   
-							       function delBooking(){
-							       
-							              $.ajax({
-							               url:"delBooking.bo",
-							               data:{boardNo:bno, userNo:userNo},
-							               success:function(result){
-							                   if(result == 'Y'){
-							                      $("#bookmark1").css("display", "");
-							                       $("#bookmark2").css("display", "none");
-							                   }
-							               },
-							               error:function(){
-							               	}
-							            })
-							       }
+							           if(confirm("모임에 신청하시겠습니까?")){
+							              location.href = "enroll.tg?gno=" + gno + "&uno=" + userNo;
+							           }
+							        }
+							        
+							        function deleteMember(){
+							           
+							           if(confirm("모임에 탈퇴하시겠습니까?")){
+							              location.href = "dropOut.tg?gno=" + gno + "&uno=" + userNo;
+							           }
+							        }
 							</script>
 	                        </div>
 	                    </div>
@@ -361,4 +365,5 @@
 	        </div>
 	    	<jsp:include page="../common/footer.jsp" />
 	</body>
+<jsp:include page="../common/footer.jsp"/>	
 </html>
