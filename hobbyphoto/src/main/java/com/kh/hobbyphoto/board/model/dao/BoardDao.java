@@ -54,9 +54,6 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.deletePhBoard", boardNo);
 	}
 	
-	
-	
-
 	public int updatePhBoard(SqlSessionTemplate sqlSession, Board b) {
 		return sqlSession.update("boardMapper.updatePhBoard", b);
 	}
