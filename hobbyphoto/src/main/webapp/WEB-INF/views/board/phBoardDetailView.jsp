@@ -306,14 +306,21 @@
                         <div class="writer_name">
                             <img src="resources/images/profile.png" width="45" style="margin-top:25px">
                             <p>${ b.boardWriter }</p>
-                            <c:forEach var="f" items="${ p }">
-                            	<c:if test="${ loginMember.userNo eq f.userId }">
-                            		<p style="color: blue; cursor: pointer;" onclick="follow();" id="follow">팔로우</p>
+                            
+                            <c:forEach var="f" items="${ f }">
+                            	<c:if test="${ loginMember.userId eq f.userId }">
+                            		<c:set var="result" value="1"/>
                             	</c:if>
-                            	<c:otherwise>
-                            		<p style="color: blue; cursor: pointer;" onclick="unfollow();" id="follow">팔로우취소</p>
-                            	</c:otherwise>
                             </c:forEach>
+                            <c:choose>
+                            	<c:when test="${ not empty loginMember and result ne 1 and loginMember.userId ne b.boardWriter}">
+                            		<p style="color: blue; cursor: pointer;" onclick="toggleFollow();" id="follow">팔로우</p>
+                            	</c:when>
+                            	<c:when test="${ not empty loginMember and result eq 1 and loginMember.userId ne b.boardWriter}">
+                            		<p style="color: red; cursor: pointer;" onclick="toggleFollow();" id="follow">팔로우취소</p>
+                            	</c:when>
+                            </c:choose>
+                            
                         </div>
                         <div class="writer_name2">
                            <img src="resources/images/option.png">
@@ -493,39 +500,43 @@
             })
         }
         
+        function toggleFollow(){
+        	if($("#follow").text()==="팔로우"){
+        		follow();
+        	}else{
+        		unfollow();
+        	}
+        }
+        
         function follow(){
         	$.ajax({
         		url:"follow",
         		data:{
-        			userId:'${loginMember.userNo}',
+        			userId:'${loginMember.userId}',
         			followId:'${b.boardWriter}'
         		},success:function(result){
         			console.log(result);
-        			if (result == 'success') {
-        			    $("#follow").text("팔로우").css("color", "gray");
-        			} else {
-        			    $("#follow").css("color", "red");
-        			}
+        			if (result === 'success') {
+                        $("#follow").text("팔로우취소").css("color", "red");
+                    }
 
         		},error:function(){
         			console.log("팔로우 ajax 통신 실패");
         		}
-        	})
+        	});
         }
         
         function unfollow() {
             $.ajax({
                 url: "unfollow",
                 data: {
-                    userId: '${loginMember.userNo}',
+                    userId: '${loginMember.userId}',
                     followId: '${b.boardWriter}'
                 },
                 success: function (result) {
                     console.log(result);
-                    if (result == 'success') {
-                        $("#follow").text("팔로우").css("color", "gray");
-                    } else {
-                        $("#follow").css("color", "red");
+                    if (result === 'success') {
+                        $("#follow").text("팔로우").css("color", "blue");
                     }
                 },
                 error: function () {

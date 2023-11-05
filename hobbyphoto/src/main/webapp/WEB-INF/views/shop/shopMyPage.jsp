@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +97,7 @@
             <br>
             <div id="gradeInfo">
               <p>${ loginMember.userName }은 기본등급입니다.</p>
-              <p>구매금액 ${ o.ordertotalprice }원 | 구매건수 ${ o.ordercount }건</p>
+              <p>구매금액 <fmt:formatNumber value="${ o.ordertotalprice }" pattern="#,###"/>원 | 구매건수 ${ o.ordercount }건</p>
             </div>
           </div>
           <hr>

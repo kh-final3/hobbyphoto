@@ -26,6 +26,7 @@
 		<typeAlias type="com.kh.hobbyphoto.common.model.vo.Follow" alias="Follow"/>
 		<typeAlias type="com.kh.hobbyphoto.common.model.vo.Alarm" alias="Alarm"/>
     	<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Orders" alias="Orders"/>
+    	<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Templates" alias="Templates"/>
 	</typeAliases>
 
 

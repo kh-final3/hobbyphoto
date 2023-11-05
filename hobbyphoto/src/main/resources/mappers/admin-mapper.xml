@@ -117,6 +117,16 @@
    		<result column="status" property="status"/>
    </resultMap>
    
+   <resultMap type="Templates" id="TemplateResult">
+   		<result column="t_no" property="tNo"/>
+   		<result column="tem_name" property="temName"/>
+   		<result column="price" property="price"/>
+   		<result column="p_type" property="pType"/>
+   		<result column="title_img" property="titleImg"/>
+   		<result column="tem_img" property="temImg"/>
+   		<result column="status" property="status"/>
+   </resultMap>
+   
 	<!-- 관리자페이지 회원 조회 -->
    <select id="selectMember" resultMap="resultMember">
    select 
@@ -453,5 +463,66 @@
   		from notice
   		order by notice_no desc
   </select>
+  
+  <insert id="templateRegist">
+  	insert
+  		into Templates
+  		(
+  			t_no
+  		,	tem_name
+  		,	price
+  		,	title_img
+  		,	tem_img
+  		,	p_type
+  		)
+  		values
+  		(
+  			SEQ_TEM_NO.nextval
+  		,	#{temName}
+  		,	#{price}
+  		,	#{titleImg}
+  		,	#{temImg}
+  		,	2
+  		)
+  </insert>
+  <select id="selectAdminTemlist" resultType="_int">
+  	select
+  			count(*)
+  	   from templates 
+  	   where status = 'Y' 
+  </select>
+  
+  <select id="selectAdminTem" resultMap="TemplateResult">
+  	select
+  		t_no
+  	,	tem_name
+  	,	price
+  	,	p_type
+  	,	title_img
+  	,	tem_img
+  	,	status
+  	from templates
+  	where status = 'Y' 
+  	order by t_no desc
+  </select>
+  
+  <select id="selectTemdetail" resultMap="TemplateResult">
+  	select
+				t_no
+			,	tem_name
+			,	price
+			,	p_type
+			,	title_img
+			,	tem_img
+			,	status
+		from templates
+		where t_no = #{TNo}
+  </select>
+  <delete id="adminTemDelete">
+  		update
+  			templates
+  		set status = 'N'
+  		where t_no = #{TNo}
+  </delete>
 
 </mapper>

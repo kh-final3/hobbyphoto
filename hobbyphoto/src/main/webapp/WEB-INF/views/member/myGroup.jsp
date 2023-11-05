@@ -16,7 +16,7 @@
     <style>
         .outer_myMeet{
         /* border: 1px solid red; */
-        width: 900px;
+        width: 1200px;
         height: 600px;
         margin: auto;
         margin-top: 50px;
@@ -25,18 +25,17 @@
         }
 
         .container_myMeet1{
-            width: 600px;
-
-            
+            width: 900px;
+            margin-left: 20px;
         }
         .container_myMeet2{
-            /* border: 1px solid red; */
-            background-color: whitesmoke;
             width: 250px;
-            height: 250px;
-            margin: 110px 10px 10px 30px;
+            height: 600px;
+            margin: 10px 30px 10px 10px;
             padding-left: 20px;
             display: block;
+            border-left: 1px solid rgba(0,0,0,.08);
+            box-shadow: 5px 1px 8px 0 rgba(0,0,0,.06);
         }
 
         .myMeet2_list li{
@@ -70,7 +69,7 @@
                 <li><a href="myBookmarks.me">북마크</a></li>
                 <li><a href="myBoard.me">게시글</a></li>
                 <li><a href="myLike.me">좋아요</a></li>
-                <li><a href="myGroup.me">모임</a></li>
+                <li class="main"><a href="myGroup.me">모임</a></li>
                 <li><a href="myBlock.me">차단회원</a></li>
             </ul>  
         </div>
@@ -108,29 +107,31 @@
                   </tbody>
                 </table>
               </div>
+              <br><br>
+              <div class="paging-area" align="center">
+                <c:choose>
+                <c:when test="${ pi.currentPage eq 1 }">
+                  <button disabled> &lt; </button>
+                </c:when>
+                <c:otherwise>
+                  <button style="border: 1px solid lightgray; font-weight: bolder;" onclick="location.href='myBoard.me?cpage=${ pi.currentPage - 1 }'">Previous</button>
+                </c:otherwise>
+              </c:choose>
+              <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                <button onclick="location.href='myBoard.me?cpage=${ p }'">${ p }</button>
+              </c:forEach>
+              <c:choose>
+                <c:when test="${ pi.currentPage eq pi.maxPage }">
+                  <button disabled> &gt; </button>
+                </c:when>
+                <c:otherwise>
+                  <button onclick="location.href='myBoard.me?cpage=${ pi.currentPage + 1 }'"> &gt;</button>
+                </c:otherwise>
+              </c:choose>
+            </div>
         </div>
     </div>
-    <div class="paging-area" align="center">
-	    <c:choose>
-			<c:when test="${ pi.currentPage eq 1 }">
-				<button disabled> &lt; </button>
-			</c:when>
-			<c:otherwise>
-				<button style="border: 1px solid lightgray; font-weight: bolder;" onclick="location.href='myBoard.me?cpage=${ pi.currentPage - 1 }'">Previous</button>
-			</c:otherwise>
-		</c:choose>
-		<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-			<button onclick="location.href='myBoard.me?cpage=${ p }'">${ p }</button>
-		</c:forEach>
-		<c:choose>
-			<c:when test="${ pi.currentPage eq pi.maxPage }">
-				<button disabled> &gt; </button>
-			</c:when>
-			<c:otherwise>
-				<button onclick="location.href='myBoard.me?cpage=${ pi.currentPage + 1 }'"> &gt;</button>
-			</c:otherwise>
-		</c:choose>
-	</div>
+    
     <script>
     	$(()=>{
     		$(document).on("click", ".table>tbody>tr",function(){

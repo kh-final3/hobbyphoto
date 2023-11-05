@@ -18,4 +18,5 @@ public class Follow {
 	private String nickname;
 	private String profileImg;
 	private String followDate;
+	private String boardWriter;
 }

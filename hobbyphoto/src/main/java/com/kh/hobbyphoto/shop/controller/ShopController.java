@@ -27,7 +27,9 @@ import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Photo;
+import com.kh.hobbyphoto.shop.model.vo.PhotoDetail;
 import com.kh.hobbyphoto.shop.model.vo.Product;
+import com.kh.hobbyphoto.shop.model.vo.Templates;
 
 @Controller
 public class ShopController {
@@ -417,19 +419,60 @@ public class ShopController {
 		return mv;
 	}
 	@RequestMapping("shop.photo")
-		public String shopPhoto() {
-			return "shop/shopPhoto";
-		}
+	public String shopPhoto(Model model) {
+		
+		ArrayList<Templates> tlist = sService.selectTemplate();
+		model.addAttribute("t", tlist);
+		
+		return "shop/shopPhotoList";
+	}
+	
+	//캡쳐 연습
+	@RequestMapping("shop.test")
+	public String shoptest() {
+		return "shop/shopPhoto";
+	}
 
 	@ResponseBody
 	@RequestMapping("save.photo")
-		public String savePhoto(Photo p, HttpSession session) {
-		System.out.println(p);
+	public String savePhoto(PhotoDetail pd, HttpSession session) {
+		System.out.println(pd +"pd에 뭐가 있니??");
 		Member m =(Member)session.getAttribute("loginMember");
-		int result = sService.insertPhoto(p);
+		int result = sService.insertPhoto(pd);
 		System.out.println(result +"과연 결과는???");
 		return result>0 ? "success":"fail";
 	}
+	
+	@RequestMapping("detail.tem")
+	public ModelAndView template(int tno, ModelAndView mv) {
+		Templates t = sService.selectTemplateDetail(tno);
+		System.out.println(t+"t에 들어있는 값들은???");
+		mv.addObject("t", t).setViewName("shop/temDetail");
+		return mv;
+	}
+	
+	@RequestMapping("make.photo")
+	public ModelAndView makeMyPhoto(Photo p,String userNo,ModelAndView mv) {
+		System.out.println(p +"뭐가 있나요???"); //tNo, userNo, count
+		int result = sService.insertOnePhoto(p);
+		int tNo = p.getTNo();
+		System.out.println(tNo + "과연 tNo있니??");
+		if(result>0) {
+			Templates t = sService.selectTemInfo(tNo);
+			System.out.println(t+"t에 뭐가 들어 있나??");//tNo,price,temName,pType,titleImg,temImg
+			mv.addObject("alertMsg", "나만의 인생네컷 만들기").addObject("t", t).setViewName("shop/shopPhotoMake");
+		}else {
+			mv.addObject("errorMsg", "다시 시도해주세요.").setViewName("common/errorPage");
+		}
+		return mv;
+		
+	}
+	
+//	@RequestMapping("finish.tem")
+//	public void finishTem(int pNo) {
+//		System.out.println("여기에 뭐가 있니??");
+//		PhotoDetail pd = sService.finishTem(pNo);
+//	}
 			
 }
 

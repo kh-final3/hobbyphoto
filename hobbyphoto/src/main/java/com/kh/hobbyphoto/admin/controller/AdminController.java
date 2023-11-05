@@ -27,6 +27,7 @@ import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.notice.model.vo.Notice;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
+import com.kh.hobbyphoto.shop.model.vo.Templates;
 
 @Controller
 public class AdminController {
@@ -481,6 +482,91 @@ public class AdminController {
 		public String adminCheckList() {
 			return "admin/adminCheckList";
 		}
+		
+		//템플릿 등록폼
+		@RequestMapping("templates.from")
+		public String templateRegistFrom() {
+			return "admin/templateRegist";
+		}
+		//템플릿 등록
+		@RequestMapping("tem.pro")
+		public String templateRegist(Templates t, MultipartFile upfile[],HttpSession session, Model model) {
+			
+//			if(!upfile.getOriginalFilename().equals("")) {
+//				String changeName = saveFile(upfile,session);
+//				t.setTitleImg("resources/proUpFiles/"+changeName);
+//			} //한개 버전
+			
+			for(int i = 0; i<upfile.length ; i++) {
+				if(upfile[i].getSize()>0) {
+					String changeName= saveFile(upfile[i],session);
+					System.out.println(changeName);
+					
+					System.out.println("resources/proUpFiles/"+changeName);
+					
+					switch(i) {
+		            case 0:
+		               t.setTitleImg("resources/proUpFiles/" + changeName);
+		                break;
+		            case 1:
+		                t.setTemImg("resources/proUpFiles/" + changeName);
+		                break;
+					}
+					
+				}
+				
+			}
+			
+			int result = aService.templateRegist(t);
+			
+			if(result>0) {
+				session.setAttribute("alertMsg", "성공적으로 템플릿이 등록되었습니다.");
+				return "redirect:templates.list";
+			}else {
+				model.addAttribute("errorMsg", "템플릿 등록 실패");
+				return "common/errorPage";
+			}
+			
+		}
+		//템플릿 리스트
+		@RequestMapping("templates.list")
+		public ModelAndView templateList(@RequestParam(value="cpage",defaultValue="1")int currentPage,ModelAndView mv) {
+			
+			int temlistCount = aService.selectAdminTemlist();
+			System.out.println(temlistCount + "템플릿 개수");
+			PageInfo pi = Pagination.getPageInfo(temlistCount, currentPage, 5, 5);
+			
+			ArrayList<Templates> tlist = aService.selectAdminTem(pi);
+			System.out.println(tlist + "템플릿 정보");
+			mv.addObject("pi", pi).addObject("tlist", tlist).setViewName("admin/templatelist");;
+			
+			return mv;
+		}
+		
+		@RequestMapping("jyadmin.tem")
+		public ModelAndView adminTemDetail(String tNo,ModelAndView mv) {
+			int tno = Integer.parseInt(tNo);
+			Templates t = aService.selectTemdetail(tno);
+			
+			mv.addObject("t", t).setViewName("admin/adminTemDetail");
+			return mv;
+		}
+		@RequestMapping("jyadmin.temdelete")
+		public String adminTemdelete(int tNo, HttpSession session, String titleImg,Model model) {
+			int result = aService.adminTemDelete(tNo);
+			
+			if(result > 0) {
+				if(!titleImg.equals("")) {
+					new File(session.getServletContext().getRealPath(titleImg)).delete();
+				}
+				session.setAttribute("alertMsg", "성공적으로 템플릿이 삭제되었습니다.");
+				return "redirect:templates.list";
+			}else {
+				model.addAttribute("errorMsg", "템플릿 삭제에 실패했습니다.");
+				return "common/errorPage";
+			}
+		}
+		
 		
 		
 	}

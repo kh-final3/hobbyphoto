@@ -126,7 +126,7 @@
                             <div class="sb-sidenav-menu-heading">상품 관리</div>
                             <a class="nav-link" href="orderlist.pr">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                상품 주문 관리
+                                주문 관리
                             </a>
                             <a class="nav-link" href="table.da">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>

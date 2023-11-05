@@ -16,6 +16,7 @@ import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.notice.model.vo.Notice;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
+import com.kh.hobbyphoto.shop.model.vo.Templates;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -157,6 +158,31 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ArrayList<Notice> selectAdminNotice() {
 		return aDao.selectAdminNotice(sqlSession);
+	}
+
+	@Override
+	public int templateRegist(Templates t) {
+		return aDao.templateRegist(sqlSession,t);
+	}
+
+	@Override
+	public int selectAdminTemlist() {
+		return aDao.selectAdminTemlist(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Templates> selectAdminTem(PageInfo pi) {
+		return aDao.selectAdminTem(sqlSession,pi);
+	}
+
+	@Override
+	public Templates selectTemdetail(int tno) {
+		return aDao.selectTemdetail(sqlSession,tno);
+	}
+
+	@Override
+	public int adminTemDelete(int tNo) {
+		return aDao.adminTemDelete(sqlSession,tNo);
 	}
 
 }

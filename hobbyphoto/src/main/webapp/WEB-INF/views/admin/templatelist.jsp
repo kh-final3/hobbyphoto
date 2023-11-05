@@ -101,13 +101,13 @@
 <body>
  <jsp:include page="adminAlert.jsp"/>
 <div class="dashboard">
-        <h2>상품 관리</h2>
+        <h2>템플릿 관리</h2>
 
-        <a href="proenro.from">상품 등록</a>  /
+        <a href="plist.pr">상품 리스트</a>  /
 
         <a href="alist.da">관리자 페이지</a>  / 
         
-        <a href="templates.list">템플릿</a>
+        <a href="templates.from">템플릿 등록</a>
 		
         <table id="protable">
             <thead>
@@ -115,23 +115,23 @@
                     <th><input type="checkbox" name="" id=""></th>
                     <th>상품번호</th>
                     <th>상품명</th>
-                    <th>재고수량</th>
+                    <th>가격</th>
                     <th>상품 관리</th>
                 </tr>
             </thead>
             <tbody>
-            	<c:forEach var="p" items="${ plist }">
+            	<c:forEach var="t" items="${ tlist }">
             	
 	                <tr>
-	                	<input type="hidden" name="thumbnail" value="${ p.thumbnail}">
+	                	<input type="hidden" name="titleImg" value="${ t.titleImg }">
 	                    <td><input type="checkbox" name="" id=""></td>
-	                    <td>${ p.PNo }</td>
-	                    <td>${ p.PName }</td>
-	                    <td>${ p.amount }</td>
+	                    <td>${ t.TNo }</td>
+	                    <td>${ t.temName }</td>
+	                    <td>${ t.price }</td>
 	                    <td class="button-container">
-	                        <button onclick="selectProductdetail(${p.PNo})">상세</button>
-	                        <button onclick="updateProduct(${p.PNo})">수정</button>
-	                        <button onclick="admindedelete(${p.PNo} ,'${ p.thumbnail }')">삭제</button>
+	                        <button onclick="selectTemdetail(${t.TNo});">상세</button>
+	                        <button onclick="">수정</button>
+	                        <button onclick="adminTemdelete(${t.TNo},'${t.titleImg }');">삭제</button>
 	                    </td>
 	                </tr>
                 </c:forEach>
@@ -147,12 +147,12 @@
             		<a style="display: none;">이전</a>
             	</c:when>
             	<c:otherwise>
-            		<a href="plist.pr?cpage=${pi.currentPage-1}">이전</a>
+            		<a href="templates.list?cpage=${pi.currentPage-1}">이전</a>
             	</c:otherwise>
             </c:choose>
 
             <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-            	<a href="plist.pr?cpage=${p}">${p}</a>
+            	<a href="templates.list?cpage=${p}">${p}</a>
             </c:forEach>
             
             <c:choose>
@@ -160,7 +160,7 @@
             		<a style="display: none;">다음</a>
             	</c:when>
             	<c:otherwise>
-            		<a href="plist.pr?cpage=${pi.currentPage+1}">다음</a>
+            		<a href="templates.list?cpage=${pi.currentPage+1}">다음</a>
             	</c:otherwise>
             </c:choose>
             
@@ -170,14 +170,14 @@
     </div>
     <script>
     
-    function selectProductdetail(pNo){
-    	location.href="adminPro.de?pNo="+pNo;
+    function selectTemdetail(tNo){
+    	location.href="jyadmin.tem?tNo="+tNo;
     }
-    function admindedelete(pNo, thumbnail){
-        location.href="adminPro.delete?pNo="+pNo+"&thumbnail="+thumbnail;
+    function adminTemdelete(tNo,titleImg){
+        location.href="jyadmin.temdelete?tNo="+tNo+"&titleImg="+titleImg;
     }
-    function updateProduct(pNo){
-    	location.href="adminPro.updateForm?pNo="+pNo;
+    function updateProduct(){
+    	location.href="";
     }
  
     </script>

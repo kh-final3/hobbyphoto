@@ -11,7 +11,9 @@ import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Photo;
+import com.kh.hobbyphoto.shop.model.vo.PhotoDetail;
 import com.kh.hobbyphoto.shop.model.vo.Product;
+import com.kh.hobbyphoto.shop.model.vo.Templates;
 
 @Repository
 public class ShopDao {
@@ -110,8 +112,20 @@ public class ShopDao {
 		return sqlSession.update("shopMapper.updateProduct", ords);
 	}
 	
-	public int insertPhoto(SqlSessionTemplate sqlSession,Photo p) {
-		return sqlSession.insert("shopMapper.insertPhoto", p);
+	public int insertPhoto(SqlSessionTemplate sqlSession,PhotoDetail pd) {
+		return sqlSession.insert("shopMapper.insertPhoto", pd);
+	}
+	public ArrayList<Templates> selectTemplate(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("shopMapper.selectTemplate");
+	}
+	public Templates selectTemplateDetail(SqlSessionTemplate sqlSession,int tno) {
+		return sqlSession.selectOne("shopMapper.selectTemplateDetail", tno);
+	}
+	public int insertOnePhoto(SqlSessionTemplate sqlSession,Photo p) {
+		return sqlSession.insert("shopMapper.insertOnePhoto", p);
+	}
+	public Templates selectTemInfo(SqlSessionTemplate sqlSession,int tNo) {
+		return sqlSession.selectOne("shopMapper.selectTemplateDetail", tNo);
 	}
 
 

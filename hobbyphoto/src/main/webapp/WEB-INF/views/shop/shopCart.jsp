@@ -103,7 +103,7 @@
                 
                 
                 
-                <div class="product_body" data-product-id="${c.PNo}" >
+                <div class="product_body" data-product-id="${c.PNo}"  data-max-stock="${c.productamount}">
                     <div class="pb_check">
                         <input class="product_check" type="checkbox">
                     </div>
@@ -118,7 +118,7 @@
                                 <span class="product_brand">${ c.brandnamee }</span>
                             </p>
                             <p>
-                                <a href="detail.pro?pno=${ c.PNo }" class="product_title">${ c.PName }</a>
+                                <a href="detail.pro?pno=${ c.PNo }" class="product_title">${ c.PName } ${c.productamount}</a>
                             </p>
                             <p>
                                 <span class="prodcut_price">${ c.productprice }</span>원
@@ -274,7 +274,9 @@
            	$(".plus").click(function(){
         	   var $input = $(this).siblings(".count");
         	   var count = parseInt($input.val());
+        	   var maxStock = parseInt($(this).closest('.product_body').data('max-stock'));
  
+        	   if(count < maxStock){
         	   $input.val(count + 1); //수량 1증가
         	   console.log($(".pb_price").text());
       			
@@ -284,6 +286,9 @@
         	   
         		// AJAX로 수량 업데이트
         	    upDateAmount(this,$input.val());
+        	   }else{
+        		   alert("주문수량이 재고수량보다 많습니다.")
+        	   }
            	});
         	   
             // "-" 버튼 클릭 이벤트

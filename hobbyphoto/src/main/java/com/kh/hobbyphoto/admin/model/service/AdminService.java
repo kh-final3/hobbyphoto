@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
+import com.kh.hobbyphoto.shop.model.vo.Templates;
 import com.kh.hobbyphoto.board.model.vo.BackGround;
 import com.kh.hobbyphoto.board.model.vo.Board;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
@@ -86,4 +87,15 @@ public interface AdminService {
 	
 	//8.공지사항(지영)
 	ArrayList<Notice> selectAdminNotice();
+	
+	//9.템플릿 등록(지영)
+	int templateRegist(Templates t);
+	//10. 템플릿 리스트(지영)
+	int selectAdminTemlist();
+	ArrayList<Templates> selectAdminTem(PageInfo pi);
+	
+	//11.템플릿 상세 보기
+	Templates selectTemdetail(int tno);
+	//12.템플릿 삭제
+	int adminTemDelete(int tNo);
 }

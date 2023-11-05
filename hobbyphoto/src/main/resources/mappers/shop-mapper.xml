@@ -54,6 +54,16 @@
 		<result column="p_name" property="pName"/>
 	</resultMap>
 
+	<resultMap type="Templates" id="TemplateResult">
+   		<result column="t_no" property="tNo"/>
+   		<result column="tem_name" property="temName"/>
+   		<result column="price" property="price"/>
+   		<result column="p_type" property="pType"/>
+   		<result column="title_img" property="titleImg"/>
+   		<result column="tem_img" property="temImg"/>
+   		<result column="status" property="status"/>
+   </resultMap>
+	
 	 <select id="selectProductList" resultMap="shopResult">
 		select
 	 				p_no
@@ -130,11 +140,12 @@
 		    ,   b.brand_no as brandnoe
 		    ,   b.brand_name as brandnamee
 		    ,	thumbnail
+            ,   p.amount as productamount
 		from cart c
 		join product p using (p_no)
 		join member using (user_no)
 		join brand b on p.brand_no = b.brand_no
-		where user_no =#{userNo}	
+		where user_no =#{userNo}
 		order
  	   		by p_no desc 
 	 </select>
@@ -383,37 +394,68 @@
 	
 	<insert id="insertPhoto">
 		insert 
-		  into photo
+		  into photoDetail
 		 (
 		   P_NO
 		 , T_NO
 	 	 , USER_NO
-		 , IMG1
-		 , IMG2
-		 , IMG3
-		 , IMG4
-		 , IMG5
-		 , IMG6
-		 , IMG7
-		 , IMG8
-		 , IMG9
-		 , IMG0
+		 , IMGS
+		 , CREATE_DATE
+		 , STATUS
 		 ) 
 		  values
 		 (
-		  SEQ_PHOTO_NO.nextval
-		 , 1
+		  SEQ_PHOTO_NO.CURRVAL
+		 , #{TNo}
 		 , #{userNo}
-		 , #{img1}
-		 , 1 
-		 , 1 
-		 , 1 
-		 , 1 
-		 , 1 
-		 , 1 
-		 , 1 
-		 , 1 
-		 , 1 
+		 , #{imgs}
+		 , sysdate
+		 , 'B'
 		 )
+	</insert>
+	
+	<select id="selectTemplate" resultMap="TemplateResult">
+		select
+				t_no
+			,	tem_name
+			,	price
+			,	p_type
+			,	title_img
+			,	tem_img
+		from templates
+		where status ='Y'
+		order
+			by t_no desc
+	</select>
+	
+	<select id="selectTemplateDetail" resultMap="TemplateResult">
+		select
+				t_no
+			,	tem_name
+			,	price
+			,	p_type
+			,	title_img
+			,	tem_img
+		from templates
+		where t_no = #{TNo}
+	</select>
+	<insert id="insertOnePhoto">
+		insert
+			into photo
+			(
+				p_no
+			,	t_no
+			,	user_no
+			,	create_date
+			,	count
+			)
+			values
+			(
+				SEQ_PHOTO_NO.nextval
+			,	#{TNo}
+			,	#{userNo}
+			,	sysdate
+			,	#{count}
+			)
 	</insert>
 </mapper>

@@ -508,7 +508,7 @@
                                             </ul> -->
                                             <p class="css-1hq4sz7 e1gwa9iy6">
                                                 금액
-                                                ${ p.totalPrice }원 
+                                               <fmt:formatNumber value="${ p.totalPrice }" pattern="#,###"/>원
                                             </p>
                                             </div>
                                         </div>

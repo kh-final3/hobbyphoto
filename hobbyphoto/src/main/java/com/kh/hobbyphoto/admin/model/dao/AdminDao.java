@@ -13,6 +13,7 @@ import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.notice.model.vo.Notice;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Product;
+import com.kh.hobbyphoto.shop.model.vo.Templates;
 
 @Repository
 public class AdminDao {
@@ -132,5 +133,24 @@ public class AdminDao {
    }
    public ArrayList<Notice> selectAdminNotice(SqlSessionTemplate sqlSession){
 	   return (ArrayList)sqlSession.selectList("adminMapper.selectAdminNotice");
+   }
+   public int templateRegist(SqlSessionTemplate sqlSession,Templates t) {
+	   return sqlSession.insert("adminMapper.templateRegist", t);
+   }
+   public int selectAdminTemlist(SqlSessionTemplate sqlSession) {
+	   return sqlSession.selectOne("adminMapper.selectAdminTemlist");
+   }
+   public ArrayList<Templates> selectAdminTem(SqlSessionTemplate sqlSession,PageInfo pi){
+	   int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+	   int limit = pi.getBoardLimit();
+	   
+	   RowBounds rowBounds = new RowBounds(offset,limit);
+	   return (ArrayList)sqlSession.selectList("adminMapper.selectAdminTem", null, rowBounds);
+   }
+   public Templates selectTemdetail(SqlSessionTemplate sqlSession,int tno) {
+	   return sqlSession.selectOne("adminMapper.selectTemdetail", tno);
+   }
+   public int adminTemDelete(SqlSessionTemplate sqlSession,int tNo) {
+	   return sqlSession.delete("adminMapper.adminTemDelete", tNo);
    }
 }
