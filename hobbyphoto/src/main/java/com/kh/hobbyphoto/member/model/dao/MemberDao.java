@@ -85,4 +85,12 @@ public class MemberDao {
 	public ArrayList<Follow> selectFollowing(SqlSessionTemplate sqlSession,String userId) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectFollowing",userId);
 	}
+
+	public int updateImg(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateImg",m);
+	}
+
+	public int idCheck(SqlSessionTemplate sqlSession, String userId) {
+		return sqlSession.selectOne("memberMapper.idCheck",userId);	
+	}
 }
