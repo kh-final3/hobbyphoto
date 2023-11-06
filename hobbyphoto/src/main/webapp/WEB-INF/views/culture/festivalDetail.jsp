@@ -169,7 +169,7 @@
                 data: {
                 boardNo: ${ fe.feNo },
                 boardWriter: userNo,
-                boardType: 5
+                boardType: 6
             },
                 success: function (result) {
                     if (result === 'Y') {
@@ -188,7 +188,7 @@
                 data: {
                     boardNo: ${ fe.feNo },
                     boardWriter: userNo,
-                    boardType: 5
+                    boardType: 6
                     },
                 success: function (result) {
                     if(result == 'Y'){
@@ -206,7 +206,7 @@
                         data: {
                             boardNo: ${ fe.feNo },
                             boardWriter: userNo,
-                            boardType: 5
+                            boardType: 6
                             },
                     success: function (result) {
                         if(result == 'Y'){

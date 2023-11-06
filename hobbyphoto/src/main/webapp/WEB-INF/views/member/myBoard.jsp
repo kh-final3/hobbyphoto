@@ -15,7 +15,6 @@
         .outer_myBoardList{
         /* border: 1px solid red; */
         width: 1200px;
-        height: 600px;
         margin: auto;
         margin-top: 50px;
         display: grid;
@@ -30,7 +29,6 @@
         }
         .container_myBoardList2{
           width: 250px;
-          height: 600px;
           margin: 10px 30px 10px 10px;
           padding-left: 20px;
           display: block;
@@ -128,7 +126,7 @@
              <button disabled> &lt; </button>
            </c:when>
            <c:otherwise>
-             <button style="border: 1px solid lightgray; font-weight: bolder;" onclick="location.href='myBoard.me?cpage=${ pi.currentPage - 1 }'">Previous</button>
+             <button onclick="location.href='myBoard.me?cpage=${ pi.currentPage - 1 }'"> &lt;</button>
            </c:otherwise>
          </c:choose>
          <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">

@@ -513,7 +513,7 @@
                 data: {
                 boardNo: ${ p.pno },
                 boardWriter: userNo,
-                boardType: 6
+                boardType: 4
             },
                 success: function (result) {
                     if (result === 'Y') {
@@ -532,7 +532,7 @@
                 data: {
                     boardNo: ${ p.pno },
                     boardWriter: userNo,
-                    boardType: 6
+                    boardType: 4
                     },
                 success: function (result) {
                     if(result == 'Y'){
@@ -550,7 +550,7 @@
                         data: {
                             boardNo: ${ p.pno },
                             boardWriter: userNo,
-                            boardType: 6
+                            boardType: 4
                             },
                     success: function (result) {
                         if(result == 'Y'){

@@ -191,7 +191,7 @@
 
         <div class="info_my">
             <div class="info_my1">
-                <img id="profileImg_my" src="resources/images/picture.png" style="width: 200px; height: 200px; margin: 50px;"></img><br>
+                <img id="profileImg_my" src="${loginMember.profileImg}" style="width: 200px; height: 200px; margin: 50px;"></img><br>
                 <h6 style="font-weight: 600; text-align: center;">반가워요!</h6>
                 <h6 style="text-align: center;">${ loginMember.nickName }님</h6>
                 <div id="btnall_my">
