@@ -38,8 +38,6 @@
     .list{
         width: 1300px;
         margin: auto;
-        margin-top: 20px;
-        margin-left: 200px;
     }
 
     .product{
@@ -181,8 +179,8 @@
 	                                    <ul class="select-ul">
 	                                        <li name="category" value="1">DSLR</li>
 	                                        <li name="category" value="2">SLR</li>
-	                                        <li name="category" value="3">미러리스트</li>
-	                                        <li name="category" value="4">임펙트</li>
+	                                        <li name="category" value="3">미러리스</li>
+	                                        <li name="category" value="4">임팩트</li>
 	                                    </ul>
 	                                </div>
 	                            </li>
@@ -193,19 +191,19 @@
                             <!-- </form> -->
                 </div>
                 
-	                <div class="list clearfix" style="width: 90%;">
-	                    <c:forEach var="c" items="${ list }">
-	                        <div class="product" id="clickpro">
-	                            <input type="hidden" name="pNo" class="pNo" value="${ c.PNo }">
-	                            <div class="img">
-	                                <img src="${ c.thumbnail }">
-	                            </div>
-	                            <div class="text">
-	                                ${ c.PName }
-	                            </div>
-	                        </div>
-	                    </c:forEach>
-	                </div>
+                <div class="list clearfix">
+                    <c:forEach var="c" items="${ list }">
+                        <div class="product" id="clickpro">
+                            <input type="hidden" name="pNo" class="pNo" value="${ c.PNo }">
+                            <div class="img">
+                                <img src="${ c.thumbnail }">
+                            </div>
+                            <div class="text">
+                                ${ c.PName }
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
 
             <br>

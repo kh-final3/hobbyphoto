@@ -128,7 +128,7 @@ public class NoticeController {
 	public ModelAndView selectShopNotice(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv){ 
 		int listCount = nService.selectShopListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<Notice> list = nService.selectShopList(pi);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("notice/selectShopNoticeList");
