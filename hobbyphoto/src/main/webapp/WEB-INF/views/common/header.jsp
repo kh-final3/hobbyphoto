@@ -139,11 +139,9 @@
             margin-left: 90px; /* 테이블 간격 늘리기 */
         }
         
-        /*
-        hr{
-          width: 1200px;
+        #member_menu img{
+        	border-radius: 100px;
         }
-        */
         
         .false{
         	display: none;

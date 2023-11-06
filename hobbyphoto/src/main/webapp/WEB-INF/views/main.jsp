@@ -261,11 +261,16 @@
 	    });
 	    
 	    topBoardList();
+	    
 	    $(document).on("click", ".pick-area>div", function(){
             location.href="phDetail.bo?phno=" + $(this).children().eq(0).val();
          })
 
         topPlaceList();
+	    
+	    $(document).on("click", ".section>div", function(){
+            location.href="detail.pl?pno=" + $(this).children().eq(0).val();
+         })
 	    
     });
     
