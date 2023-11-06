@@ -7,51 +7,46 @@
 <head>
 <meta charset="UTF-8">
 <title>결제성공</title>
-<!-- 
-o:
-orderNo=68, userNo=2, name=가나다라, address=서울특별시 송파구 올림픽로424, postcode=12345, 
-phone=111, orderDate=2023-10-29 17:32:17, totalPrice=2, status=미결제, 
-pType=null, oMsg=ㄱ나, dMsg=강, pNo=0, pName=null, price=0, amount=0, userName=null)}
- -->
-
-	<style>
-        .bigarea{
-            margin-top: 60px;
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        th{ width: 200px; text-align: center; border-bottom: 1px solid rgba(192, 192, 192, 0.52);}
+        tr td{
+            width: 400px;
+            height: 45px;
+            border-bottom: 1px solid rgba(192, 192, 192, 0.52);;
         }
+        table{border: none;}
+        input{border: none;text-align: center; width: 100%;}
     </style>
-
-</head>
 <body>
-
-	<div class="bigarea" align="center">
+<br><br><br><br><br>
+    <div class="bigarea" align="center">
         <h3>결제가 완료되었습니다.</h3>
+        <br>
 		
         <div class="innerOut">
-            <h4>결제 정보</h4>
+            <h4 style="margin-bottom: 20px;">결제 정보</h4>
     
-            <table border="1">
+            <table>
             <c:choose>
             	<c:when test="${ not empty o }">
          			
                 <tr>
-                    <td style="width: 200px; height: 40px;">최종결제금액</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="${ o.totalPrice }"></td>
+                    <th>최종결제금액</th>
+                    <td><input type="text" value="${ o.totalPrice }원"></td>
                 </tr>
                 <tr>
-                    <td style="width: 200px; height: 40px;">주문번호</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="ORD<fmt:parseDate value="${ o.orderDate }" var="orderDate" pattern="yyyy-MM-dd HH:mm:ss"/><fmt:formatDate value="${orderDate}" pattern="yyyyMMdd"/>-6400521${ o.userNo }"></td>
+                    <th>주문번호</th>
+                    <td><input type="text" value="ORD<fmt:parseDate value="${ o.orderDate }" var="orderDate" pattern="yyyy-MM-dd HH:mm:ss"/><fmt:formatDate value="${orderDate}" pattern="yyyyMMdd"/>-6400521${ o.userNo }"></td>
                 </tr>
                 <tr>
-                    <td style="width: 200px; height: 40px;">주문일자</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="${ o.orderDate }"></td>
+                    <th>주문일자</th>
+                    <td><input type="text" value="${ o.orderDate }"></td>
                 </tr>
                 <tr>
-                    <td style="width: 200px; height: 40px;">상품명</td>
-                    <td style="width: 200px; height: 40px;"><input type="" value=""></td>
-                </tr>
-                <tr>
-                    <td style="width: 200px; height: 40px;">주문 고객 이름</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="${ o.name }"></td>
+                    <th>주문 고객 이름</th>
+                    <td><input type="text" value="${ o.name }"></td>
                 </tr>
                 </c:when>
                <c:otherwise>
@@ -59,24 +54,24 @@ pType=null, oMsg=ㄱ나, dMsg=강, pNo=0, pName=null, price=0, amount=0, userNam
               
                
                <tr>
-                    <td style="width: 200px; height: 40px;">최종결제금액</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.totalPrice }"></td>
+                    <th>최종결제금액</th>
+                    <td><input type="text" value="${ ord.totalPrice }"></td>
                 </tr>
                 <tr>
-                    <td style="width: 200px; height: 40px;">주문번호</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="ORD<fmt:parseDate value="${ ord.orderDate }" var="orderDate" pattern="yyyy-MM-dd HH:mm:ss"/><fmt:formatDate value="${orderDate}" pattern="yyyyMMdd"/>-6400521${ ord.userNo }"></td>
+                    <th>주문번호</th>
+                    <td><input type="text" value="ORD<fmt:parseDate value="${ ord.orderDate }" var="orderDate" pattern="yyyy-MM-dd HH:mm:ss"/><fmt:formatDate value="${orderDate}" pattern="yyyyMMdd"/>-6400521${ ord.userNo }"></td>
                 </tr>
                 <tr>
-                    <td style="width: 200px; height: 40px;">주문일자</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.orderDate }"></td>
+                    <th>주문일자</th>
+                    <td><input type="text" value="${ ord.orderDate }"></td>
                 </tr>
                 <tr>
-                    <td style="width: 200px; height: 40px;">상품명</td>
-                    <td style="width: 200px; height: 40px;"><input type="" value="${ ord.totalPrice }"></td>
+                    <th>상품명</th>
+                    <td><input type="" value="${ ord.totalPrice }"></td>
                 </tr>
                 <tr>
-                    <td style="width: 200px; height: 40px;">주문 고객 이름</td>
-                    <td style="width: 200px; height: 40px;"><input type="text" value="${ ord.name }"></td>
+                    <th>주문 고객 이름</th>
+                    <td><input type="text" value="${ ord.name }"></td>
                 </tr>
                 
                 </c:otherwise>
@@ -85,22 +80,18 @@ pType=null, oMsg=ㄱ나, dMsg=강, pNo=0, pName=null, price=0, amount=0, userNam
         </div>
         <br>
         <div>
-            <button type="button" onclick="main()">메인</button>
-            <button type="button" onclick="list()">구매목록</button>
+            <button class="btn btn-secondary" type="button" onclick="main()">메인</button>
+            <button class="btn btn-success" type="button" onclick="list()">구매목록</button>
         </div>
-		
     </div>
-
-	<script>
-		function main(){
+    <script>
+    function list(){
 			location.href="pro.list";
-		}
-		
-		function list(){
 			location.href="shop.order?userNo='${loginMember.userNo}'";
 		}
+    function main(){
+    	location.href="pro.list";
+    }
 	</script>
-
-
 </body>
 </html>

@@ -162,6 +162,27 @@
             margin-top: 2px;
         }
 
+        #profile_2>img {
+            width: 180px;
+            height: 180px;
+            border-radius: 100px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 60px;
+            margin-right: 60px;
+        }
+      
+        #profile_2>#uplo {
+            width: 40px;
+        }
+
+        #uplo {
+            width: 30px;
+            position: absolute;
+            top: 190px;
+            left: 205px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -172,7 +193,16 @@
 
         <div class="info_my">
             <div class="info_my1">
-                <img id="profileImg_my" src="../../resources/images/picture.png" style="width: 200px; height: 200px; margin: 50px;"></img><br>
+                <div id="profile">
+                    <div id="profile_2" style="position: relative">
+                        <label for="image-upload" id="upload-label">
+                            <img src="resources/images/plus.png" id="uplo">
+                        </label>
+                        <img src="${ loginMember.profileImg }" id="pro">
+                        <input type="file" id="image-upload" accept="image/*" style="display: none;" name="upfile" onchange="updateProfileImage(this)">
+                    </div>
+                                
+                </div>
                 <h6 style="font-weight: 600; text-align: center;">반가워요!</h6>
                 <h6 style="text-align: center;">${ loginMember.nickName }님</h6>
                 <div id="btnall_my">
@@ -329,7 +359,47 @@
                 }
             })
         })
+
     </script>
+
+<script>
+    function updateProfileImage(input) {
+    const selectedImage = input.files[0];
+
+    if (selectedImage) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const profileImage = document.getElementById("pro");
+            profileImage.src = e.target.result;
+
+            const formData = new FormData();
+            formData.append("image", selectedImage);
+
+            $.ajax({
+                type: "POST",
+                url: "updateImg.me",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log("성공");
+                },
+                error: function() {
+                    console.error("실패");
+                }
+            });
+        };
+
+        reader.readAsDataURL(selectedImage);
+    }
+}
+
+</script>
+
+
+
+
     <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

@@ -7,19 +7,15 @@
 <title>Insert title here</title>
 <style>
     .content{
-        width: 1370px;
+        width: 1200px;
         margin: auto;
-    }
-
-    .recommend{
-        border-bottom: 1px solid lightgray;
     }
 
     #contentArea th{
         border-right: 1px solid lightgray;
     }
-
     .rc-btn>button{margin-left: 10px;}
+    #content{margin-left:95px;}
 </style>
 </head>
 <body>
@@ -36,27 +32,31 @@
                <input type="hidden" id="boardWriter" value="${ loginMember.userNo }" name="boardWriter">
                 <table id="contentArea" align="center" class="table">
                     <tr>
+                        <th width="100">제목</th>
+                        <td colspan=""><input type="text" name="boardTitle" style="width: 1000px;" required></td>
                         <tr>
                             <th width="100">해시태그</th>
-                            <td colspan=""><input type="text" name="hashTag" value="${ b.hashTag }" style="width: 1200px;"></td>
+                            <td colspan=""><input type="text" name="hashTag" value="${ b.hashTag }" style="width: 1000px;" required></td>
                         </tr>
-                        <th width="100">제목</th>
-                        <td colspan=""><input type="text" name="boardTitle" style="width: 1200px;"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><textarea name="boardContent" cols="145" rows="15" style="resize: none;"></textarea></td>
+                        <td colspan="2"><textarea id="content" name="boardContent" cols="120" rows="15" style="resize: none;" required></textarea></td>
                     </tr>
                 </table>
-                <input type="file" name="upfile" style="margin: 0 0 0 12px;" required>
-                <input type="file" name="upfile">
+                <div style="margin-left:200px";>
+	                <input type="file" name="upfile">
+	                <input type="file" name="upfile">
+	                <input type="file" name="upfile">
+	            </div>    
         		<br>
-			        <div class="rc-btn" align="right" style="width: 1300px; margin-bottom: 20px;" >
+			        <div class="rc-btn" align="right" style="width: 1200px; margin-bottom: 20px;" >
 			            <button type="submit" class="btn btn-dark">작성</button>
 			            <button class="btn btn-dark">취소</button>
 			        </div>
         	</form>
         </div>
     </div>
+    <br><br><br>
     <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
