@@ -121,30 +121,31 @@
                     <div class="photo-area">
 
                         <div class="mainpho">
-                            <img src="" alt="" id="image1" width="450" height="400" onclick="chooseFile(1);">
+                            <img src="resources/images/enrollImage.png" alt="" id="image1" width="450" height="400" onclick="chooseFile(1);">
                             <input type="file" name="upfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;" required>
                         </div>
                         <div class="pho">
                             <div class="pho1">
-                                <img src="" alt="" id="image2" width="200" height="200" onclick="chooseFile(2);">
+                                <img src="resources/images/enrollImage.png" alt="" id="image2" width="200" height="200" onclick="chooseFile(2);">
                                 <input type="file" name="upfiles" id="file2" onchange="loadImg(this, 2);" style="display: none;">
                             </div>
                             <div class="pho2">
-                                <img src="" alt="" id="image3" width="200" height="200" onclick="chooseFile(3);">
+                                <img src="resources/images/enrollImage.png" alt="" id="image3" width="200" height="200" onclick="chooseFile(3);">
                                 <input type="file" name="upfiles" id="file3" onchange="loadImg(this, 3);" style="display: none;">
                             </div>
                             <div class="pho3">
-                                <img src="" alt="" id="image4" width="200" height="200" onclick="chooseFile(4);">
+                                <img src="resources/images/enrollImage.png" alt="" id="image4" width="200" height="200" onclick="chooseFile(4);">
                                 <input type="file" name="upfiles" id="file4" onchange="loadImg(this, 4);" style="display: none;">
                             </div>
                             <div class="pho4">
-                                <img src="" alt="" id="image5" width="200" height="200" onclick="chooseFile(5);">
+                                <img src="resources/images/enrollImage.png" alt="" id="image5" width="200" height="200" onclick="chooseFile(5);">
                                 <input type="file" name="upfiles" id="file5" onchange="loadImg(this, 5);" style="display: none;">
                             </div>
                         </div>
                     </div>
 
                     <script>
+                    const defaultImage = "resources/images/enrollImage.png"
                         function chooseFile(num) {
                             $("#file" + num).click();
                         }
@@ -183,11 +184,11 @@
                                 
                             }else { // 선택된 파일이 취소된 경우(뺌) => 미리보기 한것도 사라지도록
                                 switch(num) {
-                                    case 1: $("#image1").attr("src", null); break;
-                                    case 2: $("#image2").attr("src", null); break;
-                                    case 3: $("#image3").attr("src", null); break;
-                                    case 4: $("#image4").attr("src", null); break;
-                                    case 5: $("#image5").attr("src", null); break;
+                                    case 1: $("#image1").attr("src", defaultImage); break;
+                                    case 2: $("#image2").attr("src", defaultImage); break;
+                                    case 3: $("#image3").attr("src", defaultImage); break;
+                                    case 4: $("#image4").attr("src", defaultImage); break;
+                                    case 5: $("#image5").attr("src", defaultImage); break;
                                 }
                             }
 
@@ -202,8 +203,8 @@
                         해시태그 <input type="text" name="hashTag" id="hashTag" class="tag-input" style="width: 290px;" placeholder="해시태그를 입력해주세요.">
                     </div>
                     <div class="btn-area">
-                        <button type="submit" class="btn btn-secondary" style="margin-left: 35px;">등록하기</button>
-                        <button type="button" onclick="" class="btn btn-primary">목록가기</button>
+                        <button type="button" onclick="" class="btn btn-primary" style="margin-left: 35px;">목록가기</button>
+                        <button type="submit" class="btn btn-secondary">등록하기</button>
                     </div>
                 </div>
             </form>

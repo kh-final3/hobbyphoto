@@ -14,4 +14,5 @@ import lombok.ToString;
 public class GroupD {
 	private int groupNo;
 	private int userNo;
+	private String profileImg;
 }

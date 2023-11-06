@@ -64,6 +64,10 @@ public class GroupServiceImpl implements GroupService{
 		return GDao.selectGroupPeople(sqlSession, gno);
 	}
 
+	public ArrayList<GroupD> selectPeopleImg() {
+		return GDao.selectPeopleImg(sqlSession);
+	}
+
 
 
 

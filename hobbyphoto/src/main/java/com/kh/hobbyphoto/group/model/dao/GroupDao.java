@@ -61,5 +61,9 @@ public class GroupDao {
 		return (ArrayList)sqlSession.selectList("sgroupMapper.selectGroupPeople", gno);
 	}
 
+	public ArrayList<GroupD> selectPeopleImg(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("sgroupMapper.selectPeopleImg");
+	}
+
 
 }
