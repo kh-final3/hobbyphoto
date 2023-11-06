@@ -15,6 +15,7 @@
 		<result column="hashtag" property="hashTag"/>
 		<result column="thumbnail" property="thumbnail"/>
 		<result column="board_writer" property="boardWriter"/>
+		<result column="profile_img" property="profileImg"/>
 	</resultMap>
 	
 	<resultMap id="AttachmentResult" type="Attachment">
@@ -119,6 +120,7 @@
 		    , b.board_content
 		    , b.count
 	        , m.nickname
+            , profile_img
 		    , to_char(b.create_date, 'YYYY-MM-DD') as "create_date"
 		    , a.file_path as "thumbnail"
 		 from board b

@@ -25,5 +25,5 @@ public class Board {
 	private Date createDate;
 	private String hashTag;
 	private String thumbnail;
-
+	private String profileImg;
 }

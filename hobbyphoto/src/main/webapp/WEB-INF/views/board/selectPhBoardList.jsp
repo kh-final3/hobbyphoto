@@ -83,13 +83,14 @@
 				        </c:when>
 				    </c:choose>
 				</div>
+				${ b.profileImg }
 	        <div class="list-area_th">
 			   	<c:forEach var="b" items="${ list }">
 		           	<div class="thumbnail" align="center" data-phno="${ b.boardNo }">
 		                <img src= "${ b.thumbnail }" width="295" height="220"> 
 		                <p id="thumbText">
-		                    <img src="${ loginMember.profileImg }" style="border-radius: 100%; margin-bottom: 3px;" width="20px" height="20px"> ${ b.boardWriter }<br><h class="h_a">${ b.boardTitle }</h>
-		                    
+		                
+		                    <img src="${ b.profileImg }" style="border-radius: 100%; margin-bottom: 3px;" width="20px" height="20px"> ${ b.boardWriter }<br><h class="h_a">${ b.boardTitle }</h>
 		                    <p style="font-size: small;">
 		                    <c:choose>
 			                    <c:when test="${ b.boardContent.length() > 20}">

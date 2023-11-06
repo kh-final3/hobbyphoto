@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
     <style>
-        .innerOuter{width: 1300px; height: 600px; margin: 10px 0 0 200px;}
+        .innerOuter{width: 1200px; height: 600px; margin: auto;}
         .innerOuter>div{box-sizing: border-box; display: block; float: left;}
         .product-img{width: 500px; height: 500px; margin-right: 40px;}
         .product-info{width: 570px; height: 525px;}
@@ -55,7 +55,7 @@
             
         
             <div class="product-img">
-                <img src="${ t.titleImg }" style="width: 500px; height: 290px; margin-top: 100px;">
+                <img src="${ t.titleImg }" style="width: 500px; height: 400px;">
             </div>
             <div class="product-info">
                 <div class="product-name">
