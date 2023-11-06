@@ -454,6 +454,7 @@ public class BoardController {
 	        HttpSession session, Model model) {
 	    ArrayList<Attachment> list = new ArrayList<>();
 	    Place existingPlace = bService.selectPlace(p.getPno());
+	    System.out.println(existingPlace);
 	    p.setPimg1(existingPlace.getPimg1());
 	    p.setPimg2(existingPlace.getPimg2());
 	    p.setPimg3(existingPlace.getPimg3());
@@ -523,17 +524,25 @@ public class BoardController {
 	
 
 	@RequestMapping("sortPlace.pl")
-	public ModelAndView sortPlace(String keyword, @RequestParam(value = "cpage", defaultValue = "1") int currentPage,
-			ModelAndView mv) {
-		int listCount = bService.selectPlaceListCount();
-		HashMap<String, String> map = new HashMap<>();
-		map.put("keyword", keyword);
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		ArrayList<Place> list = bService.sortPlaceList(pi, map);
-		mv.addObject("pi", pi).addObject("list", list).setViewName("board/placeListView");
+	public ModelAndView sortPlace(String keyword, @RequestParam(value = "cpage", defaultValue = "1") int currentPage, ModelAndView mv) {
+	    int listCount = bService.selectPlaceListCount();
+	    HashMap<String, String> map = new HashMap<>();
+	    map.put("keyword", keyword);
+	    
+	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+	    ArrayList<Place> list;
 
-		return mv;
+	    if ("best".equals(keyword)) {
+	        // Sort the list by count in descending order
+	        list = bService.sortPlaceListByCount(pi, map);
+	    } else {
+	        list = bService.sortPlaceList(pi, map); // Your existing sorting logic for other cases
+	    }
+
+	    mv.addObject("pi", pi).addObject("list", list).setViewName("board/placeListView");
+	    return mv;
 	}
+
 
 	
 	//////////////// 축제,전시 ///////////////////////////

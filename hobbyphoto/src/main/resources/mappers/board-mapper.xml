@@ -624,7 +624,7 @@
 	
 	<update id="increaseCountPlace">
 		update place
-		   set count = count+1
+		   set count = count + 1
 		   where p_no = #{ pno }
 	</update>
 	
@@ -700,12 +700,23 @@
 		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
 		     , p_img1
 		  from place
-		  <if test="keyword == 'date'">
 		  	 order by create_date desc
-		    </if>
-		    <if test="keyword == 'best'">
-		   	order by count desc
-		    </if>
+		    
+	</select>
+	
+	
+	<select id="sortPlaceListByCount" resultMap="placeResult">
+		select p_no
+		     , p_title
+		     , p_content
+		     , p_location
+		     , p_address
+		     , count
+		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+		     , p_img1
+		  from place
+		  order by count desc
+		 
 	</select>
 	
 	<update id="updatePlace">

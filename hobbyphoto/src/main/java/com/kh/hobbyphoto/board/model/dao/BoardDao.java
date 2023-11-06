@@ -212,6 +212,7 @@ public class BoardDao {
 	}
 	
 	public int increaseCountPlace(SqlSessionTemplate sqlSession, int pno) {
+		System.out.println(pno);
 		return sqlSession.update("boardMapper.increaseCountPlace", pno);
 	}
 
@@ -233,6 +234,15 @@ public class BoardDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.sortPlaceList", null, rowBounds);
+	}
+
+	public ArrayList<Place> sortPlaceListByCount(SqlSessionTemplate sqlSession, HashMap<String, String> map,
+			PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.sortPlaceListByCount", null, rowBounds);
 	}
 	
 	public int updatePlace(SqlSessionTemplate sqlSession, Place p) {
@@ -363,4 +373,5 @@ public class BoardDao {
 	public ArrayList<Board> selectProfileImg(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectProfileImg");
 	}
+
 }

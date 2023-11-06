@@ -263,6 +263,12 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.sortPlaceList(sqlSession, map, pi);
 	}
 	
+
+	public ArrayList<Place> sortPlaceListByCount(PageInfo pi, HashMap<String, String> map) {
+		return bDao.sortPlaceListByCount(sqlSession, map, pi);
+	}
+
+	
 	@Override
 	public int insertAttachmentPlace(ArrayList<Attachment> list) {
 		

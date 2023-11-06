@@ -323,7 +323,7 @@
                             <hr>
                             <li class="li-area1">
                                 <div class="board-writer">&nbsp;&nbsp;작성자 : ${ p.pwriter }</div>
-                                <div class="board-ect">조회수 : ${ p.count } &nbsp;&nbsp;&nbsp; 추천수 : 3 &nbsp;&nbsp;&nbsp; 댓글 : 2</div>
+                                <div class="board-ect">조회수 : ${ p.count } &nbsp;&nbsp;&nbsp; 북마크수 : 3</div>
                             </li>
                         </ul>
                     </div>

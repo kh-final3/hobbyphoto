@@ -14,7 +14,6 @@
             /* background-color: rgba(0, 0,0,0.1); */
             border-radius: 15px;
             margin-top: 50px;
-            margin-left: 160px;
         }
         
         .innerOut{
@@ -62,6 +61,20 @@
             margin: auto;
             margin-top: 5px;
             border: none;
+        }
+
+        .photo-area {
+            width: 100%;    
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center; 
+            align-items: flex-start; 
+        }
+
+        .photo-area img{
+            width: 22%;
+            margin-left: 30px;
+            margin-top: 25px;
         }
 
         .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
@@ -147,7 +160,7 @@
             </div>
         </div>
         
-        <div class="photo" style="width: 550px;">
+        <div class="photo" style="width: 100%;">
             <div class="photo-area">
                 <img src="" alt="사진1"  id="titleImg"  width="150" height="120"onclick="chooseFile(1);" >
                 <img src="" alt="사진2" id="contentImg1" width="150" height="120" onclick="chooseFile(2);">

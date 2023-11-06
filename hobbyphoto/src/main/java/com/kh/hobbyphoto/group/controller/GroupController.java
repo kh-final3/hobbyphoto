@@ -22,7 +22,6 @@ import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.group.model.service.GroupServiceImpl;
 import com.kh.hobbyphoto.group.model.vo.GroupD;
 import com.kh.hobbyphoto.group.model.vo.Sgroup;
-import com.kh.hobbyphoto.member.model.vo.Member;
 
 @Controller
 public class GroupController {
