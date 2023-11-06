@@ -177,7 +177,7 @@
 
         .view_btn:hover {
             font-weight: bold;
-            border: 1px solid #000;
+           /*  border: 1px solid #000; */
             background-color: #dadada;
             text-decoration: none;
         }
@@ -202,7 +202,12 @@
 	            width: 35px;
 	            height: 35px;
 	            margin-top: 20px;
-	        }
+	    }
+	    a:hover {
+		    text-decoration: none;
+		    border:none;
+		}
+	    
 
     </style>
 </head>
@@ -219,8 +224,8 @@
                     <div class="pf_schedule">
                         <div class="pf_sche_tab">
                             <ul class="tab_ul">
-                                <li class="on"><a href="festivalList.fs">축제</a></li>
-                                <li><a href="exhibitList.fs">전시</a></li>
+                                <li class="on"><a style="text-decoration: none;" href="festivalList.fs">축제</a></li>
+                                <li><a style="text-decoration: none;" href="exhibitList.fs">전시</a></li>
                             </ul>
                         </div>
                     </div>
@@ -257,7 +262,7 @@
 	                </ul>
 	                <div class="pf_btn">
 	                    <br>
-	                    <a href="cultureDetail.fs?feNo=${ fe.feNo}" seq="2221" class="view_btn">상세보기</a>
+	                    <a href="cultureDetail.fs?feNo=${ fe.feNo }" seq="2221" class="view_btn">상세보기</a>
 	                </div>
 	            </div>
 	        </div>

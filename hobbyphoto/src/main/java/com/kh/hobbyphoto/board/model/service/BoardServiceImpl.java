@@ -401,5 +401,9 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.selectDownload(sqlSession,backNo);
 	}
 
+	public ArrayList<Board> selectProfileImg() {
+		return bDao.selectProfileImg(sqlSession);
+	}
+
 
 }
