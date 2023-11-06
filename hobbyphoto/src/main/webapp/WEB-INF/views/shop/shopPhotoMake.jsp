@@ -10,7 +10,6 @@
 
 <style>
         .warp {
-            border: 1px solid black;
             width: 1400px;
             margin: auto;
             margin-top: 20px;
@@ -18,7 +17,6 @@
         }
 
         .innerOuter {
-            border: 1px solid red;
             margin-top: 20px;
             margin-bottom: 10px;
             height: 900px;
@@ -28,82 +26,93 @@
         }
 
         .photo {
-            border: 1px solid black;
             width: 100%;
+            height: 100%;
             margin: auto;
             position: absolute; /* 추가: 자식 요소의 position을 absolute로 설정 */
+            top:1px;
+            left:1px;
+            z-index: 1;
+            pointer-events: none; 
+        }
+        
+        .photo img{
+        	width: 100%;
+        	height: 100%;
         }
 
         .cut1 {
             border: 1px solid royalblue;
-            width: 276px;
+            width: 278px;
             position: absolute;
             height: 183px;
             margin-left: 9.8px;
             margin-top: 10px;
-            /* 추가: z-index를 설정하여 cut1이 위에 표시되도록 함 */
-            z-index: 1;
             border: none;
         }
 
         .cut2 {
             border: 1px solid royalblue;
-            width: 276px;
+            width: 278px;
             position: absolute;
             height: 183px;
             margin-left: 9.8px;
             margin-top: 205px;
-            /* 추가: z-index를 설정하여 cut1이 위에 표시되도록 함 */
-            z-index: 1;
             border: none;
         }
 
         .cut3 {
             border: 1px solid royalblue;
-            width: 276px;
+            width: 278px;
             position: absolute;
             height: 183px;
             margin-left: 9.8px;
             margin-top: 400px;
-            /* 추가: z-index를 설정하여 cut1이 위에 표시되도록 함 */
-            z-index: 1;
             border: none;
         }
 
         .cut4 {
             border: 1px solid royalblue;
-            width: 276px;
+            width: 278px;
             position: absolute;
             height: 183px;
             margin-left: 9.8px;
             margin-top: 595px;
-            /* 추가: z-index를 설정하여 cut1이 위에 표시되도록 함 */
-            z-index: 1;
             border: none;
         }
 
         #photo1 {
             width: 100%;
             height: 100%;
-            opacity: 0.5;
+            z-index: 10;
         }
 
         #photo2 {
             width: 100%;
             height: 100%;
-            opacity: 0.5;
+            z-index: 10;
         }
 
         #photo3 {
             width: 100%;
             height: 100%;
-            opacity: 0.5;
+            z-index: 10;
         }
 
         #photo4 {
             width: 100%;
             height: 100%;
-            opacity: 0.5;
+            z-index: 10;
+        }
+        
+        .btn-area{
+        	width: 300px;
+        	margin: auto;
+        }
+        
+        .btn{
+        	width: 300px;
+        	margin-bottom: 10px;
         }
 
 
@@ -113,10 +122,11 @@
 <body>
 <!-- 여기에 있는 정보 =>'t'에 있다: tNo,price,temName,pType,titleImg,temImg  --> 
 <!-- po에 있는 정보 => pNo,tNo,userNo,count -->
+	<jsp:include page="../common/header.jsp"/>
 	<div class="warp">
         <div class="innerOuter" id="innerOuter">
             <div class="photo">
-                <img src="${ t.titleImg }" alt="" height="900">
+                <img src="${ t.titleImg }" height="900">
             </div>
             <div class="cut1">
                 <img src="" alt="" id="photo1" onclick="chooseFile(1)">
@@ -135,11 +145,11 @@
                 <input type="file" name="upfiles" id="file4" style="display: none;" onchange="loadImg(this,4);">
             </div>
         </div>
+        <br>
         <div class="btn-area">
-            <button type="button" onclick="partShot();">완료</button>
-        </div>
-        <div>
-        	<button type="button" onclick="finish();">다음</button>
+            <button type="button" class="btn btn-dark btn" onclick="partShot();">완료</button>
+            <br>
+        	<button type="button" class="btn btn-dark" onclick="finish();">다음</button>
         </div>
         
     </div>
@@ -161,27 +171,6 @@
                 reader.readAsDataURL(file);
             }
         }
-        //이미지 변경
-   
-        
-        //function partShot() {
-        //    html2canvas(document.getElementById("innerOuter"))
-        //        .then(function (canvas) {
-        //            var capturedImage = canvas.toDataURL('image/jpeg');
-        //            console.log("캡처된 이미지 데이터 URL:", capturedImage);
-        //            saveImageAsFile(capturedImage, "captured_image.jpg");
-        //        })
-        //        .catch(function (err) {
-        //            console.log(err);
-        //        });
-        //}
-
-        //function saveImageAsFile(dataURL, fileName) {
-        //    var link = document.createElement("a");
-        //    link.href = dataURL;
-        //    link.download = fileName;
-        //    link.click();
-       // }
         
         function partShot() {
 		    html2canvas(document.getElementById("innerOuter"))
@@ -204,8 +193,6 @@
 		        });
 		}
 		function saveImageOnServer(imageData) {
-			//imageData는 canvas.toDataURL메서드 때문에 자동으로 생성 => 임의 변경 불가
-		    // POST 요청을 사용하여 캡처한 이미지 데이터를 서버로 전송합니다.
             console.log(imageData)
 		    $.ajax({
 		    	type: "POST",
@@ -228,11 +215,8 @@
 		function finish(){
 			location.href="finish.tem?pNo="+${po.PNo}+"&tNo="+${t.TNo}
 		}
-        
-        
-        
-        
 
     </script>
+    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

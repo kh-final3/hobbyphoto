@@ -26,6 +26,8 @@
         #h_my{
             font-weight: 600;
         }
+        
+        #profileImg_my{border-radius: 100px;}
 
         .info_my{
           background-color: white;

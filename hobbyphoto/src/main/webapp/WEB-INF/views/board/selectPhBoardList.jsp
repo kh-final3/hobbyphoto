@@ -83,6 +83,7 @@
 				        </c:when>
 				    </c:choose>
 				</div>
+				${ b.profileImg }
 	        <div class="list-area_th">
 			   	<c:forEach var="b" items="${ list }">
 		           	<div class="thumbnail" align="center" data-phno="${ b.boardNo }">

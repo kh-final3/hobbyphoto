@@ -26,5 +26,4 @@ public class Board {
 	private String hashTag;
 	private String thumbnail;
 	private String profileImg;
-
 }

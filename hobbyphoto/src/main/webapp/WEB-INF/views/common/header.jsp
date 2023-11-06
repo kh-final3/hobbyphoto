@@ -308,7 +308,14 @@
                     <table class="login-area" align="center">
                         <tr height="75">
                             <td width="70"><a href="pro.list"><img width="60" src="resources/images/shopping-cart.png" alt=""></a></td>
-                            <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/149/149071.png"></td>
+                            <c:choose>
+                            	<c:when test="${ empty loginMember }">
+                            		<td width="70" id="member_menu"><img width="60" height="60" src="resources/images/profile.png"></td>
+                            	</c:when>
+                            	<c:otherwise>
+		                            <td width="70" id="member_menu"><img width="60" height="60" src="${loginMember.profileImg }"></td>
+                            	</c:otherwise>
+                            </c:choose>
                         </tr>
                     </table>
                 </div>
