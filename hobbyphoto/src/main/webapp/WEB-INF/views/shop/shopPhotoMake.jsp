@@ -122,7 +122,7 @@
 <body>
 <!-- 여기에 있는 정보 =>'t'에 있다: tNo,price,temName,pType,titleImg,temImg  --> 
 <!-- po에 있는 정보 => pNo,tNo,userNo,count -->
-	<jsp:include page="../common/header.jsp"/>
+	<jsp:include page="../common/shopHeader.jsp"/>
 	<div class="warp">
         <div class="innerOuter" id="innerOuter">
             <div class="photo">

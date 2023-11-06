@@ -277,10 +277,6 @@
 		                var selectedBrand = $("#selectedbrand").val(); // 현재 선택된 브랜드 값
 		                ulselect(selectedBrand,selectedCategory);
 		                
-		                console.log(selectedBrand)
-		                console.log(selectedCategory)
-		                //$("#selectedcategory").val(selectedCategory); // 값을 숨겨진 input 필드에 저장
-		                //$("#searchul").submit(); // form 제출
 		            });
 		            
 		            function ulselect(selectedBrand,selectedCategory){
@@ -291,8 +287,6 @@
 		            			category:selectedCategory
 		            		},
 		            		success:function(data){
-		            			console.log(data);
-		            			
 		            			let value ="";
 		            			$.each(data.list, function(index, product) {
 		            		        value += '<div class="product" id="clickpro">'
@@ -301,7 +295,7 @@
 		            		               + '<img src="' + product.thumbnail + '">'
 		            		               + '</div>'
 		            		               + '<div class="text">'
-		            		               + product.pName
+		            		               + product.pname
 		            		               + '</div>'
 		            		               + '</div>';
 		            		    });

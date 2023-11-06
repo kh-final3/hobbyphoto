@@ -34,6 +34,7 @@
         ul>li{list-style-type: none;}
         .product-nav>ul{margin-bottom: 0px;}
         .product-nav>ul>li{ width: 300px; height: 70px; padding-top: 20px; display: inline-block; font-size: 20px; font-weight: bolder;}
+        #overview{width: 450px; margin: auto;}
     </style>
 </head>
 <body>
@@ -152,12 +153,6 @@
     
     	$(document).ready(function(){
     		
-    		//찜하기
-    		//$("#wishbtn").click(function(event){
-    		//	event.preventDefault();
-    		//	$("form").attr("action", "add-to-wishlist").submit();
-    		//});
-    		
     		//로그인 체크
     		function checkLogin() {
 		        if (${ empty loginMember}) { // 로그인하지 않은 경우
@@ -166,18 +161,6 @@
 		        }
 		        return true;
 		    }
-    		
-    		//장바구니
-    		//$("#cartbtn-cart").click(function(event) {
-    	     //   event.preventDefault();
-    	        
-    	     	// 로그인 여부 확인
-    	    //    if (!checkLogin()) return; // 로그인하지 않은 경우 함수에서 빠져나옴
-    	        
-    	     //   $("form").attr("action", "cart.pro").submit();
-    	        
-    	    //});
-
     		
     	    // 구매하기 버튼
     	    $(".final").click(function(event) {
@@ -195,13 +178,9 @@
         
         <div class="product-nav" align="center">
             <ul>
-                <li class="nav-item" data-content="overview" style="border-bottom: 2px solid skyblue;">
+                <li class="nav-item" data-content="overview" style="border-bottom: 2px solid black;">
                     <!-- <a id="jyoverview">제품 개요</a> -->
                     <input type="button" name="" id="overbtn" style="background-color: white; border: none;" value="제품개요">
-                </li>
-                <li class="nav-item" data-content="detail">
-                    <!-- <a id="jydetail">제품 상세</a> -->
-                    <input type="button" name="" id="detailbtn" style="background-color: white; border: none;" value="제품상세">
                 </li>
                 <li class="nav-item" data-content="refund">
                     <!-- <a id="jyrefund">배송/환불규정</a> -->
@@ -212,13 +191,8 @@
         <br><br>
 
         <!-- -->
-        <div style="width: 960px; margin: auto;" id="overview" class="jyImg" >
+        <div id="overview" class="jyImg" >
             <img src="${ t.temImg }">
-        </div>
-		
-        
-        <div style="width: 960px; margin: auto; display: none;" id="detail" class="jyImg" >
-            <img src="">
         </div>
         
        <div style="display: none" id="refund" class="refund" >
@@ -358,7 +332,7 @@
 				$("#overview,#refund").hide();
 				$("#detail").show();
 				$(".nav-item").css("border-bottom", "");
-				$(this).closest(".nav-item").css("border-bottom", "2px solid skyblue");
+				$(this).closest(".nav-item").css("border-bottom", "2px solid black");
 			});
 			
 			$("#overbtn").click(function(){
@@ -366,7 +340,7 @@
 				$("#refund").hide();
 				$("#overview").show();
 				$(".nav-item").css("border-bottom", "");
-				$(this).closest(".nav-item").css("border-bottom", "2px solid skyblue");
+				$(this).closest(".nav-item").css("border-bottom", "2px solid black");
 			});
 			
 			$("#refundbtn").click(function(){
@@ -374,7 +348,7 @@
 				$("#overview").hide();
 				$("#refund").show();
 				$(".nav-item").css("border-bottom", "");
-				$(this).closest(".nav-item").css("border-bottom", "2px solid skyblue");
+				$(this).closest(".nav-item").css("border-bottom", "2px solid black");
 			});
 			
 		})
