@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <style>
         .all{
             width: 1200px;
-            height: 1000px;
+            height: 800px;
             margin: auto;
-            border-radius: 15px;
 
         }
 
@@ -18,20 +18,17 @@
             width: 80%;
             height: 90%;
             margin: auto;
-            background-color: white;
         }
 
         .form-area{
-            margin-left: 30%;
-            margin-top: 20px;
+            margin-left: 20%;
         }
 
         .form-area input{
-            width: 60%;
+            width: 80%;
             height: 40px;
-            margin-bottom: 20px;
-            border-radius: 13px;
-            border: 1px solid;
+            border: none;
+            border-bottom: 1px solid black;
         }
 
         .form-area #Male{
@@ -92,49 +89,51 @@
 
             <form action="Enroll.me" method="post">
                 <div class="form-area">
-                    <label for="userId">* 아이디</label> <br>
-                    <input type="text" name="userId" id="userId" placeholder="아이디를 입력해주세요." required>
-                    <div id="checkId" style="font-size:0.8em; display:none"></div>
-                    <!-- <button type="button">중복확인</button> -->
-                
-                    <br>
-                    <label for="userPwd">* 비밀번호</label> <br>
-                    <input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력해주세요" required>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" name="userId" id="userId" placeholder="아이디를 입력해주세요." required>
+                        <label for="userId">아이디</label> <br>
+                        <div id="checkId" style="font-size:0.8em; display:none"></div>
+                        <!-- <button type="button">중복확인</button> -->
+                    </div>                    
 
-                    <br>
-                    <label for="checkPwd">* 비밀번호 확인</label> <br>
-                    <input type="password" id="checkPwd" placeholder="비밀번호를 입력해주세요." required>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" name="userPwd" id="userPwd" placeholder="비밀번호를 입력해주세요" required>
+                        <label for="userPwd">비밀번호</label> <br>
+                    </div>
 
-                    <br>
-                    <label for="userName">* 이름</label> <br>
-                    <input type="text" name="userName" id="userName" placeholder="이름을 입력해주세요." required>
+                    <div class="form-floating">    
+                        <input type="password" class="form-control" id="checkPwd" placeholder="비밀번호를 입력해주세요." required>
+                        <label for="checkPwd">비밀번호 확인</label> <br>
+                    </div>
 
-                    <br>
-                    <label for="nickName">* 닉네임</label> <br>
-                    <input type="text" name="nickName" id="nickName" placeholder="닉네임을 입력해주세요." required>
+                    <div class="form-floating">    
+                        <input type="text" class="form-control" name="userName" id="userName" placeholder="이름을 입력해주세요." required>
+                        <label for="userName">이름</label> <br>
+                    </div>    
 
-                    <br>
-                    <label for="email">* 이메일</label> <br>
-                    <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요." required>
-
-                    <br>
-                    <label for="phone">전화번호</label> <br>
-                    <input type="text" name="phone" id="phone" placeholder="-없이 입력해주세요.">
-
-                    <br>
-                    <label for="">성별 : </label>
+                    <div class="form-floating">    
+                        <input type="text" class="form-control" name="nickName" id="nickName" placeholder="닉네임을 입력해주세요." required>
+                        <label for="nickName">닉네임</label> <br>
+                    </div>     
+                    <div class="form-floating">  
+                        <input type="email" class="form-control" name="email" id="email" placeholder="이메일을 입력해주세요." required>
+                        <label for="email">이메일</label> <br>
+                    </div>      
+                    <div class="form-floating">  
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="-없이 입력해주세요.">
+                        <label for="phone">전화번호</label> <br>
+                    </div>  
+                    &nbsp;&nbsp;&nbsp;<label for="">성별 : &nbsp;</label>
                     <input type="radio" name="gender" id="Male" value="M">
                     <label for="Male">남자</label>
                     <input type="radio" name="gender" id="Female" value="F">
                     <label for="Female">여자</label>
                 </div>
-
-                <br>
-                <div align="center" class="btn-area">
+  			    <br>
+                <div align="center" class="btn-area" style="margin:auto;">
                     <button id="enrollBtn" type="submit">회원가입</button>
                     <button type="reset">초기화</button>
                 </div>
-
             </form>
         </div>
     </div>
