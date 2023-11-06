@@ -358,4 +358,8 @@ public class BoardDao {
 	public int selectDownload(SqlSessionTemplate sqlSession, int backNo) {
 		return sqlSession.selectOne("boardMapper.selectDownload", backNo);
 	}
+
+	public ArrayList<Board> selectProfileImg(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectProfileImg");
+	}
 }

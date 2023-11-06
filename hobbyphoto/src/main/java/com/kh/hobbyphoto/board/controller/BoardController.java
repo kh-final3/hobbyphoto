@@ -22,6 +22,7 @@ import com.kh.hobbyphoto.board.model.vo.Report;
 import com.kh.hobbyphoto.common.model.service.AlarmServiceImpl;
 import com.kh.hobbyphoto.common.model.vo.*;
 import com.kh.hobbyphoto.common.template.Pagination;
+import com.kh.hobbyphoto.group.model.vo.GroupD;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 @Controller
 public class BoardController {
@@ -45,14 +46,12 @@ public class BoardController {
 		Alarm a = new Alarm();
 		if (result > 0) {
 			Board b = bService.selectPhBoard(phno); 
-			System.out.println(b+"b안에 뭐가 들어 있니??");
 			//boardWriter들어 있다.
 			ArrayList<Attachment> at = bService.selectAtBoard(phno);
 			ArrayList<Follow> f = bService.selectFollowMember(b);// 추가
 			model.addAttribute("b", b);
 			model.addAttribute("at", at);
 			model.addAttribute("f", f);
-			System.out.println(f+"결과값은???????");
 			
 			return "board/phBoardDetailView";
 			

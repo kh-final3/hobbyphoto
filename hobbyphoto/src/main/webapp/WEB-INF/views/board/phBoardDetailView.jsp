@@ -147,12 +147,15 @@
         /*글정보*/
         .writer_name img{
             float: left;
+            width:45px;
+            height:45px;
+            border-radius: 50%;
         }
 
         .writer_name p{
             font-size: medium;
             font-weight: 600;
-            margin-top: 35px;
+            margin-top: 30px;
             margin-left: 10px;
             float: left;
         }
@@ -304,7 +307,7 @@
                 <div class="head-area">
                     <div class="profile">
                         <div class="writer_name">
-                            <img src="resources/images/profile.png" width="45" style="margin-top:25px">
+                            <img src="${ b.profileImg }" width="45" style="margin-top:20px">
                             <p>${ b.boardWriter }</p>
                             
                             <c:forEach var="f" items="${ f }">
@@ -346,7 +349,7 @@
                 <hr id="detail-hr">
                 <br>
                 <div class="content-area">
-                    <div class="review-area" style="border: 1px solid black;">
+                    <div class="review-area" style="margin-left: 20px;">
                         <!-- 댓글 들어가는 자리 -->
                     </div>
                 </div>
@@ -411,10 +414,10 @@
     			}, success:function(list){
 	    				let value = "";
 	    				for(let i in list){
-	    					value += "<tr style='border:1px solid blue;'>"
-	    						  + "<th style='width:40px;'>" + list[i].replyWriter + "</th>"
-	    						  + "<td style='width:200px; margin-left:50px;'>" + list[i].replyContent + "</td>"
-	    						  + "<td>" + list[i].createDate + "</td>"
+	    					value += "<tr>"
+	    						  + "<th style='width:80px; margin-left:50px; font-size:16px;'>" + list[i].replyWriter + "</th>"
+	    						  + "<td style='width:200px; margin-left:50px; font-size:15px'>" + list[i].replyContent + "</td>"
+	    						  + "<td style='font-size:13px'>" + list[i].createDate + "</td>"
 	    						  + "</tr>"
 	    					}
     				
