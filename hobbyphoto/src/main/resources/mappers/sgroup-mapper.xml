@@ -19,6 +19,7 @@
 	<resultMap id="groupDResult" type="GroupD">
 		<result column="user_no" property="userNo"/>
 		<result column="group_no" property="groupNo"/>
+		<result column="profile_img" property="profileImg"/>
 	</resultMap>
 
 	<select id="selectTgListCount" resultType="_int">
@@ -141,6 +142,16 @@
 		group_no
 		from group_d
 		where group_no = #{groupNo}
+	</select>
+	
+	
+	
+	<select id="selectPeopleImg" resultMap="groupDResult">
+		SELECT 
+		       PROFILE_IMG
+			 , group_no
+	  	  FROM MEMBER
+	      JOIN GROUP_D USING(USER_NO)
 	</select>
 	
 	

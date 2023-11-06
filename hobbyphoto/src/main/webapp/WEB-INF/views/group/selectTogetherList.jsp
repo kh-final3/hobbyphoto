@@ -109,10 +109,14 @@
 					                        <td>📅 ${ g.grDate }</td>
 					                    </tr>
 					                    <tr>
-					                        <td>🕒 시간</td>
-					                    </tr>
-					                    <tr>
-					                        <td>🙋 ${ g.meCount }/${ g.meTotal }명</td>
+					                        <td>🙋 
+                                                <c:forEach var="pro" items="${ pro }">
+					                                <c:if test="${ g.groupNo eq pro.groupNo }">
+                                                        <img src="${ pro.profileImg }" style="height: 25px; width: 25px; border-radius: 50%;">
+                                                    </c:if>
+                                                </c:forEach>
+                                                
+                                                ${ g.meCount }/${ g.meTotal }명</td>
 					                    </tr>
 					                </tbody>
 					            </table>

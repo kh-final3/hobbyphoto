@@ -35,8 +35,8 @@ public class GroupController {
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 		ArrayList<Sgroup> list = GService.selectTgList(pi);
-		
-		mv.addObject("pi", pi).addObject("list", list).setViewName("group/selectTogetherList");
+		ArrayList<GroupD> pro = GService.selectPeopleImg();
+		mv.addObject("pi", pi).addObject("list", list).addObject("pro", pro).setViewName("group/selectTogetherList");
 		
 		return mv;
 	}
@@ -54,7 +54,7 @@ public class GroupController {
 	public String enrollForm() {
 		return "group/togetherEnrollForm";
 	}
-	
+		
 	@RequestMapping("tgInsert.tg")
 	public String insertTogether(@ModelAttribute("g") Sgroup g, @RequestParam("upfile") MultipartFile upfile, Model model, HttpSession session) {
 
