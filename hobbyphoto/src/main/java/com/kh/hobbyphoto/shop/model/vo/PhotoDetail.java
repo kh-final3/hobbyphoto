@@ -1,7 +1,5 @@
 package com.kh.hobbyphoto.shop.model.vo;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,15 +11,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Photo {
+public class PhotoDetail {
 	private int pNo;
 	private int tNo;
 	private int userNo;
-	
-	private Date createDate;
+	private String imgs;
+	private String createDate;
 	private String status;
-	private int pType;
-	
-	private String img;
-	private int count;
 }

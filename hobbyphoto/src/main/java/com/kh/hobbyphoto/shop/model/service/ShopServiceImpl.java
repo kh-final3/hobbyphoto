@@ -12,7 +12,9 @@ import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Photo;
+import com.kh.hobbyphoto.shop.model.vo.PhotoDetail;
 import com.kh.hobbyphoto.shop.model.vo.Product;
+import com.kh.hobbyphoto.shop.model.vo.Templates;
 
 @Service
 public class ShopServiceImpl implements ShopService{
@@ -196,11 +198,50 @@ public class ShopServiceImpl implements ShopService{
 		return sDao.updateProduct(sqlSession,ords);
 	}
 
+	@Override
+	public int insertPhoto(PhotoDetail pd) {
+		return sDao.insertPhoto(sqlSession,pd);
+	}
 
+	@Override
+	public ArrayList<Templates> selectTemplate() {
+		return sDao.selectTemplate(sqlSession);
+	}
+
+	@Override
+	public Templates selectTemplateDetail(int tno) {
+		return sDao.selectTemplateDetail(sqlSession,tno);
+	}
+
+	@Override
+	public int insertOnePhoto(Photo p) {
+		return sDao.insertOnePhoto(sqlSession,p);
+	}
+
+	@Override
+	public Templates selectTemInfo(int tNo) {
+		return sDao.selectTemInfo(sqlSession,tNo);
+	}
+
+	@Override
+	public Photo PnoSelect(int userno) {
+		return sDao.PnoSelect(sqlSession,userno);
+	}
 	
 	@Override
-	public int insertPhoto(Photo p) {
-		return sDao.insertPhoto(sqlSession,p);
+	public int updatePhoto(int pNo) {
+		return sDao.updatePhoto(sqlSession,pNo);
 	}
+
+	@Override
+	public Photo finishTem(int pNo) {
+		return sDao.finishTem(sqlSession,pNo);
+	}
+
+	@Override
+	public PhotoDetail finishPhoto(int pNo) {
+		return sDao.finishPhoto(sqlSession,pNo);
+	}
+
 		
 }

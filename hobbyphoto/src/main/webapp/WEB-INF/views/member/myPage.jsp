@@ -12,8 +12,10 @@
 <title>Insert title here</title>
 <style>
         .outer_my{
-        /* border: 1px solid red; */
-        background-color: gainsboro;
+        border:1px solid black;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        background-color: black;
         width: 1200px;
         height: 900px;
         margin: auto;
@@ -23,18 +25,19 @@
         /* 마이페이지 제목 */
         #h_my{
             font-weight: 600;
-            
         }
 
         .info_my{
           background-color: white;
+          border:1px solid black;
           width: 1180px;    
           height: 800px;
           margin: auto;
         }
 
         .info_my1{
-          background-color: gainsboro;
+          border:1px solid black;
+          border-radius: 10px;
           width: 300px;
           height: 500px;
           float: left;
@@ -43,16 +46,34 @@
         }
 
         .info_my2{
-          background-color: gainsboro;
-          width: 780px;
-          float: right;
-          margin: 32px 40px 10px 10px;
-          height: 260px;
-          
+            background-color: black;
+            border:1px solid black;
+            border-radius: 10px;
+            width: 780px;
+            float: right;
+            margin: 32px 40px 10px 10px;
+            height: 260px;
         }
+
+        .table_my{
+            background-color: white;
+            border-radius: 10px;
+            margin: auto;
+            width: 770px;
+            height: 190px;
+        }
+
+        .info_my2_title{
+            background-color: black;
+            color: white;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+            padding-bottom: 10px;
+        }
+
         .info_my3{
-          /* border: 1px solid red; */
-          background-color: gainsboro;
+          background-color: black;
+          border-radius: 10px;
           font-weight: 700;
           width: 780px;
           height: 390px;
@@ -63,7 +84,6 @@
 
         /* 프로필 div안의 버튼 */
         #btnall_my{
-            /* border: 1px solid red; */
             margin: 40px 74px;
         }
 
@@ -80,9 +100,8 @@
         
         /* 나의 활동 */
         .info_my3 ul li{
-            /* border: 1px solid red; */
+            border: 1px solid black;
             border-radius: 10px;
-            background-color: whitesmoke;
             display: inline-block;
             height: 110px;
             width: 130px;
@@ -166,9 +185,9 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
-	<div class="outer_my">
+    <div class="outer_my">
         <br><br>
-        <h4 id="h_my" style="margin-left: 30px;"> 마이페이지</h4>
+        <h4 id="h_my" style="margin-left: 30px; color: white;"> 마이페이지</h4>
 
         <div class="info_my">
             <div class="info_my1">
@@ -176,14 +195,17 @@
                 <h6 style="font-weight: 600; text-align: center;">반가워요!</h6>
                 <h6 style="text-align: center;">${ loginMember.nickName }님</h6>
                 <div id="btnall_my">
-                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my1" onclick="location.href='logout.me'">로그아웃</button><br>                    
-                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my2" onclick ="location.href='updateForm.me'">정보수정</button>
+                    <button type="submit" class="btnF" id="btn_my1" onclick="location.href='logout.me'">로그아웃</button><br>                    
+                    <button type="submit" class="btnF" id="btn_my2" onclick ="location.href='updateForm.me'">정보수정</button>
                 </div>
             </div>
             <div class="info_my2">
-                <br>
-                <h style="font-weight: 700; margin: 0 0 5px 10px; font-size: larger;">나의정보</h><br><br>
-                <div style="text-align: center;">
+                <div class="info_my2_title">
+                    <br>
+                    <h style="font-weight: 700; margin: 20px 0 5px 10px; font-size: larger;">나의정보</h>
+                </div>  
+                <div class="table_my">
+                    <br>
                     <table align="center">
                         <tr>
                             <th>닉네임</th>
@@ -205,7 +227,9 @@
                 </div>
             </div>
             <div class="info_my3">
-                <h style="font-weight: 700; margin: 0 0 15px 10px; font-size: larger;">나의 활동</h>
+                <div class="info_my2_title">
+                    <h style="font-weight: 700; margin: 0 0 15px 10px; font-size: larger;">나의 활동</h>
+                </div>
                 <div id="list_my">
                     <ul>
                         <li onclick="myActivity(1);">

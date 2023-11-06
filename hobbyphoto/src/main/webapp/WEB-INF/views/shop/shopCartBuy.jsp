@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -161,9 +162,17 @@
 		                <tr>
 		                    <td style="text-align: center;"><img src="${ list.thumbnail }" alt=""></td>
 		                    <td style="text-align: center;"><input type="text" name="pName" id="pName" value="${ list.PName }" readonly></td>
-		                    <td style="text-align: center;"><input type="text" name="price" id="price" value="${ list.price }" readonly></td>
+		                    <!-- <td style="text-align: center;"><input type="text" name="price" id="price" value="${ list.price }" readonly></td> -->
+		                    <td style="text-align: center;">
+			                    <fmt:formatNumber var="totalPriceFormat" value="${ list.price }" pattern="#,###" />
+			                    <input type="text" id="totalPrice" name="" value="<c:out value='${totalPriceFormat}' />" />
+		                    </td>
 		                    <td style="text-align: center;"><input type="text" name="amount" id="amount" value="${ amount }" readonly></td>
-		                    <td style="text-align: center;"><input type="text" name="" id="" value="${ list.price * amount }" readonly></td>
+		                    <!-- <td style="text-align: center;"><input type="text" name="" id="" value="${ list.price * amount }" readonly></td> -->
+		                    <td style="text-align: center;">
+		                    	<fmt:formatNumber var="totalPriceFormat" value="${ list.price * amount }" pattern="#,###" />
+			                    <input type="text" id="totalPrice" name="" value="<c:out value='${totalPriceFormat}' />" />
+			                </td>
 		                </tr>
 		            </tbody>   
             	</c:when>
@@ -179,9 +188,17 @@
 			            		<input type="hidden" name="pNo" value="${ c.PNo }">
 			                    <td style="text-align: center;"><img src="${ c.thumbnail }" alt=""></td>
 			                    <td style="text-align: center;"><input type="text" name="pNAme" id="pNAme" value="${ c.PName }" readonly></td>
-			                    <td style="text-align: center;"><input type="text" name="price" id="" value="${ c.productprice }" readonly></td>
+			                    <!-- <td style="text-align: center;"><input type="text" name="price" id="" value="${ c.productprice }" readonly></td> -->
+			                    <td style="text-align: center;">
+			                    <fmt:formatNumber var="totalPriceFormat" value="${ c.productprice }" pattern="#,###" />
+			                    <input type="text" id="totalPrice" name="" value="<c:out value='${totalPriceFormat}' />" />
+			                    </td>
 			                    <td style="text-align: center;"><input type="text" name="amount" id="amount" value="${ c.cartamount }" readonly></td>
-			                    <td style="text-align: center;"><input type="text" name="" id="price" value="${ c.productprice * c.cartamount }" readonly></td>
+			                    <!-- <td style="text-align: center;"><input type="text" name="" id="price" value="${ c.productprice * c.cartamount }" readonly></td> -->
+			                    <td style="text-align: center;">
+			                    <fmt:formatNumber var="totalPriceFormat" value="${ c.productprice * c.cartamount }" pattern="#,###" />
+			                    <input type="text" id="totalPrice" name="" value="<c:out value='${totalPriceFormat}' />" />
+			                    </td>
 			                </tr>
 			            </tbody>   
             		
@@ -241,12 +258,12 @@
                     </tr>
                     <tr>
                         <td>주문메시지</td>
-                    	<td colspan="2"><textarea name="oMsg" id="" style="resize: none; width: 350px; height: 50px;" ></textarea></td>
+                    	<td colspan="2"><textarea name="oMsg" id="" style="resize: none; width: 350px; height: 100px;" ></textarea></td>
                     </tr>
 
                     <tr>
                         <td>배송메시지</td>
-                    	<td colspan="2"><textarea name="dMsg" id="" style="resize: none; width: 350px; height: 50px;" ></textarea></td>
+                    	<td colspan="2"><textarea name="dMsg" id="" style="resize: none; width: 350px; height: 100px;" ></textarea></td>
                     </tr>
                     
                 
@@ -311,13 +328,21 @@
 		                <div id="amount2">
 		                    <div id="sum">
 		                        결제예정 금액
-		                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input type="text" name="totalPrice" id="totalPrice" value="${list.price * amount + (list.price * amount >= 50000 ? 0 : 3000)}" readonly> 원</p>
+		                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;">
+		                        <!-- <input type="text" name="totalPrice" id="totalPrice" value="${list.price * amount + (list.price * amount >= 50000 ? 0 : 3000)}" readonly> 원 -->
+		                        	<fmt:formatNumber var="totalPriceFormat" value="${list.price * amount + (list.price * amount >= 50000 ? 0 : 3000)}" pattern="#,###" />
+			                    	<input type="text" id="totalPrice" name="" value="<c:out value='${totalPriceFormat}' />" />원
+		                        </p>
 		                    </div>
 		                    <hr class="hr2">
 		                    <table id="sum2" >
 		                        <tr>
 		                            <td>주문금액</td>
-		                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ list.price * amount }" readonly>원</td>
+		                            <!-- <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ list.price * amount }" readonly>원</td> -->
+		                            <td>
+		                            	<fmt:formatNumber var="totalPriceFormat" value="${ list.price * amount }" pattern="#,###" />
+			                    		<input type="text" id="totalPrice" style="width: 200px; margin-left: 5px;" name="" value="<c:out value='${totalPriceFormat}' />" />원
+		                            </td>
 		                        </tr>
 		                        
 		                        <tr>
@@ -343,13 +368,21 @@
 			                <div id="amount2">
 			                    <div id="sum">
 			                        <h5>결제예정 금액</h5>
-			                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;"><input style="width: 300px;" type="text" name="totalPrice" id="totalPrice" value="${totalPrice + (totalPrice >= 50000 ? 0 : 3000)}"> 원</p>
+			                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;">
+			                        <!-- <input style="width: 300px;" type="text" name="totalPrice" id="totalPrice" value="${totalPrice + (totalPrice >= 50000 ? 0 : 3000)}"> 원 -->
+			                        	<fmt:formatNumber var="totalPriceFormat" value="${totalPrice + (totalPrice >= 50000 ? 0 : 3000)}" pattern="#,###" />
+			                    		<input type="text" id="totalPrice" name=""  value="<c:out value='${totalPriceFormat}' />" /> 원
+			                        </p>
 			                    </div>
 			                    <hr class="hr2">
 			                    <table id="sum2">
 			                        <tr>
 			                            <td>주문금액</td>
-			                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ totalPrice }"> 원</td>
+			                            <!-- <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ totalPrice }"> 원</td> -->
+			                            <td>
+			                            	<fmt:formatNumber var="totalPriceFormat" value="${ totalPrice }" pattern="#,###" />
+			                    			<input type="text" id="totalPrice" name="" style="width: 200px; margin-left: 5px;" value="<c:out value='${totalPriceFormat}' />" />원
+			                            </td>
 			                        </tr>
 			                        
 			                        <tr>

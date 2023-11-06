@@ -7,7 +7,9 @@ import com.kh.hobbyphoto.shop.model.vo.Cart;
 import com.kh.hobbyphoto.shop.model.vo.D_order;
 import com.kh.hobbyphoto.shop.model.vo.Orders;
 import com.kh.hobbyphoto.shop.model.vo.Photo;
+import com.kh.hobbyphoto.shop.model.vo.PhotoDetail;
 import com.kh.hobbyphoto.shop.model.vo.Product;
+import com.kh.hobbyphoto.shop.model.vo.Templates;
 
 public interface ShopService {
 
@@ -78,5 +80,21 @@ public interface ShopService {
 		int updateProduct(Orders ords);
 		
 		//21.사진 저장(인생넷컷)
-		int insertPhoto(Photo p);
+		int insertPhoto(PhotoDetail pd);
+		
+		//22.포토북 리스트
+		ArrayList<Templates> selectTemplate();
+		
+		//23.포토북 상세
+		Templates selectTemplateDetail(int tno);
+		//24.포토테이블 인서트
+		int insertOnePhoto(Photo p);
+		//25.탬플릿 정보 가져오기
+		Templates selectTemInfo(int tNo);
+		Photo PnoSelect(int userno);
+		//26.사진 주문테이블로 넘기기
+		int updatePhoto(int pNo);
+		Photo finishTem(int pNo);
+		PhotoDetail finishPhoto(int pNo);
+		
 }

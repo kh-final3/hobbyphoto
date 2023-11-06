@@ -45,11 +45,14 @@ public class BoardController {
 		Alarm a = new Alarm();
 		if (result > 0) {
 			Board b = bService.selectPhBoard(phno); 
+			System.out.println(b+"b안에 뭐가 들어 있니??");
+			//boardWriter들어 있다.
 			ArrayList<Attachment> at = bService.selectAtBoard(phno);
-			ArrayList<Follow> f = bService.selectFollowMember(b);
+			ArrayList<Follow> f = bService.selectFollowMember(b);// 추가
 			model.addAttribute("b", b);
 			model.addAttribute("at", at);
 			model.addAttribute("f", f);
+			System.out.println(f+"결과값은???????");
 			
 			return "board/phBoardDetailView";
 			
@@ -846,7 +849,7 @@ public class BoardController {
 	}
 	@ResponseBody
 	@RequestMapping("follow")
-	public String followMember(Follow f,int userId, String memberId) {
+	public String followMember(Follow f,String userId, String memberId) {
 		
 		int result = bService.insertfollow(f);
 		
@@ -855,7 +858,7 @@ public class BoardController {
 	
 	@ResponseBody
 	@RequestMapping("unfollow")
-	public String unFollowMember(Follow f, int userId, String memberId) {
+	public String unFollowMember(Follow f, String userId, String memberId) {
 		
 		int result = bService.unfollow(f);
 		

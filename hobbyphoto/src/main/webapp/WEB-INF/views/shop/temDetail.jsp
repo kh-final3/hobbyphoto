@@ -43,11 +43,11 @@
         
       <jsp:include page="../common/shopHeader.jsp"/>
         
-    <form action="cart.pro"	>
+    <form action="">
         
         
         <input type="hidden" name="userNo" class="userNo" value="${ loginMember.userNo }">
-        <input type="hidden" name="prono" value=${ p.PNo }>
+        <input type="hidden" name="tNo" value=${ t.TNo }>
         
         
         <div class="innerOuter">
@@ -55,16 +55,16 @@
             
         
             <div class="product-img">
-                <img src="${ p.thumbnail }" style="width: 500px; height: 290px; margin-top: 100px;">
+                <img src="${ t.titleImg }" style="width: 500px; height: 290px; margin-top: 100px;">
             </div>
             <div class="product-info">
                 <div class="product-name">
                     <strong>
-                        ${	p.PName }
+                        ${	t.temName }
                     </strong>
                 </div>
                 <div class="product-price">
-                    <strong class="st-price"><fmt:formatNumber value="${ p.price }" pattern="#,###"/></strong>
+                    <strong class="st-price"><fmt:formatNumber value="${ t.price }" pattern="#,###"/></strong>
                     <strong>원</strong>
                 </div>
                 <div class="product-select">
@@ -75,7 +75,7 @@
                         <div id="pd-selectbox">
                             <div id="count-box" align="center">
                                 <button type="button" class="minus">-</button>
-                                <input class="count" type="text" name="amount" value="1" align="center">
+                                <input class="count" type="text" name="count" value="1" align="center">
                                 <button type="button" class="plus">+</button>
                             </div>
                         </div>
@@ -98,9 +98,9 @@
                     </div>
                     <br><br>
                     <div class="product-btn" style="margin-left: 100px;">
-                        <button type="submit" class="pd-btn" id="cartbtn-cart">
+                        <!-- <button type="submit" class="pd-btn" id="cartbtn-cart">
                             <img src="resources/images/cart.png" style="width: 40px; height: 40px;">
-                        </button>
+                        </button> -->
                         
                         <button class="final" type="submit">
                             구매하기
@@ -138,7 +138,7 @@
 	            let price =  Number($(".st-price").text().replace(/,/g,''));
 	            let totalPrice = price;
 				
-	            if($(".count").val() < ${ p.amount}){
+	            if($(".count").val() < 99){
 	                $(".count").val(count+1)
 	                $(".count").text($(".count").val())
 	                totalPrice = price * $(".count").val();
@@ -168,15 +168,15 @@
 		    }
     		
     		//장바구니
-    		$("#cartbtn-cart").click(function(event) {
-    	        event.preventDefault();
+    		//$("#cartbtn-cart").click(function(event) {
+    	     //   event.preventDefault();
     	        
     	     	// 로그인 여부 확인
-    	        if (!checkLogin()) return; // 로그인하지 않은 경우 함수에서 빠져나옴
+    	    //    if (!checkLogin()) return; // 로그인하지 않은 경우 함수에서 빠져나옴
     	        
-    	        $("form").attr("action", "cart.pro").submit();
+    	     //   $("form").attr("action", "cart.pro").submit();
     	        
-    	    });
+    	    //});
 
     		
     	    // 구매하기 버튼
@@ -186,7 +186,7 @@
     	     	// 로그인 여부 확인
     	        if (!checkLogin()) return; // 로그인하지 않은 경우 함수에서 빠져나옴
 
-    	        $("form").attr("action", "purchase").submit();
+    	        $("form").attr("action", "make.photo").submit();
     	    });
     		
     	})
@@ -213,12 +213,12 @@
 
         <!-- -->
         <div style="width: 960px; margin: auto;" id="overview" class="jyImg" >
-            <img src="${ p.PDimg }">
+            <img src="${ t.temImg }">
         </div>
 		
         
         <div style="width: 960px; margin: auto; display: none;" id="detail" class="jyImg" >
-            <img src="${ p.PSimg }">
+            <img src="">
         </div>
         
        <div style="display: none" id="refund" class="refund" >

@@ -98,6 +98,7 @@
 	
 	<resultMap type="Follow" id="FollowResult">
 		<result column="user_id" property="userId"/>
+		<result column="follow_id" property="followId"/>		
 	</resultMap>
 	
 	
@@ -1045,6 +1046,7 @@
 	<select id="selectFollowMember" resultMap="FollowResult">
 		select
 			user_id
+		,	follow_id
 		from follow
 		where follow_id = #{boardWriter}
 	</select>

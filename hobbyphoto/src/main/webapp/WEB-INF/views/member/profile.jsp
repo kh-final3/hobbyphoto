@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 <style>
         .outer_profile{
-        background-color: gainsboro;
+        background-color: black;
+        border-radius: 10px;
         width: 1200px;
         height: 900px;
         margin: auto;
@@ -23,6 +24,7 @@
 
         .info_profile{
           background-color: white;
+          border-radius: 10px;
           width: 1180px;    
           height: 800px;
           margin: auto;
@@ -202,7 +204,7 @@
 	<jsp:include page="../common/header.jsp"/>
 	<div class="outer_profile">
         <br><br>
-        <h4 id="h_profile" style="margin-left: 30px;"> 마이페이지</h4>
+        
 
         <div class="info_profile">
             <div class="info_profile1">
