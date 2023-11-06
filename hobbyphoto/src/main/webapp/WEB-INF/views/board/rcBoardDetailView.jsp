@@ -31,6 +31,7 @@
     .ir-title{margin-top:10px;}
     .ir-content, .ir-title{margin-left:500px;}
 </style>
+
 </head>
 	<jsp:include page="../common/header.jsp"/>
 	<body>
@@ -112,6 +113,53 @@
 	            </div>
 	        <br><br>
 	    </div>
+
+		<div class="modal" id="reportBoard">
+			<div class="modal-dialog">
+				<div class="modal-content">
+			
+					<!-- Modal Header -->
+					<div class= "modal-header">
+					<h4 class="modal-title"><b>신고하기</b></h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+			
+					<!-- Modal body -->
+					<div class="modal-body">
+					<form action="reportBoard.bo" method="post">
+						<p>작성자 : ${b.boardWriter} </p>
+						<p>글 제목 : ${b.boardTitle} </p>
+						
+						<input name="refBno" type="hidden" value="${b.boardNo}">
+						<input name="boardType" type="hidden" value="2">
+						<input name="reportedUno" type="hidden" value="${b.boardWriter}">
+						<input name="reportUno" type="hidden" value="${loginMember.userNo}">
+						
+						<hr>
+						
+							<input type="radio" id="r1" name="GUILTY" value="영리목적/홍보성">
+							<label for="r1">영리목적/홍보성</label><br>
+							<input type="radio" id="r2" name="GUILTY" value="욕설/인신공격">
+							<label for="r2">욕설/인신공격</label> <br>
+							<input type="radio" id="r3" name="GUILTY" value="도배">
+							<label for="r3">같은 내용 반복(도배)</label> <br>
+							<input type="radio" id="r4" name="GUILTY" value="개인정보노출">
+							<label for="r4">개인정보노출</label> <br>
+							<input type="radio" id="r5" name="GUILTY" value="불법정보">
+							<label for="r5">불법정보</label><br>
+							<input type="radio" id="r6" name="GUILTY" value="음란성/선정성">
+							<label for="r6">음란성/선정성</label> <br>
+				
+						<textarea name="rpContent" style="resize: none;" placeholder=" 신고 사유 설명이 필요하신 경우 작성해주세요." cols="50" rows="3" style="margin: 20px;"></textarea>
+						<br><button type="submit" class="btn btn-secondary" id="rpt_btn" style="width: 100%; height: 40px; margin-top: 15px;">신고</button>
+					</form>
+					</div>
+		
+				</div>
+				
+			</div>
+		</div>
+
 	</body>
 	    <script>
     	$(function(){
@@ -129,6 +177,7 @@
     					replyWriter:'${ loginMember.userNo }'
     					
     				}, success:function(status){
+						console.log("성공")
     					if(status == "success"){
     						selectRcReplyList();
     					}
@@ -159,10 +208,12 @@
     	}
     	
     	function selectRcReplyList(){
+			console.log('${ loginMember.boardWriter}')
     		$.ajax({
     			url:"rcRlist.bo",
     			data:{
-    				phno:${ b.boardNo }
+    				boardNo:${ b.boardNo },
+					boardWriter:'${ loginMember.boardWriter}'
     			}, success:function(list){
     				console.log(list);
     				
@@ -181,7 +232,7 @@
 	                    		   + "<div class='reply-content'>" + list[i].replyContent + "</div>"
 	                    		   + "</ul>"
 	    					}
-    				
+    				console.log(value)
     				$(".reply").html(value);
     				$("#rcount").text(list.length);
 
@@ -192,7 +243,7 @@
     		
     		
     	}
-        if (${ loginMember.userNo } !== null) {
+        if (${ loginMember.userNo } != null) {
             let userNo = ${ loginMember.userNo };
             let bno = ${ b.boardNo };
             function insertLike(){

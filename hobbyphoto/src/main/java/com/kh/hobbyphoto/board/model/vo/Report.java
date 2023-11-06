@@ -14,6 +14,6 @@ public class Report {
 	String process;
 	int refBno;
 	int reportUno;
-	int reportedUno;
+	String reportedUno;
 	int boardType;
 }

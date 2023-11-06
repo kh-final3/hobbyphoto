@@ -23,6 +23,7 @@ import com.kh.hobbyphoto.common.model.service.AlarmServiceImpl;
 import com.kh.hobbyphoto.common.model.vo.*;
 import com.kh.hobbyphoto.common.template.Pagination;
 import com.kh.hobbyphoto.group.model.vo.GroupD;
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 @Controller
 public class BoardController {
@@ -30,11 +31,18 @@ public class BoardController {
 	private BoardServiceImpl bService;
 	
 	@RequestMapping("phBoardList.bo")
-	public ModelAndView selectPhBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+	public ModelAndView selectPhBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv, HttpSession session) {
 		int listCount = bService.selectPhListCount();
-		
+		Member m = new Member();
+		if(session.getAttribute("loginMember") != null) {
+			
+		m.setUserNo(((Member)session.getAttribute("loginMember")).getUserNo());
+		}else {
+			m.setUserNo(0);
+		}
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
-		ArrayList<Board> list = bService.selectPhList(pi);
+		System.out.println(m);
+		ArrayList<Board> list = bService.selectPhList(pi,m);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectPhBoardList");
 		return mv;
@@ -170,8 +178,9 @@ public class BoardController {
 	
 	@ResponseBody
 	@RequestMapping(value="phRlist.bo", produces="application/json; charset=UTF-8")
-	public String ajaxSelectReplyList(int phno) {
-		ArrayList<Reply> list = bService.selectPhReplyList(phno);
+	public String ajaxSelectReplyList(Board b) {
+		System.out.println(b.getBoardWriter());
+		ArrayList<Reply> list = bService.selectPhReplyList(b);
 		return new Gson().toJson(list);
 	}
 	
@@ -187,11 +196,17 @@ public class BoardController {
 	//-------------------------------------------------------------------------
 	
 	@RequestMapping("rcBoardList.bo")
-	public ModelAndView selectRcBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+	public ModelAndView selectRcBoardList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv,HttpSession session) {
 		int listCount = bService.selectRcListCount();
-		
+		Member m = new Member();
+		if(session.getAttribute("loginMember") != null) {
+			
+		m.setUserNo(((Member)session.getAttribute("loginMember")).getUserNo());
+		}else {
+			m.setUserNo(0);
+		}
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
-		ArrayList<Board> list = bService.selectRcList(pi);
+		ArrayList<Board> list = bService.selectRcList(pi,m);
 		
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectRcBoardList");
@@ -307,9 +322,14 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="rcRlist.bo", produces="application/json; charset=UTF-8")
-	public String ajaxSelectRcReplyList(int phno) {
-		ArrayList<Reply> list = bService.selectRcReplyList(phno);
+	@RequestMapping(value = "rcRlist.bo", produces = "application/json; charset=UTF-8")
+	public String ajaxSelectRcReplyList(int boardNo, String boardWriter) {
+		Board b = new Board();
+		b.setBoardNo(boardNo);
+		b.setBoardWriter(boardWriter);
+		System.out.println(b+"sadasdsadwdqwdawdasdcxdc");
+		ArrayList<Reply> list = bService.selectRcReplyList(b);
+		System.out.println(list);
 		return new Gson().toJson(list);
 	}
 	
@@ -835,7 +855,7 @@ public class BoardController {
 	
 	@RequestMapping("reportBoard.bo")
 	public String reportBoard(Report r,HttpSession session, Model model){
-		r.setBoardType(4);
+		System.out.println(r);
 		int result = bService.reportBoard(r);
 		
 		if(result > 0) {

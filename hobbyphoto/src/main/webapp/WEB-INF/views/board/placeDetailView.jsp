@@ -474,9 +474,10 @@
             <p>글 제목 : ${p.ptitle}</p>
             
             <input name="refBno" type="hidden" value="${ p.pno}">
-            <input name="reportedUno" type="hidden" value="${ loginMember.userNo} ">
+            <input name="boardType" type="hidden" value="4">
+            <input name="reportedUno" type="hidden" value="${ p.pwriter} ">
            
-            <input name="reportUno" type="hidden" value="2">
+            <input name="reportUno" type="hidden" value="${ loginMember.userNo}">
           
             <hr>
             

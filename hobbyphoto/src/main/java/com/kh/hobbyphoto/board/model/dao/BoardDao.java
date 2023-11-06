@@ -12,6 +12,7 @@ import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Block;
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Repository
@@ -21,12 +22,12 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.selectPhListCount");
 	}
 
-	public ArrayList<Board> selectPhList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Board> selectPhList(SqlSessionTemplate sqlSession, PageInfo pi, Member m) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return (ArrayList)sqlSession.selectList("boardMapper.selectPhList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectPhList", m, rowBounds);
 	
 	}
 	
@@ -68,8 +69,8 @@ public class BoardDao {
 	}
 	
 	
-	public ArrayList<Reply> selectPhReplyList(SqlSessionTemplate sqlSession, int boardNo) {
-		return (ArrayList) sqlSession.selectList("boardMapper.selectPhReplyList", boardNo);
+	public ArrayList<Reply> selectPhReplyList(SqlSessionTemplate sqlSession, Board b) {
+		return (ArrayList) sqlSession.selectList("boardMapper.selectPhReplyList", b);
 	}
 
 	public int insertPhReply(SqlSessionTemplate sqlSession, Reply r) {
@@ -91,12 +92,12 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.selectRcListCount");
 	}
 
-	public ArrayList<Board> selectRcList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Board> selectRcList(SqlSessionTemplate sqlSession, PageInfo pi, Member m) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return (ArrayList)sqlSession.selectList("boardMapper.selectRcList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectRcList", m, rowBounds);
 	}
 	
 	public int increaseRcCount(SqlSessionTemplate sqlSession, int boardNo) {
@@ -131,8 +132,8 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.updateRcAtBoard", at);
 	}
 	
-	public ArrayList<Reply> selectRcReplyList(SqlSessionTemplate sqlSession, int boardNo) {
-		return (ArrayList)sqlSession.selectList("boardMapper.selectRcReplyList", boardNo);
+	public ArrayList<Reply> selectRcReplyList(SqlSessionTemplate sqlSession, Board b) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectRcReplyList", b);
 	}
 
 	public int insertRcReply(SqlSessionTemplate sqlSession, Reply r) {
