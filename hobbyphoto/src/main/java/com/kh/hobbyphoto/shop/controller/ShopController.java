@@ -435,7 +435,8 @@ public class ShopController {
 
 	@ResponseBody
 	@RequestMapping("save.photo")
-	public String savePhoto(PhotoDetail pd, HttpSession session) {
+	public String savePhoto(PhotoDetail pd, HttpSession session,Photo p) {
+		System.out.println(p+"p값이 나오니??");
 		System.out.println(pd +"pd에 뭐가 있니??");
 		Member m =(Member)session.getAttribute("loginMember");
 		int result = sService.insertPhoto(pd);
@@ -456,11 +457,14 @@ public class ShopController {
 		System.out.println(p +"뭐가 있나요???"); //tNo, userNo, count
 		int result = sService.insertOnePhoto(p);
 		int tNo = p.getTNo();
+		int userno = Integer.parseInt(userNo);
 		System.out.println(tNo + "과연 tNo있니??");
 		if(result>0) {
 			Templates t = sService.selectTemInfo(tNo);
 			System.out.println(t+"t에 뭐가 들어 있나??");//tNo,price,temName,pType,titleImg,temImg
-			mv.addObject("alertMsg", "나만의 인생네컷 만들기").addObject("t", t).setViewName("shop/shopPhotoMake");
+			Photo po = sService.PnoSelect(userno);
+			System.out.println(po+"여기 po에 뭐가 있니??"); //pNo,tNo,userNo,count
+			mv.addObject("alertMsg", "나만의 인생네컷 만들기").addObject("t", t).addObject("po", po).setViewName("shop/shopPhotoMake");
 		}else {
 			mv.addObject("errorMsg", "다시 시도해주세요.").setViewName("common/errorPage");
 		}
@@ -468,11 +472,20 @@ public class ShopController {
 		
 	}
 	
-//	@RequestMapping("finish.tem")
-//	public void finishTem(int pNo) {
-//		System.out.println("여기에 뭐가 있니??");
-//		PhotoDetail pd = sService.finishTem(pNo);
-//	}
+	@RequestMapping("finish.tem")
+	public ModelAndView finishTem(int pNo,ModelAndView mv) {
+		System.out.println(pNo +"여기에 뭐가 있니??"); //pNo있음
+		int result = sService.updatePhoto(pNo);
+		if(result>0) {
+			Photo pd = sService.finishTem(pNo);
+			System.out.println(pd+"pd를 넘겨야하는데 뭐가 있니?");
+			PhotoDetail k = sService.finishPhoto(pNo);
+			mv.addObject("pd", pd).addObject("k", k).setViewName("shop/shopCartBuy");
+		}else {
+			mv.addObject("errorMsg", "오류!!!").setViewName("common/errorPage");
+		}
+		return mv;
+	}
 			
 }
 

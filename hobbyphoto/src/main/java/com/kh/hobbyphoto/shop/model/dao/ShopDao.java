@@ -127,7 +127,18 @@ public class ShopDao {
 	public Templates selectTemInfo(SqlSessionTemplate sqlSession,int tNo) {
 		return sqlSession.selectOne("shopMapper.selectTemplateDetail", tNo);
 	}
-
+	public Photo PnoSelect(SqlSessionTemplate sqlSession,int userno) {
+		return sqlSession.selectOne("shopMapper.PnoSelect", userno);
+	}
+	public Photo finishTem(SqlSessionTemplate sqlSession,int pNo) {
+		return sqlSession.selectOne("shopMapper.finishTem", pNo);
+	}
+	public int updatePhoto(SqlSessionTemplate sqlSession,int pNo) {
+		return sqlSession.update("shopMapper.updatePhoto", pNo);
+	}
+	public PhotoDetail finishPhoto(SqlSessionTemplate sqlSession,int pNo) {
+		return sqlSession.selectOne("shopMapper.finishPhoto", pNo);
+	}
 
 
 }

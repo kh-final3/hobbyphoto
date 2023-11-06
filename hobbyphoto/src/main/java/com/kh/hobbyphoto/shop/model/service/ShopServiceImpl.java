@@ -222,5 +222,26 @@ public class ShopServiceImpl implements ShopService{
 	public Templates selectTemInfo(int tNo) {
 		return sDao.selectTemInfo(sqlSession,tNo);
 	}
+
+	@Override
+	public Photo PnoSelect(int userno) {
+		return sDao.PnoSelect(sqlSession,userno);
+	}
+	
+	@Override
+	public int updatePhoto(int pNo) {
+		return sDao.updatePhoto(sqlSession,pNo);
+	}
+
+	@Override
+	public Photo finishTem(int pNo) {
+		return sDao.finishTem(sqlSession,pNo);
+	}
+
+	@Override
+	public PhotoDetail finishPhoto(int pNo) {
+		return sDao.finishPhoto(sqlSession,pNo);
+	}
+
 		
 }

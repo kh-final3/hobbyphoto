@@ -112,6 +112,7 @@
 </head>
 <body>
 <!-- 여기에 있는 정보 =>'t'에 있다: tNo,price,temName,pType,titleImg,temImg  --> 
+<!-- po에 있는 정보 => pNo,tNo,userNo,count -->
 	<div class="warp">
         <div class="innerOuter" id="innerOuter">
             <div class="photo">
@@ -210,7 +211,8 @@
 		        url: "save.photo", // 서버의 엔드포인트로 교체
 		        data: { 
 		        	imgs: imageData, 
-					userNo:'${loginMember.userNo}'      	
+					userNo:'${loginMember.userNo}',
+					tNo:${t.TNo}
 		        	},
 		        success: function (response) {
 		            console.log("서버에 이미지 저장됨:", response);
@@ -222,7 +224,7 @@
 		}
         
 		function finish(){
-			location.href="finish.tem"
+			location.href="finish.tem?pNo="+${po.PNo}
 		}
         
         

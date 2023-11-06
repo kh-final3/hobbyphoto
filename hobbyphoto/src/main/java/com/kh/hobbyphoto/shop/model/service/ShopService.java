@@ -91,4 +91,10 @@ public interface ShopService {
 		int insertOnePhoto(Photo p);
 		//25.탬플릿 정보 가져오기
 		Templates selectTemInfo(int tNo);
+		Photo PnoSelect(int userno);
+		//26.사진 주문테이블로 넘기기
+		int updatePhoto(int pNo);
+		Photo finishTem(int pNo);
+		PhotoDetail finishPhoto(int pNo);
+		
 }

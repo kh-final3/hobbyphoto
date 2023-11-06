@@ -63,6 +63,22 @@
    		<result column="tem_img" property="temImg"/>
    		<result column="status" property="status"/>
    </resultMap>
+   <resultMap type="Photo" id="PhotoResult">
+   		<result column="p_no" property="pNo"/>
+   		<result column="t_no" property="tNo"/>
+   		<result column="user_no" property="userNo"/>
+   		<result column="status" property="status"/>
+   		<result column="create_date" property="createDate"/>
+   		<result column="count" property="count"/>
+   </resultMap>
+   <resultMap type="PhotoDetail" id="PhotoDetailResult">
+   		<result column="p_no" property="pNo"/>
+   		<result column="t_no" property="tNo"/>
+   		<result column="user_no" property="userNo"/>
+   		<result column="imgs" property="imgs"/>
+   		<result column="create_date" property="createDate"/>
+   		<result column="status" property="status"/>
+   </resultMap>
 	
 	 <select id="selectProductList" resultMap="shopResult">
 		select
@@ -410,7 +426,7 @@
 		 , #{userNo}
 		 , #{imgs}
 		 , sysdate
-		 , 'B'
+		 , 'Y'
 		 )
 	</insert>
 	
@@ -458,4 +474,50 @@
 			,	#{count}
 			)
 	</insert>
+	
+	<select id="PnoSelect" resultMap="PhotoResult">
+		select *	
+			from(
+				select e.*, rownum as r
+				from (	
+						select
+								p_no
+							,	t_no
+							,	user_no
+							,	status
+							,	count
+					     from photo
+					     where user_No = #{userNo}
+					     order by p_no desc
+					   )e
+					)
+					where r = 1
+	</select>
+	<select id="finishTem">
+		select
+				p_no
+			,	t_no
+			,	user_no
+			,	create_date
+			,	status
+			,	count
+		from photo
+		where p_no = #{PNo}
+	</select>
+	<update id="updatePhoto">
+		update	photo
+			set	status = 'Y'
+		where p_no = #{PNo}
+	</update>
+	<select id="finishPhoto">
+		select
+				p_no
+			,	t_no
+			,	user_no
+			,	imgs
+			,	create_date
+			,	status
+		from photoDetail
+		where p_no = #{PNo}
+	</select>
 </mapper>
