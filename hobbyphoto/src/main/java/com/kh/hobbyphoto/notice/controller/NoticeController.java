@@ -34,6 +34,20 @@ public class NoticeController {
 
 		return mv;
 	}
+	
+	@RequestMapping("shList.no")
+	public ModelAndView selectShList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			ModelAndView mv) {
+
+		int listCount = nService.selectShListCount();
+
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Notice> list = nService.selectShList(pi);
+
+		mv.addObject("pi", pi).addObject("list", list).setViewName("notice/selectShopNoticeList");
+
+		return mv;
+	}
 
 	@RequestMapping("enrollForm.no")
 	public String enrollForm() {

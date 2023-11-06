@@ -16,6 +16,10 @@ public class NoticeDao {
 		
 		return sqlSession.selectOne("noticeMapper.selectListCount");
 	}
+	
+	public int selectShListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("noticeMapper.selectShListCount");
+	}
 
 	public ArrayList<Notice> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
@@ -23,6 +27,14 @@ public class NoticeDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("noticeMapper.selectList", null, rowBounds);
+	}
+	
+	public ArrayList<Notice> selectShList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectShList", null, rowBounds);
 	}
 
 	public int insertNotice(SqlSessionTemplate sqlSession, Notice n) {
@@ -76,5 +88,7 @@ public class NoticeDao {
 	public int updateShNotice(SqlSessionTemplate sqlSession, Notice n) {
 		return sqlSession.update("noticeMapper.updateShNotice", n);
 	}
+
+
 
 }

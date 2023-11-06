@@ -50,7 +50,8 @@
             width: 39%;
             height: 60%;
             float: right;
-            margin-top: 20px;
+            margin-top: 120px;
+            margin-right:20px;
             border: none;
         }
 
@@ -70,14 +71,14 @@
         }
         
         .text-area{
-            width: 350px;
+        	margin-left:33px;
+            width: 318px;
             height: 400px;
             resize: none;
             margin-top: 10px;
         }
 
         .tag-input{
-            width: 300px;
             height: 30px;
         }
 
@@ -109,6 +110,9 @@
             margin-left: 50px;
             margin-top: 5px;
         }
+        textarea::placeholder {
+		  font-size: 14px;
+		}
 
     </style>
 </head>
@@ -200,7 +204,7 @@
                         제목 <input type="hidden" id="boardWriter" value="${ loginMember.userNo }" name="boardWriter">
                         <input type="text" name="boardTitle" id="boardTitle" class="title-input" style="width: 317px;" placeholder="제목을 입력해주세요."   required> <br>
                         <textarea name="boardContent" id="boardContent" class="text-area" placeholder="내용을 입력해주세요." required></textarea> <br>
-                        해시태그 <input type="text" name="hashTag" id="hashTag" class="tag-input" style="width: 290px;" placeholder="해시태그를 입력해주세요.">
+                        해시태그 <input style="margin-right:20px; width:290px;"type="text" name="hashTag" id="hashTag" class="tag-input" style="width: 290px;" placeholder="해시태그를 입력해주세요.">
                     </div>
                     <div class="btn-area">
                         <button type="button" onclick="" class="btn btn-primary" style="margin-left: 35px;">목록가기</button>
