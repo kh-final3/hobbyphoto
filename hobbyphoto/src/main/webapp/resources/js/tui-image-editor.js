@@ -42678,7 +42678,7 @@ var map_default = /*#__PURE__*/__webpack_require__.n(instance_map);
  * @example
 
 /* harmony default export */ var standard = ({
-  'common.bi.image': 'http://localhost:8006/hobbyphoto/resources/images/logo.png',
+  'common.bi.image': 'http://localhost:8006/hobbyphoto/resources/images/222222.png',
   'common.bisize.width': '251px',
   'common.bisize.height': '21px',
   'common.backgroundImage': 'none',
