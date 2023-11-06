@@ -20,7 +20,27 @@
 		   and notice_type = 1
 	</select>
 	
+	<select id="selectShListCount" resultType="_int">
+		select count(*)
+		  from notice
+		 where status='Y'
+		   and notice_type = 2
+	</select>
+	
 	<select id="selectList" resultMap="noticeResult">
+		select notice_no
+		     , notice_title
+		     , notice_writer
+		     , count
+		     , to_char(create_date, 'YYYY-MM-DD') as "create_date"
+		  from notice
+		 where status = 'Y'
+		   and notice_type = 1
+		 order 
+		       by notice_no desc
+	</select>
+	
+	<select id="selectShList" resultMap="noticeResult">
 		select notice_no
 		     , notice_title
 		     , notice_writer

@@ -24,12 +24,23 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return nDao.selectListCount(sqlSession);
 	}
+	
+	public int selectShListCount() {
+		return nDao.selectShListCount(sqlSession);
+	}
 
 	@Override
 	public ArrayList<Notice> selectList(PageInfo pi) {
 		
 		return nDao.selectList(sqlSession,pi);
 	}
+	
+	@Override
+	public ArrayList<Notice> selectShList(PageInfo pi) {
+		
+		return nDao.selectShList(sqlSession,pi);
+	}
+	
 
 	@Override
 	public int insertNotice(Notice n) {
@@ -89,6 +100,8 @@ public class NoticeServiceImpl implements NoticeService{
 	public int updateShNotice(Notice n) {
 		return nDao.updateShNotice(sqlSession, n);
 	}
+
+
 	
 
 
