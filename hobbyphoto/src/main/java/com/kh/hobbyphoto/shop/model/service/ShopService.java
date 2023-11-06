@@ -96,5 +96,9 @@ public interface ShopService {
 		int updatePhoto(int pNo);
 		Photo finishTem(int pNo);
 		PhotoDetail finishPhoto(int pNo);
+		Templates finishTemplate(int tno);
+		
+		int insertTemplateBuy(Orders o);
+		Orders selectOrderTemInfo(int userNo);
 		
 }

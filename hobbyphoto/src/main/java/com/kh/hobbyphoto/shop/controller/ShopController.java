@@ -473,16 +473,32 @@ public class ShopController {
 	}
 	
 	@RequestMapping("finish.tem")
-	public ModelAndView finishTem(int pNo,ModelAndView mv) {
+	public ModelAndView finishTem(int pNo,ModelAndView mv, String tNo) {
 		System.out.println(pNo +"여기에 뭐가 있니??"); //pNo있음
+		int tno = Integer.parseInt(tNo);
 		int result = sService.updatePhoto(pNo);
 		if(result>0) {
 			Photo pd = sService.finishTem(pNo);
 			System.out.println(pd+"pd를 넘겨야하는데 뭐가 있니?");
 			PhotoDetail k = sService.finishPhoto(pNo);
-			mv.addObject("pd", pd).addObject("k", k).setViewName("shop/shopCartBuy");
+			System.out.println(k+"k안에는 뭐가 있니??");
+			Templates t = sService.finishTemplate(tno);
+			System.out.println(t+"t에는 무슨 값이??");
+			mv.addObject("pd", pd).addObject("k", k).addObject("t", t).setViewName("shop/shopTemBuy");
 		}else {
 			mv.addObject("errorMsg", "오류!!!").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	@RequestMapping("template.go")
+	public ModelAndView templateBuyjy(Orders o,ModelAndView mv,String userNo) {
+		int uno = Integer.parseInt(userNo);
+		int result = sService.insertTemplateBuy(o);
+		if(result > 0) {//주문 성공
+			Orders or = sService.selectOrderTemInfo(uno);
+			mv.addObject("alertMsg", "결제성공").addObject("o", or).setViewName("payment/success");;
+		}else {//주문 실패
+			mv.addObject("errorMsg", "결제 실패").setViewName("payment/fail");;
 		}
 		return mv;
 	}

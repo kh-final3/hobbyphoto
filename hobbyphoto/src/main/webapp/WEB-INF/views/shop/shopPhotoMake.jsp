@@ -141,6 +141,7 @@
         <div>
         	<button type="button" onclick="finish();">다음</button>
         </div>
+        
     </div>
 
 
@@ -223,8 +224,9 @@
 		    });
 		}
         
+		
 		function finish(){
-			location.href="finish.tem?pNo="+${po.PNo}
+			location.href="finish.tem?pNo="+${po.PNo}+"&tNo="+${t.TNo}
 		}
         
         
