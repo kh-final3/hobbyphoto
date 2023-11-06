@@ -36,19 +36,17 @@ public class EchoHandler extends TextWebSocketHandler{
 				String title = strs[4];
 				int type = Integer.parseInt(strs[5]);
 				WebSocketSession boardWriterSession = userSessionsMap.get(boardWriter);
-				System.out.println(boardWriterSession);
 				
 				//댓글
 				if (cmd.equals("reply") && boardWriterSession != null) {
-					TextMessage tmpMsg = new TextMessage("<div class='alarmMsg'><span class='bno'>"+bno+"</span><span class='type'>"+type+"</span>"+replyWriter + "님이 "+title+" 에 댓글을 달았습니다!</div>");
+					TextMessage tmpMsg = new TextMessage("<div class='alarmMsg'><span class='bno'>"+bno+"</span><span class='type'>"+type+"</span><span class='sendId'>" + replyWriter + "</span> 님이 "+title+" 에 댓글을 달았습니다!</div>");
 					boardWriterSession.sendMessage(tmpMsg);
 				}
 				
 				//좋아요
-				else if("like".equals(cmd) && boardWriterSession != null) {
+				else if(cmd.equals("like") && boardWriterSession != null) {
 					//replyWriter = 좋아요누른사람 , boardWriter = 게시글작성자
-					TextMessage tmpMsg = new TextMessage("<div class='alarmMsg'><span class='bno'>"+bno+"</span>"+replyWriter + "님이 "+title+" 에 댓글을 달았습니다!</div>");
-
+					TextMessage tmpMsg = new TextMessage("<div class='alarmMsg'><span class='bno'>"+bno+"</span><span class='type'>"+type+"</span><span class='sendId'>" + replyWriter + "</span> 님이 "+title+" 에 좋아요를 눌렀습니다!</div>");
 					boardWriterSession.sendMessage(tmpMsg);
 					
 				}
@@ -59,7 +57,6 @@ public class EchoHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {//연결 해제
-		// TODO Auto-generated method stub
 		sessions.remove(session);
 		userSessionsMap.remove(currentUserName(session),session);
 	}

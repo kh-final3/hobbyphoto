@@ -47,7 +47,7 @@
                         <td colspan="2"><textarea name="boardContent" cols="145" rows="15" style="resize: none;"></textarea></td>
                     </tr>
                 </table>
-                <input type="file" name="upfile" style="margin: 0 0 0 12px;">
+                <input type="file" name="upfile" style="margin: 0 0 0 12px;" required>
                 <input type="file" name="upfile">
         		<br>
 			        <div class="rc-btn" align="right" style="width: 1300px; margin-bottom: 20px;" >
