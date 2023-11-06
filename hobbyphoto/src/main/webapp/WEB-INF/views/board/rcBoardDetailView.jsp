@@ -23,13 +23,13 @@
             background-color: rgba(0, 0, 0, 0);
             font-size: 15px;
 	}
-	.like{margin-left:670px;}
+	.like{margin-left:880px;}
     .images img{width: 600px; height: 300px;}
     .title{font-weight: bold;}
     .writer{font-size: 13px;}
     hr{color: gainsboro;}
     .ir-title{margin-top:10px;}
-    .ir-content, .ir-title{margin-left:160px;}
+    .ir-content, .ir-title{margin-left:500px;}
 </style>
 </head>
 	<jsp:include page="../common/header.jsp"/>
@@ -53,7 +53,8 @@
 			      </div>
 				      <div class="images" align="center">
 				         <c:forEach var="a" items="${ at }">    
-						 	<img src="${ a.filePath }" style="width: 800px;">
+						 	<img src="${ a.filePath }" style="width: 700px;">
+						 	<br><br>
 						 </c:forEach>
 			      </div> <br>
 				      <div class="like">
@@ -65,7 +66,7 @@
 	        </div>
 	        <br>
 	        <c:if test="${ loginMember.userId ne b.boardWriter }">
-	        	<button class="btn btn-sm btn-secondary" style="margin-bottom: 10px; margin-left:700px;" onclick="goBack();">목록가기</button>
+	        	<button class="btn btn-sm btn-secondary" style="margin-bottom: 10px; margin-left:915px;" onclick="goBack();">목록가기</button>
 	        </c:if>
 				<c:if test="${ loginMember.userId eq b.boardWriter }">
 		            <div align="center">
@@ -105,7 +106,7 @@
 	            <div class="insertReply">
                     <div class="ir-title">댓글달기</div>
                     <div class="ir-content">
-                            <textarea name="" id="content" cols="120" rows="3" style="resize: none;"></textarea>
+                            <textarea name="" id="content" cols="90" rows="3" style="resize: none;"></textarea>
                             <button class="ir-btn btn-dark" onclick="addReply();">작성</button>
                     </div>
 	            </div>
