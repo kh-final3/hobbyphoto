@@ -91,20 +91,22 @@
                 <div class="form-area">
                     <div class="form-floating">
                         <input type="text" class="form-control" name="userId" id="userId" placeholder="아이디를 입력해주세요." required>
-                        <label for="userId">아이디</label> <br>
+                        <label for="userId">아이디</label> 
                         <div id="checkId" style="font-size:0.8em; display:none"></div>
                         <!-- <button type="button">중복확인</button> -->
                     </div>                    
-
+					<br>
                     <div class="form-floating">
                         <input type="password" class="form-control" name="userPwd" id="userPwd" placeholder="비밀번호를 입력해주세요" required>
-                        <label for="userPwd">비밀번호</label> <br>
+                        <label for="userPwd">비밀번호</label> 
                     </div>
 
+                    <br>
                     <div class="form-floating">    
                         <input type="password" class="form-control" id="checkPwd" placeholder="비밀번호를 입력해주세요." required>
-                        <label for="checkPwd">비밀번호 확인</label> <br>
+                        <label for="checkPwd">비밀번호 확인</label> 
                     </div>
+                    <br>
 
                     <div class="form-floating">    
                         <input type="text" class="form-control" name="userName" id="userName" placeholder="이름을 입력해주세요." required>
