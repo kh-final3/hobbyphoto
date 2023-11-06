@@ -82,6 +82,8 @@
 
         
     </style>
+    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div class="all">
@@ -139,6 +141,37 @@
             </form>
         </div>
     </div>
+    <script>
+        $(function() {
+            $("#userId").keyup(function() {
+                checkUserIdAvailability();
+            });
+        });
+        
+        function checkUserIdAvailability() {
+            var userId = $("#userId").val();
+        
+            // AJAX 요청을 보내서 아이디 중복 확인을 수행
+            $.ajax({
+                url: "idCheck.me", // 서버의 URL로 변경해야 합니다.
+                method: "POST",
+                data: { userId: userId },
+                success: function(response) {
+                    if (response === "success") {
+                        $("#checkId").html("사용 가능한 아이디입니다.").css("color", "green");
+                    } else if (response === "fail") {
+                        $("#checkId").html("이미 사용 중인 아이디입니다.").css("color", "red");
+                    }
+                    $("#checkId").show();
+                },
+                error: function() {
+                    console.log("아이디 중복 확인 중 오류가 발생했습니다.");
+                }
+            });
+        }
+    </script>
 
+        
+        
 </body>
 </html>

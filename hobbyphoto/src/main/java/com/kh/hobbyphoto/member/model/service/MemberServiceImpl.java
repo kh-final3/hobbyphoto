@@ -114,5 +114,13 @@ public class MemberServiceImpl implements MemberService {
 		return md.selectFollowing(sqlSession,userId);
 	}
 
+	public int updateImg(Member m) {
+		return md.updateImg(sqlSession,m);
+	}
+
+	public int idCheck(String userId) {
+		return md.idCheck(sqlSession,userId);
+	}
+
 
 }

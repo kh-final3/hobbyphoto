@@ -372,7 +372,7 @@
 				(
 				   seq_board_no.nextval
 				 , #{boardTitle}
-				 , 1
+				 , #{boardWriter}
 				 , #{boardContent}
 				 , 2
 				 , sysdate

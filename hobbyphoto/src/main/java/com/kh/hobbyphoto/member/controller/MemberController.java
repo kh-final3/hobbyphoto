@@ -1,6 +1,10 @@
 package com.kh.hobbyphoto.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -90,6 +95,19 @@ public class MemberController {
 		}
 	
 	}
+	
+    @ResponseBody
+    @RequestMapping(value = "idCheck.me")
+    public String checkUserId(@RequestParam("userId") String userId) {
+    	int result = ms.idCheck(userId);
+    	
+        if (result == 0) {
+            return "success";
+        } else {
+            return "fail";
+        }
+    }
+	
 	
 	@RequestMapping("myPage.me")
 	public String myPage(HttpSession session,Model model) {
@@ -313,6 +331,22 @@ public class MemberController {
 		return gender;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="updateImg.me")
+	public String updateImg(@RequestParam("image") MultipartFile upfile, Member m,HttpSession session) {
+		if (!upfile.getOriginalFilename().equals("")) {
+			System.out.println(upfile);
+			String changeName = saveFile(upfile, session);
+
+			m.setProfileImg("resources/upfiles/" + changeName);
+		}
+		System.out.println(m.getProfileImg());
+		int result = ms.updateImg(m);
+
+		
+		return m.getProfileImg();
+	}
+	
 	@RequestMapping("profile.me")
 	public String profile(@RequestParam(value="cpage", defaultValue="1") int currentPage,Member m,HttpSession session,Model model) {
 		String userId = m.getUserId();
@@ -346,4 +380,22 @@ public class MemberController {
 		}
 		return "member/profile";
 	}
+	
+	public String saveFile(MultipartFile upfiles, HttpSession session) {
+		
+		 String originName = upfiles.getOriginalFilename(); 
+		 String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		 
+		  int ranNum = (int)(Math.random()* 90000 + 10000); // 5자리 랜덤값)
+		  String ext = originName.substring(originName.lastIndexOf("."));
+		  String changeName = currentTime + ranNum + ext; //"202320055470821318.png"
+		  String savePath = session.getServletContext().getRealPath("/resources/upfiles/");
+		  
+			try {
+				upfiles.transferTo(new File(savePath + changeName));
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+			return changeName;
+		}
 }

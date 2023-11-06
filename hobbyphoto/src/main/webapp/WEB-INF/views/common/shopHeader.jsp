@@ -18,7 +18,7 @@
 	.notosanskr * { 
 	font-family: 'Noto Sans KR', sans-serif;
 	}
-    div{/*box-sizing: border-box; border: 1px solid ;*/ font-family: 'Noto Sans KR';}
+    div{ font-family: 'Noto Sans KR';}
         .mb_outer{
             height: 120px;
             margin-top: 10px;
@@ -31,9 +31,9 @@
 
         .mb_outer>div{height: 100%; float: left;}
         .mb_menu-area{
-            width: 70%; 
+            width: 770px; 
             height: auto;
-            /* border: 1px solid blue;  */
+           /*  border: 1px solid blue; */
         }
         .mb_login-area{
             width: 20%;
@@ -42,8 +42,10 @@
         }
 
         .mb_menu-area>div{height: 100%; float: left;}
-        #mb_logo{width: 15%; height: 100%;}
-        #mb_nav{width: 80%;}
+        #mb_logo{width: 25%; height: 100%;}
+        #mb_nav {
+    		width: 565px;
+		}
         #mb_logo>img{
             display: block; 
             width: 100%; 
@@ -89,7 +91,7 @@
         #mb_navi li {
             float: left;
             text-align: center;
-            width: 20%; 
+            width: 27%; 
             /* border: 1px solid red; */
             height: 100%;
         }
@@ -111,13 +113,13 @@
         }
     
         .mb_search-area {
-            width: 150px;
+            width: 200px;
         }
         
         #sh_text {
             margin-left: 10px;
             margin-top: 5px;
-            width: 180px;
+            width: 300px;
             border: none; 
             border-bottom: 1px solid #aeaeae; 
         }
@@ -222,12 +224,10 @@
             </div> 
             <div id="mb_nav">
                 <ul id="mb_navi">
-                    <!--<li><a href="pro.list">홈</a></li> -->
                     <li><a href="pro.list">카메라</a></li>
                     <li><a href="shop.photo">포토북</a></li>
                     <li><a href="shop.test">핸드폰 케이스</a></li>
                     <li><a href="shNotice.no">공지사항</a></li>
-                    
                 </ul>
             </div>
         </div>
@@ -235,7 +235,7 @@
             <div id="mb_search">
                 <form action="shop.search" id="search_form">
                     <div id="search_text">
-                        <input type="text" name="keyword" id="sh_text" placeholder="검색어를 입력해주세요">
+                        <input type="text" name="keyword" id="sh_text" placeholder="         찾으시는 상품을 입력해주세요">
                         <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
                     </div>
                     
@@ -246,7 +246,7 @@
                 <div id="mb_user_1">
                     <table class="login-area" align="center">
                         <tr height="75">
-                            <td width="70"><a href="/hobbyphoto"><img width="60" src="resources/images/clipboard.png" alt=""></a></td>
+                            <td width="70"><a href="/hobbyphoto"><img width="45" src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt=""></a></td>
                             <td width="70" id="member_menu"><img width="60" height="60" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt=""></td>
                         </tr>
                     </table>
@@ -299,6 +299,7 @@
                 </div>
         </div>
     </div>
+
 
 </body>
 	<script>

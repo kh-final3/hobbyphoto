@@ -381,7 +381,6 @@
     						if("${ loginMember.userId }" != "${ b.boardWriter }"){
     							if(socket){
     								let socketMsg = "reply,${ loginMember.userId },${ b.boardWriter },${b.boardNo},${b.boardTitle},1";
-    								console.log(socketMsg);
     								socket.send(socketMsg);
     							}
     			           	}
@@ -447,11 +446,25 @@
                             $("#like1").css("display", "none");
                             $("#like2").css("display", "");
                         }
+                        
+                        if("${ loginMember.userId }" != "${ b.boardWriter }"){
+							if(socket){
+								let socketMsg = "like,${ loginMember.userId },${ b.boardWriter },${b.boardNo},${b.boardTitle},1";
+								socket.send(socketMsg);
+							}
+			           	}
                     },
                     error:function(){
                         
                     }
                 })
+                
+                if("${ loginMember.userId }" != "${ b.boardWriter }"){
+          			 $.ajax({
+          			        url : "insertAlram",
+          			        data : {sendId: "${ loginMember.userId }" , fromId: "${ b.boardWriter }" , bno:${ b.boardNo },title:"${ b.boardTitle }" , cmd: "like", type:1 }
+          			 });
+          		}
             }
             
             function deleteLike(){
@@ -515,11 +528,11 @@
         			userId:'${loginMember.userId}',
         			followId:'${b.boardWriter}'
         		},success:function(result){
+
         			console.log(result);
         			if (result === 'success') {
                         $("#follow").text("팔로우취소").css("color", "red");
                     }
-
         		},error:function(){
         			console.log("팔로우 ajax 통신 실패");
         		}
