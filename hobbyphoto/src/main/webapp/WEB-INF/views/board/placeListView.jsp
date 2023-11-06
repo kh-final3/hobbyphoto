@@ -185,7 +185,7 @@
                     <button disabled> &lt; </button>
                 </c:when>
                 <c:otherwise>
-                    <button style="width:70px" onclick="location.href='list.pl?cpage=${ pi.currentPage - 1 }'">Previous</button>
+                    <button style="width:70px" onclick="location.href='list.pl?cpage=${ pi.currentPage - 1 }'">&lt; </button>
                 </c:otherwise>
             </c:choose>
             
@@ -197,12 +197,10 @@
             
                <c:choose>
                    <c:when test="${ pi.currentPage eq pi.maxPage }">
-                     <button onclick="location.href=''" disabled>Next</button>
-                     <button disabled> &gt; </button>
+                     <button disabled> &gt;</button>
                    </c:when>
                  <c:otherwise>
-                     <button style="width:40px;" onclick="location.href='list.pl?cpage=${ pi.currentPage + 1 }'">Next</button>
-                     <button> &gt; </button>
+                     <button style="width:40px;" onclick="location.href='list.pl?cpage=${ pi.currentPage + 1 }'"> &gt;</button>
                   </c:otherwise>
             </c:choose>
         </div>
