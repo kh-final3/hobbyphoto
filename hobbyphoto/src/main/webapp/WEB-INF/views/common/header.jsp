@@ -169,7 +169,7 @@
             background-color: white;
         	position: absolute;
         	top: 100px;
-            right: 117px;
+            right: 265px;
         	border: 1px solid black;
         	z-index: 120;
             text-align: center;
@@ -182,7 +182,7 @@
         	background-color: white;
         	position: absolute;
         	top: 100px;
-            right: 117px;
+            right: 205px;
         	border: 1px solid black;
         	z-index: 120;
             text-align: center;
@@ -267,7 +267,9 @@
 	
 		ws.onmessage = function(event) {
 			let $socketAlert = $('.alarmArea');
-			$socketAlert.html(event.data)
+			$socketAlert.prepend(event.data);
+			let count = Number($("#alarmCount").text())
+			$("#alarmCount").text(count+1);
 		};
 	
 		ws.onclose = function() {
@@ -343,7 +345,7 @@
 
 				                					</c:when>
 				                					<c:otherwise>
-				                						<a id="alarmText">알림<span id="alarmCount">(0)</span></a>
+				                						<a id="alarmText">알림(<span id="alarmCount">0</span>)</a>
 				                					</c:otherwise>
 			                					</c:choose>
 		                					</li>
@@ -414,7 +416,7 @@
 		    		url:"alramCount",
 		    		data:{fromId:"${loginMember.userId}"},
 		    		success:data=>{
-		    			$("#alarmCount").text("("+ data +")")
+		    			$("#alarmCount").text(data)
 		    		},
 		    		error:()=>{
 			    		console.log("알림 카운트 수 로딩 실패")	
@@ -427,13 +429,27 @@
 		    		success:data=>{
 		    			let value = "";
 		                for(let i in data){
-		                	if(data[i].type == 1){
+		                	if(data[i].cmd == "reply"){
 			                   value += "<div class='alarmMsg'><span class='bno'>"+data[i].bno+"</span>"
 			                   		  + "<span class='type'>"+data[i].type+"</span>"
 			                   		  + "<span class='sendId'>" +data[i].sendId + "</span>"
-			                   		  + "님이 "+ data[i].title +" 에 댓글을 달았습니다!</div>";
+				                   	  + "님이 "+ data[i].title +" 에 댓글을 달았습니다!</div>";
+			                   		 
 		                	}
-		                          
+		                	
+		                	if(data[i].cmd == "like"){
+				                   value += "<div class='alarmMsg'><span class='bno'>"+data[i].bno+"</span>"
+				                   		  + "<span class='type'>"+data[i].type+"</span>"
+				                   		  + "<span class='sendId'>" +data[i].sendId + "</span>"
+					                   	  + "님이 "+ data[i].title +" 에 좋아요를 눌렀습니다!</div>";
+				                   		 
+			                }
+		                	
+		                	if(data[i].cmd == "follow"){
+				                   value += "<div class='alarmMsg'><span class='bno'>"+data[i].bno+"</span>"
+				                   		  + "<span class='sendId'>" +data[i].sendId + "</span>"
+					                   	  + "님이 팔로우했습니다.!</div>";
+			                }
 		                }
 		                
 		                $(".alarmArea").html(value);
@@ -445,7 +461,7 @@
 		    	
 		    	 $(document).on("click", ".alarmMsg", function(){
 		    		 let type = $(this).find(".type").text();
-						// 댓글
+						// 사진게시판
 						if(type==1){
 				    		$.ajax({
 				    			url:"alramClick",
@@ -460,34 +476,22 @@
 				    		})
 						}
 		    		 
-		    		 	// 좋아요
+		    		 	// 추천게시판
 		    		 	if(type==2){
+		    		 		console.log("여기")
+		    		 		console.log("글번호" + $(this).find(".bno").text())
+		    		 		console.log("아이디" + $(this).find(".sendId").text())
 		    		 		$.ajax({
 				    			url:"alramClick",
 				    			data:{bno:$(this).find(".bno").text(),sendId:$(this).find(".sendId").text(),type:$(this).find(".type").text()},
 				    			type:"post",
 				    			success:data=>{
-				    				location.href="phDetail.bo?phno="+data
+				    				location.href="rcDetail.bo?phno="+data
 				    			},
 				    			error:()=>{
 				    				console.log("알림 삭제 실패")
 				    			}
 				    		})
-		    		 	}
-		    		 	
-		    		 	// 팔로우
-		    		 	if(type==3){
-		    		 		$.ajax({
-		    		 			url:"alramClick",
-		    		 			data:{bno:$(this).find(".bno").text(),sendId:$(this).find(".sendId").text(),type:$(this).find(".type").text()},
-		    		 			type:"post",
-		    		 			success:data=>{
-		    		 				location.href="phDetail.bo?phno="+data
-		    		 			},
-		    		 			error:()=>{
-		    		 				console.log("알림 삭제 실패");
-		    		 			}
-		    		 		})
 		    		 	}
 		    	})
 	    	}

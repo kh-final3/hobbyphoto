@@ -53,6 +53,8 @@
              , type
 		  from alarm
 		 where from_id = #{fromId}
+		 order
+		    by create_date desc
 	</select>
 	
 	<delete id="alramClick">

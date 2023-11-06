@@ -49,6 +49,7 @@ public class AlarmController {
 	@ResponseBody
 	@RequestMapping(value = "alramClick", method=RequestMethod.POST)
 	public int alramClick(Alarm a) throws Exception{
+		System.out.println(a);
 		int result = aService.alramClick(a);
 		if(result>0) {
 			return a.getBno();

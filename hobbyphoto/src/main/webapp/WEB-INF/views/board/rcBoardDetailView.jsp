@@ -132,12 +132,29 @@
     					if(status == "success"){
     						selectRcReplyList();
     					}
+    					
+    					if("${ loginMember.userId }" != "${ b.boardWriter }"){
+							if(socket){
+								let socketMsg = "reply,${ loginMember.userId },${ b.boardWriter },${b.boardNo},${b.boardTitle},2";
+								socket.send(socketMsg);
+							}
+			           	}
+    					
+    					$("#content").val("");
+    					
     				}, error:function(){
     					console.log("댓글 작성용 ajax 요청 실패!")
     				}
     			})
     		} else {
     			alert("댓글 작성 후 등록 요청해주세요!");
+    		}
+    		
+    		if("${ loginMember.userId }" != "${ b.boardWriter }"){
+    			 $.ajax({
+    			        url : "insertAlram",
+    			        data : {sendId: "${ loginMember.userId }" , fromId: "${ b.boardWriter }" , bno:${ b.boardNo },title:"${ b.boardTitle }" , cmd: "reply", type:2 }
+    			 });
     		}
     	}
     	
@@ -172,6 +189,8 @@
     				console.log("댓글리스트 조회용 ajax 통신 실패!")
     			}
     		})
+    		
+    		
     	}
         if (${ loginMember.userNo } !== null) {
             let userNo = ${ loginMember.userNo };
@@ -189,11 +208,25 @@
                             $("#like1").css("display", "none");
                             $("#like2").css("display", "");
                         }
+                        
+                        if("${ loginMember.userId }" != "${ b.boardWriter }"){
+							if(socket){
+								let socketMsg = "like,${ loginMember.userId },${ b.boardWriter },${b.boardNo},${b.boardTitle},2";
+								socket.send(socketMsg);
+							}
+			           	}
                     },
                     error:function(){
                         
                     }
                 })
+                
+                if("${ loginMember.userId }" != "${ b.boardWriter }"){
+         			 $.ajax({
+         			        url : "insertAlram",
+         			        data : {sendId: "${ loginMember.userId }" , fromId: "${ b.boardWriter }" , bno:${ b.boardNo },title:"${ b.boardTitle }" , cmd: "like", type:2 }
+         			 });
+         		}
             }
             
             function deleteLike(){
