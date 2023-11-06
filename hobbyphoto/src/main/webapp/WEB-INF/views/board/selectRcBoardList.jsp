@@ -66,21 +66,6 @@
 	                <h6 style="color: gray;">사용자가 전해주는 다양한 카메라 이야기!</h6>
 	            </div>
 	            <br>
-	            <div align="right">
-	                <form id="searchForm" action="" method="get">
-	                    <div class="select">
-	                        <select class="custom-select" name="condition">
-	                            <option value="writer">작성자</option>
-	                            <option value="title">제목</option>
-	                            <option value="content">내용</option>
-	                        </select>
-	                    </div>
-	                    <div class="text">
-	                        <input type="text" class="form-control" name="keyword">
-	                    </div>
-	                    <button type="submit" class="searchBtn btn btn-secondary">검색</button>
-	                </form>
-	            </div>  
 	            <br></br>
 					<table id="boardList" class="table table-hover" align="center">
 					    <thead>
@@ -137,18 +122,17 @@
 		                    <button onclick="location.href='rcBoardList.bo?cpage=${ p }'">${ p }</button>
 		                </c:forEach>
 		                
-		                <!-- <button onclick="location.href='rcBoardList.bo?cpage=${ p }'">${ p }</button> -->
-		                
 		               	<c:choose>
 		                   	<c:when test="${ pi.currentPage eq pi.maxPage }">
-		                    		<button onclick="location.href=''" disabled>Next</button>
+		                    		<button disabled>Next</button>
+		                    		<button disabled> &gt; </button>
 		                   	</c:when>
 		                     <c:otherwise>
 		                     	<button onclick="location.href='rcBoardList.bo?cpage=${ pi.currentPage + 1 }'">Next</button>
+		                  		<button> &gt; </button>
 		                   	</c:otherwise>
 		                </c:choose>
 		                
-		                <button> &gt; </button>
             		</div>
 	            		<br clear="both"><br>
 	            	<br><br>
