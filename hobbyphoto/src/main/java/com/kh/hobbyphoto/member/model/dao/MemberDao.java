@@ -87,6 +87,7 @@ public class MemberDao {
 	}
 
 	public int updateImg(SqlSessionTemplate sqlSession, Member m) {
+		System.out.println(m);
 		return sqlSession.update("memberMapper.updateImg",m);
 	}
 

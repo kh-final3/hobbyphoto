@@ -363,8 +363,9 @@
     </script>
 
 <script>
-    function updateProfileImage(input) {
+  function updateProfileImage(input) {
     const selectedImage = input.files[0];
+    const userNo = "${loginMember.userNo}"; // Get the userNo value from JSP variable
 
     if (selectedImage) {
         const reader = new FileReader();
@@ -375,6 +376,7 @@
 
             const formData = new FormData();
             formData.append("image", selectedImage);
+            formData.append("userNo", userNo); // Add userNo to the formData
 
             $.ajax({
                 type: "POST",
@@ -394,7 +396,6 @@
         reader.readAsDataURL(selectedImage);
     }
 }
-
 </script>
 
 

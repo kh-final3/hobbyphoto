@@ -335,12 +335,10 @@ public class MemberController {
 	@RequestMapping(value="updateImg.me")
 	public String updateImg(@RequestParam("image") MultipartFile upfile, Member m,HttpSession session) {
 		if (!upfile.getOriginalFilename().equals("")) {
-			System.out.println(upfile);
 			String changeName = saveFile(upfile, session);
 
 			m.setProfileImg("resources/upfiles/" + changeName);
 		}
-		System.out.println(m.getProfileImg());
 		int result = ms.updateImg(m);
 
 		

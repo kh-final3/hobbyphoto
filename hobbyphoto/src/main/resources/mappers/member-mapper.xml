@@ -206,7 +206,7 @@
 		 where user_no = #{ userNo }
 	</update>
 	
-	<update id="updateImg">
+	<update id="updateImg" parameterType="Member">
 		update
 		       member
 		   set profile_img = #{ profileImg }

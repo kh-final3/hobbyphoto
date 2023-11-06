@@ -208,7 +208,7 @@
 
         <div class="info_profile">
             <div class="info_profile1">
-                <img id="profileImg_profile" src="resources/images/picture.png" style="width: 200px; height: 200px; margin: 50px;"></img><br>
+                <img id="profileImg_profile" src="${ loginMember.profileImg }" style="width: 200px; height: 200px; margin: 50px;"></img><br>
                 <div id="btnall_profile">
                 </div>
             </div>
