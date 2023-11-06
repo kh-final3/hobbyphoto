@@ -493,7 +493,7 @@
 					)
 					where r = 1
 	</select>
-	<select id="finishTem">
+	<select id="finishTem" resultMap="PhotoResult">
 		select
 				p_no
 			,	t_no
@@ -509,7 +509,7 @@
 			set	status = 'Y'
 		where p_no = #{PNo}
 	</update>
-	<select id="finishPhoto">
+	<select id="finishPhoto" resultMap="PhotoDetailResult">
 		select
 				p_no
 			,	t_no
@@ -520,4 +520,5 @@
 		from photoDetail
 		where p_no = #{PNo}
 	</select>
+	
 </mapper>

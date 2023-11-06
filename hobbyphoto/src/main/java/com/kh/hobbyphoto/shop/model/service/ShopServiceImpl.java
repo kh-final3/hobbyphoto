@@ -243,5 +243,20 @@ public class ShopServiceImpl implements ShopService{
 		return sDao.finishPhoto(sqlSession,pNo);
 	}
 
+	@Override
+	public Templates finishTemplate(int tno) {
+		return sDao.finishTemplate(sqlSession,tno);
+	}
+
+	@Override
+	public int insertTemplateBuy(Orders o) {
+		return sDao.insertTemplateBuy(sqlSession,o);
+	}
+
+	@Override
+	public Orders selectOrderTemInfo(int uno) {
+		return sDao.selectOrderTemInfo(sqlSession,uno);
+	}
+
 		
 }

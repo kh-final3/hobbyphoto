@@ -139,6 +139,15 @@ public class ShopDao {
 	public PhotoDetail finishPhoto(SqlSessionTemplate sqlSession,int pNo) {
 		return sqlSession.selectOne("shopMapper.finishPhoto", pNo);
 	}
+	public Templates finishTemplate(SqlSessionTemplate sqlSession,int tno) {
+		return sqlSession.selectOne("shopMapper.selectTemplateDetail", tno);
+	}
+	public int insertTemplateBuy(SqlSessionTemplate sqlSession,Orders o) {
+		return sqlSession.insert("shopMapper.insertOneOrder", o);
+	}
+	public Orders selectOrderTemInfo(SqlSessionTemplate sqlSession,int userNo) {
+		return sqlSession.selectOne("shopMapper.selectOrderNo", userNo);
+	}
 
 
 }

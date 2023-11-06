@@ -131,9 +131,10 @@
 </head>
 <body>
 
-<!-- buylist => 장바구니, list => 단품 -->
-<!-- buylist => pNo, pName, categoryNo, brandNo, price, amount-->
-<!-- list =>  pNo,userNo,pName, categoryNo, brandNo, price, amount-->
+<!-- pd => photo , k => photoDetail (pd,와 k의 status는 다름 -->
+<!-- pd => pNo, tNo, userNo, createDate, status, count -->
+<!-- k => pNo, tNo, userNo, imgs, create_date, status  -->
+<!-- t => tNo, price,temName,pType, titleImg, temImg -->
 <jsp:include page="../common/shopHeader.jsp"/>
 
 <form action="">
@@ -141,7 +142,7 @@
 <div class="payment_outer" align="center">
         <div class="order_pay" style="margin-bottom: 10px;">
             <!-- <img src="img/pay.png" alt="카메라 사진"> -->
-            <h1>ORDER</h1>
+            <h1>TemORDER</h1>
         </div>
         <table class="pd_table" border="1">
             <thead id="pd_thead" style="text-align: center;">
@@ -152,56 +153,19 @@
                     <th>합계</th>    
                 </tr>
             </thead>
-            
-            <c:choose>
-            
-            	<c:when test="${ empty buylist }">
-            	<input type="hidden" name="pType" value="${ list.PType }">
-            	<input type="hidden" name="pNo" value="${ list.PNo }">
+
 		            <tbody> 
 		                <tr>
-		                    <td style="text-align: center;"><img src="${ list.thumbnail }" alt=""></td>
-		                    <td style="text-align: center;"><input type="text" name="pName" id="pName" value="${ list.PName }" readonly></td>
-		                    <td style="text-align: center;"><input type="text" name="price" id="price" value="${ list.price }" readonly></td>
+		                    <td style="text-align: center;"><img src="${ k.imgs }" alt=""></td>
+		                    <td style="text-align: center;"><input type="text" name="pName" id="pName" value="${ t.temName }" readonly></td>
+		                    <td style="text-align: center;"><input type="text" name="price" id="price" value="${ t.price }" readonly></td> 
 		                    
-		                    <td style="text-align: center;"><input type="text" name="amount" id="amount" value="${ amount }" readonly></td>
-		                   <td style="text-align: center;"><input type="text" name="" id="" value="${ list.price * amount }" readonly></td> 
+		                    <td style="text-align: center;"><input type="text" name="amount" id="amount" value="${ pd.count }" readonly></td>
+		                    <td style="text-align: center;"><input type="text" name="" id="" value="${ t.price * pd.count }" readonly></td>
 		                    
 		                </tr>
 		            </tbody>   
-            	</c:when>
             	
-            	<c:otherwise>
-
-				<c:set var="totalPrice" value="0"/>            		
-         
-            		<c:forEach var="c" items="${ buylist }">
-         				<tbody> 
-			                <tr>
-			            		<input type="hidden" name="pType" value="${ c.PType }">
-			            		<input type="hidden" name="pNo" value="${ c.PNo }">
-			                    <td style="text-align: center;"><img src="${ c.thumbnail }" alt=""></td>
-			                    <td style="text-align: center;"><input type="text" name="pNAme" id="pNAme" value="${ c.PName }" readonly></td>
-			                    <!-- <td style="text-align: center;"><input type="text" name="price" id="" value="${ c.productprice }" readonly></td> -->
-			                    <td style="text-align: center;">
-			                    <fmt:formatNumber var="totalPriceFormat" value="${ c.productprice }" pattern="#,###" />
-			                    <input type="text" id="totalPrice" name="" value="<c:out value='${totalPriceFormat}' />" />
-			                    </td>
-			                    <td style="text-align: center;"><input type="text" name="amount" id="amount" value="${ c.cartamount }" readonly></td>
-			                    <!-- <td style="text-align: center;"><input type="text" name="" id="price" value="${ c.productprice * c.cartamount }" readonly></td> -->
-			                    <td style="text-align: center;">
-			                    <fmt:formatNumber var="totalPriceFormat" value="${ c.productprice * c.cartamount }" pattern="#,###" />
-			                    <input type="text" id="totalPrice" name="" value="<c:out value='${totalPriceFormat}' />" />
-			                    </td>
-			                </tr>
-			            </tbody>   
-            		
-            			<c:set var="totalPrice" value="${totalPrice + (c.productprice * c.cartamount)}"/>
-            		</c:forEach>
-            	</c:otherwise>
-
-            </c:choose>
-
         </table>
 
         <br>
@@ -315,28 +279,25 @@
                 
             </div>
             
-            <c:choose>
-            
-            	<c:when test="${ empty buylist }">
             		<div class="amount_outer">
 		                <div id="amount2">
 		                    <div id="sum">
 		                        결제예정 금액
 		                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;">
-		                       <input type="text" name="totalPrice" id="totalPrice" value="${list.price * amount + (list.price * amount >= 50000 ? 0 : 3000)}" readonly> 원
-		                        	 </p>
+		                        <input type="text" name="totalPrice" id="totalPrice" value="${t.price * pd.count + (t.price * pd.count >= 50000 ? 0 : 3000)}" readonly> 원
+		                        	</p>
 		                    </div>
 		                    <hr class="hr2">
 		                    <table id="sum2" >
 		                        <tr>
 		                            <td>주문금액</td>
-		                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ list.price * amount }" readonly>원</td> 
+		                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ t.price * pd.count }" readonly>원</td>
 		                            
 		                        </tr>
 		                        
 		                        <tr>
 		                            <td>배송비</td>
-		                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ list.price * amount  >= 50000 ? 0 : 3000 }" readonly>원</td>
+		                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ t.price * pd.count  >= 50000 ? 0 : 3000 }" readonly>원</td>
 		                        </tr>
 		                    </table>
 		                    <br>
@@ -344,64 +305,20 @@
 		                        [필수] 주문할 제품의 거래조건을 <br>
 		                        하였으며, 구매에 동의하시겠습니까? <br>
 		                        (전자상거래법 제8조 2항)<br><br>
-		                        <button class="orbtn" id="onebuy" onclick="requestOnePay();">결제</button>
+		                        <button class="orbtn" id="onebuy" onclick="templateBuy();">결제</button>
 		                    </div>
 		                </div>
 		               <p style="margin-top: 10px;">결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</p>
 		            </div>
-            	</c:when>
             	
-            	<c:otherwise>
-            	
-            			<div class="amount_outer">
-			                <div id="amount2">
-			                    <div id="sum">
-			                        <h5>결제예정 금액</h5>
-			                        <p style="color: steelblue; font-size: 26px; margin-top: 10px;">
-			                       <input style="width: 300px;" type="text" name="totalPrice" id="totalPrice" value="${totalPrice + (totalPrice >= 50000 ? 0 : 3000)}"> 원
-			                        	</p>
-			                    </div>
-			                    <hr class="hr2">
-			                    <table id="sum2">
-			                        <tr>
-			                            <td>주문금액</td>
-			                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ totalPrice }"> 원</td> 
-			                            
-			                        </tr>
-			                        
-			                        <tr>
-			                            <td>배송비</td>
-			                            <td><input type="text" style="width: 200px; margin-left: 5px;" name="" id="" value="${ totalPrice  >= 50000 ? 0 : 3000 }"> 원</td>
-			                        </tr>
-			                    </table>
-			                    <br>
-			                    <div>
-			                        [필수] 주문할 제품의 거래조건을 <br>
-			                        하였으며, 구매에 동의하시겠습니까? <br>
-			                        (전자상거래법 제8조 2항)<br><br>
-			                        <button class="orbtn" id="allbuy" onclick="requestPay()">결제</button>
-			                    </div>
-			                </div>
-			               <p style="margin-top: 10px;">결제가 팝업창에서 이루어집니다 <br> 브라우저 설정에서 팝업창 차단을 해제해주세요</p>
-			            </div>
-            		
-            	</c:otherwise>
-            	
-            </c:choose>
-            
             <script>
-            	$("#allbuy").click(function(event){
-            		event.preventDefault();
-            		requestPay();
-            		
-            	});
             	
             	$("#onebuy").click(function(event){
             		event.preventDefault();
             		requestOnePay();
             	})
             	
-            	function requestOnePay() {
+            	function templateBuy() {
 			    	  IMP.init('imp25583820'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
 			    	  //IMP.request_pay(param, callback) 호출 => 결제창 호출
 			    	  IMP.request_pay({//param
@@ -418,43 +335,15 @@
 			    	  }, function (rsp) { // callback => 결제 성공시 실행되는 함수 rsp에는 성공여부, 결제정보, 에러 정보등등
 			    		  	console.log(rsp);
 			    	
+			    	  		$("form").attr("action","template.go").submit();	
+			    	  
 			    	      if (rsp.success) {//결제 성공시 
 			    	        console.log("성공")
-			    	        $("form").attr("action","pro.onebuy").submit();
-			    	 
 			    	      } else {//결제 실패시 
 			    	    	  console.log("실패")
 			    	      }
 			    	  });
 			    	}
-            	
-            	
-            	function requestPay() {
-			    	  IMP.init('imp25583820'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
-			    	  IMP.request_pay({
-			    	    pg: "inicis",
-			    	    pay_method: "card",
-			    	    merchant_uid : 'merchant_'+new Date().getTime(),
-			    	    name : $(".pd_table tbody").children().eq(0).children().eq(3).children().val(),
-			    	    amount : 1,
-			    	    buyer_email : '${loginMember.email}',
-			    	    buyer_name : '${loginMember.userName}',
-			    	    buyer_tel : $("#phone").val(),
-			    	    buyer_addr :$("#sample6_address").val(),
-			    	    buyer_postcode : $("#sample6_detailAddress").val()
-			    	  }, function (rsp) { // callback
-			    		  console.log(rsp);
-			    	      if (rsp.success) {
-			    	        console.log("성공")
-			    	        $("form").attr("action","pro.allbuy").submit();
-			    	        
-			    	      } else {
-			    	    	  console.log("실패")
-			    	      }
-			    	  });
-			    	}
-            	
-      
             </script>
             
             
