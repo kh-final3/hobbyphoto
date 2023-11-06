@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         .outer_find{
             /* border: 1px solid red; */
@@ -41,6 +42,7 @@
     </style>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp" />
 	<div class="outer_find">
 		<div class="container_find">
 			<div class="area_inputs wow fadeIn">
@@ -48,10 +50,9 @@
 					<h3>아이디/비밀번호 찾기</h3>
 					<p>인증된 이메일주소로 비밀번호 찾기가 가능합니다.</p>
 				</div>
-				<div style="margin-bottom: 10px;"
-					class="custom-control custom-radio custom-control-inline">
-					<input type="radio" class="custom-control-input" id="search_1" name="search_total" onclick="search_check(1)" checked>
-					<label class="custom-control-label font-weight-bold"	for="search_1">아이디 찾기</label>
+				<div style="margin-bottom: 10px;"class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="search_1" name="search_total" onclick="search_check(1)" checked>
+						<label class="custom-control-label font-weight-bold"	for="search_1">아이디 찾기</label>
 				</div>
 				<div class="custom-control custom-radio custom-control-inline">
 					<input type="radio" class="custom-control-input" id="search_2" name="search_total" onclick="search_check(2)"> 
@@ -59,26 +60,28 @@
 				</div>
 				<div id="searchI">
 					<div class="form-group">
-						<label class="font-weight-bold" for="inputName_1">이름</label>
 						<div>
+						<div class="form-floating">
 							<input type="text" class="form-control" id="inputName_1" name="inputName_1" placeholder="이름을 입력해주세요">
+							<label class="font-weight-bold" for="inputName_1">이름</label>
+						</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="font-weight-bold" for="inputPhone_1">이메일</label>
-						<div>
+						<div class="form-floating">
 							<input type="email" class="form-control mail mailId" placeholder="이메일을 입력해주세요">
+							<label class="font-weight-bold" for="inputPhone_1">이메일</label>
 						</div>
-						<button class="btn btn-primary btn-block" type="button" id="sendBtn" name="sendBtn" onclick="sendNumberId()">인증번호</button>
+						<button class="btn btn-dark btn-block" type="button" id="sendBtn" name="sendBtn" onclick="sendNumberId()">인증번호</button>
 						<br>
 					  	<div class="mail_number_Id" style="display: none;">
 					    	<input class="form-control mail numberId" type="text"  placeholder="인증번호 입력">
-					   		<button class="btn btn-primary btn-block" type="button" name="confirmBtn1" onclick="confirmNumberId()">이메일 인증</button>
+					   		<button class="btn btn-dark btn-block" type="button" name="confirmBtn1" onclick="confirmNumberId()">이메일 인증</button>
 					  	</div>
 					</div>
 					<br>
 					<div class="form-group">
-						<button id="searchBtn1" type="button" onclick="idSearch_click()" class="btn btn-primary btn-block" data-toggle="modal" data-target="#idModal" disabled>확인</button>
+						<button id="searchBtn1" type="button" onclick="idSearch_click()" class="btn btn-dark btn-block" data-toggle="modal" data-target="#idModal" disabled>확인</button>
 						<a class="btn btn-danger btn-block"	href="${pageContext.request.contextPath}">취소</a>
 						<br>
 					    <input type="text" class="confirmId" style="display: none" value="">
@@ -86,26 +89,26 @@
 				</div>
 				<div id="searchP" style="display: none;">
 					<div class="form-group">
-						<label class="font-weight-bold" for="inputId">아이디</label>
-						<div>
+						<div class="form-floating">
 							<input type="text" class="form-control" id="inputId" name="inputId_2" placeholder="아이디를 입력해주세요">
+							<label class="font-weight-bold" for="inputId">아이디</label>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="font-weight-bold" for="inputEmail_2">이메일</label>
-						<div>
+						<div class="form-floating">
 							<input class="form-control mail mailPwd" type="email" class="form-control" placeholder="이메일을 입력해주세요">
+							<label class="font-weight-bold" for="inputEmail_2">이메일</label>
 						</div>
-						<button class="btn btn-primary btn-block" type="button" id="sendBtn" name="sendBtn" onclick="sendNumberPwd()">인증번호</button>
+						<button class="btn btn-dark btn-block" type="button" id="sendBtn" name="sendBtn" onclick="sendNumberPwd()">인증번호</button>
 						<br>
 					  	<div class="mail_number_Pwd" style="display: none">
 					    	<input type="text" class="form-control mail numberPwd" placeholder="인증번호 입력">
-					   		<button type="button" class="btn btn-primary btn-block" name="confirmBtn2" onclick="confirmNumberPwd()">이메일 인증</button>
+					   		<button type="button" class="btn btn-dark btn-block" name="confirmBtn2" onclick="confirmNumberPwd()">이메일 인증</button>
 					  	</div>
 					</div>
 					<br>
 					<div class="form-group">
-						<button id="searchBtn2" type="button" onclick="pwdSearch_click()" class="btn btn-primary btn-block" data-toggle="modal" data-target="#pwdModal" disabled>확인</button>
+						<button id="searchBtn2" type="button" onclick="pwdSearch_click()" class="btn btn-dark btn-block" data-toggle="modal" data-target="#pwdModal" disabled>확인</button>
 					<a class="btn btn-danger btn-block"	href="${pageContext.request.contextPath}">취소</a>
 					<br>
 						<input type="text" class="confirmPwd" style="display: none" value="">
@@ -304,6 +307,6 @@
     	}
     })
     </script>
-
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

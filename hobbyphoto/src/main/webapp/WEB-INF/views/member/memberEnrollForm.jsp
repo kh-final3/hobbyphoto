@@ -10,18 +10,15 @@
             width: 1200px;
             height: 1000px;
             margin: auto;
-            background-color: rgba(0, 0, 0, 0.1);
             border-radius: 15px;
+
         }
 
         .innerOuter{
-            border: 1px solid black;
             width: 80%;
             height: 90%;
             margin: auto;
             background-color: white;
-            border: none;
-            border-radius: 50px;
         }
 
         .form-area{
@@ -34,8 +31,7 @@
             height: 40px;
             margin-bottom: 20px;
             border-radius: 13px;
-            background-color: lightgrey;
-            border: none;
+            border: 1px solid;
         }
 
         .form-area #Male{
@@ -86,6 +82,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp" />
 	<div class="all">
         <br><br>
         <div class="innerOuter">
@@ -172,6 +169,6 @@
     </script>
 
         
-        
+      	<jsp:include page="../common/footer.jsp" />  
 </body>
 </html>

@@ -12,7 +12,10 @@
 <title>Insert title here</title>
 <style>
         .outer_my{
-        background-color: gainsboro;
+        border:1px solid black;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        background-color: black;
         width: 1200px;
         height: 900px;
         margin: auto;
@@ -22,7 +25,7 @@
         /* 마이페이지 제목 */
         #h_my{
             font-weight: 600;
-            
+            color: white;
         }
 
         .info_my{
@@ -33,7 +36,8 @@
         }
 
         .info_my1{
-          background-color: gainsboro;
+          border:1px solid black;
+          border-radius: 10px;
           width: 300px;
           height: 500px;
           float: left;
@@ -183,6 +187,17 @@
             left: 205px;
             cursor: pointer;
         }
+        
+        .btnF{
+			background-color: black;
+			color:white;
+			border-radius: 12px;
+			width: 80px; 
+			height: 40px;
+			vertical-align: bottom;
+			font-size: 13px;
+			font-weight: 700;
+		}
     </style>
 </head>
 <body>
@@ -206,8 +221,8 @@
                 <h6 style="font-weight: 600; text-align: center;">반가워요!</h6>
                 <h6 style="text-align: center;">${ loginMember.nickName }님</h6>
                 <div id="btnall_my">
-                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my1" onclick="location.href='update.me'">수정하기</button><br>                    
-                    <button type="submit" class="btn btn-sm btn-primary" id="btn_my2" onclick ="location.href='deleteForm.me'">회원탈퇴</button>
+                    <button type="submit" class="btnF" id="btn_my1" onclick="location.href='update.me'">수정하기</button><br>                    
+                    <button type="submit" class="btnF" id="btn_my2" onclick ="location.href='deleteForm.me'">회원탈퇴</button>
                 </div>
             </div>
             <div class="info_my2">

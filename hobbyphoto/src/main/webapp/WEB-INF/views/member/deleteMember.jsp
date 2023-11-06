@@ -33,6 +33,7 @@
     </style>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp"/>
 	<c:if test="${ not empty alertMsg }">
 	      <script>
 	         alert("${alertMsg}");
@@ -101,5 +102,6 @@
 	        </div>
         </div>    
     </div>
+    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

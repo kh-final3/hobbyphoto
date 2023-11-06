@@ -18,8 +18,6 @@
         box-sizing: border-box;
      }
 
-   
-
     #banner{
     height: 450px;
     border: 1px solid black;
@@ -33,7 +31,6 @@
         height: 60px;
         border: 1px solid black;
         margin: auto;
-        margin-top: 10px;
         background-color: black;
         color: white;
     }
