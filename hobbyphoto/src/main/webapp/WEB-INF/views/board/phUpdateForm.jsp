@@ -120,34 +120,80 @@
                 <div class="content-area">
                     <div class="photo-area">
 						<div class="mainpho">
-						    <img src="${ at[0].filePath }" alt="" id="image1" width="450" height="200" onclick="chooseFile(1);">
-						    <input type="file" name="reupfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;">
-						    <input type="hidden" name="originFileNo1" value=${ at[0].fileLevel }>
+						<c:choose>
+							<c:when test="${ empty at[0].filePath }">
+								<img src="resources/images/enrollImage.png">
+								<input type="file" name="reupfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;">
+							    <input type="hidden" name="originFileNo1" value=${ at[0].fileLevel }>
+							</c:when>
+							<c:otherwise>
+							    <img src="${ at[0].filePath }" alt="" id="image1" width="450" height="200" onclick="chooseFile(1);">
+							    <input type="file" name="reupfiles" id="file1" onchange="loadImg(this, 1);" style="display: none;">
+							    <input type="hidden" name="originFileNo1" value=${ at[0].fileLevel }>
+							</c:otherwise>
+						</c:choose>
 						</div>
 			            <div class="pho">
 	                        <div class="pho1">
-	                            <img src="${ at[1].filePath }" alt="" id="image2" width="200" height="200" onclick="chooseFile(2);">
-	                            <input type="file" name="reupfiles" id="file2" onchange="loadImg(this, 2);" style="display: none;">
-	                            <input type="hidden" name="originFileNo2" value=${ at[1].fileLevel }>
+	                        	<c:choose>
+									<c:when test="${ empty at[1].filePath }">
+										<img src="resources/images/enrollImage.png">
+										<input type="file" name="reupfiles" id="file2" onchange="loadImg(this, 2);" style="display: none;">
+	                            		<input type="hidden" name="originFileNo2" value=${ at[1].fileLevel }>
+									</c:when>
+									<c:otherwise>
+									   <img src="${ at[1].filePath }" alt="" id="image2" width="200" height="200" onclick="chooseFile(2);">
+									   <input type="file" name="reupfiles" id="file2" onchange="loadImg(this, 2);" style="display: none;">
+	                            	   <input type="hidden" name="originFileNo2" value=${ at[1].fileLevel }>
+									</c:otherwise>
+								</c:choose>
 	                        </div>
 	                        <div class="pho1">
-	                            <img src="${ at[2].filePath }" alt="" id="image3" width="200" height="200" onclick="chooseFile(3);">
-	                            <input type="file" name="reupfiles" id="file3" onchange="loadImg(this, 3);" style="display: none;">
-	                            <input type="hidden" name="originFileNo3" value=${ at[2].fileLevel }>
+	                        	 <c:choose>
+									<c:when test="${ empty at[2].filePath }">
+										<img src="resources/images/enrollImage.png">
+										<input type="file" name="reupfiles" id="file3" onchange="loadImg(this, 3);" style="display: none;">
+			                            <input type="hidden" name="originFileNo3" value=${ at[2].fileLevel }>
+									</c:when>
+									<c:otherwise>
+									   <img src="${ at[2].filePath }" alt="" id="image3" width="200" height="200" onclick="chooseFile(3);">
+			                            <input type="file" name="reupfiles" id="file3" onchange="loadImg(this, 3);" style="display: none;">
+			                            <input type="hidden" name="originFileNo3" value=${ at[2].fileLevel }>
+									</c:otherwise>
+								</c:choose>
 	                        </div>
 	                        <div class="pho1">
-	                            <img src="${ at[3].filePath }" alt="" id="image4" width="200" height="200" onclick="chooseFile(4);">
-	                            <input type="file" name="reupfiles" id="file4" onchange="loadImg(this, 4);" style="display: none;">
-	                            <input type="hidden" name="originFileNo4" value=${ at[3].fileLevel }>
+	                        	 <c:choose>
+									<c:when test="${ empty at[3].filePath }">
+										<img src="resources/images/enrollImage.png">
+										<input type="file" name="reupfiles" id="file4" onchange="loadImg(this, 4);" style="display: none;">
+			                            <input type="hidden" name="originFileNo4" value=${ at[3].fileLevel }>
+									</c:when>
+									<c:otherwise>
+										<img src="${ at[3].filePath }" alt="" id="image4" width="200" height="200" onclick="chooseFile(4);">
+			                            <input type="file" name="reupfiles" id="file4" onchange="loadImg(this, 4);" style="display: none;">
+			                            <input type="hidden" name="originFileNo4" value=${ at[3].fileLevel }>
+									</c:otherwise>
+								</c:choose>
 	                        </div>
 	                        <div class="pho1">
-	                            <img src="${ at[4].filePath }" alt="" id="image5" width="200" height="200" onclick="chooseFile(5);">
-	                            <input type="file" name="reupfiles" id="file5" onchange="loadImg(this, 5);" style="display: none;">
-	                            <input type="hidden" name="originFileNo5" value=${ at[4].fileLevel }>
+	                        	<c:choose>
+									<c:when test="${ empty at[4].filePath }">
+										<img src="resources/images/enrollImage.png">
+										<input type="file" name="reupfiles" id="file5" onchange="loadImg(this, 5);" style="display: none;">
+	                            		<input type="hidden" name="originFileNo5" value=${ at[4].fileLevel }>
+									</c:when>
+									<c:otherwise>
+										<img src="${ at[4].filePath }" alt="" id="image5" width="200" height="200" onclick="chooseFile(5);">
+	                            		<input type="file" name="reupfiles" id="file5" onchange="loadImg(this, 5);" style="display: none;">
+	                            		<input type="hidden" name="originFileNo5" value=${ at[4].fileLevel }>
+									</c:otherwise>
+								</c:choose>
 	                        </div>
 			            </div>
                     </div>
                     <script>
+                    const defaultImage = "resources/images/enrollImage.png"
                         function chooseFile(num) {
                             $("#file" + num).click();
                         }
@@ -186,11 +232,11 @@
                                 
                             }else { // 선택된 파일이 취소된 경우(뺌) => 미리보기 한것도 사라지도록
                                 switch(num) {
-                                    case 1: $("#image1").attr("src", null); break;
-                                    case 2: $("#image2").attr("src", null); break;
-                                    case 3: $("#image3").attr("src", null); break;
-                                    case 4: $("#image4").attr("src", null); break;
-                                    case 5: $("#image5").attr("src", null); break;
+                                    case 1: $("#image1").attr("src", defaultImage); break;
+                                    case 2: $("#image2").attr("src", defaultImage); break;
+                                    case 3: $("#image3").attr("src", defaultImage); break;
+                                    case 4: $("#image4").attr("src", defaultImage); break;
+                                    case 5: $("#image5").attr("src", defaultImage); break;
                                 }
                             }
 
