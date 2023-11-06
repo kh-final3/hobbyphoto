@@ -32,6 +32,7 @@ public interface NoticeService {
 	
 	// 4. 게시글 삭제하기 서비스
 	int shNoticeDelete(int num);
+	ArrayList<Notice> selectShList(PageInfo pi);
 	
 	// 5. 게시글 수정하기 서비스
 	

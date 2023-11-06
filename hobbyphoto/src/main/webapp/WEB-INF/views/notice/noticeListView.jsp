@@ -170,7 +170,7 @@ h1 {
 									<td width="80">${n.noticeNo}</td>
 									<td width="95">[ 공지 ]</td>
 									<td align="left" style="padding-left: 10px;">${n.noticeTitle}</td>
-									<td>${n.noticeContent}</td>
+									<td>관리자</td>
 									<td>${n.createDate}</td>
 									<td>${n.count}</td>
 								</tr>

@@ -57,6 +57,13 @@
         	width:80px;
         	height:20px;
         }
+	    .paging-area>button{
+	            border: none;
+	            background-color: white;
+	            width: 35px;
+	            height: 35px;
+	            margin-top: 20px;
+	        }
     </style>
 </head>
 <jsp:include page="../common/shopHeader.jsp"/>
@@ -101,7 +108,7 @@
 		            <tr class="clickable-row">
 		                <td>${ reverseIndex }</td>
 		                <td>${ n.noticeTitle }</td>
-		                <td>${ n.noticeWriter }</td>
+		                <td>관리자</td>
 		                <td>${ n.count }</td>
 		                <td>${ n.createDate }</td>
 		               <input type="hidden" class="shno" value="${n.noticeNo}" />
@@ -110,6 +117,31 @@
             </tbody>
           </table>
         </div>
+        <div class="paging-area" align="center">
+            	<c:choose>
+            		<c:when test="${ pi.currentPage eq 1 }">
+                		<button disabled> &lt; </button>
+                	</c:when>
+                	<c:otherwise>
+                		<button style="width:70px" onclick="location.href='shList.no?cpage=${ pi.currentPage - 1 }'">Previous</button>
+                	</c:otherwise>
+                </c:choose>
+                
+                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    <button onclick="location.href='shList.no?cpage=${ p }'">${ p }</button>
+                </c:forEach>
+                
+               	<c:choose>
+                   	<c:when test="${ pi.currentPage eq pi.maxPage }">
+                    	<button disabled>Next</button>
+                    	<button disabled> &gt; </button>
+                   	</c:when>
+                     <c:otherwise>
+                     	<button onclick="location.href='shList.no?cpage=${ pi.currentPage + 1 }'">Next</button>
+                     	<button> &gt; </button>
+                   	</c:otherwise>
+                </c:choose>		                
+            </div>
             <script>
             	$(document).ready(function() {
             		$('.table-hover > tbody').on('click', 'tr', function() {
