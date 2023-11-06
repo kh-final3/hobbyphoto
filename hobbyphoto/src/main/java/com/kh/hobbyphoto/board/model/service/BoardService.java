@@ -6,13 +6,14 @@ import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Block;
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 public interface BoardService {
 	// ------------------- 사진 게시판 ------------------- 
 	// 1. 사진게시판 리스트 페이지 서비스 (페이징)
 	int selectPhListCount();
-	ArrayList<Board> selectPhList(PageInfo pi);
+	ArrayList<Board> selectPhList(PageInfo pi, Member m);
 	
 	// 2. 게시글 작성하기 서비스
 	int insertPhBoard(Board b, ArrayList<Attachment> list);
@@ -30,13 +31,13 @@ public interface BoardService {
 	int insertNewAttachment(Attachment at);
 	
 	// 6. 댓글 작성, 조회용 서비스
-	ArrayList<Reply> selectPhReplyList(int boardNo);
+	ArrayList<Reply> selectPhReplyList(Board b);
 	int insertPhReply(Reply r);
 	
 	// ------------------- 장비추천 게시판 ------------------- //
 	// 1. 장비추천 게시판 리스트 페이지 서비스 (페이징)
 	int selectRcListCount();
-	ArrayList<Board> selectRcList(PageInfo pi);
+	ArrayList<Board> selectRcList(PageInfo pi, Member m);
 	
 	// 2. 게시글 작성하기 서비스
 	int insertRcBoard(Board b, ArrayList<Attachment> list);
@@ -54,7 +55,7 @@ public interface BoardService {
 	int updateRcAtBoard(Attachment at);
 	
 	// 6. 댓글 작성, 조회용 서비스
-	ArrayList<Reply> selectRcReplyList(int boardNo);
+	ArrayList<Reply> selectRcReplyList(Board b);
 	int insertRcReply(Reply r);
 	
 	// ------------------- 마이 페이지 게시판 ------------------- //

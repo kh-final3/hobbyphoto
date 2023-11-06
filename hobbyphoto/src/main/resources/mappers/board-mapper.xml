@@ -113,7 +113,7 @@
 	</select>
 	
 	<select id="selectPhList" resultMap="boardResult">
-		select
+		  select
 		      b.board_no
 		    , b.board_title
 		    , b.board_content
@@ -127,8 +127,14 @@
 		where b.status = 'Y'
 		  and b.board_type = 1
 	      and a.file_level = 1
-		order 
-		   by b.board_no desc
+          and board_writer not in (
+              select user_no 
+                from member
+                where user_no in 
+                    (select ref_no
+                      from block bl
+                      where bl.user_no = #{userNo}))
+              order by TO_NUMBER(SUBSTR(BOARD_NO,2)) desc
 	</select>
 	
 	<insert id="insertPhBoard">
@@ -272,7 +278,15 @@
 		join member m on m.user_no = reply_writer
 		where r.status = 'Y'
 		    and ref_bno = #{boardNo}
-		order by reply_no asc
+        
+        and reply_writer not in (
+              select user_no 
+                from member
+                where user_no in 
+                    (select ref_no
+                      from block bl
+                      where bl.user_no = (SELECT user_no FROM member WHERE user_id = #{boardWriter})))
+              order by reply_no asc
 	</select>
 	
 	<insert id="insertPhReply">
@@ -313,7 +327,15 @@
 	      join member m on b.board_writer = m.user_no
 		  where b.status = 'Y'
 		  and b.board_type = 2
-		  order by b.board_no desc
+		  AND board_writer not in (
+		  select user_no 
+		    from member
+		    where user_no in 
+		        (select ref_no
+		          from block bl
+		          where bl.user_no = #{userNo}))
+		  order by TO_NUMBER(SUBSTR(BOARD_NO,2)) DESC
+        
 	</select>
 	
 	<update id="increaseRcCount">
@@ -436,7 +458,16 @@
 		join member m on m.user_no = reply_writer
 		where r.status = 'Y'
 		    and ref_bno = #{boardNo}
-		order by reply_no desc
+		AND reply_writer not in (
+		  select user_no 
+		    from member
+		    where user_no in 
+		        (select ref_no
+		          from block bl
+		          where bl.user_no = (SELECT user_no FROM member WHERE user_id = #{boardWriter})
+		          )
+		     )
+		  order by reply_no DESC
 	</select>
 	
 	<insert id="insertRcReply">
@@ -922,19 +953,29 @@
 	</select>
 	
 	<select id="selectWpList" resultMap="wallResult">
-		 select
-			      back_no
-			    , nickname
-			    , img
-		        , count
-		        , download
-		        , board_type
-			    , to_char(bg.create_date, 'YYYY-MM-DD') as "create_date"
-			    , back_title
-			  from background bg
-		      join member using(USER_NO)
-			  where bg.status = 'Y'
-			  order by back_no desc
+		SELECT
+	 		   back_no,
+			   nickname,
+			   img,
+			   count,
+			   download,
+			   board_type,
+			   TO_CHAR(bg.create_date, 'YYYY-MM-DD') AS "create_date",
+			   back_title
+		  FROM background bg
+		  JOIN member m ON bg.user_no = m.user_no  -- Removed USING clause
+		 WHERE bg.status = 'Y'
+		   AND bg.user_no NOT IN (
+		SELECT m.user_no
+		  FROM member m
+		 WHERE m.user_no IN (
+				SELECT ref_no
+				  FROM block bl
+				 WHERE bl.user_no = 1
+				  )
+				)
+		 ORDER BY back_no DESC
+
 	</select>
 	
 	
@@ -1001,25 +1042,26 @@
 	<insert id="reportBoard">
 		INSERT
 		  INTO REPORT
-		  (
-		    RP_NO
-		  , GUILTY
-		  , RP_CONTENT
-		  ,	REF_BNO
-		  ,	REPORT_UNO
-		  ,	REPORTED_UNO
-		  ,	BOARD_TYPE
-		  )
-		  VALUES
-		  (
-		    SEQ_REPNO.NEXTVAL
-		  , #{guilty}
-		  , #{rpContent}
-		  , #{refBno}
-		  , #{reportUno}
-		  , #{reportedUno}
-		  , #{boardType}
-		  )
+		    (
+			  RP_NO,
+			  GUILTY,
+			  RP_CONTENT,
+			  REF_BNO,
+			  REPORT_UNO,
+			  REPORTED_UNO,
+			  BOARD_TYPE
+			) 
+			VALUES
+			(
+			  SEQ_REPNO.NEXTVAL,
+			  #{guilty},
+			  #{rpContent},
+			  #{refBno},
+			  #{reportUno},
+			  (SELECT user_no FROM member WHERE user_id = #{reportedUno}),
+			  #{boardType}
+			)
+
 	</insert>
 	
 	<insert id="insertfollow">

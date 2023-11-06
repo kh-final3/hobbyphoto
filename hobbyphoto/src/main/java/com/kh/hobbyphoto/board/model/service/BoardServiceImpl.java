@@ -11,6 +11,7 @@ import com.kh.hobbyphoto.board.model.vo.*;
 import com.kh.hobbyphoto.common.model.vo.Follow;
 import com.kh.hobbyphoto.common.model.vo.PageInfo;
 import com.kh.hobbyphoto.member.model.vo.Block;
+import com.kh.hobbyphoto.member.model.vo.Member;
 import com.kh.hobbyphoto.upfile.model.vo.Attachment;
 
 @Service
@@ -27,8 +28,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public ArrayList<Board> selectPhList(PageInfo pi) {
-		ArrayList<Board> list = bDao.selectPhList(sqlSession, pi);
+	public ArrayList<Board> selectPhList(PageInfo pi, Member m) {
+		ArrayList<Board> list = bDao.selectPhList(sqlSession, pi,m);
 		return list;
 	}
 
@@ -89,8 +90,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public ArrayList<Reply> selectPhReplyList(int boardNo) {
-		return bDao.selectPhReplyList(sqlSession, boardNo);
+	public ArrayList<Reply> selectPhReplyList(Board b) {
+		return bDao.selectPhReplyList(sqlSession, b);
 	}
 	
 	@Override
@@ -106,8 +107,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public ArrayList<Board> selectRcList(PageInfo pi) {
-		return bDao.selectRcList(sqlSession, pi);
+	public ArrayList<Board> selectRcList(PageInfo pi, Member m) {
+		return bDao.selectRcList(sqlSession, pi,m);
 	}
 
 	@Override
@@ -160,8 +161,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public ArrayList<Reply> selectRcReplyList(int boardNo) {
-		return bDao.selectRcReplyList(sqlSession, boardNo);
+	public ArrayList<Reply> selectRcReplyList(Board b) {
+		return bDao.selectRcReplyList(sqlSession, b);
 	}
 
 	@Override
