@@ -737,9 +737,10 @@ public class BoardController {
 	@RequestMapping("increaseDownload.wp")
 	public String increaseDownload(int backNo) {
 	    int result = bService.increaseDownload(backNo);
-
+	   
 	    if (result > 0) {
-	        return "success";
+	    	int download = bService.selectDownload(backNo);
+	        return download+"";
 	    } else {
 	        return "faiL";
 	    }

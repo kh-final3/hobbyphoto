@@ -1051,4 +1051,13 @@
 		where follow_id = #{boardWriter}
 	</select>
 	
+	
+	<select id="selectDownload" resultType="_int">
+		select
+			  download
+		from background
+		where back_no = #{backNo}
+	</select>
+	
+	
 </mapper>

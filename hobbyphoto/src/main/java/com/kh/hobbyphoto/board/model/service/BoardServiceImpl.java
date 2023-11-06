@@ -397,5 +397,9 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.selectFollowMember(sqlSession,b);
 	}
 
+	public int selectDownload(int backNo) {
+		return bDao.selectDownload(sqlSession,backNo);
+	}
+
 
 }

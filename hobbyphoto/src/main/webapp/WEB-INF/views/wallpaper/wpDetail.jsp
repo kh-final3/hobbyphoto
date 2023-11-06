@@ -79,7 +79,7 @@
                 url: 'increaseDownload.wp',
                 data: { backNo: ${wp.backNo} }, // 동적인 백엔드 데이터 사용
                 success: function(data) {
-                    if (data === 'success') {
+                    if (data >0) {
                         // 카운트 증가 성공 후 파일 다운로드
                         var canvas = document.createElement("canvas");
                         canvas.width = width;
@@ -101,7 +101,7 @@
                     } else {
                         alert('다운로드 실패.');
                     }
-                    $('.downloads').html('📥 ' + ${wp.download + 1});
+                    $('.downloads').html('📥 ' + data);
                 },
                 error: function() {
                     alert('서버 오류.');

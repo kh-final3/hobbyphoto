@@ -354,4 +354,8 @@ public class BoardDao {
 	public ArrayList<Follow> selectFollowMember(SqlSessionTemplate sqlSession,Board b){
 		return (ArrayList)sqlSession.selectList("boardMapper.selectFollowMember", b);
 	}
+
+	public int selectDownload(SqlSessionTemplate sqlSession, int backNo) {
+		return sqlSession.selectOne("boardMapper.selectDownload", backNo);
+	}
 }
