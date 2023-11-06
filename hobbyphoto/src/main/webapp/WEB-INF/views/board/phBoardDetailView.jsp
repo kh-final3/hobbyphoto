@@ -203,7 +203,7 @@
             background-color: rgba(0, 0, 0, 0);
             font-size: 18px;
             color: black;
-            width: 50px;
+            width: 30px;
         }
     </style>
 </head>
@@ -328,9 +328,10 @@
                         <br>
                         <div>
                             작성일 : ${ b.createDate } | 
-                            조회수 : ${ b.count }  <button id="like1" onclick="insertLike();">🤍</button>
+                            조회수 : ${ b.count }  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="like1" onclick="insertLike();">🤍</button>
 							<button id="like2" style="display: none;" onclick="deleteLike();">❤️</button>
-							<button type="button" data-toggle="modal" data-target="#reportBoard">신고</button>	
+							<button id="report" type="button" data-toggle="modal" data-target="#reportBoard">🚨</button>	
                         </div>
                         
                     </div>
@@ -338,7 +339,7 @@
                 <hr id="detail-hr">
                 <br>
                 <div class="content-area">
-                    <div class="review-area">
+                    <div class="review-area" style="border: 1px solid black;">
                         <!-- 댓글 들어가는 자리 -->
                     </div>
                 </div>
@@ -404,9 +405,9 @@
     			}, success:function(list){
 	    				let value = "";
 	    				for(let i in list){
-	    					value += "<tr>"
-	    						  + "<th>" + list[i].replyWriter + "</th>"
-	    						  + "<td style='width:200px;'>" + list[i].replyContent + "</td>"
+	    					value += "<tr style='border:1px solid blue;'>"
+	    						  + "<th style='width:40px;'>" + list[i].replyWriter + "</th>"
+	    						  + "<td style='width:200px; margin-left:50px;'>" + list[i].replyContent + "</td>"
 	    						  + "<td>" + list[i].createDate + "</td>"
 	    						  + "</tr>"
 	    					}
