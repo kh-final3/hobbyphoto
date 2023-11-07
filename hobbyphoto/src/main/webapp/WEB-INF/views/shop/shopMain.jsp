@@ -301,7 +301,7 @@
 		            		               + '<img src="' + product.thumbnail + '">'
 		            		               + '</div>'
 		            		               + '<div class="text">'
-		            		               + product.pName
+		            		               + product.pname
 		            		               + '</div>'
 		            		               + '</div>';
 		            		    });
