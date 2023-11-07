@@ -90,8 +90,6 @@ public class AdminController {
 		
 		mv.addObject("pi",pi).addObject("plist", plist).setViewName("admin/productManage");
 		
-		System.out.println(mv);
-		
 		return mv;
 	}
 	
@@ -252,10 +250,6 @@ public class AdminController {
 		for(int i = 0; i<upfile.length ; i++) {
 			if(upfile[i].getSize()>0) {
 				String changeName= saveFile(upfile[i],session);
-				System.out.println(changeName);
-				
-				System.out.println("resources/proUpFiles/"+changeName);
-				
 				switch(i) {
 	            case 0:
 	                p.setThumbnail("resources/proUpFiles/" + changeName);
@@ -273,8 +267,6 @@ public class AdminController {
 		}
 		int result = aService.insertProduct(p);
 		
-		System.out.println(p);
-		System.out.println(result);
 		if(result>0) {//등록 성공
 			session.setAttribute("alertMsg", "성공적으로 상품이 등록되었습니다.");
 			return "redirect:plist.pr";
@@ -361,14 +353,10 @@ public class AdminController {
 		   @RequestMapping("adminPro.update")
 		   public String adminProductupdate(Product p,String pno,MultipartFile[] upfile,HttpSession session, Model model) {
 			   int pNo = Integer.parseInt(pno);
-			   System.out.println(pNo + "상품번호");
 			   p.setPNo(pNo);
 			   
 			   
-			   System.out.println(p);//jsp에서 입력되어 있는 값
-			   
 			   Product op = aService.selectProductdetail(pNo);
-			   System.out.println(op + "op의 값");
 			   op.setPNo(pNo);
 			   
 			   String newThumbnail = null;
@@ -414,8 +402,6 @@ public class AdminController {
 				}
 			   
 			   int result = aService.adminProductupdate(p);
-			   
-			   System.out.println(result + "리턴된 result 값");
 			   
 			   if(result>0) { //업데이트 성공시
 				   
@@ -500,9 +486,6 @@ public class AdminController {
 			for(int i = 0; i<upfile.length ; i++) {
 				if(upfile[i].getSize()>0) {
 					String changeName= saveFile(upfile[i],session);
-					System.out.println(changeName);
-					
-					System.out.println("resources/proUpFiles/"+changeName);
 					
 					switch(i) {
 		            case 0:
@@ -533,11 +516,9 @@ public class AdminController {
 		public ModelAndView templateList(@RequestParam(value="cpage",defaultValue="1")int currentPage,ModelAndView mv) {
 			
 			int temlistCount = aService.selectAdminTemlist();
-			System.out.println(temlistCount + "템플릿 개수");
 			PageInfo pi = Pagination.getPageInfo(temlistCount, currentPage, 5, 5);
 			
 			ArrayList<Templates> tlist = aService.selectAdminTem(pi);
-			System.out.println(tlist + "템플릿 정보");
 			mv.addObject("pi", pi).addObject("tlist", tlist).setViewName("admin/templatelist");;
 			
 			return mv;

@@ -208,12 +208,11 @@
     	}
     	
     	function selectRcReplyList(){
-			console.log('${ loginMember.boardWriter}')
     		$.ajax({
     			url:"rcRlist.bo",
     			data:{
     				boardNo:${ b.boardNo },
-					boardWriter:'${ loginMember.boardWriter}'
+					boardWriter:'${ loginMember.userId }'
     			}, success:function(list){
     				console.log(list);
     				

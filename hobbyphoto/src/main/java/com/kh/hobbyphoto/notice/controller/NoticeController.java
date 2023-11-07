@@ -110,7 +110,6 @@ public class NoticeController {
 
 	@RequestMapping("update.no")
 	public String updateNotice(Notice n, HttpSession session, Model model) {
-		System.out.println(n);
 		int result = nService.updateNotice(n);
 
 		if (result > 0) {
@@ -141,8 +140,6 @@ public class NoticeController {
 		
 		if(result > 0) {
 			Notice n = nService.selectShNotice(shno);
-			System.out.println(n);
-			
 			model.addAttribute("n", n);
 			
 			return "notice/shNoticeDetailView";
@@ -160,7 +157,6 @@ public class NoticeController {
 	@RequestMapping("shInsert.no")
 	public String shNoticeInsert(Notice n, Model model, HttpSession session) {
 		int result = nService.insertShNotice(n);
-		System.out.println(n);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "공지사항 등록에 성공했습니다");

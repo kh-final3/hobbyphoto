@@ -65,7 +65,6 @@ public class ShopController {
 	
 	@RequestMapping("cart.pro")
 	public ModelAndView insertCartProduct(int userNo,String prono,Cart cart, HttpSession session, ModelAndView mv) {
-		System.out.println("컨트롤러 : " + prono);
 		
 		cart.setPNo(Integer.parseInt(prono));
 		ArrayList<Cart> list = sService.selectCartList(userNo);
@@ -85,8 +84,6 @@ public class ShopController {
 	        }
 	    }
 
-	    System.out.println(list);
-	    System.out.println(exists);
 	    
 	    if(!exists) {
 	        // 상품 번호가 리스트에 없으므로 장바구니에 추가
@@ -123,9 +120,7 @@ public class ShopController {
 	@ResponseBody
 	@RequestMapping(value="cupdate.amount")
 	public String upDateCartAmount(Cart cart) {
-		System.out.println(cart);
 		int result = sService.updateCartAmount(cart);
-		System.out.println(result);
 		
 		return result>0?"success":"fail";
 	}
@@ -146,10 +141,8 @@ public class ShopController {
 				clist.add(c);
 			
 		}
-		System.out.println(clist + "controller에서 clist값");
 		
 		int result = sService.deleteCartProduct(clist);
-		System.out.println(result + "controller에서 result 값");
 		return result>0 ? "success":"fail";
 		
 	}
@@ -171,7 +164,6 @@ public class ShopController {
 			blist.add(bc);
 		}
 		
-		System.out.println(blist + "컨트롤러에서 blist의 값");
 		//System.out.println(blist.get(1).getPNo()+"상품 번호 확인중");
 			
 		//ArrayList<Orders> list = sService.selectCartBuy(blist.get(1).getPNo());
@@ -182,7 +174,6 @@ public class ShopController {
 		//System.out.println("리턴값 확이중 + " + buylist.get(i));
 		//}
 		model.addAttribute("buylist", buylist);
-		System.out.println(buylist + "장바구니에서 구매");
 		return "shop/shopCartBuy";
 	}
 	
@@ -209,7 +200,6 @@ public class ShopController {
 			Product list = sService.selectBuyProduct(pno);
 			
 			mv.addObject("list", list).setViewName("shop/shopCartBuy");
-			System.out.println(list + "상세보기에서 구매");
 		}
 		return mv;
 		
@@ -242,8 +232,6 @@ public class ShopController {
 //	    }
 		Map<String, Object> response = new HashMap<>();
 		
-		System.out.println(brand != null);
-		System.out.println(!brand.isEmpty());
 		
 		if (brand != null && !brand.isEmpty()) {
 	        int brandNo = Integer.parseInt(brand);
@@ -350,11 +338,8 @@ public class ShopController {
 	@RequestMapping("shop.gomy")
 	public String selectShopMyInfo(HttpSession session, int userNo,Model model) {
 		
-		System.out.println(userNo + "과연 넘어오니??");
-		
 		//주문관련
 		Orders o = sService.selectOrderInfo(userNo);
-		System.out.println(o + "과연 뭐가 나올것인가????");
 		model.addAttribute("o", o);
 		return "shop/shopMyPage";
 	}
@@ -362,8 +347,6 @@ public class ShopController {
 	@ResponseBody
 	@RequestMapping("amount.zero")
 	public String deleteAmountZero(Cart c, String userNo,String[] pNo) {
-		System.out.println(c + "Cart 값");
-		System.out.println(userNo + "회원번호 세션이용할까?");
 		int userno = Integer.parseInt(userNo);
 		
 		ArrayList<Cart> buylist = new ArrayList<Cart>();
@@ -454,16 +437,12 @@ public class ShopController {
 	
 	@RequestMapping("make.photo")
 	public ModelAndView makeMyPhoto(Photo p,String userNo,ModelAndView mv) {
-		System.out.println(p +"뭐가 있나요???"); //tNo, userNo, count
 		int result = sService.insertOnePhoto(p);
 		int tNo = p.getTNo();
 		int userno = Integer.parseInt(userNo);
-		System.out.println(tNo + "과연 tNo있니??");
 		if(result>0) {
 			Templates t = sService.selectTemInfo(tNo);
-			System.out.println(t+"t에 뭐가 들어 있나??");//tNo,price,temName,pType,titleImg,temImg
 			Photo po = sService.PnoSelect(userno);
-			System.out.println(po+"여기 po에 뭐가 있니??"); //pNo,tNo,userNo,count
 			mv.addObject("alertMsg", "나만의 인생네컷 만들기").addObject("t", t).addObject("po", po).setViewName("shop/shopPhotoMake");
 		}else {
 			mv.addObject("errorMsg", "다시 시도해주세요.").setViewName("common/errorPage");
@@ -479,11 +458,8 @@ public class ShopController {
 		int result = sService.updatePhoto(pNo);
 		if(result>0) {
 			Photo pd = sService.finishTem(pNo);
-			System.out.println(pd+"pd를 넘겨야하는데 뭐가 있니?");
 			PhotoDetail k = sService.finishPhoto(pNo);
-			System.out.println(k+"k안에는 뭐가 있니??");
 			Templates t = sService.finishTemplate(tno);
-			System.out.println(t+"t에는 무슨 값이??");
 			mv.addObject("pd", pd).addObject("k", k).addObject("t", t).setViewName("shop/shopTemBuy");
 		}else {
 			mv.addObject("errorMsg", "오류!!!").setViewName("common/errorPage");

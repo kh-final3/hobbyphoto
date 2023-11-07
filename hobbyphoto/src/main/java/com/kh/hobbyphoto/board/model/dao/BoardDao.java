@@ -211,8 +211,7 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectPlaceList", null, rowBounds);
 	}
 	
-	public int increaseCountPlace(SqlSessionTemplate sqlSession, int pno) {
-		System.out.println(pno);
+	public int increaseCountPlace(SqlSessionTemplate sqlSession, int pno) 
 		return sqlSession.update("boardMapper.increaseCountPlace", pno);
 	}
 
@@ -291,17 +290,14 @@ public class BoardDao {
 
 
 	public int checkBook(SqlSessionTemplate sqlSession, Board b) {
-		System.out.println(b);
 		return sqlSession.selectOne("boardMapper.checkBook",b);
 	}
 	
 	public int insertBookmark(SqlSessionTemplate sqlSession, Board b) {
-		System.out.println(b);
 		return sqlSession.insert("boardMapper.insertBookmark",b);
 	}
 	
 	public int deleteBookmark(SqlSessionTemplate sqlSession, Board b) {
-		System.out.println(b);
 		return sqlSession.delete("boardMapper.deleteBookmark",b);
 	}
 

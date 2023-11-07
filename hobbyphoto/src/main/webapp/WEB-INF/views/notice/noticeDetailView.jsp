@@ -103,10 +103,11 @@
     <div align="center">
         <a href="list.no" class="btn btn-sm btn-primary" style="width: 90px; height: 35px; font-size: medium;">목록가기</a>
     	        <!-- 현재 로그인한 사용자가 해당 글을 쓴 본인일 경우 -->
-
+		<c:if test="${ loginMember.userNo eq 1}">
         <a href="updateForm.no?noticeNo=${ n.noticeNo }" class="btn btn-sm btn-warning" style="width: 90px; height: 35px; font-size: medium;">수정하기</a>
         <a href="delete.no?noticeNo=${ n.noticeNo }" class="btn btn-sm btn-danger" style="width: 90px; height: 35px; font-size: medium;">삭제하기</a>
     
+		</c:if>
     </div>
   </div>
  </div>

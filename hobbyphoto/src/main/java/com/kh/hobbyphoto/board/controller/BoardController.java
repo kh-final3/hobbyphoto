@@ -41,7 +41,6 @@ public class BoardController {
 			m.setUserNo(0);
 		}
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
-		System.out.println(m);
 		ArrayList<Board> list = bService.selectPhList(pi,m);
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("board/selectPhBoardList");
@@ -179,7 +178,6 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value="phRlist.bo", produces="application/json; charset=UTF-8")
 	public String ajaxSelectReplyList(Board b) {
-		System.out.println(b.getBoardWriter());
 		ArrayList<Reply> list = bService.selectPhReplyList(b);
 		return new Gson().toJson(list);
 	}
@@ -327,9 +325,7 @@ public class BoardController {
 		Board b = new Board();
 		b.setBoardNo(boardNo);
 		b.setBoardWriter(boardWriter);
-		System.out.println(b+"sadasdsadwdqwdawdasdcxdc");
 		ArrayList<Reply> list = bService.selectRcReplyList(b);
-		System.out.println(list);
 		return new Gson().toJson(list);
 	}
 	
@@ -414,7 +410,6 @@ public class BoardController {
 		if (result > 0) {
 			Place p = bService.selectPlace(pno);
 			model.addAttribute("p", p);
-			System.out.println(p);
 			return "board/placeDetailView";
 
 		} else {
@@ -454,7 +449,6 @@ public class BoardController {
 	        HttpSession session, Model model) {
 	    ArrayList<Attachment> list = new ArrayList<>();
 	    Place existingPlace = bService.selectPlace(p.getPno());
-	    System.out.println(existingPlace);
 	    p.setPimg1(existingPlace.getPimg1());
 	    p.setPimg2(existingPlace.getPimg2());
 	    p.setPimg3(existingPlace.getPimg3());
@@ -610,13 +604,10 @@ public class BoardController {
 		int result = bService.insertCulture(fe);
 
 		if (result > 0) {
-	        System.out.println(fe.getFeType());
 	        if ("전시".equals(fe.getFeType())) {
 	            
 	            return "redirect:exhibitList.fs";
 	        } else if ("축제".equals(fe.getFeType())) {
-	        	System.out.println(2);
-	            // 축제인 경우
 	            return "redirect:festivalList.fs";
 	        }
 	    }
@@ -696,8 +687,6 @@ public class BoardController {
 	
 	@RequestMapping("insertWallPaper.wp")
 	public String insertWallPaper(WallPaper wp,Model model) {
-		
-	    System.out.println(wp);	
 		int result = bService.insertWallPaper(wp);
 
 		
@@ -715,7 +704,6 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping("base64.wp")
 	private String saveImage(@RequestParam("pngData") String dataURL, HttpSession session) {
-	    System.out.println(dataURL);
 	    String base64Data = dataURL.split(",")[1];
 	    
 	    // Decode the base64 string into bytes
@@ -746,9 +734,7 @@ public class BoardController {
 
 	@RequestMapping("wpDelete.wp")
 	public String wpDelete(int backNo,HttpSession session, Model model) { 
-		System.out.println(backNo);
 		int result = bService.wpDelete(backNo);
-		System.out.println(result);
 		if(result > 0) {
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
 			return "redirect:list.wp";
@@ -864,9 +850,7 @@ public class BoardController {
 	
 	@RequestMapping("reportBoard.bo")
 	public String reportBoard(Report r,HttpSession session, Model model){
-		System.out.println(r);
 		int result = bService.reportBoard(r);
-		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "성공적으로 게시글이 신고되었습니다.");
 			return "main";

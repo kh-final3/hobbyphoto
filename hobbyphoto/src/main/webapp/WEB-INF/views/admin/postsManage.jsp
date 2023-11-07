@@ -198,8 +198,8 @@
 	                	<input type="hidden" name="boardTitle" value="${ b.boardTitle }">
 	                    <button type="submit">삭제</button>
                     </form>
-                    <form action="phUpdateForm.bo?phno=" method="post">
-                    <input type="hidden" name="boardNo" value="${ b.boardNo }">
+                    <form action="phUpdateForm.bo?phno=${ b.boardNo }" method="post">
+                    <input type="hidden" name="phno" value="${ b.boardNo }">
                     <button type="submit">수정</button>
                     
                     </form>
@@ -249,7 +249,7 @@
               <td>${k.backNo}</td>
               <td>배경 화면 게시판</td>
               <td class="kno">배경화면</td>
-              <td>${k.userNo}</td>
+              <td>${k.nickname}</td>
               <td>${k.createDate}</td>
               <td class="button-container">
                   <button onclick="submit">삭제</button>

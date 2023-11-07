@@ -85,7 +85,7 @@
 
    <resultMap type="BackGround" id="BackResult">
       <result column="back_no" property="backNo"></result>
-      <result column="nickname" property="userNo"></result>
+      <result column="nickname" property="nickname"></result>
       <result column="img" property="img"></result>
       <result column="create_date" property="createDate"></result>
       <result column="count" property="count"></result>

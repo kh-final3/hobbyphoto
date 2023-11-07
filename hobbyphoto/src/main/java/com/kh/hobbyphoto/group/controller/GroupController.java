@@ -94,7 +94,7 @@ public class GroupController {
 	
 	@RequestMapping("delete.tg")
 	public String deleteTogether(@RequestParam(required = false) Integer gno, String filePath, HttpSession session, Model model) {
-		System.out.println(gno);
+		
 		int result = GService.deleteTogether(gno);
 		
 		if(result > 0) {
@@ -131,7 +131,6 @@ public class GroupController {
 	    gr.setUserNo(uno);
 
 		int result = GService.deleteMember(gr);
-		System.out.println(result);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "모임 신청을 취소했습니다.");

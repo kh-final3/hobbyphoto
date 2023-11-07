@@ -20,4 +20,5 @@ public class BackGround {
 	private Date createDate;
 	private int count;
 	private int download;
+	private String nickname;
 }
