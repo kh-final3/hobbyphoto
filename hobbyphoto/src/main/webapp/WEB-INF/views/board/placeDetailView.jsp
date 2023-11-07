@@ -432,8 +432,11 @@
             </div>
             <div class="btn-area" style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
                 <button type="button" class="golist btn btn-primary">목록가기</button>
+                
+                <c:if test="${ loginMember.userNo eq 1}">
                 <button type="button" class="update btn btn-warning">수정하기</button>
                 <button type="button" class="delete btn btn-danger">삭제하기</button>
+                </c:if>
             </div>
             
             

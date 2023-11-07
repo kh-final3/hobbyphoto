@@ -135,6 +135,8 @@
                         </div><!-- //view_tab -->
                         <div class="view_cont">
                             <br><br>
+                             <img src=" ${fe.timg }">
+                             <br>
                             ${fe.feContent}
                             
 

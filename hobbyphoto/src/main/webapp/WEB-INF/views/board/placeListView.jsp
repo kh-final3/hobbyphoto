@@ -163,9 +163,8 @@
 		
 		                        <div class="text">
 		                        	<p class="pno">${ p.pno }</p>
-		                            <h2 class="title">${ p.ptitle }</h2>
-		                            <p class="location">${ p.plocation }</p>
-		                            <p class="content">${ p.pcontent }</p>
+		                            <h2 class="title">${ p.ptitle }</h2> <br>
+		                            <p class="location">한줄평 : ${ p.plocation }</p> <br>
 		                            <p class="content-ect">조회수 : ${ p.count }  &nbsp;&nbsp;&nbsp; 좋아요 : 1 &nbsp;&nbsp;&nbsp;&nbsp; 작성일 : ${ p.createDate }</p>
 		                        </div>
 		                    </li>

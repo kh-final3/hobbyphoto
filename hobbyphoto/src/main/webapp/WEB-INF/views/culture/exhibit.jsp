@@ -288,7 +288,7 @@
 		                     <c:otherwise>
 		                     	<button style="width:40px;" onclick="location.href='exhibitList.fs?cpage=${ pi.currentPage + 1 }'"> &gt;</button>
 		                   	</c:otherwise>
-		                </c:choose>`    
+		                </c:choose>
             		</div>
      <script>
       
