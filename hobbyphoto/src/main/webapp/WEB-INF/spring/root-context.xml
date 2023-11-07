@@ -33,7 +33,7 @@
 		<property name="port" value="587" />
 		<property name="defaultEncoding" value="utf-8"/>
 		<property name="username" value="final3.kh@gmail.com" />
-		<property name="password" value="rydg zkcd hwgh hwmg" />
+		<property name="password" value="kytg njwu mrfd ufix" />
 	
 		<!-- email 요청시는 SMTP -->
 		<property name="javaMailProperties">

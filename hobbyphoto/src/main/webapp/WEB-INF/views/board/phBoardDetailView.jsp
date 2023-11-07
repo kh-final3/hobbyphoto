@@ -460,7 +460,6 @@
     				boardNo:${ b.boardNo },
                     boardWriter:'${loginMember.userId}'
     			}, success:function(list){
-                    console.log(list)
 	    				let value = "";
 	    				for(let i in list){
 	    					value += "<tr>"
@@ -582,14 +581,27 @@
         			followId:'${b.boardWriter}'
         		},success:function(result){
 
-        			console.log(result);
         			if (result === 'success') {
                         $("#follow").text("팔로우취소").css("color", "red");
                     }
+        			
+        			if("${ loginMember.userId }" != "${ b.boardWriter }"){
+						if(socket){
+							let socketMsg = "follow,${ loginMember.userId },${ b.boardWriter },${b.boardNo},${b.boardTitle},3";
+							socket.send(socketMsg);
+						}
+		           	}
         		},error:function(){
         			console.log("팔로우 ajax 통신 실패");
         		}
         	});
+        	
+        	 if("${ loginMember.userId }" != "${ b.boardWriter }"){
+      			 $.ajax({
+      			        url : "insertAlram",
+      			        data : {sendId: "${ loginMember.userId }" , fromId: "${ b.boardWriter }" , bno:${ b.boardNo },title:"${ b.boardTitle }" , cmd: "follow", type:3 }
+      			 });
+      		}
         }
         
         function unfollow() {
@@ -600,7 +612,6 @@
                     followId: '${b.boardWriter}'
                 },
                 success: function (result) {
-                    console.log(result);
                     if (result === 'success') {
                         $("#follow").text("팔로우").css("color", "blue");
                     }

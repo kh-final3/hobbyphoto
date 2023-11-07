@@ -483,15 +483,27 @@
 		    		 
 		    		 	// 추천게시판
 		    		 	if(type==2){
-		    		 		console.log("여기")
-		    		 		console.log("글번호" + $(this).find(".bno").text())
-		    		 		console.log("아이디" + $(this).find(".sendId").text())
 		    		 		$.ajax({
 				    			url:"alramClick",
 				    			data:{bno:$(this).find(".bno").text(),sendId:$(this).find(".sendId").text(),type:$(this).find(".type").text()},
 				    			type:"post",
 				    			success:data=>{
 				    				location.href="rcDetail.bo?phno="+data
+				    			},
+				    			error:()=>{
+				    				console.log("알림 삭제 실패")
+				    			}
+				    		})
+		    		 	}
+		    		 	
+		    		 // 팔로우
+		    		 	if(type==3){
+		    		 		$.ajax({
+				    			url:"alramFollow",
+				    			data:{bno:$(this).find(".bno").text(),sendId:$(this).find(".sendId").text(),type:$(this).find(".type").text()},
+				    			type:"post",
+				    			success:data=>{
+				    				location.href="profile.me?userId="+data
 				    			},
 				    			error:()=>{
 				    				console.log("알림 삭제 실패")

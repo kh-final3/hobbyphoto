@@ -228,6 +228,7 @@
                     </table>
                 </div>
             </div>
+            
             <div class="info_my3">
                 <div class="info_my2_title">
                     <h style="font-weight: 700; margin: 0 0 15px 10px; font-size: larger;">나의 활동</h>
@@ -271,7 +272,7 @@
 	      </div>
 	      <div class="modal-body">
 	       	<c:choose>
-	       		<c:when test="${ countFollowing eq 0 }">
+	       		<c:when test="${ countFollow eq 0 }">
 	       			<br>
 	       			<div class="noFollow">팔로우 중인 회원이 없습니다.</div>
 	       			<br>
@@ -310,7 +311,7 @@
 	      </div>
 	      <div class="modal-body">
 	      	<c:choose>
-	       		<c:when test="${ countFollow eq 0 }">
+	       		<c:when test="${ countFollower eq 0 }">
 	       			<br>
 	       			<div class="noFollow">팔로우 중인 회원이 없습니다.</div>
 	       			<br>

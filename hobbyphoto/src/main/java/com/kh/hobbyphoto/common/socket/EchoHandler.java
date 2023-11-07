@@ -49,6 +49,11 @@ public class EchoHandler extends TextWebSocketHandler{
 					TextMessage tmpMsg = new TextMessage("<div class='alarmMsg'><span class='bno'>"+bno+"</span><span class='type'>"+type+"</span><span class='sendId'>" + replyWriter + "</span> 님이 "+title+" 에 좋아요를 눌렀습니다!</div>");
 					boardWriterSession.sendMessage(tmpMsg);
 					
+				}else if(cmd.equals("follow") && boardWriterSession != null) {
+					//replyWriter = 좋아요누른사람 , boardWriter = 게시글작성자
+					TextMessage tmpMsg = new TextMessage("<div class='alarmMsg'><span class='bno'>"+bno+"</span><span class='type'>"+type+"</span><span class='sendId'>" + replyWriter + "</span> 님이 팔로우하셨습니다!</div>");
+					boardWriterSession.sendMessage(tmpMsg);
+					
 				}
 			}
 			

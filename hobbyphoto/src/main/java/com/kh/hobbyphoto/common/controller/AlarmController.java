@@ -56,4 +56,14 @@ public class AlarmController {
 		}
 		return 0;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "alramFollow", method=RequestMethod.POST)
+	public String alramFollow(Alarm a) throws Exception{
+		int result = aService.alramClick(a);
+		if(result>0) {
+			return a.getSendId();
+		}
+		return "";
+	}
 }

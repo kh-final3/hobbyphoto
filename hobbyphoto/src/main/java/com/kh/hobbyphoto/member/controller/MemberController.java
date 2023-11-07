@@ -113,6 +113,7 @@ public class MemberController {
 	public String myPage(HttpSession session,Model model) {
 		String userId = ((Member)session.getAttribute("loginMember")).getUserId();
 		
+		
 		// 나를 팔로우 하는 사람들
 		int countFollow = ms.selectFollowCount(userId);
 		model.addAttribute("countFollower", countFollow);
@@ -127,7 +128,7 @@ public class MemberController {
 		if(countFollow>0) {
 			ArrayList<Follow> following = ms.selectFollowing(userId);
 			model.addAttribute("follow", following);
-		}
+		}	
 		
 		return "member/myPage";
 	}
@@ -366,6 +367,7 @@ public class MemberController {
 		model.addAttribute("countFollower", countFollow);
 		if(countFollow>0) {
 			ArrayList<Follow> follow = ms.selectFollow(userId);			
+			System.out.println(follow);
 			model.addAttribute("follower", follow);
 		}
 		
@@ -374,6 +376,7 @@ public class MemberController {
 		model.addAttribute("countFollowing", countFollowing);
 		if(countFollowing>0) {
 			ArrayList<Follow> following = ms.selectFollowing(userId);
+			System.out.println(following);
 			model.addAttribute("follow", following);
 		}
 		return "member/profile";

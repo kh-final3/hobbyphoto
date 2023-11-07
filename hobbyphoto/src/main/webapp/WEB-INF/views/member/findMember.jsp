@@ -180,7 +180,7 @@
 	}
         
 	function sendNumberId(){
-		if($(".mailId").val() != ""){
+		if($(".mailId").val() != "" && $("#inputName_1").val() != ""){
 	        $(".mail_number_Id").css("display","block");
 	        $.ajax({
 	            url:"mail",
@@ -192,12 +192,12 @@
 	            }
 	        });
 		}else{
-			alert("이메일을 입력해주세요.");
+			alert("빈칸을 입력해주세요.");
 		}
     }
 	
 	function sendNumberPwd(){
-		if($(".mailPwd").val() != ""){
+		if($(".mailPwd").val() != "" && $("#inputId").val() != ""){
 	        $(".mail_number_Pwd").css("display","block");
 	        $.ajax({
 	            url:"mail",
@@ -216,27 +216,31 @@
     function confirmNumberId(){
         var number1 = $(".numberId").val();
         var number2 = $(".confirmId").val();
-        console.log(number1)
-        console.log(number2)
-        if(number1 == number2){
-            alert("인증되었습니다.");
-            $("#searchBtn1").attr("disabled",false);
-            $("button[name=confirmBtn1]").attr("disabled",true);
+        if(number1 == ""){
+        	alert("인증번호를 입력해주세요");
         }else{
-            alert("인증번호가 다릅니다.");
+	        if(number1 == number2){
+	            alert("인증되었습니다.");
+	            $("#searchBtn1").attr("disabled",false);
+	            $("button[name=confirmBtn1]").attr("disabled",true);
+	        }else{
+	            alert("인증번호가 다릅니다.");
+	        }
         }
     }  
     function confirmNumberPwd(){
         var number1 = $(".numberPwd").val();
         var number2 = $(".confirmPwd").val();
-        console.log(number1)
-        console.log(number2)
-        if(number1 == number2){
-            alert("인증되었습니다.");
-            $("#searchBtn2").attr("disabled",false);
-            $("button[name=confirmBtn2]").attr("disabled",true);
+        if(number1 == ""){
+        	alert("인증번호를 입력해주세요");
         }else{
-            alert("인증번호가 다릅니다.");
+	        if(number1 == number2){
+	            alert("인증되었습니다.");
+	            $("#searchBtn2").attr("disabled",false);
+	            $("button[name=confirmBtn2]").attr("disabled",true);
+	        }else{
+	            alert("인증번호가 다릅니다.");
+	        }
         }
     }
     
