@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=header&text=Welcometo%20HobbyPhotoProject🖐️&fontSize=50&animation=fadeIn&fontAlignY=38&desc=Decorate%20GitHub%20Profile%20or%20any%20Repo%20like%20me!&descAlignY=51&descAlign=62)
+![header](https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&width=1000&section=header&text=Welcometo%20HobbyPhotoProject🖐️&fontSize=50&animation=fadeIn&fontAlignY=38&desc=Decorate%20GitHub%20Profile%20or%20any%20Repo%20like%20me!&descAlignY=51&descAlign=62)
 
 # HobbyPhoto
 ![팀로고](https://github.com/kh-final3/hobbyphoto/assets/134485729/3e8e7309-abb4-4e59-8d58-d4273dbfd555)
