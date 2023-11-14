@@ -1,5 +1,5 @@
 # HobbyPhoto
-
+![팀로고](https://github.com/kh-final3/hobbyphoto/assets/134485729/3e8e7309-abb4-4e59-8d58-d4273dbfd555)
 
 ## 🌈Technology Stack
 <div style="display:flex; flex-direction:row;">
