@@ -8,12 +8,12 @@
 ## 개발 기간
 2023.09.18 ~ 2023.11.06
 
-
+<br><br>
 
 ## 프로젝트 명 - HobbyPhoto
 HobbyPhoto는 취미를 뜻하는 hobby와 사진을 뜻하는 photo를 합쳐 사진을 취미로 가지고 있는 사람들을 위한 공간을 제공하여 다양한 정보를 공유 하고 얻을 수 있는 사이트를 만들고자 하는 의도로 'HobbyPhoto'를 프로젝트 명으로 정했습니다.
 
-
+<br><br>
 
 ## 프로젝트 설명
 HobbyPhoto - 사진 관련 정보를 얻고, 소통이 가능한 커뮤니티와 쇼핑몰을 결합한 플랫폼
@@ -43,15 +43,13 @@ HobbyPhoto - 사진 관련 정보를 얻고, 소통이 가능한 커뮤니티와
 - 포토북
 1. 원하는 템플릿을 선택하여 네컷 사진을 구성하고 나만의 인생네컷 사진을 만들어서 구입할 수 있습니다. 
 
-
-
+<br><br>
 
 ## 개발 배경
 최근 MZ 세대를 중심으로 사진에 대한 관심이 높아지고 있는 추세와 함께 SNS에서는 사진과 관련된 언급량이 증가하고 있습니다. 이런 현상이 계속 되면서 사진은 더이상 전문가를 위한 영역이 아니라 많은 사람들이 쉽게 접근할 수 있고 가볍게 즐길 수 있는 취미의 영역으로 자리를 잡고 있습니다. 
 이러한 트렌드를 반영하여 사진을 좋아하는 사람이나 사진이라는 취미를 시작하고자 하는 사람들이 모여 서로의 정보를 공유하고 얻을 수 있는 커뮤니티 공간을 만들어 주고, 해당 커뮤니티 공간에서 얻은 정보를 통해 카메라를 구매할 수 있는 쇼핑몰 공간을 제공해주면서 사진을 취미로 하는 사람들에게 보다 편리함을 제공해주기 위해 개발을 하게 되었습니다. 
 
-
-
+<br><br>
 
 ## 🌈Technology Stack
 <div style="display:flex; flex-direction:row;">
@@ -71,8 +69,7 @@ HobbyPhoto - 사진 관련 정보를 얻고, 소통이 가능한 커뮤니티와
     <img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white">
 </div>
 
-
-
+<br><br>
 
 ## 👨‍👩‍👧‍👦Team members
 <div style="display:flex; flex-direction:row;">
@@ -83,7 +80,7 @@ HobbyPhoto - 사진 관련 정보를 얻고, 소통이 가능한 커뮤니티와
  이호연
  
  </div>
-<br>
 
+<br><br>
 
 [HobbyPhoto.pdf](https://github.com/kh-final3/hobbyphoto/files/12911399/HobbyPhoto.pdf)
