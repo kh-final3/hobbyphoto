@@ -1,5 +1,5 @@
 # HobbyPhoto
-![팀로고.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/afe438c8-a2cd-4e47-9b0c-cdd3b93f2b41/c4f466fe-f35e-4564-81ad-dcf5c10c7618/%ED%8C%80%EB%A1%9C%EA%B3%A0.png)
+<img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/afe438c8-a2cd-4e47-9b0c-cdd3b93f2b41/c4f466fe-f35e-4564-81ad-dcf5c10c7618/%ED%8C%80%EB%A1%9C%EA%B3%A0.png">
 
 ## 🌈Technology Stack
 <div style="display:flex; flex-direction:row;">
